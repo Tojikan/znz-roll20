@@ -29,6 +29,13 @@ function build(){
 
 }
 
+function html(){
+    include();
+    build();
+    browserSync.reload();
+
+}
+
 
 function watch() {
     browserSync.init({
@@ -38,8 +45,7 @@ function watch() {
         }
     });
     gulp.watch('./src/scss/*.scss', style)
-    gulp.watch('./src/html/*.html').on('change',include);
-    gulp.watch('./src/html/*.html').on('change',browserSync.reload);
+    gulp.watch('./src/html/*.html').on('change',html);
     gulp.watch('./src/js/*.js').on('change', browserSync.reload);
 }
 

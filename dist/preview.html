@@ -1,96 +1,201 @@
 <html>
     <head>
-        <link href="./dist/sheet-styles.css" rel="stylesheet"/>
+        <link href="./sheet-styles.css" rel="stylesheet"/>
     </head>
 
     <body>
-            <div class="znz-character-sheet">
-        <div class="znz-section znz-section-name-description">
-            <div class="znz-block-name">
-                <label>Name:</label>
-                <input type="text" name="attr_Name" />
+            <div class="sheet-znz-character-sheet">
+
+        <!--- Name and Stats --->
+        <div class="sheet-znz-area">
+            <div class="sheet-znz-section sheet-znz-section-name">
+                <div class="sheet-znz-block sheet-znz-block-name">
+                    <label>Name:</label>
+                    <input type="text" name="attr_name"></input>
+                </div>
+                <div class="sheet-znz-block sheet-znz-block-status">
+                    <label>Status:</label>
+                    <input type="text" name="attr_status"></input>
+                </div>
             </div>
-            <div class="znz-block-description">
-                <label>Description:</label>
-                <textarea type="text" name="attr_info" rows="3"></textarea>
+
+            <div class="sheet-znz-section sheet-znz-section-status">
+                <div class="sheet-znz-block sheet-znz-block-health">
+                    <label>Health</label>
+                    <div class="sheet-znz-stat-container">
+                        <input type="number" name="attr_hp" /> <span class="sheet-divider">/</span>
+                        <input type="number" disabled="true" name="attr_hp_max"/>
+                    </div>
+                </div>
+                <div class="sheet-znz-block sheet-znz-block-sanity">
+                    <label>Sanity</label>
+                    <div class="sheet-znz-stat-container">
+                        <input type="number" name="attr_sanity" /> <span class="sheet-divider">/</span>
+                        <input type="number" disabled="true" name="attr_sanity_max"/>
+                    </div>
+                </div>
+                <div class="sheet-znz-block sheet-znz-block-energy">
+                    <label>Energy</label>
+                    <div class="sheet-znz-stat-container">
+                        <input type="number" name="attr_energy" /> <span class="sheet-divider">/</span>
+                        <input type="number" disabled="true" name="attr_energy_max"/>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="znz-section znz-section-status-equipment">
-            <div class="znz-block-status">
-                <div class="znz-field-health">
-    
-                </div>
-                <div class="znz-field-sanity">
-                    
-                </div>
-                <div class="znz-field-energy">
-                    
-                </div>
-    
-            </div>
-            <div class="znz-block-equipped">
-    
-            </div>
-        </div>
-    
-    
-    
-        <div class="sheet-section-name-info">
-            <div class="sheet-name">
-            </div>
-        </div>
-    
-        <div class="sheet-section-attr-skills">
-            <div class="sheet-col-33">
-                <h2>Attributes</h2>
-                <table class="sheet-stat-table" border="1" cellpadding="5" cellspacing="2">
-                    <tbody>
-                        <tr>
-                            <td>Intelligence</td>
-                            <td><input type="number" name="attr_int" value="3"/></td>
-                            <td><input type="number" name="attr_intmod" value="floor(@{INT}-3)"/></td>
-                        </tr>
-                        <tr>
-                            <td>Strength</td>
-                            <td><input type="number" name="attr_str" value="3"/></td>
-                            <td><input type="number" name="attr_strmod" value="floor(@{STR}-3)"/></td>
-                        </tr>
-                        <tr>
-                            <td>Dexterity</td>
-                            <td><input type="number" name="attr_dex" value="3"/></td>
-                            <td><input type="number" name="attr_dexmod" value="floor(@{DEX}-3)"/></td>
-                        </tr>
-                        <tr>
-                            <td>Empathy</td>
-                            <td><input type="number" name="attr_emp" value="3"/></td>
-                            <td><input type="number" name="attr_empmod" value="floor(@{EMP}-3)"/></td>
-                        </tr>
-                        <tr>
-                            <td>Awareness</td>
-                            <td><input type="number" name="attr_awa" value="3"/></td>
-                            <td><input type="number" name="attr_awamod" value="floor(@{AWA}-3)"/></td>
-                        </tr>
-                        <tr>
-                            <td>Determination</td>
-                            <td><input type="number" name="attr_deter" value="3"/></td>
-                            <td><input type="number" name="attr_determod" value="floor(@{DETER}-3)"/></td>
-                        </tr>
-                    </tbody>
+
+        <!--- Attributes and Equipment --->
+        <div class="sheet-znz-area">
+
+            <div class="sheet-znz-section sheet-znz-section-attributes">
+                <table>
+                    <tr>
+                        <th>
+                            Attribute
+                        </th>
+                        <th>
+                            Score
+                        </th>
+                        <th>
+                            Bonus
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Intelligence</label>
+                            <div class="sheet-attrib-description">
+                                Knowledge, Understanding, Crafting,
+                            </div>
+                        </td>
+                        <td><input type="number" name="attr_intelligence" value="3"/></td>
+                        <td><input type="number" disabled="true" name="attr_intelligencebonus" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Strength</label>
+                            <div class="sheet-attrib-description">
+                                Strength Checks, Melee Damage, Grappling
+                            </div>
+                        </td>
+                        <td><input type="number" name="attr_strength" value="3"/></td>
+                        <td><input type="number" disabled="true" name="attr_strengthbonus" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Dexterity</label>
+                            <div class="sheet-attrib-description">
+                                Speed, Initiative, Dodging
+                            </div>
+                        </td>
+                        <td><input type="number" name="attr_dexterity" value="3"/></td>
+                        <td><input type="number" disabled="true" name="attr_dexteritybonus" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Empathy</label>
+                            <div class="sheet-attrib-description">
+                                Interpersonal Skills, Charisma, Insight
+                            </div>
+                        </td>
+                        <td><input type="number" name="attr_empathy" value="3"/></td>
+                        <td><input type="number" disabled="true" name="attr_empathybonus" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Awareness</label>
+                            <div class="sheet-attrib-description">
+                                Perception, Scouting, Stealth
+                            </div>
+                        </td>
+                        <td><input type="number" name="attr_awareness" value="3"/></td>
+                        <td><input type="number" disabled="true" name="attr_awarenessbonus" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Tenacity</label>
+                            <div class="sheet-attrib-description">
+                                Determines Max Stress. Mental Fortitude. Pain resistance
+                            </div>
+                        </td>
+                        <td><input type="number" name="attr_tenacity" value="3"/></td>
+                        <td><input type="number" disabled="true" name="attr_tenacitybonus" value="0"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Health</label>
+                            <div class="sheet-attrib-description">
+                                Determines Max HP and Energy. Sickness resistance
+                            </div></td>
+                        <td><input type="number" name="attr_health" value="3"/></td>
+                        <td><input type="number" disabled="true" name="attr_healthbonus" value="0"/></td>
+                    </tr>
                 </table>
             </div>
-            <div class="sheet-col-66">
-                <h2>Skills</h2>
-                <fieldset class="repeating_skills">
-                    <div class="sheet-skill-container">
-                        <div class="sheet-skill-label">
-                            <div class="sheet-skill-label-text">Name</div>
-                            <div class="sheet-skill-label-input"><input type="text" name="attr_skillname"/></div>
+
+            <div class="sheet-znz-section-equipment">
+                <div class="sheet-znz-block-equipped">
+                    <div class="sheet-znz-block-ranged">
+                        <label>Equipped Ranged</label>
+                        <div class="sheet-znz-weapon-stats sheet-znz-ranged-stats">
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Bonus:</label> 
+                                <input type="number" name="attr_equipped_ranged_bonus"/>
+                            </div>
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Ammo:</label> 
+                                <input type="number" name="attr_equipped_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_equipped_ranged_ammo_max"/>
+                            </div>
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Reloads:</label> 
+                                <input type="number" name="attr_equipped_ranged_reloads"/>
+                            </div>
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Notes</label> 
+                                <textarea name="attr_equipped_ranged_notes" rows="2"></textarea>
+                            </div>
                         </div>
-                        <div class="sheet-skill-type">
-                            <select name="attr_skill-type">
+                    </div>
+
+                    <div class="sheet-znz-block-melee">
+                        <label>Equipped Melee</label>
+                        <div class="sheet-znz-weapon-stats sheet-znz-melee-stats">
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Bonus:</label> 
+                                <input type="number" name="attr_equipped_melee_bonus"/>
+                            </div>
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Energy Cost:</label> 
+                                <input type="number" name="attr_equipped_melee_cost"/>
+                            </div>
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Durability:</label> 
+                                <input type="number" name="attr_equipped_melee_durability"/><span class="sheet-divider">/</span><input type="number" name="attr_equipped_melee_durability_max"/>
+                            </div>
+                            <div class="sheet-znz-weapon-stat-row">
+                                <label>Notes</label> 
+                                <textarea name="attr_equipped_melee_notes" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+        <!--- Skills and Abilities-->
+        <div class="sheet-znz-area">
+            <div class="sheet-znz-section-skills">
+                <label>Skills</label>
+                <fieldset class="repeating_skills">
+                    <div class="sheet-znz-block-skill">
+                        <div class="sheet-znz-field-skill-select">
+                            <label>Select Skill</label>
+                            <select name="attr_skill_type">
                                 <option value="firearms">Firearms</option>
                                 <option value="unarmed">Unarmed Combat</option>
                                 <option value="melee">Melee Combat</option>
+                                <option value="stealth">Stealth</option>
                                 <option value="archery">Archery</option>
                                 <option value="throwing">Throwing weapons</option>
                                 <option value="scavenging">Scavenging</option>
@@ -110,22 +215,117 @@
                                 <option value="animal">Animal Handling</option>
                                 <option value="persuasion">Persuasion</option>
                                 <option value="athletics">Athletics</option>
-                                <option value="stealth">Stealth</option>
+                                <option value="custom">Custom</option>
                             </select>
                         </div>
-                        <div class="sheet-skill-bonus">
-                            <div class="sheet-skill-bonus-text">Bonus</div>
-                            <div class="sheet-skill-bonus-input"><input type="number" name="attr_skillbonus"/></div>
+                        <div class="sheet-znz-field-skill-custom">
+                            <label>Skill Name</label>
+                            <div class="sheet-znz-skill-bonus-input"><input class="sheet-znz-custom-skill" type="text" name="attr_skill_custom_name"/></div>
+                        </div>
+                        <div class="sheet-znz-field-skill-bonus">
+                            <label>Bonus</label>
+                            <div class="sheet-znz-skill-bonus-input"><input type="number" name="attr_skill_bonus"/></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+
+            <div class="sheet-znz-section-abilities">
+                <label>Abilities</label>
+                <fieldset class="repeating_abilities">
+                    <div class="sheet-znz-block-ability">
+                        <div class="sheet-znz-field-ability-type">
+                            <select name="attr_ability_type">
+                                <option value="hawkeye">Hawkeye</option>
+                                <option value="fighter">Fighter</option>
+                                <option value="brawler">Brawler</option>
+                                <option value="sniper">Sniper</option>
+                                <option value="lucky">Lucky</option>
+                                <option value="stable">Stable</option>
+                                <option value="martialartist">Martial Artist</option>
+                                <option value="wrestler">Wrestler</option>
+                            </select>
+                        </div>
+                        <div class="sheet-znz-field-ability-descript">
+                            <div class="sheet-znz-field-label">Description:</div>
+                            <textarea type="text" name="attr_ability_description"></textarea>
                         </div>
                     </div>
                 </fieldset>
             </div>
         </div>
+
+        <div class="sheet-znz-area">
+            <div class="sheet-znz-section-ranged-inventory">
+                <label>Ranged Weapons in Inventory</label>
+                <fieldset class="repeating_ranged_inventory">
+                    <div class="sheet-znz-field-weapon-name">
+                        Name:
+                        <input type="text" name="attr_inventory_ranged_name"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-ammo">
+                        Ammo:
+                        <input type="number" name="attr_inventory_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_inventory_ranged_ammo_max"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-reload">
+                        Reloads:
+                        <input type="text" name="attr_inventory_ranged_reloads"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-weight">
+                        Weight:
+                        <input type="text" name="attr_inventory_ranged_weight"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-note">
+                        <label>Notes</label> 
+                        <textarea name="attr_inventory_ranged_note" ></textarea>
+                    </div>
+                    <div class="sheet-znz-weapon-equip-button">
+                        <button name="act_equip_inventory_ranged_weapon">Equip</button>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="sheet-znz-section-melee-inventory">
+                <label>Melee Weapons in Inventory</label>
+                <fieldset class="repeating_ranged_inventory">
+                    <div class="sheet-znz-field-weapon-name">
+                        Name:
+                        <input type="text" name="attr_inventory_melee_name"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-ammo">
+                        Durability:
+                        <input type="number" name="attr_inventory_melee_durability"/>  
+                        <span class="sheet-divider">/</span>  
+                        <input type="number" name="attr_inventory_melee_durability_max"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-reload">
+                        Energy Cost:
+                        <input type="text" name="attr_inventory_melee_energy_cost"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-weight">
+                        Weight:
+                        <input type="text" name="attr_inventory_melee_weight"/>
+                    </div>
+                    <div class="sheet-znz-field-weapon-note">
+                        <label>Notes</label> 
+                        <textarea name="attr_inventory_melee_note" ></textarea>
+                    </div>
+                    <div class="sheet-znz-weapon-equip-button">
+                        <button name="act_equip_inventory_melee_weapon">Equip</button>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="sheet-znz-section-misc-inventory">
+
+            </div>
+        </div>
     
+            
     
-        <div class="sheet-section-inv"></div>
-    
-    
+        <div class="sheet-znz-block sheet-znz-block-notes">
+            <label>Notes:</label>
+            <textarea type="text" name="attr_notes"></textarea>
+        </div>
     </div>
 
     </body>
