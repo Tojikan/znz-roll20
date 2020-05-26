@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const browserSync = require('browser-sync').create();
 const fileinclude = require('gulp-file-include');
+const concat = require('gulp-concat');
 
 //compile scss into css
 function style() {
@@ -12,9 +13,22 @@ function style() {
     .pipe(browserSync.stream());
 }
 
+function scripts(){
+    return gulp.src('./src/js/*.js')
+        .pipe(concat('scripts.js'))
+        .pipe(gulp.dest('./dist/'));
+}
+
 
 function include(){
-    return gulp.src('src/html/preview.html')
+    gulp.src('src/html/preview.html')
+    .pipe(fileinclude({
+                prefix: '@@',
+                basepath: '@file'
+        }))
+    .pipe(gulp.dest('./dist'));
+
+    gulp.src('src/html/character-sheet.html')
     .pipe(fileinclude({
                 prefix: '@@',
                 basepath: '@file'
@@ -24,16 +38,12 @@ function include(){
 
 function build(){
     style();
-    return gulp.src('src/html/character-sheet.html')
-    .pipe(gulp.dest('./dist'));
-
+    include();
 }
 
 function html(){
     include();
-    build();
     browserSync.reload();
-
 }
 
 
@@ -44,7 +54,8 @@ function watch() {
            index: "preview.html"
         }
     });
-    gulp.watch('./src/scss/*.scss', style)
+    gulp.watch('./src/scss/*.scss', style);
+    gulp.watch('./src/js/*.js').on('change', scripts);
     gulp.watch('./src/html/*.html').on('change',html);
     gulp.watch('./src/js/*.js').on('change', browserSync.reload);
 }
@@ -52,4 +63,6 @@ function watch() {
 exports.style = style;
 exports.watch = watch;
 exports.build = build;
+exports.html = html;
+exports.scripts = scripts;
 exports.include = include;

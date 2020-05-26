@@ -51,30 +51,40 @@ label {
         border: none; }
   .sheet-znz-section-attributes .sheet-attrib-description {
     font-size: 10px; }
+  .sheet-znz-section-attributes .sheet-znz-attr-bonus {
+    width: 50px; }
 
-.sheet-znz-section-equipment {
+.sheet-znz-equipment {
   flex: 55%; }
-  .sheet-znz-section-equipment .sheet-znz-block-equipped {
+  .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped {
     display: flex; }
-    .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged, .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-melee {
+    .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee {
       flex: 35%; }
-      .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats, .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats {
+      .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats {
         border: solid 1px black;
         padding: 10px;
         min-height: 100px; }
-        .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row, .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row {
+        .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row {
           display: flex;
           margin-bottom: 15px; }
-          .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row label, .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row label {
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row label, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row label {
             flex: 25%; }
-          .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row textarea, .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row textarea {
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row textarea, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row textarea {
             flex: 50%; }
-          .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-current, .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-current {
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-current, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-current {
             margin-right: 10px; }
-          .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-max, .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-max {
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-max, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-max {
             margin-left: 10px; }
-    .sheet-znz-section-equipment .sheet-znz-block-equipped .sheet-znz-block-ranged {
+    .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged {
       margin-right: 20px; }
+  .sheet-znz-equipment .sheet-znz-section-other-equipment {
+    padding: 25px;
+    margin: 10px 0;
+    border: solid 1px black; }
+    .sheet-znz-equipment .sheet-znz-section-other-equipment .sheet-znz-field-other-equipment {
+      padding: 10px;
+      border-top: solid 1px lightgray;
+      border-bottom: solid 1px lightgray; }
 
 .sheet-znz-section-skills {
   flex: 50%;
@@ -90,6 +100,10 @@ label {
     .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom, .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-select {
       flex: 40%;
       margin-right: 10px; }
+    .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom {
+      visibility: hidden; }
+      .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom.is-custom {
+        visibility: visible; }
     .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-bonus {
       flex: 20%; }
 
