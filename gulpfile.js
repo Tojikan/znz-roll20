@@ -4,6 +4,7 @@ const sass = require('gulp-sass');
 const browserSync = require('browser-sync').create();
 const fileinclude = require('gulp-file-include');
 const concat = require('gulp-concat');
+const replace = require('gulp-replace');
 
 //compile scss into css
 function style() {
@@ -19,30 +20,28 @@ function scripts(){
         .pipe(gulp.dest('./dist/'));
 }
 
-
-function include(){
-    gulp.src('src/html/preview.html')
-    .pipe(fileinclude({
-                prefix: '@@',
-                basepath: '@file'
-        }))
-    .pipe(gulp.dest('./dist'));
-
-    gulp.src('src/html/character-sheet.html')
-    .pipe(fileinclude({
-                prefix: '@@',
-                basepath: '@file'
-        }))
-    .pipe(gulp.dest('./dist'));
-}
-
 function build(){
     style();
-    include();
+    replaceWithWorker();
 }
 
 function html(){
-    include();
+    gulp.src('src/html/preview.html')
+    .pipe(fileinclude({
+        prefix: '@@',
+        basepath: '@file'
+    }))
+    .pipe(gulp.dest('./dist'));
+    
+    gulp.src('src/html/character-sheet.html')
+    .pipe(fileinclude({
+        prefix: '@@',
+        basepath: '@file'
+    }))
+    .pipe(replace('text/javascript', 'text/worker'))
+    .pipe(gulp.dest('./dist'));
+
+
     browserSync.reload();
 }
 
@@ -65,4 +64,4 @@ exports.watch = watch;
 exports.build = build;
 exports.html = html;
 exports.scripts = scripts;
-exports.include = include;
+exports.replace = replace;

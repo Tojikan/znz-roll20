@@ -3,6 +3,9 @@
   flex-direction: row;
   margin-bottom: 25px; }
 
+.sheet-znz-area-unflexed {
+  margin-bottom: 25px; }
+
 label, .sheet-znz-label-text {
   font-weight: 700;
   display: block; }
@@ -37,7 +40,7 @@ label {
       margin-right: 0px; }
 
 .sheet-znz-section-attributes {
-  flex: 40%;
+  flex: 30%;
   margin-right: 25px; }
   .sheet-znz-section-attributes table {
     width: 100%; }
@@ -49,13 +52,17 @@ label {
       border-color: lightgrey; }
       .sheet-znz-section-attributes table tr:first-child {
         border: none; }
+  .sheet-znz-section-attributes .sheet-znz-total-attrs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px; }
   .sheet-znz-section-attributes .sheet-attrib-description {
     font-size: 10px; }
   .sheet-znz-section-attributes .sheet-znz-attr-bonus {
     width: 50px; }
 
 .sheet-znz-equipment {
-  flex: 55%; }
+  flex: 70%; }
   .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped {
     display: flex; }
     .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee {
@@ -78,13 +85,8 @@ label {
     .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged {
       margin-right: 20px; }
   .sheet-znz-equipment .sheet-znz-section-other-equipment {
-    padding: 25px;
-    margin: 10px 0;
-    border: solid 1px black; }
-    .sheet-znz-equipment .sheet-znz-section-other-equipment .sheet-znz-field-other-equipment {
-      padding: 10px;
-      border-top: solid 1px lightgray;
-      border-bottom: solid 1px lightgray; }
+    margin-top: 10px;
+    padding: 5px; }
 
 .sheet-znz-section-skills {
   flex: 50%;
@@ -97,15 +99,24 @@ label {
     .sheet-znz-section-skills .sheet-znz-block-skill label {
       font-size: 14px;
       font-weight: 300; }
+    .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-label-custom-skill {
+      align-self: center; }
+    .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-custom-skill-toggle {
+      align-self: center;
+      margin: 0 25px 0 5px; }
     .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom, .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-select {
-      flex: 40%;
+      flex: 30%;
       margin-right: 10px; }
+      .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom select, .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom input, .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-select select, .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-select input {
+        max-width: 180px; }
     .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom {
-      visibility: hidden; }
-      .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-custom.is-custom {
-        visibility: visible; }
+      display: none; }
+    .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-custom-skill-toggle:checked ~ .sheet-znz-field-skill-custom {
+      display: block; }
+    .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-custom-skill-toggle:checked ~ .sheet-znz-field-skill-select {
+      display: none; }
     .sheet-znz-section-skills .sheet-znz-block-skill .sheet-znz-field-skill-bonus {
-      flex: 20%; }
+      flex: 10%; }
 
 .sheet-znz-section-abilities {
   flex: 50%;
@@ -114,3 +125,17 @@ label {
     padding: 12px 0;
     border-top: solid 1px lightgrey;
     border-bottom: solid 1px lightgrey; }
+
+.sheet-znz-section-inventory {
+  display: flex;
+  width: 100%;
+  border: solid 1px black;
+  padding: 10px; }
+  .sheet-znz-section-inventory > label {
+    width: 100%; }
+  .sheet-znz-section-inventory [class^="sheet-znz-block-"] {
+    padding: 8px;
+    border: solid 1px lightgray;
+    flex: 33%; }
+    .sheet-znz-section-inventory [class^="sheet-znz-block-"]:nth-child(2) {
+      margin: 0 10px; }

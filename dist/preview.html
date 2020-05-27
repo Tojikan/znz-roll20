@@ -48,6 +48,9 @@
         <div class="sheet-znz-area">
 
             <div class="sheet-znz-section sheet-znz-section-attributes">
+                <div class="sheet-znz-total-attrs">
+                    Total Attribute Points: <input type="number" name="attr_total_attr_points" class="sheet-znz-field-total-stat-points" readonly value="21"/>
+                </div>
                 <table>
                     <tr>
                         <th>
@@ -67,7 +70,7 @@
                                 Knowledge, Understanding, Crafting,
                             </div>
                         </td>
-                        <td><input type="number" name="attr_intelligence" min="0" value="3" max="6"/></td>
+                        <td><input type="number" name="attr_intelligence" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_intelligence_bonus" value="0"/></td>
                     </tr>
                     <tr>
@@ -77,7 +80,7 @@
                                 Strength Checks, Melee Damage, Grappling
                             </div>
                         </td>
-                        <td><input type="number" name="attr_strength" min="0" value="3" max="6"/></td>
+                        <td><input type="number" name="attr_strength" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_strength_bonus" value="0"/></td>
                     </tr>
                     <tr>
@@ -87,7 +90,7 @@
                                 Speed, Initiative, Dodging
                             </div>
                         </td>
-                        <td><input type="number" name="attr_dexterity" min="0" value="3" max="6"/></td>
+                        <td><input type="number" name="attr_dexterity" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_dexterity_bonus" value="0"/></td>
                     </tr>
                     <tr>
@@ -97,7 +100,7 @@
                                 Interpersonal Skills, Charisma, Insight
                             </div>
                         </td>
-                        <td><input type="number" name="attr_empathy" min="0" value="3" max="6"/></td>
+                        <td><input type="number" name="attr_empathy" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_empathy_bonus" value="0"/></td>
                     </tr>
                     <tr>
@@ -107,7 +110,7 @@
                                 Perception, Scouting, Stealth
                             </div>
                         </td>
-                        <td><input type="number" name="attr_awareness" min="0" value="3" max="6"/></td>
+                        <td><input type="number" name="attr_awareness" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_awareness_bonus" value="0"/></td>
                     </tr>
                     <tr>
@@ -117,7 +120,7 @@
                                 Determines Max Stress. Mental Fortitude. Pain resistance
                             </div>
                         </td>
-                        <td><input type="number" name="attr_tenacity" min="0" value="3" max="6"/></td>
+                        <td><input type="number" name="attr_tenacity" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_tenacity_bonus" value="0"/></td>
                     </tr>
                     <tr>
@@ -126,7 +129,7 @@
                             <div class="sheet-attrib-description">
                                 Determines Max HP and Energy. Sickness resistance
                             </div></td>
-                        <td><input type="number" name="attr_health" min="0" value="3" max="6"/></td>
+                        <td><input type="number" name="attr_health" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_health_bonus" value="0"/></td>
                     </tr>
                 </table>
@@ -142,19 +145,19 @@
                             <div class="sheet-znz-weapon-stats sheet-znz-ranged-stats">
                                 <div class="sheet-znz-weapon-stat-row">
                                     <label>Name:</label> 
-                                    <input type="number" name="attr_equipped_ranged_name"/>
+                                    <input type="text" name="attr_equipped_ranged_name"/>
                                 </div>
                                 <div class="sheet-znz-weapon-stat-row">
                                     <label>Additional Shots Bonus:</label> 
                                     <input type="number" name="attr_equipped_ranged_bonus"/>
                                 </div>
                                 <div class="sheet-znz-weapon-stat-row">
-                                    <label>Ammo:</label> 
-                                    <input type="number" name="attr_equipped_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_equipped_ranged_ammo_max"/>
-                                </div>
-                                <div class="sheet-znz-weapon-stat-row">
                                     <label>Reloads:</label> 
                                     <input type="number" name="attr_equipped_ranged_reloads"/>
+                                </div>
+                                <div class="sheet-znz-weapon-stat-row">
+                                    <label>Ammo:</label> 
+                                    <input type="number" name="attr_equipped_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_equipped_ranged_ammo_max"/>
                                 </div>
                                 <div class="sheet-znz-weapon-stat-row">
                                     <label>Notes</label> 
@@ -168,7 +171,7 @@
                             <div class="sheet-znz-weapon-stats sheet-znz-melee-stats">
                                 <div class="sheet-znz-weapon-stat-row">
                                     <label>Name:</label> 
-                                    <input type="number" name="attr_equipped_melee_name"/>
+                                    <input type="text" name="attr_equipped_melee_name"/>
                                 </div>
                                 <div class="sheet-znz-weapon-stat-row">
                                     <label>Additional Energy Bonus:</label> 
@@ -197,18 +200,7 @@
                 <div class="sheet-znz-section-other-equipment">
                     <label>Other Equipment</label>
                     <div class="sheet-znz-field-other-equipment">
-                        <fieldset class="repeating_other_equipment">
-                            <div class="sheet-znz-field-other-equipment">
-                                <div class="sheet-znz-field-weapon-name">
-                                    Name:
-                                    <input type="text" name="attr_other_equipment_name"/>
-                                </div>
-                                <div class="sheet-znz-field-equipment-description">
-                                    Details:
-                                    <textarea name="attr_other_equipment_details" ></textarea>
-                                </div>
-                            </div>
-                        </fieldset>
+                        <textarea name="attr_other_equipment" ></textarea>
                     </div>
                 </div>
 
@@ -224,6 +216,8 @@
                 <label>Skills</label>
                 <fieldset class="repeating_skills">
                     <div class="sheet-znz-block-skill">
+                        <div class="sheet-znz-label-custom-skill">Custom Skill?</div>
+                        <input type="checkbox" name="attr_use_custom_skill" class="sheet-znz-field-custom-skill-toggle" value="0"/>
                         <div class="sheet-znz-field-skill-select">
                             <label>Select Skill</label>
                             <select name="attr_skill_type">
@@ -250,7 +244,6 @@
                                 <option value="animal">Animal Handling</option>
                                 <option value="persuasion">Persuasion</option>
                                 <option value="athletics">Athletics</option>
-                                <option value="custom">Custom</option>
                             </select>
                         </div>
                         <div class="sheet-znz-field-skill-custom">
@@ -291,75 +284,96 @@
             </div>
         </div>
 
-        <div class="sheet-znz-area">
-            <div class="sheet-znz-section-ranged-inventory">
-                <label>Ranged Weapons in Inventory</label>
-                <fieldset class="repeating_ranged_inventory">
-                    <div class="sheet-znz-field-weapon-name">
-                        Name:
-                        <input type="text" name="attr_inventory_ranged_name"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-bonus">
-                        <label>Additional Shots Bonus:</label> 
-                        <input type="number" name="attr_inventory_ranged_bonus"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-ammo">
-                        Ammo:
-                        <input type="number" name="attr_inventory_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_inventory_ranged_ammo_max"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-reload">
-                        Reloads:
-                        <input type="text" name="attr_inventory_ranged_reloads"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-weight">
-                        Weight:
-                        <input type="text" name="attr_inventory_ranged_weight"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-note">
-                        <label>Notes</label> 
-                        <textarea name="attr_inventory_ranged_note" ></textarea>
-                    </div>
-                    <div class="sheet-znz-weapon-equip-button">
-                        <button name="act_equip_inventory_ranged_weapon">Equip</button>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="sheet-znz-section-melee-inventory">
-                <label>Melee Weapons in Inventory</label>
-                <fieldset class="repeating_ranged_inventory">
-                    <div class="sheet-znz-field-weapon-name">
-                        Name:
-                        <input type="text" name="attr_inventory_melee_name"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-bonus">
-                        <label>Additional Energy Bonus:</label> 
-                        <input type="number" name="attr_inventory_melee_bonus"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-reload">
-                        Energy Cost:
-                        <input type="text" name="attr_inventory_melee_energy_cost"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-ammo">
-                        Durability:
-                        <input type="number" name="attr_inventory_melee_durability"/>  
-                        <span class="sheet-divider">/</span>  
-                        <input type="number" name="attr_inventory_melee_durability_max"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-weight">
-                        Weight:
-                        <input type="text" name="attr_inventory_melee_weight"/>
-                    </div>
-                    <div class="sheet-znz-field-weapon-note">
-                        <label>Notes</label> 
-                        <textarea name="attr_inventory_melee_note" ></textarea>
-                    </div>
-                    <div class="sheet-znz-weapon-equip-button">
-                        <button name="act_equip_inventory_melee_weapon">Equip</button>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="sheet-znz-section-misc-inventory">
-
+        <div class="sheet-znz-area-unflexed">
+            <label>Inventory</label>
+            <div class="sheet-znz-section-inventory">
+                <div class="sheet-znz-block-ranged-inventory">
+                    <label>Ranged Weapons</label>
+                    <fieldset class="repeating_ranged_inventory">
+                        <div class="sheet-znz-field-weapon-name">
+                            Name:
+                            <input type="text" name="attr_inventory_ranged_name"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-bonus">
+                            <label>Additional Shots Bonus:</label> 
+                            <input type="number" name="attr_inventory_ranged_bonus"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-ammo">
+                            Ammo:
+                            <input type="number" name="attr_inventory_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_inventory_ranged_ammo_max"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-reload">
+                            Reloads:
+                            <input type="text" name="attr_inventory_ranged_reloads"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-weight">
+                            Weight:
+                            <input type="text" name="attr_inventory_ranged_weight"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-note">
+                            <label>Notes</label> 
+                            <textarea name="attr_inventory_ranged_note" ></textarea>
+                        </div>
+                        <div class="sheet-znz-weapon-equip-button">
+                            <button name="act_equip_inventory_ranged_weapon">Equip</button>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="sheet-znz-block-melee-inventory">
+                    <label>Melee Weapons</label>
+                    <fieldset class="repeating_ranged_inventory">
+                        <div class="sheet-znz-field-weapon-name">
+                            Name:
+                            <input type="text" name="attr_inventory_melee_name"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-bonus">
+                            <label>Additional Energy Bonus:</label> 
+                            <input type="number" name="attr_inventory_melee_bonus"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-reload">
+                            Energy Cost:
+                            <input type="text" name="attr_inventory_melee_energy_cost"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-ammo">
+                            Durability:
+                            <input type="number" name="attr_inventory_melee_durability"/>  
+                            <span class="sheet-divider">/</span>  
+                            <input type="number" name="attr_inventory_melee_durability_max"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-weight">
+                            Weight:
+                            <input type="text" name="attr_inventory_melee_weight"/>
+                        </div>
+                        <div class="sheet-znz-field-weapon-note">
+                            <label>Notes</label> 
+                            <textarea name="attr_inventory_melee_note" ></textarea>
+                        </div>
+                        <div class="sheet-znz-weapon-equip-button">
+                            <button name="act_equip_inventory_melee_weapon">Equip</button>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="sheet-znz-block-misc-inventory">
+                    <label>Items</label>
+                    <fieldset class="repeating_ranged_inventory">
+                        <div class="sheet-znz-field-item-name">
+                            Name:
+                            <input type="text" name="attr_inventory_item_name"/>
+                        </div>
+                        <div class="sheet-znz-field-item_count">
+                            <label>Quantity:</label> 
+                            <input type="number" name="attr_inventory_item_quantity"/>
+                        </div>
+                        <div class="sheet-znz-field-item-space">
+                            Space:
+                            <input type="text" name="attr_inventory_item_space"/>
+                        </div>
+                        <div class="sheet-znz-field-item-note">
+                            <label>Notes</label> 
+                            <textarea name="attr_inventory_item_note" ></textarea>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
         </div>
     
@@ -371,8 +385,7 @@
         </div>
     </div>
 
-
-    <script type="text/worker">
+    <script type="text/javascript">
 
     const stats = [
         "intelligence",
@@ -384,6 +397,31 @@
         "health"
         ];
 
+
+    const setTotalAttrs = () => {
+        getAttrs(stats, values => {
+            let val = Object.values(values);
+
+            let total = 0
+
+            for (field in val){
+
+                let count = parseInt(val[field], 10);
+                total += count;
+            }
+
+            console.log("Total Attributes: " + total);
+
+            setAttrs({
+                ['total_attr_points']: total
+            })
+
+
+        });
+    }
+
+
+
     stats.forEach(function (stat) {
         on("change:" + stat, function() {
             getAttrs([stat], function (values) {
@@ -391,7 +429,8 @@
                 const mod = score - 3;
 
                 mod > 0 ? setAttrs({ [stat + '_bonus']: "+" + mod }) : setAttrs({ [stat + '_bonus']: mod });
-
+                
+                setTotalAttrs();
 
                 if (stat == "health"){
                     const energy = score * 10;

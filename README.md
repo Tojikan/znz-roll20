@@ -1,10 +1,10 @@
-## Build Process ##
+## About ##
 
-Uses browersync for active reloading. Use `gulp watch` to sync.
+Uses SCSS for styles.
 
-The preview html page is a wrapper around character-sheet that includes the html and styles since roll20 doesn't allow you to include this when uploading. This lets you 
-preview the sheet.
+Gulp file includes is used to include files.
+- to build a preview html file
+- break out script workers into other files
 
-`gulp styles` - build styles
-`gulp include` - build the preview file
-`gulp build` - build styles and move character-sheet to dist. 
+
+Gulp replacer to replace text/javascript with text/worker in dist.

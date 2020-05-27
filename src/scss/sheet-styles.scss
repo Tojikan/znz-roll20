@@ -4,6 +4,10 @@
     margin-bottom: 25px;
 }
 
+.sheet-znz-area-unflexed{
+    margin-bottom: 25px;
+}
+
 label, .sheet-znz-label-text{
     font-weight: 700;
     display: block;
@@ -59,7 +63,7 @@ label {
 
 //ATTRIBUTES
 .sheet-znz-section-attributes{
-    flex: 40%;
+    flex: 30%;
     margin-right: 25px;
 
     table{
@@ -79,6 +83,12 @@ label {
         }
     }
 
+    .sheet-znz-total-attrs{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
     .sheet-attrib-description{
         font-size: 10px;
     }
@@ -91,7 +101,7 @@ label {
 
 //EQUIPMENT
 .sheet-znz-equipment{
-    flex: 55%;
+    flex: 70%;
 
     .sheet-znz-section-equipped-weapons{
         .sheet-znz-block-equipped {
@@ -134,15 +144,8 @@ label {
     }
 
     .sheet-znz-section-other-equipment{
-        padding: 25px;
-        margin: 10px 0;
-        border: solid 1px black;
-
-        .sheet-znz-field-other-equipment{
-            padding: 10px;
-            border-top: solid 1px lightgray;
-            border-bottom: solid 1px lightgray;
-        }
+        margin-top: 10px;
+        padding: 5px;
     }
 }
 
@@ -164,22 +167,38 @@ label {
             font-weight: 300;
         }
 
+        .sheet-znz-label-custom-skill{
+            align-self: center;
+        }
+
+        .sheet-znz-field-custom-skill-toggle{
+            align-self: center;
+            margin: 0 25px 0 5px;
+        }
+
         .sheet-znz-field-skill-custom, .sheet-znz-field-skill-select{
-            flex: 40%;
+            flex: 30%;
             margin-right: 10px;
+
+            select, input {
+                max-width: 180px;
+            }
         }
         
         .sheet-znz-field-skill-custom{
-            visibility: hidden;
+            display: none;
+        }
 
-            &.is-custom{
-                visibility: visible;
-            }
+        .sheet-znz-field-custom-skill-toggle:checked ~ .sheet-znz-field-skill-custom{
+            display: block;
+        }
 
+        .sheet-znz-field-custom-skill-toggle:checked ~ .sheet-znz-field-skill-select{
+            display: none;
         }
 
         .sheet-znz-field-skill-bonus{
-            flex: 20%;
+            flex: 10%;
         }
 
     }
@@ -196,5 +215,29 @@ label {
         padding: 12px 0;
         border-top: solid 1px lightgrey;
         border-bottom: solid 1px lightgrey;
+    }
+}
+
+
+//INVENTORY
+.sheet-znz-section-inventory{
+    display: flex;
+    width: 100%;
+    border: solid 1px black;
+    padding: 10px;
+    
+    > label{
+        width: 100%;
+    }
+
+    [class^="sheet-znz-block-"]{
+        padding: 8px;
+        border: solid 1px lightgray;
+        flex: 33%;
+
+        &:nth-child(2){
+            margin: 0 10px;
+        }
+
     }
 }

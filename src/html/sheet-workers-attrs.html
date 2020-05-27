@@ -1,4 +1,4 @@
-<script type="text/worker">
+<script type="text/javascript">
 
     const stats = [
         "intelligence",
@@ -10,6 +10,31 @@
         "health"
         ];
 
+
+    const setTotalAttrs = () => {
+        getAttrs(stats, values => {
+            let val = Object.values(values);
+
+            let total = 0
+
+            for (field in val){
+
+                let count = parseInt(val[field], 10);
+                total += count;
+            }
+
+            console.log("Total Attributes: " + total);
+
+            setAttrs({
+                ['total_attr_points']: total
+            })
+
+
+        });
+    }
+
+
+
     stats.forEach(function (stat) {
         on("change:" + stat, function() {
             getAttrs([stat], function (values) {
@@ -17,7 +42,8 @@
                 const mod = score - 3;
 
                 mod > 0 ? setAttrs({ [stat + '_bonus']: "+" + mod }) : setAttrs({ [stat + '_bonus']: mod });
-
+                
+                setTotalAttrs();
 
                 if (stat == "health"){
                     const energy = score * 10;
