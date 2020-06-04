@@ -14,8 +14,9 @@ label {
   margin-bottom: 5px; }
 
 .sheet-divider {
-  font-size: 28px;
-  margin: 0 6px; }
+  font-size: 16px;
+  margin: 0 6px;
+  font-weight: 900; }
 
 .sheet-znz-section-name {
   flex: 30%; }
@@ -71,17 +72,21 @@ label {
         border: solid 1px black;
         padding: 10px;
         min-height: 100px; }
-        .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row {
+        .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-field, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-field {
+          margin-bottom: 12px; }
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-field label, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-field label {
+            padding: 0; }
+        .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-field-row, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-field-row {
           display: flex;
-          margin-bottom: 15px; }
-          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row label, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row label {
-            flex: 25%; }
-          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row textarea, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row textarea {
-            flex: 50%; }
-          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-current, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-current {
-            margin-right: 10px; }
-          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-max, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-stat-row .sheet-weapon-max {
-            margin-left: 10px; }
+          justify-content: space-between; }
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field:last-child label, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field:last-child label {
+            text-align: right; }
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field.sheet-znz-align-right input, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field.sheet-znz-align-right input {
+            display: block;
+            margin-left: auto; }
+        .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats input[type=text], .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats textarea, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats input[type=text], .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats textarea {
+          width: 100%;
+          box-sizing: border-box; }
     .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged {
       margin-right: 20px; }
   .sheet-znz-equipment .sheet-znz-section-other-equipment {
@@ -129,13 +134,33 @@ label {
 .sheet-znz-section-inventory {
   display: flex;
   width: 100%;
-  border: solid 1px black;
+  border: solid 2px black;
   padding: 10px; }
   .sheet-znz-section-inventory > label {
     width: 100%; }
   .sheet-znz-section-inventory [class^="sheet-znz-block-"] {
     padding: 8px;
-    border: solid 1px lightgray;
-    flex: 33%; }
+    flex: 27.5%; }
     .sheet-znz-section-inventory [class^="sheet-znz-block-"]:nth-child(2) {
       margin: 0 10px; }
+    .sheet-znz-section-inventory [class^="sheet-znz-block-"]:last-child {
+      flex: 45%; }
+  .sheet-znz-section-inventory .sheet-znz-header {
+    border-bottom: solid 2px black;
+    padding: 0;
+    margin-bottom: 20px; }
+  .sheet-znz-section-inventory .sheet-znz-inventory-item {
+    border: solid 1px lightgray;
+    padding: 8px;
+    margin-bottom: 16px; }
+    .sheet-znz-section-inventory .sheet-znz-inventory-item label {
+      padding: 0; }
+    .sheet-znz-section-inventory .sheet-znz-inventory-item .sheet-znz-inventory-item-field {
+      margin-bottom: 12px; }
+      .sheet-znz-section-inventory .sheet-znz-inventory-item .sheet-znz-inventory-item-field textarea {
+        box-sizing: border-box; }
+    .sheet-znz-section-inventory .sheet-znz-inventory-item .sheet-znz-inventory-item-row {
+      display: flex;
+      justify-content: space-between; }
+      .sheet-znz-section-inventory .sheet-znz-inventory-item .sheet-znz-inventory-item-row .sheet-znz-inventory-item-field:last-child label {
+        text-align: right; }
