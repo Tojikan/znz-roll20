@@ -1,0 +1,138 @@
+
+
+
+
+
+//EQUIPMENT
+.sheet-znz-equipment{
+    flex: 70%;
+
+    .sheet-znz-section-equipped-weapons{
+        .sheet-znz-block-equipped {
+            display: flex;
+            .sheet-znz-block-ranged, .sheet-znz-block-melee{
+                flex: 35%;
+    
+                .sheet-znz-weapon-stats{
+                    border: solid 1px black;
+                    padding: 10px;
+                    min-height: 100px;
+
+                    .sheet-znz-weapon-stat-field {
+                        margin-bottom: 12px;
+
+                        label {
+                            padding: 0;
+                        }
+                    }
+
+
+                    .sheet-znz-weapon-field-row{
+                        display: flex;
+                        justify-content: space-between;
+
+                        .sheet-znz-weapon-stat-field{
+
+                
+                            &:last-child {
+                                label {
+                                    text-align: right;
+                                }
+
+                                input {
+                                    display: block;
+                                    margin-left: auto;
+                                }
+                            }
+                        }
+                    }
+
+                    input[type=text], textarea {
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+    
+            .sheet-znz-block-ranged{
+                margin-right: 20px;
+            }
+        }
+    }
+
+    .sheet-znz-section-other-equipment{
+        margin-top: 10px;
+        padding: 5px;
+    }
+}
+
+
+
+//INVENTORY
+.sheet-znz-section-inventory{
+    display: flex;
+    width: 100%;
+    border: solid 2px black;
+    padding: 10px;
+    
+    > label{
+        width: 100%;
+    }
+
+    [class^="sheet-znz-block-"]{
+        padding: 8px;
+        flex: 27.5%;
+
+        &:nth-child(2){
+            margin: 0 10px;
+        }
+
+        &:last-child{
+            flex: 45%;
+        }
+
+    }
+    
+    .sheet-znz-header {
+        border-bottom: solid 2px black;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .sheet-znz-inventory-item {
+        border: solid 1px lightgray;
+        padding: 8px; 
+        margin-bottom: 16px;
+
+        label {
+            padding: 0;
+        }
+
+        .sheet-znz-inventory-item-field {
+            margin-bottom: 12px;
+
+            textarea {
+                box-sizing: border-box;
+            }
+        }
+
+        .sheet-znz-inventory-item-row{
+            display: flex;
+            justify-content: space-between;
+
+            .sheet-znz-inventory-item-field{
+                
+                &:last-child {
+                    label {
+                        text-align: right;
+                    }
+
+                    input {
+                        display: block;
+                        margin-left: auto;
+                    }
+                }
+            }
+        }
+    }
+}

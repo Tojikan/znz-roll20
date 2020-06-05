@@ -1,0 +1,17 @@
+//ATTRIBUTES
+table.sheet-znz-block-attrib-table{
+    width: 100%;
+    td{
+        padding: 10px 5px;
+    }
+
+    tr{
+        border-top: thin solid;
+        border-bottom: thin solid;
+        border-color: lightgrey;
+
+        &:first-child{
+            border: none;
+        }
+    }
+}

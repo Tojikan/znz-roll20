@@ -1,0 +1,45 @@
+
+.sheet-znz-block-custom-select{
+    display: flex;
+    padding: 10px 0;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+    
+    label {
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .sheet-znz-custom-label{
+        align-self: center;
+    }
+
+    .sheet-znz-custom-toggle-field{
+        align-self: center;
+        margin: 0 15px 0 5px;
+        width: auto;
+    }
+
+    .sheet-znz-custom-input, .sheet-znz-custom-select{
+        flex: 1 1 90%;
+        margin-right: 10px;
+    }
+    
+    .sheet-znz-custom-input{
+        display: none;
+    }
+
+    //toggle part
+    .sheet-znz-custom-toggle-field:checked ~ .sheet-znz-custom-input{
+        display: block;
+    }
+
+    .sheet-znz-custom-toggle-field:checked ~ .sheet-znz-custom-select{
+        display: none;
+    }
+
+    .sheet-znz-custom-bonus{
+        flex: 10%;
+    }
+
+}

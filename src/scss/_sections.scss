@@ -1,0 +1,43 @@
+.sheet-znz-area{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+}
+
+.sheet-znz-area-unflexed{
+    margin-bottom: 25px;
+}
+
+/********** NAME  - STATUS *********/
+.sheet-znz-section-name{
+    flex: 30%;
+}
+
+.sheet-znz-section-status{
+    flex: 70%;
+}
+
+
+/********* Attrib - Equipped **********/
+
+.sheet-znz-section-attributes{
+    flex: 30%;
+    margin-right: 25px;
+}
+
+.sheet-znz-equipment{
+    flex: 70%;
+}
+
+
+
+
+/********* Abilities and Skills and Proficiency and Flaws**********/
+.sheet-znz-section-abilities, .sheet-znz-section-flaws{
+    flex: 50%;
+    margin-left: 20px;
+}
+
+.sheet-znz-section-skills, .sheet-znz-section-proficiency{
+    flex: 50%;
+}
