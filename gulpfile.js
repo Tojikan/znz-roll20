@@ -1,17 +1,15 @@
 
 const gulp = require('gulp');
 const sass = require('gulp-sass');
-const browserSync = require('browser-sync').create();
 const fileinclude = require('gulp-file-include');
 const concat = require('gulp-concat');
 const replace = require('gulp-replace');
 
 //compile scss into css
 function style() {
-    return gulp.src('src/scss/*.scss')
+    return gulp.src('src/scss/main.scss')
     .pipe(sass().on('error',sass.logError))
-    .pipe(gulp.dest('dist'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('dist'));
 }
 
 function scripts(){
@@ -40,23 +38,14 @@ function html(){
     }))
     .pipe(replace('text/javascript', 'text/worker'))
     .pipe(gulp.dest('./dist'));
-
-
-    browserSync.reload();
 }
 
 
 function watch() {
-    browserSync.init({
-        server: {
-           baseDir: "./dist",
-           index: "preview.html"
-        }
-    });
     gulp.watch('./src/scss/*.scss', style);
     gulp.watch('./src/js/*.js').on('change', scripts);
+    gulp.watch('./src/js/sheet/*.js').on('change',html);
     gulp.watch('./src/html/*.html').on('change',html);
-    gulp.watch('./src/js/*.js').on('change', browserSync.reload);
 }
 
 exports.style = style;

@@ -4,35 +4,64 @@
         <div class="sheet-znz-area">
             <div class="sheet-znz-section sheet-znz-section-name">
                 <div class="sheet-znz-block sheet-znz-block-name">
-                    <label>Name</label>
+                    <h2>Name</h2>
                     <input type="text" name="attr_name"></input>
                 </div>
                 <div class="sheet-znz-block sheet-znz-block-status">
-                    <label>Status</label>
+                    <h2>Status</h2>
                     <input type="text" name="attr_status"></input>
                 </div>
             </div>
 
             <div class="sheet-znz-section sheet-znz-section-status">
-                <div class="sheet-znz-block sheet-znz-block-health">
-                    <label>Health</label>
+                <div class="sheet-znz-block sheet-znz-block-stat">
+                    <h2>
+                        Health
+                    </h2>
                     <div class="sheet-znz-stat-container">
-                        <input type="number" name="attr_hp" /> <span class="sheet-divider">/</span>
-                        <input type="number" class="sheet-znz-attr-bonus" readonly name="attr_hp_max" value="15"/>
+                        <div class="sheet-znz-input-field">
+                            <input type="number" name="attr_hp" />
+                        </div>
+                        <div class="sheet-znz-label-text">
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_hp_max" value="15"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="sheet-znz-block sheet-znz-block-sanity">
-                    <label>Sanity</label>
+                <div class="sheet-znz-block sheet-znz-block-stat">
+                    <h2>
+                        Sanity
+                    </h2>
                     <div class="sheet-znz-stat-container">
-                        <input type="number" name="attr_sanity" /> <span class="sheet-divider">/</span>
-                        <input type="number" class="sheet-znz-attr-bonus" readonly name="attr_sanity_max" value="15"/>
+                        <div class="sheet-znz-input-field">
+                            <input type="number" name="attr_sanity" />
+                        </div>
+                        <div class="sheet-znz-label-text">
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_sanity_max" value="15"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="sheet-znz-block sheet-znz-block-energy">
-                    <label>Energy</label>
+                <div class="sheet-znz-block sheet-znz-block-stat">
+                    <h2>
+                        Energy
+                    </h2>
                     <div class="sheet-znz-stat-container">
-                        <input type="number" name="attr_energy" /> <span class="sheet-divider">/</span>
-                        <input type="number" class="sheet-znz-attr-bonus" readonly name="attr_energy_max" value="30"/>
+                        <div class="sheet-znz-input-field">
+                            <input type="number" name="attr_energy" />
+                        </div>
+                        <div class="sheet-znz-label-text">
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_energy_max" value="15"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sheet-znz-block sheet-znz-block-stat">
+                    <h2>Exp</h2>
+                    <div class="sheet-znz-stat-container">
+                        <input type="number" name="attr_exp" value="0" />
+                    </div>
+                    <div class="sheet-znz-label-text">
+                        Learn Costs:
+                        <div class="sheet-znz-description-text">Proficiencies:5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Skill:10 </div>
+                        <div class="sheet-znz-description-text">Attribute:15  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ability:30 </div>
                     </div>
                 </div>
             </div>
@@ -42,10 +71,10 @@
         <div class="sheet-znz-area">
 
             <div class="sheet-znz-section sheet-znz-section-attributes">
-                <div class="sheet-znz-total-attrs">
+                <div class="sheet-znz-spaced-between">
                     Total Attribute Points <input type="number" name="attr_total_attr_points" class="sheet-znz-field-total-stat-points" readonly value="21"/>
                 </div>
-                <table>
+                <table class="sheet-znz-block-attrib-table">
                     <tr>
                         <th>
                             Attribute
@@ -60,7 +89,7 @@
                     <tr>
                         <td>
                             <label>Intelligence</label>
-                            <div class="sheet-attrib-description">
+                            <div class="sheet-znz-description-text">
                                 Knowledge, Understanding, Crafting,
                             </div>
                         </td>
@@ -70,7 +99,7 @@
                     <tr>
                         <td>
                             <label>Strength</label>
-                            <div class="sheet-attrib-description">
+                            <div class="sheet-znz-description-text">
                                 Strength Checks, Melee Damage, Grappling
                             </div>
                         </td>
@@ -80,8 +109,8 @@
                     <tr>
                         <td>
                             <label>Dexterity</label>
-                            <div class="sheet-attrib-description">
-                                Speed, Initiative, Dodging
+                            <div class="sheet-znz-description-text">
+                                Speed, Agility, Dodging
                             </div>
                         </td>
                         <td><input type="number" name="attr_dexterity" min="1" value="3" max="6"/></td>
@@ -90,7 +119,7 @@
                     <tr>
                         <td>
                             <label>Empathy</label>
-                            <div class="sheet-attrib-description">
+                            <div class="sheet-znz-description-text">
                                 Interpersonal Skills, Charisma, Insight
                             </div>
                         </td>
@@ -100,7 +129,7 @@
                     <tr>
                         <td>
                             <label>Awareness</label>
-                            <div class="sheet-attrib-description">
+                            <div class="sheet-znz-description-text">
                                 Perception, Scouting, Stealth
                             </div>
                         </td>
@@ -110,7 +139,7 @@
                     <tr>
                         <td>
                             <label>Tenacity</label>
-                            <div class="sheet-attrib-description">
+                            <div class="sheet-znz-description-text">
                                 Determines Max Stress. Mental Fortitude. Pain resistance
                             </div>
                         </td>
@@ -120,7 +149,7 @@
                     <tr>
                         <td>
                             <label>Health</label>
-                            <div class="sheet-attrib-description">
+                            <div class="sheet-znz-description-text">
                                 Determines Max HP and Energy. Sickness resistance
                             </div></td>
                         <td><input type="number" name="attr_health" min="1" value="3" max="6"/></td>
@@ -134,77 +163,108 @@
                 <!--- Equipped Weapons-->
                 <div class="sheet-znz-section-equipped-weapons">
                     <div class="sheet-znz-block-equipped">
-                        <div class="sheet-znz-block-ranged">
-                            <label>Equipped Ranged</label>
-                            <div class="sheet-znz-weapon-stats sheet-znz-ranged-stats">
-                                <div class="sheet-znz-weapon-stat-field">
-                                    <label>Name</label> 
+                        <div class="sheet-znz-block-item sheet-znz-block-equipped-ranged">
+                            <label>Equipped Ranged Weapon</label>
+                            <div class="sheet-znz-item sheet-znz-weapon-card">
+                                <div class="sheet-znz-item-field sheet-znz-field-item-name">
+                                    <label>Name</label>
                                     <input type="text" name="attr_equipped_ranged_name"/>
                                 </div>
-                                <div class="sheet-znz-weapon-field-row">
-                                    <div class="sheet-znz-weapon-stat-field">
-                                        <label> Add Shots Bonus</label> 
-                                        <input type="number" name="attr_equipped_ranged_bonus"/>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Weight:
                                     </div>
-                                    <div class="sheet-znz-weapon-stat-field">
-                                        <label>Weight</label> 
+                                    <div class="sheet-znz-item-field">
                                         <input type="number" name="attr_equipped_ranged_weight"/>
                                     </div>
                                 </div>
-                                <div class="sheet-znz-weapon-field-row">
-                                    <div class="sheet-znz-weapon-stat-field">
-                                        <label>Ammo / Max Ammo</label> 
-                                        <input type="number" name="attr_equipped_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_equipped_ranged_ammo_max"/>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Ammo:
                                     </div>
-                                    <div class="sheet-znz-weapon-stat-field ">
-                                        <label>Reloads</label> 
+    
+                                    <div class="sheet-znz-item-field-row">
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" name="attr_equipped_ranged_ammo"/>  
+                                        </div>
+                                        
+                                        <span class="sheet-divider">/</span>  
+                                        
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" name="attr_equipped_ranged_ammo_max"/>
+                                            <div class="sheet-znz-description-text">
+                                                MAX
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Reloads:
+                                    </div>
+                                    <div class="sheet-znz-item-field">
                                         <input type="number" name="attr_equipped_ranged_reloads"/>
                                     </div>
                                 </div>
-                                <div class="sheet-znz-weapon-stat-field">
-                                    <label>Notes</label> 
-                                    <textarea name="attr_equipped_ranged_notes" rows="2"></textarea>
+                                <div class="sheet-znz-item-note">
+                                    <div class="sheet-znz-item-field-label">Notes</div> 
+                                    <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_equipped_ranged_note" ></textarea>
                                 </div>
-                                <div class="sheet-znz-weapon-stat-field">
-                                    <button name="act_unequip_ranged">Unequip</button>
+                                <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
+                                    <button type="action" name="act_unequip_ranged_weapon">Unequip</button>
                                 </div>
                             </div>
                         </div>
     
-                        <div class="sheet-znz-block-melee">
-                            <label>Equipped Melee</label>
-                            <div class="sheet-znz-weapon-stats sheet-znz-melee-stats">
-                                <div class="sheet-znz-weapon-stat-field">
-                                    <label>Name</label> 
+                        <div class="sheet-znz-block-item sheet-znz-block-equipped-melee">
+                            <label>Equipped Melee Weapon</label>
+                            <div class="sheet-znz-item sheet-znz-weapon-card">
+                                <div class="sheet-znz-item-field sheet-znz-field-item-name">
+                                    <label>Name</label>
                                     <input type="text" name="attr_equipped_melee_name"/>
                                 </div>
-                                <div class="sheet-znz-weapon-field-row">
-                                    <div class="sheet-znz-weapon-stat-field">
-                                        <label> Add Energy Bonus</label> 
-                                        <input type="number" name="attr_equipped_melee_bonus"/>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Weight:
                                     </div>
-                                    <div class="sheet-znz-weapon-stat-field">
-                                        <label>Weight</label> 
+                                    <div class="sheet-znz-item-field">
                                         <input type="number" name="attr_equipped_melee_weight"/>
                                     </div>
                                 </div>
-                                
-                                <div class="sheet-znz-weapon-field-row">
-                                    <div class="sheet-znz-weapon-stat-field">
-                                        <label>Current / Max Durability</label> 
-                                        <input type="number" name="attr_equipped_melee_durability"/><span class="sheet-divider">/</span><input type="number" name="attr_equipped_melee_durability_max"/>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Durability:
                                     </div>
-                                    <div class="sheet-znz-weapon-stat-field ">
-                                        <label>Durability Rating</label> 
-                                        <input type="number" name="attr_equipped_durability_rating"/>
+    
+                                    <div class="sheet-znz-item-field-row">
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" name="attr_equipped_melee_durability"/>  
+                                        </div>
+                                        
+                                        <span class="sheet-divider">/</span>  
+                                        
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" name="attr_equipped_melee_durability_max"/>
+                                            <div class="sheet-znz-description-text">
+                                                MAX
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="sheet-znz-weapon-stat-field">
-                                    <label>Notes</label> 
-                                    <textarea name="attr_equipped_melee_notes" rows="2"></textarea>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Damaged on rolls of:
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" name="attr_equipped_melee_durability_rating"/>
+                                    </div>
                                 </div>
-                                <div class="sheet-znz-weapon-stat-field">
-                                    <button name="act_unequip_melee">Unequip</button>
+                                <div class="sheet-znz-item-note">
+                                    <div class="sheet-znz-item-field-label">Notes</div> 
+                                    <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_equipped_melee_note" ></textarea>
+                                </div>
+                                <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
+                                    <button type="action" name="act_unequip_melee_weapon">Unequip</button>
                                 </div>
                             </div>
     
@@ -232,205 +292,276 @@
             <div class="sheet-znz-section-skills">
                 <label>Skills</label>
                 <fieldset class="repeating_skills">
-                    <div class="sheet-znz-block-skill">
-                        <div class="sheet-znz-label-custom-skill">Custom Skill?</div>
-                        <input type="checkbox" name="attr_use_custom_skill" class="sheet-znz-field-custom-skill-toggle" />
+                    <div class="sheet-znz-block-custom-select">
+                        <div class="sheet-znz-custom-label">Custom?</div>
+                        <input type="checkbox" name="attr_use_custom_skill" class="sheet-znz-custom-toggle-field" />
                         <!-- hidden with css -->
-                        <div class="sheet-znz-field-skill-select">
+                        <div class="sheet-znz-custom-select">
                             <label>Select Skill</label>
                             <select name="attr_skill_type">
                                 <option value="" selected>Select Skill</option>
-                                <option value="firearms">Firearms</option>
-                                <option value="unarmed">Unarmed Combat</option>
-                                <option value="melee">Melee Combat</option>
-                                <option value="stealth">Stealth</option>
-                                <option value="archery">Archery</option>
-                                <option value="throwing">Throwing weapons</option>
-                                <option value="scavenging">Scavenging</option>
                                 <option value="lockpicking">Lockpicking</option>
+                                <option value="hotwiring">Hotwiring</option>
+                                <option value="lockpicking">Hacking</option>
+                                <option value="sleightofhand">Sleight of Hand</option>
+                                <option value="mechanics">Mechanical</option>
                                 <option value="electronics">Electronics</option>
-                                <option value="driving">Driving</option>
-                                <option value="piloting">Piloting</option>
-                                <option value="crafting">Crafting</option>
-                                <option value="repair">Repair</option>
-                                <option value="cooking">Cooking</option>
                                 <option value="medicine">Medicine</option>
-                                <option value="science">Science</option>
+                                <option value="pharmaceutical">Pharmaceutical</option>
+                                <option value="biology">Biology</option>
+                                <option value="explosives">Explosives</option>
                                 <option value="engineering">Engineering</option>
-                                <option value="survival">Survival</option>
-                                <option value="intimidation">Intimidation</option>
-                                <option value="leadership">Leadership</option>
-                                <option value="animal">Animal Handling</option>
-                                <option value="persuasion">Persuasion</option>
-                                <option value="athletics">Athletics</option>
+                                <option value="boat">Boat Piloting</option>
+                                <option value="plane">Plane Piloting</option>
+                                <option value="cartography">Cartography</option>
+                                <option value="nature">Nature</option>
+                                <option value="construction">Construction</option>
+                                <option value="tailor">Tailoring</option>
                             </select>
                         </div>
-                        <div class="sheet-znz-field-skill-custom">
-                            <label>Skill Name</label>
-                            <div class="sheet-znz-skill-bonus-input"><input class="sheet-znz-custom-skill" type="text" name="attr_skill_custom_name"/></div>
+                        <div class="sheet-znz-custom-input">
+                            <label>Custom Skill Name</label>
+                            <div class="sheet-znz-custom-input-wrapper"><input class="sheet-znz-custom-input-field" type="text" name="attr_skill_custom_name"/></div>
                         </div>
-                        <div class="sheet-znz-field-skill-bonus">
+                        <div class="sheet-znz-custom-bonus">
                             <label>Bonus</label>
-                            <div class="sheet-znz-skill-bonus-input"><input type="number" name="attr_skill_bonus"/></div>
+                            <div class="sheet-znz-custom-bonus-input"><input type="number" name="attr_skill_bonus"/></div>
                         </div>
                     </div>
                 </fieldset>
-
             </div>
 
             <div class="sheet-znz-section-abilities">
                 <label>Abilities</label>
                 <fieldset class="repeating_abilities">
-                    <div class="sheet-znz-block-ability">
-                        <div class="sheet-znz-field-ability-type">
-                            <select name="attr_ability_type">
-                                <option value="hawkeye">Hawkeye</option>
-                                <option value="fighter">Fighter</option>
-                                <option value="brawler">Brawler</option>
-                                <option value="sniper">Sniper</option>
+                    <div class="sheet-znz-block-trait">
+                        <div class="sheet-znz-trait-select">
+                            <select name="attr_ability">
+                                <option value="default" default>Select Ability</option>
+                                <option value="bullseye">Bulls Eye</option>
                                 <option value="lucky">Lucky</option>
                                 <option value="stable">Stable</option>
                                 <option value="martialartist">Martial Artist</option>
-                                <option value="wrestler">Wrestler</option>
                                 <option value="motivational">Motivational</option>
                                 <option value="highoctane">High Octane</option>
-
+                                <option value="knowledgeable">Knowledgeable</option>
+                                <option value="knots">Advanced Knots</option>
                             </select>
                         </div>
-                        <div class="sheet-znz-field-ability-descript">
-                            <div class="sheet-znz-field-label">Description</div>
-                            <textarea type="text" readonly name="attr_ability_description"></textarea>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-
-            <div class="sheet-znz-section-flaws">
-                <label>Flaws</label>
-                <fieldset class="repeating_flaws">
-                    <div class="sheet-znz-block-flaw">
-                        <div class="sheet-znz-field-flaw-type">
-                            <select name="attr_flaw_type" readonly>
-                                <option value="nearsighted">Nearsighted</option>
-                                <option value="diabetic">Diabetic</option>
-                                <option value="glutton">Glutton</option>
-                                <option value="lovesick">Lovesick</option>
-                                <option value="psychopath">Psychopath</option>
-                                <option value="clumsy">Clumsy</option>
-                                <option value="alcoholic">Alcoholic</option>
-                            </select>
-                        </div>
-                        <div class="sheet-znz-field-ability-descript">
-                            <div class="sheet-znz-field-label">Description</div>
-                            <textarea type="text" readonly name="attr_ability_description"></textarea>
+                        <div class="sheet-znz-trait-descript">
+                            <textarea type="text" readonly name="attr_abilitytext"></textarea>
                         </div>
                     </div>
                 </fieldset>
             </div>
         </div>
 
+         <!--- Proficiencies and Flaws-->
+        <div class="sheet-znz-area">
+            <div class="sheet-znz-section-proficiency">
+                <label>Proficiencies</label>
+                <fieldset class="repeating_proficiency">
+                    <div class="sheet-znz-block-custom-select">
+                        <div class="sheet-znz-custom-label">Custom?</div>
+                        <input type="checkbox" name="attr_use_custom_proficiency" class="sheet-znz-custom-toggle-field" />
+                        <!-- hidden with css -->
+                        <div class="sheet-znz-custom-select">
+                            <label>Select Proficiency</label>
+                            <select name="attr_skill_type">
+                                <option value="" selected>Select Proficiency</option>
+                                <option value="firearms">Firearms</option>
+                                <option value="unarmed">Unarmed Combat</option>
+                                <option value="sharpmelee">Sharp Melee Weapons</option>
+                                <option value="bluntmelee">Blunt Melee Weapons</option>
+                                <option value="throwing">Throwing Weapons</option>
+                                <option value="archery">Archery</option>
+                                <option value="stealth">Stealth</option>
+                                <option value="pickpocket">Pickpocketing</option>
+                                <option value="repair">Repair</option>
+                                <option value="crafting">Crafting</option>
+                                <option value="driving">Driving</option>
+                                <option value="scavenging">Scavenging</option>
+                                <option value="cooking">Cooking</option>
+                                <option value="firstaid">First Aid</option>
+                                <option value="survival">Survival</option>
+                                <option value="performance">Performance</option>
+                                <option value="intimidation">Intimidation</option>
+                                <option value="persuasion">Persuasion</option>
+                                <option value="negotiation">Negotiation</option>
+                                <option value="investigation">Investigation</option>
+                                <option value="animal">Animal Handling</option>
+                                <option value="climbing">Climbing</option>
+                                <option value="swimming">Swimming</option>
+                            </select>
+                        </div>
+                        <div class="sheet-znz-custom-input">
+                            <label>Custom Proficiency</label>
+                            <div class="sheet-znz-custom-input-wrapper"><input class="sheet-znz-custom-input-field" type="text" name="attr_skill_custom_name"/></div>
+                        </div>
+                        <div class="sheet-znz-custom-bonus">
+                            <label>Bonus</label>
+                            <div class="sheet-znz-custom-bonus-input"><input type="number" name="attr_skill_bonus"/></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+            <div class="sheet-znz-section-flaws">
+                <label>Flaws</label>
+                <fieldset class="repeating_flaws">
+                    <div class="sheet-znz-block-trait">
+                        <div class="sheet-znz-field-trait-select">
+                            <select name="attr_flaw" readonly>
+                                <option value="default" default>Select Flaw</option>
+                                <option value="nearsighted">Nearsighted</option>
+                                <option value="curious">Curious</option>
+                                <option value="sickly">Sickly</option>
+                                <option value="clumsy">Clumsy</option>
+                                <option value="addict">Addict</option>
+                                <option value="unlucky">Unlucky</option>
+                            </select>
+                        </div>
+                        <div class="sheet-znz-field-trait-descript">
+                            <textarea type="text" readonly name="attr_flawtext"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+
         <div class="sheet-znz-area-unflexed">
             <label>Inventory</label>
             <div class="sheet-znz-section-inventory">
-                <div class="sheet-znz-block-ranged-inventory">
+                <div class="sheet-znz-block-item">
                     <label class="sheet-znz-header">Ranged Weapons</label>
                     <fieldset class="repeating_ranged">
-                        <div class="sheet-znz-inventory-item">
-                            <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-name">
+                        <div class="sheet-znz-item sheet-znz-weapon-card">
+                            <div class="sheet-znz-item-field sheet-znz-field-item-name">
                                 <label>Name</label>
                                 <input type="text" name="attr_inv_ranged_name"/>
                             </div>
-                            <div class="sheet-znz-inventory-item-row">
-                                <div class="sheet-znz-field-weapon-bonus">
-                                    <label> Add Shots Bonus</label> 
-                                    <input type="number" name="attr_inv_ranged_bonus"/>
+                            <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-field-label">
+                                    Weight:
                                 </div>
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-weight">
-                                    <label>Weight</label>
+                                <div class="sheet-znz-item-field">
                                     <input type="number" name="attr_inv_ranged_weight"/>
                                 </div>
                             </div>
-                            <div class="sheet-znz-inventory-item-row">
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-ammo">
-                                    <label>Ammo / Max Ammo</label>
-                                    <input type="number" name="attr_inv_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_inv_ranged_ammo_max"/>
+                            <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-field-label">
+                                    Ammo:
                                 </div>
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-reload">
-                                    <label>Reloads</label>
+
+                                <div class="sheet-znz-item-field-row">
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" name="attr_inv_ranged_ammo"/>  
+                                    </div>
+                                    
+                                    <span class="sheet-divider">/</span>  
+                                    
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" name="attr_inv_ranged_ammo_max"/>
+                                        <div class="sheet-znz-description-text">
+                                            MAX
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-field-label">
+                                    Reloads:
+                                </div>
+                                <div class="sheet-znz-item-field">
                                     <input type="number" name="attr_inv_ranged_reloads"/>
                                 </div>
                             </div>
-                            <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-note">
-                                <label>Notes</label> 
-                                <textarea name="attr_inv_ranged_note" ></textarea>
+                            <div class="sheet-znz-item-note">
+                                <div class="sheet-znz-item-field-label">Notes</div> 
+                                <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_inv_ranged_note" ></textarea>
                             </div>
-                            <div class="sheet-znz-inventory-item-field sheet-znz-weapon-equip-button">
-                                <button name="act_equip_inventory_ranged_weapon">Equip</button>
+                            <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
+                                <button type="action" name="act_equiprange">Equip</button>
                             </div>
                         </div>
                     </fieldset>
                 </div>
-                <div class="sheet-znz-block-melee-inventory">
+                <div class="sheet-znz-block-item">
                     <label class="sheet-znz-header">Melee Weapons</label>
                     <fieldset class="repeating_melee">
-                        <div class="sheet-znz-inventory-item">
-                            <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-name">
-                               <label>Name</label>
+                        <div class="sheet-znz-item sheet-znz-weapon-card">
+                            <div class="sheet-znz-item-field sheet-znz-field-item-name">
+                                <label>Name</label>
                                 <input type="text" name="attr_inv_melee_name"/>
                             </div>
-                            <div class="sheet-znz-inventory-item-row">
-                                <div class="sheet-znz-field-weapon-bonus">
-                                    <label>Add Energy Bonus</label> 
-                                    <input type="number" name="attr_inv_melee_bonus"/>
+                            <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-field-label">
+                                    Weight:
                                 </div>
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-weight">
-                                    <label>Weight</label>
+                                <div class="sheet-znz-item-field">
                                     <input type="number" name="attr_inv_melee_weight"/>
                                 </div>
                             </div>
-                            <div class="sheet-znz-inventory-item-row">
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-durability">
-                                    <label>Current / Max Durability</label>
-                                    <input type="number" name="attr_inv_melee_durability"/>  
-                                    <span class="sheet-divider">/</span>  
-                                    <input type="number" name="attr_inv_melee_durability_max"/>
+                            <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-field-label">
+                                    Durability:
                                 </div>
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-durability-rating">
-                                    <label>Durability Rating</label>
+
+                                <div class="sheet-znz-item-field-row">
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" name="attr_inv_melee_durability"/>  
+                                    </div>
+                                    
+                                    <span class="sheet-divider">/</span>  
+                                    
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" name="attr_inv_melee_durability_max"/>
+                                        <div class="sheet-znz-description-text">
+                                            MAX
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-field-label">
+                                    Damaged on rolls of:
+                                </div>
+                                <div class="sheet-znz-item-field">
                                     <input type="number" name="attr_inv_melee_durability_rating"/>
                                 </div>
                             </div>
-                            <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-note">
-                                <label>Notes</label> 
-                                <textarea name="attr_inv_melee_note" ></textarea>
+                            <div class="sheet-znz-item-note">
+                                <div class="sheet-znz-item-field-label">Notes</div> 
+                                <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_inv_melee_note" ></textarea>
                             </div>
-                            <div class="sheet-znz-inventory-item-field sheet-znz-weapon-equip-button">
-                                <button name="act_equip_inventory_melee_weapon">Equip</button>
+                            <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
+                                <button type="action" name="act_equipmelee">Equip</button>
                             </div>
                         </div>
                     </fieldset>
                 </div>
-                <div class="sheet-znz-block-misc-inventory">
+                <div class="sheet-znz-block-item">
                     <label class="sheet-znz-header">Items</label>
                     <fieldset class="repeating_inventory">
-                        <div class="sheet-znz-inventory-item">
-                            <div class="sheet-znz-inventory-item-row">
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-item-name">
-                                    <label>Name</label>
-                                    <input type="text" name="attr_inv_item_name"/>
-                                </div>
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-item_count">
-                                    <label>Quantity</label> 
+                        <div class="sheet-znz-item">
+                            <div class="sheet-znz-item-field sheet-znz-field-item-name-misc">
+                                <label>Name</label>
+                                <input type="text" name="attr_inv_item_name"/>
+                            </div>
+                            <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-field sheet-znz-field-item-count"weight>
+                                    <div class="sheet-znz-item-field-label">Quantity</div> 
                                     <input type="number" name="attr_inv_item_quantity"/>
                                 </div>
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-item-space">
-                                    <label>Weight</label>
-                                    <input type="number" name="attr_inv_item_space"/>
+                                <div class="sheet-znz-item-field sheet-znz-field-item-weight">
+                                    <div class="sheet-znz-item-field-label">Weight</div> 
+                                    <input type="number" name="attr_inv_item_weight"/>
                                 </div>
                             </div>
-                            <div class="sheet-znz-inventory-item-field sheet-znz-field-item-note">
-                                <label>Notes</label> 
-                                <textarea name="attr_inv_item_note" ></textarea>
+                            <div class="sheet-znz-item-field sheet-znz-field-item-note">
+                                <div class="sheet-znz-item-field-label">Notes</div> 
+                                <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_inv_item_note" ></textarea>
                             </div>
                         </div>
                     </fieldset>
@@ -447,77 +578,300 @@
     </div>
 
     <script type="text/worker">
+        const stats = [
+    "intelligence",
+    "strength", 
+    "dexterity",
+    "empathy",
+    "awareness",
+    "tenacity",
+    "health"
+    ];
 
-    const stats = [
-        "intelligence",
-        "strength", 
-        "dexterity",
-        "empathy",
-        "awareness",
-        "tenacity",
-        "health"
-        ];
+
+const setTotalAttrs = () => {
+    getAttrs(stats, values => {
+        let val = Object.values(values);
+
+        let total = 0
+
+        for (field in val){
+
+            let count = parseInt(val[field], 10);
+            total += count;
+        }
+
+        console.log("Total Attributes: " + total);
+
+        setAttrs({
+            ['total_attr_points']: total
+        })
 
 
-    const setTotalAttrs = () => {
-        getAttrs(stats, values => {
-            let val = Object.values(values);
+    });
+}
 
-            let total = 0
 
-            for (field in val){
 
-                let count = parseInt(val[field], 10);
-                total += count;
+stats.forEach(function (stat) {
+    on("change:" + stat, function() {
+        getAttrs([stat], function (values) {
+            const score = parseInt(values[stat], 10) || 0;
+            const mod = score - 3;
+
+            mod > 0 ? setAttrs({ [stat + '_bonus']: "+" + mod }) : setAttrs({ [stat + '_bonus']: mod });
+            
+            setTotalAttrs();
+
+            if (stat == "health"){
+                const energy = score * 10;
+                const health = score * 5;
+                setAttrs({
+                    ['hp_max'] : health,
+                    ['energy_max'] : energy
+
+                });
             }
 
-            console.log("Total Attributes: " + total);
+            if (stat == 'tenacity'){
+                const sanity = score * 5;
 
-            setAttrs({
-                ['total_attr_points']: total
-            })
+                setAttrs({
+                    ['sanity_max']:sanity   
+                });
+            }
 
-
-        });
-    }
-
-
-
-    stats.forEach(function (stat) {
-        on("change:" + stat, function() {
-            getAttrs([stat], function (values) {
-                const score = parseInt(values[stat], 10) || 0;
-                const mod = score - 3;
-
-                mod > 0 ? setAttrs({ [stat + '_bonus']: "+" + mod }) : setAttrs({ [stat + '_bonus']: mod });
-                
-                setTotalAttrs();
-
-                if (stat == "health"){
-                    const energy = score * 10;
-                    const health = score * 5;
-                    setAttrs({
-                        ['hp_max'] : health,
-                        ['energy_max'] : energy
-
-                    });
-                }
-
-                if (stat == 'tenacity'){
-                    const sanity = score * 5;
-
-                    setAttrs({
-                        ['sanity_max']:sanity   
-                    });
-                }
-
-            });
         });
     });
+});
+
+
+        var abilitiesArr = {
+        default:
+            "Select an ability to see its description.",
+        bullseye: 
+            "All that time throwing darts and shooting guns paid off. Just like you knew it would. \n\n + Know exactly how much a ranged attack success requires. \n + Ranged weapons critically strike on a natural 9.",
+        lucky: 
+            "Lady luck smiles on you. She offers a damn good safety net. \n\n + 3 times a play session, you can re-roll any roll. You can choose which roll to accept. ",
+        stable: 
+            "Everyone needs a shoulder to cry on. You just happen to have a good shoulder. \n\n + When your sanity breaks, choose which traumatic response action to take. \n + You can give your sanity points to other players.",
+        martialartist: 
+            "When they said self-defense, you weren't expecting this is what you'd be defending against. \n\n + Know exactly how much a melee attack success requires. \n + Successful dodging allows you to make a free melee attack roll.",
+        motivational: 
+            "Just because the dead are rising, doesn't mean positive thinking is less valuable. \n\n + 3 times a day, give someone else a +2 bonus on their next roll as a free action.",
+        highoctane: 
+            "'Relax. Take a chill pill. Don't hurt yourself.' they said. Well, you're all out of chill pills and there's zombies to be a-killin'. \n\n + You can take one additional combat action on your turn in exchange for 3 energy or 3 health.",
+        knowledgeable: 
+            "They said the internet's full of useless facts. Well guess who's dead and no longer able to laugh now? \n\n + You can attempt any skill action for a skill you don't possess by passing an intelligence check first. You must still roll the skill check after. \n + You can not have any additive bonuses or have a critical success for any skill action done this way.",
+}
+
+
+
+var flawsArr = {
+        default:
+            "Select a flaw to see its description.",
+        nearsighted: 
+            "Glasses. What, did you think you would never have to worry about them during an apocalypse?. \n\n + Occasionally, your glasses may break. Especially during intense combat. \n + Once your glasses are broken, you can attempt to fix them or scavenge for other glasses with matching prescriptions. \n + Once your glasses are broken, reduce all ranged attack rolls by half.",
+        curious: 
+            "They say curiosity killed the cat. Well now the cat can come back and eat your brains. \n\n + Occasionally, you will have an urge to explore or visit an certain area. \n + You can attempt to resist this urge with a tenacity check and spending 3 sanity. You can spend additional sanity to improve your tenacity check.",
+        sickly: 
+            "Well, at least there's no insurance to deal with. \n\n + Occasionally, you require special medicine for a condition. This will give you a quest to scavenge for this medicine. \n + If you ignore this quest, take 5 damage. This quest will appear again shortly.",
+        clumsy: 
+            "It's not unusual to have two left feet anymore. You can find body parts of all orientations really easily now.. \n\n + When doing actions such as sneaking or scavenging, you will occasionally cause a disturbance which leads to an encounter. \n + Occasionally, you will slip or trip while falling.",
+        addict: 
+            "TBA \n\n + Have constant urges to pursue a substance addiction, especially in its presence.  on your turn in exchange for 3 energy or 3 health.",
+        unlucky: 
+            "Just when life during the undead apocalypse seems to be looking in a slightly more positive direction than down. \n\n + 3 times a play session, the ZM will force you to re-roll your dice, making you take the lowest roll.",
+}
+
+
+
+
+on("change:repeating_abilities:ability", function(eventInfo){
+    getAttrs([
+        "repeating_abilities_ability"
+    ], function(value){
+        var abilityName = value["repeating_abilities_ability"];
+
+
+        if (abilityName in abilitiesArr){
+            setAttrs({
+                repeating_abilities_abilitytext: abilitiesArr[abilityName]
+            });
+        }
+    });
+});
+
+on("change:repeating_flaws:flaw", function(eventInfo){
+    getAttrs([
+        "repeating_abilities_flaw"
+    ], function(value){
+        var flawName = value["repeating_abilities_flaw"];
+
+
+        if (flawName in flawsArr){
+            setAttrs({
+                repeating_abilities_flawtext: flawsArr[flawName]
+            });
+        }
+    });
+});
 
 
 
 
 
 
-</script>
+
+
+
+
+        
+//Button Actions
+on("clicked:unequip_ranged_weapon", function(eventInfo){
+    unequip_weapon("ranged");
+});
+
+on("clicked:unequip_melee_weapon", function(eventInfo){
+    unequip_weapon("melee");
+});
+
+// Repeater Button Actions - can't have multiple underscores.
+on("clicked:repeating_melee:equipmelee", function(eventInfo){
+    //strip out everything after last underscore, which would be the button's name
+    //gets us the row ID
+    var underscoreIndex = eventInfo.sourceAttribute.lastIndexOf("_"),
+        rowId = eventInfo.sourceAttribute.substr(0, underscoreIndex);
+
+    unequip_weapon("melee");
+    equip_weapon("melee", rowId)
+});
+
+on("clicked:repeating_ranged:equiprange", function(eventInfo){
+    //strip out everything after last underscore, which would be the button's name
+    //gets us the row ID
+    var underscoreIndex = eventInfo.sourceAttribute.lastIndexOf("_"),
+        rowId = eventInfo.sourceAttribute.substr(0, underscoreIndex);
+
+    unequip_weapon("ranged");
+    equip_weapon("ranged", rowId)
+});
+
+
+
+
+// Unequip - basically a move function. 
+function unequip_weapon(type){
+
+    var weaponFields = getWeaponFields(type, "equipped_" + type + "_"); //examples: equipped_ranged_ammo  ,  equipped_melee_durability
+    
+    getAttrs(weaponFields, function (values){
+
+        //check if we actually have values in the equipped weapon. before unequipping
+        var isEmpty = true;
+        for (let val in values){
+            if (values[val].length){
+                isEmpty = false;
+            }
+        }
+        if (isEmpty){
+            return;
+        }
+
+        //Create new Row
+        var newInvRowId = generateRowID();
+        var newInvRowAttrs = {};
+
+        //get the keys for inventory item and equipped item.
+        var invFields = getWeaponFields(type, "repeating_" + type + "_" + newInvRowId + "_inv_" + type + "_"),
+            valueFields = getWeaponFields(type, "equipped_" + type +  "_");
+
+        // loop is shorthand for: newInvRowAttrs["repeating_" + type + "_" + newInvRowId + "_inv_" + type + "_name"] = values["equipped_" + type + "_name"];
+        for (let i = 0; i < invFields.length; i++){
+            newInvRowAttrs[invFields[i]] = values[valueFields[i]];
+        }
+
+        //add new row in inventory. 
+        setAttrs(newInvRowAttrs);
+
+
+        //struct for clearing equipped weapon.
+        var fieldClearStruct = getWeaponFields(type, "equipped_" + type + "_", true) //example ['equipped_ranged_note'] : ''
+
+        setAttrs(fieldClearStruct);
+    });
+}
+
+
+//Equip inventory item.
+function equip_weapon(type, rowId){
+
+    var weaponFields = getWeaponFields(type, rowId + "_inv_" + type + "_"); //examples: equipped_ranged_ammo  ,  equipped_melee_durability
+
+    getAttrs(weaponFields, function (values){
+
+        if (Object.keys(values).length === 0) {
+            return;
+        }
+
+
+
+        var fieldSetStruct = getWeaponFields(type, "equipped_" + type + "_", true), //the struct to be set
+            fieldValues = getWeaponFields(type, ""); // simple array of values that we will need as keys for both fieldSetStruct and values
+
+
+        for (let i = 0; i < fieldValues.length; i++){
+            fieldSetStruct["equipped_" + type + "_" + fieldValues[i]] = values[rowId + "_inv_" + type + "_" + fieldValues[i]];
+        }
+
+        //set equipped and remove current.
+        setAttrs(fieldSetStruct);
+        removeRepeatingRow(rowId);
+
+    });
+}
+
+
+
+
+/**
+ * Helper in order to get arrays or structs of weapon field names needed for the various functions.
+ * Lets us use a single equip weapon function as it handles both fields for ranged or melee
+ * These are often used to dynamically loop over keys in a struct.
+ * 
+ * @param {string} type Melee or Ranged
+ * @param {string} prefix String appended in front of each returned field name
+ * @param {boolean} asStruct Determine if we return a struct or an array.
+ */
+function getWeaponFields(type, prefix, asStruct = false){
+    var rangedFields = ["name", "weight", "ammo", "ammo_max", "reloads", "note"],
+        meleeFields = ["name", "weight", "durability", "durability_max", "durability_rating", "note"],
+        targetField = [];
+
+
+    //which field array to use. 
+    if (type === "ranged"){
+        targetField = rangedFields;
+    } else if (type === "melee"){
+        targetField = meleeFields;
+    }
+ 
+    if (asStruct){
+        //Return struct, in which each key is the a field name with a prefix and set the value to ""
+        let resultStruct = {};
+
+        for (let i = 0; i < targetField.length; i++) {
+            resultStruct[prefix + targetField[i]] = "";
+        }
+
+        return resultStruct;
+    } else{
+        //Return array of field names with a prefix.
+        for(let i = 0; i < targetField.length; i++){
+            targetField[i]= prefix + targetField[i];
+        }
+
+        return targetField;
+    }
+}
+    </script>

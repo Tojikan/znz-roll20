@@ -34,10 +34,60 @@
 
 /********* Abilities and Skills and Proficiency and Flaws**********/
 .sheet-znz-section-abilities, .sheet-znz-section-flaws{
-    flex: 50%;
+    flex: 60%;
     margin-left: 20px;
 }
 
 .sheet-znz-section-skills, .sheet-znz-section-proficiency{
-    flex: 50%;
+    flex: 40%;
+}
+
+
+
+
+/*** Inventory ***/
+.sheet-znz-section-inventory{
+    display: flex;
+    border: solid 2px black;
+    padding: 8px;
+
+    > label{
+        width: 100%;
+    }
+
+    .sheet-znz-block-item{
+        padding: 6px;
+        flex: 27.5%;
+
+        &:nth-child(2){
+            margin: 0 10px;
+        }
+
+        &:last-child{
+            flex: 45%;
+        }
+    }
+}
+
+
+
+/*** Equipment **/
+.sheet-znz-equipment{
+    flex:70%;
+
+    .sheet-znz-section-equipped-weapons{
+        .sheet-znz-block-equipped {
+            display: flex;
+            
+            .sheet-znz-block-item{
+                flex: 35%;
+            }
+        }
+
+    }
+    
+    .sheet-znz-section-other-equipment{
+        margin-top: 10px;
+        padding: 5px;
+    }
 }

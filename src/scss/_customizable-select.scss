@@ -23,6 +23,10 @@
     .sheet-znz-custom-input, .sheet-znz-custom-select{
         flex: 1 1 90%;
         margin-right: 10px;
+
+        input, select{
+            width: 100%;
+        }
     }
     
     .sheet-znz-custom-input{
