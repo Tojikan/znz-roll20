@@ -136,9 +136,6 @@ label {
                                     text-align: right;
                                 }
 
-                            }
-
-                            &.sheet-znz-align-right{
                                 input {
                                     display: block;
                                     margin-left: auto;
@@ -169,7 +166,7 @@ label {
 
 //SKILLS
 .sheet-znz-section-skills{
-    flex: 50%;
+    flex: 25%;
     margin-right: 10px;
     
     
@@ -225,10 +222,24 @@ label {
 
 //ABILITY
 .sheet-znz-section-abilities{
-    flex: 50%;
+    flex: 37.5%;
     margin-left: 10px;
+    margin-right: 10px;
 
     .sheet-znz-block-ability{
+        padding: 12px 0;
+        border-top: solid 1px lightgrey;
+        border-bottom: solid 1px lightgrey;
+    }
+}
+
+
+//FLAWS
+.sheet-znz-section-flaws{
+    flex: 37.5%;
+    margin-left: 10px;
+
+    .sheet-znz-block-flaw{
         padding: 12px 0;
         border-top: solid 1px lightgrey;
         border-bottom: solid 1px lightgrey;
@@ -293,6 +304,11 @@ label {
                 &:last-child {
                     label {
                         text-align: right;
+                    }
+
+                    input {
+                        display: block;
+                        margin-left: auto;
                     }
                 }
             }

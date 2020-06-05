@@ -81,7 +81,7 @@ label {
           justify-content: space-between; }
           .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field:last-child label, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field:last-child label {
             text-align: right; }
-          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field.sheet-znz-align-right input, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field.sheet-znz-align-right input {
+          .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field:last-child input, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats .sheet-znz-weapon-field-row .sheet-znz-weapon-stat-field:last-child input {
             display: block;
             margin-left: auto; }
         .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats input[type=text], .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-ranged .sheet-znz-weapon-stats textarea, .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats input[type=text], .sheet-znz-equipment .sheet-znz-section-equipped-weapons .sheet-znz-block-equipped .sheet-znz-block-melee .sheet-znz-weapon-stats textarea {
@@ -94,7 +94,7 @@ label {
     padding: 5px; }
 
 .sheet-znz-section-skills {
-  flex: 50%;
+  flex: 25%;
   margin-right: 10px; }
   .sheet-znz-section-skills .sheet-znz-block-skill {
     display: flex;
@@ -124,9 +124,18 @@ label {
       flex: 10%; }
 
 .sheet-znz-section-abilities {
-  flex: 50%;
-  margin-left: 10px; }
+  flex: 37.5%;
+  margin-left: 10px;
+  margin-right: 10px; }
   .sheet-znz-section-abilities .sheet-znz-block-ability {
+    padding: 12px 0;
+    border-top: solid 1px lightgrey;
+    border-bottom: solid 1px lightgrey; }
+
+.sheet-znz-section-flaws {
+  flex: 37.5%;
+  margin-left: 10px; }
+  .sheet-znz-section-flaws .sheet-znz-block-flaw {
     padding: 12px 0;
     border-top: solid 1px lightgrey;
     border-bottom: solid 1px lightgrey; }
@@ -164,3 +173,6 @@ label {
       justify-content: space-between; }
       .sheet-znz-section-inventory .sheet-znz-inventory-item .sheet-znz-inventory-item-row .sheet-znz-inventory-item-field:last-child label {
         text-align: right; }
+      .sheet-znz-section-inventory .sheet-znz-inventory-item .sheet-znz-inventory-item-row .sheet-znz-inventory-item-field:last-child input {
+        display: block;
+        margin-left: auto; }

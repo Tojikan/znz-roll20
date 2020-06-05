@@ -159,12 +159,12 @@
                                 </div>
                                 <div class="sheet-znz-weapon-field-row">
                                     <div class="sheet-znz-weapon-stat-field">
-                                        <label>Reloads</label> 
-                                        <input type="number" name="attr_equipped_ranged_reloads"/>
-                                    </div>
-                                    <div class="sheet-znz-weapon-stat-field">
                                         <label>Ammo / Max Ammo</label> 
                                         <input type="number" name="attr_equipped_ranged_ammo"/>  <span class="sheet-divider">/</span>  <input type="number" name="attr_equipped_ranged_ammo_max"/>
+                                    </div>
+                                    <div class="sheet-znz-weapon-stat-field ">
+                                        <label>Reloads</label> 
+                                        <input type="number" name="attr_equipped_ranged_reloads"/>
                                     </div>
                                 </div>
                                 <div class="sheet-znz-weapon-stat-field">
@@ -196,13 +196,13 @@
                                 </div>
                                 
                                 <div class="sheet-znz-weapon-field-row">
-                                    <div class="sheet-znz-weapon-stat-field sheet-znz-align-right">
-                                        <label>Durability Rating</label> 
-                                        <input type="number" name="attr_equipped_durability_rating"/>
-                                    </div>
                                     <div class="sheet-znz-weapon-stat-field">
                                         <label>Current / Max Durability</label> 
                                         <input type="number" name="attr_equipped_melee_durability"/><span class="sheet-divider">/</span><input type="number" name="attr_equipped_melee_durability_max"/>
+                                    </div>
+                                    <div class="sheet-znz-weapon-stat-field ">
+                                        <label>Durability Rating</label> 
+                                        <input type="number" name="attr_equipped_durability_rating"/>
                                     </div>
                                 </div>
                                 <div class="sheet-znz-weapon-stat-field">
@@ -298,11 +298,37 @@
                                 <option value="stable">Stable</option>
                                 <option value="martialartist">Martial Artist</option>
                                 <option value="wrestler">Wrestler</option>
+                                <option value="motivational">Motivational</option>
+                                <option value="highoctane">High Octane</option>
+
                             </select>
                         </div>
                         <div class="sheet-znz-field-ability-descript">
                             <div class="sheet-znz-field-label">Description</div>
-                            <textarea type="text" name="attr_ability_description"></textarea>
+                            <textarea type="text" readonly name="attr_ability_description"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="sheet-znz-section-flaws">
+                <label>Flaws</label>
+                <fieldset class="repeating_flaws">
+                    <div class="sheet-znz-block-flaw">
+                        <div class="sheet-znz-field-flaw-type">
+                            <select name="attr_flaw_type" readonly>
+                                <option value="nearsighted">Nearsighted</option>
+                                <option value="diabetic">Diabetic</option>
+                                <option value="glutton">Glutton</option>
+                                <option value="lovesick">Lovesick</option>
+                                <option value="psychopath">Psychopath</option>
+                                <option value="clumsy">Clumsy</option>
+                                <option value="alcoholic">Alcoholic</option>
+                            </select>
+                        </div>
+                        <div class="sheet-znz-field-ability-descript">
+                            <div class="sheet-znz-field-label">Description</div>
+                            <textarea type="text" readonly name="attr_ability_description"></textarea>
                         </div>
                     </div>
                 </fieldset>
@@ -369,15 +395,15 @@
                                 </div>
                             </div>
                             <div class="sheet-znz-inventory-item-row">
-                                <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-cost">
-                                    <label>Durability Rating</label>
-                                    <input type="number" name="attr_inv_melee_durability_rating"/>
-                                </div>
                                 <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-durability">
                                     <label>Current / Max Durability</label>
                                     <input type="number" name="attr_inv_melee_durability"/>  
                                     <span class="sheet-divider">/</span>  
                                     <input type="number" name="attr_inv_melee_durability_max"/>
+                                </div>
+                                <div class="sheet-znz-inventory-item-field sheet-znz-field-durability-rating">
+                                    <label>Durability Rating</label>
+                                    <input type="number" name="attr_inv_melee_durability_rating"/>
                                 </div>
                             </div>
                             <div class="sheet-znz-inventory-item-field sheet-znz-field-weapon-note">
