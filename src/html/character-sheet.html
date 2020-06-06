@@ -60,8 +60,8 @@
                     </div>
                     <div class="sheet-znz-label-text">
                         Learn Costs:
-                        <div class="sheet-znz-description-text">Proficiencies:5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Skill:10 </div>
-                        <div class="sheet-znz-description-text">Attribute:15  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ability:30 </div>
+                        <div class="sheet-znz-description-text">10: +1 to any attribute or skill</div>
+                        <div class="sheet-znz-description-text">30: Learn new ability.</div>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                         <td>
                             <label>Intelligence</label>
                             <div class="sheet-znz-description-text">
-                                Knowledge, Understanding, Crafting,
+                                Knowledge, Understanding, Exp Gain
                             </div>
                         </td>
                         <td><input type="number" name="attr_intelligence" min="1" value="3" max="6"/></td>
@@ -100,7 +100,7 @@
                         <td>
                             <label>Strength</label>
                             <div class="sheet-znz-description-text">
-                                Strength Checks, Melee Damage, Grappling
+                                Physical Strength, Melee Damage, Grappling
                             </div>
                         </td>
                         <td><input type="number" name="attr_strength" min="1" value="3" max="6"/></td>
@@ -140,7 +140,7 @@
                         <td>
                             <label>Tenacity</label>
                             <div class="sheet-znz-description-text">
-                                Determines Max Stress. Mental Fortitude. Pain resistance
+                                Determines Max Sanity. Mental Fortitude. Pain resistance
                             </div>
                         </td>
                         <td><input type="number" name="attr_tenacity" min="1" value="3" max="6"/></td>
@@ -150,7 +150,7 @@
                         <td>
                             <label>Health</label>
                             <div class="sheet-znz-description-text">
-                                Determines Max HP and Energy. Sickness resistance
+                                Determines Max HP and Max Energy. Sickness resistance
                             </div></td>
                         <td><input type="number" name="attr_health" min="1" value="3" max="6"/></td>
                         <td><input type="text" class="sheet-znz-attr-bonus" readonly name="attr_health_bonus" value="0"/></td>
@@ -304,19 +304,27 @@
                                 <option value="hotwiring">Hotwiring</option>
                                 <option value="lockpicking">Hacking</option>
                                 <option value="sleightofhand">Sleight of Hand</option>
-                                <option value="mechanics">Mechanical</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="electrical">Electrical Work</option>
                                 <option value="electronics">Electronics</option>
                                 <option value="medicine">Medicine</option>
                                 <option value="pharmaceutical">Pharmaceutical</option>
-                                <option value="biology">Biology</option>
                                 <option value="explosives">Explosives</option>
-                                <option value="engineering">Engineering</option>
+                                <option value="biology">Biology</option>
                                 <option value="boat">Boat Piloting</option>
                                 <option value="plane">Plane Piloting</option>
                                 <option value="cartography">Cartography</option>
+                                <option value="knots">Advanced Knots</option>
                                 <option value="nature">Nature</option>
+                                <option value="hunting">Hunting</option>
+                                <option value="farming">Farming</option>
                                 <option value="construction">Construction</option>
                                 <option value="tailor">Tailoring</option>
+                                <option value="firearms">Gun Handling, Crafting, & Repair</option>
+                                <option value="leather">Leatherworking</option>
+                                <option value="metals">Metalworking</option>
+                                <option value="acrobatics">Acrobatics</option>
+                                <option value="animal">Animal Handling</option>
                             </select>
                         </div>
                         <div class="sheet-znz-custom-input">
@@ -345,7 +353,7 @@
                                 <option value="motivational">Motivational</option>
                                 <option value="highoctane">High Octane</option>
                                 <option value="knowledgeable">Knowledgeable</option>
-                                <option value="knots">Advanced Knots</option>
+                                <option value="speedster">Speedster</option>
                             </select>
                         </div>
                         <div class="sheet-znz-trait-descript">
@@ -369,7 +377,9 @@
                             <label>Select Proficiency</label>
                             <select name="attr_skill_type">
                                 <option value="" selected>Select Proficiency</option>
-                                <option value="firearms">Firearms</option>
+                                <option value="pistols">Shooting Pistols</option>
+                                <option value="shotguns">Shooting Shotguns</option>
+                                <option value="rifles">Shooting Rifles</option>
                                 <option value="unarmed">Unarmed Combat</option>
                                 <option value="sharpmelee">Sharp Melee Weapons</option>
                                 <option value="bluntmelee">Blunt Melee Weapons</option>
@@ -377,10 +387,9 @@
                                 <option value="archery">Archery</option>
                                 <option value="stealth">Stealth</option>
                                 <option value="pickpocket">Pickpocketing</option>
-                                <option value="repair">Repair</option>
-                                <option value="crafting">Crafting</option>
+                                <option value="repair">Basic Repair</option>
+                                <option value="crafting">Basic Crafting</option>
                                 <option value="driving">Driving</option>
-                                <option value="scavenging">Scavenging</option>
                                 <option value="cooking">Cooking</option>
                                 <option value="firstaid">First Aid</option>
                                 <option value="survival">Survival</option>
@@ -389,9 +398,9 @@
                                 <option value="persuasion">Persuasion</option>
                                 <option value="negotiation">Negotiation</option>
                                 <option value="investigation">Investigation</option>
-                                <option value="animal">Animal Handling</option>
                                 <option value="climbing">Climbing</option>
                                 <option value="swimming">Swimming</option>
+                                <option value="swimming">Athletics</option>
                             </select>
                         </div>
                         <div class="sheet-znz-custom-input">
@@ -407,7 +416,11 @@
             </div>
             
             <div class="sheet-znz-section-flaws">
-                <label>Flaws</label>
+                <div class="sheet-znz-spaced-between">
+                    <label>Flaws</label>
+                    <button type="action" name="act_randomizeflaw">Randomize Flaw</button>
+                </div>
+
                 <fieldset class="repeating_flaws">
                     <div class="sheet-znz-block-trait">
                         <div class="sheet-znz-field-trait-select">
@@ -417,8 +430,10 @@
                                 <option value="curious">Curious</option>
                                 <option value="sickly">Sickly</option>
                                 <option value="clumsy">Clumsy</option>
-                                <option value="addict">Addict</option>
+                                <option value="addict">Alcoholic</option>
                                 <option value="unlucky">Unlucky</option>
+                                <option value="Fainthearted">Fainthearted</option>
+                                <option value="fainthearted">Vulnerable</option>
                             </select>
                         </div>
                         <div class="sheet-znz-field-trait-descript">
@@ -581,4 +596,5 @@
         @@include('../js/sheet/workers-attrs.js')
         @@include('../js/sheet/workers-abilities-flaws.js')
         @@include('../js/sheet/workers-equip.js')
+        @@include('../js/sheet/workers-randomize-flaw.js')
     </script>

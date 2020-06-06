@@ -1,4 +1,3 @@
-
 //Button Actions
 on("clicked:unequip_ranged_weapon", function(eventInfo){
     unequip_weapon("ranged");
@@ -28,8 +27,6 @@ on("clicked:repeating_ranged:equiprange", function(eventInfo){
     unequip_weapon("ranged");
     equip_weapon("ranged", rowId)
 });
-
-
 
 
 // Unequip - basically a move function. 
