@@ -26,10 +26,11 @@
                     </h2>
                     <div class="sheet-znz-stat-container">
                         <div class="sheet-znz-input-field">
-                            <input type="number" name="attr_hp" />
+                            <input type="number" name="attr_hp" value="15"/>
                         </div>
                         <div class="sheet-znz-label-text">
-                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_hp_max" value="15"></span>
+                            <input type="hidden" name="attr_hp_max" value="15"/>
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_hp_max"></span>
                         </div>
                     </div>
                 </div>
@@ -39,10 +40,11 @@
                     </h2>
                     <div class="sheet-znz-stat-container">
                         <div class="sheet-znz-input-field">
-                            <input type="number" name="attr_sanity" />
+                            <input type="number" name="attr_sanity" value="15" />
                         </div>
                         <div class="sheet-znz-label-text">
-                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_sanity_max" value="15"></span>
+                            <input type="hidden" name="attr_sanity_max" value="15"/>
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_sanity_max"></span>
                         </div>
                     </div>
                 </div>
@@ -52,10 +54,11 @@
                     </h2>
                     <div class="sheet-znz-stat-container">
                         <div class="sheet-znz-input-field">
-                            <input type="number" name="attr_energy" />
+                            <input type="number" name="attr_energy" value="15" />
                         </div>
                         <div class="sheet-znz-label-text">
-                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_energy_max" value="15"></span>
+                            <input type="hidden" name="attr_energy_max" value="30"/>
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_energy_max"></span>
                         </div>
                     </div>
                 </div>
@@ -259,10 +262,10 @@
                                 </div>
                                 <div class="sheet-znz-item-row">
                                     <div class="sheet-znz-item-field-label">
-                                        Damaged on rolls of:
+                                        Melee Weapon Type:
                                     </div>
                                     <div class="sheet-znz-item-field">
-                                        <input type="number" name="attr_equipped_melee_durability_rating"/>
+                                        <input type="text" name="attr_equipped_melee_type"/>
                                     </div>
                                 </div>
                                 <div class="sheet-znz-item-note">
@@ -422,7 +425,10 @@
             </div>
             
             <div class="sheet-znz-section-flaws">
-                <label>Flaws</label>
+                <div class="sheet-znz-spaced-between">
+                    <label>Flaws</label>
+                    <button type="action" name="act_randomizeflaw">Randomize</button>
+                </div>
                 <fieldset class="repeating_flaws">
                     <div class="sheet-znz-block-trait">
                         <div class="sheet-znz-field-trait-select">
@@ -432,10 +438,10 @@
                                 <option value="curious">Curious</option>
                                 <option value="sickly">Sickly</option>
                                 <option value="clumsy">Clumsy</option>
-                                <option value="addict">Alcoholic</option>
+                                <option value="alcoholic">Alcoholic</option>
                                 <option value="unlucky">Unlucky</option>
-                                <option value="Fainthearted">Fainthearted</option>
-                                <option value="fainthearted">Vulnerable</option>
+                                <option value="fainthearted">Fainthearted</option>
+                                <option value="vulnerable">Vulnerable</option>
                             </select>
                         </div>
                         <div class="sheet-znz-field-trait-descript">
@@ -542,10 +548,10 @@
                             </div>
                             <div class="sheet-znz-item-row">
                                 <div class="sheet-znz-item-field-label">
-                                    Damaged on rolls of:
+                                    Melee Type:
                                 </div>
                                 <div class="sheet-znz-item-field">
-                                    <input type="number" name="attr_inv_melee_durability_rating"/>
+                                    <input type="text" name="attr_inv_melee_type"/>
                                 </div>
                             </div>
                             <div class="sheet-znz-item-note">
@@ -663,7 +669,7 @@ stats.forEach(function (stat) {
 });
 
 
-        var abilitiesArr = {
+        var availableAbilities = {
         default:
             "Select an ability to see its description.",
         bullseye: 
@@ -681,12 +687,12 @@ stats.forEach(function (stat) {
         knowledgeable: 
             "+ Once a day, you can attempt any skill action for a skill you don't possess by passing an intelligence check first. You must still roll the skill check after.",
         speedster:
-            "+ Gain an additional 2 movement speed. \n + Allows you to use your minor action to dodge back 1 space."
+            "+ Gain an additional 2 movement speed. \n + Gain ability to jump back one space as an action or when you attempt to dodge."
 }
 
 
 
-var flawsArr = {
+var availableFlaws = {
         default:
             "Select a flaw to see its description.",
         nearsighted: 
@@ -700,7 +706,7 @@ var flawsArr = {
         alcoholic: 
             "- You have constant urges to drink alcohol once a day.   \n\n - If you fail to do so by the end of the day. you will take 2 health, sanity, and energy damage. \n\n - This damage doubles for each consecutive day you fail to do so and resets to 2 after you consume some. \n\n You cannot hit 0 through this effect. This effect will can only reduce you to 1 at most.",
         fainthearted:
-            "- Roll a tenacity check at the start of a battle. If you fail the check, your first action will either be a freeze if you don't attack or a -4 penalty if you do attempt to attack.",
+            "- Occasionally, roll a tenacity check at the start of a battle. If you fail the check, your first action will be a freeze.",
         vulnerable:
             "- Roll a health check whenever you take damage. If you fail the check, take double damage.",
         unlucky: 
@@ -717,9 +723,9 @@ on("change:repeating_abilities:ability", function(eventInfo){
         var abilityName = value["repeating_abilities_ability"];
 
 
-        if (abilityName in abilitiesArr){
+        if (abilityName in availableAbilities){
             setAttrs({
-                repeating_abilities_abilitytext: abilitiesArr[abilityName]
+                repeating_abilities_abilitytext: availableAbilities[abilityName]
             });
         }
     });
@@ -732,9 +738,9 @@ on("change:repeating_flaws:flaw", function(eventInfo){
         var flawName = value["repeating_abilities_flaw"];
 
 
-        if (flawName in flawsArr){
+        if (flawName in availableFlaws){
             setAttrs({
-                repeating_abilities_flawtext: flawsArr[flawName]
+                repeating_abilities_flawtext: availableFlaws[flawName]
             });
         }
     });
@@ -749,12 +755,7 @@ on("change:repeating_flaws:flaw", function(eventInfo){
 
 
 
-        //locks
-var meleeLock = false,
-    rangedLock = false;
-
-
-//Button Actions
+        //Button Actions
 on("clicked:unequip_ranged_weapon", function(eventInfo){
     unequip_weapon("ranged");
 });
@@ -899,6 +900,27 @@ function getWeaponFields(type, prefix, asStruct = false){
         return targetField;
     }
 }
+        //This has to be included AFTER workers-abilities-flaws.js
+//Randomizes a flaw
+
+on("clicked:randomizeflaw", function(){
+    let keys = Object.keys(availableFlaws);
+
+    let randomKey = keys[keys.length * Math.random() << 0];
+
+    //Prevent it for being the Default option. 
+    while (randomKey === "default"){
+        randomKey = keys[keys.length * Math.random() << 0];
+    }
+
+    var newFlawId = generateRowID();
+    var newFlaw = {};
+
+    newFlaw["repeating_flaws_" + newFlawId + "_flaw"] = randomKey;
+
+    setAttrs(newFlaw);
+
+});
     </script>
 
     </body>

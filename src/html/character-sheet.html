@@ -20,10 +20,11 @@
                     </h2>
                     <div class="sheet-znz-stat-container">
                         <div class="sheet-znz-input-field">
-                            <input type="number" name="attr_hp" />
+                            <input type="number" name="attr_hp" value="15"/>
                         </div>
                         <div class="sheet-znz-label-text">
-                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_hp_max" value="15"></span>
+                            <input type="hidden" name="attr_hp_max" value="15"/>
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_hp_max"></span>
                         </div>
                     </div>
                 </div>
@@ -33,10 +34,11 @@
                     </h2>
                     <div class="sheet-znz-stat-container">
                         <div class="sheet-znz-input-field">
-                            <input type="number" name="attr_sanity" />
+                            <input type="number" name="attr_sanity" value="15" />
                         </div>
                         <div class="sheet-znz-label-text">
-                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_sanity_max" value="15"></span>
+                            <input type="hidden" name="attr_sanity_max" value="15"/>
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_sanity_max"></span>
                         </div>
                     </div>
                 </div>
@@ -46,10 +48,11 @@
                     </h2>
                     <div class="sheet-znz-stat-container">
                         <div class="sheet-znz-input-field">
-                            <input type="number" name="attr_energy" />
+                            <input type="number" name="attr_energy" value="15" />
                         </div>
                         <div class="sheet-znz-label-text">
-                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_energy_max" value="15"></span>
+                            <input type="hidden" name="attr_energy_max" value="30"/>
+                            Max: <span class="sheet-znz-stat-max-text" readonly name="attr_energy_max"></span>
                         </div>
                     </div>
                 </div>
@@ -253,10 +256,10 @@
                                 </div>
                                 <div class="sheet-znz-item-row">
                                     <div class="sheet-znz-item-field-label">
-                                        Damaged on rolls of:
+                                        Melee Weapon Type:
                                     </div>
                                     <div class="sheet-znz-item-field">
-                                        <input type="number" name="attr_equipped_melee_durability_rating"/>
+                                        <input type="text" name="attr_equipped_melee_type"/>
                                     </div>
                                 </div>
                                 <div class="sheet-znz-item-note">
@@ -418,9 +421,8 @@
             <div class="sheet-znz-section-flaws">
                 <div class="sheet-znz-spaced-between">
                     <label>Flaws</label>
-                    <button type="action" name="act_randomizeflaw">Randomize Flaw</button>
+                    <button type="action" name="act_randomizeflaw">Randomize</button>
                 </div>
-
                 <fieldset class="repeating_flaws">
                     <div class="sheet-znz-block-trait">
                         <div class="sheet-znz-field-trait-select">
@@ -430,10 +432,10 @@
                                 <option value="curious">Curious</option>
                                 <option value="sickly">Sickly</option>
                                 <option value="clumsy">Clumsy</option>
-                                <option value="addict">Alcoholic</option>
+                                <option value="alcoholic">Alcoholic</option>
                                 <option value="unlucky">Unlucky</option>
-                                <option value="Fainthearted">Fainthearted</option>
-                                <option value="fainthearted">Vulnerable</option>
+                                <option value="fainthearted">Fainthearted</option>
+                                <option value="vulnerable">Vulnerable</option>
                             </select>
                         </div>
                         <div class="sheet-znz-field-trait-descript">
@@ -540,10 +542,10 @@
                             </div>
                             <div class="sheet-znz-item-row">
                                 <div class="sheet-znz-item-field-label">
-                                    Damaged on rolls of:
+                                    Melee Type:
                                 </div>
                                 <div class="sheet-znz-item-field">
-                                    <input type="number" name="attr_inv_melee_durability_rating"/>
+                                    <input type="text" name="attr_inv_melee_type"/>
                                 </div>
                             </div>
                             <div class="sheet-znz-item-note">

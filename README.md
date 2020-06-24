@@ -8,3 +8,15 @@ Gulp file includes is used to include files.
 
 
 Gulp replacer to replace text/javascript with text/worker in dist.
+
+
+All JS gets concatenated.
+
+
+`gulp html` - HTML building
+
+`gulp scripts` - JS concatenating
+
+`gulp watch` - Watch for changes.
+
+`gulp style` - build SCSS

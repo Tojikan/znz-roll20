@@ -31,13 +31,14 @@ function html(){
     }))
     .pipe(gulp.dest('./dist'));
     
-    gulp.src('src/html/character-sheet.html')
+    return gulp.src('src/html/character-sheet.html')
     .pipe(fileinclude({
         prefix: '@@',
         basepath: '@file'
     }))
     .pipe(replace('text/javascript', 'text/worker'))
     .pipe(gulp.dest('./dist'));
+
 }
 
 

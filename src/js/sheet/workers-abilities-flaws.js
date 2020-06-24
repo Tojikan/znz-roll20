@@ -1,4 +1,4 @@
-var abilitiesArr = {
+var availableAbilities = {
         default:
             "Select an ability to see its description.",
         bullseye: 
@@ -16,12 +16,12 @@ var abilitiesArr = {
         knowledgeable: 
             "+ Once a day, you can attempt any skill action for a skill you don't possess by passing an intelligence check first. You must still roll the skill check after.",
         speedster:
-            "+ Gain an additional 2 movement speed. \n + Allows you to use your minor action to dodge back 1 space."
+            "+ Gain an additional 2 movement speed. \n + Gain ability to jump back one space as an action or when you attempt to dodge."
 }
 
 
 
-var flawsArr = {
+var availableFlaws = {
         default:
             "Select a flaw to see its description.",
         nearsighted: 
@@ -35,7 +35,7 @@ var flawsArr = {
         alcoholic: 
             "- You have constant urges to drink alcohol once a day.   \n\n - If you fail to do so by the end of the day. you will take 2 health, sanity, and energy damage. \n\n - This damage doubles for each consecutive day you fail to do so and resets to 2 after you consume some. \n\n You cannot hit 0 through this effect. This effect will can only reduce you to 1 at most.",
         fainthearted:
-            "- Roll a tenacity check at the start of a battle. If you fail the check, your first action will either be a freeze if you don't attack or a -4 penalty if you do attempt to attack.",
+            "- Occasionally, roll a tenacity check at the start of a battle. If you fail the check, your first action will be a freeze.",
         vulnerable:
             "- Roll a health check whenever you take damage. If you fail the check, take double damage.",
         unlucky: 
@@ -52,9 +52,9 @@ on("change:repeating_abilities:ability", function(eventInfo){
         var abilityName = value["repeating_abilities_ability"];
 
 
-        if (abilityName in abilitiesArr){
+        if (abilityName in availableAbilities){
             setAttrs({
-                repeating_abilities_abilitytext: abilitiesArr[abilityName]
+                repeating_abilities_abilitytext: availableAbilities[abilityName]
             });
         }
     });
@@ -67,9 +67,9 @@ on("change:repeating_flaws:flaw", function(eventInfo){
         var flawName = value["repeating_abilities_flaw"];
 
 
-        if (flawName in flawsArr){
+        if (flawName in availableFlaws){
             setAttrs({
-                repeating_abilities_flawtext: flawsArr[flawName]
+                repeating_abilities_flawtext: availableFlaws[flawName]
             });
         }
     });
