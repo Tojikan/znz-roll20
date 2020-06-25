@@ -47,12 +47,23 @@
 
 /*** Inventory ***/
 .sheet-znz-section-inventory{
-    display: flex;
     border: solid 2px black;
     padding: 8px;
 
     > label{
         width: 100%;
+    }
+
+    .sheet-znz-inventory-info{
+        margin-bottom: 12px;
+
+        .sheet-znz-hidden-weight-check[value="1"] ~ .sheet-znz-weight-check{
+            color: red;
+        }
+    }
+
+    .sheet-znz-block-wrapper{
+        display: flex;
     }
 
     .sheet-znz-block-item{

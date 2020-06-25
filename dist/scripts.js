@@ -1,3 +1,62 @@
+on("change:attribute", function(obj, prev){
+    let attr;
+    
+    log(obj);
+    log(prev);
+
+    switch (obj.get("name")){
+        case "energy":
+            attr = "Energy";
+        break;
+
+        case "hp":
+            attr = "Hit";
+
+        break;
+
+        case "sanity":
+            attr = "sanity";
+        break;
+
+        default:
+            return;
+    }
+
+    let textColor = '#800080',
+        bgColor = '#e6e6fa',
+        prevVal = prev['current'], //prev is a basic object without getters/setters
+        curVal = obj.get('current'),
+        action,
+        diff,
+        character = getObj('character', obj.get('_characterid'));
+
+    if (prevVal > curVal){
+        action = ' subtracted ';
+    } else if (curVal > prevVal){
+        action = ' added ';
+    } else {
+        //If its not related to the current value, then we can ignore it. 
+        return;
+    }
+
+    diff = Math.abs(curVal - prevVal);
+    
+
+    sendChat(
+        'ZnZ Resource Spent',
+        `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}"><strong>${character.get('name')} ${action} ${diff} ${attr} points!</strong><div> The new value is ${curVal} and the previous value was ${prevVal}.</div></div>`
+    );
+
+    if (curVal <= 0){
+        textColor = '#8B0000';
+        bgColor = '#FFA07A';
+        sendChat(
+            'ZnZ Resource Spent',
+            `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}"><strong>${character.get('name')} reached 0 ${attr} points!</strong></div>`
+        );
+    }
+
+});
 // Github:   https://github.com/shdwjk/Roll20API/blob/master/Ammo/Ammo.js
 // By:       The Aaron, Arcane Scriptomancer
 // Contact:  https://app.roll20.net/users/104025/the-aaron
@@ -319,52 +378,105 @@ on("ready",function(){
 	Ammo.RegisterEventHandlers();
 });
 
-var Ranged = Ranged || (function() {
+var Reload = Reload || (function() {
     'use strict';
+    const RELOADS_ATTR = "equipped_ranged_reloads",
+    AMMO_ATTR = "equipped_ranged_ammo",
 
-
-    var HandleInput = function(msg) {
-        log(msg)
-        if (!msg.content.startsWith("!!ranged")){
+    HandleInput = function(msg) {
+        if (msg.type !== "api") {
+			return;
+        }
+        
+        if (!msg.content.startsWith("!!reload")){
             return;
         }
 
         let sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
             token,
-            character,
-            isSelected = false;
+            character;
         
         //Get character from sending player's selected token
         if ("selected" in msg){
-            token = getObj('graphic', msg.selected.id);
-            log(token);
-            log(msg.selected);
-            // character = getObj('character', token.get('represents'));
+            token = getObj('graphic', msg.selected[0]._id);
 
-            if (character){
-                isSelected = true;
+            if (token){
+                character = getObj('character', token.get('represents'));
             }
         }
 
-        if (!isSelected){
-            sendMessage("You must select a token with a valid character sheet before firing!", sender, true);
+        //Validate player
+        if (character){
+            if( ! validatePlayerControl(character, msg.playerid)) {
+                sendMessage('You do not control the selected character', sender, true, "danger");
+                return;
+            }
+
+        } else{
+            sendMessage("You must select a token with a valid character sheet!", sender, true, "danger");
             return;
         }
+
+        //Handle Reload
+        let reloads = attrLookup(character, RELOADS_ATTR),
+        ammo = attrLookup(character, AMMO_ATTR);
+
+        if (!reloads || !ammo){
+            sendMessage("Could not find attribute. Please verify this character has an initialized character sheet.", sender, true, "danger");
+            return;
+        }
+
         
-        let args = msg.content.split(/\s+/);
-        log(args);
-        
+        if ((!reloads.get("current") && reloads.get("current") !== 0)|| !ammo.get("max")){
+            sendMessage("Your character either has no ranged weapon equipped or the reloads / max Ammo field(s) is empty!", sender, true, "danger");
+            return;
+        }
+
+        let currReloads = parseInt(reloads.get("current"), 10) || 0,
+            ammoMax = parseInt(ammo.get("max"), 10) || 0;
 
 
+        if (currReloads <= 0){
+            sendMessage(character.get('name') + " has no more reloads left.", sender, false, "danger");
+            return;
+        } else if (currReloads === 1){
+            sendMessage(character.get('name') + " has only one more reload. Make it count.", sender, false, "warning");
+        }
 
-
-
+        sendMessage(character.get('name') + " reloads their ranged weapon!", sender, false);
+        ammo.setWithWorker({current: ammoMax});
+        reloads.setWithWorker({current: (currReloads - 1)});
 
     },
-    sendMessage = function(message, who, whisper) {
+    getCharacter
+    attrLookup = function(character, name){
+        return findObjs({type: 'attribute', characterid: character.id, name: name})[0];
+    },
+    validatePlayerControl = function(character, playerId){
+        return playerIsGM(playerId) ||  
+        _.contains(character.get('controlledby').split(','),playerId) || 
+        _.contains(character.get('controlledby').split(','),'all');
+    },
+    sendMessage = function(message, who, whisper, type="info" ) {
+        let textColor = '#006400',
+            bgColor = '#98FB98';
+
+        
+        switch (type) {
+            case "danger":
+                textColor = '#8B0000';
+                bgColor = '#FFA07A';
+                break;
+            case "warning":
+                textColor = '#8B4513';
+                bgColor = '#F0E68C';
+                break;
+        }
+
+
 		sendChat(
-            'Fire Ranged Weapon',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid #8B4513;background: #eeffee; color: #8B4513; font-size: 80%;">${message}</div>`
+            'ZnZ Action - Reload',
+            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
 		);
 	},
     RegisterEventHandlers = function() {
@@ -379,5 +491,5 @@ var Ranged = Ranged || (function() {
 
 on("ready",function(){
 	'use strict';
-	Ranged.RegisterEventHandlers();
+	Reload.RegisterEventHandlers();
 });

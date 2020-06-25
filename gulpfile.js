@@ -2,28 +2,17 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const fileinclude = require('gulp-file-include');
-const concat = require('gulp-concat');
 const replace = require('gulp-replace');
 
 //compile scss into css
-function style() {
+gulp.task('style', function() {
     return gulp.src('src/scss/main.scss')
     .pipe(sass().on('error',sass.logError))
     .pipe(gulp.dest('dist'));
-}
+});
 
-function scripts(){
-    return gulp.src('./src/js/*.js')
-        .pipe(concat('scripts.js'))
-        .pipe(gulp.dest('./dist/'));
-}
-
-function build(){
-    style();
-    replaceWithWorker();
-}
-
-function html(){
+//sheets
+gulp.task('html', function(){
     gulp.src('src/html/preview.html')
     .pipe(fileinclude({
         prefix: '@@',
@@ -38,20 +27,18 @@ function html(){
     }))
     .pipe(replace('text/javascript', 'text/worker'))
     .pipe(gulp.dest('./dist'));
+    
+});
 
-}
+//watch sheets and styles
+gulp.task('watch', function(){
+    gulp.watch('./src/scss/*.scss', gulp.series(['style']));
+    gulp.watch('./src/js/sheet/*.js' , gulp.series(['html']));
+    gulp.watch('./src/html/*.html' , gulp.series(['html']));
+});
 
+//build sheets and styles
+gulp.task('build', function(){
+    gulp.series(['styles', 'html'])
+});
 
-function watch() {
-    gulp.watch('./src/scss/*.scss', style);
-    gulp.watch('./src/js/*.js').on('change', scripts);
-    gulp.watch('./src/js/sheet/*.js').on('change',html);
-    gulp.watch('./src/html/*.html').on('change',html);
-}
-
-exports.style = style;
-exports.watch = watch;
-exports.build = build;
-exports.html = html;
-exports.scripts = scripts;
-exports.replace = replace;

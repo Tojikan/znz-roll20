@@ -1,8 +1,5 @@
 on("change:attribute", function(obj, prev){
     let attr;
-    
-    log(obj);
-    log(prev);
 
     switch (obj.get("name")){
         case "energy":
@@ -55,8 +52,5 @@ on("change:attribute", function(obj, prev){
             `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}"><strong>${character.get('name')} reached 0 ${attr} points!</strong></div>`
         );
     }
-
-
-
 
 });
