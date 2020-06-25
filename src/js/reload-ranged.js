@@ -25,28 +25,30 @@ var Reload = Reload || (function() {
             }
         }
 
-        //Validate player contorl. 
+        //Validate player
         if (character){
-            if(
-                ! playerIsGM(msg.playerid) && 
-                !_.contains(character.get('controlledby').split(','),msg.playerid) &&
-                !_.contains(character.get('controlledby').split(','),'all')
-            ) {
-                sendMessage('You do not control the selected character', sender, true);
+            if( ! validatePlayerControl(character, msg.playerid)) {
+                sendMessage('You do not control the selected character', sender, true, "danger");
                 return;
             }
 
         } else{
-            sendMessage("You must select a token with a valid character sheet!", sender, true);
+            sendMessage("You must select a token with a valid character sheet!", sender, true, "danger");
             return;
         }
 
         //Handle Reload
         let reloads = attrLookup(character, RELOADS_ATTR),
         ammo = attrLookup(character, AMMO_ATTR);
+
+        if (!reloads || !ammo){
+            sendMessage("Could not find attribute. Please verify this character has an initialized character sheet.", sender, true, "danger");
+            return;
+        }
+
         
-        if (!reloads.get("current") || !ammo.get("max")){
-            sendMessage("Your character either has no ranged weapon equipped or the reloads / max Ammo field(s) is empty!", sender, true);
+        if ((!reloads.get("current") && reloads.get("current") !== 0)|| !ammo.get("max")){
+            sendMessage("Your character either has no ranged weapon equipped or the reloads / max Ammo field(s) is empty!", sender, true, "danger");
             return;
         }
 
@@ -55,10 +57,10 @@ var Reload = Reload || (function() {
 
 
         if (currReloads <= 0){
-            sendMessage(character.get('name') + " has no more reloads...", sender, false);
+            sendMessage(character.get('name') + " has no more reloads left.", sender, false, "danger");
             return;
         } else if (currReloads === 1){
-            sendMessage(character.get('name') + " has only one more reload. Make it count.", sender, false);
+            sendMessage(character.get('name') + " has only one more reload. Make it count.", sender, false, "warning");
         }
 
         sendMessage(character.get('name') + " reloads their ranged weapon!", sender, false);
@@ -66,13 +68,35 @@ var Reload = Reload || (function() {
         reloads.setWithWorker({current: (currReloads - 1)});
 
     },
+    getCharacter
     attrLookup = function(character, name){
         return findObjs({type: 'attribute', characterid: character.id, name: name})[0];
     },
-    sendMessage = function(message, who, whisper) {
+    validatePlayerControl = function(character, playerId){
+        return playerIsGM(playerId) ||  
+        _.contains(character.get('controlledby').split(','),playerId) || 
+        _.contains(character.get('controlledby').split(','),'all');
+    },
+    sendMessage = function(message, who, whisper, type="info" ) {
+        let textColor = '#006400',
+            bgColor = '#98FB98';
+
+        
+        switch (type) {
+            case "danger":
+                textColor = '#8B0000';
+                bgColor = '#FFA07A';
+                break;
+            case "warning":
+                textColor = '#8B4513';
+                bgColor = '#F0E68C';
+                break;
+        }
+
+
 		sendChat(
-            'Reload Ranged Weapon',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid #8B4513;background: #eeffee; color: #8B4513; font-size: 80%;">${message}</div>`
+            'ZnZ Action - Reload',
+            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
 		);
 	},
     RegisterEventHandlers = function() {
