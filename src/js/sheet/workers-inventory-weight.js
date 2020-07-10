@@ -29,7 +29,7 @@ on ('change:misc_total_weight change:melee_total_weight change:ranged_total_weig
             maxWeight = values['inventory_max_weight'],
             exceedWeight = false;
 
-        let newWeight = melee + ranged + misc;
+        let newWeight = Number(melee) + Number(ranged) + Number(misc);
 
         if (newWeight === currentWeight){
             return;

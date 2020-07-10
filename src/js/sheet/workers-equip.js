@@ -114,7 +114,7 @@ function equip_weapon(type, rowId){
  */
 function getWeaponFields(type, prefix, asStruct = false){
     var rangedFields = ["name", "weight", "ammo", "ammo_max", "reloads", "note"],
-        meleeFields = ["name", "weight", "durability", "durability_max", "durability_rating", "note"],
+        meleeFields = ["name", "weight", "durability", "durability_max", "type","type_note", "note"],
         targetField = [];
 
 

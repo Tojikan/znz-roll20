@@ -68,7 +68,6 @@ var Reload = Reload || (function() {
         reloads.setWithWorker({current: (currReloads - 1)});
 
     },
-    getCharacter
     attrLookup = function(character, name){
         return findObjs({type: 'attribute', characterid: character.id, name: name})[0];
     },
