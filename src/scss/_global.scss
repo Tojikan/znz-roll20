@@ -37,7 +37,9 @@ input {
 
 .sheet-znz-dialog{
 
-    &.sheet-znz-reduced-height{
-        height: 50px;
-    }
+}
+
+.sheet-znz-reduced-height,
+.sheet-znz-note{
+    height: 50px;
 }

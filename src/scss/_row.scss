@@ -1,0 +1,32 @@
+.sheet-znz-row{
+    display: flex;
+    margin-bottom: 12px;
+
+    &.sheet-spaced{
+        justify-content: space-between;
+    }
+
+    .sheet-znz-field{
+        flex: 100%;
+
+        &:not(:last-child){
+            margin-right:10px;
+        }
+
+        &.sheet-znz-33{
+            flex-basis: 33%;
+        }
+
+        &.sheet-znz-25{
+            flex-basis: 25%;
+        }
+
+        &.sheet-znz-15{
+            flex-basis: 15%;
+        }
+
+        &.sheet-znz-50{
+            flex-basis: 50%;
+        }
+    }
+}

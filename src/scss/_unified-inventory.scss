@@ -1,0 +1,45 @@
+.sheet-znz-section-inventory{
+    .sheet-znz-item-type-hidden{
+        display: none;
+    }
+
+    .sheet-znz-inventory-type-fields{
+        display: none;
+    }
+
+    input.sheet-znz-item-type-1:checked ~ .sheet-znz-inventory-item-misc-fields,
+    input.sheet-znz-item-type-2:checked ~ .sheet-znz-inventory-item-melee-fields,
+    input.sheet-znz-item-type-3:checked ~ .sheet-znz-inventory-item-ranged-fields,
+    input.sheet-znz-item-type-4:checked ~ .sheet-znz-inventory-item-equipment-fields {
+        display: block;
+    }
+
+    .sheet-znz-unified-inventory{
+
+        .sheet-znz-inventory-item-type-select{
+            width: auto;
+        }
+
+        .repcontainer{
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            justify-content: space-between;
+
+            .repitem{
+                position: relative;
+                flex-basis: 49%;
+                flex-grow: 0;
+                max-width: 49%;
+            }
+        }
+
+        .sheet-znz-note{
+            height: auto;
+
+            textarea{
+                max-width: 100%;
+            }
+        }
+    }
+}

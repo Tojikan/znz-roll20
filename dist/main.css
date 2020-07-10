@@ -32,7 +32,8 @@
 /*** Inventory ***/
 .sheet-znz-section-inventory {
   border: solid 2px black;
-  padding: 8px; }
+  padding: 8px;
+  /*** Styles for new Unified Inventory System ***/ }
   .sheet-znz-section-inventory > label {
     width: 100%; }
   .sheet-znz-section-inventory .sheet-znz-inventory-info {
@@ -48,6 +49,23 @@
       margin: 0 10px; }
     .sheet-znz-section-inventory .sheet-znz-block-item:last-child {
       flex: 45%; }
+  .sheet-znz-section-inventory .sheet-znz-item-type-hidden {
+    display: none; }
+  .sheet-znz-section-inventory .sheet-znz-inventory-item-field-group {
+    display: none; }
+  .sheet-znz-section-inventory input.sheet-znz-item-type-1:checked ~ .sheet-znz-inventory-item-misc-fields,
+  .sheet-znz-section-inventory input.sheet-znz-item-type-2:checked ~ .sheet-znz-inventory-item-melee-fields,
+  .sheet-znz-section-inventory input.sheet-znz-item-type-3:checked ~ .sheet-znz-inventory-item-ranged-fields,
+  .sheet-znz-section-inventory input.sheet-znz-item-type-4:checked ~ .sheet-znz-inventory-item-equipment-fields {
+    display: block; }
+  .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer {
+    display: flex;
+    flex-wrap: wrap; }
+    .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer .repitem {
+      width: 50%;
+      flex: 45%; }
+      .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer .repitem:nth-child(odd) {
+        margin-right: 5px; }
 
 /*** Equipment **/
 .sheet-znz-equipment {
@@ -87,8 +105,27 @@ input {
   justify-content: space-between;
   margin-bottom: 5px; }
 
-.sheet-znz-dialog.sheet-znz-reduced-height {
+.sheet-znz-reduced-height,
+.sheet-znz-note {
   height: 50px; }
+
+.sheet-znz-row {
+  display: flex;
+  margin-bottom: 12px; }
+  .sheet-znz-row.sheet-spaced {
+    justify-content: space-between; }
+  .sheet-znz-row .sheet-znz-field {
+    flex: 100%; }
+    .sheet-znz-row .sheet-znz-field:not(:last-child) {
+      margin-right: 10px; }
+    .sheet-znz-row .sheet-znz-field.sheet-znz-33 {
+      flex-basis: 33%; }
+    .sheet-znz-row .sheet-znz-field.sheet-znz-25 {
+      flex-basis: 25%; }
+    .sheet-znz-row .sheet-znz-field.sheet-znz-15 {
+      flex-basis: 15%; }
+    .sheet-znz-row .sheet-znz-field.sheet-znz-50 {
+      flex-basis: 50%; }
 
 .sheet-znz-section-status {
   display: flex;
@@ -170,10 +207,27 @@ table.sheet-znz-block-attrib-table {
     padding: 0; }
   .sheet-znz-block-item .sheet-znz-item textarea {
     box-sizing: border-box; }
+  .sheet-znz-block-item .sheet-znz-item .sheet-znz-row {
+    display: flex;
+    margin-bottom: 12px; }
+    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row.sheet-spaced {
+      justify-content: space-between; }
+    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field:not(:last-child) {
+      margin-right: 10px; }
+    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field.sheet-znz-third {
+      flex: 33%; }
+    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field.sheet-znz-quarter {
+      flex: 25%; }
+    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field.sheet-znz-half {
+      flex: 50%; }
   .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 12px; }
+    .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-row.sheet-znz-melee-type-row .sheet-znz-item-field {
+      flex: 40%; }
+      .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-row.sheet-znz-melee-type-row .sheet-znz-item-field select {
+        width: 100%; }
   .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-field-row {
     display: flex;
     justify-content: space-between; }
@@ -188,3 +242,34 @@ table.sheet-znz-block-attrib-table {
     font-size: 12px; }
   .sheet-znz-block-item .sheet-znz-item .sheet-znz-field-item-name {
     margin-bottom: 15px; }
+
+.sheet-znz-section-inventory .sheet-znz-item-type-hidden {
+  display: none; }
+
+.sheet-znz-section-inventory .sheet-znz-inventory-type-fields {
+  display: none; }
+
+.sheet-znz-section-inventory input.sheet-znz-item-type-1:checked ~ .sheet-znz-inventory-item-misc-fields,
+.sheet-znz-section-inventory input.sheet-znz-item-type-2:checked ~ .sheet-znz-inventory-item-melee-fields,
+.sheet-znz-section-inventory input.sheet-znz-item-type-3:checked ~ .sheet-znz-inventory-item-ranged-fields,
+.sheet-znz-section-inventory input.sheet-znz-item-type-4:checked ~ .sheet-znz-inventory-item-equipment-fields {
+  display: block; }
+
+.sheet-znz-section-inventory .sheet-znz-unified-inventory .sheet-znz-inventory-item-type-select {
+  width: auto; }
+
+.sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: space-between; }
+  .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer .repitem {
+    position: relative;
+    flex-basis: 49%;
+    flex-grow: 0;
+    max-width: 49%; }
+
+.sheet-znz-section-inventory .sheet-znz-unified-inventory .sheet-znz-note {
+  height: auto; }
+  .sheet-znz-section-inventory .sheet-znz-unified-inventory .sheet-znz-note textarea {
+    max-width: 100%; }

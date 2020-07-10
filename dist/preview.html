@@ -6,6 +6,288 @@
     <body>
             <div class="sheet-znz-character-sheet">
 
+        
+        <div class="sheet-znz-area-unflexed">
+            <label>Inventory</label>
+            <div class="sheet-znz-section-inventory">
+                <div class="sheet-znz-inventory-info sheet-znz-spaced-between">
+                    <div class="sheet-znz-inventory-field-bag-select">
+                        <div>
+                            Bag Type:
+                        </div>
+                        <select name="attr_bagtype">
+                            <option value="none" default>No Bag</option>
+                            <option value="tiny">Satchel</option>
+                            <option value="small">Daypack</option>
+                            <option value="medium">Medium Backpack</option>
+                            <option value="large">Large Rucksack</option>
+                        </select>
+                    </div>
+                    <div class="sheet-znz-inventory-current-weight">
+                        <div class="sheet-znz-inventory-label-current-weight">
+                            Current Weight: 
+                        </div>
+                        <div class="sheet-znz-inventory-field-current-weight">
+                            <input type="hidden" class="sheet-znz-hidden-weight-check" name="attr_weight_check" value="0"/>
+                            <input type="number" class="sheet-znz-weight-check" name="attr_inventory_weight" readonly/>
+                        </div>
+                    </div>
+                    <div class="sheet-znz-inventory-max-weight">
+                        <div class="sheet-znz-inventory-field-bag-weight-label">
+                            Max Weight:
+                        </div>
+                        <div class="sheet-znz-inventory-field-bag-weight-max">
+                            <input type="number" name="attr_inventory_max_weight" readonly/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sheet-znz-block-wrapper">
+                    <div class="sheet-znz-block-item sheet-znz-unified-inventory">
+                        <label class="sheet-znz-header">Items</label>
+                        <fieldset class="repeating_backpack">
+                            <div class="sheet-znz-item">
+                                <!-- Hidden Inputs for setting item type -->
+                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-1" type="checkbox" name="attr_inventory_item_type" value="misc" checked/>
+                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-2" type="checkbox" name="attr_inventory_item_type" value="melee"/>
+                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-3" type="checkbox" name="attr_inventory_item_type" value="ranged"/>
+                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-4" type="checkbox" name="attr_inventory_item_type" value="equipment"/>
+
+                                <!-- Item Type and Name -->
+                                <div class="sheet-znz-row">
+                                    <div class="sheet-znz-field sheet-znz-15">
+                                        <label>Item Type</label>
+                                        <select class="sheet-znz-inventory-item-type-select" name="attr_inventory_item_type">
+                                            <option value="misc" default>Misc</option>
+                                            <option value="melee">Melee Weapon</option>
+                                            <option value="ranged">Ranged Weapon</option>
+                                            <option value="equipment">Equipment</option>
+                                        </select>
+                                    </div>
+                                    <div class="sheet-znz-field">
+                                        <label>Name</label>
+                                        <input type="text" name="attr_inventory_item_name"/>
+                                    </div>
+                                    <div class="sheet-znz-field sheet-znz-15">
+                                        <label>Weight</label>
+                                        <input type="number" name="attr_inventory_item_weight" min="0"/>
+                                    </div>
+                                </div>
+                                
+                                <!--- Misc Fields-->
+                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-misc-fields">
+                                    Misc
+                                </div>
+
+                                <!--- Melee Fields-->
+                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-melee-fields">
+                                    Melee
+                                </div>
+
+                                <!-- Ranged Fields-->
+                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-ranged-fields">
+                                    Ranged
+                                </div>
+                                
+                                <!-- Equipment Fields-->
+                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-equipment-fields">
+                                    Equipment
+                                </div>
+
+                                <!-- Note -->
+                                <div class="sheet-znz-note">
+                                    <div class="sheet-znz-item-field-label">Notes</div> 
+                                    <textarea class="sheet-znz-reduced-height" name="attr_inventory_item_note" ></textarea>
+                                </div>
+                            </div>
+    
+                        </fieldset>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="sheet-znz-section-inventory">
+                <div class="sheet-znz-inventory-info sheet-znz-spaced-between">
+                    <div class="sheet-znz-inventory-field-bag-select">
+                        <div>
+                            Bag Type:
+                        </div>
+                        <select name="attr_bagtype">
+                            <option value="none" default>No Bag</option>
+                            <option value="tiny">Satchel</option>
+                            <option value="small">Daypack</option>
+                            <option value="medium">Medium Backpack</option>
+                            <option value="large">Large Rucksack</option>
+                        </select>
+                    </div>
+                    <div class="sheet-znz-inventory-current-weight">
+                        <div class="sheet-znz-inventory-label-current-weight">
+                            Current Weight: 
+                        </div>
+                        <div class="sheet-znz-inventory-field-current-weight">
+                            <input type="hidden" class="sheet-znz-hidden-weight-check" name="attr_weight_check" value="0"/>
+                            <input type="number" class="sheet-znz-weight-check" name="attr_inventory_weight" readonly/>
+                        </div>
+                    </div>
+                    <div class="sheet-znz-inventory-max-weight">
+                        <div class="sheet-znz-inventory-field-bag-weight-label">
+                            Max Weight:
+                        </div>
+                        <div class="sheet-znz-inventory-field-bag-weight-max">
+                            <input type="number" name="attr_inventory_max_weight" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="sheet-znz-block-wrapper">
+                    <div class="sheet-znz-block-item">
+                        <input type="hidden" name="attr_ranged_total_weight" value="0"/>
+                        <label class="sheet-znz-header">Ranged Weapons</label>
+                        <fieldset class="repeating_ranged">
+                            <div class="sheet-znz-item sheet-znz-weapon-card">
+                                <div class="sheet-znz-item-field sheet-znz-field-item-name">
+                                    <label>Name</label>
+                                    <input type="text" name="attr_inv_ranged_name"/>
+                                </div>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Weight:
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" min="0" name="attr_inv_ranged_weight"/>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Ammo:
+                                    </div>
+    
+                                    <div class="sheet-znz-item-field-row">
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" min="0" name="attr_inv_ranged_ammo"/>  
+                                        </div>
+                                        
+                                        <span class="sheet-divider">/</span>  
+                                        
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" name="attr_inv_ranged_ammo_max"/>
+                                            <div class="sheet-znz-description-text">
+                                                MAX
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Reloads:
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" min="0" name="attr_inv_ranged_reloads"/>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-note">
+                                    <div class="sheet-znz-item-field-label">Notes</div> 
+                                    <textarea class="sheet-znz-note" name="attr_inv_ranged_note" ></textarea>
+                                </div>
+                                <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
+                                    <button type="action" name="act_equiprange">Equip</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="sheet-znz-block-item">
+                        <input type="hidden" name="attr_melee_total_weight" value="0"/>
+                        <label class="sheet-znz-header">Melee Weapons</label>
+                        <fieldset class="repeating_melee">
+                            <div class="sheet-znz-item sheet-znz-weapon-card">
+                                <div class="sheet-znz-item-field sheet-znz-field-item-name">
+                                    <label>Name</label>
+                                    <input type="text" name="attr_inv_melee_name"/>
+                                </div>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Weight:
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <input type="number" min="0" name="attr_inv_melee_weight"/>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Durability:
+                                    </div>
+    
+                                    <div class="sheet-znz-item-field-row">
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" min="0" name="attr_inv_melee_durability"/>  
+                                        </div>
+                                        
+                                        <span class="sheet-divider">/</span>  
+                                        
+                                        <div class="sheet-znz-item-field">
+                                            <input type="number" name="attr_inv_melee_durability_max"/>
+                                            <div class="sheet-znz-description-text">
+                                                MAX
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-row sheet-znz-melee-type-row">
+                                    <div class="sheet-znz-item-field-label">
+                                        Melee Type:
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <select name="attr_inv_melee_type">
+                                            <option value="blunt" default>Blunt</option>
+                                            <option value="sharp">Sharp</option>
+                                            <option value="heavy">Heavy</option>
+                                        </select>
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <input type="text" name="attr_inv_melee_type_note"/>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-note">
+                                    <div class="sheet-znz-item-field-label">Notes</div> 
+                                    <textarea class="sheet-znz-note" name="attr_inv_melee_note" ></textarea>
+                                </div>
+                                <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
+                                    <button type="action" name="act_equipmelee">Equip</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="sheet-znz-block-item">
+                        <input type="hidden" name="attr_misc_total_weight" value="0"/>
+                        <label class="sheet-znz-header">Items</label>
+                        <fieldset class="repeating_inventory">
+                            <div class="sheet-znz-item">
+                                <div class="sheet-znz-item-field sheet-znz-field-item-name-misc">
+                                    <label>Name</label>
+                                    <input type="text" name="attr_inv_item_name"/>
+                                </div>
+                                <div class="sheet-znz-item-row">
+                                    <div class="sheet-znz-item-field sheet-znz-field-item-count"weight>
+                                        <div class="sheet-znz-item-field-label">Quantity</div> 
+                                        <input type="number" min="0" name="attr_inv_item_quantity"/>
+                                    </div>
+                                    <div class="sheet-znz-item-field sheet-znz-field-item-weight">
+                                        <div class="sheet-znz-item-field-label">Weight</div> 
+                                        <input type="number" min="0" name="attr_inv_item_weight"/>
+                                    </div>
+                                </div>
+                                <div class="sheet-znz-item-field sheet-znz-field-item-note">
+                                    <div class="sheet-znz-item-field-label">Notes</div> 
+                                    <textarea class="sheet-znz-note" name="attr_inv_item_note" ></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--- Name and Stats --->
         <div class="sheet-znz-area">
             <div class="sheet-znz-section sheet-znz-section-name">
@@ -217,7 +499,7 @@
                                 </div>
                                 <div class="sheet-znz-item-note">
                                     <div class="sheet-znz-item-field-label">Notes</div> 
-                                    <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_equipped_ranged_note" ></textarea>
+                                    <textarea class="sheet-znz-note" name="attr_equipped_ranged_note" ></textarea>
                                 </div>
                                 <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
                                     <button type="action" name="act_unequip_ranged_weapon">Unequip</button>
@@ -260,17 +542,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-row sheet-znz-melee-type-row">
                                     <div class="sheet-znz-item-field-label">
-                                        Melee Weapon Type:
+                                        Melee Type:
                                     </div>
                                     <div class="sheet-znz-item-field">
-                                        <input type="text" name="attr_equipped_melee_type"/>
+                                        <select name="attr_equipped_melee_type">
+                                            <option value="blunt" default>Blunt</option>
+                                            <option value="sharp">Sharp</option>
+                                            <option value="heavy">Heavy</option>
+                                        </select>
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <input type="text" name="attr_equipped_melee_type_note"/>
                                     </div>
                                 </div>
                                 <div class="sheet-znz-item-note">
                                     <div class="sheet-znz-item-field-label">Notes</div> 
-                                    <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_equipped_melee_note" ></textarea>
+                                    <textarea class="sheet-znz-note" name="attr_equipped_melee_note" ></textarea>
                                 </div>
                                 <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
                                     <button type="action" name="act_unequip_melee_weapon">Unequip</button>
@@ -535,7 +824,7 @@
                                 </div>
                                 <div class="sheet-znz-item-note">
                                     <div class="sheet-znz-item-field-label">Notes</div> 
-                                    <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_inv_ranged_note" ></textarea>
+                                    <textarea class="sheet-znz-note" name="attr_inv_ranged_note" ></textarea>
                                 </div>
                                 <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
                                     <button type="action" name="act_equiprange">Equip</button>
@@ -580,17 +869,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sheet-znz-item-row">
+                                <div class="sheet-znz-item-row sheet-znz-melee-type-row">
                                     <div class="sheet-znz-item-field-label">
                                         Melee Type:
                                     </div>
                                     <div class="sheet-znz-item-field">
-                                        <input type="text" name="attr_inv_melee_type"/>
+                                        <select name="attr_inv_melee_type">
+                                            <option value="blunt" default>Blunt</option>
+                                            <option value="sharp">Sharp</option>
+                                            <option value="heavy">Heavy</option>
+                                        </select>
+                                    </div>
+                                    <div class="sheet-znz-item-field">
+                                        <input type="text" name="attr_inv_melee_type_note"/>
                                     </div>
                                 </div>
                                 <div class="sheet-znz-item-note">
                                     <div class="sheet-znz-item-field-label">Notes</div> 
-                                    <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_inv_melee_note" ></textarea>
+                                    <textarea class="sheet-znz-note" name="attr_inv_melee_note" ></textarea>
                                 </div>
                                 <div class="sheet-znz-item-field sheet-znz-weapon-equip-button">
                                     <button type="action" name="act_equipmelee">Equip</button>
@@ -619,7 +915,7 @@
                                 </div>
                                 <div class="sheet-znz-item-field sheet-znz-field-item-note">
                                     <div class="sheet-znz-item-field-label">Notes</div> 
-                                    <textarea class="sheet-znz-dialog sheet-znz-reduced-height" name="attr_inv_item_note" ></textarea>
+                                    <textarea class="sheet-znz-note" name="attr_inv_item_note" ></textarea>
                                 </div>
                             </div>
                         </fieldset>
@@ -627,6 +923,7 @@
                 </div>
             </div>
         </div>
+
     
             
     
@@ -907,7 +1204,7 @@ function equip_weapon(type, rowId){
  */
 function getWeaponFields(type, prefix, asStruct = false){
     var rangedFields = ["name", "weight", "ammo", "ammo_max", "reloads", "note"],
-        meleeFields = ["name", "weight", "durability", "durability_max", "durability_rating", "note"],
+        meleeFields = ["name", "weight", "durability", "durability_max", "type","type_note", "note"],
         targetField = [];
 
 
@@ -989,7 +1286,7 @@ on ('change:misc_total_weight change:melee_total_weight change:ranged_total_weig
             maxWeight = values['inventory_max_weight'],
             exceedWeight = false;
 
-        let newWeight = melee + ranged + misc;
+        let newWeight = Number(melee) + Number(ranged) + Number(misc);
 
         if (newWeight === currentWeight){
             return;
