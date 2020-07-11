@@ -109,23 +109,75 @@ input {
 .sheet-znz-note {
   height: 50px; }
 
+.sheet-znz-hidden {
+  display: none; }
+
+.sheet-znz-expandable {
+  display: none;
+  margin: 20px 0; }
+
+input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
+  display: block; }
+
+.sheet-znz-expand-button {
+  position: relative; }
+  .sheet-znz-expand-button input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    margin: 0; }
+  .sheet-znz-expand-button label:after {
+    content: '';
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    position: absolute;
+    top: 3px;
+    margin-left: 10px;
+    transition: transform 0.3s; }
+  .sheet-znz-expand-button input[type=checkbox]:checked + label:after {
+    transform: rotate(225deg) rotateY(360deg);
+    top: 5px; }
+
 .sheet-znz-row {
   display: flex;
   margin-bottom: 12px; }
-  .sheet-znz-row.sheet-spaced {
+  .sheet-znz-row.sheet-znz-spaced {
     justify-content: space-between; }
-  .sheet-znz-row .sheet-znz-field {
-    flex: 100%; }
-    .sheet-znz-row .sheet-znz-field:not(:last-child) {
-      margin-right: 10px; }
-    .sheet-znz-row .sheet-znz-field.sheet-znz-33 {
-      flex-basis: 33%; }
-    .sheet-znz-row .sheet-znz-field.sheet-znz-25 {
-      flex-basis: 25%; }
-    .sheet-znz-row .sheet-znz-field.sheet-znz-15 {
-      flex-basis: 15%; }
-    .sheet-znz-row .sheet-znz-field.sheet-znz-50 {
-      flex-basis: 50%; }
+  .sheet-znz-row .sheet-znz-field:not(:last-child) {
+    margin-right: 10px; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-15 {
+    flex-basis: 15%; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-25 {
+    flex-basis: 25%; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-33 {
+    flex-basis: 33%; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-50 {
+    flex-basis: 50%; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-60 {
+    flex-basis: 60%; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-75 {
+    flex-basis: 75%; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-full {
+    flex: 1 1 100%; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-right input {
+    display: block;
+    margin-left: auto; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-right label {
+    text-align: right; }
+  .sheet-znz-row .sheet-znz-field select {
+    width: auto; }
+  .sheet-znz-row .sheet-znz-description-text {
+    text-align: center;
+    margin-top: -7px; }
+  .sheet-znz-row .sheet-znz-inner-row {
+    display: flex;
+    align-items: baseline; }
 
 .sheet-znz-section-status {
   display: flex;
@@ -207,27 +259,10 @@ table.sheet-znz-block-attrib-table {
     padding: 0; }
   .sheet-znz-block-item .sheet-znz-item textarea {
     box-sizing: border-box; }
-  .sheet-znz-block-item .sheet-znz-item .sheet-znz-row {
-    display: flex;
-    margin-bottom: 12px; }
-    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row.sheet-spaced {
-      justify-content: space-between; }
-    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field:not(:last-child) {
-      margin-right: 10px; }
-    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field.sheet-znz-third {
-      flex: 33%; }
-    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field.sheet-znz-quarter {
-      flex: 25%; }
-    .sheet-znz-block-item .sheet-znz-item .sheet-znz-row .sheet-znz-field.sheet-znz-half {
-      flex: 50%; }
   .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 12px; }
-    .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-row.sheet-znz-melee-type-row .sheet-znz-item-field {
-      flex: 40%; }
-      .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-row.sheet-znz-melee-type-row .sheet-znz-item-field select {
-        width: 100%; }
   .sheet-znz-block-item .sheet-znz-item .sheet-znz-item-field-row {
     display: flex;
     justify-content: space-between; }
@@ -242,9 +277,6 @@ table.sheet-znz-block-attrib-table {
     font-size: 12px; }
   .sheet-znz-block-item .sheet-znz-item .sheet-znz-field-item-name {
     margin-bottom: 15px; }
-
-.sheet-znz-section-inventory .sheet-znz-item-type-hidden {
-  display: none; }
 
 .sheet-znz-section-inventory .sheet-znz-inventory-type-fields {
   display: none; }

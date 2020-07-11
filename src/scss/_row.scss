@@ -2,31 +2,66 @@
     display: flex;
     margin-bottom: 12px;
 
-    &.sheet-spaced{
+    &.sheet-znz-spaced{
         justify-content: space-between;
     }
 
     .sheet-znz-field{
-        flex: 100%;
-
         &:not(:last-child){
             margin-right:10px;
+        }
+        
+        &.sheet-znz-15{
+            flex-basis: 15%;
+        }
+        
+        &.sheet-znz-25{
+            flex-basis: 25%;
         }
 
         &.sheet-znz-33{
             flex-basis: 33%;
         }
 
-        &.sheet-znz-25{
-            flex-basis: 25%;
-        }
-
-        &.sheet-znz-15{
-            flex-basis: 15%;
-        }
-
         &.sheet-znz-50{
             flex-basis: 50%;
         }
+
+        &.sheet-znz-60{
+            flex-basis: 60%;
+        }
+
+        &.sheet-znz-75{
+            flex-basis: 75%;
+        }
+
+        &.sheet-znz-full{
+            flex: 1 1 100%;
+        }
+
+        &.sheet-znz-right{
+            input{
+                display: block;
+                margin-left: auto;
+            }
+
+            label {
+                text-align:right;
+            }
+        }
+
+        select{
+            width: auto;
+        }
+    }
+
+    .sheet-znz-description-text{
+        text-align: center;
+        margin-top: -7px;
+    }
+
+    .sheet-znz-inner-row{
+        display: flex;
+        align-items: baseline;
     }
 }

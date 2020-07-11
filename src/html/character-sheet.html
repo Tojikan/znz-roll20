@@ -40,61 +40,9 @@
                     <div class="sheet-znz-block-item sheet-znz-unified-inventory">
                         <label class="sheet-znz-header">Items</label>
                         <fieldset class="repeating_backpack">
-                            <div class="sheet-znz-item">
-                                <!-- Hidden Inputs for setting item type -->
-                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-1" type="checkbox" name="attr_inventory_item_type" value="misc" checked/>
-                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-2" type="checkbox" name="attr_inventory_item_type" value="melee"/>
-                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-3" type="checkbox" name="attr_inventory_item_type" value="ranged"/>
-                                <input class="sheet-znz-item-type-hidden sheet-znz-item-type-4" type="checkbox" name="attr_inventory_item_type" value="equipment"/>
-
-                                <!-- Item Type and Name -->
-                                <div class="sheet-znz-row">
-                                    <div class="sheet-znz-field sheet-znz-15">
-                                        <label>Item Type</label>
-                                        <select class="sheet-znz-inventory-item-type-select" name="attr_inventory_item_type">
-                                            <option value="misc" default>Misc</option>
-                                            <option value="melee">Melee Weapon</option>
-                                            <option value="ranged">Ranged Weapon</option>
-                                            <option value="equipment">Equipment</option>
-                                        </select>
-                                    </div>
-                                    <div class="sheet-znz-field">
-                                        <label>Name</label>
-                                        <input type="text" name="attr_inventory_item_name"/>
-                                    </div>
-                                    <div class="sheet-znz-field sheet-znz-15">
-                                        <label>Weight</label>
-                                        <input type="number" name="attr_inventory_item_weight" min="0"/>
-                                    </div>
-                                </div>
-                                
-                                <!--- Misc Fields-->
-                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-misc-fields">
-                                    Misc
-                                </div>
-
-                                <!--- Melee Fields-->
-                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-melee-fields">
-                                    Melee
-                                </div>
-
-                                <!-- Ranged Fields-->
-                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-ranged-fields">
-                                    Ranged
-                                </div>
-                                
-                                <!-- Equipment Fields-->
-                                <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-equipment-fields">
-                                    Equipment
-                                </div>
-
-                                <!-- Note -->
-                                <div class="sheet-znz-note">
-                                    <div class="sheet-znz-item-field-label">Notes</div> 
-                                    <textarea class="sheet-znz-reduced-height" name="attr_inventory_item_note" ></textarea>
-                                </div>
-                            </div>
-    
+                           @@include('item-card.html', {
+                               'attributePrefix': 'inventory'
+                           })
                         </fieldset>
                     </div>
                 </div>
