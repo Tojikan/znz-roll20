@@ -23,9 +23,11 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
     }
 
     label{
+        color: #3757c1;
+
         &:after{
             content: '';
-            border: solid black;
+            border: solid #3757c1;
             border-width: 0 3px 3px 0;
             padding: 3px;
             transform: rotate(45deg);

@@ -15,6 +15,10 @@ on("change:attribute", function(obj, prev){
             attr = "sanity";
         break;
 
+        case "exp":
+            attr = "Exp";
+        break;
+
         default:
             return;
     }

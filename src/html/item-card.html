@@ -47,6 +47,7 @@
             </div>
         </div>
     </div>
+    <!--- End Misc Fields --->
 
     <!--- Melee Fields-->
     <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-melee-fields">
@@ -94,22 +95,22 @@
         <div class="sheet-znz-expandable">
             <div class="sheet-znz-row sheet-znz-spaced">
                 <div class="sheet-znz-field">
-                    <label>Quantity</label>
-                    <input type="number" min="0" name="attr_@@attributePrefix_item_quantity" value="1"/>
-                </div>
-                <div class="sheet-znz-field sheet-znz-right">
                     <label>Attack Range</label>
                     <input type="number" min="0" name="attr_@@attributePrefix_attack_range" value="1"/>
+                </div>
+                <div class="sheet-znz-field sheet-znz-right">
+                    <label>Damage Bonus</label>
+                    <input type="number" min="0" name="attr_@@attributePrefix_damage_bonus" value="0"/>
                 </div>
             </div>
             <div class="sheet-znz-row sheet-znz-spaced">
                 <div class="sheet-znz-field">
                     <label>Bonus Damage Per Additional Energy</label>
-                    <input type="number" min="1" name="attr_@@attributePrefix_energy_bonus" value="1"/>
+                    <input type="number" name="attr_@@attributePrefix_weapon_resource_bonus" value="1"/>
                 </div>
                 <div class="sheet-znz-field sheet-znz-right">
                     <label>Energy Consumption Per Attack</label>
-                    <input type="number" min="1" name="attr_@@attributePrefix_energy_consumption" value="1"/>
+                    <input type="number" name="attr_@@attributePrefix_energy_consumption" value="1"/>
                 </div>
             </div>
             <div class="sheet-znz-row">
@@ -120,6 +121,7 @@
             </div>
         </div>
     </div>
+    <!--- End Melee Fields --->
 
     <!-- Ranged Fields-->
     <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-ranged-fields">
@@ -142,7 +144,7 @@
                 </div>
             </div>
         </div>
-        <div class="sheet-znz-row">
+        <div class="sheet-znz-row sheet-znz-spaced">
             <div class="sheet-znz-field sheet-znz-50">
                 <button type="action" name="act_equipranged">Equip Ranged Weapon</button>
             </div>
@@ -154,11 +156,65 @@
                 </div>
             </div>
         </div>
+        <input class="sheet-znz-hidden sheet-znz-expand" type="checkbox" name="attr_@@attributePrefix_expand_ranged_details" />
+        <div class="sheet-znz-expandable">
+            <div class="sheet-znz-row sheet-znz-spaced">
+                <div class="sheet-znz-field">
+                    <label>Attack Range</label>
+                    <input type="number" min="0" name="attr_@@attributePrefix_attack_range"/>
+                </div>
+                <div class="sheet-znz-field sheet-znz-right">
+                    <label>Damage Bonus</label>
+                    <input type="number" min="1" name="attr_@@attributePrefix_damage_bonus" value="0"/>
+                </div>
+            </div>
+            <div class="sheet-znz-row sheet-znz-spaced">
+                <div class="sheet-znz-field">
+                    <label>Bonus Damage Per Additional Ammo</label>
+                    <input type="number" min="1" name="attr_@@attributePrefix_weapon_resource_bonus" value="1"/>
+                </div>
+            </div>
+            <div class="sheet-znz-row">
+                <div class="sheet-znz-field sheet-znz-full">
+                    <label>Weapon Effect</label>
+                    <input type="text" name="attr_@@attributePrefix_item_effect"/>
+                </div>
+            </div>
+        </div>
+
     </div>
+    <!--- End Ranged Fields --->
     
     <!-- Equipment Fields-->
     <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-equipment-fields">
-        Equipment
+        <div class="sheet-znz-row">
+            <div class="sheet-znz-field sheet-znz-15">
+                <label>Durability</label>
+                <div class="sheet-znz-inner-row">
+                    <div>
+                        <input type="number" min="0" name="attr_@@attributePrefix_equipment_durability"/>
+                    </div>
+                    <div class="sheet-divider">/</div>  
+                    <div>
+                        <input type="number" min="0" name="attr_@@attributePrefix_equipment_durability_max"/>
+                        <div class="sheet-znz-description-text">
+                            MAX
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sheet-znz-row sheet-znz-spaced">
+            <div class="sheet-znz-field">
+                <label>Attribute Penalty</label>
+                
+            </div>
+            <div class="sheet-znz-field">
+
+            </div>
+
+        </div>
     </div>
 
     <!-- Note -->

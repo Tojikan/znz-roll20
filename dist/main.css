@@ -129,17 +129,19 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     border: none;
     padding: 0;
     margin: 0; }
-  .sheet-znz-expand-button label:after {
-    content: '';
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    padding: 3px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    position: absolute;
-    top: 3px;
-    margin-left: 10px;
-    transition: transform 0.3s; }
+  .sheet-znz-expand-button label {
+    color: #3757c1; }
+    .sheet-znz-expand-button label:after {
+      content: '';
+      border: solid #3757c1;
+      border-width: 0 3px 3px 0;
+      padding: 3px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      position: absolute;
+      top: 3px;
+      margin-left: 10px;
+      transition: transform 0.3s; }
   .sheet-znz-expand-button input[type=checkbox]:checked + label:after {
     transform: rotate(225deg) rotateY(360deg);
     top: 5px; }
