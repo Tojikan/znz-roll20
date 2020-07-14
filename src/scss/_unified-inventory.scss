@@ -18,17 +18,9 @@
         }
 
         > .repcontainer{
-            display: flex;
-            flex-wrap: wrap;
-            position: relative;
-            justify-content: space-between;
-
-            .repitem{
-                position: relative;
-                flex-basis: 49%;
-                flex-grow: 0;
-                max-width: 49%;
-            }
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .sheet-znz-note{
