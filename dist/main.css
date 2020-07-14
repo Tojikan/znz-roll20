@@ -343,3 +343,7 @@ table.sheet-znz-block-attrib-table {
   height: auto; }
   .sheet-znz-section-inventory .sheet-znz-unified-inventory .sheet-znz-note textarea {
     max-width: 100%; }
+
+.sheet-znz-section-inventory .sheet-znz-unified-inventory .sheet-znz-header .sheet-znz-inventory-controls {
+  margin-left: auto;
+  margin-bottom: 3px; }
