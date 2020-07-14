@@ -69,11 +69,29 @@ label {
   font-weight: 700;
   display: block;
   margin-bottom: 5px; }
+  label.sheet-znz-small {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 3px; }
 
 .sheet-divider {
   font-size: 16px;
   margin: 0 6px;
   font-weight: 900; }
+
+.sheet-pseudo-divider {
+  height: 100%;
+  position: relative;
+  width: 20px;
+  margin-right: 30px; }
+  .sheet-pseudo-divider:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    bottom: 10%;
+    border-left: solid 2px black;
+    transform: rotate(30deg); }
 
 input {
   width: 100%;
@@ -222,6 +240,8 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   .sheet-znz-row .sheet-znz-inner-row {
     display: flex;
     align-items: baseline; }
+    .sheet-znz-row .sheet-znz-inner-row.sheet-znz-no-align {
+      align-items: initial; }
 
 .sheet-znz-section-status {
   display: flex;

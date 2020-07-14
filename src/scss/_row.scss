@@ -77,5 +77,9 @@
     .sheet-znz-inner-row{
         display: flex;
         align-items: baseline;
+
+        &.sheet-znz-no-align{
+            align-items: initial;
+        }
     }
 }

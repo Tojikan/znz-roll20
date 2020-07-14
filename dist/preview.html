@@ -10,35 +10,47 @@
         <div class="sheet-znz-area-unflexed">
             <label>Inventory</label>
             <div class="sheet-znz-section-inventory">
-                <div class="sheet-znz-inventory-info sheet-znz-spaced-between">
-                    <div class="sheet-znz-inventory-field-bag-select">
-                        <div>
-                            Bag Type:
+                <div class="sheet-znz-inventory-info sheet-znz-row sheet-znz-spaced">
+                    <div class="sheet-znz-inner-row">
+                        <div class="sheet-znz-field">
+                            <label class="sheet-znz-small">
+                                Bag Type:
+                            </label>
+                            <select name="attr_bagtype">
+                                <option value="none" default>No Bag</option>
+                                <option value="tiny">Satchel</option>
+                                <option value="small">Daypack</option>
+                                <option value="medium">Medium Backpack</option>
+                                <option value="large">Large Rucksack</option>
+                            </select>
                         </div>
-                        <select name="attr_bagtype">
-                            <option value="none" default>No Bag</option>
-                            <option value="tiny">Satchel</option>
-                            <option value="small">Daypack</option>
-                            <option value="medium">Medium Backpack</option>
-                            <option value="large">Large Rucksack</option>
-                        </select>
+                        <div class="sheet-znz-field">
+                            <label class="sheet-znz-small">
+                                Bonus Bag Weight:
+                            </label>
+                            <input type="number" name="attr_bag_bonus_weight" value="0" />
+                        </div>
                     </div>
-                    <div class="sheet-znz-inventory-current-weight">
-                        <div class="sheet-znz-inventory-label-current-weight">
-                            Current Weight: 
+                    <div class="sheet-znz-inner-row sheet-znz-no-align">
+                        <div class="sheet-znz-field">
+                            <label class="sheet-znz-small">
+                                Current Weight: 
+                            </label>
+                            <div class="sheet-znz-inventory-field-current-weight">
+                                <input type="hidden" class="sheet-znz-hidden-weight-check" name="attr_weight_check" value="0"/>
+                                <input type="number" class="sheet-znz-weight-check" name="attr_inventory_weight" readonly/>
+                            </div>
                         </div>
-                        <div class="sheet-znz-inventory-field-current-weight">
-                            <input type="hidden" class="sheet-znz-hidden-weight-check" name="attr_weight_check" value="0"/>
-                            <input type="number" class="sheet-znz-weight-check" name="attr_inventory_weight" readonly/>
-                        </div>
-                    </div>
-                    <div class="sheet-znz-inventory-max-weight">
-                        <div class="sheet-znz-inventory-field-bag-weight-label">
-                            Max Weight:
-                        </div>
-                        <div class="sheet-znz-inventory-field-bag-weight-max">
+                        <div class="sheet-pseudo-divider"></div>
+                        <div class="sheet-znz-field">
+                            <label class="sheet-znz-small">
+                                Max Weight: 
+                            </label>
                             <input type="number" name="attr_inventory_max_weight" readonly/>
                         </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-33">
+
                     </div>
                 </div>
 
