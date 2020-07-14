@@ -32,8 +32,7 @@
 /*** Inventory ***/
 .sheet-znz-section-inventory {
   border: solid 2px black;
-  padding: 8px;
-  /*** Styles for new Unified Inventory System ***/ }
+  padding: 8px; }
   .sheet-znz-section-inventory > label {
     width: 100%; }
   .sheet-znz-section-inventory .sheet-znz-inventory-info {
@@ -49,23 +48,6 @@
       margin: 0 10px; }
     .sheet-znz-section-inventory .sheet-znz-block-item:last-child {
       flex: 45%; }
-  .sheet-znz-section-inventory .sheet-znz-item-type-hidden {
-    display: none; }
-  .sheet-znz-section-inventory .sheet-znz-inventory-item-field-group {
-    display: none; }
-  .sheet-znz-section-inventory input.sheet-znz-item-type-1:checked ~ .sheet-znz-inventory-item-misc-fields,
-  .sheet-znz-section-inventory input.sheet-znz-item-type-2:checked ~ .sheet-znz-inventory-item-melee-fields,
-  .sheet-znz-section-inventory input.sheet-znz-item-type-3:checked ~ .sheet-znz-inventory-item-ranged-fields,
-  .sheet-znz-section-inventory input.sheet-znz-item-type-4:checked ~ .sheet-znz-inventory-item-equipment-fields {
-    display: block; }
-  .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer {
-    display: flex;
-    flex-wrap: wrap; }
-    .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer .repitem {
-      width: 50%;
-      flex: 45%; }
-      .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer .repitem:nth-child(odd) {
-        margin-right: 5px; }
 
 /*** Equipment **/
 .sheet-znz-equipment {
@@ -112,6 +94,7 @@ input {
 .sheet-znz-hidden {
   display: none; }
 
+/** Show more toggle **/
 .sheet-znz-expandable {
   display: none;
   margin: 20px 0; }
@@ -130,10 +113,13 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     padding: 0;
     margin: 0; }
   .sheet-znz-expand-button label {
-    color: #3757c1; }
+    color: #666;
+    font-size: 12px;
+    margin: auto;
+    width: 40%; }
     .sheet-znz-expand-button label:after {
       content: '';
-      border: solid #3757c1;
+      border: solid #666;
       border-width: 0 3px 3px 0;
       padding: 3px;
       transform: rotate(45deg);
@@ -142,15 +128,71 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       top: 3px;
       margin-left: 10px;
       transition: transform 0.3s; }
-  .sheet-znz-expand-button input[type=checkbox]:checked + label:after {
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ label:after, .sheet-znz-expand-button input[type=checkbox]:checked ~ label:before {
     transform: rotate(225deg) rotateY(360deg);
     top: 5px; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-znz-expand-text {
+    display: none; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-znz-collapse-text {
+    display: block; }
+  .sheet-znz-expand-button input[type=checkbox]:not(:checked) ~ .sheet-znz-expand-text {
+    display: block; }
+  .sheet-znz-expand-button input[type=checkbox]:not(:checked) ~ .sheet-znz-collapse-text {
+    display: none; }
+  .sheet-znz-expand-button.sheet-znz-expandable-section {
+    margin: 5px 0; }
+    .sheet-znz-expand-button.sheet-znz-expandable-section label {
+      text-align: center; }
+      .sheet-znz-expand-button.sheet-znz-expandable-section label:before {
+        content: '';
+        border: solid #666;
+        border-width: 0 3px 3px 0;
+        padding: 3px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        position: absolute;
+        top: 3px;
+        margin-left: -20px;
+        transition: transform 0.3s; }
+      .sheet-znz-expand-button.sheet-znz-expandable-section label span:before {
+        content: '';
+        border: dotted 1px #666;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 30%; }
+      .sheet-znz-expand-button.sheet-znz-expandable-section label span:after {
+        content: '';
+        border: dotted 1px #666;
+        position: absolute;
+        top: 50%;
+        left: 70%;
+        width: 30%; }
+
+.sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section label {
+  color: darkgray; }
+  .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section label:before, .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section label:after {
+    border-color: darkgray;
+    border-style: dashed; }
+  .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section label span:before, .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section label span:after {
+    border-style: dashed;
+    border-color: darkgray; }
+
+.sheet-znz-expandable .sheet-znz-expandable {
+  border-bottom: dashed 1px darkgray; }
 
 .sheet-znz-row {
   display: flex;
+  justify-content: space-between;
   margin-bottom: 12px; }
   .sheet-znz-row.sheet-znz-spaced {
     justify-content: space-between; }
+  .sheet-znz-row.sheet-znz-centered {
+    justify-content: space-around; }
+  .sheet-znz-row.sheet-znz-no-margin {
+    margin-bottom: 0; }
+    .sheet-znz-row.sheet-znz-no-margin input, .sheet-znz-row.sheet-znz-no-margin select {
+      margin-bottom: 0; }
   .sheet-znz-row .sheet-znz-field:not(:last-child) {
     margin-right: 10px; }
   .sheet-znz-row .sheet-znz-field.sheet-znz-15 {
@@ -292,12 +334,12 @@ table.sheet-znz-block-attrib-table {
 .sheet-znz-section-inventory .sheet-znz-unified-inventory .sheet-znz-inventory-item-type-select {
   width: auto; }
 
-.sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer {
+.sheet-znz-section-inventory .sheet-znz-unified-inventory > .repcontainer {
   display: flex;
   flex-wrap: wrap;
   position: relative;
   justify-content: space-between; }
-  .sheet-znz-section-inventory .sheet-znz-unified-inventory .repcontainer .repitem {
+  .sheet-znz-section-inventory .sheet-znz-unified-inventory > .repcontainer .repitem {
     position: relative;
     flex-basis: 49%;
     flex-grow: 0;

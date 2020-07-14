@@ -1,5 +1,7 @@
-//Show more toggle
+$primaryColor: #666;
+$secondColor: darkgray;
 
+/** Show more toggle **/
 .sheet-znz-expandable{
     display: none;
     margin: 20px 0;
@@ -23,11 +25,14 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
     }
 
     label{
-        color: #3757c1;
+        color: $primaryColor;
+        font-size: 12px;
+        margin: auto;
+        width: 40%;
 
         &:after{
             content: '';
-            border: solid #3757c1;
+            border: solid $primaryColor;
             border-width: 0 3px 3px 0;
             padding: 3px;
             transform: rotate(45deg);
@@ -40,11 +45,100 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
     }
 
     input[type=checkbox]:checked{
-        + label{
-            &:after{
+        ~ label{
+            &:after, &:before{
                 transform: rotate(225deg) rotateY(360deg);
                 top: 5px;
             }
         }
+
+        ~ .sheet-znz-expand-text{
+            display: none;
+        }
+
+        ~ .sheet-znz-collapse-text{
+            display: block;
+        }
+    }
+
+    input[type=checkbox]:not(:checked){
+        ~ .sheet-znz-expand-text{
+            display: block;
+        }
+
+        ~ .sheet-znz-collapse-text{
+            display: none;
+        }
+    }
+
+    &.sheet-znz-expandable-section{
+        margin: 5px 0;
+
+        label {
+            text-align: center;
+            
+            //arrow both sides 
+            &:before{
+                content: '';
+                border: solid $primaryColor;
+                border-width: 0 3px 3px 0;
+                padding: 3px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                position: absolute;
+                top:3px;
+                margin-left: -20px;
+                transition: transform 0.3s;
+            }
+
+            // Lines before and after text
+            span{
+                &:before{
+                    content: '';
+                    border: dotted 1px $primaryColor;
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 30%;
+                }
+
+                &:after{
+                    content: '';
+                    border: dotted 1px $primaryColor;
+                    position: absolute;
+                    top: 50%;
+                    left: 70%;
+                    width: 30%;
+                }
+            }
+        }
     }
 }
+    
+.sheet-znz-expandable{
+    
+    //Different Color for Nested Expandables
+    .sheet-znz-expand-button{
+        &.sheet-znz-expandable-section{
+            label {
+                color: $secondColor;
+                &:before, &:after{
+                    border-color: $secondColor;
+                    border-style: dashed;
+                }
+    
+                span {
+                    &:before, &:after{
+                        border-style: dashed;
+                        border-color: $secondColor
+                    }
+                }
+            }
+        }
+    }
+
+    .sheet-znz-expandable{
+        border-bottom: dashed 1px $secondColor;
+    }
+}
+
