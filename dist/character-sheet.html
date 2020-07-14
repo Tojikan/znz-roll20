@@ -240,7 +240,29 @@
         <!-- Equipment Fields-->
         <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-equipment-fields">
             <div class="sheet-znz-row sheet-znz-spaced">
-                <div class="sheet-znz-field sheet-znz-15">
+                <div class="sheet-znz-field">
+                    <label>Damage Reduction</label>
+                    <input type="number" name="attr_inventory_equipment_damage_reduction" value="0"/>
+                </div>
+                <div class="sheet-znz-field sheet-znz-right">
+                    <label>Attribute Modifier</label>
+                    <div class="sheet-znz-inner-row">
+                        <select name="attr_equipment_attr_mod_type">
+                            <option value="" selected>Select Attribute</option>
+                            <option value="intelligence">Intelligence</option>
+                            <option value="strength">Strength</option>
+                            <option value="dexterity">Dexterity</option>
+                            <option value="empathy">Empathy</option>
+                            <option value="awareness">Awareness</option>
+                            <option value="tenacity">Tenacity</option>
+                            <option value="health">Health</option>
+                        </select>
+                        <input type="number" name="attr_equip_attr_bonus"/>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-znz-row">
+                <div class="sheet-znz-field sheet-znz-25">
                     <label>Durability</label>
                     <div class="sheet-znz-inner-row">
                         <div>
@@ -255,26 +277,55 @@
                         </div>
                     </div>
                 </div>
-                <div class="sheet-znz-field">
-                    <label>Attribute Modifier</label>
+                <div class="sheet-znz-field sheet-znz-right">
+                    <label>Proficiency Modifier</label>
                     <div class="sheet-znz-inner-row">
-                        <select name="attr_equipment_attr_mod">
-                            <option value="" selected>Select Attribute</option>
-                            <option value="intelligence">Intelligence</option>
-                            <option value="strength">Strength</option>
-                            <option value="dexterity">Dexterity</option>
-                            <option value="empathy">Empathy</option>
-                            <option value="awareness">Awareness</option>
-                            <option value="tenacity">Tenacity</option>
-                            <option value="health">Health</option>
+                        <select name="attr_equipment_prof_mod_type">
+                            <option value="" selected>Select Proficiency</option>
+                                <option value="pistols">Shooting Pistols</option>
+                                <option value="shotguns">Shooting Shotguns</option>
+                                <option value="rifles">Shooting Rifles</option>
+                                <option value="unarmed">Unarmed Combat</option>
+                                <option value="sharpmelee">Sharp Melee Weapons</option>
+                                <option value="bluntmelee">Blunt Melee Weapons</option>
+                                <option value="throwing">Throwing Weapons</option>
+                                <option value="archery">Archery</option>
+                                <option value="stealth">Stealth</option>
+                                <option value="pickpocket">Pickpocketing</option>
+                                <option value="repair">Basic Repair</option>
+                                <option value="crafting">Basic Crafting</option>
+                                <option value="driving">Driving</option>
+                                <option value="cooking">Cooking</option>
+                                <option value="firstaid">First Aid</option>
+                                <option value="survival">Survival</option>
+                                <option value="performance">Performance</option>
+                                <option value="intimidation">Intimidation</option>
+                                <option value="persuasion">Persuasion</option>
+                                <option value="negotiation">Negotiation</option>
+                                <option value="investigation">Investigation</option>
+                                <option value="climbing">Climbing</option>
+                                <option value="swimming">Swimming</option>
+                                <option value="swimming">Athletics</option>
                         </select>
-                        <input type="number" name="attr_equip_attr_bonus"/>
+                        <input type="number" name="attr_equip_prof_bonus"/>
                     </div>
+                </div>
+            </div>
+            <div class="sheet-znz-row">
+                <div class="sheet-znz-field sheet-znz-full">
+                    <label>Equipment Effect</label>
+                    <input type="text" name="attr_inventory_item_effect"/>
+                </div>
+            </div>
+            <div class="sheet-znz-row sheet-znz-centered">
+                <div class="sheet-znz-field">
+                    <button type="action" name="act_wearequipment">Wear Equipment</button>
                 </div>
             </div>
             
         </div>
-        
+        <!--- End Equipment Fields-->
+
         <!-- Note -->
         <div class="sheet-znz-note">
             <label>Notes</label> 
