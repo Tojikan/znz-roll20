@@ -1,0 +1,26 @@
+{% import 'partials/statblock.njk' as statblock %}
+
+<div class="sheet-znz-character-sheet sheet-znz-grid-layout">
+    <!-- Name Area -->
+    <div class="sheet-znz-area-name">
+        <div class="sheet-znz-field">
+            <h2>Name</h2>
+            <input type="text" name="attr_name"></input>
+        </div>
+        <div class="sheet-znz-field">
+            <h2>Status</h2>
+            <input type="text" name="attr_status"></input>
+        </div>
+    </div>
+
+    <!--- Stat Block-->
+    <div class="sheet-znz-area-status">
+        <div class="sheet-znz-row sheet-znz-spaced">
+            {{ statblock.create('Health', 'hp', '30') }}
+            {{ statblock.create('Sanity', 'sanity', '30') }}
+            {{ statblock.create('Energy', 'energy', '30') }}
+            {{ statblock.create('Exp', 'exp', '30', false) }}
+        </div>
+    </div>
+
+</div>
