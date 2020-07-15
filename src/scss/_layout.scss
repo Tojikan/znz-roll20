@@ -1,0 +1,45 @@
+.sheet-znz-character-sheet{
+    
+    &.sheet-znz-grid-layout{
+        display: grid;
+        grid-template-columns: 
+            [col1] 1fr
+            [col2] 1fr
+            [col3] 1fr
+            [col4] 1fr
+            [col5] 1fr
+            [col6] 1fr;
+        grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+        grid-gap: $gridgap;
+
+        grid-template-areas:
+            "name name stat stat stat stat"
+            "attr attr hit hit hit hit"
+            "attr attr ranged ranged melee melee"
+            "attr attr ranged ranged melee melee"
+            "attr attr ranged ranged melee melee"
+            "attr attr head head head head"
+            "attr attr armor armor armor armor"
+            "attr attr apparel apparel apparel apparel"
+            "skills skills prof prof abilities abilities"
+            "skills skills prof prof abilities abilities"
+            "skills skills prof prof flaws flaws"
+            "skills skills prof prof flaws flaws"
+            "inventory inventory inventory inventory inventory inventory"
+            "inventory inventory inventory inventory inventory inventory"
+            "inventory inventory inventory inventory inventory inventory"
+            "inventory inventory inventory inventory inventory inventory"
+            "notes notes notes notes notes notes"
+
+        ;
+
+    }
+
+    .sheet-znz-area-name{
+        grid-area: name;
+    }
+
+    .sheet-znz-area-status{
+        grid-area: stat;
+    }
+}

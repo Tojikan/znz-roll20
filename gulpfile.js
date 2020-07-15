@@ -13,7 +13,18 @@ gulp.task('style', function() {
 
 //sheets
 gulp.task('html', function(){
-    gulp.src('src/html/preview.html')
+
+    htmlProcess('src/html/htmlpreview.html');
+    return htmlProcess('src/html/znz-character-sheet.html');
+    
+    gulp.src('src/html/htmlpreview.html')
+    .pipe(fileinclude({
+        prefix: '@@',
+        basepath: '@file'
+    }))
+    .pipe(gulp.dest('./dist'));
+
+    gulp.src('src/html/znz-character-sheet.html')
     .pipe(fileinclude({
         prefix: '@@',
         basepath: '@file'
@@ -30,11 +41,13 @@ gulp.task('html', function(){
     
 });
 
+
 //watch sheets and styles
 gulp.task('watch', function(){
     gulp.watch('./src/scss/*.scss', gulp.series(['style']));
     gulp.watch('./src/js/sheet/*.js' , gulp.series(['html']));
     gulp.watch('./src/html/*.html' , gulp.series(['html']));
+    gulp.watch('./src/html/components/*.html' , gulp.series(['html']));
 });
 
 //build sheets and styles
@@ -42,3 +55,13 @@ gulp.task('build', function(){
     gulp.series(['styles', 'html'])
 });
 
+//function for handling html gulp
+function htmlProcess(file){
+    return gulp.src(file)
+    .pipe(fileinclude({
+        prefix: '@@',
+        basepath: '@file'
+    }))
+    .pipe(replace(/<!---@(.*?)-->/g, ''))
+    .pipe(gulp.dest('./dist'));
+}
