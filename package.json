@@ -1,0 +1,33 @@
+{
+  "name": "znz-roll20",
+  "version": "1.0.0",
+  "description": "Build Character Sheet, Scripts, and other assets for ZnZ Roll20",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tojikan/ZnZ-Roll20.git"
+  },
+  "keywords": [
+    "Roll20",
+    "RPG",
+    "role",
+    "playing",
+    "game",
+    "zombies"
+  ],
+  "author": "Andrew Qian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tojikan/ZnZ-Roll20/issues"
+  },
+  "homepage": "https://github.com/Tojikan/ZnZ-Roll20#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-file-include": "^2.2.2",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.1.0"
+  }
+}
