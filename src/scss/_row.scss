@@ -1,17 +1,36 @@
-.sheet-znz-row{
+/*** Row Layout System for ZnZ ***/
+
+
+// Data and fields should go into a field class
+.sheet-znz-field {
+    margin-bottom: 8px;
+    width: 100%;
+
+    .sheet-znz-description {
+        margin-top: 3px;
+        font-size: 10px;
+    }
+}
+
+
+// Horizontally lay out fields
+.sheet-znz-row {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 12px;
 
-    &.sheet-znz-spaced{
+    &.sheet-znz-spaced {
         justify-content: space-between;
     }
 
-    &.sheet-znz-centered{
+    &.sheet-znz-centered {
         justify-content: space-around;
     }
 
-    &.sheet-znz-no-margin{
+    &.sheet-znz-v-center {
+        align-items: center;
+    }
+
+    &.sheet-znz-no-margin {
         margin-bottom: 0;
 
         input, select {
@@ -20,41 +39,45 @@
     }
 
 
-    .sheet-znz-field{
-        &:not(:last-child){
+    .sheet-znz-field {
+        &:not(:last-child) {
             margin-right:10px;
         }
         
-        &.sheet-znz-15{
+        &.sheet-znz-15 {
             flex-basis: 15%;
         }
         
-        &.sheet-znz-25{
+        &.sheet-znz-25 {
             flex-basis: 25%;
         }
 
-        &.sheet-znz-33{
+        &.sheet-znz-33 {
             flex-basis: 33%;
         }
 
-        &.sheet-znz-50{
+        &.sheet-znz-40 {
+            flex-basis: 40%;
+        }
+
+        &.sheet-znz-50 {
             flex-basis: 50%;
         }
 
-        &.sheet-znz-60{
+        &.sheet-znz-60 {
             flex-basis: 60%;
         }
 
-        &.sheet-znz-75{
+        &.sheet-znz-75 {
             flex-basis: 75%;
         }
 
-        &.sheet-znz-full{
+        &.sheet-znz-full {
             flex: 1 1 100%;
         }
 
-        &.sheet-znz-right{
-            input{
+        &.sheet-znz-right {
+            input {
                 display: block;
                 margin-left: auto;
             }
@@ -64,22 +87,40 @@
             }
         }
 
-        select{
+        select {
             width: auto;
         }
     }
 
-    .sheet-znz-description-text{
+    .sheet-znz-description-text {
         text-align: center;
         margin-top: -7px;
     }
 
-    .sheet-znz-inner-row{
+    .sheet-znz-inner-row {
         display: flex;
         align-items: baseline;
 
-        &.sheet-znz-no-align{
+        &.sheet-znz-no-align {
             align-items: initial;
+        }
+    }
+}
+
+.sheet-znz-row-table {
+
+    .sheet-znz-row {
+        border-bottom: thin solid;
+        border-color: lightgrey;
+        padding: 10px 0;
+        margin-bottom: 0;
+
+        .sheet-znz-field {
+            margin-bottom: 0;
+        }
+
+        &.sheet-znz-row-table-header {
+            padding: 0;
         }
     }
 }

@@ -4,6 +4,7 @@ const sass = require('gulp-sass');
 const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
 const nunjucksRender = require('gulp-nunjucks-render');
+const data = require('gulp-data');
 
 //compile scss into css
 gulp.task('style', function() {
@@ -15,12 +16,15 @@ gulp.task('style', function() {
 //build character sheet and workers.
 gulp.task('sheet', function(){
     return gulp.src('src/templates/*.njk')
-        .pipe(nunjucksRender({
-            path:['src/templates']
-        }))
         .pipe(fileInclude({
             prefix: '@@',
             basepath: '@file'
+        }))
+        .pipe(data(function(){
+            return require('./data/attributes.json');
+        }))
+        .pipe(nunjucksRender({
+            path:['src/templates']
         }))
         .pipe(replace('text/javascript', 'text/worker'))
         .pipe(gulp.dest('./dist'));

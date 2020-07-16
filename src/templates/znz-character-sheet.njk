@@ -1,3 +1,8 @@
+{#  Imported JSON Data via Gulp
+attributeData - /data/attributes.json
+
+#}
+
 {% import 'partials/statblock.njk' as statblock %}
 
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
@@ -13,14 +18,61 @@
         </div>
     </div>
 
-    <!--- Stat Block-->
+    <!-- Stat Block-->
     <div class="sheet-znz-area-status">
         <div class="sheet-znz-row sheet-znz-spaced">
-            {{ statblock.create('Health', 'hp', '30') }}
+            {{ statblock.create('HP', 'hp', '30') }}
             {{ statblock.create('Sanity', 'sanity', '30') }}
             {{ statblock.create('Energy', 'energy', '30') }}
-            {{ statblock.create('Exp', 'exp', '30', false) }}
+            {{ statblock.create('Exp', 'exp', '30') }}
         </div>
     </div>
+    
+    <!-- Attributes Block -->
+    <div class="sheet-znz-area-attributes">
+        <div class="sheet-znz-row-table">
+            <div class="sheet-znz-row sheet-znz-row-table-header">
+                <div class="sheet-znz-field sheet-znz-75">
+                    <h2>Attribute</h2>
+                </div>
 
+                <div class="sheet-znz-field sheet-znz-25">
+                    <div class="sheet-znz-inner-row">
+                        <div class="sheet-znz-field sheet-znz-50">
+                            <h2>Score</h2>
+                        </div>
+                        <div class="sheet-znz-field sheet-znz-50">
+                            <h2>Bonus</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% for attr in attributeData %}
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h3>{{ attr.display_name }}</h3>
+                        <div class="sheet-znz-description">
+                            {{ attr.reminder_note }}
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-field">
+                            <div class="sheet-znz-inner-row">
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="number" name="attr_{{ attr.attr_name }}" min="1" value="3" max="6"/>
+                                </div>
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="text" readonly name="attr_{{ attr.attr_name }}_bonus" value="0"/>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-description">
+                                Other Modifiers: <span readonly name="attr_{{ attr.attr_name }}_max"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>

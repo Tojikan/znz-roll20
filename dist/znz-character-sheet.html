@@ -1,5 +1,7 @@
 
 
+
+
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
     <!-- Name Area -->
     <div class="sheet-znz-area-name">
@@ -13,21 +15,20 @@
         </div>
     </div>
 
-    <!--- Stat Block-->
+    <!-- Stat Block-->
     <div class="sheet-znz-area-status">
         <div class="sheet-znz-row sheet-znz-spaced">
             
     <div class="sheet-znz-field sheet-znz-stat-block">
-        <h2>Health</h2>
+        <h2>HP</h2>
         <input type="number" name="attr_hp" value="30"/>
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_hp_max" value="30"/>
                 
-                Max: <span readonly name="attr_hp_max"></span>
+                    Max: <span readonly name="attr_hp_max"></span> 
                 
         </div>
     </div>
-
 
             
     <div class="sheet-znz-field sheet-znz-stat-block">
@@ -36,11 +37,10 @@
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_sanity_max" value="30"/>
                 
-                Max: <span readonly name="attr_sanity_max"></span>
+                    Max: <span readonly name="attr_sanity_max"></span> 
                 
         </div>
     </div>
-
 
             
     <div class="sheet-znz-field sheet-znz-stat-block">
@@ -49,11 +49,10 @@
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_energy_max" value="30"/>
                 
-                Max: <span readonly name="attr_energy_max"></span>
+                    Max: <span readonly name="attr_energy_max"></span> 
                 
         </div>
     </div>
-
 
             
     <div class="sheet-znz-field sheet-znz-stat-block">
@@ -61,12 +60,181 @@
         <input type="number" name="attr_exp" value="30"/>
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_exp_max" value="30"/>
+                 
+                    <div class="sheet-znz-xp-text"> <span>10</span>: +1 to any stat/skill </div>
+                    <div class="sheet-znz-xp-text"> <span>30</span>: Learn new ability </div>
                 
         </div>
     </div>
 
-
         </div>
     </div>
+    
+    <!-- Attributes Block -->
+    <div class="sheet-znz-area-attributes">
+        <div class="sheet-znz-row-table">
+            <div class="sheet-znz-row sheet-znz-row-table-header">
+                <div class="sheet-znz-field sheet-znz-75">
+                    <h2>Attribute</h2>
+                </div>
 
+                <div class="sheet-znz-field sheet-znz-25">
+                    <div class="sheet-znz-inner-row">
+                        <div class="sheet-znz-field sheet-znz-50">
+                            <h2>Score</h2>
+                        </div>
+                        <div class="sheet-znz-field sheet-znz-50">
+                            <h2>Bonus</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h3>Agility</h3>
+                        <div class="sheet-znz-description">
+                            Dodging, Initiative, Dexterity
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-field">
+                            <div class="sheet-znz-inner-row">
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="number" name="attr_agility" min="1" value="3" max="6"/>
+                                </div>
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="text" readonly name="attr_agility_bonus" value="0"/>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-description">
+                                Other Modifiers: <span readonly name="attr_agility_max"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h3>Luck</h3>
+                        <div class="sheet-znz-description">
+                            Chance, XP Gain, Loot
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-field">
+                            <div class="sheet-znz-inner-row">
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="number" name="attr_luck" min="1" value="3" max="6"/>
+                                </div>
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="text" readonly name="attr_luck_bonus" value="0"/>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-description">
+                                Other Modifiers: <span readonly name="attr_luck_max"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h3>Intelligence</h3>
+                        <div class="sheet-znz-description">
+                            Max Sanity, Knowledge
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-field">
+                            <div class="sheet-znz-inner-row">
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="number" name="attr_intelligence" min="1" value="3" max="6"/>
+                                </div>
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="text" readonly name="attr_intelligence_bonus" value="0"/>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-description">
+                                Other Modifiers: <span readonly name="attr_intelligence_max"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h3>Vitality</h3>
+                        <div class="sheet-znz-description">
+                            Max HP, Max Energy, Physical Health
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-field">
+                            <div class="sheet-znz-inner-row">
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="number" name="attr_vitality" min="1" value="3" max="6"/>
+                                </div>
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="text" readonly name="attr_vitality_bonus" value="0"/>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-description">
+                                Other Modifiers: <span readonly name="attr_vitality_max"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h3>Empathy</h3>
+                        <div class="sheet-znz-description">
+                            Interpersonal Skills, Insight
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-field">
+                            <div class="sheet-znz-inner-row">
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="number" name="attr_empathy" min="1" value="3" max="6"/>
+                                </div>
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="text" readonly name="attr_empathy_bonus" value="0"/>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-description">
+                                Other Modifiers: <span readonly name="attr_empathy_max"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h3>Strength</h3>
+                        <div class="sheet-znz-description">
+                            Melee Damage, Power
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-field">
+                            <div class="sheet-znz-inner-row">
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="number" name="attr_strength" min="1" value="3" max="6"/>
+                                </div>
+                                <div class="sheet-znz-field sheet-znz-50">
+                                    <input type="text" readonly name="attr_strength_bonus" value="0"/>
+                                </div>
+                            </div>
+                            <div class="sheet-znz-description">
+                                Other Modifiers: <span readonly name="attr_strength_max"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
 </div>
