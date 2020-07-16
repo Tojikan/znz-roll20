@@ -19,16 +19,40 @@ input {
   grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr;
   grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
   grid-gap: 10px;
-  grid-template-areas: "name name stat stat stat stat" "attr attr hit hit hit hit" "attr attr ranged ranged melee melee" "attr attr ranged ranged melee melee" "attr attr ranged ranged melee melee" "attr attr head head head head" "attr attr armor armor armor armor" "attr attr apparel apparel apparel apparel" "skills skills prof prof abilities abilities" "skills skills prof prof abilities abilities" "skills skills prof prof flaws flaws" "skills skills prof prof flaws flaws" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "notes notes notes notes notes notes"; }
+  grid-template-areas: "name name stat stat stat stat" "attr attr hit hit hit hit" "attr attr ranged ranged ranged ranged" "attr attr ranged ranged ranged ranged" "attr attr melee melee melee melee" "attr attr melee melee melee melee" "attr attr helmet helmet armor armor" "attr attr helmet helmet armor armor" "skills skills prof prof abilities abilities" "skills skills prof prof flaws flaws" "skills skills prof prof flaws flaws" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "notes notes notes notes notes notes"; }
 
 .sheet-znz-character-sheet .sheet-znz-area-name {
-  grid-area: name; }
+  grid-area: name;
+  margin-bottom: 20px; }
 
 .sheet-znz-character-sheet .sheet-znz-area-status {
-  grid-area: stat; }
+  grid-area: stat;
+  margin-left: 30px; }
 
 .sheet-znz-character-sheet .sheet-znz-area-attributes {
   grid-area: attr; }
+
+.sheet-znz-character-sheet .sheet-znz-area-hitstats {
+  grid-area: hit; }
+
+.sheet-znz-character-sheet .sheet-znz-area-equipped-melee {
+  grid-area: melee; }
+
+.sheet-znz-character-sheet .sheet-znz-area-equipped-ranged {
+  grid-area: ranged; }
+
+.sheet-znz-character-sheet .sheet-znz-area-equipped-helmet {
+  grid-area: helmet; }
+
+.sheet-znz-character-sheet .sheet-znz-area-equipped-armor {
+  grid-area: armor; }
+
+.sheet-znz-area-hitstats,
+.sheet-znz-area-equipped-melee,
+.sheet-znz-area-equipped-ranged,
+.sheet-znz-area-equipped-helmet,
+.sheet-znz-area-equipped-armor {
+  border: solid 2px black; }
 
 /*** Row Layout System for ZnZ ***/
 .sheet-znz-field {
@@ -95,9 +119,7 @@ input {
   .sheet-znz-row-table .sheet-znz-row.sheet-znz-row-table-header {
     padding: 0; }
 
-.sheet-znz-area-status .sheet-znz-row {
-  padding-left: 30px; }
-  .sheet-znz-area-status .sheet-znz-row .sheet-znz-field.sheet-znz-stat-block {
-    text-align: center; }
-    .sheet-znz-area-status .sheet-znz-row .sheet-znz-field.sheet-znz-stat-block .sheet-znz-description span {
-      font-weight: 700; }
+.sheet-znz-field.sheet-znz-stat-block {
+  text-align: center; }
+  .sheet-znz-field.sheet-znz-stat-block .sheet-znz-description span {
+    font-weight: 700; }

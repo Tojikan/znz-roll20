@@ -1,6 +1,6 @@
-.sheet-znz-character-sheet{
+.sheet-znz-character-sheet {
     
-    &.sheet-znz-grid-layout{
+    &.sheet-znz-grid-layout {
         display: grid;
         grid-template-columns: 
             [col1] 1fr
@@ -15,13 +15,12 @@
         grid-template-areas:
             "name name stat stat stat stat"
             "attr attr hit hit hit hit"
-            "attr attr ranged ranged melee melee"
-            "attr attr ranged ranged melee melee"
-            "attr attr ranged ranged melee melee"
-            "attr attr head head head head"
-            "attr attr armor armor armor armor"
-            "attr attr apparel apparel apparel apparel"
-            "skills skills prof prof abilities abilities"
+            "attr attr ranged ranged ranged ranged"
+            "attr attr ranged ranged ranged ranged"
+            "attr attr melee melee melee melee"
+            "attr attr melee melee melee melee"
+            "attr attr helmet helmet armor armor"
+            "attr attr helmet helmet armor armor"
             "skills skills prof prof abilities abilities"
             "skills skills prof prof flaws flaws"
             "skills skills prof prof flaws flaws"
@@ -35,15 +34,47 @@
 
     }
 
-    .sheet-znz-area-name{
+    .sheet-znz-area-name {
         grid-area: name;
+        margin-bottom: 20px;
     }
 
-    .sheet-znz-area-status{
+    .sheet-znz-area-status {
         grid-area: stat;
+        margin-left: 30px;
     }
 
-    .sheet-znz-area-attributes{
+    .sheet-znz-area-attributes {
         grid-area: attr;
     }
+    
+    .sheet-znz-area-hitstats{
+        grid-area: hit;
+    }
+
+    .sheet-znz-area-equipped-melee {
+        grid-area: melee;
+    }
+
+    .sheet-znz-area-equipped-ranged {
+        grid-area: ranged;
+    }
+
+    .sheet-znz-area-equipped-helmet {
+        grid-area: helmet;
+    }
+
+    .sheet-znz-area-equipped-armor {
+        grid-area: armor;
+
+    }
+}
+
+.sheet-znz-area-hitstats,
+.sheet-znz-area-equipped-melee,
+.sheet-znz-area-equipped-ranged,
+.sheet-znz-area-equipped-helmet,
+.sheet-znz-area-equipped-armor
+{
+    border: solid 2px black;
 }

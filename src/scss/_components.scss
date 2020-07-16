@@ -1,18 +1,13 @@
 // Component specific styles
 
 //Stat Block
-.sheet-znz-area-status {
-    .sheet-znz-row {
-        padding-left: 30px;
-        .sheet-znz-field {
-            &.sheet-znz-stat-block {
-                text-align: center;
-        
-                .sheet-znz-description {
-                    span {
-                        font-weight: 700;
-                    }
-                }
+.sheet-znz-field {
+    &.sheet-znz-stat-block {
+        text-align: center;
+
+        .sheet-znz-description {
+            span {
+                font-weight: 700;
             }
         }
     }
