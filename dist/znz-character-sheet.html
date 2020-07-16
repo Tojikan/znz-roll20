@@ -2,6 +2,7 @@
 
 
 
+
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
     <!-- Name Area -->
     <div class="sheet-znz-area-name">
@@ -17,7 +18,7 @@
 
     <!-- Stat Block-->
     <div class="sheet-znz-area-status">
-        <div class="sheet-znz-row sheet-znz-spaced">
+        <div class="sheet-znz-row">
             
     <div class="sheet-znz-field sheet-znz-stat-block">
         <h2>HP</h2>
@@ -238,14 +239,322 @@
         </div>
     </div>
 
-    <div class="sheet-znz-area-hitstats">
+    <div class="sheet-znz-area-equipped-ranged">
+        <h3>Equipped Ranged Weapon</h3>
+        
+
+<div class="sheet-znz-item-card">
+
+    
+    <div class="sheet-znz-row">
+
+        
+        
+    
+        <input type="hidden" name="attr_equipped_item_type" />
+    
+
+        
+        
+        <div class="sheet-znz-field sheet-znz-itemcard-name sheet-znz-75">
+            <label>Name</label>
+            <input type="text" name="attr_equipped_item_name"/>
+        </div>
+        
+        
+        
+    
+        <input type="hidden" name="attr_equipped_item_weight" />
+    
+
     </div>
+    
+
+        
+        
+
+    
+        <div class="sheet-znz-itemcard-misc-fields">
+            <div class="sheet-znz-field sheet-znz-25">
+                <h3>Quantity</h3>
+                <input type="number" min="0" name="attr_equipped_item_quantity"/>
+            </div>
+        </div>
+
+        
+        <div class="sheet-znz-itemcard-weapon-fields"><div class="sheet-znz-itemcard-melee-fields">
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-25">
+                        <h3>Type Bonus</h3>
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_melee_type">
+                                <option value="blunt" default>Blunt</option>
+                                <option value="sharp">Sharp</option>
+                                <option value="heavy">Heavy</option>
+                            </select>
+                            <input type="number" name="attr_equipped_melee_bonus"/>
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-15">
+                        <h3>Durability</h3>
+                        <div class="sheet-znz-inner-row">
+                            <div>
+                                <input type="number" min="0" name="attr_equipped_melee_durability"/>
+                            </div>
+                            <div class="sheet-divider">/</div>  
+                            <div>
+                                <input type="number" min="1" name="attr_equipped_melee_durability_max"/>
+                                <div class="sheet-znz-description">
+                                    MAX
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="sheet-znz-itemcard-ranged-fields">
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Type</h3>
+                        <select name="attr_equipped_ranged_type">
+                            <option value="handgun" default>Handgun</option>
+                            <option value="shotgun">Shotgun</option>
+                            <option value="rifle">Rifle</option>
+                        </select>
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>Range</h3>
+                        <input type="number" name="attr_equipped_weapon_range" value = "1" />
+                    </div>
+                </div>
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Reloads</h3>
+                        <input type="number" min="0" name="attr_equipped_ranged_reloads"/>
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>Ammo</h3>
+                        <div class="sheet-znz-inner-row">
+                            <input type="number" min="0" name="attr_equipped_ranged_ammo"/>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" min="0" name="attr_equipped_ranged_ammo_max"/>
+                                <div class="sheet-znz-description">
+                                    MAX
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="sheet-znz-row">
+                <div class="sheet-znz-field sheet-znz-weapon-damage">
+                    <h3>Weapon Damage</h3>
+                    <input type="text" name="attr_equipped_weapon_damage" value ="D1"/>
+                </div>
+                <div class="sheet-znz-field">
+                    <h3>Attacks</h3>
+                    <input type="number" name="attr_equipped_weapon_attacks" value = "1" />
+                </div>
+            </div>
+            <div class="sheet-znz-row">
+                <div class="sheet-znz-field">
+                    <h3>Bonus Damage</h3>
+                    <input type="number" name="attr_equipped_weapon_bonus_damage" value = "0" />
+                </div>
+                <div class="sheet-znz-field">
+                    <h3>Bonus Accuracy</h3>
+                    <input type="number" name="attr_equipped_weapon_bonus_accuracy" value = "0" />
+                </div>
+            </div>
+        </div><div class="sheet-znz-field">
+            <h3> Ranged Weapon Effect</h3>
+            <input type="text" name="attr_equipped_item_effect"/>
+        </div>
+        <div class="sheet-znz-field sheet-znz-itemcard-note">
+            <h3>Notes</h3>
+            <textarea class="sheet-znz-reduced-height" name="attr_equipped_item_note" ></textarea>
+        </div>
+
+        
+    
+
+
+
+        
+</div>
+
+
+        
+
+<div class="sheet-znz-item-card">
+
+    
+    <div class="sheet-znz-row">
+
+        
+        
+    
+        
+        <div class="sheet-znz-field sheet-znz-15">
+            <label>Item Type</label>
+            <select name="attr__item_type" value="1">
+                <option value="1" default>Misc</option>
+                <option value="2">Melee Weapon</option>
+                <option value="3">Ranged Weapon</option>
+                <option value="4">Equipment</option>
+            </select>
+        </div>
+        
+    
+
+        
+        
+        <div class="sheet-znz-field sheet-znz-itemcard-name ">
+            <label>Name</label>
+            <input type="text" name="attr_equipped_item_name"/>
+        </div>
+        
+        
+        
+    
+        
+        <div class="sheet-znz-field sheet-znz-15">
+            <label>Weight</label>
+            <input type="number" name="attr__item_weight" min="0"/>
+        </div>
+        
+    
+
+    </div>
+     
+        <div class="sheet-znz-expand-button sheet-znz-expandable-section">
+            <input class="sheet-znz-expand-toggle" type="checkbox" name="attr_equipped_expand_toggle" checked>
+            <label class="sheet-znz-expand-text" for="attr_equipped_expand_toggle"><span>Show Item Details</span></label>
+            <label class="sheet-znz-collapse-text" for="attr_equipped_expand_toggle"><span>Hide Item Details</span></label>
+        </div>
+    
+
+        
+        
+
+    
+        <input class="sheet-znz-hidden sheet-znz-expand" type="checkbox" name="attr_equipped_expand_toggle" checked>
+        <div class="sheet-znz-expandable">
+            <div class="sheet-znz-itemcard-misc-fields">
+            <div class="sheet-znz-field sheet-znz-25">
+                <h3>Quantity</h3>
+                <input type="number" min="0" name="attr_equipped_item_quantity"/>
+            </div>
+        </div>
+
+        
+        <div class="sheet-znz-itemcard-weapon-fields"><div class="sheet-znz-itemcard-melee-fields">
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-25">
+                        <h3>Type Bonus</h3>
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_melee_type">
+                                <option value="blunt" default>Blunt</option>
+                                <option value="sharp">Sharp</option>
+                                <option value="heavy">Heavy</option>
+                            </select>
+                            <input type="number" name="attr_equipped_melee_bonus"/>
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-15">
+                        <h3>Durability</h3>
+                        <div class="sheet-znz-inner-row">
+                            <div>
+                                <input type="number" min="0" name="attr_equipped_melee_durability"/>
+                            </div>
+                            <div class="sheet-divider">/</div>  
+                            <div>
+                                <input type="number" min="1" name="attr_equipped_melee_durability_max"/>
+                                <div class="sheet-znz-description">
+                                    MAX
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="sheet-znz-itemcard-ranged-fields">
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Type</h3>
+                        <select name="attr_equipped_ranged_type">
+                            <option value="handgun" default>Handgun</option>
+                            <option value="shotgun">Shotgun</option>
+                            <option value="rifle">Rifle</option>
+                        </select>
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>Range</h3>
+                        <input type="number" name="attr_equipped_weapon_range" value = "1" />
+                    </div>
+                </div>
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Reloads</h3>
+                        <input type="number" min="0" name="attr_equipped_ranged_reloads"/>
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>Ammo</h3>
+                        <div class="sheet-znz-inner-row">
+                            <input type="number" min="0" name="attr_equipped_ranged_ammo"/>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" min="0" name="attr_equipped_ranged_ammo_max"/>
+                                <div class="sheet-znz-description">
+                                    MAX
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="sheet-znz-row">
+                <div class="sheet-znz-field sheet-znz-weapon-damage">
+                    <h3>Weapon Damage</h3>
+                    <input type="text" name="attr_equipped_weapon_damage" value ="D1"/>
+                </div>
+                <div class="sheet-znz-field">
+                    <h3>Attacks</h3>
+                    <input type="number" name="attr_equipped_weapon_attacks" value = "1" />
+                </div>
+            </div>
+            <div class="sheet-znz-row">
+                <div class="sheet-znz-field">
+                    <h3>Bonus Damage</h3>
+                    <input type="number" name="attr_equipped_weapon_bonus_damage" value = "0" />
+                </div>
+                <div class="sheet-znz-field">
+                    <h3>Bonus Accuracy</h3>
+                    <input type="number" name="attr_equipped_weapon_bonus_accuracy" value = "0" />
+                </div>
+            </div>
+        </div><div class="sheet-znz-field">
+            <h3> Melee Weapon Effect</h3>
+            <input type="text" name="attr_equipped_item_effect"/>
+        </div>
+        <div class="sheet-znz-field sheet-znz-itemcard-note">
+            <h3>Notes</h3>
+            <textarea class="sheet-znz-reduced-height" name="attr_equipped_item_note" ></textarea>
+        </div>
+
+        
+        </div>
+    
+
+
+
+        
+</div>
+
+
+    </div>
+
 
     <div class="sheet-znz-area-equipped-melee">
     </div>
 
-    <div class="sheet-znz-area-equipped-ranged">
-    </div>
 
     <div class="sheet-znz-area-equipped-helmet">
     </div>

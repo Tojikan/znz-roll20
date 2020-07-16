@@ -14,13 +14,10 @@
 
         grid-template-areas:
             "name name stat stat stat stat"
-            "attr attr hit hit hit hit"
-            "attr attr ranged ranged ranged ranged"
-            "attr attr ranged ranged ranged ranged"
-            "attr attr melee melee melee melee"
-            "attr attr melee melee melee melee"
-            "attr attr helmet helmet armor armor"
-            "attr attr helmet helmet armor armor"
+            "attr attr ranged ranged melee melee"
+            "attr attr ranged ranged melee melee"
+            "attr attr helmet helmet helmet helmet"
+            "attr attr armor armor armor armor"
             "skills skills prof prof abilities abilities"
             "skills skills prof prof flaws flaws"
             "skills skills prof prof flaws flaws"
@@ -48,10 +45,6 @@
         grid-area: attr;
     }
     
-    .sheet-znz-area-hitstats{
-        grid-area: hit;
-    }
-
     .sheet-znz-area-equipped-melee {
         grid-area: melee;
     }
@@ -70,7 +63,6 @@
     }
 }
 
-.sheet-znz-area-hitstats,
 .sheet-znz-area-equipped-melee,
 .sheet-znz-area-equipped-ranged,
 .sheet-znz-area-equipped-helmet,

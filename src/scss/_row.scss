@@ -17,10 +17,7 @@
 .sheet-znz-row {
     display: flex;
     margin-bottom: 12px;
-
-    &.sheet-znz-spaced {
-        justify-content: space-between;
-    }
+    justify-content: space-between;
 
     &.sheet-znz-centered {
         justify-content: space-around;

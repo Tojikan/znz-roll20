@@ -4,6 +4,7 @@ attributeData - /data/attributes.json
 #}
 
 {% import 'partials/statblock.njk' as statblock %}
+{% import 'partials/itemcard.njk' as itemcard %}
 
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
     <!-- Name Area -->
@@ -20,7 +21,7 @@ attributeData - /data/attributes.json
 
     <!-- Stat Block-->
     <div class="sheet-znz-area-status">
-        <div class="sheet-znz-row sheet-znz-spaced">
+        <div class="sheet-znz-row">
             {{ statblock.create('HP', 'hp', '30') }}
             {{ statblock.create('Sanity', 'sanity', '30') }}
             {{ statblock.create('Energy', 'energy', '30') }}
@@ -76,14 +77,16 @@ attributeData - /data/attributes.json
         </div>
     </div>
 
-    <div class="sheet-znz-area-hitstats">
+    <div class="sheet-znz-area-equipped-ranged">
+        <h3>Equipped Ranged Weapon</h3>
+        {{ itemcard.create('equipped', true, "Ranged Weapon") }}
+        {{ itemcard.create('equipped', false, "Melee Weapon") }}
     </div>
+
 
     <div class="sheet-znz-area-equipped-melee">
     </div>
 
-    <div class="sheet-znz-area-equipped-ranged">
-    </div>
 
     <div class="sheet-znz-area-equipped-helmet">
     </div>

@@ -1,0 +1,187 @@
+{% import './expandable.njk' as expandable %}
+
+
+{% macro create(attrPrefix='', equipped=false, type="item") %}
+
+<div class="sheet-znz-item-card">
+
+    {#  ---------------Item Card Top - Item Type and Name and Weight-------------- #}
+    <div class="sheet-znz-row">
+
+        {# Type #}
+        {% call outputField(attrPrefix + "_item_type", equipped) %}
+        <div class="sheet-znz-field sheet-znz-15">
+            <label>Item Type</label>
+            <select name="attr_{{ attrPrefix }}_item_type" value="1">
+                <option value="1" default>Misc</option>
+                <option value="2">Melee Weapon</option>
+                <option value="3">Ranged Weapon</option>
+                <option value="4">Equipment</option>
+            </select>
+        </div>
+        {% endcall %}
+        
+        {# Name #}
+        <div class="sheet-znz-field sheet-znz-itemcard-name {{ "sheet-znz-75" if equipped }}">
+            <label>Name</label>
+            <input type="text" name="attr_{{ attrPrefix }}_item_name"/>
+        </div>
+        
+        {# Weight #}
+        {% call outputField(attrPrefix + "_item_weight", equipped) %}
+        <div class="sheet-znz-field sheet-znz-15">
+            <label>Weight</label>
+            <input type="number" name="attr_{{ attrPrefix }}_item_weight" min="0"/>
+        </div>
+        {% endcall %}
+    </div>
+
+    {#--------------------- EXPANDABLE AREA --------------------#}
+    {# Show Expand Toggle Button if in Inventory #}
+    {% if not equipped %} 
+        <div class="sheet-znz-expand-button sheet-znz-expandable-section">
+            <input class="sheet-znz-expand-toggle" type="checkbox" name="attr_{{ attrPrefix }}_expand_toggle" checked>
+            <label class="sheet-znz-expand-text" for="attr_{{ attrPrefix }}_expand_toggle"><span>Show Item Details</span></label>
+            <label class="sheet-znz-collapse-text" for="attr_{{ attrPrefix }}_expand_toggle"><span>Hide Item Details</span></label>
+        </div>
+    {% endif %}
+
+        {# If in inventory, display as expandable area. If equipped, do not.  #}
+        {% call expandable.create(attrPrefix + "_expand_toggle", disabled = equipped ) %}
+        
+        {#----------------- Misc Fields ---------------#}
+        <div class="sheet-znz-itemcard-misc-fields">
+            <div class="sheet-znz-field sheet-znz-25">
+                <h3>Quantity</h3>
+                <input type="number" min="0" name="attr_{{ attrPrefix }}_item_quantity"/>
+            </div>
+        </div>
+
+        
+        <div class="sheet-znz-itemcard-weapon-fields">
+            {#----------------- Melee-Specific Fields ---------------#}
+            <div class="sheet-znz-itemcard-melee-fields">
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field sheet-znz-25">
+                        <h3>Type Bonus</h3>
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_{{ attrPrefix }}_melee_type">
+                                <option value="blunt" default>Blunt</option>
+                                <option value="sharp">Sharp</option>
+                                <option value="heavy">Heavy</option>
+                            </select>
+                            <input type="number" name="attr_{{ attrPrefix }}_melee_bonus"/>
+                        </div>
+                    </div>
+                    <div class="sheet-znz-field sheet-znz-15">
+                        <h3>Durability</h3>
+                        <div class="sheet-znz-inner-row">
+                            <div>
+                                <input type="number" min="0" name="attr_{{ attrPrefix }}_melee_durability"/>
+                            </div>
+                            <div class="sheet-divider">/</div>  
+                            <div>
+                                <input type="number" min="1" name="attr_{{ attrPrefix }}_melee_durability_max"/>
+                                <div class="sheet-znz-description">
+                                    MAX
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {#--------------- Ranged Specific Fields --------------#}
+            <div class="sheet-znz-itemcard-ranged-fields">
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Type</h3>
+                        <select name="attr_{{ attrPrefix }}_ranged_type">
+                            <option value="handgun" default>Handgun</option>
+                            <option value="shotgun">Shotgun</option>
+                            <option value="rifle">Rifle</option>
+                        </select>
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>Range</h3>
+                        <input type="number" name="attr_{{ attrPrefix }}_weapon_range" value = "1" />
+                    </div>
+                </div>
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Reloads</h3>
+                        <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_reloads"/>
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>Ammo</h3>
+                        <div class="sheet-znz-inner-row">
+                            <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo"/>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo_max"/>
+                                <div class="sheet-znz-description">
+                                    MAX
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {#--------------- General Weapon Fields --------------#}
+            <div class="sheet-znz-row">
+                <div class="sheet-znz-field sheet-znz-weapon-damage">
+                    <h3>Weapon Damage</h3>
+                    <input type="text" name="attr_{{ attrPrefix }}_weapon_damage" value ="D1"/>
+                </div>
+                <div class="sheet-znz-field">
+                    <h3>Attacks</h3>
+                    <input type="number" name="attr_{{ attrPrefix }}_weapon_attacks" value = "1" />
+                </div>
+            </div>
+            <div class="sheet-znz-row">
+                <div class="sheet-znz-field">
+                    <h3>Bonus Damage</h3>
+                    <input type="number" name="attr_{{ attrPrefix }}_weapon_bonus_damage" value = "0" />
+                </div>
+                <div class="sheet-znz-field">
+                    <h3>Bonus Accuracy</h3>
+                    <input type="number" name="attr_{{ attrPrefix }}_weapon_bonus_accuracy" value = "0" />
+                </div>
+            </div>
+        </div>
+
+
+        {#----------- Appears on every item ----------------#}
+        <div class="sheet-znz-field">
+            <h3> {{ type }} Effect</h3>
+            <input type="text" name="attr_{{ attrPrefix }}_item_effect"/>
+        </div>
+        <div class="sheet-znz-field sheet-znz-itemcard-note">
+            <h3>Notes</h3>
+            <textarea class="sheet-znz-reduced-height" name="attr_{{ attrPrefix }}_item_note" ></textarea>
+        </div>
+
+        {% endcall %}
+
+        
+</div>
+
+{% endmacro %}
+
+
+
+{# output the caller if not hidden. Else output a hidden input. For hiding specific fields #}
+{% macro outputField(attrName= '', hidden=false) %}
+    {% if not hidden %}
+        {{ caller() }}
+    {% else %}
+        <input type="hidden" name="attr_{{ attrName }}" />
+    {% endif %}
+{% endmacro %}
+
+
+
+
+
