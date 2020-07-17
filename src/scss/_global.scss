@@ -1,3 +1,7 @@
+/**
+* Styles applied globally to elements
+*/
+
 h2 {
     font-size: 16px;
     line-height: 16px;
@@ -10,13 +14,12 @@ h3 {
     margin-bottom: 3px;
 }
 
-.sheet-znz-hidden{
-    display: none;
-}
+
 
 input {
     width: 100%;
 }
+
 
 
 
@@ -52,7 +55,7 @@ input {
 //         width: 100%;
 //         height: 40%;
 //         bottom: 10%;
-//         border-left: solid 2px black;
+//         border-left: solid 2px $black;
 //         transform:  rotate(30deg);
 //     }
 // }

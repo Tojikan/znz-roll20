@@ -1,4 +1,7 @@
-// Component specific styles
+/**
+* Component specific styles
+*/
+
 
 //Stat Block
 .sheet-znz-field {
@@ -8,6 +11,47 @@
         .sheet-znz-description {
             span {
                 font-weight: 700;
+            }
+        }
+    }
+}
+
+
+// Equipped Weapon
+.sheet-znz-area-equipped-weapon {
+    h2 {
+        text-align: center;
+    }
+
+    .sheet-znz-field {
+        flex-basis: 45%;
+
+        &.sheet-znz-itemcard-name {
+            flex-basis: 100%;
+            margin: 0;
+        }
+    }
+
+    .sheet-znz-row {
+        .sheet-znz-field {
+            &:nth-child(2) {
+                text-align: right;
+                margin-left: auto;
+
+            }
+        }
+    }
+
+    .sheet-znz-weapon-attack {
+        flex-basis: 60%;
+
+        input[type=number] {
+            width: 40px;
+        }
+
+        .sheet-znz-prefixed-input {
+            input[type=number] {
+                width: 35px;
             }
         }
     }

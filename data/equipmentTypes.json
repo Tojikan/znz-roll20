@@ -1,0 +1,14 @@
+{
+    "types" : [
+        {
+            "display_name": "Armor",
+            "attr_name": "armor",
+            "description": ""
+        },
+        {
+            "display_name": "Helmet",
+            "attr_name": "helmet",
+            "description": ""
+        }
+    ]
+}

@@ -1,9 +1,9 @@
 {% import './expandable.njk' as expandable %}
 
 
-{% macro create(attrPrefix='', equipped=false, type="item") %}
+{% macro create(attrPrefix='', equipped=false, type="item", data="") %}
 
-<div class="sheet-znz-item-card">
+<div class="sheet-znz-itemcard">
 
     {#  ---------------Item Card Top - Item Type and Name and Weight-------------- #}
     <div class="sheet-znz-row">
@@ -63,14 +63,13 @@
             <div class="sheet-znz-itemcard-melee-fields">
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field sheet-znz-25">
-                        <h3>Type Bonus</h3>
+                        <h3>Melee Type</h3>
                         <div class="sheet-znz-inner-row">
                             <select name="attr_{{ attrPrefix }}_melee_type">
-                                <option value="blunt" default>Blunt</option>
-                                <option value="sharp">Sharp</option>
-                                <option value="heavy">Heavy</option>
+                                {% for melee in data.weaponTypes.meleeTypes %}
+                                <option value="{{ melee.attr_name }}">{{ melee.display_name }} </option>
+                                {% endfor %}
                             </select>
-                            <input type="number" name="attr_{{ attrPrefix }}_melee_bonus"/>
                         </div>
                     </div>
                     <div class="sheet-znz-field sheet-znz-15">
@@ -82,7 +81,7 @@
                             <div class="sheet-divider">/</div>  
                             <div>
                                 <input type="number" min="1" name="attr_{{ attrPrefix }}_melee_durability_max"/>
-                                <div class="sheet-znz-description">
+                                <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
                             </div>
@@ -95,16 +94,20 @@
             <div class="sheet-znz-itemcard-ranged-fields">
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field">
-                        <h3>Type</h3>
+                        <h3>Ranged Type</h3>
                         <select name="attr_{{ attrPrefix }}_ranged_type">
-                            <option value="handgun" default>Handgun</option>
-                            <option value="shotgun">Shotgun</option>
-                            <option value="rifle">Rifle</option>
+                            {% for ranged in data.weaponTypes.rangedTypes %}
+                            <option value="{{ ranged.attr_name }}">{{ ranged.display_name }} </option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="sheet-znz-field">
-                        <h3>Range</h3>
-                        <input type="number" name="attr_{{ attrPrefix }}_weapon_range" value = "1" />
+                        <h3>Ammo Type</h3>
+                        <select name="attr_{{ attrPrefix }}_ammo_type">
+                            {% for ammo in data.weaponTypes.ammoTypes %}
+                            <option value="{{ ammo.attr_name }}">{{ ammo.display_name }} </option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
                 <div class="sheet-znz-row">
@@ -112,14 +115,14 @@
                         <h3>Reloads</h3>
                         <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_reloads"/>
                     </div>
-                    <div class="sheet-znz-field">
+                    <div class="sheet-znz-field sheet-znz-15">
                         <h3>Ammo</h3>
                         <div class="sheet-znz-inner-row">
                             <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo"/>
                             <div class="sheet-divider">/</div>
                             <div>
                                 <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo_max"/>
-                                <div class="sheet-znz-description">
+                                <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
                             </div>
@@ -131,26 +134,61 @@
 
             {#--------------- General Weapon Fields --------------#}
             <div class="sheet-znz-row">
-                <div class="sheet-znz-field sheet-znz-weapon-damage">
-                    <h3>Weapon Damage</h3>
-                    <input type="text" name="attr_{{ attrPrefix }}_weapon_damage" value ="D1"/>
+                <div class="sheet-znz-field sheet-znz-weapon-attack">
+                    <h3>Hit</h3>
+                    <div class="sheet-znz-inner-row">
+                        <div class="sheet-znz-prefixed-input">
+                            <span>
+                                D<input type="number" name="attr_{{ attrPrefix }}_weapon_hit" value ="10" min = "1" max = "99"/>
+                            </span>
+                        </div>
+                        <input type="number" name="attr_{{ attrPrefix }}_weapon_hit_bonus" value = "0" />
+                    </div>
+                    <div class="sheet-znz-description"> Hit Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
-                    <h3>Attacks</h3>
-                    <input type="number" name="attr_{{ attrPrefix }}_weapon_attacks" value = "1" />
+                    <h3>Range</h3>
+                    <input type="number" name="attr_{{ attrPrefix }}_weapon_range" value = "1" />
+                    <div class="sheet-znz-description">Max attack range </div>
                 </div>
             </div>
+            
             <div class="sheet-znz-row">
-                <div class="sheet-znz-field">
-                    <h3>Bonus Damage</h3>
-                    <input type="number" name="attr_{{ attrPrefix }}_weapon_bonus_damage" value = "0" />
+                <div class="sheet-znz-field sheet-znz-weapon-attack">
+                    <h3>Damage</h3>
+                    <div class="sheet-znz-inner-row">
+                        <div class="sheet-znz-prefixed-input">
+                            <span>
+                                D<input type="number" name="attr_{{ attrPrefix }}_weapon_damage" value="1" min="1" max="99"/>
+                            </span>
+                        </div>
+                        <input type="number" name="attr_{{ attrPrefix }}_weapon_damage_bonus" value = "0" />
+                    </div>
+                    <div class="sheet-znz-description"> Damage Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
-                    <h3>Bonus Accuracy</h3>
-                    <input type="number" name="attr_{{ attrPrefix }}_weapon_bonus_accuracy" value = "0" />
+                    <h3>Max Attacks</h3>
+                    <input type="number" name="attr_{{ attrPrefix }}_weapon_attacks" value = "1" />
+                    <div class="sheet-znz-description"> Attacks Per Action</div>
                 </div>
             </div>
         </div>
+
+        {#----------- Equipment Fields----------------#}   
+        <div class="sheet-znz-itemcard-equipment-fields">
+            <div class="sheet-znz-row">
+                {% call outputField(attrPrefix + "_equipment_type", equipped) %}
+                <div class="sheet-znz-field">
+                    <h3>Equipment Type</h3>
+                    <select name="attr_{{ attrPrefix }}_equipment_type">
+                    {% for equip in data.equipmentTypes.types %}
+                        <option value="{{ equip.attr_name }}">{{ equip.display_name }} </option>
+                    {% endfor %}
+                    </select>
+                </div>
+                {% endcall %}
+            </div>
+        </div>     
 
 
         {#----------- Appears on every item ----------------#}

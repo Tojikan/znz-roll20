@@ -1,6 +1,7 @@
-{#  Imported JSON Data via Gulp
-attributeData - /data/attributes.json
-
+{#  
+    Some sheet data is pulled from JSON in the data folder.
+    The JSON is imported to nunjucks templates via Gulp as the data variable. If additional data is added and needed in the sheet, you'll need to add it in the gulpfile. 
+    You can access JSON data through the 'data' variable. Pass it into macros if needed
 #}
 
 {% import 'partials/statblock.njk' as statblock %}
@@ -49,7 +50,7 @@ attributeData - /data/attributes.json
                 </div>
 
             </div>
-            {% for attr in attributeData %}
+            {% for attr in data.attributes %}
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field sheet-znz-60">
                         <h3>{{ attr.display_name }}</h3>
@@ -77,14 +78,19 @@ attributeData - /data/attributes.json
         </div>
     </div>
 
-    <div class="sheet-znz-area-equipped-ranged">
-        <h3>Equipped Ranged Weapon</h3>
-        {{ itemcard.create('equipped', true, "Ranged Weapon") }}
-        {{ itemcard.create('equipped', false, "Melee Weapon") }}
+    <div class="sheet-znz-area-equipped-weapon">
+        <div class="sheet-znz-section sheet-znz-equipped-ranged">
+            <h2>Equipped Ranged Weapon</h2>
+            {{ itemcard.create('equipped', true, "Ranged Weapon", data=data) }}
+        </div>
+        <div class="sheet-znz-section sheet-znz-equipped-melee">
+            <h2>Equipped Melee Weapon</h2>
+            {{ itemcard.create('equipped', true, "Melee Weapon", data=data) }}
+        </div>
     </div>
 
 
-    <div class="sheet-znz-area-equipped-melee">
+    <div class="sheet-znz-area-equipped-melee  sheet-znz-area-equipped-weapon">
     </div>
 
 

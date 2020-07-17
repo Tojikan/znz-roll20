@@ -1,0 +1,124 @@
+{
+    "proficiencies": [
+        {
+            "display_name": "Handguns",
+            "attr_name": "handguns",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Shotguns",
+            "attr_name": "shotguns",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Rifles",
+            "attr_name": "rifles",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Archery",
+            "attr_name": "archery",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Throwing Weapons",
+            "attr_name": "throwing weapons",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Unarmed Combat",
+            "attr_name": "unarmed combat",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Sharp Melee",
+            "attr_name": "sharp melee",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Blunt Melee",
+            "attr_name": "blunt melee",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Stealth",
+            "attr_name": "stealth",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "First Aid",
+            "attr_name": "first aid",
+            "description": "",
+            "equipment_affectable": ""
+        },
+        {
+            "display_name": "Crafting",
+            "attr_name": "crafting",
+            "description": "",
+            "equipment_affectable": ""
+        },
+        {
+            "display_name": "Cooking",
+            "attr_name": "cooking",
+            "description": "",
+            "equipment_affectable": ""
+        },
+        {
+            "display_name": "Driving",
+            "attr_name": "driving",
+            "description": "",
+            "equipment_affectable": ""
+        },
+        {
+            "display_name": "Investigation",
+            "attr_name": "investigation",
+            "description": "",
+            "equipment_affectable": ""
+        },
+        {
+            "display_name": "Acrobatics",
+            "attr_name": "acrobatics",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Swimming",
+            "attr_name": "swimming",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Climbing",
+            "attr_name": "climbing",
+            "description": "",
+            "equipment_affectable": "true"
+        },
+        {
+            "display_name": "Persuasion",
+            "attr_name": "persuasion",
+            "description": "",
+            "equipment_affectable": ""
+        },
+        {
+            "display_name": "Intimidation",
+            "attr_name": "intimidation",
+            "description": "",
+            "equipment_affectable": ""
+        },
+        {
+            "display_name": "Performance",
+            "attr_name": "performance",
+            "description": "",
+            "equipment_affectable": ""
+        }
+    ]
+}

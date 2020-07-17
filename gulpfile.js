@@ -5,6 +5,7 @@ const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
 const nunjucksRender = require('gulp-nunjucks-render');
 const data = require('gulp-data');
+const fs = require('fs');
 
 //compile scss into css
 gulp.task('style', function() {
@@ -21,7 +22,14 @@ gulp.task('sheet', function(){
             basepath: '@file'
         }))
         .pipe(data(function(){
-            return require('./data/attributes.json');
+            return {
+                data: {
+                    weaponTypes: JSON.parse(fs.readFileSync('./data/weaponTypes.json')),
+                    equipmentTypes: JSON.parse(fs.readFileSync('./data/equipmentTypes.json')),
+                    attributes: JSON.parse(fs.readFileSync('./data/attributes.json')).attributes,
+                    proficiencies: JSON.parse(fs.readFileSync('./data/attributes.json')).proficiencies,
+                }
+            };
         }))
         .pipe(nunjucksRender({
             path:['src/templates']
