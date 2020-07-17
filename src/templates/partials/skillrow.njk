@@ -1,0 +1,8 @@
+{% macro create(attrPrefix= '', item='') %}
+    <div class="sheet-znz-row">
+        <div class="sheet-znz-label">{{ item.display_name }}</div>
+        <div class="sheet-znz-field sheet-znz-0">
+            <input type="number" class="sheet-znz-line-input" name="attr_{{ attrPrefix }}_{{ item.attr_name }}"/>
+        </div>
+    </div>
+{% endmacro %}

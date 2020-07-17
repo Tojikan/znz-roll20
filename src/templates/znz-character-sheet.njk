@@ -5,22 +5,24 @@
 #}
 
 {% import 'partials/statblock.njk' as statblock %}
+{% import 'partials/attributerow.njk' as attrRow %}
+{% import 'partials/skillrow.njk' as skillrow %}
 {% import 'partials/itemcard.njk' as itemcard %}
 
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
-    <!-- Name Area -->
+    {#----- Name Area ----- #}
     <div class="sheet-znz-area-name">
         <div class="sheet-znz-field">
             <h2>Name</h2>
             <input type="text" name="attr_name"></input>
         </div>
-        <div class="sheet-znz-field">
-            <h2>Status</h2>
-            <input type="text" name="attr_status"></input>
+        <div class="sheet-znz-field sheet-znz-note-tiny">
+            <h2>Quick Notes</h2>
+            <textarea name="attr_character_note"></textarea>
         </div>
     </div>
 
-    <!-- Stat Block-->
+    {#----- Stats ----- #}
     <div class="sheet-znz-area-status">
         <div class="sheet-znz-row">
             {% for stat in jsonData.stats.list %}
@@ -29,7 +31,7 @@
         </div>
     </div>
     
-    <!-- Attributes Block -->
+    {#----- Attributes ----- #}
     <div class="sheet-znz-area-attributes">
         <div class="sheet-znz-row-table">
             <div class="sheet-znz-row sheet-znz-row-table-header">
@@ -50,33 +52,12 @@
 
             </div>
             {% for attr in jsonData.attributes.list %}
-                <div class="sheet-znz-row">
-                    <div class="sheet-znz-field sheet-znz-60">
-                        <h3>{{ attr.display_name }}</h3>
-                        <div class="sheet-znz-description">
-                            {{ attr.reminder_note }}
-                        </div>
-                    </div>
-                    <div class="sheet-znz-field sheet-znz-40">
-                        <div class="sheet-znz-field">
-                            <div class="sheet-znz-inner-row">
-                                <div class="sheet-znz-field sheet-znz-50">
-                                    <input type="number" name="attr_{{ attr.attr_name }}" min="1" value="3" max="6"/>
-                                </div>
-                                <div class="sheet-znz-field sheet-znz-50">
-                                    <input type="text" readonly name="attr_{{ attr.attr_name }}_bonus" value="0"/>
-                                </div>
-                            </div>
-                            <div class="sheet-znz-description">
-                                Other Modifiers: <span readonly name="attr_{{ attr.attr_name }}_max"></span> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{ attrRow.create(attr) }}
             {% endfor %}
         </div>
     </div>
 
+    {#----- Equipped Weapons ----- #}
     <div class="sheet-znz-area-equipped-weapon">
         <div class="sheet-znz-section sheet-znz-equipped-ranged">
             <h2>Equipped Ranged Weapon</h2>
@@ -88,10 +69,23 @@
         </div>
     </div>
 
-
-    <div class="sheet-znz-area-equipped-melee  sheet-znz-area-equipped-weapon">
+    <div class="sheet-znz-area-select sheet-znz-area-skills">
+        <h2>Skills</h2>
+        <div class="sheet-znz-skill-select">
+            {% for item in jsonData.skills.list %}
+            {{ skillrow.create("skill", item) }}
+            {% endfor %}
+        </div>
     </div>
 
+    <div class="sheet-znz-area-select sheet-znz-area-proficiencies">
+        <h2>Proficiencies</h2>
+        <div class="sheet-znz-skill-select">
+            {% for item in jsonData.proficiencies.list %}
+            {{ skillrow.create("proficiency", item) }}
+            {% endfor %}
+        </div>
+    </div>
 
     <div class="sheet-znz-area-equipped-helmet">
     </div>

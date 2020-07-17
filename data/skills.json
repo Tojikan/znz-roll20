@@ -1,0 +1,94 @@
+{
+    "list": [
+        {
+            "display_name": "Lockpicking",
+            "attr_name": "lockpicking",
+            "description": ""
+        },
+        {
+            "display_name": "Hotwiring",
+            "attr_name": "hotwiring",
+            "description": ""
+        },
+        {
+            "display_name": "Hacking",
+            "attr_name": "hacking",
+            "description": ""
+        },
+        {
+            "display_name": "Sleight of Hand",
+            "attr_name": "sleight of hand",
+            "description": ""
+        },
+        {
+            "display_name": "Mechanical Work",
+            "attr_name": "mechanical work",
+            "description": ""
+        },
+        {
+            "display_name": "Electrical Work",
+            "attr_name": "electrical work",
+            "description": ""
+        },
+        {
+            "display_name": "Electronics",
+            "attr_name": "electronics",
+            "description": ""
+        },
+        {
+            "display_name": "Medicine",
+            "attr_name": "medicine",
+            "description": ""
+        },
+        {
+            "display_name": "Explosives",
+            "attr_name": "explosives",
+            "description": ""
+        },
+        {
+            "display_name": "Boat Piloting",
+            "attr_name": "boat piloting",
+            "description": ""
+        },
+        {
+            "display_name": "Plane Piloting",
+            "attr_name": "plane piloting",
+            "description": ""
+        },
+        {
+            "display_name": "Nature",
+            "attr_name": "nature",
+            "description": ""
+        },
+        {
+            "display_name": "Tailoring",
+            "attr_name": "tailoring",
+            "description": ""
+        },
+        {
+            "display_name": "Construction",
+            "attr_name": "construction",
+            "description": ""
+        },
+        {
+            "display_name": "Gunsmithing",
+            "attr_name": "gunsmmithing",
+            "description": ""
+        },
+        {
+            "display_name": "Leatherworking",
+            "attr_name": "leatherworking",
+            "description": ""
+        },
+        {
+            "display_name": "Metalworking",
+            "attr_name": "metalworking",
+            "description": ""
+        },
+        {
+            "display_name": "Animal Handling",
+            "attr_name": "animal handling",
+            "description": ""
+        }
+    ]
+}    

@@ -37,6 +37,10 @@
 
 
     .sheet-znz-field {
+        &.sheet-znz-0 {
+            flex-basis: 0;
+        }
+
         &.sheet-znz-15 {
             flex-basis: 15%;
         }

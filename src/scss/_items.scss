@@ -1,5 +1,5 @@
 /**
-*
+* Styling for item cards, Inventory, and Equipped Items
 */ 
 .sheet-znz-itemcard {
     border: solid 1px $lightgray;
@@ -48,6 +48,14 @@
 
         .sheet-znz-field {
             margin-bottom: 10px;
+        }
+    }
+
+    .sheet-znz-itemcard-button {
+        justify-content: center;
+        
+        button {
+            padding: 2px 16px;
         }
     }
 }

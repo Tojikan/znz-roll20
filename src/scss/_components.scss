@@ -24,7 +24,6 @@
     }
 }
 
-
 // Equipped Weapon
 .sheet-znz-area-equipped-weapon {
     h2 {
@@ -35,8 +34,28 @@
         flex-basis: 45%;
 
         &.sheet-znz-itemcard-name {
-            flex-basis: 100%;
             margin: 0;
+        }
+    }
+}
+
+// Skill and Prof select
+.sheet-znz-area-select {
+    h2 {
+        text-align: center;
+        border-bottom: solid 1px black;
+        padding-bottom: 5px;
+    }
+
+    .sheet-znz-skill-select {
+        font-size: 12px;
+        .sheet-znz-row {
+            margin-bottom: 2px;
+
+            .sheet-znz-label {
+                display: flex;
+                align-items: center;
+            }
         }
     }
 }

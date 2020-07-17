@@ -44,3 +44,25 @@
     font-weight: 900;
 }
 
+.sheet-znz-note {
+
+    &-tiny {
+        textarea {
+            height: 30px;
+        }
+    }
+
+    &-small {
+        textarea {
+            height: 50px;
+        }
+    }
+}
+
+input.sheet-znz-line-input {
+    margin: 0;
+    border: 0;
+    padding: 2px;
+    border-bottom: 1px solid $gray;
+}
+

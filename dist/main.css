@@ -50,6 +50,18 @@ input {
   margin: 0 6px;
   font-weight: 900; }
 
+.sheet-znz-note-tiny textarea {
+  height: 30px; }
+
+.sheet-znz-note-small textarea {
+  height: 50px; }
+
+input.sheet-znz-line-input {
+  margin: 0;
+  border: 0;
+  padding: 2px;
+  border-bottom: 1px solid gray; }
+
 /**
 * Overall layout for the sheet
 */
@@ -58,11 +70,10 @@ input {
   grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr;
   grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
   grid-gap: 20px;
-  grid-template-areas: "name name stat stat stat stat" "attr attr weapon weapon weapon weapon" "attr attr weapon weapon weapon weapon" "attr attr helmet helmet helmet helmet" "attr attr armor armor armor armor" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "notes notes notes notes notes notes"; }
+  grid-template-areas: "name name stat stat stat stat" "attr attr weapon weapon weapon weapon" "attr attr weapon weapon weapon weapon" "attr attr weapon weapon weapon weapon" "attr attr weapon weapon weapon weapon" "skills prof weapon weapon weapon weapon" "skills prof weapon weapon weapon weapon" "skills prof weapon weapon weapon weapon" "skills prof helmet helmet helmet helmet" "skills prof armor armor armor armor" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "notes notes notes notes notes notes"; }
 
 .sheet-znz-character-sheet .sheet-znz-area-name {
-  grid-area: name;
-  margin-bottom: 20px; }
+  grid-area: name; }
 
 .sheet-znz-character-sheet .sheet-znz-area-status {
   grid-area: stat;
@@ -76,6 +87,12 @@ input {
   display: flex; }
   .sheet-znz-character-sheet .sheet-znz-area-equipped-weapon .sheet-znz-section {
     width: 50%; }
+
+.sheet-znz-character-sheet .sheet-znz-area-skills {
+  grid-area: skills; }
+
+.sheet-znz-character-sheet .sheet-znz-area-prof {
+  grid-area: prof; }
 
 .sheet-znz-character-sheet .sheet-znz-area-equipped-helmet {
   grid-area: helmet; }
@@ -107,6 +124,8 @@ input {
     margin-bottom: 0; }
     .sheet-znz-row.sheet-znz-no-margin input, .sheet-znz-row.sheet-znz-no-margin select {
       margin-bottom: 0; }
+  .sheet-znz-row .sheet-znz-field.sheet-znz-0 {
+    flex-basis: 0; }
   .sheet-znz-row .sheet-znz-field.sheet-znz-15 {
     flex-basis: 15%; }
   .sheet-znz-row .sheet-znz-field.sheet-znz-25 {
@@ -170,11 +189,23 @@ input {
 .sheet-znz-area-equipped-weapon .sheet-znz-field {
   flex-basis: 45%; }
   .sheet-znz-area-equipped-weapon .sheet-znz-field.sheet-znz-itemcard-name {
-    flex-basis: 100%;
     margin: 0; }
 
+.sheet-znz-area-select h2 {
+  text-align: center;
+  border-bottom: solid 1px black;
+  padding-bottom: 5px; }
+
+.sheet-znz-area-select .sheet-znz-skill-select {
+  font-size: 12px; }
+  .sheet-znz-area-select .sheet-znz-skill-select .sheet-znz-row {
+    margin-bottom: 2px; }
+    .sheet-znz-area-select .sheet-znz-skill-select .sheet-znz-row .sheet-znz-label {
+      display: flex;
+      align-items: center; }
+
 /**
-*
+* Styling for item cards, Inventory, and Equipped Items
 */
 .sheet-znz-itemcard {
   border: solid 1px lightgray;
@@ -199,6 +230,10 @@ input {
     width: 35px; }
   .sheet-znz-itemcard .sheet-znz-itemcard-modifiers .sheet-znz-field {
     margin-bottom: 10px; }
+  .sheet-znz-itemcard .sheet-znz-itemcard-button {
+    justify-content: center; }
+    .sheet-znz-itemcard .sheet-znz-itemcard-button button {
+      padding: 2px 16px; }
 
 .sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-melee-fields,
 .sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-misc-fields,

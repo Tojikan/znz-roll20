@@ -20,10 +20,13 @@
             "name name stat stat stat stat"
             "attr attr weapon weapon weapon weapon"
             "attr attr weapon weapon weapon weapon"
-            "attr attr helmet helmet helmet helmet"
-            "attr attr armor armor armor armor"
-            "inventory inventory inventory inventory inventory inventory"
-            "inventory inventory inventory inventory inventory inventory"
+            "attr attr weapon weapon weapon weapon"
+            "attr attr weapon weapon weapon weapon"
+            "skills prof weapon weapon weapon weapon"
+            "skills prof weapon weapon weapon weapon"
+            "skills prof weapon weapon weapon weapon"
+            "skills prof helmet helmet helmet helmet"
+            "skills prof armor armor armor armor"
             "inventory inventory inventory inventory inventory inventory"
             "inventory inventory inventory inventory inventory inventory"
             "notes notes notes notes notes notes"
@@ -34,7 +37,6 @@
 
     .sheet-znz-area-name {
         grid-area: name;
-        margin-bottom: 20px;
     }
 
     .sheet-znz-area-status {
@@ -53,6 +55,14 @@
         .sheet-znz-section {
             width: 50%;
         }
+    }
+
+    .sheet-znz-area-skills {
+        grid-area: skills;
+    }
+
+    .sheet-znz-area-prof {
+        grid-area: prof;
     }
 
     .sheet-znz-area-equipped-helmet {

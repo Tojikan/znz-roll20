@@ -1,5 +1,14 @@
-{% import './expandable.njk' as expandable %}
+{#
+    Macro item card
 
+    attrPrefix - prefix to append to all attributes, such as equipped_melee or inventory
+    equipped - Boolean to determine if this is an inventory card or an equipped card, since there will be differences.
+    type - This gets used as a label text for some fields, like the item effect field.
+    jsonData - Pass all jsonData in here, since different parts might be used.
+    
+#}
+
+{% import './expandable.njk' as expandable %}
 
 {% macro create(attrPrefix='', equipped=false, type="item", jsonData="") %}
 
@@ -22,7 +31,7 @@
         {% endcall %}
         
         {# Name #}
-        <div class="sheet-znz-field sheet-znz-itemcard-name {{ "sheet-znz-75" if equipped }}">
+        <div class="sheet-znz-field sheet-znz-itemcard-name {{ "sheet-znz-75" if not equipped else "sheet-znz-full" }}">
             <label>Name</label>
             <input type="text" name="attr_{{ attrPrefix }}_item_name"/>
         </div>
@@ -51,7 +60,7 @@
         
         {#----------------- Misc Fields ---------------#}
         <div class="sheet-znz-itemcard-misc-fields">
-            <div class="sheet-znz-field sheet-znz-25">
+            <div class="sheet-znz-field">
                 <h3>Quantity</h3>
                 <input type="number" min="0" name="attr_{{ attrPrefix }}_item_quantity"/>
             </div>
@@ -62,15 +71,13 @@
             {#----------------- Melee-Specific Fields ---------------#}
             <div class="sheet-znz-itemcard-melee-fields">
                 <div class="sheet-znz-row">
-                    <div class="sheet-znz-field sheet-znz-25">
+                    <div class="sheet-znz-field">
                         <h3>Melee Type</h3>
-                        <div class="sheet-znz-inner-row">
-                            <select name="attr_{{ attrPrefix }}_melee_type">
-                                {% for melee in jsonData.weaponTypes.meleeTypes %}
-                                <option value="{{ melee.attr_name }}">{{ melee.display_name }} </option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        <select name="attr_{{ attrPrefix }}_melee_type">
+                            {% for melee in jsonData.weaponTypes.meleeTypes %}
+                            <option value="{{ melee.attr_name }}">{{ melee.display_name }} </option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
                 <div class="sheet-znz-row">
@@ -78,7 +85,7 @@
                         <h3>Energy per Attack</h3>
                         <input type="number" min="1" name="attr_{{ attrPrefix }}_melee_energy_cost" {{ 'value="1"'|safe if not equipped }}/>
                     </div>
-                    <div class="sheet-znz-field sheet-znz-15">
+                    <div class="sheet-znz-field sheet-znz-0 sheet-znz-right">
                         <h3>Durability</h3>
                         <div class="sheet-znz-inner-row">
                             <div>
@@ -121,7 +128,7 @@
                         <h3>Reloads</h3>
                         <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_reloads" {{ 'value="0"'|safe if not equipped }}/>
                     </div>
-                    <div class="sheet-znz-field sheet-znz-15">
+                    <div class="sheet-znz-field sheet-znz-0 sheet-znz-right">
                         <h3>Ammo</h3>
                         <div class="sheet-znz-inner-row">
                             <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo" {{ 'value="0"'|safe if not equipped }}/>
@@ -193,7 +200,7 @@
                     {% endfor %}
                     </select>
                 </div>
-                <div class="sheet-znz-field sheet-znz-15">
+                <div class="sheet-znz-field sheet-znz-0 sheet-znz-right">
                     <h3>Durability</h3>
                     <div class="sheet-znz-inner-row">
                         <div>
@@ -244,8 +251,6 @@
                         </div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="sheet-znz-row sheet-znz-itemcard-button">
             </div>
         </div>     
 
