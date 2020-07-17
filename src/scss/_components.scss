@@ -1,7 +1,14 @@
 /**
 * Component specific styles
 */
-
+//Stat Row
+.sheet-znz-area-status {
+    > .sheet-znz-row {
+        margin: 0;
+        align-items: center;
+        height: 100%;
+    }
+}
 
 //Stat Block
 .sheet-znz-field {
@@ -9,6 +16,7 @@
         text-align: center;
 
         .sheet-znz-description {
+            font-size: 12px;
             span {
                 font-weight: 700;
             }
@@ -29,30 +37,6 @@
         &.sheet-znz-itemcard-name {
             flex-basis: 100%;
             margin: 0;
-        }
-    }
-
-    .sheet-znz-row {
-        .sheet-znz-field {
-            &:nth-child(2) {
-                text-align: right;
-                margin-left: auto;
-
-            }
-        }
-    }
-
-    .sheet-znz-weapon-attack {
-        flex-basis: 60%;
-
-        input[type=number] {
-            width: 40px;
-        }
-
-        .sheet-znz-prefixed-input {
-            input[type=number] {
-                width: 35px;
-            }
         }
     }
 }

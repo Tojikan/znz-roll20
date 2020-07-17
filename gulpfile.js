@@ -6,6 +6,26 @@ const replace = require('gulp-replace');
 const nunjucksRender = require('gulp-nunjucks-render');
 const data = require('gulp-data');
 const fs = require('fs');
+const path = require('path');
+
+const dataFolder = './data/';
+
+gulp.task('test', function() {
+
+    var output = {};
+            
+    let files = fs.readdirSync(dataFolder);
+
+    files.forEach(file => {
+        if (path.extname(file) === '.json'){
+            let filename = path.basename(file, '.json');
+            output[filename] = JSON.parse(fs.readFileSync(dataFolder + file));
+        }
+    })
+
+    console.log(output)
+
+});
 
 //compile scss into css
 gulp.task('style', function() {
@@ -22,14 +42,19 @@ gulp.task('sheet', function(){
             basepath: '@file'
         }))
         .pipe(data(function(){
-            return {
-                data: {
-                    weaponTypes: JSON.parse(fs.readFileSync('./data/weaponTypes.json')),
-                    equipmentTypes: JSON.parse(fs.readFileSync('./data/equipmentTypes.json')),
-                    attributes: JSON.parse(fs.readFileSync('./data/attributes.json')).attributes,
-                    proficiencies: JSON.parse(fs.readFileSync('./data/attributes.json')).proficiencies,
+            //read all json files in data folder and pass it in a data object
+            //each file will be read and stored in the data object with filename as a key
+            let jsonData = {};
+            let files = fs.readdirSync(dataFolder);
+
+            files.forEach(file => {
+                if (path.extname(file) === '.json'){
+                    let filename = path.basename(file, '.json');
+                    jsonData[filename] = JSON.parse(fs.readFileSync(dataFolder + file));
                 }
-            };
+            })
+            
+            return { jsonData };
         }))
         .pipe(nunjucksRender({
             path:['src/templates']

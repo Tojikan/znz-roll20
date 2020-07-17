@@ -1,5 +1,5 @@
 {
-    "proficiencies": [
+    "list": [
         {
             "display_name": "Handguns",
             "attr_name": "handguns",

@@ -58,7 +58,7 @@ input {
   grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr;
   grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
   grid-gap: 20px;
-  grid-template-areas: "name name stat stat stat stat" "attr attr weapon weapon weapon weapon" "attr attr weapon weapon weapon weapon" "attr attr helmet helmet helmet helmet" "attr attr armor armor armor armor" "skills skills prof prof abilities abilities" "skills skills prof prof flaws flaws" "skills skills prof prof flaws flaws" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "notes notes notes notes notes notes"; }
+  grid-template-areas: "name name stat stat stat stat" "attr attr weapon weapon weapon weapon" "attr attr weapon weapon weapon weapon" "attr attr helmet helmet helmet helmet" "attr attr armor armor armor armor" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "notes notes notes notes notes notes"; }
 
 .sheet-znz-character-sheet .sheet-znz-area-name {
   grid-area: name;
@@ -152,10 +152,17 @@ input {
 /**
 * Component specific styles
 */
+.sheet-znz-area-status > .sheet-znz-row {
+  margin: 0;
+  align-items: center;
+  height: 100%; }
+
 .sheet-znz-field.sheet-znz-stat-block {
   text-align: center; }
-  .sheet-znz-field.sheet-znz-stat-block .sheet-znz-description span {
-    font-weight: 700; }
+  .sheet-znz-field.sheet-znz-stat-block .sheet-znz-description {
+    font-size: 12px; }
+    .sheet-znz-field.sheet-znz-stat-block .sheet-znz-description span {
+      font-weight: 700; }
 
 .sheet-znz-area-equipped-weapon h2 {
   text-align: center; }
@@ -166,17 +173,6 @@ input {
     flex-basis: 100%;
     margin: 0; }
 
-.sheet-znz-area-equipped-weapon .sheet-znz-row .sheet-znz-field:nth-child(2) {
-  text-align: right;
-  margin-left: auto; }
-
-.sheet-znz-area-equipped-weapon .sheet-znz-weapon-attack {
-  flex-basis: 60%; }
-  .sheet-znz-area-equipped-weapon .sheet-znz-weapon-attack input[type=number] {
-    width: 40px; }
-  .sheet-znz-area-equipped-weapon .sheet-znz-weapon-attack .sheet-znz-prefixed-input input[type=number] {
-    width: 35px; }
-
 /**
 *
 */
@@ -186,4 +182,30 @@ input {
   .sheet-znz-itemcard .sheet-znz-itemcard-note {
     height: auto; }
     .sheet-znz-itemcard .sheet-znz-itemcard-note textarea {
+      height: 50px;
       max-width: 100%; }
+  .sheet-znz-itemcard .sheet-znz-row .sheet-znz-field:nth-child(2) {
+    text-align: right;
+    margin-left: auto; }
+  .sheet-znz-itemcard .sheet-znz-weapon-attack {
+    flex-basis: 60%; }
+    .sheet-znz-itemcard .sheet-znz-weapon-attack input[type=number] {
+      width: 40px; }
+    .sheet-znz-itemcard .sheet-znz-weapon-attack .sheet-znz-prefixed-input input[type=number] {
+      width: 35px; }
+  .sheet-znz-itemcard .sheet-znz-itemcard-modifiers select, .sheet-znz-itemcard .sheet-znz-itemcard-modifiers input {
+    margin: 0; }
+  .sheet-znz-itemcard .sheet-znz-itemcard-modifiers input[type=number] {
+    width: 35px; }
+  .sheet-znz-itemcard .sheet-znz-itemcard-modifiers .sheet-znz-field {
+    margin-bottom: 10px; }
+
+.sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-melee-fields,
+.sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-misc-fields,
+.sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-equipment-fields {
+  display: none; }
+
+.sheet-znz-equipped-melee .sheet-znz-itemcard .sheet-znz-itemcard-ranged-fields,
+.sheet-znz-equipped-melee .sheet-znz-itemcard .sheet-znz-itemcard-misc-fields,
+.sheet-znz-equipped-melee .sheet-znz-itemcard .sheet-znz-itemcard-equipment-fields {
+  display: none; }

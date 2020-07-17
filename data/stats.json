@@ -1,0 +1,36 @@
+{
+    "list" : [
+        {
+            "display_name": "HP",
+            "attr_name": "hp",
+            "default_value": "30",
+            "has_max": "true",
+            "explanation_text": "<br/><br/>",
+            "description": "br for spacing"
+        },
+        {
+            "display_name": "Sanity",
+            "attr_name": "sanity",
+            "default_value": "30",
+            "has_max": "true",
+            "explanation_text": "<br/><br/>", 
+            "description": ""
+        },
+        {
+            "display_name": "Energy",
+            "attr_name": "energy",
+            "default_value": "30",
+            "has_max": "true",
+            "explanation_text": "<br/><br/>",
+            "description": ""
+        },
+        {
+            "display_name": "HP",
+            "attr_name": "hp",
+            "default_value": "0",
+            "has_max": "false",
+            "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +1 to any stat/skill </div><div class=\"sheet-znz-xp-text\"> <span>30</span>: Learn new ability </div>",
+            "description": ""
+        }
+    ]
+}

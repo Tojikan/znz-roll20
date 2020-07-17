@@ -1,7 +1,7 @@
 {% import './expandable.njk' as expandable %}
 
 
-{% macro create(attrPrefix='', equipped=false, type="item", data="") %}
+{% macro create(attrPrefix='', equipped=false, type="item", jsonData="") %}
 
 <div class="sheet-znz-itemcard">
 
@@ -66,21 +66,27 @@
                         <h3>Melee Type</h3>
                         <div class="sheet-znz-inner-row">
                             <select name="attr_{{ attrPrefix }}_melee_type">
-                                {% for melee in data.weaponTypes.meleeTypes %}
+                                {% for melee in jsonData.weaponTypes.meleeTypes %}
                                 <option value="{{ melee.attr_name }}">{{ melee.display_name }} </option>
                                 {% endfor %}
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Energy per Attack</h3>
+                        <input type="number" min="1" name="attr_{{ attrPrefix }}_melee_energy_cost" {{ 'value="1"'|safe if not equipped }}/>
+                    </div>
                     <div class="sheet-znz-field sheet-znz-15">
                         <h3>Durability</h3>
                         <div class="sheet-znz-inner-row">
                             <div>
-                                <input type="number" min="0" name="attr_{{ attrPrefix }}_melee_durability"/>
+                                <input type="number" min="0" name="attr_{{ attrPrefix }}_melee_durability" {{ 'value="0"'|safe if not equipped }}/>
                             </div>
                             <div class="sheet-divider">/</div>  
                             <div>
-                                <input type="number" min="1" name="attr_{{ attrPrefix }}_melee_durability_max"/>
+                                <input type="number" min="1" name="attr_{{ attrPrefix }}_melee_durability_max" {{ 'value="0"'|safe if not equipped }}/>
                                 <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
@@ -96,7 +102,7 @@
                     <div class="sheet-znz-field">
                         <h3>Ranged Type</h3>
                         <select name="attr_{{ attrPrefix }}_ranged_type">
-                            {% for ranged in data.weaponTypes.rangedTypes %}
+                            {% for ranged in jsonData.weaponTypes.rangedTypes %}
                             <option value="{{ ranged.attr_name }}">{{ ranged.display_name }} </option>
                             {% endfor %}
                         </select>
@@ -104,7 +110,7 @@
                     <div class="sheet-znz-field">
                         <h3>Ammo Type</h3>
                         <select name="attr_{{ attrPrefix }}_ammo_type">
-                            {% for ammo in data.weaponTypes.ammoTypes %}
+                            {% for ammo in jsonData.weaponTypes.ammoTypes %}
                             <option value="{{ ammo.attr_name }}">{{ ammo.display_name }} </option>
                             {% endfor %}
                         </select>
@@ -113,15 +119,15 @@
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field">
                         <h3>Reloads</h3>
-                        <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_reloads"/>
+                        <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_reloads" {{ 'value="0"'|safe if not equipped }}/>
                     </div>
                     <div class="sheet-znz-field sheet-znz-15">
                         <h3>Ammo</h3>
                         <div class="sheet-znz-inner-row">
-                            <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo"/>
+                            <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo" {{ 'value="0"'|safe if not equipped }}/>
                             <div class="sheet-divider">/</div>
                             <div>
-                                <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo_max"/>
+                                <input type="number" min="0" name="attr_{{ attrPrefix }}_ranged_ammo_max" {{ 'value="0"'|safe if not equipped }}/>
                                 <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
@@ -139,16 +145,16 @@
                     <div class="sheet-znz-inner-row">
                         <div class="sheet-znz-prefixed-input">
                             <span>
-                                D<input type="number" name="attr_{{ attrPrefix }}_weapon_hit" value ="10" min = "1" max = "99"/>
+                                D<input type="number" name="attr_{{ attrPrefix }}_weapon_hit" min = "1" max = "99" {{ 'value="10"'|safe if not equipped }}/>
                             </span>
                         </div>
-                        <input type="number" name="attr_{{ attrPrefix }}_weapon_hit_bonus" value = "0" />
+                        <input type="number" name="attr_{{ attrPrefix }}_weapon_hit_bonus" {{ 'value="0"'|safe if not equipped }}/>
                     </div>
                     <div class="sheet-znz-description"> Hit Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Range</h3>
-                    <input type="number" name="attr_{{ attrPrefix }}_weapon_range" value = "1" />
+                    <input type="number" name="attr_{{ attrPrefix }}_weapon_range" {{ 'value="1"'|safe if not equipped }}/>
                     <div class="sheet-znz-description">Max attack range </div>
                 </div>
             </div>
@@ -159,46 +165,125 @@
                     <div class="sheet-znz-inner-row">
                         <div class="sheet-znz-prefixed-input">
                             <span>
-                                D<input type="number" name="attr_{{ attrPrefix }}_weapon_damage" value="1" min="1" max="99"/>
+                                D<input type="number" name="attr_{{ attrPrefix }}_weapon_damage" min="1" max="99" {{ 'value="1"'|safe if not equipped }}/>
                             </span>
                         </div>
-                        <input type="number" name="attr_{{ attrPrefix }}_weapon_damage_bonus" value = "0" />
+                        <input type="number" name="attr_{{ attrPrefix }}_weapon_damage_bonus" {{ 'value="0"'|safe if not equipped }}/>
                     </div>
                     <div class="sheet-znz-description"> Damage Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Max Attacks</h3>
-                    <input type="number" name="attr_{{ attrPrefix }}_weapon_attacks" value = "1" />
+                    <input type="number" name="attr_{{ attrPrefix }}_weapon_attacks" {{ 'value="1"'|safe if not equipped }}/>
                     <div class="sheet-znz-description"> Attacks Per Action</div>
                 </div>
             </div>
+
+
         </div>
 
         {#----------- Equipment Fields----------------#}   
         <div class="sheet-znz-itemcard-equipment-fields">
             <div class="sheet-znz-row">
-                {% call outputField(attrPrefix + "_equipment_type", equipped) %}
                 <div class="sheet-znz-field">
                     <h3>Equipment Type</h3>
                     <select name="attr_{{ attrPrefix }}_equipment_type">
-                    {% for equip in data.equipmentTypes.types %}
+                    {% for equip in jsonData.equipmentTypes.types %}
                         <option value="{{ equip.attr_name }}">{{ equip.display_name }} </option>
                     {% endfor %}
                     </select>
                 </div>
-                {% endcall %}
+                <div class="sheet-znz-field sheet-znz-15">
+                    <h3>Durability</h3>
+                    <div class="sheet-znz-inner-row">
+                        <div>
+                            <input type="number" min="0" name="attr_{{ attrPrefix }}_equipment_durability" {{ 'value="0"'|safe if not equipped }}/>
+                        </div>
+                        <div class="sheet-divider">/</div>  
+                        <div>
+                            <input type="number" min="1" name="attr_{{ attrPrefix }}_equipment_durability_max" {{ 'value="0"'|safe if not equipped }}/>
+                            <div class="sheet-znz-description sheet-znz-center">
+                                MAX
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-znz-itemcard-modifiers">
+                {# Attr Mods #}
+                <div class="sheet-znz-field">
+                    {% set numberOfMods = 2 %}
+                    <h3>Attribute Modifiers</h3>
+                    {% for i in range(0, numberOfMods) %}
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_{{ attrPrefix }}_equipment_{{ loop.index }}_attr_mod_type">
+                                <option value="" default></option>
+                            {% for item in jsonData.attributes.list %}
+                                <option value="{{ item.attr_name }}">{{ item.display_name }} </option>
+                            {% endfor %}
+                            </select>
+                            <input type="number" min="0" name="attr_{{ attrPrefix }}_equipment_{{ loop.index }}_attr_mod_value" />
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {# Proficiency Mods #}
+                <div class="sheet-znz-field">
+                    <h3>Proficiency Modifiers</h3>
+                    {% for i in range(0, numberOfMods) %}
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_{{ attrPrefix }}_equipment_{{ loop.index }}_prof_mod_type">
+                                <option value="" default></option>
+                            {% for item in jsonData.proficiencies.list %}
+                                {% if item.equipment_affectable and item.equipment_affectable === "true" %}
+                                    <option value="{{ item.attr_name }}">{{ item.display_name }} </option>
+                                {% endif %}
+                            {% endfor %}
+                            </select>
+                            <input type="number" min="0" name="attr_{{ attrPrefix }}_equipment_{{ loop.index }}_prof_mod_value"/>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="sheet-znz-row sheet-znz-itemcard-button">
             </div>
         </div>     
 
 
-        {#----------- Appears on every item ----------------#}
+
+        {#----------- Bottom of Card ----------------#}
         <div class="sheet-znz-field">
             <h3> {{ type }} Effect</h3>
             <input type="text" name="attr_{{ attrPrefix }}_item_effect"/>
         </div>
+
+        {#---------------- Equip Buttons ----------------#}
+        <div class="sheet-znz-row sheet-znz-itemcard-melee-fields sheet-znz-itemcard-button">
+            {% if equipped %}
+                <button type="action" name="act_unequip_melee">Unequip Melee</button>
+            {% else %}
+                <button type="action" name="act_equip_melee">Equip Melee</button>
+            {% endif %}
+        </div>
+        <div class="sheet-znz-row sheet-znz-itemcard-ranged-fields sheet-znz-itemcard-button">
+            {% if equipped %}
+                <button type="action" name="act_unequip_ranged">Unequip Ranged</button>
+            {% else %}
+                <button type="action" name="act_equip_ranged">Equip Ranged</button>
+            {% endif %}
+        </div>
+        <div class="sheet-znz-row sheet-znz-itemcard-equipment-fields sheet-znz-itemcard-button">
+            {% if equipped %}
+                <button type="action" name="act_donequipment">Don Equipment</button>
+            {% else %}
+                <button type="action" name="act_doffequipment">Doff Equipment</button>
+            {% endif %}
+        </div>
+
+
         <div class="sheet-znz-field sheet-znz-itemcard-note">
             <h3>Notes</h3>
-            <textarea class="sheet-znz-reduced-height" name="attr_{{ attrPrefix }}_item_note" ></textarea>
+            <textarea name="attr_{{ attrPrefix }}_item_note" ></textarea>
         </div>
 
         {% endcall %}

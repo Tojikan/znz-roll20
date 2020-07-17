@@ -1,7 +1,7 @@
 {#  
     Some sheet data is pulled from JSON in the data folder.
     The JSON is imported to nunjucks templates via Gulp as the data variable. If additional data is added and needed in the sheet, you'll need to add it in the gulpfile. 
-    You can access JSON data through the 'data' variable. Pass it into macros if needed
+    You can access JSON data through the 'jsonData' variable. Pass it into macros if needed
 #}
 
 {% import 'partials/statblock.njk' as statblock %}
@@ -23,10 +23,9 @@
     <!-- Stat Block-->
     <div class="sheet-znz-area-status">
         <div class="sheet-znz-row">
-            {{ statblock.create('HP', 'hp', '30') }}
-            {{ statblock.create('Sanity', 'sanity', '30') }}
-            {{ statblock.create('Energy', 'energy', '30') }}
-            {{ statblock.create('Exp', 'exp', '30') }}
+            {% for stat in jsonData.stats.list %}
+            {{ statblock.create(stat.display_name, stat.attr_name, stat.default_value, stat.has_max, stat.explanation_text) }}
+            {% endfor %}
         </div>
     </div>
     
@@ -50,7 +49,7 @@
                 </div>
 
             </div>
-            {% for attr in data.attributes %}
+            {% for attr in jsonData.attributes.list %}
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field sheet-znz-60">
                         <h3>{{ attr.display_name }}</h3>
@@ -81,11 +80,11 @@
     <div class="sheet-znz-area-equipped-weapon">
         <div class="sheet-znz-section sheet-znz-equipped-ranged">
             <h2>Equipped Ranged Weapon</h2>
-            {{ itemcard.create('equipped', true, "Ranged Weapon", data=data) }}
+            {{ itemcard.create('equipped_ranged', true, "Ranged Weapon", jsonData=jsonData) }}
         </div>
         <div class="sheet-znz-section sheet-znz-equipped-melee">
             <h2>Equipped Melee Weapon</h2>
-            {{ itemcard.create('equipped', true, "Melee Weapon", data=data) }}
+            {{ itemcard.create('equipped_melee', true, "Melee Weapon", jsonData=jsonData) }}
         </div>
     </div>
 

@@ -20,54 +20,72 @@
     <div class="sheet-znz-area-status">
         <div class="sheet-znz-row">
             
+            
     <div class="sheet-znz-field sheet-znz-stat-block">
         <h2>HP</h2>
         <input type="number" name="attr_hp" value="30"/>
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_hp_max" value="30"/>
-                
-                    Max: <span readonly name="attr_hp_max"></span> 
-                
+            
+                Max: <span readonly name="attr_hp_max"></span> 
+            
+
+            
+                <br/><br/>
+            
         </div>
     </div>
 
+            
             
     <div class="sheet-znz-field sheet-znz-stat-block">
         <h2>Sanity</h2>
         <input type="number" name="attr_sanity" value="30"/>
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_sanity_max" value="30"/>
-                
-                    Max: <span readonly name="attr_sanity_max"></span> 
-                
+            
+                Max: <span readonly name="attr_sanity_max"></span> 
+            
+
+            
+                <br/><br/>
+            
         </div>
     </div>
 
+            
             
     <div class="sheet-znz-field sheet-znz-stat-block">
         <h2>Energy</h2>
         <input type="number" name="attr_energy" value="30"/>
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_energy_max" value="30"/>
-                
-                    Max: <span readonly name="attr_energy_max"></span> 
-                
+            
+                Max: <span readonly name="attr_energy_max"></span> 
+            
+
+            
+                <br/><br/>
+            
         </div>
     </div>
 
             
+            
     <div class="sheet-znz-field sheet-znz-stat-block">
-        <h2>Exp</h2>
-        <input type="number" name="attr_exp" value="30"/>
+        <h2>HP</h2>
+        <input type="number" name="attr_hp" value="0"/>
         <div class="sheet-znz-description">
-            <input type="hidden" name="attr_exp_max" value="30"/>
-                 
-                    <div class="sheet-znz-xp-text"> <span>10</span>: +1 to any stat/skill </div>
-                    <div class="sheet-znz-xp-text"> <span>30</span>: Learn new ability </div>
-                
+            <input type="hidden" name="attr_hp_max" value="0"/>
+            
+
+            
+                <div class="sheet-znz-xp-text"> <span>10</span>: +1 to any stat/skill </div><div class="sheet-znz-xp-text"> <span>30</span>: Learn new ability </div>
+            
         </div>
     </div>
 
+            
         </div>
     </div>
     
@@ -252,20 +270,20 @@
         
         
     
-        <input type="hidden" name="attr_equipped_item_type" />
+        <input type="hidden" name="attr_equipped_ranged_item_type" />
     
 
         
         
         <div class="sheet-znz-field sheet-znz-itemcard-name sheet-znz-75">
             <label>Name</label>
-            <input type="text" name="attr_equipped_item_name"/>
+            <input type="text" name="attr_equipped_ranged_item_name"/>
         </div>
         
         
         
     
-        <input type="hidden" name="attr_equipped_item_weight" />
+        <input type="hidden" name="attr_equipped_ranged_item_weight" />
     
 
     </div>
@@ -278,7 +296,7 @@
         <div class="sheet-znz-itemcard-misc-fields">
             <div class="sheet-znz-field sheet-znz-25">
                 <h3>Quantity</h3>
-                <input type="number" min="0" name="attr_equipped_item_quantity"/>
+                <input type="number" min="0" name="attr_equipped_ranged_item_quantity"/>
             </div>
         </div>
 
@@ -288,7 +306,7 @@
                     <div class="sheet-znz-field sheet-znz-25">
                         <h3>Melee Type</h3>
                         <div class="sheet-znz-inner-row">
-                            <select name="attr_equipped_melee_type">
+                            <select name="attr_equipped_ranged_melee_type">
                                 
                                 <option value="blunt">Blunt </option>
                                 
@@ -301,15 +319,21 @@
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Energy per Attack</h3>
+                        <input type="number" min="1" name="attr_equipped_ranged_melee_energy_cost" />
+                    </div>
                     <div class="sheet-znz-field sheet-znz-15">
                         <h3>Durability</h3>
                         <div class="sheet-znz-inner-row">
                             <div>
-                                <input type="number" min="0" name="attr_equipped_melee_durability"/>
+                                <input type="number" min="0" name="attr_equipped_ranged_melee_durability" />
                             </div>
                             <div class="sheet-divider">/</div>  
                             <div>
-                                <input type="number" min="1" name="attr_equipped_melee_durability_max"/>
+                                <input type="number" min="1" name="attr_equipped_ranged_melee_durability_max" />
                                 <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
@@ -321,7 +345,7 @@
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field">
                         <h3>Ranged Type</h3>
-                        <select name="attr_equipped_ranged_type">
+                        <select name="attr_equipped_ranged_ranged_type">
                             
                             <option value="handgun">Handgun </option>
                             
@@ -337,7 +361,7 @@
                     </div>
                     <div class="sheet-znz-field">
                         <h3>Ammo Type</h3>
-                        <select name="attr_equipped_ammo_type">
+                        <select name="attr_equipped_ranged_ammo_type">
                             
                             <option value="light">Light </option>
                             
@@ -357,15 +381,15 @@
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field">
                         <h3>Reloads</h3>
-                        <input type="number" min="0" name="attr_equipped_ranged_reloads"/>
+                        <input type="number" min="0" name="attr_equipped_ranged_ranged_reloads" />
                     </div>
                     <div class="sheet-znz-field sheet-znz-15">
                         <h3>Ammo</h3>
                         <div class="sheet-znz-inner-row">
-                            <input type="number" min="0" name="attr_equipped_ranged_ammo"/>
+                            <input type="number" min="0" name="attr_equipped_ranged_ranged_ammo" />
                             <div class="sheet-divider">/</div>
                             <div>
-                                <input type="number" min="0" name="attr_equipped_ranged_ammo_max"/>
+                                <input type="number" min="0" name="attr_equipped_ranged_ranged_ammo_max" />
                                 <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
@@ -379,16 +403,16 @@
                     <div class="sheet-znz-inner-row">
                         <div class="sheet-znz-prefixed-input">
                             <span>
-                                D<input type="number" name="attr_equipped_weapon_hit" value ="10" min = "1" max = "99"/>
+                                D<input type="number" name="attr_equipped_ranged_weapon_hit" min = "1" max = "99" />
                             </span>
                         </div>
-                        <input type="number" name="attr_equipped_weapon_hit_bonus" value = "0" />
+                        <input type="number" name="attr_equipped_ranged_weapon_hit_bonus" />
                     </div>
                     <div class="sheet-znz-description"> Hit Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Range</h3>
-                    <input type="number" name="attr_equipped_weapon_range" value = "1" />
+                    <input type="number" name="attr_equipped_ranged_weapon_range" />
                     <div class="sheet-znz-description">Max attack range </div>
                 </div>
             </div>
@@ -399,34 +423,272 @@
                     <div class="sheet-znz-inner-row">
                         <div class="sheet-znz-prefixed-input">
                             <span>
-                                D<input type="number" name="attr_equipped_weapon_damage" value="1" min="1" max="99"/>
+                                D<input type="number" name="attr_equipped_ranged_weapon_damage" min="1" max="99" />
                             </span>
                         </div>
-                        <input type="number" name="attr_equipped_weapon_damage_bonus" value = "0" />
+                        <input type="number" name="attr_equipped_ranged_weapon_damage_bonus" />
                     </div>
                     <div class="sheet-znz-description"> Damage Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Max Attacks</h3>
-                    <input type="number" name="attr_equipped_weapon_attacks" value = "1" />
+                    <input type="number" name="attr_equipped_ranged_weapon_attacks" />
                     <div class="sheet-znz-description"> Attacks Per Action</div>
                 </div>
             </div>
+
+
         </div><div class="sheet-znz-itemcard-equipment-fields">
             <div class="sheet-znz-row">
+                <div class="sheet-znz-field">
+                    <h3>Equipment Type</h3>
+                    <select name="attr_equipped_ranged_equipment_type">
+                    
+                        <option value="armor">Armor </option>
+                    
+                        <option value="helmet">Helmet </option>
+                    
+                    </select>
+                </div>
+                <div class="sheet-znz-field sheet-znz-15">
+                    <h3>Durability</h3>
+                    <div class="sheet-znz-inner-row">
+                        <div>
+                            <input type="number" min="0" name="attr_equipped_ranged_equipment_durability" />
+                        </div>
+                        <div class="sheet-divider">/</div>  
+                        <div>
+                            <input type="number" min="1" name="attr_equipped_ranged_equipment_durability_max" />
+                            <div class="sheet-znz-description sheet-znz-center">
+                                MAX
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-znz-itemcard-modifiers">
                 
-    
-        <input type="hidden" name="attr_equipped_equipment_type" />
-    
+                <div class="sheet-znz-field">
+                    
+                    <h3>Attribute Modifiers</h3>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_ranged_equipment_1_attr_mod_type">
+                                <option value="" default></option>
+                            
+                                <option value="agility">Agility </option>
+                            
+                                <option value="luck">Luck </option>
+                            
+                                <option value="intelligence">Intelligence </option>
+                            
+                                <option value="vitality">Vitality </option>
+                            
+                                <option value="empathy">Empathy </option>
+                            
+                                <option value="strength">Strength </option>
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_ranged_equipment_1_attr_mod_value" />
+                        </div>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_ranged_equipment_2_attr_mod_type">
+                                <option value="" default></option>
+                            
+                                <option value="agility">Agility </option>
+                            
+                                <option value="luck">Luck </option>
+                            
+                                <option value="intelligence">Intelligence </option>
+                            
+                                <option value="vitality">Vitality </option>
+                            
+                                <option value="empathy">Empathy </option>
+                            
+                                <option value="strength">Strength </option>
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_ranged_equipment_2_attr_mod_value" />
+                        </div>
+                    
+                </div>
 
+                
+                <div class="sheet-znz-field">
+                    <h3>Proficiency Modifiers</h3>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_ranged_equipment_1_prof_mod_type">
+                                <option value="" default></option>
+                            
+                                
+                                    <option value="handguns">Handguns </option>
+                                
+                            
+                                
+                                    <option value="shotguns">Shotguns </option>
+                                
+                            
+                                
+                                    <option value="rifles">Rifles </option>
+                                
+                            
+                                
+                                    <option value="archery">Archery </option>
+                                
+                            
+                                
+                                    <option value="throwing weapons">Throwing Weapons </option>
+                                
+                            
+                                
+                                    <option value="unarmed combat">Unarmed Combat </option>
+                                
+                            
+                                
+                                    <option value="sharp melee">Sharp Melee </option>
+                                
+                            
+                                
+                                    <option value="blunt melee">Blunt Melee </option>
+                                
+                            
+                                
+                                    <option value="stealth">Stealth </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                                    <option value="acrobatics">Acrobatics </option>
+                                
+                            
+                                
+                                    <option value="swimming">Swimming </option>
+                                
+                            
+                                
+                                    <option value="climbing">Climbing </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_ranged_equipment_1_prof_mod_value"/>
+                        </div>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_ranged_equipment_2_prof_mod_type">
+                                <option value="" default></option>
+                            
+                                
+                                    <option value="handguns">Handguns </option>
+                                
+                            
+                                
+                                    <option value="shotguns">Shotguns </option>
+                                
+                            
+                                
+                                    <option value="rifles">Rifles </option>
+                                
+                            
+                                
+                                    <option value="archery">Archery </option>
+                                
+                            
+                                
+                                    <option value="throwing weapons">Throwing Weapons </option>
+                                
+                            
+                                
+                                    <option value="unarmed combat">Unarmed Combat </option>
+                                
+                            
+                                
+                                    <option value="sharp melee">Sharp Melee </option>
+                                
+                            
+                                
+                                    <option value="blunt melee">Blunt Melee </option>
+                                
+                            
+                                
+                                    <option value="stealth">Stealth </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                                    <option value="acrobatics">Acrobatics </option>
+                                
+                            
+                                
+                                    <option value="swimming">Swimming </option>
+                                
+                            
+                                
+                                    <option value="climbing">Climbing </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_ranged_equipment_2_prof_mod_value"/>
+                        </div>
+                    
+                </div>
+            </div>
+            <div class="sheet-znz-row sheet-znz-itemcard-button">
             </div>
         </div><div class="sheet-znz-field">
             <h3> Ranged Weapon Effect</h3>
-            <input type="text" name="attr_equipped_item_effect"/>
+            <input type="text" name="attr_equipped_ranged_item_effect"/>
+        </div><div class="sheet-znz-row sheet-znz-itemcard-melee-fields sheet-znz-itemcard-button">
+            
+                <button type="action" name="act_unequip_melee">Unequip Melee</button>
+            
         </div>
+        <div class="sheet-znz-row sheet-znz-itemcard-ranged-fields sheet-znz-itemcard-button">
+            
+                <button type="action" name="act_unequip_ranged">Unequip Ranged</button>
+            
+        </div>
+        <div class="sheet-znz-row sheet-znz-itemcard-equipment-fields sheet-znz-itemcard-button">
+            
+                <button type="action" name="act_donequipment">Don Equipment</button>
+            
+        </div>
+
+
         <div class="sheet-znz-field sheet-znz-itemcard-note">
             <h3>Notes</h3>
-            <textarea class="sheet-znz-reduced-height" name="attr_equipped_item_note" ></textarea>
+            <textarea name="attr_equipped_ranged_item_note" ></textarea>
         </div>
 
         
@@ -451,20 +713,20 @@
         
         
     
-        <input type="hidden" name="attr_equipped_item_type" />
+        <input type="hidden" name="attr_equipped_melee_item_type" />
     
 
         
         
         <div class="sheet-znz-field sheet-znz-itemcard-name sheet-znz-75">
             <label>Name</label>
-            <input type="text" name="attr_equipped_item_name"/>
+            <input type="text" name="attr_equipped_melee_item_name"/>
         </div>
         
         
         
     
-        <input type="hidden" name="attr_equipped_item_weight" />
+        <input type="hidden" name="attr_equipped_melee_item_weight" />
     
 
     </div>
@@ -477,7 +739,7 @@
         <div class="sheet-znz-itemcard-misc-fields">
             <div class="sheet-znz-field sheet-znz-25">
                 <h3>Quantity</h3>
-                <input type="number" min="0" name="attr_equipped_item_quantity"/>
+                <input type="number" min="0" name="attr_equipped_melee_item_quantity"/>
             </div>
         </div>
 
@@ -487,7 +749,7 @@
                     <div class="sheet-znz-field sheet-znz-25">
                         <h3>Melee Type</h3>
                         <div class="sheet-znz-inner-row">
-                            <select name="attr_equipped_melee_type">
+                            <select name="attr_equipped_melee_melee_type">
                                 
                                 <option value="blunt">Blunt </option>
                                 
@@ -500,15 +762,21 @@
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="sheet-znz-row">
+                    <div class="sheet-znz-field">
+                        <h3>Energy per Attack</h3>
+                        <input type="number" min="1" name="attr_equipped_melee_melee_energy_cost" />
+                    </div>
                     <div class="sheet-znz-field sheet-znz-15">
                         <h3>Durability</h3>
                         <div class="sheet-znz-inner-row">
                             <div>
-                                <input type="number" min="0" name="attr_equipped_melee_durability"/>
+                                <input type="number" min="0" name="attr_equipped_melee_melee_durability" />
                             </div>
                             <div class="sheet-divider">/</div>  
                             <div>
-                                <input type="number" min="1" name="attr_equipped_melee_durability_max"/>
+                                <input type="number" min="1" name="attr_equipped_melee_melee_durability_max" />
                                 <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
@@ -520,7 +788,7 @@
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field">
                         <h3>Ranged Type</h3>
-                        <select name="attr_equipped_ranged_type">
+                        <select name="attr_equipped_melee_ranged_type">
                             
                             <option value="handgun">Handgun </option>
                             
@@ -536,7 +804,7 @@
                     </div>
                     <div class="sheet-znz-field">
                         <h3>Ammo Type</h3>
-                        <select name="attr_equipped_ammo_type">
+                        <select name="attr_equipped_melee_ammo_type">
                             
                             <option value="light">Light </option>
                             
@@ -556,15 +824,15 @@
                 <div class="sheet-znz-row">
                     <div class="sheet-znz-field">
                         <h3>Reloads</h3>
-                        <input type="number" min="0" name="attr_equipped_ranged_reloads"/>
+                        <input type="number" min="0" name="attr_equipped_melee_ranged_reloads" />
                     </div>
                     <div class="sheet-znz-field sheet-znz-15">
                         <h3>Ammo</h3>
                         <div class="sheet-znz-inner-row">
-                            <input type="number" min="0" name="attr_equipped_ranged_ammo"/>
+                            <input type="number" min="0" name="attr_equipped_melee_ranged_ammo" />
                             <div class="sheet-divider">/</div>
                             <div>
-                                <input type="number" min="0" name="attr_equipped_ranged_ammo_max"/>
+                                <input type="number" min="0" name="attr_equipped_melee_ranged_ammo_max" />
                                 <div class="sheet-znz-description sheet-znz-center">
                                     MAX
                                 </div>
@@ -578,16 +846,16 @@
                     <div class="sheet-znz-inner-row">
                         <div class="sheet-znz-prefixed-input">
                             <span>
-                                D<input type="number" name="attr_equipped_weapon_hit" value ="10" min = "1" max = "99"/>
+                                D<input type="number" name="attr_equipped_melee_weapon_hit" min = "1" max = "99" />
                             </span>
                         </div>
-                        <input type="number" name="attr_equipped_weapon_hit_bonus" value = "0" />
+                        <input type="number" name="attr_equipped_melee_weapon_hit_bonus" />
                     </div>
                     <div class="sheet-znz-description"> Hit Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Range</h3>
-                    <input type="number" name="attr_equipped_weapon_range" value = "1" />
+                    <input type="number" name="attr_equipped_melee_weapon_range" />
                     <div class="sheet-znz-description">Max attack range </div>
                 </div>
             </div>
@@ -598,34 +866,272 @@
                     <div class="sheet-znz-inner-row">
                         <div class="sheet-znz-prefixed-input">
                             <span>
-                                D<input type="number" name="attr_equipped_weapon_damage" value="1" min="1" max="99"/>
+                                D<input type="number" name="attr_equipped_melee_weapon_damage" min="1" max="99" />
                             </span>
                         </div>
-                        <input type="number" name="attr_equipped_weapon_damage_bonus" value = "0" />
+                        <input type="number" name="attr_equipped_melee_weapon_damage_bonus" />
                     </div>
                     <div class="sheet-znz-description"> Damage Dice & Bonus</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Max Attacks</h3>
-                    <input type="number" name="attr_equipped_weapon_attacks" value = "1" />
+                    <input type="number" name="attr_equipped_melee_weapon_attacks" />
                     <div class="sheet-znz-description"> Attacks Per Action</div>
                 </div>
             </div>
+
+
         </div><div class="sheet-znz-itemcard-equipment-fields">
             <div class="sheet-znz-row">
+                <div class="sheet-znz-field">
+                    <h3>Equipment Type</h3>
+                    <select name="attr_equipped_melee_equipment_type">
+                    
+                        <option value="armor">Armor </option>
+                    
+                        <option value="helmet">Helmet </option>
+                    
+                    </select>
+                </div>
+                <div class="sheet-znz-field sheet-znz-15">
+                    <h3>Durability</h3>
+                    <div class="sheet-znz-inner-row">
+                        <div>
+                            <input type="number" min="0" name="attr_equipped_melee_equipment_durability" />
+                        </div>
+                        <div class="sheet-divider">/</div>  
+                        <div>
+                            <input type="number" min="1" name="attr_equipped_melee_equipment_durability_max" />
+                            <div class="sheet-znz-description sheet-znz-center">
+                                MAX
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-znz-itemcard-modifiers">
                 
-    
-        <input type="hidden" name="attr_equipped_equipment_type" />
-    
+                <div class="sheet-znz-field">
+                    
+                    <h3>Attribute Modifiers</h3>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_melee_equipment_1_attr_mod_type">
+                                <option value="" default></option>
+                            
+                                <option value="agility">Agility </option>
+                            
+                                <option value="luck">Luck </option>
+                            
+                                <option value="intelligence">Intelligence </option>
+                            
+                                <option value="vitality">Vitality </option>
+                            
+                                <option value="empathy">Empathy </option>
+                            
+                                <option value="strength">Strength </option>
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_melee_equipment_1_attr_mod_value" />
+                        </div>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_melee_equipment_2_attr_mod_type">
+                                <option value="" default></option>
+                            
+                                <option value="agility">Agility </option>
+                            
+                                <option value="luck">Luck </option>
+                            
+                                <option value="intelligence">Intelligence </option>
+                            
+                                <option value="vitality">Vitality </option>
+                            
+                                <option value="empathy">Empathy </option>
+                            
+                                <option value="strength">Strength </option>
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_melee_equipment_2_attr_mod_value" />
+                        </div>
+                    
+                </div>
 
+                
+                <div class="sheet-znz-field">
+                    <h3>Proficiency Modifiers</h3>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_melee_equipment_1_prof_mod_type">
+                                <option value="" default></option>
+                            
+                                
+                                    <option value="handguns">Handguns </option>
+                                
+                            
+                                
+                                    <option value="shotguns">Shotguns </option>
+                                
+                            
+                                
+                                    <option value="rifles">Rifles </option>
+                                
+                            
+                                
+                                    <option value="archery">Archery </option>
+                                
+                            
+                                
+                                    <option value="throwing weapons">Throwing Weapons </option>
+                                
+                            
+                                
+                                    <option value="unarmed combat">Unarmed Combat </option>
+                                
+                            
+                                
+                                    <option value="sharp melee">Sharp Melee </option>
+                                
+                            
+                                
+                                    <option value="blunt melee">Blunt Melee </option>
+                                
+                            
+                                
+                                    <option value="stealth">Stealth </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                                    <option value="acrobatics">Acrobatics </option>
+                                
+                            
+                                
+                                    <option value="swimming">Swimming </option>
+                                
+                            
+                                
+                                    <option value="climbing">Climbing </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_melee_equipment_1_prof_mod_value"/>
+                        </div>
+                    
+                        <div class="sheet-znz-inner-row">
+                            <select name="attr_equipped_melee_equipment_2_prof_mod_type">
+                                <option value="" default></option>
+                            
+                                
+                                    <option value="handguns">Handguns </option>
+                                
+                            
+                                
+                                    <option value="shotguns">Shotguns </option>
+                                
+                            
+                                
+                                    <option value="rifles">Rifles </option>
+                                
+                            
+                                
+                                    <option value="archery">Archery </option>
+                                
+                            
+                                
+                                    <option value="throwing weapons">Throwing Weapons </option>
+                                
+                            
+                                
+                                    <option value="unarmed combat">Unarmed Combat </option>
+                                
+                            
+                                
+                                    <option value="sharp melee">Sharp Melee </option>
+                                
+                            
+                                
+                                    <option value="blunt melee">Blunt Melee </option>
+                                
+                            
+                                
+                                    <option value="stealth">Stealth </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                                    <option value="acrobatics">Acrobatics </option>
+                                
+                            
+                                
+                                    <option value="swimming">Swimming </option>
+                                
+                            
+                                
+                                    <option value="climbing">Climbing </option>
+                                
+                            
+                                
+                            
+                                
+                            
+                                
+                            
+                            </select>
+                            <input type="number" min="0" name="attr_equipped_melee_equipment_2_prof_mod_value"/>
+                        </div>
+                    
+                </div>
+            </div>
+            <div class="sheet-znz-row sheet-znz-itemcard-button">
             </div>
         </div><div class="sheet-znz-field">
             <h3> Melee Weapon Effect</h3>
-            <input type="text" name="attr_equipped_item_effect"/>
+            <input type="text" name="attr_equipped_melee_item_effect"/>
+        </div><div class="sheet-znz-row sheet-znz-itemcard-melee-fields sheet-znz-itemcard-button">
+            
+                <button type="action" name="act_unequip_melee">Unequip Melee</button>
+            
         </div>
+        <div class="sheet-znz-row sheet-znz-itemcard-ranged-fields sheet-znz-itemcard-button">
+            
+                <button type="action" name="act_unequip_ranged">Unequip Ranged</button>
+            
+        </div>
+        <div class="sheet-znz-row sheet-znz-itemcard-equipment-fields sheet-znz-itemcard-button">
+            
+                <button type="action" name="act_donequipment">Don Equipment</button>
+            
+        </div>
+
+
         <div class="sheet-znz-field sheet-znz-itemcard-note">
             <h3>Notes</h3>
-            <textarea class="sheet-znz-reduced-height" name="attr_equipped_item_note" ></textarea>
+            <textarea name="attr_equipped_melee_item_note" ></textarea>
         </div>
 
         

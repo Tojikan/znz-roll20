@@ -2,23 +2,26 @@
 name - display
 attr - gets used for roll20 attribute name
 value - default value
+hasMax - if stat has max field.
+descript - additional description text
 
 - exp has a special description text
 
 #}
 
-{% macro create(name='', attr='', value='0') %}
+{% macro create(name='', attr='', value='0', hasMax = '', descript = '') %}
     <div class="sheet-znz-field sheet-znz-stat-block">
         <h2>{{ name }}</h2>
         <input type="number" name="attr_{{ attr }}" value="{{ value }}"/>
         <div class="sheet-znz-description">
             <input type="hidden" name="attr_{{ attr }}_max" value="{{ value }}"/>
-                {% if attr === 'exp' %} 
-                    <div class="sheet-znz-xp-text"> <span>10</span>: +1 to any stat/skill </div>
-                    <div class="sheet-znz-xp-text"> <span>30</span>: Learn new ability </div>
-                {% else %}
-                    Max: <span readonly name="attr_{{ attr }}_max"></span> 
-                {% endif %}
+            {% if hasMax === 'true' %}
+                Max: <span readonly name="attr_{{ attr }}_max"></span> 
+            {% endif %}
+
+            {% if descript %}
+                {{ descript | safe }}
+            {% endif %}
         </div>
     </div>
 {% endmacro %}
