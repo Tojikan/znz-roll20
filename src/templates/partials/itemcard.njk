@@ -20,7 +20,7 @@
         {# Type #}
         {% call outputField(attrPrefix + "_item_type", equipped) %}
         <div class="sheet-znz-field sheet-znz-15">
-            <label>Item Type</label>
+            <h3>Item Type</h3>
             <select name="attr_{{ attrPrefix }}_item_type" value="1">
                 <option value="1" default>Misc</option>
                 <option value="2">Melee Weapon</option>
@@ -32,14 +32,14 @@
         
         {# Name #}
         <div class="sheet-znz-field sheet-znz-itemcard-name {{ "sheet-znz-75" if not equipped else "sheet-znz-full" }}">
-            <label>Name</label>
+            <h3>Name</h3>
             <input type="text" name="attr_{{ attrPrefix }}_item_name"/>
         </div>
         
         {# Weight #}
         {% call outputField(attrPrefix + "_item_weight", equipped) %}
         <div class="sheet-znz-field sheet-znz-15">
-            <label>Weight</label>
+            <h3>Weight</h3>
             <input type="number" name="attr_{{ attrPrefix }}_item_weight" min="0"/>
         </div>
         {% endcall %}
@@ -79,12 +79,6 @@
                             {% endfor %}
                         </select>
                     </div>
-                </div>
-                <div class="sheet-znz-row">
-                    <div class="sheet-znz-field">
-                        <h3>Energy per Attack</h3>
-                        <input type="number" min="1" name="attr_{{ attrPrefix }}_melee_energy_cost" {{ 'value="1"'|safe if not equipped }}/>
-                    </div>
                     <div class="sheet-znz-field sheet-znz-0 sheet-znz-right">
                         <h3>Durability</h3>
                         <div class="sheet-znz-inner-row">
@@ -99,6 +93,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="sheet-znz-row sheet-znz-reduced-margin">
+                    <div class="sheet-znz-field">
+                        <h3>Energy per Attack</h3>
+                        <input class="sheet-znz-line-input" type="number" min="1" name="attr_{{ attrPrefix }}_melee_energy_cost" {{ 'value="1"'|safe if not equipped }}/>
                     </div>
                 </div>
             </div>
@@ -157,12 +157,12 @@
                         </div>
                         <input type="number" name="attr_{{ attrPrefix }}_weapon_hit_bonus" {{ 'value="0"'|safe if not equipped }}/>
                     </div>
-                    <div class="sheet-znz-description"> Hit Dice & Bonus</div>
+                    <div class="sheet-znz-description">Roll for if attack hits - Crit: nat 10+</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Range</h3>
                     <input type="number" name="attr_{{ attrPrefix }}_weapon_range" {{ 'value="1"'|safe if not equipped }}/>
-                    <div class="sheet-znz-description">Max attack range </div>
+                    <div class="sheet-znz-description">Max range in squares </div>
                 </div>
             </div>
             
@@ -177,12 +177,12 @@
                         </div>
                         <input type="number" name="attr_{{ attrPrefix }}_weapon_damage_bonus" {{ 'value="0"'|safe if not equipped }}/>
                     </div>
-                    <div class="sheet-znz-description"> Damage Dice & Bonus</div>
+                    <div class="sheet-znz-description">Damage for each attack</div>
                 </div>
                 <div class="sheet-znz-field">
                     <h3>Max Attacks</h3>
                     <input type="number" name="attr_{{ attrPrefix }}_weapon_attacks" {{ 'value="1"'|safe if not equipped }}/>
-                    <div class="sheet-znz-description"> Attacks Per Action</div>
+                    <div class="sheet-znz-description"> Attack per action</div>
                 </div>
             </div>
 

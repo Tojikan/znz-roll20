@@ -1,6 +1,8 @@
 /**
 * Styling for item cards, Inventory, and Equipped Items
 */ 
+
+//Base Item Card
 .sheet-znz-itemcard {
     border: solid 1px $lightgray;
     padding: $gridgap;
@@ -61,6 +63,33 @@
 }
 
 
+//If Equipped
+.sheet-znz-section-weapons {
+    display: flex;
+    margin-bottom: 16px;
+
+    .sheet-znz-block {
+        width: 50%;
+    }
+    
+    h2 {
+        text-align: center;
+    }
+
+    .sheet-znz-itemcard {
+        .sheet-znz-field {
+            flex-basis: 45%;
+        
+            &.sheet-znz-itemcard-name {
+                margin: 0;
+                text-align: left;
+            }
+        }
+    }
+}
+
+
+//Hide fields on Equip
 .sheet-znz-equipped-ranged {
     .sheet-znz-itemcard {
         .sheet-znz-itemcard-melee-fields,
@@ -76,6 +105,17 @@
         .sheet-znz-itemcard-ranged-fields,
         .sheet-znz-itemcard-misc-fields,
         .sheet-znz-itemcard-equipment-fields {
+            display: none;
+        }
+    }
+}
+
+.sheet-znz-equipped-head, .sheet-znz-equipped-body  {
+    .sheet-znz-itemcard {
+        .sheet-znz-itemcard-weapon-fields,
+        .sheet-znz-itemcard-ranged-fields,
+        .sheet-znz-itemcard-melee-fields,
+        .sheet-znz-itemcard-misc-fields {
             display: none;
         }
     }

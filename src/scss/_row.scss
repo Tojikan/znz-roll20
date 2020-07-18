@@ -3,12 +3,12 @@
 
 // Data and fields should go into a field class
 .sheet-znz-field {
-    margin-bottom: 8px;
+    margin-bottom: $fieldBottom;
     width: 100%;
 
     .sheet-znz-description {
         margin-top: 3px;
-        font-size: 10px;
+        font-size: $small;
     }
 }
 
@@ -16,7 +16,7 @@
 // Horizontally lay out fields
 .sheet-znz-row {
     display: flex;
-    margin-bottom: 12px;
+    margin-bottom: $fieldBottom;
     justify-content: space-between;
 
     &.sheet-znz-centered {
@@ -35,6 +35,9 @@
         }
     }
 
+    &.sheet-znz-reduce-margin {
+        margin-bottom: 2px;
+    }
 
     .sheet-znz-field {
         &.sheet-znz-0 {

@@ -25,14 +25,14 @@
             "equipment_affectable": "true"
         },
         {
-            "display_name": "Throwing Weapons",
-            "attr_name": "throwing weapons",
+            "display_name": "Throwing",
+            "attr_name": "throwing",
             "description": "",
             "equipment_affectable": "true"
         },
         {
-            "display_name": "Unarmed Combat",
-            "attr_name": "unarmed combat",
+            "display_name": "Unarmed",
+            "attr_name": "unarmed",
             "description": "",
             "equipment_affectable": "true"
         },

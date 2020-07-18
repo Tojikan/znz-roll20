@@ -10,7 +10,7 @@
     .sheet-znz-item {
         border: solid 1px lightgray;
         padding: 8px; 
-        margin-bottom: 16px;
+        margin-bottom: 2 *$fieldBottom;
 
         label {
             padding: 0;
@@ -47,7 +47,6 @@
 
         .sheet-znz-item-field-label{
             font-weight: 700;
-            font-size: 12px;
         }
 
         .sheet-znz-field-item-name{

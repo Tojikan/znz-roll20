@@ -21,13 +21,18 @@
             "description": ""
         },
         {
-            "display_name": "Mechanical Work",
-            "attr_name": "mechanical work",
+            "display_name": "Chemistry",
+            "attr_name": "Chemistry",
             "description": ""
         },
         {
-            "display_name": "Electrical Work",
-            "attr_name": "electrical work",
+            "display_name": "Engineering",
+            "attr_name": "Engineering",
+            "description": ""
+        },
+        {
+            "display_name": "Electrical",
+            "attr_name": "electrical",
             "description": ""
         },
         {
@@ -86,8 +91,13 @@
             "description": ""
         },
         {
-            "display_name": "Animal Handling",
-            "attr_name": "animal handling",
+            "display_name": "Husbandry",
+            "attr_name": "husbandry",
+            "description": ""
+        },
+        {
+            "display_name": "Gardening",
+            "attr_name": "gardening",
             "description": ""
         }
     ]

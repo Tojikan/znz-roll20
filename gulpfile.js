@@ -53,7 +53,7 @@ gulp.task('sheet', function(){
                     jsonData[filename] = JSON.parse(fs.readFileSync(dataFolder + file));
                 }
             })
-            
+
             return { jsonData };
         }))
         .pipe(nunjucksRender({
@@ -69,6 +69,7 @@ gulp.task('watch', function(){
     gulp.watch('./src/scss/*.scss', gulp.series(['style']));
     gulp.watch('./src/js/sheet-workers/*.js' , gulp.series(['sheet']));
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
+    gulp.watch('./data/*.json' , gulp.series(['sheet']));
 });
 
 //build sheets and styles

@@ -17,16 +17,10 @@
         grid-gap: $gridgap * 2;
 
         grid-template-areas:
-            "name name stat stat stat stat"
-            "attr attr weapon weapon weapon weapon"
-            "attr attr weapon weapon weapon weapon"
-            "attr attr weapon weapon weapon weapon"
-            "attr attr weapon weapon weapon weapon"
-            "skills prof weapon weapon weapon weapon"
-            "skills prof weapon weapon weapon weapon"
-            "skills prof weapon weapon weapon weapon"
-            "skills prof helmet helmet helmet helmet"
-            "skills prof armor armor armor armor"
+            "head head head2 head2 head2 head2"
+            "side side main main main main"
+            "side side main main main main"
+            "block1 block1 block1 block2 block2 block2"
             "inventory inventory inventory inventory inventory inventory"
             "inventory inventory inventory inventory inventory inventory"
             "notes notes notes notes notes notes"
@@ -36,47 +30,19 @@
     }
 
     .sheet-znz-area-name {
-        grid-area: name;
+        grid-area: head;
     }
 
     .sheet-znz-area-status {
-        grid-area: stat;
-        margin-left: 30px;
+        grid-area: head2;
+        margin-left: $gridgap * 2;
     }
 
-    .sheet-znz-area-attributes {
-        grid-area: attr;
+    .sheet-znz-area-main {
+        grid-area: main;
     }
 
-    .sheet-znz-area-equipped-weapon {
-        grid-area: weapon;
-        display: flex;
-
-        .sheet-znz-section {
-            width: 50%;
-        }
+    .sheet-znz-area-sidebar {
+        grid-area: side;
     }
-
-    .sheet-znz-area-skills {
-        grid-area: skills;
-    }
-
-    .sheet-znz-area-prof {
-        grid-area: prof;
-    }
-
-    .sheet-znz-area-equipped-helmet {
-        grid-area: helmet;
-    }
-
-    .sheet-znz-area-equipped-armor {
-        grid-area: armor;
-
-    }
-}
-
-.sheet-znz-area-equipped-helmet,
-.sheet-znz-area-equipped-armor
-{
-    border: solid 2px $black;
 }

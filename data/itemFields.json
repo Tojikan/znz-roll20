@@ -1,0 +1,35 @@
+{
+    "standard": [
+        {
+            "display_name": "Quantity",
+            "attr_name": "item_quantity",
+            "description": ""
+        },
+        {
+            "display_name": "Name",
+            "attr_name": "item_name",
+            "description": ""
+        },
+        {
+            "display_name": "Weight",
+            "attr_name": "item_weight",
+            "description": ""
+        }
+    ],
+    "weapon": [
+        {
+            "display_name": "Ranged Type",
+            "attr_name": "ranged_type",
+            "field_type": "dropdown",
+            "field_options": "weaponTypes.rangedtypes",
+            "category": "ranged",
+            "description": ""
+        },
+        {
+            "display_name": "Ranged Type",
+            "attr_name": "ranged_type",
+            "category": "ranged",
+            "description": ""
+        },
+    ]
+}

@@ -31,61 +31,86 @@
         </div>
     </div>
     
-    {#----- Attributes ----- #}
-    <div class="sheet-znz-area-attributes">
-        <div class="sheet-znz-row-table">
-            <div class="sheet-znz-row sheet-znz-row-table-header">
-                <div class="sheet-znz-field sheet-znz-60">
-                    <h2>Attribute</h2>
-                </div>
+    <div class="sheet-znz-area-sidebar">
+        {#----- Attributes ----- #}
+        <div class="sheet-znz-section-attributes">
+            <div class="sheet-znz-row-table">
+                <div class="sheet-znz-row sheet-znz-row-table-header">
+                    <div class="sheet-znz-field sheet-znz-60">
+                        <h2>Attribute</h2>
+                    </div>
 
-                <div class="sheet-znz-field sheet-znz-40">
-                    <div class="sheet-znz-inner-row">
-                        <div class="sheet-znz-field sheet-znz-50">
-                            <h2>Score</h2>
-                        </div>
-                        <div class="sheet-znz-field sheet-znz-50">
-                            <h2>Bonus</h2>
+                    <div class="sheet-znz-field sheet-znz-40">
+                        <div class="sheet-znz-inner-row">
+                            <div class="sheet-znz-field sheet-znz-50">
+                                <h2>Score</h2>
+                            </div>
+                            <div class="sheet-znz-field sheet-znz-50">
+                                <h2>Bonus</h2>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-
+                {% for attr in jsonData.attributes.list %}
+                    {{ attrRow.create(attr) }}
+                {% endfor %}
             </div>
-            {% for attr in jsonData.attributes.list %}
-                {{ attrRow.create(attr) }}
-            {% endfor %}
+        </div>
+
+        <div class="sheet-znz-section-skills">
+            <div class="sheet-znz-block">
+                <h2>Skills</h2>
+                <div class="sheet-znz-skill-select">
+                    {% for item in jsonData.skills.list %}
+                    {{ skillrow.create("skill", item) }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="sheet-znz-block">
+                <h2>Proficiencies</h2>
+                <div class="sheet-znz-skill-select">
+                    {% for item in jsonData.proficiencies.list %}
+                    {{ skillrow.create("proficiency", item) }}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 
-    {#----- Equipped Weapons ----- #}
-    <div class="sheet-znz-area-equipped-weapon">
-        <div class="sheet-znz-section sheet-znz-equipped-ranged">
-            <h2>Equipped Ranged Weapon</h2>
-            {{ itemcard.create('equipped_ranged', true, "Ranged Weapon", jsonData=jsonData) }}
+    <div class="sheet-znz-area-main">
+        {#----- Equipped Weapons ----- #}
+        <div class="sheet-znz-section-weapons">
+            <div class="sheet-znz-block sheet-znz-equipped-ranged">
+                <h2>Equipped Ranged Weapon</h2>
+                {{ itemcard.create('equipped_ranged', true, "Ranged Weapon", jsonData=jsonData) }}
+            </div>
+            <div class="sheet-znz-block sheet-znz-equipped-melee">
+                <h2>Equipped Melee Weapon</h2>
+                {{ itemcard.create('equipped_melee', true, "Melee Weapon", jsonData=jsonData) }}
+            </div>
         </div>
-        <div class="sheet-znz-section sheet-znz-equipped-melee">
-            <h2>Equipped Melee Weapon</h2>
-            {{ itemcard.create('equipped_melee', true, "Melee Weapon", jsonData=jsonData) }}
+
+        {#------- Equipped Armor ------ #}
+        <div class="sheet-znz-section-equipment">
+            <div class="sheet-znz-block sheet-znz-equipped-head">
+                <h2>Equipped Head Gear</h2>
+                {{ itemcard.create('equipped_head', true, "Head Gear", jsonData=jsonData) }}
+            </div>
+            <div class="sheet-znz-block sheet-znz-equipped-body">
+                <h2>Equipped Body Gear</h2>
+                {{ itemcard.create('equipped_body', true, "Body Gear", jsonData=jsonData) }}
+            </div>
+        </div>
+        <div class="sheet-znz-section-other">
+            <div class="sheet-znz-note">
+                <textarea name="attr_equipped_other"></textarea>
+            </div>
         </div>
     </div>
 
-    <div class="sheet-znz-area-select sheet-znz-area-skills">
-        <h2>Skills</h2>
-        <div class="sheet-znz-skill-select">
-            {% for item in jsonData.skills.list %}
-            {{ skillrow.create("skill", item) }}
-            {% endfor %}
-        </div>
-    </div>
 
-    <div class="sheet-znz-area-select sheet-znz-area-proficiencies">
-        <h2>Proficiencies</h2>
-        <div class="sheet-znz-skill-select">
-            {% for item in jsonData.proficiencies.list %}
-            {{ skillrow.create("proficiency", item) }}
-            {% endfor %}
-        </div>
-    </div>
 
     <div class="sheet-znz-area-equipped-helmet">
     </div>
