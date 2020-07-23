@@ -31,7 +31,7 @@ gulp.task('test', function() {
 gulp.task('style', function() {
     return gulp.src('src/scss/main.scss')
         .pipe(sass().on('error',sass.logError))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('sheet'));
 });
 
 //build character sheet and workers.
@@ -60,7 +60,7 @@ gulp.task('sheet', function(){
             path:['src/templates']
         }))
         .pipe(replace('text/javascript', 'text/worker'))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./sheet'));
 });
 
 
