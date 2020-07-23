@@ -61,300 +61,9 @@
                             </div>
                         </div>
                         <fieldset class="repeating_backpack">
-                           <!--- Item Card Templater
-
-    Template Variables
-    inventory
-
--->
-
-
-<div class="sheet-znz-item">
-    
-    <!-- Item Type and Name -->
-    <div class="sheet-znz-row sheet-znz-no-margin">
-        <div class="sheet-znz-field sheet-znz-15">
-            <label>Item Type</label>
-            <select name="attr_inventory_item_type" value="1">
-                <option value="1" default>Misc</option>
-                <option value="2">Melee Weapon</option>
-                <option value="3">Ranged Weapon</option>
-                <option value="4">Equipment</option>
-            </select>
-        </div>
-        <div class="sheet-znz-field sheet-znz-75">
-            <label>Name</label>
-            <input type="text" name="attr_inventory_item_name"/>
-        </div>
-        <div class="sheet-znz-field sheet-znz-15">
-            <label>Weight</label>
-            <input type="number" name="attr_inventory_item_weight" min="0"/>
-        </div>
-    </div>
-    
-    <div class="sheet-znz-expand-button sheet-znz-expandable-section">
-        <!--- This attribute is shared with an hidden input. The hidden one triggers the expand since expandables need to be siblings-->
-        <input class="sheet-znz-expand-toggle" type="checkbox" name="attr_inventory_expand_item" checked>
-        <label class="sheet-znz-expand-text" for="attr_@attributePrefix_expand_item"><span>Show Item Details</span></label>
-        <label class="sheet-znz-collapse-text" for="attr_@attributePrefix_expand_item"><span>Hide Item Details</span></label>
-    </div>
-    
-    <!--- First Expand - Whole Item Detail --->
-    <input class="sheet-znz-hidden sheet-znz-expand" type="checkbox" name="attr_inventory_expand_item" checked>
-    <div class="sheet-znz-expandable">
-        <!-- Hidden Inputs for setting item type -->
-        <input class="sheet-znz-hidden sheet-znz-item-type-1" type="checkbox" name="attr_inventory_item_type" value="1" checked/>
-        <input class="sheet-znz-hidden sheet-znz-item-type-2" type="checkbox" name="attr_inventory_item_type" value="2"/>
-        <input class="sheet-znz-hidden sheet-znz-item-type-3" type="checkbox" name="attr_inventory_item_type" value="3"/>
-        <input class="sheet-znz-hidden sheet-znz-item-type-4" type="checkbox" name="attr_inventory_item_type" value="4"/>
-        <input type="hidden" name="attr_inventory_item_type" value="1"/> <!--- This needs to be here to set the default value of the selected type if you're putting an expandable around the hidden checkboxes. Why? No Idea. -->
-        
-        <!--- Misc Fields-->
-        <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-misc-fields">
-            <div class="sheet-znz-row sheet-znz-spaced">
-                <div class="sheet-znz-field sheet-znz-25">
-                    <label>Quantity</label>
-                    <input type="number" min="0" name="attr_inventory_item_quantity"/>
-                </div>
-                <div class="sheet-znz-field sheet-znz-75">
-                    <label>Effect</label>
-                    <input type="text" name="attr_inventory_item_effect"/>
-                </div>
-            </div>
-        </div>
-        <!--- End Misc Fields --->
-    
-        <!--- Melee Fields-->
-        <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-melee-fields">
-            <div class="sheet-znz-row sheet-znz-spaced">
-                <div class="sheet-znz-field sheet-znz-25">
-                    <label>Type Bonus</label>
-                    <div class="sheet-znz-inner-row">
-                        <select name="attr_@attributePrefix_melee_type">
-                            <option value="blunt" default>Blunt</option>
-                            <option value="sharp">Sharp</option>
-                            <option value="heavy">Heavy</option>
-                        </select>
-                        <input type="number" name="attr_@attributePrefix_melee_bonus"/>
-                    </div>
-                </div>
-                <div class="sheet-znz-field sheet-znz-15">
-                    <label>Durability</label>
-                    <div class="sheet-znz-inner-row">
-                        <div>
-                            <input type="number" min="0" name="attr_inventory_melee_durability"/>
-                        </div>
-                        <div class="sheet-divider">/</div>  
-                        <div>
-                            <input type="number" min="0" name="attr_inventory_melee_durability_max"/>
-                            <div class="sheet-znz-description-text">
-                                MAX
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sheet-znz-row">
-                <div class="sheet-znz-field sheet-znz-full">
-                    <label>Weapon Effect</label>
-                    <input type="text" name="attr_inventory_item_effect"/>
-                </div>
-            </div>
-            <div class="sheet-znz-row sheet-znz-centered">
-                <div class="sheet-znz-field sheet-znz-33">
-                    <button type="action" name="act_equipmelee">Equip Melee Weapon</button>
-                </div>
-            </div>
-            
-            <!--- Melee Expanding section-->
-            <div class="sheet-znz-expand-button sheet-znz-expandable-section">
-                <input class="sheet-znz-expand-toggle" type="checkbox" name="attr_inventory_expand_melee_details" />
-                <label class="sheet-znz-expand-text" for="attr_@attributePrefix_expand_melee_details"><span>Show Extra Info</span></label>
-                <label class="sheet-znz-collapse-text" for="attr_@attributePrefix_expand_melee_details"><span>Hide Extra Info</span></label>
-            </div>
-            <input class="sheet-znz-hidden sheet-znz-expand" type="checkbox" name="attr_inventory_expand_melee_details" />
-            <div class="sheet-znz-expandable">
-                <div class="sheet-znz-row sheet-znz-spaced">
-                    <div class="sheet-znz-field">
-                        <label>Attack Range</label>
-                        <input type="number" min="0" name="attr_inventory_attack_range" value="1"/>
-                    </div>
-                    <div class="sheet-znz-field sheet-znz-right">
-                        <label>Damage Bonus</label>
-                        <input type="number" min="0" name="attr_inventory_damage_bonus" value="0"/>
-                    </div>
-                </div>
-                <div class="sheet-znz-row sheet-znz-spaced">
-                    <div class="sheet-znz-field">
-                        <label>Bonus Damage Per Additional Energy</label>
-                        <input type="number" name="attr_inventory_weapon_resource_bonus" value="1"/>
-                    </div>
-                    <div class="sheet-znz-field sheet-znz-right">
-                        <label>Energy Consumption Per Attack</label>
-                        <input type="number" name="attr_inventory_energy_consumption" value="1"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--- End Melee Fields --->
-        
-        <!-- Ranged Fields-->
-        <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-ranged-fields">
-            <div class="sheet-znz-row sheet-znz-spaced">
-                <div class="sheet-znz-field">
-                    <label>Reloads</label>
-                    <input type="number" min="0" name="attr_inventory_ranged_reloads"/>
-                </div>
-                <div class="sheet-znz-field">
-                    <label>Ammo</label>
-                    <div class="sheet-znz-inner-row">
-                        <input type="number" min="0" name="attr_inventory_ranged_ammo"/>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" min="0" name="attr_inventory_ranged_ammo_max"/>
-                            <div class="sheet-znz-description-text">
-                                MAX
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sheet-znz-row">
-                <div class="sheet-znz-field sheet-znz-full">
-                    <label>Weapon Effect</label>
-                    <input type="text" name="attr_inventory_item_effect"/>
-                </div>
-            </div>
-            <div class="sheet-znz-row sheet-znz-centered">
-                <div class="sheet-znz-field">
-                    <button type="action" name="act_equipranged">Equip Ranged Weapon</button>
-                </div>
-            </div>
-            <div class="sheet-znz-expand-button sheet-znz-expandable-section">
-                <input class="sheet-znz-expand-toggle" type="checkbox" name="attr_inventory_expand_ranged_details" />
-                <label class="sheet-znz-expand-text" for="attr_@attributePrefix_expand_ranged_details"><span>Show Extra Info</span></label>
-                <label class="sheet-znz-collapse-text" for="attr_@attributePrefix_expand_ranged_details"><span>Hide Extra Info</span></label>
-            </div>
-            <input class="sheet-znz-hidden sheet-znz-expand" type="checkbox" name="attr_inventory_expand_ranged_details" />
-            <div class="sheet-znz-expandable">
-                <div class="sheet-znz-row sheet-znz-spaced">
-                    <div class="sheet-znz-field">
-                        <label>Attack Range</label>
-                        <input type="number" min="0" name="attr_inventory_attack_range"/>
-                    </div>
-                    <div class="sheet-znz-field sheet-znz-right">
-                        <label>Damage Bonus</label>
-                        <input type="number" min="0" name="attr_inventory_damage_bonus" value="0"/>
-                    </div>
-                </div>
-                <div class="sheet-znz-row sheet-znz-spaced">
-                    <div class="sheet-znz-field">
-                        <label>Bonus Damage Per Additional Ammo</label>
-                        <input type="number" min="1" name="attr_inventory_weapon_resource_bonus" value="1"/>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <!--- End Ranged Fields --->
-        
-        <!-- Equipment Fields-->
-        <div class="sheet-znz-inventory-type-fields sheet-znz-inventory-item-equipment-fields">
-            <div class="sheet-znz-row sheet-znz-spaced">
-                <div class="sheet-znz-field">
-                    <label>Damage Reduction</label>
-                    <input type="number" name="attr_inventory_equipment_damage_reduction" value="0"/>
-                </div>
-                <div class="sheet-znz-field sheet-znz-right">
-                    <label>Attribute Modifier</label>
-                    <div class="sheet-znz-inner-row">
-                        <select name="attr_equipment_attr_mod_type">
-                            <option value="" selected>Select Attribute</option>
-                            <option value="intelligence">Intelligence</option>
-                            <option value="strength">Strength</option>
-                            <option value="dexterity">Dexterity</option>
-                            <option value="empathy">Empathy</option>
-                            <option value="awareness">Awareness</option>
-                            <option value="tenacity">Tenacity</option>
-                            <option value="health">Health</option>
-                        </select>
-                        <input type="number" name="attr_equip_attr_bonus"/>
-                    </div>
-                </div>
-            </div>
-            <div class="sheet-znz-row">
-                <div class="sheet-znz-field sheet-znz-25">
-                    <label>Durability</label>
-                    <div class="sheet-znz-inner-row">
-                        <div>
-                            <input type="number" min="0" name="attr_inventory_equipment_durability"/>
-                        </div>
-                        <div class="sheet-divider">/</div>  
-                        <div>
-                            <input type="number" min="0" name="attr_inventory_equipment_durability_max"/>
-                            <div class="sheet-znz-description-text">
-                                MAX
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sheet-znz-field sheet-znz-right">
-                    <label>Proficiency Modifier</label>
-                    <div class="sheet-znz-inner-row">
-                        <select name="attr_equipment_prof_mod_type">
-                            <option value="" selected>Select Proficiency</option>
-                                <option value="pistols">Shooting Pistols</option>
-                                <option value="shotguns">Shooting Shotguns</option>
-                                <option value="rifles">Shooting Rifles</option>
-                                <option value="unarmed">Unarmed Combat</option>
-                                <option value="sharpmelee">Sharp Melee Weapons</option>
-                                <option value="bluntmelee">Blunt Melee Weapons</option>
-                                <option value="throwing">Throwing Weapons</option>
-                                <option value="archery">Archery</option>
-                                <option value="stealth">Stealth</option>
-                                <option value="pickpocket">Pickpocketing</option>
-                                <option value="repair">Basic Repair</option>
-                                <option value="crafting">Basic Crafting</option>
-                                <option value="driving">Driving</option>
-                                <option value="cooking">Cooking</option>
-                                <option value="firstaid">First Aid</option>
-                                <option value="survival">Survival</option>
-                                <option value="performance">Performance</option>
-                                <option value="intimidation">Intimidation</option>
-                                <option value="persuasion">Persuasion</option>
-                                <option value="negotiation">Negotiation</option>
-                                <option value="investigation">Investigation</option>
-                                <option value="climbing">Climbing</option>
-                                <option value="swimming">Swimming</option>
-                                <option value="swimming">Athletics</option>
-                        </select>
-                        <input type="number" name="attr_equip_prof_bonus"/>
-                    </div>
-                </div>
-            </div>
-            <div class="sheet-znz-row">
-                <div class="sheet-znz-field sheet-znz-full">
-                    <label>Equipment Effect</label>
-                    <input type="text" name="attr_inventory_item_effect"/>
-                </div>
-            </div>
-            <div class="sheet-znz-row sheet-znz-centered">
-                <div class="sheet-znz-field">
-                    <button type="action" name="act_wearequipment">Wear Equipment</button>
-                </div>
-            </div>
-            
-        </div>
-        <!--- End Equipment Fields-->
-
-        <!-- Note -->
-        <div class="sheet-znz-note">
-            <label>Notes</label> 
-            <textarea class="sheet-znz-reduced-height" name="attr_inventory_item_note" ></textarea>
-        </div>
-    </div>
-    
-</div>
+                           @@include('./components/_item-card.html', {
+                               'attributePrefix': 'inventory'
+                           })
                         </fieldset>
                     </div>
                 </div>
@@ -1005,9 +714,88 @@
             <textarea type="text" name="attr_notes"></textarea>
         </div>
     </div>
+    <script type="text/javascript">
+    /** inject:workers **/
+    var availableAbilities = {
+    default:
+        "Select an ability to see its description.",
+    bullseye: 
+        "+ Know exactly how much a ranged attack challenge is. \n\n + Ranged weapons critically strike on a natural 9.",
+    martialartist: 
+        "+ Know exactly how much a melee attack challenge level is. \n\n + Successful dodging allows you to make a free melee attack roll.",
+    lucky: 
+        "+ 3 times a play session, you can re-roll any roll. You can choose which roll to accept. ",
+    stable: 
+        "+ When your sanity breaks, choose which traumatic response action to take. \n\n + You can give your sanity points to other players.",
+    motivational: 
+        "+ 3 times a day, give someone else a +2 bonus prior to their next roll as a free action.",
+    highoctane: 
+        "+ You can take one additional combat action on your turn in exchange for 3 energy.",
+    knowledgeable: 
+        "+ Once a day, you can attempt any skill action for a skill you don't possess by passing an intelligence check first. You must still roll the skill check after.",
+    speedster:
+        "+ Gain an additional 2 movement speed. \n + Gain ability to jump back one space as an action or when you attempt to dodge."
+}
 
-    <script type="text/worker">
-        const stats = [
+
+
+var availableFlaws = {
+    default:
+        "Select a flaw to see its description.",
+    nearsighted: 
+        "- Occasionally, your glasses may break. \n\n - Once your glasses are broken, you can attempt to fix them or scavenge for other glasses with matching prescriptions. \n\n - Once your glasses are broken, reduce all awareness and ranged attack rolls by half.",
+    curious: 
+        "- Occasionally, you will have an urge to explore or visit an certain area. \n\n - You can resist this urge by spending 10 sanity.",
+    sickly: 
+        "- You have a condition which requires taking 1 special medicine each day. \n\n - On days you do not take this medicine, take a third of your maximum health as damage. \n\n - Start the game with 7 of the special medicine.",
+    clumsy: 
+        "- When doing actions such as sneaking or scavenging, you will occasionally cause a disturbance which leads to an encounter. \n\n - Occasionally, you can slip or trip while moving.",
+    alcoholic: 
+        "- You have constant urges to drink alcohol once a day.   \n\n - If you fail to do so by the end of the day. you will take 2 health, sanity, and energy damage. \n\n - This damage doubles for each consecutive day you fail to do so and resets to 2 after you consume some. \n\n You cannot hit 0 through this effect. This effect will can only reduce you to 1 at most.",
+    fainthearted:
+        "- Occasionally, roll a tenacity check at the start of a battle. If you fail the check, your first action will be a freeze.",
+    vulnerable:
+        "- Roll a health check whenever you take damage. If you fail the check, take double damage.",
+    unlucky: 
+        "- 3 times a play session, the ZM will force you to re-roll your dice roll, making you take the lower roll.",
+}
+
+
+
+
+on("change:repeating_abilities:ability", function(eventInfo){
+getAttrs([
+    "repeating_abilities_ability"
+], function(value){
+    var abilityName = value["repeating_abilities_ability"];
+
+
+    if (abilityName in availableAbilities){
+        setAttrs({
+            repeating_abilities_abilitytext: availableAbilities[abilityName]
+        });
+    }
+});
+});
+
+on("change:repeating_flaws:flaw", function(eventInfo){
+getAttrs([
+    "repeating_abilities_flaw"
+], function(value){
+    var flawName = value["repeating_abilities_flaw"];
+
+
+    if (flawName in availableFlaws){
+        setAttrs({
+            repeating_abilities_flawtext: availableFlaws[flawName]
+        });
+    }
+});
+});
+
+
+
+    const stats = [
     "intelligence",
     "strength", 
     "dexterity",
@@ -1016,6 +804,8 @@
     "tenacity",
     "health"
     ];
+
+const data = [{"display_name":"Quantity","attr_name":"item_quantity"},{"display_name":"Name","attr_name":"item_name"},{"display_name":"Weight","attr_name":"item_weight"}];
 
 
 const setTotalAttrs = () => {
@@ -1075,345 +865,14 @@ stats.forEach(function (stat) {
 });
 
 
-        var availableAbilities = {
-        default:
-            "Select an ability to see its description.",
-        bullseye: 
-            "+ Know exactly how much a ranged attack challenge is. \n\n + Ranged weapons critically strike on a natural 9.",
-        martialartist: 
-            "+ Know exactly how much a melee attack challenge level is. \n\n + Successful dodging allows you to make a free melee attack roll.",
-        lucky: 
-            "+ 3 times a play session, you can re-roll any roll. You can choose which roll to accept. ",
-        stable: 
-            "+ When your sanity breaks, choose which traumatic response action to take. \n\n + You can give your sanity points to other players.",
-        motivational: 
-            "+ 3 times a day, give someone else a +2 bonus prior to their next roll as a free action.",
-        highoctane: 
-            "+ You can take one additional combat action on your turn in exchange for 3 energy.",
-        knowledgeable: 
-            "+ Once a day, you can attempt any skill action for a skill you don't possess by passing an intelligence check first. You must still roll the skill check after.",
-        speedster:
-            "+ Gain an additional 2 movement speed. \n + Gain ability to jump back one space as an action or when you attempt to dodge."
-}
-
-
-
-var availableFlaws = {
-        default:
-            "Select a flaw to see its description.",
-        nearsighted: 
-            "- Occasionally, your glasses may break. \n\n - Once your glasses are broken, you can attempt to fix them or scavenge for other glasses with matching prescriptions. \n\n - Once your glasses are broken, reduce all awareness and ranged attack rolls by half.",
-        curious: 
-            "- Occasionally, you will have an urge to explore or visit an certain area. \n\n - You can resist this urge by spending 10 sanity.",
-        sickly: 
-            "- You have a condition which requires taking 1 special medicine each day. \n\n - On days you do not take this medicine, take a third of your maximum health as damage. \n\n - Start the game with 7 of the special medicine.",
-        clumsy: 
-            "- When doing actions such as sneaking or scavenging, you will occasionally cause a disturbance which leads to an encounter. \n\n - Occasionally, you can slip or trip while moving.",
-        alcoholic: 
-            "- You have constant urges to drink alcohol once a day.   \n\n - If you fail to do so by the end of the day. you will take 2 health, sanity, and energy damage. \n\n - This damage doubles for each consecutive day you fail to do so and resets to 2 after you consume some. \n\n You cannot hit 0 through this effect. This effect will can only reduce you to 1 at most.",
-        fainthearted:
-            "- Occasionally, roll a tenacity check at the start of a battle. If you fail the check, your first action will be a freeze.",
-        vulnerable:
-            "- Roll a health check whenever you take damage. If you fail the check, take double damage.",
-        unlucky: 
-            "- 3 times a play session, the ZM will force you to re-roll your dice roll, making you take the lower roll.",
-}
-
-
-
-
-on("change:repeating_abilities:ability", function(eventInfo){
-    getAttrs([
-        "repeating_abilities_ability"
-    ], function(value){
-        var abilityName = value["repeating_abilities_ability"];
-
-
-        if (abilityName in availableAbilities){
-            setAttrs({
-                repeating_abilities_abilitytext: availableAbilities[abilityName]
-            });
-        }
-    });
-});
-
-on("change:repeating_flaws:flaw", function(eventInfo){
-    getAttrs([
-        "repeating_abilities_flaw"
-    ], function(value){
-        var flawName = value["repeating_abilities_flaw"];
-
-
-        if (flawName in availableFlaws){
-            setAttrs({
-                repeating_abilities_flawtext: availableFlaws[flawName]
-            });
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-        //Button Actions
-on("clicked:unequip_ranged_weapon", function(eventInfo){
-    unequip_weapon("ranged");
-});
-
-on("clicked:unequip_melee_weapon", function(eventInfo){
-    unequip_weapon("melee");
-});
-
-// Repeater Button Actions - can't have multiple underscores.
-on("clicked:repeating_melee:equipmelee", function(eventInfo){
-    //strip out everything after last underscore, which would be the button's name
-    //gets us the row ID
-    var underscoreIndex = eventInfo.sourceAttribute.lastIndexOf("_"),
-        rowId = eventInfo.sourceAttribute.substr(0, underscoreIndex);
-
-    unequip_weapon("melee");
-    equip_weapon("melee", rowId)
-});
-
-on("clicked:repeating_ranged:equiprange", function(eventInfo){
-    //strip out everything after last underscore, which would be the button's name
-    //gets us the row ID
-    var underscoreIndex = eventInfo.sourceAttribute.lastIndexOf("_"),
-        rowId = eventInfo.sourceAttribute.substr(0, underscoreIndex);
-
-    unequip_weapon("ranged");
-    equip_weapon("ranged", rowId)
-});
-
-
-// Unequip - basically a move function. 
-function unequip_weapon(type){
-
-    var weaponFields = getWeaponFields(type, "equipped_" + type + "_"); //examples: equipped_ranged_ammo  ,  equipped_melee_durability
-    
-    getAttrs(weaponFields, function (values){
-
-        //check if we actually have values in the equipped weapon. before unequipping
-        var isEmpty = true;
-        for (let val in values){
-            if (values[val].length){
-                isEmpty = false;
-            }
-        }
-        if (isEmpty){
-            return;
-        }
-
-        //Create new Row
-        var newInvRowId = generateRowID();
-        var newInvRowAttrs = {};
-
-        //get the keys for inventory item and equipped item.
-        var invFields = getWeaponFields(type, "repeating_" + type + "_" + newInvRowId + "_inv_" + type + "_"),
-            valueFields = getWeaponFields(type, "equipped_" + type +  "_");
-
-        // loop is shorthand for: newInvRowAttrs["repeating_" + type + "_" + newInvRowId + "_inv_" + type + "_name"] = values["equipped_" + type + "_name"];
-        for (let i = 0; i < invFields.length; i++){
-            newInvRowAttrs[invFields[i]] = values[valueFields[i]];
-        }
-
-        //add new row in inventory. 
-        setAttrs(newInvRowAttrs);
-
-
-        //struct for clearing equipped weapon.
-        var fieldClearStruct = getWeaponFields(type, "equipped_" + type + "_", true) //example ['equipped_ranged_note'] : ''
-
-        setAttrs(fieldClearStruct);
-    });
-}
-
-
-//Equip inventory item.
-function equip_weapon(type, rowId){
-
-    var weaponFields = getWeaponFields(type, rowId + "_inv_" + type + "_"); //examples: equipped_ranged_ammo  ,  equipped_melee_durability
-
-    getAttrs(weaponFields, function (values){
-
-        if (Object.keys(values).length === 0) {
-            return;
-        }
-
-
-
-        var fieldSetStruct = getWeaponFields(type, "equipped_" + type + "_", true), //the struct to be set
-            fieldValues = getWeaponFields(type, ""); // simple array of values that we will need as keys for both fieldSetStruct and values
-
-
-        for (let i = 0; i < fieldValues.length; i++){
-            fieldSetStruct["equipped_" + type + "_" + fieldValues[i]] = values[rowId + "_inv_" + type + "_" + fieldValues[i]];
-        }
-
-        //set equipped and remove current.
-        setAttrs(fieldSetStruct);
-        removeRepeatingRow(rowId);
-
-    });
-}
-
-
-
-
-/**
- * Helper in order to get arrays or structs of weapon field names needed for the various functions.
- * Lets us use a single equip weapon function as it handles both fields for ranged or melee
- * These are often used to dynamically loop over keys in a struct.
- * 
- * @param {string} type Melee or Ranged
- * @param {string} prefix String appended in front of each returned field name
- * @param {boolean} asStruct Determine if we return a struct or an array.
- */
-function getWeaponFields(type, prefix, asStruct = false){
-    var rangedFields = ["name", "weight", "ammo", "ammo_max", "reloads", "note"],
-        meleeFields = ["name", "weight", "durability", "durability_max", "durability_rating", "note"],
-        targetField = [];
-
-
-    //which field array to use. 
-    if (type === "ranged"){
-        targetField = rangedFields;
-    } else if (type === "melee"){
-        targetField = meleeFields;
-    }
- 
-    if (asStruct){
-        //Return struct, in which each key is the a field name with a prefix and set the value to ""
-        let resultStruct = {};
-
-        for (let i = 0; i < targetField.length; i++) {
-            resultStruct[prefix + targetField[i]] = "";
-        }
-
-        return resultStruct;
-    } else{
-        //Return array of field names with a prefix.
-        for(let i = 0; i < targetField.length; i++){
-            targetField[i]= prefix + targetField[i];
-        }
-
-        return targetField;
-    }
-}
-        var bagTypes = {
-    none: 5,
-    tiny: 10,
-    small: 25,
-    medium: 40,
-    large: 75
-}
-
-
-on("change:bagtype", function(eventInfo){
-    getAttrs([
-        "bagtype"
-    ], function(value){
-        let bag = value['bagtype'];
-
-        if (bag in bagTypes){
-            setAttrs({
-                inventory_max_weight: bagTypes[bag]
-            });
-        }
-    });
-});
-        //Update hidden ranged weight
-on ('change:repeating_ranged:inv_ranged_weight remove:repeating_ranged', function(){
-    repeatingSum('ranged_total_weight', 'ranged', 'inv_ranged_weight');
-});
-
-//Update hidden melee weight
-on ('change:repeating_melee:inv_melee_weight remove:repeating_melee', function(){
-    repeatingSum('melee_total_weight', 'melee', 'inv_melee_weight');
-});
-
-//Update hidden item weight
-on ('change:repeating_inventory:inv_item_weight change:repeating_inventory:inv_item_quantity  remove:repeating_inventory', function(){
-    repeatingSum('misc_total_weight', 'inventory', ['inv_item_weight', 'inv_item_quantity']);
-});
-
-//Add up weights
-on ('change:misc_total_weight change:melee_total_weight change:ranged_total_weight', function(){
-    getAttrs([
-        'melee_total_weight',
-        'misc_total_weight',
-        'ranged_total_weight',
-        'inventory_weight',
-        'inventory_max_weight'
-    ], function(values){
-        let melee = values['melee_total_weight'],
-            ranged = values['ranged_total_weight'],
-            misc = values['misc_total_weight'],
-            currentWeight = values['inventory_weight'],
-            maxWeight = values['inventory_max_weight'],
-            exceedWeight = false;
-
-        let newWeight = melee + ranged + misc;
-
-        if (newWeight === currentWeight){
-            return;
-        }
-
-        if (newWeight > maxWeight){
-            exceedWeight = true;
-        }
-
-        setAttrs({
-            ['inventory_weight']: newWeight,
-            ['weight_check']: (exceedWeight) ? 1 : 0
-        })
-
-    });
-});
-
-
-//https://wiki.roll20.net/RepeatingSum
-const repeatingSum = (destinations, section, fields) => {
-    if (!Array.isArray(destinations)) destinations = [destinations.replace(/\s/g, '').split(',')];
-    if (!Array.isArray(fields)) fields = [fields.replace(/\s/g, '').split(',')];
-    getSectionIDs(`repeating_${section}`, idArray => {
-        const attrArray = idArray.reduce((m, id) => [...m, ...(fields.map(field => `repeating_${section}_${id}_${field}`))], []);
-        getAttrs([...attrArray], v => {
-            const getValue = (section, id, field) => v[`repeating_${section}_${id}_${field}`] === 'on' ? 1 : parseFloat(v[`repeating_${section}_${id}_${field}`]) || 0;
-            const commonMultipliers = (fields.length <= destinations.length) ? [] : fields.splice(destinations.length, fields.length - destinations.length);
-            const output = {};
-            destinations.forEach((destination, index) => {
-                output[destination] = idArray.reduce((total, id) => total + getValue(section, id, fields[index]) * commonMultipliers.reduce((subtotal, mult) => subtotal * getValue(section, id, mult), 1), 0);
-            });
-            setAttrs(output);
-        }); 
-    }); 
-};
-        //This has to be included AFTER workers-abilities-flaws.js
-//Randomizes a flaw
-
-on("clicked:randomizeflaw", function(){
-    let keys = Object.keys(availableFlaws);
-
-    let randomKey = keys[keys.length * Math.random() << 0];
-
-    //Prevent it for being the Default option. 
-    while (randomKey === "default"){
-        randomKey = keys[keys.length * Math.random() << 0];
-    }
-
-    var newFlawId = generateRowID();
-    var newFlaw = {};
-
-    newFlaw["repeating_flaws_" + newFlawId + "_flaw"] = randomKey;
-
-    setAttrs(newFlaw);
-
-});
+    /** endinject **/
+    </script>
+
+    <script type="text/javascript">
+        @@include('../js/sheet/workers-attrs.js')
+        @@include('../js/sheet/workers-abilities-flaws.js')
+        @@include('../js/sheet/workers-equip.js')
+        @@include('../js/sheet/workers-bag-select.js')
+        @@include('../js/sheet/workers-inventory-weight.js')
+        @@include('../js/sheet/workers-randomize-flaw.js')
     </script>

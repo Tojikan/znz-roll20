@@ -8,6 +8,8 @@ const stats = [
     "health"
     ];
 
+const data = [['data']];
+
 
 const setTotalAttrs = () => {
     getAttrs(stats, values => {
