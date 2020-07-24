@@ -106,21 +106,3 @@
         }
     }
 }
-
-.sheet-znz-row-table {
-
-    .sheet-znz-row {
-        border-bottom: thin solid;
-        border-color: lightgrey;
-        padding: 10px 0;
-        margin-bottom: 0;
-
-        .sheet-znz-field {
-            margin-bottom: 0;
-        }
-
-        &.sheet-znz-row-table-header {
-            padding: 0;
-        }
-    }
-}

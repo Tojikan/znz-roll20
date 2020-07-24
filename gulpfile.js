@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const tap = require('gulp-tap');
 const inject = require('gulp-inject');
+const removeEmptyLines = require('gulp-remove-empty-lines');
 const log = require('fancy-log');
 
 const dataFolder = './data/';
@@ -55,6 +56,7 @@ gulp.task('sheet', function(){
             path:['src/templates']
         }))
         .pipe(replace('text/javascript', 'text/worker'))
+        .pipe(removeEmptyLines())
         .pipe(gulp.dest('./sheet'));
 });
 

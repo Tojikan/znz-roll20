@@ -1,0 +1,48 @@
+{# Output the attribute table
+    - data - array of all attributes fields
+    - vals - array of attribute mins, maxes, and default values
+    - headerArray - array of strings for header. Should be only 3 of them
+#}
+
+{% macro create(data="", vals = "" , headerArray= ["Attribute", "Score", "Bonus"]) %}
+<table class="sheet-znz-row-table">
+    {% if headerArray %}
+    <tr class="sheet-znz-header">
+    {% for head in headerArray %}
+        <th>{{ head }}</th>
+    {% endfor %}
+    </tr>
+    {% endif %}
+        
+
+    {% for field in data %}
+    <tr>
+        <td>
+            <h3>{{field.display_name}}</h3>
+            <div class="sheet-znz-description">
+                {{field.reminder_note}}
+            </div>
+        </td>
+        <td><input type="number" name="attr_{{field.attr_name}}" min="{{vals.min}}" value="{{vals.default}}" max="{{vals.max}}" /></td>
+        <td>
+            <div class="sheet-znz-attr-mod">
+                <input type="number" readonly name="attr_{{field.attr_name}}_{{field.mod_attr}}" value="0"/>
+                <div class="sheet-znz-attr-bonus">
+                    {# This select is for styling the bonus #}
+                    <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_{{field.bonus_check}}">
+                        <option value="none" default />
+                        <option value="positive" default />
+                        <option value="negative" default />
+                    </select>
+                    <span readonly name="attr_{{field.attr_name}}_{{field.bonus_attr}}"></span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    
+    {% endfor %}
+
+
+</table>
+
+{% endmacro %}

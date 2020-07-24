@@ -141,16 +141,6 @@ input.sheet-znz-line-input {
     .sheet-znz-row .sheet-znz-inner-row.sheet-znz-no-align {
       align-items: initial; }
 
-.sheet-znz-row-table .sheet-znz-row {
-  border-bottom: thin solid;
-  border-color: lightgrey;
-  padding: 10px 0;
-  margin-bottom: 0; }
-  .sheet-znz-row-table .sheet-znz-row .sheet-znz-field {
-    margin-bottom: 0; }
-  .sheet-znz-row-table .sheet-znz-row.sheet-znz-row-table-header {
-    padding: 0; }
-
 /**
 * Component specific styles
 */
@@ -172,6 +162,37 @@ input.sheet-znz-line-input {
     font-size: 11px; }
     .sheet-znz-stat-block .sheet-znz-description span {
       font-weight: 700; }
+
+table.sheet-znz-row-table {
+  width: 100%; }
+  table.sheet-znz-row-table td {
+    padding: 10px 5px; }
+    table.sheet-znz-row-table td .sheet-znz-attr-mod {
+      display: flex;
+      align-items: center; }
+      table.sheet-znz-row-table td .sheet-znz-attr-mod input {
+        width: 30px;
+        margin-right: 5px; }
+  table.sheet-znz-row-table tr {
+    border-top: thin solid;
+    border-bottom: thin solid;
+    border-color: lightgrey; }
+    table.sheet-znz-row-table tr.sheet-znz-header {
+      border: none; }
+    table.sheet-znz-row-table tr:last-child {
+      border-bottom: none; }
+
+.sheet-znz-skill-table {
+  width: 100%; }
+  .sheet-znz-skill-table tr {
+    margin-bottom: 2px; }
+    .sheet-znz-skill-table tr.sheet-znz-header {
+      border-bottom: solid 1px black; }
+    .sheet-znz-skill-table tr td {
+      vertical-align: bottom; }
+      .sheet-znz-skill-table tr td .sheet-znz-line-input {
+        padding: 0;
+        margin-bottom: 4px; }
 
 .sheet-znz-section-skills {
   display: flex; }

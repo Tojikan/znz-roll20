@@ -1,5 +1,5 @@
 {
-    "name": [
+    "nameArea": [
         {
             "display_name" : "Name",
             "attr_name" : "char_name",
@@ -12,7 +12,7 @@
             "display_name" : "Character Notes",
             "attr_name" : "char_note",
             "field_type" : "textarea",
-            "field_class" : "",
+            "field_class" : "sheet-znz-note-tiny",
             "description" : ""
         }
     ],
@@ -62,39 +62,57 @@
 
     "attributes": [
         {
+            "display_name": "Strength",
+            "attr_name": "strength",
+            "reminder_note": "Melee Damage, Power",
+            "bonus_attr": "bonus",
+            "bonus_check": "bonus_check",
+            "mod_attr": "mod",
+            "description": ""
+        },
+        {
             "display_name": "Agility",
             "attr_name": "agility",
             "reminder_note": "Dodging, Initiative, Dexterity",
+            "bonus_attr": "bonus",
+            "bonus_check": "bonus_check",
+            "mod_attr": "mod",
             "description": ""
         },
         {
             "display_name": "Luck",
             "attr_name": "luck",
             "reminder_note": "Chance, XP Gain, Loot",
+            "bonus_attr": "bonus",
+            "bonus_check": "bonus_check",
+            "mod_attr": "mod",
             "description": ""
         },
         {
             "display_name": "Intelligence",
             "attr_name": "intelligence",
             "reminder_note": "Max Sanity, Knowledge",
+            "bonus_attr": "bonus",
+            "bonus_check": "bonus_check",
+            "mod_attr": "mod",
             "description": ""
         },
         {
             "display_name": "Vitality",
             "attr_name": "vitality",
-            "reminder_note": "Max HP, Max Energy, Physical Health",
+            "reminder_note": "Max HP & Energy, Physical Health",
+            "mod_attr": "mod",
+            "bonus_attr": "bonus",
+            "bonus_check": "bonus_check",
             "description": ""
         },
         {
             "display_name": "Empathy",
             "attr_name": "empathy",
             "reminder_note": "Interpersonal Skills, Insight",
-            "description": ""
-        },
-        {
-            "display_name": "Strength",
-            "attr_name": "strength",
-            "reminder_note": "Melee Damage, Power",
+            "bonus_attr": "bonus",
+            "bonus_check": "bonus_check",
+            "mod_attr": "mod",
             "description": ""
         }
     ],
@@ -103,101 +121,158 @@
         {
             "display_name": "Lockpicking",
             "attr_name": "lockpicking",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Hotwiring",
             "attr_name": "hotwiring",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Hacking",
             "attr_name": "hacking",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
-            "display_name": "Sleight of Hand",
-            "attr_name": "sleight of hand",
+            "display_name": "Thievery",
+            "attr_name": "thievery",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Chemistry",
             "attr_name": "Chemistry",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Engineering",
             "attr_name": "Engineering",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Electrical",
             "attr_name": "electrical",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Electronics",
             "attr_name": "electronics",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Medicine",
             "attr_name": "medicine",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Explosives",
             "attr_name": "explosives",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Boat Piloting",
-            "attr_name": "boat piloting",
+            "attr_name": "boat_piloting",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Plane Piloting",
-            "attr_name": "plane piloting",
+            "attr_name": "plane_piloting",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Nature",
             "attr_name": "nature",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Tailoring",
             "attr_name": "tailoring",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Construction",
             "attr_name": "construction",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Gunsmithing",
             "attr_name": "gunsmmithing",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Leatherworking",
             "attr_name": "leatherworking",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
+            "skill_bonus" : "",
             "description": ""
         },
         {
             "display_name": "Metalworking",
             "attr_name": "metalworking",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": ""
         },
         {
             "display_name": "Husbandry",
             "attr_name": "husbandry",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": ""
         },
         {
             "display_name": "Gardening",
             "attr_name": "gardening",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": ""
         }
     ],
@@ -205,131 +280,187 @@
     "proficiencies": [
         {
             "display_name": "Handguns",
-            "attr_name": "handguns",
+            "attr_name": "prof_handguns",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Shotguns",
-            "attr_name": "shotguns",
+            "attr_name": "prof_shotguns",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Rifles",
-            "attr_name": "rifles",
+            "attr_name": "prof_rifles",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Archery",
-            "attr_name": "archery",
+            "attr_name": "prof_archery",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Throwing",
-            "attr_name": "throwing",
+            "attr_name": "prof_throwing",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Unarmed",
-            "attr_name": "unarmed",
+            "attr_name": "prof_unarmed",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Sharp Melee",
-            "attr_name": "sharp melee",
+            "attr_name": "prof_sharp melee",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Blunt Melee",
-            "attr_name": "blunt melee",
+            "attr_name": "prof_blunt melee",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Stealth",
-            "attr_name": "stealth",
+            "attr_name": "prof_stealth",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "First Aid",
-            "attr_name": "first aid",
+            "attr_name": "prof_first aid",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         },
         {
             "display_name": "Crafting",
-            "attr_name": "crafting",
+            "attr_name": "prof_crafting",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         },
         {
             "display_name": "Cooking",
-            "attr_name": "cooking",
+            "attr_name": "prof_cooking",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         },
         {
             "display_name": "Driving",
-            "attr_name": "driving",
+            "attr_name": "prof_driving",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         },
         {
             "display_name": "Investigation",
-            "attr_name": "investigation",
+            "attr_name": "prof_investigation",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         },
         {
             "display_name": "Acrobatics",
-            "attr_name": "acrobatics",
+            "attr_name": "prof_acrobatics",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Swimming",
-            "attr_name": "swimming",
+            "attr_name": "prof_swimming",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Climbing",
-            "attr_name": "climbing",
+            "attr_name": "prof_climbing",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": "true"
         },
         {
             "display_name": "Persuasion",
-            "attr_name": "persuasion",
+            "attr_name": "prof_persuasion",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         },
         {
             "display_name": "Intimidation",
-            "attr_name": "intimidation",
+            "attr_name": "prof_intimidation",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         },
         {
             "display_name": "Performance",
-            "attr_name": "performance",
+            "attr_name": "prof_performance",
+            "mod_attr": "mod",
+            "mod_check": "mod_check",
             "description": "",
+            "prof_bonus": "",
             "equipment_affectable": ""
         }
     ],
 
     "item": {
-        "prefixes": [
-            "equipped",
-            "inventory"
-        ],
         "standard": [
             {
                 "display_name" : "Item Type",
@@ -396,7 +527,7 @@
                         "value": "powered"
                     }
                 ],
-                "item_category" : "melee",
+                "weapon_category" : "melee",
                 "field_note" : "",
                 "description" : ""
             },
@@ -409,7 +540,7 @@
                 "field_class" : "",
                 "field_min" : "0",
                 "field_max" : "",
-                "item_category" : "melee",
+                "weapon_category" : "melee",
                 "field_note" : "",
                 "description" : ""
             },
@@ -442,7 +573,7 @@
                         "value": "throwing"
                     }
                 ],
-                "item_category" : "ranged",
+                "weapon_category" : "ranged",
                 "field_note" : "",
                 "description" : ""
             },
@@ -455,7 +586,7 @@
                 "field_class" : "",
                 "field_min" : "0",
                 "field_max" : "",
-                "item_category" : "ranged",
+                "weapon_category" : "ranged",
                 "field_note" : "",
                 "description" : ""
             },
@@ -468,7 +599,7 @@
                 "field_class" : "",
                 "field_min" : "0",
                 "field_max": "",    
-                "item_category" : "ranged",
+                "weapon_category" : "ranged",
                 "field_note" : "",
                 "description" : ""
             },
@@ -480,7 +611,7 @@
                 "field_type" : "text",
                 "field_class" : "",
                 "field_placeholder" : "1d4+1",
-                "item_category" : "",
+                "weapon_category" : "",
                 "field_note" : "",
                 "description" : ""
             },
@@ -492,7 +623,7 @@
                 "field_type" : "text",
                 "field_class" : "",
                 "field_placeholder" : "1d4+1",
-                "item_category" : "",
+                "weapon_category" : "",
                 "field_note" : "",
                 "description" : ""
             },
@@ -505,7 +636,7 @@
                 "field_class" : "",
                 "field_min" : "1",
                 "field_max" : "",
-                "item_category" : "",
+                "weapon_category" : "",
                 "field_note" : "",
                 "description" : ""
             },
@@ -518,7 +649,7 @@
                 "field_class" : "",
                 "field_min": "1",
                 "field_max" : "",
-                "item_category" : "",
+                "weapon_category" : "",
                 "field_note" : "",
                 "description" : ""
             },
@@ -531,7 +662,7 @@
                 "field_class" : "",
                 "field_min":"1",
                 "field_max": "",
-                "item_category" : "melee",
+                "weapon_category" : "melee",
                 "field_note" : "",
                 "description" : ""
             }
@@ -554,7 +685,7 @@
                         "value": "head"
                     }
                 ],
-                "item_category" : "",
+                "equipment_category" : "",
                 "field_note" : "",
                 "description" : ""
             },
@@ -565,28 +696,14 @@
                 "repeatable" : "true",
                 "count" : "2",
                 "has_max" : "false",
+                "mod_attr": "mod",
                 "field_type" : "select-mod",
                 "field_class" : "",
                 "field_options" : "equipment_affectable",
-                "item_category" : "",
+                "equipment_category" : "",
                 "field_note" : "",
                 "description" : "",
                 "hint" : "Dropdown should be generated dynamically based on skills/profs"
-            },
-            {
-                "display_name" : "Equipment Stat Modifier",
-                "attr_name" : "equipment_stat_mod",
-                "attr_prefixed" : "true",
-                "repeatable" : "true",
-                "count" : "2",
-                "has_max" : "false",
-                "field_type" : "number",
-                "field_class" : "",
-                "field_min" : "",
-                "field_max" : "",
-                "item_category" : "",
-                "field_note" : "",
-                "description" : ""
             }
         ],
         "misc": [
@@ -599,7 +716,7 @@
                 "field_class" : "",
                 "field_min" : "0",
                 "field_max" : "",
-                "item_category" : "",
+                "misc_category" : "",
                 "field_note" : "",
                 "description" : ""
             }
@@ -612,7 +729,6 @@
             "field_type" : "text",
             "field_class" : "",
             "field_placeholder" : "",
-            "item_category" : "",
             "field_note" : "",
             "description" : ""
         },
@@ -623,9 +739,20 @@
             "has_max" : "false",
             "field_type" : "textarea",
             "field_class" : "",
-            "item_category" : "",
             "field_note" : "",
             "description" : ""
+        }
+    },
+
+    "config" : {
+        "item_prefixes": {
+            "equipped" : "equipped",
+            "inventory" : "inventory"
+        },
+        "attribute_values" : {
+            "min": 1,
+            "default": 3,
+            "max": 6
         }
     }
 }

@@ -2,7 +2,6 @@
 
 // @import "expandable";
 // @import "statblock";
-// @import "attrib-table";
 // @import "trait-select";
 // @import "customizable-select";
 // @import "item-card";
@@ -19,5 +18,6 @@
 
 @import "components";
 @import "statblock";
+@import "tables"; //attributes and skills/profs
 @import "skills";
 @import "items";

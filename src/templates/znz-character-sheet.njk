@@ -1,32 +1,29 @@
 {#  
-    Some sheet data is pulled from JSON in the data folder.
-    The JSON is imported to nunjucks templates via Gulp as the data variable. If additional data is added and needed in the sheet, you'll need to add it in the gulpfile. 
-    You can access JSON data through the 'jsonData' variable. Pass it into macros if needed
+    Sheet Field Data and other data is pulled from JSON in the data folder. This is imported into Nunjucks in a Gulp process.
+    Since Sheet Fields are defined outside in a data file, we can just feed the data directly into a macro or into a nunjucks template
+    
+    Any JSON file in the data folder is fed into the template. You can access the JSON data through the 'jsonData' variable and then refer to the file name (ex jsonData.jsonfile if the JSON file in the data folder is called jsonfile.json)
 #}
 
+{% import 'partials/basicfields.njk' as basicFields %}
 {% import 'partials/statblock.njk' as statblock %}
-{% import 'partials/attributerow.njk' as attrRow %}
-{% import 'partials/skillrow.njk' as skillrow %}
+{% import 'partials/attrTable.njk' as attrTable %}
+{% import 'partials/skillTable.njk' as skillTable %}
 {% import 'partials/itemcard.njk' as itemcard %}
 
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
     {#----- Name Area ----- #}
     <div class="sheet-znz-area-name">
-        <div class="sheet-znz-field">
-            <h2>Name</h2>
-            <input type="text" name="attr_name"></input>
-        </div>
-        <div class="sheet-znz-field sheet-znz-note-tiny">
-            <h2>Quick Notes</h2>
-            <textarea name="attr_character_note"></textarea>
-        </div>
+        {% for field in jsonData.fields.nameArea %}
+            {{ basicFields.outputField(field)}}
+        {% endfor %}
     </div>
 
     {#----- Stats ----- #}
     <div class="sheet-znz-area-status">
         <div class="sheet-znz-row">
-            {% for stat in jsonData.stats.list %}
-            {{ statblock.create(stat.display_name, stat.attr_name, stat.default_value, stat.has_max, stat.explanation_text) }}
+            {% for stat in jsonData.fields.stats %}
+            {{ statblock.create(stat) }}
             {% endfor %}
         </div>
     </div>
@@ -34,47 +31,16 @@
     <div class="sheet-znz-area-sidebar">
         {#----- Attributes ----- #}
         <div class="sheet-znz-section-attributes">
-            <div class="sheet-znz-row-table">
-                <div class="sheet-znz-row sheet-znz-row-table-header">
-                    <div class="sheet-znz-field sheet-znz-60">
-                        <h2>Attribute</h2>
-                    </div>
-
-                    <div class="sheet-znz-field sheet-znz-40">
-                        <div class="sheet-znz-inner-row">
-                            <div class="sheet-znz-field sheet-znz-50">
-                                <h2>Score</h2>
-                            </div>
-                            <div class="sheet-znz-field sheet-znz-50">
-                                <h2>Bonus</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                {% for attr in jsonData.attributes.list %}
-                    {{ attrRow.create(attr) }}
-                {% endfor %}
-            </div>
+            {{ attrTable.create(jsonData.fields.attributes, jsonData.fields.attributeVals) }}
         </div>
 
         <div class="sheet-znz-section-skills">
             <div class="sheet-znz-block">
-                <h2>Skills</h2>
-                <div class="sheet-znz-skill-select">
-                    {% for item in jsonData.skills.list %}
-                    {{ skillrow.create("skill", item) }}
-                    {% endfor %}
-                </div>
+                {{ skillTable.create(jsonData.fields.skills, "Skills") }}
             </div>
 
             <div class="sheet-znz-block">
-                <h2>Proficiencies</h2>
-                <div class="sheet-znz-skill-select">
-                    {% for item in jsonData.proficiencies.list %}
-                    {{ skillrow.create("proficiency", item) }}
-                    {% endfor %}
-                </div>
+                {{ skillTable.create(jsonData.fields.skills, "Skills") }}
             </div>
         </div>
     </div>

@@ -1,0 +1,29 @@
+{# Create skill/prof table 
+    - data - pass in an entire array of fields (skills, proficiencies)
+    - header - header on the table#}
+
+{% macro create(data="", header="") %}
+    <table class="sheet-znz-skill-table">
+        {% if header %}
+        <tr class="sheet-znz-header"><h2>{{header}}</h2></tr>
+        {% endif %}
+
+        {% for field in data %}
+        <tr>
+            <td><input type="number" class="sheet-znz-line-input" name="attr_{{ field.attr_name }}"/></td>
+            <td>
+                {{field.display_name}} 
+                {# This select is for styling the mod #}
+                <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_{{field.mod_check}}">
+                    <option value="none" default />
+                    <option value="positive" default />
+                    <option value="negative" default />
+                </select>
+                <span class="sheet-znz-mod" name="attr_{{ field.attr_name }}_{{field.mod_attr}}"/>
+                <span class="sheet-znz-mod">(+1)</span>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endmacro %}

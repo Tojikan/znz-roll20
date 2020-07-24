@@ -1,0 +1,53 @@
+//ATTRIBUTES
+table.sheet-znz-row-table {
+    width: 100%;
+
+    td {
+        padding: 10px 5px;
+
+        .sheet-znz-attr-mod {
+            display: flex;
+            align-items: center;
+
+            input {
+                width: 30px;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    tr {
+        border-top: thin solid;
+        border-bottom: thin solid;
+        border-color: lightgrey;
+
+        &.sheet-znz-header{
+            border: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.sheet-znz-skill-table {
+    width: 100%;
+
+    tr {
+        margin-bottom: 2px;
+
+        &.sheet-znz-header {
+            border-bottom: solid 1px black;
+        }
+
+        td {
+            vertical-align: bottom;
+
+            .sheet-znz-line-input {
+                padding: 0;
+                margin-bottom: 4px;
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{# Output a simple field - header and the input element
+    - field param - Pass in individual fields
+
+    You can feed a field into the outputField macro, which then routes it to the appropriate
+    macro to output the field
+#}
+
+{# field router #}
+{% macro outputField(field='', header="h2") %}
+    {% switch field.field_type %}
+        {% case "text" %}
+            {{ createText(field, header ) }}
+        {% case "textarea" %}
+            {{ createTextarea(field, header ) }}
+        {% default %}
+            <p> ERROR! UNHANDLED FIELD TYPE! </p>
+    {% endswitch %}
+{% endmacro %}
+
+
+
+{# field creators #}
+{% macro createText(field='', header="h2") %}
+    <div class="sheet-znz-field {{field.field_class}}">
+        <{{ header }}>{{ field.display_name }}</{{header}}>
+        <input type="text" name="attr_{{field.attr_name}}"></input>
+    </div>
+{% endmacro %}
+
+{% macro createTextarea(field='', header="h2") %}
+    <div class="sheet-znz-field {{field.field_class}}">
+        <{{ header }}>{{ field.display_name }}</{{header}}>
+        <textarea name="attr_{{field.attr_name}}"></textarea>
+    </div>
+{% endmacro %}

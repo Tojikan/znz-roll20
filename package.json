@@ -31,6 +31,7 @@
     "gulp-file-include": "^2.2.2",
     "gulp-inject": "^5.0.5",
     "gulp-nunjucks-render": "^2.2.3",
+    "gulp-remove-empty-lines": "^0.1.0",
     "gulp-replace": "^1.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-tap": "^2.0.0"
