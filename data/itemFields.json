@@ -1,22 +1,72 @@
 {
     "standard": [
         {
-            "display_name": "Quantity",
-            "attr_name": "item_quantity",
-            "description": ""
+            "display_name" : "Item Type",
+            "attr_name" : "item_type",
+            "attr_prefixed": "true",
+            "field_type" : "select",
+            "field_options": [
+                {
+                    "name": "Misc",
+                    "value": "misc"
+                },
+                {
+                    "name": "Melee Weapon",
+                    "value": "melee"
+                },
+                {
+                    "name": "Ranged Weapon",
+                    "value": "ranged"
+                },
+                {
+                    "name": "Equipment",
+                    "value": "equipment"
+                }
+            ],
+            "description" : ""
         },
         {
             "display_name": "Name",
+            "attr_prefixed": "true",
             "attr_name": "item_name",
             "description": ""
         },
         {
             "display_name": "Weight",
+            "attr_prefixed": "true",
             "attr_name": "item_weight",
             "description": ""
         }
     ],
     "weapon": [
+        {
+            "display_name" : "Melee Type",
+            "attr_name" : "melee_type",
+            "attr_prefixed" : "true",
+            "has_max" : "false",
+            "field_type" : "select",
+            "field_options": [
+                {
+                    "name": "Blunt",
+                    "value": "blunt"
+                },
+                {
+                    "name": "Sharp",
+                    "value": "sharp"
+                },
+                {
+                    "name": "Heavy",
+                    "value": "heavy"
+                },
+                {
+                    "name": "Powered",
+                    "value": "powered"
+                }
+            ],
+            "item_category" : "melee",
+            "field_note" : "",
+            "description" : ""
+        },
         {
             "display_name": "Ranged Type",
             "attr_name": "ranged_type",
