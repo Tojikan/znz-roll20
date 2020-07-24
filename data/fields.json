@@ -60,6 +60,45 @@
         }
     ],
 
+    "attributes": [
+        {
+            "display_name": "Agility",
+            "attr_name": "agility",
+            "reminder_note": "Dodging, Initiative, Dexterity",
+            "description": ""
+        },
+        {
+            "display_name": "Luck",
+            "attr_name": "luck",
+            "reminder_note": "Chance, XP Gain, Loot",
+            "description": ""
+        },
+        {
+            "display_name": "Intelligence",
+            "attr_name": "intelligence",
+            "reminder_note": "Max Sanity, Knowledge",
+            "description": ""
+        },
+        {
+            "display_name": "Vitality",
+            "attr_name": "vitality",
+            "reminder_note": "Max HP, Max Energy, Physical Health",
+            "description": ""
+        },
+        {
+            "display_name": "Empathy",
+            "attr_name": "empathy",
+            "reminder_note": "Interpersonal Skills, Insight",
+            "description": ""
+        },
+        {
+            "display_name": "Strength",
+            "attr_name": "strength",
+            "reminder_note": "Melee Damage, Power",
+            "description": ""
+        }
+    ],
+
     "skills": [
         {
             "display_name": "Lockpicking",
