@@ -10,12 +10,13 @@
 {% import 'partials/attrTable.njk' as attrTable %}
 {% import 'partials/skillTable.njk' as skillTable %}
 {% import 'partials/itemcard.njk' as itemcard %}
+{% import 'partials/item.njk' as item %}
 
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
     {#----- Name Area ----- #}
     <div class="sheet-znz-area-name">
-        {% for field in jsonData.fields.nameArea %}
-            {{ basicFields.outputField(field)}}
+        {% for fld in jsonData.fields.nameArea %}
+            {{ basicFields.outputField( field=fld)}}
         {% endfor %}
     </div>
 
@@ -31,7 +32,7 @@
     <div class="sheet-znz-area-sidebar">
         {#----- Attributes ----- #}
         <div class="sheet-znz-section-attributes">
-            {{ attrTable.create(jsonData.fields.attributes, jsonData.fields.attributeVals) }}
+            {{ attrTable.create(jsonData.fields.attributes, jsonData.fields.config.attribute_values) }}
         </div>
 
         <div class="sheet-znz-section-skills">
@@ -40,7 +41,7 @@
             </div>
 
             <div class="sheet-znz-block">
-                {{ skillTable.create(jsonData.fields.skills, "Skills") }}
+                {{ skillTable.create(jsonData.fields.proficiencies, "Proficiencies") }}
             </div>
         </div>
     </div>
@@ -50,7 +51,7 @@
         <div class="sheet-znz-section-weapons">
             <div class="sheet-znz-block sheet-znz-equipped-ranged">
                 <h2>Equipped Ranged Weapon</h2>
-                {{ itemcard.create('equipped_ranged', true, "Ranged Weapon", jsonData=jsonData) }}
+                {{ item.equippedWeapon(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_ranged, type="ranged") }}
             </div>
             <div class="sheet-znz-block sheet-znz-equipped-melee">
                 <h2>Equipped Melee Weapon</h2>

@@ -2,6 +2,20 @@
 * Styling for item cards, Inventory, and Equipped Items
 */ 
 
+//All Items
+[class^='sheet-znz-item-card']{
+    border: solid 1px $lightgray;
+    padding: $gridgap;
+
+    textarea {
+        height: 50px;
+        max-width: 100%;
+    }
+}
+
+
+
+
 //Base Item Card
 .sheet-znz-itemcard {
     border: solid 1px $lightgray;

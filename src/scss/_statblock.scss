@@ -2,7 +2,7 @@
 .sheet-znz-area-status {
     > .sheet-znz-row {
         margin: 0;
-        align-items: center;
+        align-items: flex-start;
         height: 100%;
     }
 }
@@ -20,9 +20,14 @@
 
     .sheet-znz-description {
         font-size: $regular;
+        margin-top: 2px;
         
         span {
             font-weight: 700;
         }
+    }
+
+    .sheet-znz-max {
+        font-size: $regular;
     }
 }

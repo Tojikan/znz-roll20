@@ -1,17 +1,24 @@
 {# Output a simple field - header and the input element
-    - field param - Pass in individual fields
+    - field param - Pass in individual field. Required.
+    - header - field label tag
+    - class - optional class to append to the field
+    - options - options to pass into a select field. 
+    - prefix - attr prefix
 
-    You can feed a field into the outputField macro, which then routes it to the appropriate
-    macro to output the field
+    Fields get fed into outputField which routes to field creators which create the field.
 #}
 
 {# field router #}
-{% macro outputField(field='', header="h2") %}
+{% macro outputField(field='', header="h2", class="", options="", prefix="") %}
     {% switch field.field_type %}
         {% case "text" %}
-            {{ createText(field, header ) }}
+            {{ createText(field=field, header=header, class=class, prefix=prefix ) }}
         {% case "textarea" %}
-            {{ createTextarea(field, header ) }}
+            {{ createTextarea(field=field, header=header, class=class, prefix=prefix ) }}
+        {% case "number" %}
+            {{ createNumber(field=field, header=header, class=class, prefix=prefix ) }}
+        {% case "select" %}
+            {{ createSelect(field=field, header=header, class=class, options=options, prefix=prefix ) }}
         {% default %}
             <p> ERROR! UNHANDLED FIELD TYPE! </p>
     {% endswitch %}
@@ -20,16 +27,120 @@
 
 
 {# field creators #}
-{% macro createText(field='', header="h2") %}
-    <div class="sheet-znz-field {{field.field_class}}">
+{% macro createText(field="", header="h2", class="", prefix="") %}
+    {% if field.attr_prefixed == "true" %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+
+    <div class="sheet-znz-field {{field.field_class}} {{class}}">
         <{{ header }}>{{ field.display_name }}</{{header}}>
-        <input type="text" name="attr_{{field.attr_name}}"></input>
+        <input type="text" name="{{ attrName | join}}"></input>
     </div>
 {% endmacro %}
 
-{% macro createTextarea(field='', header="h2") %}
-    <div class="sheet-znz-field {{field.field_class}}">
+{% macro createTextarea(field="", header="h2", class="", prefix="") %}
+    {% if field.attr_prefixed == "true" %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+
+    <div class="sheet-znz-field {{field.field_class}} {{ class }}">
         <{{ header }}>{{ field.display_name }}</{{header}}>
-        <textarea name="attr_{{field.attr_name}}"></textarea>
+        <textarea name="{{ attrName | join}}"></textarea>
     </div>
+{% endmacro %}
+
+{% macro createNumber(field="", header="h2", class="", prefix="") %}
+    {% if field.attr_prefixed == "true" %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+
+    <div class="sheet-znz-field {{field.field_class}} {{class}}">
+        <{{ header }}>{{ field.display_name }}</{{header}}>
+
+        {% if field.has_max == "true" %}
+            <div class="sheet-znz-flex">
+                <input type="number" name="{{ attrName | join}}" min="{{field.field_min}}" max="{{field.field_max}}" value="{{field.default_value}}"></input>
+                <div class="sheet-divider">/</div>
+                <div>
+                    <input type="number" name="{{ attrName | join}}_max" value="{{field.default_value}}"></input>
+                    <div class="sheet-znz-description sheet-znz-center">MAX</div>
+                </div>  
+            </div>
+        {% else %}
+            <input type="number" name="{{ attrName | join}}" min="{{field.field_min}}" max="{{field.field_max}}" ></input>
+        {% endif %}
+
+    </div>
+{% endmacro %}
+
+
+{% macro createSelect(field="", header="h2", class="", options="", prefix="") %}
+    {% if field.attr_prefixed == "true" %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+    
+    <div class="sheet-znz-field {{field.field_class}} {{class}}">
+        <{{ header }}>{{ field.display_name }}</{{header}}>
+        <select name="{{ attrName | join}}" value="{{field.field_selected}}">
+            {% if field.field_options_type == "data" %}
+            {% for option in field.field_options %}
+            <option value="{{option.value}}" {{"default" if option.name == field.field_selected}}>{{option.name}}</option>
+            {% endfor %}
+
+            {# not created inside the field definition #}
+            {% elif field.field_options_type == "external" %}
+            {% for option in options %}
+            <option value="{{option.value}}" {{"default" if option.default}}>{{option.name}}</option>
+            {% endfor %}
+
+            {% endif %}
+        </select>
+    </div>
+{% endmacro %}
+
+
+{% macro createHidden(field="", prefix="") %}
+    {% if field.attr_prefixed == "true" %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+
+    {# we do this it like this because repeatables aren't supposed to output a field without a num #}
+    {% if field.has_max == "true" %}
+        <input type="hidden" name="{{ attrName | join}}" />
+        <input type="hidden" name="{{ attrName | join}}_max" />
+    {% elif field.mod_attr %}
+        <input type="hidden" name="{{ attrName | join}}" />
+        <input type="hidden" name="{{ attrName | join}}_{{mod_attr}}" />
+    {% elif field.mod_check %}
+        <input type="hidden" name="{{ attrName | join}}" />
+        <input type="hidden" name="{{ attrName | join}}_{{mod_check}}" />
+    {% elif field.bonus_attr %}
+        <input type="hidden" name="{{ attrName | join}}" />
+        <input type="hidden" name="{{ attrName | join}}_{{bonus_attr}}" />
+    {% elif field.bonus_check %}
+        <input type="hidden" name="{{ attrName | join}}" />
+        <input type="hidden" name="{{ attrName | join}}_{{bonus_check}}" />
+    {% elif field.repeatable %}
+        {% for num in range(0,field.count) %}
+        <input type="hidden" name="{{ attrName | join}}_{{num}}" />
+
+        {% if field.repeat_mod_attr %}
+        <input type="hidden" name="{{ attrName | join}}_{{num}}_{{field.repeat_mod_attr}}" />
+        {% endif %}
+
+        {% endfor %}
+    {% else %}
+        <input type="hidden" name="{{ attrName | join}}" />
+    {% endif %}
+
 {% endmacro %}

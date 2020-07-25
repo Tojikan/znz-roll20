@@ -16,18 +16,19 @@
 	// 	"description": "Log output to console"
 	// }
 
-	"Roll20 Attribute Field" : {
+	"Basic Attr Field" : {
 		"scope": "javascript,json",
-		"prefix": "attr",
+		"prefix": "attrField",
 		"body": [
 			"{",
 			"	\"display_name\" : \"$1\",",
 			"	\"attr_name\" : \"$2\",",
 			"	\"field_type\" : \"$3\",",
-			"	\"description\" : \"$4\"$5",
+			"	\"description\" : \"$4\",",
+			"	\"area\" : \"$5\"$6",
 			"}$0"
 		],
-		"description": "Generate a JSON Struct for a Roll20 Attribute field with basic keys"
+		"description": "Basic template for any attr field"
 	},
 	"Item with Text Field" : {
 		"scope": "javascript,json",
@@ -37,55 +38,56 @@
 			"	\"display_name\" : \"$1\",",
 			"	\"attr_name\" : \"$2\",",
 			"	\"attr_prefixed\" : \"${3:true}\",",
-			"	\"has_max\" : \"${4:false}\",",
-			"	\"field_type\" : \"${5:text}\",$6",
-			"	\"field_placeholder\" : \"$7\",",
-			"	\"field_class\" : \"$8\",",
-			"	\"item_category\" : \"$9\",",
-			"	\"field_note\" : \"$10\",",
-			"	\"description\" : \"$11\"$12",
+			"	\"field_type\" : \"${4:text}\",",
+			"	\"field_placeholder\" : \"$5\",",
+			"	\"field_class\" : \"$6\",",
+			"	\"field_note\" : \"$7\",",
+			"	\"description\" : \"$8\",",
+			"	\"area\" : \"$9\"$10",
 			"}$0"
 		],
-		"description": "Generate a JSON Struct for a Item Field of type Text with basic keys"
+		"description": "Template for any Text Field"
 	},
-	"Item with Number Field" : {
+	"Number Field" : {
 		"scope": "javascript,json",
-		"prefix": "numberitem",
+		"prefix": "numberfield",
 		"body": [
 			"{",
 			"	\"display_name\" : \"$1\",",
 			"	\"attr_name\" : \"$2\",",
 			"	\"attr_prefixed\" : \"${3:true}\",",
 			"	\"has_max\" : \"${4:false}\",",
-			"	\"field_type\" : \"${5:number}\",$6",
+			"	\"field_type\" : \"${5:number}\",",
 			"	\"field_class\" : \"$7\",",
 			"	\"field_min\" : \"$8\",",
 			"	\"field_max\" : \"$9\",",
-			"	\"item_category\" : \"$10\",",
+			"	\"default_value\" : \"$10\",",
 			"	\"field_note\" : \"$11\",",
-			"	\"description\" : \"$12\"$13",
+			"	\"description\" : \"$12\",",
+			"	\"area\" : \"$13\"$14",
 			"}$0"
 		],
-		"description": "Generate a JSON Struct for a Item Field of type Text with basic keys"
+		"description": "Template for a Number Field"
 	},
-	"Item with Select Field" : {
+	"Select Field" : {
 		"scope": "javascript,json",
-		"prefix": "selectitem",
+		"prefix": "selectfield",
 		"body": [
 			"{",
 			"	\"display_name\" : \"$1\",",
 			"	\"attr_name\" : \"$2\",",
 			"	\"attr_prefixed\" : \"${3:true}\",",
-			"	\"has_max\" : \"${4:false}\",",
 			"	\"field_type\" : \"${5:select}\",$6",
-			"	\"field_options\" : \"[$7\",",
-			"	]",
-			"	\"field_class\" : \"$8\",",
-			"	\"item_category\" : \"$9\",",
-			"	\"field_note\" : \"$10\",",
-			"	\"description\" : \"$11\"$12",
+				"	\"field_options_type\" : \"${7:jsonarray}\",",	
+				"	\"field_options\" : \"[$8\",",
+					"	]",
+			"	\"field_selected\" : \"$9\",",		
+			"	\"field_class\" : \"$10\",",
+			"	\"field_note\" : \"$11\",",
+			"	\"description\" : \"$12\",",
+			"	\"area\" : \"$13\"$14",
 			"}$0"
 		],
-		"description": "Generate a JSON Struct for a Item Field of type Text with basic keys"
+		"description": "Template for Select Field"
 	},
 }

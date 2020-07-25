@@ -26,7 +26,7 @@
         <td><input type="number" name="attr_{{field.attr_name}}" min="{{vals.min}}" value="{{vals.default}}" max="{{vals.max}}" /></td>
         <td>
             <div class="sheet-znz-attr-mod">
-                <input type="number" readonly name="attr_{{field.attr_name}}_{{field.mod_attr}}" value="0"/>
+                <input type="number" readonly name="attr_{{field.attr_name}}_{{field.mod_attr}}" value="{{field.mod_default}}"/>
                 <div class="sheet-znz-attr-bonus">
                     {# This select is for styling the bonus #}
                     <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_{{field.bonus_check}}">

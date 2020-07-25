@@ -31,6 +31,13 @@ input {
 .sheet-znz-hidden {
   display: none; }
 
+.sheet-znz-flex {
+  display: flex; }
+
+.sheet-znz-description {
+  margin-top: 3px;
+  font-size: 9px; }
+
 .sheet-znz-prefixed-input span {
   border: 1px #ccc solid;
   border-radius: 3px;
@@ -60,7 +67,12 @@ input.sheet-znz-line-input {
   margin: 0;
   border: 0;
   padding: 2px;
-  border-bottom: 1px solid gray; }
+  border-bottom: 1px solid gray;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.sheet-znz-dice-field input[type=text] {
+  width: 75px; }
 
 /**
 * Overall layout for the sheet
@@ -144,12 +156,15 @@ input.sheet-znz-line-input {
 /**
 * Component specific styles
 */
+.sheet-znz-area-name h2 {
+  font-size: 16px; }
+
 .sheet-znz-section-attributes {
   margin-bottom: 16px; }
 
 .sheet-znz-area-status > .sheet-znz-row {
   margin: 0;
-  align-items: center;
+  align-items: flex-start;
   height: 100%; }
 
 .sheet-znz-stat-block {
@@ -159,9 +174,12 @@ input.sheet-znz-line-input {
   .sheet-znz-stat-block input {
     font-size: 13px; }
   .sheet-znz-stat-block .sheet-znz-description {
-    font-size: 11px; }
+    font-size: 11px;
+    margin-top: 2px; }
     .sheet-znz-stat-block .sheet-znz-description span {
       font-weight: 700; }
+  .sheet-znz-stat-block .sheet-znz-max {
+    font-size: 11px; }
 
 table.sheet-znz-row-table {
   width: 100%; }
@@ -220,6 +238,13 @@ table.sheet-znz-row-table {
 /**
 * Styling for item cards, Inventory, and Equipped Items
 */
+[class^='sheet-znz-item-card'] {
+  border: solid 1px lightgray;
+  padding: 10px; }
+  [class^='sheet-znz-item-card'] textarea {
+    height: 50px;
+    max-width: 100%; }
+
 .sheet-znz-itemcard {
   border: solid 1px lightgray;
   padding: 10px; }

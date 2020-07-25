@@ -1,0 +1,49 @@
+
+
+
+{% import './basicfields.njk' as basicFields %}
+
+{% macro equippedWeapon(fields='', attr_prefix='', type='') %}
+
+<div class="sheet-znz-item-card-equipped">
+    <div class="sheet-znz-item-header">
+    {% for stdfld in fields.standard %}
+        {% if stdfld.flag == 'name' %}
+            {{ basicFields.outputField(field=stdfld, header="h3", prefix=attr_prefix) }}
+        {% else %}
+            {{ basicFields.createHidden(field=stdfld, prefix=attr_prefix) }}
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    {% for fld in fields.weapon %}
+        {% if fld.weapon_category == "standard" or fld.weapon_category == type %}
+        {{ basicFields.outputField(field=fld, header="h3", class="sheet-znz-flex", prefix=attr_prefix) }}
+        {% else %}
+        {{ basicFields.createHidden(field=fld, prefix=attr_prefix) }}
+        {% endif %}
+    {% endfor %}
+
+    <div class="sheet-znz-field">
+        <h3>{{type | capitalize}} Weapon Effect</h3>
+        <input type="text" name="attr_{{attr_prefix}}_{{fields.effect.attr_name}}"></input>
+    </div>
+
+    <div class="sheet-znz-item-buttons">
+        <button type="action" name="act_unequip_{{type}}">Unequip {{type | capitalize}} </button>
+    </div>
+    {{ basicFields.outputField(field=fields.note, header="h3", class="", prefix=attr_prefix) }}
+
+    {% for fld in fields.equipment %}
+        {{ basicFields.createHidden(field=fld, prefix=attr_prefix) }}
+    {% endfor %}
+
+    {% for fld in fields.misc %}
+        {{ basicFields.createHidden(field=fld, prefix=attr_prefix) }}
+    {% endfor %}
+
+</div>
+
+{% endmacro %}
+
+
