@@ -8,7 +8,7 @@
 <div class="sheet-znz-item-card-equipped">
     <div class="sheet-znz-item-header">
     {% for stdfld in fields.standard %}
-        {% if stdfld.flag == 'name' %}
+        {% if stdfld.canonical == 'name' %}
             {{ fieldCreate.outputField(field=stdfld, header="h3", prefix=attr_prefix) }}
         {% else %}
             {{ fieldCreate.createHidden(field=stdfld, prefix=attr_prefix) }}
@@ -28,7 +28,7 @@
         
         {# equipment #}
         {% for fld in fields.equipment %}
-            {% if type=="equipment" and not fld.typeflag %}
+            {% if type=="equipment" and not fld.canonical %}
                 {% if fld.field_type == "repeater" %}
                     {# TODO make a more generic way of rendering a repeater. This is pretty manual at the moment #}
                     <div class="sheet-znz-field sheet-znz-equipment-stat-repeater">

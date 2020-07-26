@@ -626,7 +626,7 @@
                 "field_type": "text",
                 "field_class": "sheet-70",
                 "description": "",
-                "flag": "name",
+                "canonical": "name",
                 "area": "item",
                 "area_subcat": "standard"
             },
@@ -857,7 +857,7 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "typeflag": "type",
+                "canonical": "type",
                 "area_subcat": "equipment"
             },
             {
