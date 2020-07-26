@@ -13,20 +13,25 @@ const removeEmptyLines = require('gulp-remove-empty-lines');
 const log = require('fancy-log');
 
 const dataFolder = './data/';
+const queryFolder = './data-query/';
 
 gulp.task('test', function() {
 
     return gulp.src('src/html/character-sheet.html')
-    .pipe(inject(gulp.src(['src/sheet-workers/*/worker.js'])
-                .pipe(tap(function (file, t){ //1st param - stream of file
+    .pipe(inject(//We start with running inject into the stream with all worker.js files
+                /** First param of Inject - a stream*/
+                gulp.src(['src/sheet-workers/*/worker.js']) 
+                        .pipe(tap(function (file, t){ // In this stream, we tap into it to get the file path.
                     
-                    let importPath = path.dirname(file.path) + '/import.js';
+                        let importPath = path.dirname(file.path) + '/import.js'; //then we can find an import.js which exports the data we need into a nicely packaged JSON array
                     
-                    if (fs.existsSync(importPath)) {
-                        let importData = require(importPath);
-                        return t.through(replace, ['[[\'data\']]', JSON.stringify(importData)]);
-                    }
-                })), { //2nd param - options for inject
+                        // if import exists, then we can just require it in.
+                        if (fs.existsSync(importPath)) {
+                            let importData = require(importPath);
+                            return t.through(replace, ['[[\'data\']]', JSON.stringify(importData)]); //Tap returns a stream. We use t.through to run replace and replace all instances of [['data]] with a stringified version of our json array
+                        }
+                    })
+                ),{ /** Second param of Inject - Options **/ //Back in Inject, we then inject the stream's contents from the first param into a specific location in the sheet file.
                 starttag: '/** inject:workers **/',
                 endtag: '/** endinject **/',
                 transform: function(filePath, file){
@@ -52,6 +57,7 @@ gulp.task('sheet', function(){
             basepath: '@file'
         }))
         .pipe(data(getAllJsonData)) //pass all json data into Nunjucks Templates
+        .pipe(data(queryJson))
         .pipe(nunjucksRender({
             path:['src/templates']
         }))
@@ -75,7 +81,7 @@ gulp.task('watch', function(){
 gulp.task('build', gulp.series(['style', 'sheet']));
 
 
-//Read all json files in data folder and save it in a data object with filename as key.
+//Read all json files in data folder and save it in a data object with filename as key. Then passed in via gulp-data
 function getAllJsonData(){
     let jsonData = {};
     let files = fs.readdirSync(dataFolder);
@@ -88,4 +94,21 @@ function getAllJsonData(){
     });
 
     return { jsonData };
+}
+
+//Run any JS files in data-query folder and save any exports into a data object with filename as key. Then passed in via gulp-data
+//Any data query file should export a simple JS object for easy use in nunjucks
+function queryJson(){
+    let queryData = {};
+    let files = fs.readdirSync(queryFolder);
+
+    files.forEach(file => {
+        if (path.extname(file) === '.js'){
+            let filename = path.basename(file, '.js');
+
+            queryData[filename] = require(queryFolder + file);
+        }
+    });
+
+    return { queryData };
 }

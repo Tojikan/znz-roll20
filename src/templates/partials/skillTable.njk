@@ -10,8 +10,8 @@
 
         {% for field in data %}
         <tr>
-            <td><input type="number" class="sheet-znz-line-input" name="attr_{{ field.attr_name }}"/></td>
-            <td>
+            <td class="sheet-znz-input"><input type="number" class="sheet-znz-line-input" name="attr_{{ field.attr_name }}"/></td>
+            <td class="sheet-znz-label">
                 {{field.display_name}} 
                 {# This select is for styling the mod #}
                 <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_{{field.mod_check}}">
@@ -20,7 +20,6 @@
                     <option value="negative" default />
                 </select>
                 <span class="sheet-znz-mod" name="attr_{{ field.attr_name }}_{{field.mod_attr}}"/>
-                <span class="sheet-znz-mod">(+1)</span>
             </td>
         </tr>
         {% endfor %}

@@ -47,6 +47,11 @@ table.sheet-znz-row-table {
             .sheet-znz-line-input {
                 padding: 0;
                 margin-bottom: 4px;
+                margin-right: 3px;
+            }
+
+            &.sheet-znz-input {
+                text-align: right;
             }
         }
     }

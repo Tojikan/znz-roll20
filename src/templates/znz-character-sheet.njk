@@ -1,8 +1,10 @@
 {#  
-    Sheet Field Data and other data is pulled from JSON in the data folder. This is imported into Nunjucks in a Gulp process.
-    Since Sheet Fields are defined outside in a data file, we can just feed the data directly into a macro or into a nunjucks template
-    
-    Any JSON file in the data folder is fed into the template. You can access the JSON data through the 'jsonData' variable and then refer to the file name (ex jsonData.jsonfile if the JSON file in the data folder is called jsonfile.json)
+    In the Gulp process, certain data is pulled in and added to the templates
+    jsonData is an object containing all JSON data in the data folder 
+    queryData is an object containing the exported results of any JS file in the data-query folder
+   
+    Access any data through the filename 
+        example - Any JSON in /data/example.json can be accessed through jsonData.example
 #}
 
 {% import 'partials/attrTable.njk' as attrTable %}
@@ -75,12 +77,12 @@
         {#------- Equipped Armor ------ #}
         <div class="sheet-znz-section-equipment sheet-znz-equipped">
             <div class="sheet-znz-block sheet-znz-equipped-head">
-                <h2>Equipped Helmet</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_helmet, type="equipment", category="helmet") }}
+                <h2>Equipped on Head</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_head, type="equipment", category="head", options=queryData.equipmentAffected) }}
             </div>
             <div class="sheet-znz-block sheet-znz-equipped-body">
-                <h2>Equipped Armor</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_armor, type="equipment", category="armor") }}
+                <h2>Equipped on Body</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_body, type="equipment", category="body", options=queryData.equipmentAffected) }}
             </div>
         </div>
     </div>

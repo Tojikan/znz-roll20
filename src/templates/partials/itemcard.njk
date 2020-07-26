@@ -242,7 +242,7 @@
                             <select name="attr_{{ attrPrefix }}_equipment_{{ loop.index }}_prof_mod_type">
                                 <option value="" default></option>
                             {% for item in jsonData.proficiencies.list %}
-                                {% if item.equipment_affectable and item.equipment_affectable === "true" %}
+                                {% if item.equipment_affectable %}
                                     <option value="{{ item.attr_name }}">{{ item.display_name }} </option>
                                 {% endif %}
                             {% endfor %}

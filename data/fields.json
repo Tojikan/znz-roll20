@@ -23,7 +23,7 @@
         {
             "display_name": "Attributes",
             "attr_name": "attributes_count",
-            "readonly": "true",
+            "readonly": true,
             "field_type" : "number",
             "counts": "attributes",
             "description": "",
@@ -32,7 +32,7 @@
         {
             "display_name": "Stats",
             "attr_name": "stats_count",
-            "readonly": "true",
+            "readonly": true,
             "field_type" : "number",
             "counts": "stats",
             "description": "",
@@ -41,7 +41,7 @@
         {
             "display_name" : "Skills",
             "attr_name" : "skills_count",
-            "readonly" : "true",
+            "readonly" : true,
             "field_type" : "number",
             "counts" : "skills",
             "description" : "",
@@ -50,7 +50,7 @@
         {
             "display_name" : "Proficiencies",
             "attr_name" : "profs_count",
-            "readonly" : "true",
+            "readonly" : true,
             "field_type" : "number",
             "counts" : "proficiencies",
             "description" : "",
@@ -69,8 +69,8 @@
             "field_class": "",
             "description": "",
             "default_value": "50",
-            "has_max": "true",
-            "explanation_text": "<br/><br/><br/>",
+            "has_max": true,
+            "explanation_text": "",
             "area": "stat"
         },
         {
@@ -82,8 +82,8 @@
             "field_class": "",
             "description": "",
             "default_value": "50",
-            "has_max": "true",
-            "explanation_text": "<br/><br/><br/>",
+            "has_max": true,
+            "explanation_text": "",
             "area": "stat"
         },
         {
@@ -95,8 +95,8 @@
             "field_class": "",
             "description": "",
             "default_value": "50",
-            "has_max": "true",
-            "explanation_text": "<br/><br/><br/>",
+            "has_max": true,
+            "explanation_text": "",
             "area": "stat"
         },
         {
@@ -108,7 +108,7 @@
             "field_class": "",
             "description": "",
             "default_value": "0",
-            "has_max": "false",
+            "has_max": false,
             "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +5 to any stat max  </div><div class=\"sheet-znz-xp-text\"> <span>20</span>: +1 to attr/skill/prof </div><div class=\"sheet-znz-xp-text\"> <span>40</span>: Learn new ability </div>",
             "area": "stat"
         }
@@ -392,7 +392,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -402,7 +402,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -412,17 +412,17 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
-            "display_name": "Projectile",
+            "display_name": "Projectiles",
             "attr_name": "prof_projectile",
             "mod_attr": "mod",
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -432,7 +432,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -442,7 +442,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -452,7 +452,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -462,7 +462,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -472,7 +472,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -532,7 +532,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -542,7 +542,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -552,7 +552,7 @@
             "mod_check": "mod_check",
             "description": "",
             "bonus_attr": "",
-            "equipment_affectable": "true",
+            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
@@ -592,7 +592,7 @@
             {
                 "display_name": "Item Type",
                 "attr_name": "item_type",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "field_type": "select",
                 "field_class": "sheet-15",
                 "field_selected": "misc",
@@ -621,7 +621,7 @@
             },
             {
                 "display_name": "Name",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "attr_name": "item_name",
                 "field_type": "text",
                 "field_class": "sheet-70",
@@ -632,7 +632,7 @@
             },
             {
                 "display_name": "Weight",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "attr_name": "item_weight",
                 "field_type": "number",
                 "field_class": "sheet-15",
@@ -645,7 +645,7 @@
             {
                 "display_name": "Melee Type",
                 "attr_name": "melee_type",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "field_type": "select",
                 "field_class": "",
                 "field_selected": "blunt",
@@ -677,8 +677,8 @@
             {
                 "display_name": "Durability",
                 "attr_name": "melee_durability",
-                "attr_prefixed": "true",
-                "has_max": "true",
+                "attr_prefixed": true,
+                "has_max": true,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "0",
@@ -693,8 +693,8 @@
             {
                 "display_name": "Energy Per Attack",
                 "attr_name": "melee_energy_cost",
-                "attr_prefixed": "true",
-                "has_max": "false",
+                "attr_prefixed": true,
+                "has_max": false,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "1",
@@ -709,7 +709,7 @@
             {
                 "display_name": "Ranged Type",
                 "attr_name": "ranged_type",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "field_type": "select",
                 "field_class": "",
                 "field_selected": "handgun",
@@ -745,8 +745,8 @@
             {
                 "display_name": "Ammo",
                 "attr_name": "ranged_ammo",
-                "attr_prefixed": "true",
-                "has_max": "true",
+                "attr_prefixed": true,
+                "has_max": true,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "0",
@@ -761,8 +761,8 @@
             {
                 "display_name": "Reloads",
                 "attr_name": "ranged_reloads",
-                "attr_prefixed": "true",
-                "has_max": "false",
+                "attr_prefixed": true,
+                "has_max": false,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "0",
@@ -777,7 +777,7 @@
             {
                 "display_name": "Hit Roll",
                 "attr_name": "weapon_hit",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "field_type": "text",
                 "field_class": "sheet-znz-dice-field",
                 "field_placeholder": "1d4+1",
@@ -790,7 +790,7 @@
             {
                 "display_name": "Damage Roll",
                 "attr_name": "weapon_damage",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "field_type": "text",
                 "field_class": "sheet-znz-dice-field",
                 "field_placeholder": "1d4+1",
@@ -803,8 +803,8 @@
             {
                 "display_name": "Attacks Per Action",
                 "attr_name": "weapon_attacks",
-                "attr_prefixed": "true",
-                "has_max": "false",
+                "attr_prefixed": true,
+                "has_max": false,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "1",
@@ -819,8 +819,8 @@
             {
                 "display_name": "Range",
                 "attr_name": "weapon_range",
-                "attr_prefixed": "true",
-                "has_max": "false",
+                "attr_prefixed": true,
+                "has_max": false,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "1",
@@ -838,7 +838,7 @@
             {
                 "display_name": "Equipment Type",
                 "attr_name": "equipment_type",
-                "attr_prefixed": "true",
+                "attr_prefixed": true,
                 "field_type": "select",
                 "field_class": "",
                 "field_selected": "body",
@@ -863,8 +863,8 @@
             {
                 "display_name" : "Damage Reduction",
                 "attr_name" : "equipment_dmg_reduce",
-                "attr_prefixed" : "true",
-                "has_max" : "false",
+                "attr_prefixed" : true,
+                "has_max" : false,
                 "field_type" : "number",
                 "field_class" : "",
                 "field_min" : "",
@@ -878,11 +878,11 @@
             {
                 "display_name": "Equipment Stat",
                 "attr_name": "equipment_stat",
-                "attr_prefixed": "true",
-                "repeatable": "true",
+                "attr_prefixed": true,
+                "repeatable": true,
                 "field_type": "repeater",
                 "repeater_type": "select",
-                "count": "2",
+                "count": "3",
                 "field_class": "",
                 "field_selected": "",
                 "field_options_type": "external",
@@ -900,8 +900,8 @@
             {
                 "display_name": "Quantity",
                 "attr_name": "item_quantity",
-                "attr_prefixed": "true",
-                "has_max": "false",
+                "attr_prefixed": true,
+                "has_max": false,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "0",
@@ -917,7 +917,7 @@
         "effect": {
             "display_name": "Effect",
             "attr_name": "item_effect",
-            "attr_prefixed": "true",
+            "attr_prefixed": true,
             "field_type": "text",
             "field_class": "",
             "field_placeholder": "",
@@ -928,7 +928,7 @@
         "note": {
             "display_name": "Notes",
             "attr_name": "item_note",
-            "attr_prefixed": "true",
+            "attr_prefixed": true,
             "field_type": "textarea",
             "field_class": "",
             "field_note": "",
@@ -941,8 +941,8 @@
         "item_prefixes": {
             "eq_ranged": "equipped_ranged_weapon",
             "eq_melee": "equipped_melee_weapon",
-            "eq_helmet": "equipped_helmet",
-            "eq_armor": "equipped_armor",
+            "eq_head": "equipped_head",
+            "eq_body": "equipped_body",
             "inventory": "inventory"
         },
         "attribute_values": {
