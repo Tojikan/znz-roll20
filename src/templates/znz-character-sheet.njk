@@ -5,36 +5,40 @@
     Any JSON file in the data folder is fed into the template. You can access the JSON data through the 'jsonData' variable and then refer to the file name (ex jsonData.jsonfile if the JSON file in the data folder is called jsonfile.json)
 #}
 
-{% import 'partials/basicfields.njk' as basicFields %}
-{% import 'partials/statblock.njk' as statblock %}
 {% import 'partials/attrTable.njk' as attrTable %}
-{% import 'partials/skillTable.njk' as skillTable %}
-{% import 'partials/itemcard.njk' as itemcard %}
+{% import 'partials/fields.njk' as fieldCreate %}
 {% import 'partials/item.njk' as item %}
+{% import 'partials/skillTable.njk' as skillTable %}
+{% import 'partials/statblock.njk' as statblock %}
+
+{% import 'partials/itemcard.njk' as itemcard %}
 
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
-    {#----- Name Area ----- #}
-    <div class="sheet-znz-area-name">
-        {% for fld in jsonData.fields.nameArea %}
-            {{ basicFields.outputField( field=fld)}}
-        {% endfor %}
-    </div>
 
-    {#----- Stats ----- #}
-    <div class="sheet-znz-area-status">
-        <div class="sheet-znz-row">
-            {% for stat in jsonData.fields.stats %}
-            {{ statblock.create(stat) }}
+    <div class="sheet-znz-grid-sidebar">
+        {#----- Name Area ----- #}
+        <div class="sheet-znz-area-name">
+            {% for fld in jsonData.fields.nameArea %}
+                {{ fieldCreate.outputField( field=fld)}}
             {% endfor %}
         </div>
-    </div>
-    
-    <div class="sheet-znz-area-sidebar">
+
+        {#----- Counter Area ----#}
+        <div class="sheet-znz-area-counter">
+            <div class="sheet-znz-flex">
+                <div class="sheet-znz-counter-label">Total: </div>
+                {% for fld in jsonData.fields.counters %}
+                    {{ fieldCreate.outputField( field=fld, header="h3") }}
+                {% endfor %}
+            </div>
+        </div>
+
         {#----- Attributes ----- #}
         <div class="sheet-znz-section-attributes">
             {{ attrTable.create(jsonData.fields.attributes, jsonData.fields.config.attribute_values) }}
         </div>
 
+        {#----- Skills & Proficiencies ----- #}
         <div class="sheet-znz-section-skills">
             <div class="sheet-znz-block">
                 {{ skillTable.create(jsonData.fields.skills, "Skills") }}
@@ -46,44 +50,45 @@
         </div>
     </div>
 
-    <div class="sheet-znz-area-main">
+    <div class="sheet-znz-grid-main">
+        {#----- Stats ----- #}
+        <div class="sheet-znz-area-status">
+            <div class="sheet-znz-row">
+                {% for stat in jsonData.fields.stats %}
+                {{ statblock.create(stat) }}
+                {% endfor %}
+            </div>
+        </div>
+
         {#----- Equipped Weapons ----- #}
-        <div class="sheet-znz-section-weapons">
+        <div class="sheet-znz-section-weapons sheet-znz-equipped">
             <div class="sheet-znz-block sheet-znz-equipped-ranged">
                 <h2>Equipped Ranged Weapon</h2>
-                {{ item.equippedWeapon(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_ranged, type="ranged") }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_ranged, type="weapon", category="ranged") }}
             </div>
             <div class="sheet-znz-block sheet-znz-equipped-melee">
                 <h2>Equipped Melee Weapon</h2>
-                {{ itemcard.create('equipped_melee', true, "Melee Weapon", jsonData=jsonData) }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_melee, type="weapon", category="melee") }}
             </div>
         </div>
 
         {#------- Equipped Armor ------ #}
-        <div class="sheet-znz-section-equipment">
+        <div class="sheet-znz-section-equipment sheet-znz-equipped">
             <div class="sheet-znz-block sheet-znz-equipped-head">
-                <h2>Equipped Head Gear</h2>
-                {{ itemcard.create('equipped_head', true, "Head Gear", jsonData=jsonData) }}
+                <h2>Equipped Helmet</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_helmet, type="equipment", category="helmet") }}
             </div>
             <div class="sheet-znz-block sheet-znz-equipped-body">
-                <h2>Equipped Body Gear</h2>
-                {{ itemcard.create('equipped_body', true, "Body Gear", jsonData=jsonData) }}
-            </div>
-        </div>
-        <div class="sheet-znz-section-other">
-            <div class="sheet-znz-note">
-                <textarea name="attr_equipped_other"></textarea>
+                <h2>Equipped Armor</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_armor, type="equipment", category="armor") }}
             </div>
         </div>
     </div>
 
-
-
-    <div class="sheet-znz-area-equipped-helmet">
+    <div class="sheet-znz-grid-full-width">
+    
     </div>
 
-    <div class="sheet-znz-area-equipped-armor">
-    </div>
 </div>
 
 <script type="text/workers">

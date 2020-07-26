@@ -1,0 +1,30 @@
+/**
+* Section specific styles
+*/
+
+// Name
+.sheet-znz-area-name {
+    h2 {
+        font-size: $xLarge;
+    }
+}
+
+//Attributes
+.sheet-znz-section-attributes {
+    margin-bottom: 16px;
+}
+
+
+
+// Counters
+.sheet-znz-area-counter {
+    font-size: $medium;
+
+    h2, h3 {
+        font-size: $medium;
+    }
+
+    .sheet-znz-counter-label {
+        margin-right: 8px;
+    }
+}

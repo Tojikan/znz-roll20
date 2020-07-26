@@ -1,49 +1,91 @@
 
 
 
-{% import './basicfields.njk' as basicFields %}
+{% import './fields.njk' as fieldCreate %}
 
-{% macro equippedWeapon(fields='', attr_prefix='', type='') %}
+{% macro equippedItem(fields='', attr_prefix='', type='', category='', options='') %}
 
 <div class="sheet-znz-item-card-equipped">
     <div class="sheet-znz-item-header">
     {% for stdfld in fields.standard %}
         {% if stdfld.flag == 'name' %}
-            {{ basicFields.outputField(field=stdfld, header="h3", prefix=attr_prefix) }}
+            {{ fieldCreate.outputField(field=stdfld, header="h3", prefix=attr_prefix) }}
         {% else %}
-            {{ basicFields.createHidden(field=stdfld, prefix=attr_prefix) }}
+            {{ fieldCreate.createHidden(field=stdfld, prefix=attr_prefix) }}
         {% endif %}
     {% endfor %}
     </div>
 
-    {% for fld in fields.weapon %}
-        {% if fld.weapon_category == "standard" or fld.weapon_category == type %}
-        {{ basicFields.outputField(field=fld, header="h3", class="sheet-znz-flex", prefix=attr_prefix) }}
-        {% else %}
-        {{ basicFields.createHidden(field=fld, prefix=attr_prefix) }}
-        {% endif %}
-    {% endfor %}
+    <div class="sheet-znz-item-row-area">
+        {# misc - weapon #}
+        {% for fld in fields.weapon %}
+            {% if type=="weapon" and ( fld.weapon_category == "standard" or fld.weapon_category == category ) %}
+                {{ fieldCreate.outputField(field=fld, header="h3", class="sheet-znz-item-row", prefix=attr_prefix) }}
+            {% else %}
+                {{ fieldCreate.createHidden(field=fld, prefix=attr_prefix) }}
+            {% endif %}
+        {% endfor %}
+        
+        {# equipment #}
+        {% for fld in fields.equipment %}
+            {% if type=="equipment" and not fld.typeflag %}
+                {% if fld.field_type == "repeater" %}
+                    {# TODO make a more generic way of rendering a repeater. This is pretty manual at the moment #}
+                    <div class="sheet-znz-field sheet-znz-equipment-stat-repeater">
+                        <h3 class="sheet-znz-repeater-label">
+                            Equipment Stats
+                        </h3>
+                        {% for num in range(0,fld.count) %}
+                            {% set toJoin = ["attr_", fld.attr_name, "_", num] %}
+                            {% set newAttr = toJoin | join %}
 
-    <div class="sheet-znz-field">
-        <h3>{{type | capitalize}} Weapon Effect</h3>
-        <input type="text" name="attr_{{attr_prefix}}_{{fields.effect.attr_name}}"></input>
+                            <div class="sheet-znz-repeater-input">
+                                <div class="sheet-znz-equipment-stat">
+                                    <select name="{{newAttr}}">
+                                        <option value="" default></option>
+                                        {# a custom made array of options #}
+                                        {% for val in options %}
+                                            <option value="{{val.attr_name}}">{{val.display_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="sheet-znz-equipment-stat-mod">
+                                    {% set modJoin = [newAttr, "_", fld.repeat_mod_attr] %}
+                                    <input type="number" name="{{ modJoin | join}}"></input>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ fieldCreate.outputField(field=fld, header="h3", class="sheet-znz-item-row", prefix=attr_prefix) }}
+                {% endif %}
+            {% else %}
+                {{ fieldCreate.createHidden(field=fld, prefix=attr_prefix) }}
+            {% endif %}
+        {% endfor %}
+
+        {# misc - hidden #}
+        {% for fld in fields.misc %}
+            {{ fieldCreate.createHidden(field=fld, prefix=attr_prefix) }}
+        {% endfor %}
     </div>
+
+    {{ fieldCreate.outputField(field=fields.effect, header="h3", class="", prefix=attr_prefix) }}
+    {{ fieldCreate.outputField(field=fields.note, header="h3", class="", prefix=attr_prefix) }}
 
     <div class="sheet-znz-item-buttons">
+        {% if type=="weapon" %}
+            <button type="action" name="act_{{type}}_attack"> {{type | capitalize}} Attack </button>
+        {% endif %}
         <button type="action" name="act_unequip_{{type}}">Unequip {{type | capitalize}} </button>
     </div>
-    {{ basicFields.outputField(field=fields.note, header="h3", class="", prefix=attr_prefix) }}
 
-    {% for fld in fields.equipment %}
-        {{ basicFields.createHidden(field=fld, prefix=attr_prefix) }}
-    {% endfor %}
-
-    {% for fld in fields.misc %}
-        {{ basicFields.createHidden(field=fld, prefix=attr_prefix) }}
-    {% endfor %}
 
 </div>
 
 {% endmacro %}
+
+
 
 

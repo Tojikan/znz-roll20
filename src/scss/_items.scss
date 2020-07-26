@@ -8,8 +8,91 @@
     padding: $gridgap;
 
     textarea {
-        height: 50px;
+        height: 28px;
         max-width: 100%;
+    }
+    
+    .sheet-znz-item-row-area {
+        margin-bottom: 12px;
+        padding: 0 15px;
+    
+        input, select {
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            border-bottom: solid 1px $lightgray;
+            text-align: center;
+        }
+    }
+
+    
+    .sheet-znz-item-row {
+        display: flex;
+        justify-content: space-around;
+        font-size: $regular;
+        
+        h2, h3 {
+            margin-bottom: 0;
+            font-size: $regular;
+        }
+
+        .sheet-znz-field-label {
+            text-align: right;
+            margin-right: 8px;
+            width: 50%;
+        }
+        
+        &.sheet-znz-field-select {
+            .sheet-znz-field-label {
+                align-self: center;
+            }
+        }
+
+        .sheet-znz-field-input {
+            width: 50%;
+        }
+
+        select {
+            max-width: 100%;
+        }
+    }
+
+    //Equipment repeater
+    .sheet-znz-equipment-stat-repeater {
+        margin: 12px 0;
+
+        .sheet-znz-repeater-label {
+            font-size: $regular;
+            width: 50%;
+            text-align: center;
+        }
+
+        .sheet-znz-repeater-input {
+            display: flex;
+            justify-content: space-around;
+
+            select {
+                width: 120px;
+            }
+
+            
+
+            .sheet-znz-equipment-stat {
+                margin-right: 12px;
+            }
+
+            .sheet-znz-equipment-stat-mod {
+                align-self: flex-end;
+                margin-bottom: -1px;
+            }
+        }
+    }
+
+    
+    .sheet-znz-item-buttons {
+        display: flex;
+        justify-content: space-around;
     }
 }
 
@@ -78,7 +161,7 @@
 
 
 //If Equipped
-.sheet-znz-section-weapons {
+.sheet-znz-equipped {
     display: flex;
     margin-bottom: 16px;
 

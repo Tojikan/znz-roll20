@@ -3,46 +3,32 @@
 */
 
 .sheet-znz-character-sheet {
+
+    &.sheet-znz-layout {
+        display: flex;
+
+
+    }
     
     &.sheet-znz-grid-layout {
         display: grid;
-        grid-template-columns: 
-            [col1] 1fr
-            [col2] 1fr
-            [col3] 1fr
-            [col4] 1fr
-            [col5] 1fr
-            [col6] 1fr;
+        grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
         grid-gap: $gridgap * 2;
-
-        grid-template-areas:
-            "head head head2 head2 head2 head2"
-            "side side main main main main"
-            "side side main main main main"
-            "block1 block1 block1 block2 block2 block2"
-            "inventory inventory inventory inventory inventory inventory"
-            "inventory inventory inventory inventory inventory inventory"
-            "notes notes notes notes notes notes"
-
-        ;
-
     }
 
-    .sheet-znz-area-name {
-        grid-area: head;
+    .sheet-znz-grid-sidebar {
+        grid-column: 1;
+        grid-column-end: 6
     }
 
-    .sheet-znz-area-status {
-        grid-area: head2;
-        margin-left: $gridgap * 2;
+    .sheet-znz-grid-main {
+        grid-column-start: 6;
+        grid-column-end: span 12;
     }
 
-    .sheet-znz-area-main {
-        grid-area: main;
-    }
-
-    .sheet-znz-area-sidebar {
-        grid-area: side;
+    .sheet-znz-grid-full-width {
+        grid-column-start: 1;
+        grid-column-end: 12;
     }
 }

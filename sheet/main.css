@@ -22,6 +22,10 @@ input {
   font-size: 11px;
   line-height: 11px; }
 
+textarea {
+  max-width: 100%;
+  box-sizing: border-box; }
+
 /**
 * Reusable classes and elements across the sheet. 
 */
@@ -77,25 +81,26 @@ input.sheet-znz-line-input {
 /**
 * Overall layout for the sheet
 */
+.sheet-znz-character-sheet.sheet-znz-layout {
+  display: flex; }
+
 .sheet-znz-character-sheet.sheet-znz-grid-layout {
   display: grid;
-  grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr;
+  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-  grid-gap: 20px;
-  grid-template-areas: "head head head2 head2 head2 head2" "side side main main main main" "side side main main main main" "block1 block1 block1 block2 block2 block2" "inventory inventory inventory inventory inventory inventory" "inventory inventory inventory inventory inventory inventory" "notes notes notes notes notes notes"; }
+  grid-gap: 20px; }
 
-.sheet-znz-character-sheet .sheet-znz-area-name {
-  grid-area: head; }
+.sheet-znz-character-sheet .sheet-znz-grid-sidebar {
+  grid-column: 1;
+  grid-column-end: 6; }
 
-.sheet-znz-character-sheet .sheet-znz-area-status {
-  grid-area: head2;
-  margin-left: 20px; }
+.sheet-znz-character-sheet .sheet-znz-grid-main {
+  grid-column-start: 6;
+  grid-column-end: span 12; }
 
-.sheet-znz-character-sheet .sheet-znz-area-main {
-  grid-area: main; }
-
-.sheet-znz-character-sheet .sheet-znz-area-sidebar {
-  grid-area: side; }
+.sheet-znz-character-sheet .sheet-znz-grid-full-width {
+  grid-column-start: 1;
+  grid-column-end: 12; }
 
 /*** Row Layout System for ZnZ ***/
 .sheet-znz-field {
@@ -154,13 +159,20 @@ input.sheet-znz-line-input {
       align-items: initial; }
 
 /**
-* Component specific styles
+* Section specific styles
 */
 .sheet-znz-area-name h2 {
   font-size: 16px; }
 
 .sheet-znz-section-attributes {
   margin-bottom: 16px; }
+
+.sheet-znz-area-counter {
+  font-size: 10px; }
+  .sheet-znz-area-counter h2, .sheet-znz-area-counter h3 {
+    font-size: 10px; }
+  .sheet-znz-area-counter .sheet-znz-counter-label {
+    margin-right: 8px; }
 
 .sheet-znz-area-status > .sheet-znz-row {
   margin: 0;
@@ -242,8 +254,54 @@ table.sheet-znz-row-table {
   border: solid 1px lightgray;
   padding: 10px; }
   [class^='sheet-znz-item-card'] textarea {
-    height: 50px;
+    height: 28px;
     max-width: 100%; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-row-area {
+    margin-bottom: 12px;
+    padding: 0 15px; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row-area input, [class^='sheet-znz-item-card'] .sheet-znz-item-row-area select {
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      border-bottom: solid 1px lightgray;
+      text-align: center; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 11px; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row h2, [class^='sheet-znz-item-card'] .sheet-znz-item-row h3 {
+      margin-bottom: 0;
+      font-size: 11px; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row .sheet-znz-field-label {
+      text-align: right;
+      margin-right: 8px;
+      width: 50%; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row.sheet-znz-field-select .sheet-znz-field-label {
+      align-self: center; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row .sheet-znz-field-input {
+      width: 50%; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row select {
+      max-width: 100%; }
+  [class^='sheet-znz-item-card'] .sheet-znz-equipment-stat-repeater {
+    margin: 12px 0; }
+    [class^='sheet-znz-item-card'] .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-label {
+      font-size: 11px;
+      width: 50%;
+      text-align: center; }
+    [class^='sheet-znz-item-card'] .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input {
+      display: flex;
+      justify-content: space-around; }
+      [class^='sheet-znz-item-card'] .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input select {
+        width: 120px; }
+      [class^='sheet-znz-item-card'] .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input .sheet-znz-equipment-stat {
+        margin-right: 12px; }
+      [class^='sheet-znz-item-card'] .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input .sheet-znz-equipment-stat-mod {
+        align-self: flex-end;
+        margin-bottom: -1px; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-buttons {
+    display: flex;
+    justify-content: space-around; }
 
 .sheet-znz-itemcard {
   border: solid 1px lightgray;
@@ -273,16 +331,16 @@ table.sheet-znz-row-table {
     .sheet-znz-itemcard .sheet-znz-itemcard-button button {
       padding: 2px 16px; }
 
-.sheet-znz-section-weapons {
+.sheet-znz-equipped {
   display: flex;
   margin-bottom: 16px; }
-  .sheet-znz-section-weapons .sheet-znz-block {
+  .sheet-znz-equipped .sheet-znz-block {
     width: 50%; }
-  .sheet-znz-section-weapons h2 {
+  .sheet-znz-equipped h2 {
     text-align: center; }
-  .sheet-znz-section-weapons .sheet-znz-itemcard .sheet-znz-field {
+  .sheet-znz-equipped .sheet-znz-itemcard .sheet-znz-field {
     flex-basis: 45%; }
-    .sheet-znz-section-weapons .sheet-znz-itemcard .sheet-znz-field.sheet-znz-itemcard-name {
+    .sheet-znz-equipped .sheet-znz-itemcard .sheet-znz-field.sheet-znz-itemcard-name {
       margin: 0;
       text-align: left; }
 
