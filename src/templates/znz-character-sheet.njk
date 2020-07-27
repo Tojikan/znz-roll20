@@ -12,7 +12,7 @@
 {% import 'partials/item.njk' as item %}
 {% import 'partials/skillTable.njk' as skillTable %}
 {% import 'partials/statblock.njk' as statblock %}
-{% import 'partials/trait.njk' as trait %}
+{% import 'partials/quirk.njk' as quirk %}
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
 
     <div class="sheet-znz-grid-sidebar">
@@ -86,15 +86,40 @@
     </div>
 
     <div class="sheet-znz-grid-full-width">
-        <div class="sheet-znz-area-traits">
-            <div class="sheet-znz-section-trait sheet-znz-section-abilities">
+        <div class="sheet-znz-area-quirks">
+            <div class="sheet-znz-section-quirk sheet-znz-section-abilities">
             <h2>Abilities</h2>
-                {{ trait.create(data=jsonData.traits.abilities, options=jsonData.quirks.abilities)}}
+                {{ quirk.create(data=jsonData.fields.quirks.abilities, options=jsonData.quirks.abilities, randomizeButton=true)}}
             </div>
 
-            <div class="sheet-znz-section-trait sheet-znz-section-flaws">
+            <div class="sheet-znz-section-quirk sheet-znz-section-flaws">
             <h2>Flaws</h2>
-                {{ trait.create(data=jsonData.traits.flaws, options=jsonData.quirks.flaws)}}
+                {{ quirk.create(data=jsonData.fields.quirks.flaws, options=jsonData.quirks.flaws, randomizeButton=true)}}
+            </div>
+        </div>
+        <div class="sheet-znz-area-inventory">
+            <div class="sheet-znz-section-inventory">
+                <h2>Inventory</h2>
+                <div class="sheet-znz-inventory-controls">
+                    <button type="action"name="act_inventoryshow">Show All Details</button>
+                    <button type="action"name="act_inventoryhide">Hide All Details</button>
+                </div>
+                <div class="sheet-znz-inventory-weight">
+                    <div class="sheet-znz-field">
+                        <h3>{{ jsonData.fields.inventory.weight.display_name }}</h3>
+                        <input type="number" name="attr_{{jsonData.config.item_prefixes.inventory}}_{{ jsonData.fields.inventory.weight.attr_name }}" min="{{jsonData.fields.inventory.weight.field_min}}">
+                        <input type="hidden" name="attr_{{jsonData.config.item_prefixes.inventory}}_{{ jsonData.fields.inventory.weight.attr_name }}_{{ jsonData.fields.inventory.weight.check_attr}}" value = "0">
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>{{ jsonData.fields.inventory.max_weight.display_name }}</h3>
+                        <input type="number" name="attr_{{jsonData.config.item_prefixes.inventory}}_{{ jsonData.fields.inventory.max_weight.attr_name }}" min="{{jsonData.fields.inventory.max_weight.field_min}}">
+                    </div>
+                </div>
+                <div class="sheet-znz-inventory-items">
+                    <fieldset class="repeating_inventory">
+                        {{ item.inventoryItem(fields=jsonData.fields.item, equipstatoptions=queryData.equipmentAffected) }}
+                    </fieldset>
+                </div>
             </div>
         </div>
     </div>

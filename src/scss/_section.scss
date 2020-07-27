@@ -29,14 +29,51 @@
     }
 }
 
+// Equipped 
+.sheet-znz-section-weapons, .sheet-znz-section-equipment {
+    &.sheet-znz-equipped {
+        display: flex;
+        margin-bottom: 16px;
+    
+        .sheet-znz-block {
+            width: 50%;
+        }
+        
+        h2 {
+            text-align: center;
+        }
 
-// Traits
+        .sheet-znz-item-card-equipped {
+            margin-right: $gridgap;
+        }
+    }
+}
 
-.sheet-znz-area-traits {
+
+// Quirk
+.sheet-znz-area-quirks {
     display: flex;
 
-    .sheet-znz-section-trait {
+    .sheet-znz-section-quirk {
         width: 50%;
         margin-right: 2 * $gridgap;
+
+        .sheet-znz-block-quirk {
+            padding: 12px 0;
+            border-top: solid 1px lightgrey;
+        
+            textarea {
+                height: 75px;
+            }
+        }
+
+        .sheet-znz-quirk {
+            margin-bottom: 2 * $gridgap;
+
+            .sheet-znz-field-quirk-select {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
 }

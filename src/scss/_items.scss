@@ -11,7 +11,7 @@
         height: 28px;
         max-width: 100%;
     }
-    
+
     .sheet-znz-item-row-area {
         margin-bottom: 12px;
         padding: 0 15px;
@@ -25,7 +25,6 @@
             text-align: center;
         }
     }
-
     
     .sheet-znz-item-row {
         display: flex;
@@ -57,38 +56,6 @@
             max-width: 100%;
         }
     }
-
-    //Equipment repeater
-    .sheet-znz-equipment-stat-repeater {
-        margin: 12px 0;
-
-        .sheet-znz-repeater-label {
-            font-size: $regular;
-            width: 50%;
-            text-align: center;
-        }
-
-        .sheet-znz-repeater-input {
-            display: flex;
-            justify-content: space-around;
-
-            select {
-                width: 120px;
-            }
-
-            
-
-            .sheet-znz-equipment-stat {
-                margin-right: 12px;
-            }
-
-            .sheet-znz-equipment-stat-mod {
-                align-self: flex-end;
-                margin-bottom: -1px;
-            }
-        }
-    }
-
     
     .sheet-znz-item-buttons {
         display: flex;
@@ -97,93 +64,81 @@
 }
 
 
+//Equipment Stat repeater
+.sheet-znz-equipment-stat-repeater {
+    margin: 12px 0;
 
-
-//Base Item Card
-.sheet-znz-itemcard {
-    border: solid 1px $lightgray;
-    padding: $gridgap;
-
-    .sheet-znz-itemcard-note {
-      height: auto;
-
-        textarea {
-            height: 50px;
-            max-width: 100%;
-        }
-    }
-
-    .sheet-znz-row {
-        .sheet-znz-field {
-            &:nth-child(2) {
-                text-align: right;
-                margin-left: auto;
-            }
-        }
-    }
-
-    .sheet-znz-weapon-attack {
-        flex-basis: 60%;
-
-        input[type=number] {
-            width: 40px;
-        }
-
-        .sheet-znz-prefixed-input {
-            input[type=number] {
-                width: 35px;
-            }
-        }
-    }
-
-    .sheet-znz-itemcard-modifiers {
-        select, input {
-            margin: 0;
-        }
-
-        input[type=number] {
-            width: 35px;
-        }
-
-        .sheet-znz-field {
-            margin-bottom: 10px;
-        }
-    }
-
-    .sheet-znz-itemcard-button {
-        justify-content: center;
-        
-        button {
-            padding: 2px 16px;
-        }
-    }
-}
-
-
-//If Equipped
-.sheet-znz-equipped {
-    display: flex;
-    margin-bottom: 16px;
-
-    .sheet-znz-block {
+    .sheet-znz-repeater-label {
+        font-size: $regular;
         width: 50%;
-    }
-    
-    h2 {
         text-align: center;
     }
 
-    .sheet-znz-itemcard {
-        .sheet-znz-field {
-            flex-basis: 45%;
+    .sheet-znz-repeater-input {
+        display: flex;
+        justify-content: space-around;
+
+        select {
+            width: 120px;
+        }
+
         
-            &.sheet-znz-itemcard-name {
-                margin: 0;
-                text-align: left;
-            }
+
+        .sheet-znz-equipment-stat {
+            margin-right: 12px;
+        }
+
+        .sheet-znz-equipment-stat-mod {
+            align-self: flex-end;
+            margin-bottom: -1px;
         }
     }
 }
+
+
+// Show/hide based on item type
+.sheet-znz-item-card-inventory {
+
+    .sheet-znz-row {
+        margin-bottom: 0;
+    }
+
+    .sheet-znz-item-row-area{
+        .sheet-znz-field, .sheet-znz-equipment-stat-repeater{
+            display: none;
+        }
+
+
+        input.sheet-znz-item-type-2:checked ~ .sheet-znz-melee-field, input.sheet-znz-item-type-2:checked ~ .sheet-znz-standard-field,
+        input.sheet-znz-item-type-3:checked ~ .sheet-znz-ranged-field, input.sheet-znz-item-type-3:checked ~ .sheet-znz-standard-field,
+        input.sheet-znz-item-type-4:checked ~ .sheet-znz-head-field, input.sheet-znz-item-type-4:checked ~ .sheet-znz-equipment-field,
+        input.sheet-znz-item-type-5:checked ~ .sheet-znz-body-field, input.sheet-znz-item-type-5:checked ~ .sheet-znz-equipment-field
+        {
+            display: flex;
+        }
+
+        input.sheet-znz-item-type-4:checked ~ .sheet-znz-equipment-stat-repeater,
+        input.sheet-znz-item-type-5:checked ~ .sheet-znz-equipment-stat-repeater {
+            display: block;
+        }
+    }
+
+    .sheet-znz-item-buttons {
+        button {
+            display: none;
+        }
+
+        input.sheet-znz-item-type-2:checked ~ button.sheet-znz-melee-field,
+        input.sheet-znz-item-type-3:checked ~ button.sheet-znz-ranged-field,
+        input.sheet-znz-item-type-4:checked ~ button.sheet-znz-head-field,
+        input.sheet-znz-item-type-5:checked ~ button.sheet-znz-body-field {
+            display: block;
+        }
+    }
+
+}
+
+
 
 
 //Hide fields on Equip
@@ -217,43 +172,3 @@
         }
     }
 }
-
-// .sheet-znz-section-inventory {
-//   .sheet-znz-inventory-type-fields {
-//     display: none;
-//   }
-
-//   input.sheet-znz-item-type-1:checked ~ .sheet-znz-inventory-item-misc-fields,
-//   input.sheet-znz-item-type-2:checked ~ .sheet-znz-inventory-item-melee-fields,
-//   input.sheet-znz-item-type-3:checked ~ .sheet-znz-inventory-item-ranged-fields,
-//   input.sheet-znz-item-type-4:checked ~ .sheet-znz-inventory-item-equipment-fields {
-//     display: block;
-//   }
-
-//   .sheet-znz-unified-inventory {
-//     .sheet-znz-inventory-item-type-select {
-//       width: auto;
-//     }
-
-//     > .repcontainer {
-//       display: grid;
-//       grid-gap: 10px;
-//       grid-template-columns: repeat(2, 1fr);
-//     }
-
-//     .sheet-znz-note {
-//       height: auto;
-
-//       textarea {
-//         max-width: 100%;
-//       }
-//     }
-
-//     .sheet-znz-header {
-//       .sheet-znz-inventory-controls {
-//         margin-left: auto;
-//         margin-bottom: 3px;
-//       }
-//     }
-//   }
-// }

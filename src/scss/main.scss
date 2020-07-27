@@ -1,5 +1,4 @@
 
-// @import "expandable";
 // @import "item-card";
 
 
@@ -10,10 +9,11 @@
 @import "layout";
 @import "row";
 @import "section";
+@import "expandable";
 
 
 @import "statblock";
 @import "tables"; //attributes and skills/profs
 @import "skills";
-@import "traits";
 @import "items";
+@import "inventory";

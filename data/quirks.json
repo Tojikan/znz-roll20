@@ -16,9 +16,9 @@
             "description" : "You can spend 3 energy on your turn in order to take one additional action."
         },
         {
-            "name" : "Analyzer",
-            "value" : "analyzer",
-            "description" : "You can use an action to determine the exact health of an enemy target."
+            "name" : "Scaner",
+            "value" : "scanner",
+            "description" : "You can use an action to determine the exact health of any enemy target you can see."
         },
         {
             "name" : "Cheerleader",

@@ -24,7 +24,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
         margin: 0;
     }
 
-    label{
+    .sheet-label{
         color: $primaryColor;
         font-size: 12px;
         margin: auto;
@@ -45,7 +45,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
     }
 
     input[type=checkbox]:checked{
-        ~ label{
+        ~ .sheet-label{
             &:after, &:before{
                 transform: rotate(225deg) rotateY(360deg);
                 top: 5px;
@@ -73,8 +73,9 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
 
     &.sheet-znz-expandable-section{
         margin: 5px 0;
+        border-bottom: solid 1px $lightgray;
 
-        label {
+        .sheet-label {
             text-align: center;
             
             //arrow both sides 
@@ -90,27 +91,6 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
                 margin-left: -20px;
                 transition: transform 0.3s;
             }
-
-            // Lines before and after text
-            span{
-                &:before{
-                    content: '';
-                    border: dotted 1px $primaryColor;
-                    position: absolute;
-                    top: 50%;
-                    left: 0;
-                    width: 30%;
-                }
-
-                &:after{
-                    content: '';
-                    border: dotted 1px $primaryColor;
-                    position: absolute;
-                    top: 50%;
-                    left: 70%;
-                    width: 30%;
-                }
-            }
         }
     }
 }
@@ -120,7 +100,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable{
     //Different Color for Nested Expandables
     .sheet-znz-expand-button{
         &.sheet-znz-expandable-section{
-            label {
+            .sheet-label {
                 color: $secondColor;
                 &:before, &:after{
                     border-color: $secondColor;

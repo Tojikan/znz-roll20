@@ -6,17 +6,22 @@
     #}
 
 {% macro create(data='', options='', randomizeButton=false) %}
-    <div class="sheet-znz-block-trait">
+    <div class="sheet-znz-block-quirk">
         <fieldset class="repeating_{{ data.attr_name }}">
-            <div class="sheet-znz-trait">
-                <div class="sheet-znz-field-trait-select">
+            <div class="sheet-znz-quirk">
+                <div class="sheet-znz-field-quirk-select">
                     <select name="attr_{{ data.attr_name }}" readonly>
                     {% for opt in options %}
                         <option value="{{opt.value}}">{{opt.name}}</option>
                     {% endfor %}
                     </select>
+                    {% if randomizeButton %}
+                    <div class="sheet-znz-randomize">
+                        <button type="action" name="act_randomize{{data.attr_name}}">Randomize</button>
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="sheet-znz-field-trait-descript">
+                <div class="sheet-znz-field-quirk-descript">
                     <textarea type="text" readonly name="attr_{{ data.attr_name }}_text"></textarea>
                 </div>
             </div>

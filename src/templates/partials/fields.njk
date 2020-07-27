@@ -37,7 +37,7 @@
         {% set attrName = ["attr_", field.attr_name] %}
     {% endif %}
 
-    <div class="sheet-znz-field sheet-znz-field-text {{field.field_class}} {{class}}">
+    <div class="sheet-znz-field sheet-znz-field-text {{field.field_class}} {{class if class}}">
         {% if displayHeader %} <div class="sheet-znz-field-label"><{{ header }}>{{ field.display_name }}</{{header}}></div>{% endif %}
         <div class="sheet-znz-field-input"><input type="text" name="{{ attrName | join}}" {{ "readonly" if field.readonly }} ></input></div>
     </div>

@@ -594,28 +594,43 @@
                 "attr_name": "item_type",
                 "attr_prefixed": true,
                 "field_type": "select",
-                "field_class": "sheet-15",
+                "field_class": "",
                 "field_selected": "misc",
                 "field_options_type": "array",
                 "field_options": [
                     {
                         "name": "Misc",
-                        "value": "misc"
+                        "value": "misc",
+                        "id" : 1,
+                        "default" : true
                     },
                     {
                         "name": "Melee Weapon",
-                        "value": "melee"
+                        "value": "melee",
+                        "id" : 2,
+                        "equippable" : true
                     },
                     {
                         "name": "Ranged Weapon",
-                        "value": "ranged"
+                        "value": "ranged",
+                        "id" : 3,
+                        "equippable" : true
                     },
                     {
-                        "name": "Equipment",
-                        "value": "equipment"
+                        "name": "Head",
+                        "value": "head",
+                        "id" : 4,
+                        "equippable" : true
+                    },
+                    {
+                        "name": "Body",
+                        "value": "body",
+                        "id" : 5,
+                        "equippable" : true
                     }
                 ],
                 "description": "",
+                "canonical": "item_type",
                 "area": "item",
                 "area_subcat": "standard"
             },
@@ -624,9 +639,9 @@
                 "attr_prefixed": true,
                 "attr_name": "item_name",
                 "field_type": "text",
-                "field_class": "sheet-70",
+                "field_class": "sheet-center",
                 "description": "",
-                "canonical": "name",
+                "canonical": "item_name",
                 "area": "item",
                 "area_subcat": "standard"
             },
@@ -635,8 +650,26 @@
                 "attr_prefixed": true,
                 "attr_name": "item_weight",
                 "field_type": "number",
-                "field_class": "sheet-15",
+                "field_class": "sheet-center",
                 "description": "",
+                "canonical": "item_weight",
+                "area": "item",
+                "area_subcat": "standard"
+            },
+            {
+                "display_name": "Quantity",
+                "attr_name": "item_quantity",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "sheet-center",
+                "field_min": "0",
+                "field_max": "",
+                "default_value": "",
+                "misc_category": "",
+                "field_note": "",
+                "description": "",
+                "canonical": "item_quantity",
                 "area": "item",
                 "area_subcat": "standard"
             }
@@ -836,31 +869,6 @@
         ],
         "equipment": [
             {
-                "display_name": "Equipment Type",
-                "attr_name": "equipment_type",
-                "attr_prefixed": true,
-                "field_type": "select",
-                "field_class": "",
-                "field_selected": "body",
-                "field_options_type": "array",
-                "field_options": [
-                    {
-                        "name": "Body",
-                        "value": "body"
-                    },
-                    {
-                        "name": "Head",
-                        "value": "head"
-                    }
-                ],
-                "equipment_category": "",
-                "field_note": "",
-                "description": "",
-                "area": "item",
-                "canonical": "type",
-                "area_subcat": "equipment"
-            },
-            {
                 "display_name" : "Damage Reduction",
                 "attr_name" : "equipment_dmg_reduce",
                 "attr_prefixed" : true,
@@ -896,24 +904,6 @@
                 "area_subcat": "equipment"
             }
         ],
-        "misc": [
-            {
-                "display_name": "Quantity",
-                "attr_name": "item_quantity",
-                "attr_prefixed": true,
-                "has_max": false,
-                "field_type": "number",
-                "field_class": "",
-                "field_min": "0",
-                "field_max": "",
-                "default_value": "",
-                "misc_category": "",
-                "field_note": "",
-                "description": "",
-                "area": "item",
-                "area_subcat": "misc"
-            }
-        ],
         "effect": {
             "display_name": "Effect",
             "attr_name": "item_effect",
@@ -937,7 +927,7 @@
         }
     },
 
-    "traits" : {
+    "quirks" : {
         "abilities" : {
             "display_name" : "Abilities",
             "attr_name" : "ability",
@@ -950,7 +940,7 @@
             "field_class" : "",
             "field_note" : "",
             "description" : "",
-            "area" : "traits"
+            "area" : "quirks"
         },
 
         "flaws" : {
@@ -965,9 +955,45 @@
             "field_class" : "",
             "field_note" : "",
             "description" : "",
-            "area" : "traits"
+            "area" : "quirks"
         }
     },
+
+    "inventory" : {
+        "weight" : {
+            "display_name" : "Current Weight",
+            "attr_name" : "weight",
+            "attr_prefixed" : true,
+            "has_max" : false,
+            "has_check" : false,
+            "check_attr": "check",
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "0",
+            "field_max" : "",
+            "default_value" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "inventory"
+        },
+        "max_weight" : {
+            "display_name" : "Max Weight",
+            "attr_name" : "weight_max",
+            "attr_prefixed" : true,
+            "has_max" : false,
+            "has_check" : false,
+            "readonly" : true,
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "0",
+            "field_max" : "",
+            "default_value" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "inventory"
+        }
+    },
+
     "config": {
         "item_prefixes": {
             "eq_ranged": "equipped_ranged_weapon",
@@ -985,10 +1011,12 @@
     "informational" : {
         "field_adders" : [
             "has_max",
+            "has_check",
+            "has_mod",
+            "has_bonus",
+            "check_attr",
             "mod_attr",
             "bonus_attr",
-            "mod_check",
-            "bonus_check",
             "repeatable",
             "dice"
         ]
