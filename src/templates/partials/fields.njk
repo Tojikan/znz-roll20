@@ -126,7 +126,7 @@
     
     <div class="sheet-znz-field-hidden">
 
-    {# we do this it like this because repeatables aren't supposed to output a field without a num #}
+    {# we do this it like this because looped fields aren't supposed to output a field without a num #}
     {% if field.has_max %}
         <input type="hidden" name="{{ attrName | join}}" />
         <input type="hidden" name="{{ attrName | join}}_max" />
@@ -142,7 +142,7 @@
     {% elif field.bonus_check %}
         <input type="hidden" name="{{ attrName | join}}" />
         <input type="hidden" name="{{ attrName | join}}_{{bonus_check}}" />
-    {% elif field.repeatable %}
+    {% elif field.looped %}
         {% for num in range(0,field.count) %}
         <input type="hidden" name="{{ attrName | join}}_{{num}}" />
 

@@ -28,3 +28,15 @@
         margin-right: 8px;
     }
 }
+
+
+// Traits
+
+.sheet-znz-area-traits {
+    display: flex;
+
+    .sheet-znz-section-trait {
+        width: 50%;
+        margin-right: 2 * $gridgap;
+    }
+}

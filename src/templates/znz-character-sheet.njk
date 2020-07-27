@@ -12,9 +12,7 @@
 {% import 'partials/item.njk' as item %}
 {% import 'partials/skillTable.njk' as skillTable %}
 {% import 'partials/statblock.njk' as statblock %}
-
-{% import 'partials/itemcard.njk' as itemcard %}
-
+{% import 'partials/trait.njk' as trait %}
 <div class="sheet-znz-character-sheet sheet-znz-grid-layout">
 
     <div class="sheet-znz-grid-sidebar">
@@ -88,7 +86,17 @@
     </div>
 
     <div class="sheet-znz-grid-full-width">
-    
+        <div class="sheet-znz-area-traits">
+            <div class="sheet-znz-section-trait sheet-znz-section-abilities">
+            <h2>Abilities</h2>
+                {{ trait.create(data=jsonData.traits.abilities, options=jsonData.quirks.abilities)}}
+            </div>
+
+            <div class="sheet-znz-section-trait sheet-znz-section-flaws">
+            <h2>Flaws</h2>
+                {{ trait.create(data=jsonData.traits.flaws, options=jsonData.quirks.flaws)}}
+            </div>
+        </div>
     </div>
 
 </div>

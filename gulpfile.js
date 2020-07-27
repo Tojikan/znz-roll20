@@ -75,6 +75,7 @@ gulp.task('watch', function(){
     gulp.watch('./src/js/sheet-workers/*.js' , gulp.series(['sheet']));
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
     gulp.watch('./data/*.json' , gulp.series(['sheet']));
+    gulp.watch('./data-query/*.js' , gulp.series(['sheet']));
 });
 
 //build sheets and styles

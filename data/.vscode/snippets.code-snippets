@@ -79,7 +79,7 @@
 			"	\"attr_prefixed\" : ${3:true},",
 			"	\"field_type\" : \"${5:select}\",$6",
 				"	\"field_options_type\" : \"${7:jsonarray}\",",	
-				"	\"field_options\" : \"[$8\",",
+				"	\"field_options\" : [$8,",
 					"	]",
 			"	\"field_selected\" : \"$9\",",		
 			"	\"field_class\" : \"$10\",",
@@ -100,9 +100,22 @@
 			"	\"readonly\" : ${3:true},",
 			"	\"counts\" : \"$4\",",
 			"	\"description\" : \"$5\",",
-			"	\"area\" : \"${6:counts}\"$7"
+			"	\"area\" : \"${6:counts}\"$7",
 			"}$0"
 		],
 		"description": "Template for Field counters"
+	},
+
+	"quirk" : {
+		"scope": "javascript,json",
+		"prefix": "quirk",
+		"body": [
+			"{",
+			"	\"name\" : \"$1\",",
+			"	\"value\" : \"$2\",",
+			"	\"description\" : \"$3\"",
+			"}$0"
+		],
+		"description": "Abilities/Flaws"
 	},
 }

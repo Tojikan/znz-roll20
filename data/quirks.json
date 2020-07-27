@@ -1,0 +1,96 @@
+{
+    "abilities" : [
+        {
+            "name" : "Select Ability",
+            "value" : "none",
+            "description" : "Select an ability to see its description."
+        },
+        {
+            "name" : "Mulligan",
+            "value" : "mulligan",
+            "description" : "Two times a play session, re-roll any roll. You can refund any resources spent on the first roll."
+        },
+        {
+            "name" : "Action Star",
+            "value" : "action_star",
+            "description" : "You can spend 3 energy on your turn in order to take one additional action."
+        },
+        {
+            "name" : "Analyzer",
+            "value" : "analyzer",
+            "description" : "You can use an action to determine the exact health of an enemy target."
+        },
+        {
+            "name" : "Cheerleader",
+            "value" : "cheerleader",
+            "description" : "You can spend an action during combat to give someone else a +2 bonus to their next roll. During non-combat rolls, this can only happen 3 times a play session."
+        },
+        {
+            "name" : "Knowledgeable",
+            "value" : "knowledgeable",
+            "description" : "You can attempt any skill roll even for a skill you don't possess by passing an Intelligence check first."
+        },
+        {
+            "name" : "Gotta Go Fast",
+            "value" : "speedster",
+            "description" : "Gain an additional 2 movement speed."
+        },
+        {
+            "name" : "Brawler",
+            "value" : "brawler",
+            "description" : "Successful dodging gives you a free melee attack opportunity. Melee attacks have reduced difficulty."
+        },
+        {
+            "name" : "Sniper",
+            "value" : "sniper",
+            "description" : "You can spend one action to give your next ranged attack action in the same turn a +4 bonus. Ranged attacks have reduced difficulty"
+        }
+    ],
+    "flaws" : [
+        {
+            "name" : "Select Flaw",
+            "value" : "none",
+            "description" : "Select a flaw to see its description"
+        },
+        {
+            "name" : "Ill-Fated",
+            "value" : "illfated",
+            "description" : "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
+        },
+        {
+            "name" : "Fainthearted",
+            "value" : "fainthearted",
+            "description" : "During some encounters, the ZM will force you to skip your first turn."
+        },
+        {
+            "name" : "Clumsy",
+            "value" : "clumsy",
+            "description" : "Your character occasionally has accidents. These accidents can have unforeseen consequences. They can be prevented by spending a certain number of resources as dictated by the ZM."
+        },
+        {
+            "name" : "Alcoholic",
+            "value" : "alcoholic",
+            "description" : "If your character does not drink 3 units of alcohol each day, they will take sanity, health, and energy damage. "
+        },
+        {
+            "name" : "Vulnerable",
+            "value" : "vulnerable",
+            "description" : "If your character takes damage, roll a luck check. If the roll is 5 or under, your character takes double damage."
+        },
+        {
+            "name" : "Nearsighted",
+            "value" : "nearsighted",
+            "description" : "Your character has glasses. If you don't have glasses on, all perception and ranged attack rolls are reduced by half. On any critical fail roll, your glasses may fall and you will have to spend an action to pick them up. If this happens 3 times in a day, your glasses break and may need to be repaired or replaced with a scavenged pair with matching prescriptions."
+        },
+        {
+            "name" : "Curious",
+            "value" : "curious",
+            "description" : "Occasionally, you will have an urge to explore or do something that may cause something to happen. You can resist this urge by spending 10 sanity."
+        },
+        {
+            "name" : "Diabetic",
+            "value" : "diabetic",
+            "description" : "You need to take a shot of insulin every day in order to survive. If you do not take insulin each day, you will take a third of your max health. Start the game with 3 insulin in your inventory.  "
+        }
+    ]
+}

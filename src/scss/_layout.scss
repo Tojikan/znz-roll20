@@ -6,13 +6,11 @@
 
     &.sheet-znz-layout {
         display: flex;
-
-
     }
     
     &.sheet-znz-grid-layout {
         display: grid;
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(12, minmax(50px, 1fr));
         grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
         grid-gap: $gridgap * 2;
     }
@@ -24,11 +22,11 @@
 
     .sheet-znz-grid-main {
         grid-column-start: 6;
-        grid-column-end: span 12;
+        grid-column-end: 13;
     }
 
     .sheet-znz-grid-full-width {
         grid-column-start: 1;
-        grid-column-end: 12;
+        grid-column-end: 13;
     }
 }

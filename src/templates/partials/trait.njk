@@ -1,0 +1,25 @@
+{# Generate Trait Section 
+    - data param - pass in the field struct
+    - options - external json array of available options
+
+    remember the repeating fieldset class can only be one word. (repeating_classname, NOT repeating_class_name)
+    #}
+
+{% macro create(data='', options='', randomizeButton=false) %}
+    <div class="sheet-znz-block-trait">
+        <fieldset class="repeating_{{ data.attr_name }}">
+            <div class="sheet-znz-trait">
+                <div class="sheet-znz-field-trait-select">
+                    <select name="attr_{{ data.attr_name }}" readonly>
+                    {% for opt in options %}
+                        <option value="{{opt.value}}">{{opt.name}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="sheet-znz-field-trait-descript">
+                    <textarea type="text" readonly name="attr_{{ data.attr_name }}_text"></textarea>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+{% endmacro %}

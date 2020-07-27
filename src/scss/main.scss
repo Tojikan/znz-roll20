@@ -1,11 +1,6 @@
-// @import "sections";
 
 // @import "expandable";
-// @import "statblock";
-// @import "trait-select";
-// @import "customizable-select";
 // @import "item-card";
-// @import "unified-inventory";
 
 
 @import "variables";
@@ -14,10 +9,11 @@
 @import "elements";
 @import "layout";
 @import "row";
-
-
 @import "section";
+
+
 @import "statblock";
 @import "tables"; //attributes and skills/profs
 @import "skills";
+@import "traits";
 @import "items";

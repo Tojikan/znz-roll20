@@ -691,7 +691,7 @@
                 "area_sub": "weapon"
             },
             {
-                "display_name": "Energy Per Attack",
+                "display_name": "Energy Cost",
                 "attr_name": "melee_energy_cost",
                 "attr_prefixed": true,
                 "has_max": false,
@@ -879,7 +879,7 @@
                 "display_name": "Equipment Stat",
                 "attr_name": "equipment_stat",
                 "attr_prefixed": true,
-                "repeatable": true,
+                "looped": true,
                 "field_type": "repeater",
                 "repeater_type": "select",
                 "count": "3",
@@ -937,6 +937,37 @@
         }
     },
 
+    "traits" : {
+        "abilities" : {
+            "display_name" : "Abilities",
+            "attr_name" : "ability",
+            "attr_prefixed" : false,
+            "repeating" : true,
+            "field_type" : "select",
+            "field_options_type" : "external",
+            "field_options" : "",
+            "field_selected" : "",
+            "field_class" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "traits"
+        },
+
+        "flaws" : {
+            "display_name" : "Flaws",
+            "attr_name" : "flaw",
+            "attr_prefixed" : false,
+            "repeating" : true,
+            "field_type" : "select",
+            "field_options_type" : "external",
+            "field_options" : "",
+            "field_selected" : "",
+            "field_class" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "traits"
+        }
+    },
     "config": {
         "item_prefixes": {
             "eq_ranged": "equipped_ranged_weapon",
