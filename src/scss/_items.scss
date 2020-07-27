@@ -137,38 +137,3 @@
     }
 
 }
-
-
-
-
-//Hide fields on Equip
-.sheet-znz-equipped-ranged {
-    .sheet-znz-itemcard {
-        .sheet-znz-itemcard-melee-fields,
-        .sheet-znz-itemcard-misc-fields,
-        .sheet-znz-itemcard-equipment-fields {
-            display: none;
-        }
-    }
-}
-
-.sheet-znz-equipped-melee {
-    .sheet-znz-itemcard {
-        .sheet-znz-itemcard-ranged-fields,
-        .sheet-znz-itemcard-misc-fields,
-        .sheet-znz-itemcard-equipment-fields {
-            display: none;
-        }
-    }
-}
-
-.sheet-znz-equipped-head, .sheet-znz-equipped-body  {
-    .sheet-znz-itemcard {
-        .sheet-znz-itemcard-weapon-fields,
-        .sheet-znz-itemcard-ranged-fields,
-        .sheet-znz-itemcard-melee-fields,
-        .sheet-znz-itemcard-misc-fields {
-            display: none;
-        }
-    }
-}
