@@ -13,6 +13,10 @@
 
 .sheet-znz-flex {
     display: flex;
+
+    &.sheet-spaced-between {
+        justify-content: space-between;
+    }
 }
 
 .sheet-znz-description {

@@ -7,8 +7,8 @@ const stats = [
     "tenacity",
     "health"
     ];
-
-const data = [['data']];
+;
+const data = [[{dataquery:'data'}]]
 
 
 const setTotalAttrs = () => {

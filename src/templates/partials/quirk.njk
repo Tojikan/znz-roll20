@@ -5,9 +5,9 @@
     remember the repeating fieldset class can only be one word. (repeating_classname, NOT repeating_class_name)
     #}
 
-{% macro create(data='', options='', randomizeButton=false) %}
+{% macro create(data='', options='') %}
     <div class="sheet-znz-block-quirk">
-        <fieldset class="repeating_{{ data.attr_name }}">
+        <fieldset class="repeating_{{ data.repeating_attr }}">
             <div class="sheet-znz-quirk">
                 <div class="sheet-znz-field-quirk-select">
                     <select name="attr_{{ data.attr_name }}" readonly>
@@ -15,14 +15,9 @@
                         <option value="{{opt.value}}">{{opt.name}}</option>
                     {% endfor %}
                     </select>
-                    {% if randomizeButton %}
-                    <div class="sheet-znz-randomize">
-                        <button type="action" name="act_randomize{{data.attr_name}}">Randomize</button>
-                    </div>
-                    {% endif %}
                 </div>
                 <div class="sheet-znz-field-quirk-descript">
-                    <textarea type="text" readonly name="attr_{{ data.attr_name }}_text"></textarea>
+                    <textarea type="text" readonly name="attr_{{ data.attr_name }}_{{ data.text_attr }}" value="{{options[0].description}}"></textarea>
                 </div>
             </div>
         </fieldset>

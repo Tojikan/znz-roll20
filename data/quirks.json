@@ -8,7 +8,7 @@
         {
             "name" : "Mulligan",
             "value" : "mulligan",
-            "description" : "Two times a play session, re-roll any roll. You can refund any resources spent on the first roll."
+            "description" : "Three times a play session, re-roll any roll. You can refund any resources spent on the first roll."
         },
         {
             "name" : "Action Star",
@@ -16,7 +16,7 @@
             "description" : "You can spend 3 energy on your turn in order to take one additional action."
         },
         {
-            "name" : "Scaner",
+            "name" : "Scanner",
             "value" : "scanner",
             "description" : "You can use an action to determine the exact health of any enemy target you can see."
         },
@@ -55,7 +55,7 @@
         {
             "name" : "Ill-Fated",
             "value" : "illfated",
-            "description" : "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
+            "description" : "Three times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
         },
         {
             "name" : "Fainthearted",

@@ -37,6 +37,8 @@ textarea {
 
 .sheet-znz-flex {
   display: flex; }
+  .sheet-znz-flex.sheet-spaced-between {
+    justify-content: space-between; }
 
 .sheet-znz-description {
   margin-top: 3px;
@@ -208,8 +210,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   .sheet-znz-expand-button .sheet-label {
     color: #666;
     font-size: 12px;
-    margin: auto;
-    width: 40%; }
+    margin: auto; }
     .sheet-znz-expand-button .sheet-label:after {
       content: '';
       border: solid #666;
@@ -260,82 +261,6 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
 
 .sheet-znz-expandable .sheet-znz-expandable {
   border-bottom: dashed 1px darkgray; }
-
-.sheet-znz-area-status > .sheet-znz-row {
-  margin: 0;
-  align-items: flex-start;
-  height: 100%; }
-
-.sheet-znz-stat-block {
-  text-align: center; }
-  .sheet-znz-stat-block h2 {
-    font-size: 16px; }
-  .sheet-znz-stat-block input {
-    font-size: 13px; }
-  .sheet-znz-stat-block .sheet-znz-description {
-    font-size: 11px;
-    margin-top: 2px; }
-    .sheet-znz-stat-block .sheet-znz-description span {
-      font-weight: 700; }
-  .sheet-znz-stat-block .sheet-znz-max {
-    font-size: 11px; }
-
-table.sheet-znz-row-table {
-  width: 100%; }
-  table.sheet-znz-row-table td {
-    padding: 10px 5px; }
-    table.sheet-znz-row-table td .sheet-znz-attr-mod {
-      display: flex;
-      align-items: center; }
-      table.sheet-znz-row-table td .sheet-znz-attr-mod input {
-        width: 30px;
-        margin-right: 5px; }
-  table.sheet-znz-row-table tr {
-    border-top: thin solid;
-    border-bottom: thin solid;
-    border-color: lightgrey; }
-    table.sheet-znz-row-table tr.sheet-znz-header {
-      border: none; }
-    table.sheet-znz-row-table tr:last-child {
-      border-bottom: none; }
-
-.sheet-znz-skill-table {
-  width: 100%; }
-  .sheet-znz-skill-table tr {
-    margin-bottom: 2px; }
-    .sheet-znz-skill-table tr.sheet-znz-header {
-      border-bottom: solid 1px black; }
-    .sheet-znz-skill-table tr td {
-      vertical-align: bottom; }
-      .sheet-znz-skill-table tr td .sheet-znz-line-input {
-        padding: 0;
-        margin-bottom: 4px;
-        margin-right: 3px; }
-      .sheet-znz-skill-table tr td.sheet-znz-input {
-        text-align: right; }
-
-.sheet-znz-section-skills {
-  display: flex; }
-  .sheet-znz-section-skills h2 {
-    text-align: center;
-    border-bottom: solid 1px black;
-    padding-bottom: 5px; }
-  .sheet-znz-section-skills .sheet-znz-block {
-    width: 50%;
-    flex: 50%; }
-
-.sheet-znz-skill-select .sheet-znz-skill {
-  margin-bottom: 2px;
-  display: flex;
-  justify-content: start; }
-  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-input {
-    margin: 0 3px 3px 0; }
-  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-label {
-    display: flex;
-    align-items: flex-end; }
-  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-mod {
-    margin-left: 2px;
-    font-size: 9px; }
 
 /**
 * Styling for item cards, Inventory, and Equipped Items
@@ -419,25 +344,6 @@ table.sheet-znz-row-table {
 .sheet-znz-item-card-inventory .sheet-znz-item-buttons input.sheet-znz-item-type-5:checked ~ button.sheet-znz-body-field {
   display: block; }
 
-.sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-melee-fields,
-.sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-misc-fields,
-.sheet-znz-equipped-ranged .sheet-znz-itemcard .sheet-znz-itemcard-equipment-fields {
-  display: none; }
-
-.sheet-znz-equipped-melee .sheet-znz-itemcard .sheet-znz-itemcard-ranged-fields,
-.sheet-znz-equipped-melee .sheet-znz-itemcard .sheet-znz-itemcard-misc-fields,
-.sheet-znz-equipped-melee .sheet-znz-itemcard .sheet-znz-itemcard-equipment-fields {
-  display: none; }
-
-.sheet-znz-equipped-head .sheet-znz-itemcard .sheet-znz-itemcard-weapon-fields,
-.sheet-znz-equipped-head .sheet-znz-itemcard .sheet-znz-itemcard-ranged-fields,
-.sheet-znz-equipped-head .sheet-znz-itemcard .sheet-znz-itemcard-melee-fields,
-.sheet-znz-equipped-head .sheet-znz-itemcard .sheet-znz-itemcard-misc-fields, .sheet-znz-equipped-body .sheet-znz-itemcard .sheet-znz-itemcard-weapon-fields,
-.sheet-znz-equipped-body .sheet-znz-itemcard .sheet-znz-itemcard-ranged-fields,
-.sheet-znz-equipped-body .sheet-znz-itemcard .sheet-znz-itemcard-melee-fields,
-.sheet-znz-equipped-body .sheet-znz-itemcard .sheet-znz-itemcard-misc-fields {
-  display: none; }
-
 .sheet-znz-area-inventory {
   margin: 20px 0; }
   .sheet-znz-area-inventory .sheet-znz-section-inventory {
@@ -455,10 +361,12 @@ table.sheet-znz-row-table {
       .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-field {
         width: 25%;
         text-align: center; }
-        .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-field input {
+        .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-field input[type=number] {
           display: block;
           margin: auto;
           width: 75px; }
+      .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-inventory-weight-check:checked ~ .sheet-znz-inventory-weight {
+        color: red; }
     .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items {
       display: flex;
       flex-direction: column; }
@@ -487,3 +395,79 @@ table.sheet-znz-row-table {
           flex-basis: 100%;
           width: 0;
           order: 2; }
+
+table.sheet-znz-row-table {
+  width: 100%; }
+  table.sheet-znz-row-table td {
+    padding: 10px 5px; }
+    table.sheet-znz-row-table td .sheet-znz-attr-mod {
+      display: flex;
+      align-items: center; }
+      table.sheet-znz-row-table td .sheet-znz-attr-mod input {
+        width: 30px;
+        margin-right: 5px; }
+  table.sheet-znz-row-table tr {
+    border-top: thin solid;
+    border-bottom: thin solid;
+    border-color: lightgrey; }
+    table.sheet-znz-row-table tr.sheet-znz-header {
+      border: none; }
+    table.sheet-znz-row-table tr:last-child {
+      border-bottom: none; }
+
+.sheet-znz-skill-table {
+  width: 100%; }
+  .sheet-znz-skill-table tr {
+    margin-bottom: 2px; }
+    .sheet-znz-skill-table tr.sheet-znz-header {
+      border-bottom: solid 1px black; }
+    .sheet-znz-skill-table tr td {
+      vertical-align: bottom; }
+      .sheet-znz-skill-table tr td .sheet-znz-line-input {
+        padding: 0;
+        margin-bottom: 4px;
+        margin-right: 3px; }
+      .sheet-znz-skill-table tr td.sheet-znz-input {
+        text-align: right; }
+
+.sheet-znz-area-status > .sheet-znz-row {
+  margin: 0;
+  align-items: flex-start;
+  height: 100%; }
+
+.sheet-znz-stat-block {
+  text-align: center; }
+  .sheet-znz-stat-block h2 {
+    font-size: 16px; }
+  .sheet-znz-stat-block input {
+    font-size: 13px; }
+  .sheet-znz-stat-block .sheet-znz-description {
+    font-size: 11px;
+    margin-top: 2px; }
+    .sheet-znz-stat-block .sheet-znz-description span {
+      font-weight: 700; }
+  .sheet-znz-stat-block .sheet-znz-max {
+    font-size: 11px; }
+
+.sheet-znz-section-skills {
+  display: flex; }
+  .sheet-znz-section-skills h2 {
+    text-align: center;
+    border-bottom: solid 1px black;
+    padding-bottom: 5px; }
+  .sheet-znz-section-skills .sheet-znz-block {
+    width: 50%;
+    flex: 50%; }
+
+.sheet-znz-skill-select .sheet-znz-skill {
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: start; }
+  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-input {
+    margin: 0 3px 3px 0; }
+  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-label {
+    display: flex;
+    align-items: flex-end; }
+  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-mod {
+    margin-left: 2px;
+    font-size: 9px; }

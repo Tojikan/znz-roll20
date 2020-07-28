@@ -650,6 +650,7 @@
                 "attr_prefixed": true,
                 "attr_name": "item_weight",
                 "field_type": "number",
+                "field_min": "0",
                 "field_class": "sheet-center",
                 "description": "",
                 "canonical": "item_weight",
@@ -933,6 +934,8 @@
             "attr_name" : "ability",
             "attr_prefixed" : false,
             "repeating" : true,
+            "repeating_attr": "abilities",
+            "text_attr": "text",
             "field_type" : "select",
             "field_options_type" : "external",
             "field_options" : "",
@@ -948,6 +951,8 @@
             "attr_name" : "flaw",
             "attr_prefixed" : false,
             "repeating" : true,
+            "repeating_attr": "flaws",
+            "text_attr": "text",
             "field_type" : "select",
             "field_options_type" : "external",
             "field_options" : "",
@@ -961,11 +966,12 @@
 
     "inventory" : {
         "weight" : {
-            "display_name" : "Current Weight",
-            "attr_name" : "weight",
+            "display_name" : "Total Weight",
+            "attr_name" : "inv_weight_total",
             "attr_prefixed" : true,
             "has_max" : false,
             "has_check" : false,
+            "readonly" : true,
             "check_attr": "check",
             "field_type" : "number",
             "field_class" : "",
@@ -978,7 +984,7 @@
         },
         "max_weight" : {
             "display_name" : "Max Weight",
-            "attr_name" : "weight_max",
+            "attr_name" : "inv_weight_max",
             "attr_prefixed" : true,
             "has_max" : false,
             "has_check" : false,
@@ -1000,7 +1006,7 @@
             "eq_melee": "equipped_melee_weapon",
             "eq_head": "equipped_head",
             "eq_body": "equipped_body",
-            "inventory": "inventory"
+            "inventory": "inv"
         },
         "attribute_values": {
             "min": 1,

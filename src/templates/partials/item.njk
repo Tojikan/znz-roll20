@@ -65,7 +65,7 @@
 
 {% endmacro %}
 
-{% macro inventoryItem(fields='', attrPrefix='inventory', options='') %}
+{% macro inventoryItem(fields='', attrPrefix='inv', options='') %}
 {% set itemTypes = [] %}
 {% set typeAttr = "" %}
 
@@ -95,12 +95,12 @@
 
     {# Expand toggle #}
     <div class="sheet-znz-expand-button sheet-znz-expandable-section">
-        <input class="sheet-znz-expand-toggle" type="checkbox" name="attr_{{ attrPrefix }}_expand_toggle" checked>
-        <div class="sheet-label sheet-znz-expand-text" for="attr_{{ attrPrefix }}_expand_toggle"><span>Show Item Details</span></div>
-        <div class="sheet-label sheet-znz-collapse-text" for="attr_{{ attrPrefix }}_expand_toggle"><span>Hide Item Details</span></div>
+        <input class="sheet-znz-expand-toggle" type="checkbox" name="attr_expand_toggle" checked>
+        <div class="sheet-label sheet-znz-expand-text" for="attr_expand_toggle"><span>Show Item Details</span></div>
+        <div class="sheet-label sheet-znz-collapse-text" for="attr_expand_toggle"><span>Hide Item Details</span></div>
     </div>
 
-    {% call expandable.create(attrPrefix + "_expand_toggle" ) %}
+    {% call expandable.create( "expand_toggle" ) %}
     <div class="sheet-znz-item-row-area">
         {# hidden checks for showing specific fields #}
         {% for type in itemTypes %}

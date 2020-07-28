@@ -88,12 +88,19 @@
     <div class="sheet-znz-grid-full-width">
         <div class="sheet-znz-area-quirks">
             <div class="sheet-znz-section-quirk sheet-znz-section-abilities">
-            <h2>Abilities</h2>
+            <div class="sheet-znz-flex sheet-spaced-between">
+                <h2>Abilities</h2>
+                <button type="action" name="act_randomizeability">Random Ability </button>
+            </div>
+            
                 {{ quirk.create(data=jsonData.fields.quirks.abilities, options=jsonData.quirks.abilities, randomizeButton=true)}}
             </div>
 
             <div class="sheet-znz-section-quirk sheet-znz-section-flaws">
-            <h2>Flaws</h2>
+                <div class="sheet-znz-flex sheet-spaced-between">
+                    <h2>Flaws</h2>
+                    <button type="action" name="act_randomizeflaw">Random Flaw </button>
+                </div>
                 {{ quirk.create(data=jsonData.fields.quirks.flaws, options=jsonData.quirks.flaws, randomizeButton=true)}}
             </div>
         </div>
@@ -101,18 +108,18 @@
             <div class="sheet-znz-section-inventory">
                 <h2>Inventory</h2>
                 <div class="sheet-znz-inventory-controls">
-                    <button type="action"name="act_inventoryshow">Show All Details</button>
-                    <button type="action"name="act_inventoryhide">Hide All Details</button>
+                    <button type="action"name="act_inventoryshow">Expand All</button>
+                    <button type="action"name="act_inventoryhide">Collapse All</button>
                 </div>
                 <div class="sheet-znz-inventory-weight">
                     <div class="sheet-znz-field">
                         <h3>{{ jsonData.fields.inventory.weight.display_name }}</h3>
-                        <input type="number" name="attr_{{jsonData.config.item_prefixes.inventory}}_{{ jsonData.fields.inventory.weight.attr_name }}" min="{{jsonData.fields.inventory.weight.field_min}}">
-                        <input type="hidden" name="attr_{{jsonData.config.item_prefixes.inventory}}_{{ jsonData.fields.inventory.weight.attr_name }}_{{ jsonData.fields.inventory.weight.check_attr}}" value = "0">
+                        <input class="sheet-znz-hidden sheet-znz-inventory-weight-check" type="checkbox" name="attr_{{ jsonData.fields.inventory.weight.attr_name }}_{{ jsonData.fields.inventory.weight.check_attr}}">
+                        <input class="sheet-znz-inventory-weight" type="number" name="attr_{{ jsonData.fields.inventory.weight.attr_name }}" min="0" readonly>
                     </div>
                     <div class="sheet-znz-field">
                         <h3>{{ jsonData.fields.inventory.max_weight.display_name }}</h3>
-                        <input type="number" name="attr_{{jsonData.config.item_prefixes.inventory}}_{{ jsonData.fields.inventory.max_weight.attr_name }}" min="{{jsonData.fields.inventory.max_weight.field_min}}">
+                        <input type="number" name="attr_{{ jsonData.fields.inventory.max_weight.attr_name }}" min="{{jsonData.fields.inventory.max_weight.field_min}}">
                     </div>
                 </div>
                 <div class="sheet-znz-inventory-items">
@@ -126,7 +133,7 @@
 
 </div>
 
-<script type="text/workers">
+<script type="text/worker">
     /** inject:workers **/
     /** endinject **/
 </script>

@@ -23,11 +23,15 @@
                 width: 25%;
                 text-align: center;
 
-                input {
+                input[type=number] {
                     display: block;
                     margin: auto;
                     width: 75px;
                 }
+            }
+
+            .sheet-znz-inventory-weight-check:checked ~ .sheet-znz-inventory-weight{
+                color: red;
             }
         }
         
