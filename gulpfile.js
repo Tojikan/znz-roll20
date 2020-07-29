@@ -29,7 +29,7 @@ gulp.task('sheet', function(){
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(data(getAllJsonData)) //pass all json data into Templates
+        .pipe(data(getAllJsonData)) //pass all json data into Templates. should be done first since it also clears require() json cache
         .pipe(data(getAllDataQuery)) //pass all data queries into templates
         .pipe(nunjucksRender({
             path:['src/templates']
@@ -71,6 +71,7 @@ function getAllJsonData(){
     files.forEach(file => {
         if (path.extname(file) === '.json'){
             let filename = path.basename(file, '.json');
+            delete require.cache[require.resolve(dataFolder + file)]; //clear cache for json before it gets used by dataqueries
             jsonData[filename] = JSON.parse(fs.readFileSync(dataFolder + file));
         }
     });

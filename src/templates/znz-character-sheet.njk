@@ -38,6 +38,11 @@
             {{ attrTable.create(jsonData.fields.attributes, jsonData.fields.config.attribute_values) }}
         </div>
 
+        {#---- Flashlight ----- #}
+        <div class="sheet-znz-section-flashlight">
+            {{ fieldCreate.outputField( field=jsonData.fields.flashlight)}}
+        </div>
+
         {#----- Skills & Proficiencies ----- #}
         <div class="sheet-znz-section-skills">
             <div class="sheet-znz-block">

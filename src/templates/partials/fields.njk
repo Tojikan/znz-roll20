@@ -80,7 +80,7 @@
                     </div>  
                 </div>
             {% else %}
-                <input type="number" name="{{ attrName | join}}" {{ "readonly" if field.readonly }} min="{{field.field_min}}" max="{{field.field_max}}" ></input>
+                <input type="number" name="{{ attrName | join}}" {{ "readonly" if field.readonly }} min="{{field.field_min}}" max="{{field.field_max}}" value="{{field.default_value}}" ></input>
             {% endif %}
         </div>
 

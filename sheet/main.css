@@ -21,6 +21,11 @@ input {
   width: 100%;
   font-size: 11px;
   line-height: 11px; }
+  input:read-only {
+    -moz-appearance: textfield; }
+    input:read-only::-webkit-outer-spin-button, input:read-only::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
 
 textarea {
   max-width: 100%;
@@ -156,6 +161,17 @@ input.sheet-znz-line-input {
 .sheet-znz-section-attributes {
   margin-bottom: 16px; }
 
+.sheet-znz-section-flashlight .sheet-znz-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px lightgray;
+  padding: 5px 10px;
+  margin-bottom: 12px;
+  box-sizing: border-box; }
+  .sheet-znz-section-flashlight .sheet-znz-field h2 {
+    margin: 0; }
+
 .sheet-znz-area-counter {
   font-size: 10px; }
   .sheet-znz-area-counter h2, .sheet-znz-area-counter h3 {
@@ -272,8 +288,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     height: 28px;
     max-width: 100%; }
   [class^='sheet-znz-item-card'] .sheet-znz-item-row-area {
-    margin-bottom: 12px;
-    padding: 0 15px; }
+    margin-bottom: 12px; }
     [class^='sheet-znz-item-card'] .sheet-znz-item-row-area input, [class^='sheet-znz-item-card'] .sheet-znz-item-row-area select {
       margin: 0;
       padding: 0;
@@ -291,11 +306,11 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     [class^='sheet-znz-item-card'] .sheet-znz-item-row .sheet-znz-field-label {
       text-align: right;
       margin-right: 8px;
-      width: 50%; }
+      width: 55%; }
     [class^='sheet-znz-item-card'] .sheet-znz-item-row.sheet-znz-field-select .sheet-znz-field-label {
       align-self: center; }
     [class^='sheet-znz-item-card'] .sheet-znz-item-row .sheet-znz-field-input {
-      width: 50%; }
+      width: 45%; }
     [class^='sheet-znz-item-card'] .sheet-znz-item-row select {
       max-width: 100%; }
   [class^='sheet-znz-item-card'] .sheet-znz-item-buttons {
@@ -306,11 +321,11 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   margin: 12px 0; }
   .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-label {
     font-size: 11px;
-    width: 50%;
-    text-align: center; }
+    width: 55%;
+    text-align: right; }
   .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input {
     display: flex;
-    justify-content: space-around; }
+    justify-content: center; }
     .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input select {
       width: 120px; }
     .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input .sheet-znz-equipment-stat {
@@ -426,7 +441,8 @@ table.sheet-znz-row-table {
       .sheet-znz-skill-table tr td .sheet-znz-line-input {
         padding: 0;
         margin-bottom: 4px;
-        margin-right: 3px; }
+        margin-right: 3px;
+        text-align: center; }
       .sheet-znz-skill-table tr td.sheet-znz-input {
         text-align: right; }
 

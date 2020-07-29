@@ -22,20 +22,24 @@
     "counters": [ 
         {
             "display_name": "Attributes",
-            "attr_name": "attributes_count",
+            "attr_name": "attrib_count",
             "readonly": true,
             "field_type" : "number",
             "counts": "attributes",
+            "counts_max": false,
             "description": "",
+            "default_value" : 21,
             "area": "counts"
         },
         {
-            "display_name": "Stats",
+            "display_name": "Stat Max",
             "attr_name": "stats_count",
             "readonly": true,
             "field_type" : "number",
             "counts": "stats",
+            "counts_max": true,
             "description": "",
+            "default_value" : 150,
             "area": "counts"
         },
         {
@@ -44,7 +48,9 @@
             "readonly" : true,
             "field_type" : "number",
             "counts" : "skills",
+            "counts_max": false,
             "description" : "",
+            "default_value" : 0,
             "area" : "counts"
         },
         {
@@ -53,7 +59,9 @@
             "readonly" : true,
             "field_type" : "number",
             "counts" : "proficiencies",
+            "counts_max": false,
             "description" : "",
+            "default_value" : 0,
             "area" : "counts"
         }
 
@@ -68,7 +76,7 @@
             "field_max": "",  
             "field_class": "",
             "description": "",
-            "default_value": "50",
+            "default_value": 50,
             "has_max": true,
             "explanation_text": "",
             "area": "stat"
@@ -81,7 +89,7 @@
             "field_max": "",  
             "field_class": "",
             "description": "",
-            "default_value": "50",
+            "default_value": 50,
             "has_max": true,
             "explanation_text": "",
             "area": "stat"
@@ -94,7 +102,7 @@
             "field_max": "",  
             "field_class": "",
             "description": "",
-            "default_value": "50",
+            "default_value": 50,
             "has_max": true,
             "explanation_text": "",
             "area": "stat"
@@ -107,7 +115,7 @@
             "field_max": "",  
             "field_class": "",
             "description": "",
-            "default_value": "0",
+            "default_value": 0,
             "has_max": false,
             "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +5 to any stat max  </div><div class=\"sheet-znz-xp-text\"> <span>20</span>: +1 to attr/skill/prof </div><div class=\"sheet-znz-xp-text\"> <span>40</span>: Learn new ability </div>",
             "area": "stat"
@@ -201,6 +209,21 @@
         }
     ],
 
+    "flashlight": {
+        "display_name" : "Flashlight Distance",
+        "attr_name" : "flashlight",
+        "attr_prefixed" : false,
+        "has_max" : false,
+        "field_type" : "number",
+        "field_class" : "",
+        "field_min" : "0",
+        "field_max" : "",
+        "default_value" : "10",
+        "field_note" : "",
+        "description" : "",
+        "area" : "flashlight"
+    },
+
     "skills": [
         {
             "display_name": "Lockpicking",
@@ -240,7 +263,7 @@
         },
         {
             "display_name": "Chemistry",
-            "attr_name": "Chemistry",
+            "attr_name": "chemistry",
             "mod_attr": "mod",
             "mod_check": "mod_check",
             "bonus_attr": "",
@@ -249,7 +272,7 @@
         },
         {
             "display_name": "Engineering",
-            "attr_name": "Engineering",
+            "attr_name": "engineering",
             "mod_attr": "mod",
             "mod_check": "mod_check",
             "bonus_attr": "",
@@ -447,7 +470,7 @@
         },
         {
             "display_name": "Sharp Melee",
-            "attr_name": "prof_sharp melee",
+            "attr_name": "prof_sharp_melee",
             "mod_attr": "mod",
             "mod_check": "mod_check",
             "description": "",
@@ -457,7 +480,7 @@
         },
         {
             "display_name": "Blunt Melee",
-            "attr_name": "prof_blunt melee",
+            "attr_name": "prof_blunt_melee",
             "mod_attr": "mod",
             "mod_check": "mod_check",
             "description": "",
@@ -477,7 +500,7 @@
         },
         {
             "display_name": "First Aid",
-            "attr_name": "prof_first aid",
+            "attr_name": "prof_first_aid",
             "mod_attr": "mod",
             "mod_check": "mod_check",
             "description": "",

@@ -14,7 +14,7 @@
 
     .sheet-znz-item-row-area {
         margin-bottom: 12px;
-        padding: 0 15px;
+        // padding: 0 15px;
     
         input, select {
             margin: 0;
@@ -39,7 +39,7 @@
         .sheet-znz-field-label {
             text-align: right;
             margin-right: 8px;
-            width: 50%;
+            width: 55%;
         }
         
         &.sheet-znz-field-select {
@@ -49,7 +49,7 @@
         }
 
         .sheet-znz-field-input {
-            width: 50%;
+            width: 45%;
         }
 
         select {
@@ -70,13 +70,13 @@
 
     .sheet-znz-repeater-label {
         font-size: $regular;
-        width: 50%;
-        text-align: center;
+        width: 55%;
+        text-align: right;
     }
 
     .sheet-znz-repeater-input {
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
 
         select {
             width: 120px;

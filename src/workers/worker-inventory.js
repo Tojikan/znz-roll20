@@ -1,4 +1,5 @@
 
+//Expand all item cards
 on("clicked:inventoryshow", function(){
     getSectionIDs("inventory", function(idArray) {
         var toggleArray = idArray.map(x => "repeating_inventory_" + x + "_expand_toggle");
@@ -13,7 +14,7 @@ on("clicked:inventoryshow", function(){
 
 });
 
-
+//Collapse Item Cards
 on("clicked:inventoryhide", function(){
     getSectionIDs("inventory", function(idArray) {
         var toggleArray = idArray.map(x => "repeating_inventory_" + x + "_expand_toggle");
@@ -34,13 +35,13 @@ const weightFields = [[{dataquery:'weightFields'}]],
     total = weightFields.total,
     check = weightFields.check;
 
-//dont forget spacse
+// Repeating Sum of inventory weight
 on('change:repeating_inventory:' + individual + ' change:repeating_inventory:' + quantity +' remove:repeating_inventory', function() {
     repeatingSum(total,"inventory",[individual, quantity]);
 });
 
+// Set hidden checkbox if weight exceeds max to turn it red
 on('change:' + total, function() {
-
     getAttrs([total, max, check], function(value){
         let exceedWeight = false,
             attrSet = {};
