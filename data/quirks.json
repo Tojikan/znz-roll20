@@ -8,42 +8,42 @@
         {
             "name" : "Mulligan",
             "value" : "mulligan",
-            "description" : "Three times a play session, re-roll any roll. You can refund any resources spent on the first roll."
+            "description" : "Two times a play session, you may re-roll any roll but must accept the results of the re-roll. You can refund any resources spent on the first roll."
         },
         {
-            "name" : "Action Star",
-            "value" : "action_star",
-            "description" : "You can spend 3 energy on your turn in order to take one additional action."
+            "name" : "High Octane",
+            "value" : "high_octane",
+            "description" : "You can spend 3 energy on your turn in order to take one additional action. This additional action can be an attack."
         },
         {
-            "name" : "Scanner",
-            "value" : "scanner",
-            "description" : "You can use an action to determine the exact health of any enemy target you can see."
+            "name" : "Triage",
+            "value" : "triage",
+            "description" : "You can use an action to determine the exact health of up to three enemy targets. This can be repeated in a turn without an energy price. "
         },
         {
             "name" : "Cheerleader",
             "value" : "cheerleader",
-            "description" : "You can spend an action during combat to give someone else a +2 bonus to their next roll. During non-combat rolls, this can only happen 3 times a play session."
+            "description" : "You can give any player a +2 bonus to their next roll. You can do this during combat as an action but you can only do this 3 times a play session out of combat. "
         },
         {
-            "name" : "Knowledgeable",
-            "value" : "knowledgeable",
+            "name" : "Encyclopedia",
+            "value" : "encyclopedia",
             "description" : "You can attempt any skill roll even for a skill you don't possess by passing an Intelligence check first."
         },
         {
             "name" : "Gotta Go Fast",
             "value" : "speedster",
-            "description" : "Gain an additional 2 movement speed."
+            "description" : "Gain an additional 2 movement speed. During successful dodges, you can jump back 2 spaces."
         },
         {
-            "name" : "Brawler",
-            "value" : "brawler",
-            "description" : "Successful dodging gives you a free melee attack opportunity. Melee attacks have reduced difficulty."
+            "name" : "Martial Artist",
+            "value" : "Martial Artist",
+            "description" : "Successful dodging gives you a free melee attack opportunity. Chance to receive Hard+ melee attack difficulty reduced."
         },
         {
             "name" : "Sniper",
             "value" : "sniper",
-            "description" : "You can spend one action to give your next ranged attack action in the same turn a +4 bonus. Ranged attacks have reduced difficulty"
+            "description" : "You can spend one action to give your ranged attack action in the same turn a +4 hit bonus. Increase Ranged "
         }
     ],
     "flaws" : [
@@ -60,32 +60,32 @@
         {
             "name" : "Fainthearted",
             "value" : "fainthearted",
-            "description" : "During some encounters, the ZM will force you to skip your first turn."
+            "description" : "During most combat encounters and high-stress situations, you must roll a Tenacity check. If you fail the check, you lose your first turn."
         },
         {
             "name" : "Clumsy",
             "value" : "clumsy",
-            "description" : "Your character occasionally has accidents. These accidents can have unforeseen consequences. They can be prevented by spending a certain number of resources as dictated by the ZM."
+            "description" : "You occasionally has accidents which can cause problems. \n\n You can sometimes prevent this accident by spending a certain amount of resources dictated by the ZM."
         },
         {
             "name" : "Alcoholic",
             "value" : "alcoholic",
-            "description" : "If your character does not drink 3 units of alcohol each day, they will take sanity, health, and energy damage. "
+            "description" : "Your character cannot rest unless they consume alcohol. \n\n Start the game with 5 uses of alcohol.  "
         },
         {
             "name" : "Vulnerable",
             "value" : "vulnerable",
-            "description" : "If your character takes damage, roll a luck check. If the roll is 5 or under, your character takes double damage."
+            "description" : "Your character takes double damage."
         },
         {
             "name" : "Nearsighted",
             "value" : "nearsighted",
-            "description" : "Your character has glasses. If you don't have glasses on, all perception and ranged attack rolls are reduced by half. On any critical fail roll, your glasses may fall and you will have to spend an action to pick them up. If this happens 3 times in a day, your glasses break and may need to be repaired or replaced with a scavenged pair with matching prescriptions."
+            "description" : "Every time you roll a critical fail, your glasses falls off. All Perception checks fail and ranged attacks receive Impossible+ difficulty until you put it back on."
         },
         {
             "name" : "Curious",
             "value" : "curious",
-            "description" : "Occasionally, you will have an urge to explore or do something that may cause something to happen. You can resist this urge by spending 10 sanity."
+            "description" : ""
         },
         {
             "name" : "Diabetic",

@@ -1,4 +1,5 @@
 {
+    "$schema": "./fies.schema.json",
     "nameArea": [
         {
             "display_name": "Name",
@@ -117,7 +118,7 @@
             "description": "",
             "default_value": 0,
             "has_max": false,
-            "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +5 to any stat max  </div><div class=\"sheet-znz-xp-text\"> <span>20</span>: +1 to attr/skill/prof </div><div class=\"sheet-znz-xp-text\"> <span>40</span>: Learn new ability </div>",
+            "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +5 to any stat max  </div><div class=\"sheet-znz-xp-text\"> <span>20</span>: +1 to attr/skill/prof </div><div class=\"sheet-znz-xp-text\"> <span>50</span>: Learn new ability </div>",
             "area": "stat"
         }
     ],
@@ -127,9 +128,9 @@
             "display_name": "Strength",
             "attr_name": "strength",
             "reminder_note": "Melee Damage",
-            "mod_attr": "mod",
-            "bonus_attr": "bonus",
-            "bonus_check": "bonus_check",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
             "description": "",
@@ -139,9 +140,9 @@
             "display_name": "Dexterity",
             "attr_name": "dexterity",
             "reminder_note": "Dodging, Initiative",
-            "mod_attr": "mod",
-            "bonus_attr": "bonus",
-            "bonus_check": "bonus_check",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
             "description": "",
@@ -151,9 +152,9 @@
             "display_name": "Perception",
             "attr_name": "perception",
             "reminder_note": "Scouting, Senses",
-            "mod_attr": "mod",
-            "bonus_attr": "bonus",
-            "bonus_check": "bonus_check",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
             "description": "",
@@ -163,9 +164,9 @@
             "display_name": "Intelligence",
             "attr_name": "intelligence",
             "reminder_note": "XP Gain, Knowledge, Clues",
-            "mod_attr": "mod",
-            "bonus_attr": "bonus",
-            "bonus_check": "bonus_check",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
             "description": "",
@@ -175,9 +176,9 @@
             "display_name": "Tenacity",
             "attr_name": "tenacity",
             "reminder_note": "Mental fortitude, Resistance",
-            "mod_attr": "mod",
-            "bonus_attr": "bonus",
-            "bonus_check": "bonus_check",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
             "description": "",
@@ -187,9 +188,9 @@
             "display_name": "Humanity",
             "attr_name": "humanity",
             "reminder_note": "Socialability, Sanity Restore",
-            "mod_attr": "mod",
-            "bonus_attr": "bonus",
-            "bonus_check": "bonus_check",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
             "description": "",
@@ -199,9 +200,9 @@
             "display_name": "Luck",
             "attr_name": "luck",
             "reminder_note": "Chance, Loot",
-            "mod_attr": "mod",
-            "bonus_attr": "bonus",
-            "bonus_check": "bonus_check",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
             "description": "",
@@ -212,7 +213,6 @@
     "flashlight": {
         "display_name" : "Flashlight Distance",
         "attr_name" : "flashlight",
-        "attr_prefixed" : false,
         "has_max" : false,
         "field_type" : "number",
         "field_class" : "",
@@ -228,180 +228,160 @@
         {
             "display_name": "Lockpicking",
             "attr_name": "lockpicking",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Hotwiring",
             "attr_name": "hotwiring",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Hacking",
             "attr_name": "hacking",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Sleight of Hand",
             "attr_name": "sleight_of_hand",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Chemistry",
             "attr_name": "chemistry",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Engineering",
             "attr_name": "engineering",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Electrical",
             "attr_name": "electrical",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Electronics",
             "attr_name": "electronics",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Medicine",
             "attr_name": "medicine",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Explosives",
             "attr_name": "explosives",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Boat Piloting",
             "attr_name": "boat_piloting",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Plane Piloting",
             "attr_name": "plane_piloting",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Nature",
             "attr_name": "nature",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Tailoring",
             "attr_name": "tailoring",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Construction",
             "attr_name": "construction",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Gunsmithing",
             "attr_name": "gunsmmithing",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Leatherworking",
             "attr_name": "leatherworking",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Metalworking",
             "attr_name": "metalworking",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Husbandry",
             "attr_name": "husbandry",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         },
         {
             "display_name": "Gardening",
             "attr_name": "gardening",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "bonus_attr": "",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
             "area": "skills"
         }
@@ -411,201 +391,162 @@
         {
             "display_name": "Handguns",
             "attr_name": "prof_handguns",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "Shotguns",
             "attr_name": "prof_shotguns",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "Rifles",
             "attr_name": "prof_rifles",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "Projectiles",
             "attr_name": "prof_projectile",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "Throwing",
             "attr_name": "prof_throwing",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
-            "display_name": "Unarmed",
+            "display_name": "Hand to Hand",
             "attr_name": "prof_unarmed",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "Sharp Melee",
             "attr_name": "prof_sharp_melee",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "Blunt Melee",
             "attr_name": "prof_blunt_melee",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Heavy Melee",
+            "attr_name": "prof_heavy_melee",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
             "area": "proficiencies"
         },
         {
             "display_name": "Stealth",
             "attr_name": "prof_stealth",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "First Aid",
             "attr_name": "prof_first_aid",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
             "area": "proficiencies"
         },
         {
             "display_name": "Crafting",
             "attr_name": "prof_crafting",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
             "area": "proficiencies"
         },
         {
             "display_name": "Cooking",
             "attr_name": "prof_cooking",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
             "area": "proficiencies"
         },
         {
             "display_name": "Driving",
             "attr_name": "prof_driving",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
             "area": "proficiencies"
         },
         {
             "display_name": "Investigation",
             "attr_name": "prof_investigation",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
             "area": "proficiencies"
         },
         {
-            "display_name": "Acrobatics",
-            "attr_name": "prof_acrobatics",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "display_name": "Orientation",
+            "attr_name": "prof_orientation",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
+
         {
             "display_name": "Swimming",
             "attr_name": "prof_swimming",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
             "display_name": "Climbing",
             "attr_name": "prof_climbing",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": true,
             "area": "proficiencies"
         },
         {
-            "display_name": "Persuasion",
-            "attr_name": "prof_persuasion",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "display_name": "Negotiation",
+            "attr_name": "prof_negotiation",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
-            "area": "proficiencies"
-        },
-        {
-            "display_name": "Intimidation",
-            "attr_name": "prof_intimidation",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
-            "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
             "area": "proficiencies"
         },
         {
             "display_name": "Performance",
             "attr_name": "prof_performance",
-            "mod_attr": "mod",
-            "mod_check": "mod_check",
+            "has_bonus": true,
+            "has_bonus_check" : true,
             "description": "",
-            "bonus_attr": "",
-            "equipment_affectable": "",
             "area": "proficiencies"
         }
     ],
@@ -673,7 +614,7 @@
                 "attr_prefixed": true,
                 "attr_name": "item_weight",
                 "field_type": "number",
-                "field_min": "0",
+                "field_min": 0,
                 "field_class": "sheet-center",
                 "description": "",
                 "canonical": "item_weight",
@@ -687,9 +628,9 @@
                 "has_max": false,
                 "field_type": "number",
                 "field_class": "sheet-center",
-                "field_min": "0",
-                "field_max": "",
-                "default_value": "",
+                "field_min": 0,
+                "field_max": null,
+                "default_value": null,
                 "misc_category": "",
                 "field_note": "",
                 "description": "",
@@ -709,6 +650,10 @@
                 "field_options_type": "array",
                 "field_options": [
                     {
+                        "name": "Select Type",
+                        "value": ""
+                    },
+                    {
                         "name": "Blunt",
                         "value": "blunt"
                     },
@@ -719,10 +664,6 @@
                     {
                         "name": "Heavy",
                         "value": "heavy"
-                    },
-                    {
-                        "name": "Powered",
-                        "value": "powered"
                     }
                 ],
                 "weapon_category": "melee",
@@ -772,6 +713,10 @@
                 "field_selected": "handgun",
                 "field_options_type": "array",
                 "field_options": [
+                    {
+                        "name": "Select Type",
+                        "value": ""
+                    },
                     {
                         "name": "Handgun",
                         "value": "handgun"
@@ -919,11 +864,12 @@
                 "field_selected": "",
                 "field_options_type": "external",
                 "field_options": "",
-                "repeat_mod_attr": "mod",
+                "has_mod": true,
                 "equipment_category": "",
                 "field_note": "",
                 "description": "",
                 "hint": "Dropdown should be generated dynamically based on skills/profs",
+                "canonical": "equipment_stat",
                 "area": "item",
                 "area_subcat": "equipment"
             }
@@ -955,7 +901,6 @@
         "abilities" : {
             "display_name" : "Abilities",
             "attr_name" : "ability",
-            "attr_prefixed" : false,
             "repeating" : true,
             "repeating_attr": "abilities",
             "text_attr": "text",
@@ -972,7 +917,6 @@
         "flaws" : {
             "display_name" : "Flaws",
             "attr_name" : "flaw",
-            "attr_prefixed" : false,
             "repeating" : true,
             "repeating_attr": "flaws",
             "text_attr": "text",
@@ -991,7 +935,6 @@
         "weight" : {
             "display_name" : "Total Weight",
             "attr_name" : "inv_weight_total",
-            "attr_prefixed" : true,
             "has_max" : false,
             "has_check" : false,
             "readonly" : true,
@@ -1008,7 +951,6 @@
         "max_weight" : {
             "display_name" : "Max Weight",
             "attr_name" : "inv_weight_max",
-            "attr_prefixed" : true,
             "has_max" : false,
             "has_check" : false,
             "readonly" : true,
@@ -1036,18 +978,5 @@
             "default": 3,
             "max": 6
         }
-    },
-    "informational" : {
-        "field_adders" : [
-            "has_max",
-            "has_check",
-            "has_mod",
-            "has_bonus",
-            "check_attr",
-            "mod_attr",
-            "bonus_attr",
-            "repeatable",
-            "dice"
-        ]
     }
 }

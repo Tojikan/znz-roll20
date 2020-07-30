@@ -69,7 +69,7 @@ function getAllJsonData(){
     let files = fs.readdirSync(dataFolder);
 
     files.forEach(file => {
-        if (path.extname(file) === '.json' && file.indexOf('schema') >= 0){
+        if (path.extname(file) === '.json' && file.indexOf('schema') < 0){ //ignore schema
             let filename = path.basename(file, '.json');
             delete require.cache[require.resolve(dataFolder + file)]; //clear cache for json before it gets used by dataqueries
             jsonData[filename] = JSON.parse(fs.readFileSync(dataFolder + file));

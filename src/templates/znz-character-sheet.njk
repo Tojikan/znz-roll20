@@ -69,11 +69,11 @@
         <div class="sheet-znz-section-weapons sheet-znz-equipped">
             <div class="sheet-znz-block sheet-znz-equipped-ranged">
                 <h2>Equipped Ranged Weapon</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_ranged, type="weapon", category="ranged") }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_ranged, type="weapon", category="ranged") }}
             </div>
             <div class="sheet-znz-block sheet-znz-equipped-melee">
                 <h2>Equipped Melee Weapon</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_melee, type="weapon", category="melee") }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_melee, type="weapon", category="melee") }}
             </div>
         </div>
 
@@ -81,11 +81,11 @@
         <div class="sheet-znz-section-equipment sheet-znz-equipped">
             <div class="sheet-znz-block sheet-znz-equipped-head">
                 <h2>Equipped on Head</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_head, type="equipment", category="head", options=queryData.equipmentAffected) }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_head, type="equipment", category="head", options=queryData.equipmentStatsOptions) }}
             </div>
             <div class="sheet-znz-block sheet-znz-equipped-body">
                 <h2>Equipped on Body</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attr_prefix=jsonData.fields.config.item_prefixes.eq_body, type="equipment", category="body", options=queryData.equipmentAffected) }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_body, type="equipment", category="body", options=queryData.equipmentStatsOptions) }}
             </div>
         </div>
     </div>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="sheet-znz-inventory-items">
                     <fieldset class="repeating_inventory">
-                        {{ item.inventoryItem(fields=jsonData.fields.item, equipstatoptions=queryData.equipmentAffected) }}
+                        {{ item.inventoryItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.inventory, options=queryData.equipmentStatsOptions) }}
                     </fieldset>
                 </div>
             </div>

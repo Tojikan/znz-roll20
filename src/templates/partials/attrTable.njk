@@ -26,15 +26,15 @@
         <td><input type="number" name="attr_{{field.attr_name}}" min="{{vals.min}}" value="{{vals.default}}" max="{{vals.max}}" /></td>
         <td>
             <div class="sheet-znz-attr-mod">
-                <input type="number" readonly name="attr_{{field.attr_name}}_{{field.mod_attr}}" value="{{field.mod_default}}"/>
+                <input type="number" readonly name="attr_{{field.attr_name}}_mod" value="{{field.mod_default}}"/>
                 <div class="sheet-znz-attr-bonus">
                     {# This select is for styling the bonus #}
-                    <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_{{field.bonus_check}}">
+                    <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_bonus_check">
                         <option value="none" default />
                         <option value="positive" default />
                         <option value="negative" default />
                     </select>
-                    <span readonly name="attr_{{field.attr_name}}_{{field.bonus_attr}}"></span>
+                    <span readonly name="attr_{{field.attr_name}}_bonus"></span>
                 </div>
             </div>
         </td>

@@ -20,6 +20,8 @@
     {% for stdfld in fields.standard %}
         {% if stdfld.canonical == 'item_name' %}
             {{ fieldCreate.outputField(field=stdfld, header="h3", prefix=attrPrefix) }}
+        {% elif stdfld.canonical == 'item_type' %}
+            {{ fieldCreate.createHidden(field=stdfld, header="h3", prefix=attrPrefix, defaultValue=category) }}
         {% else %}
             {{ fieldCreate.createHidden(field=stdfld, prefix=attrPrefix) }}
         {% endif %}
@@ -40,7 +42,7 @@
         {% for fld in fields.equipment %}
             {% if type=="equipment" %}
                 {% if fld.field_type == "repeater" %}
-                    {{ equipmentStatRepeater(field=fld, options=options, header='Equipment Stats', class='sheet-znz-equipment-field')}}
+                    {{ equipmentStatRepeater(field=fld, prefix=attrPrefix, options=options, header='Equipment Stats', class='sheet-znz-equipment-field')}}
                 {% else %}
                     {{ fieldCreate.outputField(field=fld, header="h3", class="sheet-znz-item-row", prefix=attrPrefix) }}
                 {% endif %}
@@ -55,9 +57,9 @@
 
     <div class="sheet-znz-item-buttons">
         {% if type=="weapon" %}
-            <button type="action" name="act_{{type}}attack"> {{category | capitalize}} Attack </button>
+            <button type="action" name="act_{{category}}attack"> {{category | capitalize}} Attack </button>
         {% endif %}
-        <button type="action" name="act_unequip{{type}}">Unequip {{category | capitalize}} </button>
+        <button type="action" name="act_unequip_{{category}}">Unequip {{category | capitalize}} </button>
     </div>
 
 
@@ -116,7 +118,7 @@
         {# equipment #}
         {% for fld in fields.equipment %}
             {% if fld.field_type == "repeater" %}
-                {{ equipmentStatRepeater(field=fld, options=options, header='Equipment Stats', class='')}}
+                {{ equipmentStatRepeater(field=fld, prefix=attrPrefix, options=options, header='Equipment Stats', class='')}}
             {% else %}
                 {{ fieldCreate.outputField(field=fld, header="h3", class="sheet-znz-item-row", prefix=attrPrefix) }}
             {% endif %}
@@ -147,13 +149,13 @@
 
 
 
-{% macro equipmentStatRepeater(field='', options='', header='', class='') %}
+{% macro equipmentStatRepeater(field='', prefix='',options='', header='', class='') %}
     <div class="sheet-znz-field sheet-znz-equipment-stat-repeater {{class}}">
         <h3 class="sheet-znz-repeater-label">
             {{ header }}
         </h3>
         {% for num in range(0,field.count) %}
-            {% set toJoin = ["attr_", field.attr_name, "_", num] %}
+            {% set toJoin = ["attr_", prefix, "_", field.attr_name, "_", num] %}
             {% set newAttr = toJoin | join %}
 
             <div class="sheet-znz-repeater-input">
@@ -167,7 +169,7 @@
                     </select>
                 </div>
                 <div class="sheet-znz-equipment-stat-mod">
-                    {% set modJoin = [newAttr, "_", field.repeat_mod_attr] %}
+                    {% set modJoin = [newAttr, "_mod"] %}
                     <input type="number" name="{{ modJoin | join}}"></input>
                 </div>
             </div>

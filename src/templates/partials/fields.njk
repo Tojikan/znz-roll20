@@ -117,7 +117,7 @@
 {% endmacro %}
 
 {# hidden #}
-{% macro createHidden(field="", prefix="") %}
+{% macro createHidden(field="", prefix="", defaultValue) %}
     {% if field.attr_prefixed %}
         {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
     {% else %}
@@ -126,35 +126,43 @@
     
     <div class="sheet-znz-field-hidden">
 
-    {# we do this it like this because looped fields aren't supposed to output a field without a num #}
-    {% if field.has_max %}
-        <input type="hidden" name="{{ attrName | join}}" />
-        <input type="hidden" name="{{ attrName | join}}_max" />
-    {% elif field.mod_attr %}
-        <input type="hidden" name="{{ attrName | join}}" />
-        <input type="hidden" name="{{ attrName | join}}_{{mod_attr}}" />
-    {% elif field.mod_check %}
-        <input type="hidden" name="{{ attrName | join}}" />
-        <input type="hidden" name="{{ attrName | join}}_{{mod_check}}" />
-    {% elif field.bonus_attr %}
-        <input type="hidden" name="{{ attrName | join}}" />
-        <input type="hidden" name="{{ attrName | join}}_{{bonus_attr}}" />
-    {% elif field.bonus_check %}
-        <input type="hidden" name="{{ attrName | join}}" />
-        <input type="hidden" name="{{ attrName | join}}_{{bonus_check}}" />
-    {% elif field.looped %}
+
+    {# looped fields aren't supposed to output a field without a num #}
+    {% if field.looped %}
         {% for num in range(0,field.count) %}
         <input type="hidden" name="{{ attrName | join}}_{{num}}" />
 
-        {% if field.repeat_mod_attr %}
-        <input type="hidden" name="{{ attrName | join}}_{{num}}_{{field.repeat_mod_attr}}" />
+        {% if field.has_mod %}
+        <input type="hidden" name="{{ attrName | join}}_{{num}}_mod" />
         {% endif %}
 
         {% endfor %}
+    
     {% else %}
-        <input type="hidden" name="{{ attrName | join}}" />
-    {% endif %}
+        {% if defaultValue %}
+            <input type="hidden" name="{{ attrName | join}}" value="{{defaultValue}}"/>
+        {% else %}
+            <input type="hidden" name="{{ attrName | join}}" />
+        {% endif %}
 
+
+        {% if field.has_max %}
+        <input type="hidden" name="{{ attrName | join}}_max" />
+        {% endif %}
+
+        {% if field.has_mod %}
+            <input type="hidden" name="{{ attrName | join}}_mod" />
+        {% endif %}
+        {% if field.mod_check %}
+            <input type="hidden" name="{{ attrName | join}}_mod_check" />
+        {% endif %}
+        {% if field.has_bonus %}
+            <input type="hidden" name="{{ attrName | join}}_bonus" />
+        {% endif %}
+        {% if field.has_bonus_check %}
+            <input type="hidden" name="{{ attrName | join}}_bonus_check" />
+        {% endif %}
+    {% endif %}
     </div>
 
 {% endmacro %}

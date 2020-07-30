@@ -5,7 +5,6 @@ for (let count of counterData){
     let changeStr = count.attr_list.join(' change:');
     
     changeStr = 'change:' + changeStr;
-
     
     on( changeStr, function(){
         getAttrs(count.attr_list, function(values) {
@@ -17,6 +16,5 @@ for (let count of counterData){
             
             setAttrs(attrSet);
         });
-    })
-
+    });
 }
