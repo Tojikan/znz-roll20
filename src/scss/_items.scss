@@ -60,6 +60,16 @@
     .sheet-znz-item-buttons {
         display: flex;
         justify-content: space-around;
+
+        button {
+            font-size: $regular;
+        }
+    }
+
+    .sheet-znz-item-header {
+        select {
+            height: 100%;
+        }
     }
 }
 
@@ -77,9 +87,16 @@
     .sheet-znz-repeater-input {
         display: flex;
         justify-content: center;
+        margin: 10px 0;
+
 
         select {
             width: 120px;
+            height: 100%;
+        }
+
+        select, input {
+            padding-bottom: 2px;
         }
 
         

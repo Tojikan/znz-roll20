@@ -1,15 +1,15 @@
-const data = [[{dataquery:'getQuirks'}]]; //imported via gulp.
+const quirkData = [[{dataquery:'getQuirks'}]]; //imported via gulp.
 
-const abilityList = data.abilityList,
-    flawList = data.flawList,
-    repeatingAbility = data.repeatingAbility,
-    repeatingFlaw = data.repeatingFlaw,
-    abilityAttr = data.abilityAttr,
-    fullAbilityAttr = data.fullAbilityAttr,
-    fullAbilityTextAttr = data.fullAbilityTextAttr,
-    flawAttr = data.flawAttr,
-    fullFlawAttr = data.fullFlawAttr,
-    fullFlawTextAttr = data.fullFlawTextAttr;
+var abilityList = quirkData.abilityList,
+    flawList = quirkData.flawList,
+    repeatingAbility = quirkData.repeatingAbility,
+    repeatingFlaw = quirkData.repeatingFlaw,
+    abilityAttr = quirkData.abilityAttr,
+    fullAbilityAttr = quirkData.fullAbilityAttr,
+    fullAbilityTextAttr = quirkData.fullAbilityTextAttr,
+    flawAttr = quirkData.flawAttr,
+    fullFlawAttr = quirkData.fullFlawAttr,
+    fullFlawTextAttr = quirkData.fullFlawTextAttr;
 
 
 /*** Set Quirk Text ***/
@@ -22,7 +22,7 @@ on("change:" + repeatingAbility + ":" + abilityAttr, function(eventInfo){
         
         if (abilityName in abilityList){
             attrSet = {};
-            attrSet[data.fullAbilityTextAttr] = abilityList[abilityName];
+            attrSet[fullAbilityTextAttr] = abilityList[abilityName];
             setAttrs(attrSet)
         }
     });

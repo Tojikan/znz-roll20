@@ -171,6 +171,8 @@ input.sheet-znz-line-input {
   box-sizing: border-box; }
   .sheet-znz-section-flashlight .sheet-znz-field h2 {
     margin: 0; }
+  .sheet-znz-section-flashlight .sheet-znz-field input {
+    width: 50px; }
 
 .sheet-znz-area-counter {
   font-size: 10px; }
@@ -316,6 +318,10 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   [class^='sheet-znz-item-card'] .sheet-znz-item-buttons {
     display: flex;
     justify-content: space-around; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-buttons button {
+      font-size: 11px; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-header select {
+    height: 100%; }
 
 .sheet-znz-equipment-stat-repeater {
   margin: 12px 0; }
@@ -325,9 +331,13 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     text-align: right; }
   .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input {
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    margin: 10px 0; }
     .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input select {
-      width: 120px; }
+      width: 120px;
+      height: 100%; }
+    .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input select, .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input input {
+      padding-bottom: 2px; }
     .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input .sheet-znz-equipment-stat {
       margin-right: 12px; }
     .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input .sheet-znz-equipment-stat-mod {
@@ -379,7 +389,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
         .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-field input[type=number] {
           display: block;
           margin: auto;
-          width: 75px; }
+          width: 50px; }
       .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-inventory-weight-check:checked ~ .sheet-znz-inventory-weight {
         color: red; }
     .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items {

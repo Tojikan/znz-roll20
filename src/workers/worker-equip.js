@@ -77,40 +77,19 @@ function equipItem(eqPrefix, invPrefix, rowId){
         var attrSet = {};
 
         //set the equipped fields from inventory fields
-        for (const field of invFields) {
-            attrSet[eqPrefix + "_" + field] = values["repeating_inventory_" + field]; 
+        for (const field of fieldList) { //we have to restart back to fieldList now for ease.
+            attrSet[eqPrefix + "_" + field] = values[rowId + "_" + invPrefix + "_" + field]; 
         }
 
-        //If equipped fields aren't empty, then we can add them back to the inventory
+        //If equipped fields aren't empty, then we can add equipped back to the inventory
         if (!equipEmpty) {
-            for (let field of equippedFields) {
-                attrSet["repeating_inventory_" + field] = values[eqPrefix + "_" + field]; 
+            for (const field of fieldList) {
+                attrSet[rowId + "_" + invPrefix + "_" + field] = values[eqPrefix + "_" + field]; 
             }
         }
 
-
-
-        //If there is an equipped item, generate an unequip object to append to the equip object
-        if (!equipEmpty){
-            //Go through each key in the equippedFields array, and find the matching value for that key in the values object.
-            var equipValues = equippedFields.reduce((obj,item) => {
-                var newObj = {}
-
-                //the first obj is a string. In that case, you should not use the spread operator to accumulate the object
-                if (typeof obj === "string") {
-                    newObj[obj] = values[obj];
-                } else {
-                    newObj = {...obj};
-                }
-
-                newObj[item] = values[item]; //add new one
-
-                return newObj;
-            });
-
-            var unequipObject = createUnequipObject(eqPrefix, invPrefix, equipValues);
-        }
-
+        removeRepeatingRow(rowId);
+        setAttrs(attrSet);
     });
 }
 
@@ -132,9 +111,6 @@ function unequipItem(prefix){
     });
 }
 
-
-function getEquippedObject(prefix, values) {
-}
 
 
 

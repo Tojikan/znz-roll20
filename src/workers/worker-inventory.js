@@ -1,3 +1,10 @@
+const weightFields = [[{dataquery:'weightFields'}]];
+
+var individual = weightFields.individual,
+    quantity = weightFields.quantity,
+    max = weightFields.max,
+    total = weightFields.total,
+    check = weightFields.check;
 
 //Expand all item cards
 on("clicked:inventoryshow", function(){
@@ -27,13 +34,6 @@ on("clicked:inventoryhide", function(){
         });
     });
 });
-
-const weightFields = [[{dataquery:'weightFields'}]],
-    individual = weightFields.individual,
-    quantity = weightFields.quantity,
-    max = weightFields.max,
-    total = weightFields.total,
-    check = weightFields.check;
 
 // Repeating Sum of inventory weight
 on('change:repeating_inventory:' + individual + ' change:repeating_inventory:' + quantity +' remove:repeating_inventory', function() {
