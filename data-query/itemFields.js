@@ -18,7 +18,6 @@ for (const prop in item){
 
 
 results.fieldList = fieldList;
-results.prefixes = fields.config.item_prefixes;
 results.ignoreEmpty = ignoreEmpty;
 
 module.exports = results;

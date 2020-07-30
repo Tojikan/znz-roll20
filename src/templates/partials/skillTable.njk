@@ -13,13 +13,10 @@
             <td class="sheet-znz-input"><input type="number" class="sheet-znz-line-input" name="attr_{{ field.attr_name }}"/></td>
             <td class="sheet-znz-label">
                 {{field.display_name}} 
-                {# This select is for styling the mod #}
-                <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_field.mod_check">
-                    <option value="none" default />
-                    <option value="positive" default />
-                    <option value="negative" default />
-                </select>
-                <span class="sheet-znz-mod" name="attr_{{ field.attr_name }}_mod"/>
+                {# This select is for styling the bonus #}
+                <input class="sheet-znz-hidden sheet-znz-bonus-checker-plus" type="checkbox" name="attr_{{ field.attr_name}}_bonus_check" value="positive" />
+                <input class="sheet-znz-hidden sheet-znz-bonus-checker-minus" type="checkbox" name="attr_{{ field.attr_name}}_bonus_check" value="negative" />
+                <span class="sheet-znz-mod sheet-znz-bonus-display" name="attr_{{ field.attr_name }}_bonus"/>
             </td>
         </tr>
         {% endfor %}

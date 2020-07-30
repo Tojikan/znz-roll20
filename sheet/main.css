@@ -85,6 +85,25 @@ input.sheet-znz-line-input {
 .sheet-znz-dice-field input[type=text] {
   width: 75px; }
 
+.sheet-znz-bonus-checker-plus {
+  display: none; }
+  .sheet-znz-bonus-checker-plus:checked ~ .sheet-znz-bonus-display {
+    display: block;
+    color: darkgreen; }
+    .sheet-znz-bonus-checker-plus:checked ~ .sheet-znz-bonus-display:before {
+      content: "(+"; }
+
+.sheet-znz-bonus-checker-minus:checked ~ .sheet-znz-bonus-display {
+  display: block;
+  color: red; }
+  .sheet-znz-bonus-checker-minus:checked ~ .sheet-znz-bonus-display:before {
+    content: "("; }
+
+.sheet-znz-bonus-display {
+  display: none; }
+  .sheet-znz-bonus-display:after {
+    content: ")"; }
+
 /**
 * Overall layout for the sheet
 */
@@ -426,11 +445,17 @@ table.sheet-znz-row-table {
   table.sheet-znz-row-table td {
     padding: 10px 5px; }
     table.sheet-znz-row-table td .sheet-znz-attr-mod {
-      display: flex;
-      align-items: center; }
+      position: relative; }
       table.sheet-znz-row-table td .sheet-znz-attr-mod input {
         width: 30px;
         margin-right: 5px; }
+      table.sheet-znz-row-table td .sheet-znz-attr-mod .sheet-znz-attr-bonus {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        display: flex;
+        align-items: center; }
   table.sheet-znz-row-table tr {
     border-top: thin solid;
     border-bottom: thin solid;
@@ -455,6 +480,11 @@ table.sheet-znz-row-table {
         text-align: center; }
       .sheet-znz-skill-table tr td.sheet-znz-input {
         text-align: right; }
+      .sheet-znz-skill-table tr td.sheet-znz-label {
+        white-space: nowrap; }
+      .sheet-znz-skill-table tr td .sheet-znz-bonus-checker-plus:checked ~ .sheet-znz-bonus-display,
+      .sheet-znz-skill-table tr td .sheet-znz-bonus-checker-minus:checked ~ .sheet-znz-bonus-display {
+        display: inline; }
 
 .sheet-znz-area-status > .sheet-znz-row {
   margin: 0;

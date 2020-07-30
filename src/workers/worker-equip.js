@@ -1,46 +1,45 @@
 const itemFields = [[{dataquery:'itemFields'}]];
     
 var fieldList = itemFields.fieldList,
-    prefixes = itemFields.prefixes,
     ignoreEmpty = itemFields.ignoreEmpty;
 
 
 /*** Unequip Button Actions ***/
 on("clicked:unequip_melee", function(eventInfo){
-    unequipItem(prefixes.eq_melee);
+    unequipItem(global.meleePrefix);
 });
 
 on("clicked:unequip_ranged", function(eventInfo){
-    unequipItem(prefixes.eq_ranged);
+    unequipItem(global.rangedPrefix);
 });
 
 on("clicked:unequip_head", function(eventInfo){
-    unequipItem(prefixes.eq_head);
+    unequipItem(global.headPrefix);
 });
 
 on("clicked:unequip_body", function(eventInfo){
-    unequipItem(prefixes.eq_body);
+    unequipItem(global.bodyPrefix);
 });
 
 /*** Equip Button Actions ***/
 on("clicked:repeating_inventory:equipmelee", function(eventInfo){
     const rowId = getButtonRowId(eventInfo);
-    equipItem(prefixes.eq_melee, prefixes.inventory, rowId);
+    equipItem(global.meleePrefix, global.invPrefix, rowId);
 });
 
 on("clicked:repeating_inventory:equipranged", function(eventInfo){
     const rowId = getButtonRowId(eventInfo);
-    equipItem(prefixes.eq_ranged, prefixes.inventory, rowId);
+    equipItem(global.rangedPrefix, global.invPrefix, rowId);
 });
 
 on("clicked:repeating_inventory:equiphead", function(eventInfo){
     const rowId = getButtonRowId(eventInfo);
-    equipItem(prefixes.eq_head, prefixes.inventory, rowId);
+    equipItem(global.headPrefix, global.invPrefix, rowId);
 });
 
 on("clicked:repeating_inventory:equipbody", function(eventInfo){
     const rowId = getButtonRowId(eventInfo);
-    equipItem(prefixes.eq_body, prefixes.inventory, rowId);
+    equipItem(global.bodyPrefix, global.invPrefix, rowId);
 });
 
 
@@ -105,7 +104,7 @@ function unequipItem(prefix){
 
         })) { return; } 
 
-        var attrSet = createUnequipObject(prefix, prefixes.inventory, values)
+        var attrSet = createUnequipObject(prefix, global.invPrefix, values)
 
         setAttrs(attrSet);
     });

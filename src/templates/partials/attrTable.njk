@@ -28,13 +28,10 @@
             <div class="sheet-znz-attr-mod">
                 <input type="number" readonly name="attr_{{field.attr_name}}_mod" value="{{field.mod_default}}"/>
                 <div class="sheet-znz-attr-bonus">
-                    {# This select is for styling the bonus #}
-                    <select class="sheet-znz-hidden" name="attr_{{ field.attr_name }}_bonus_check">
-                        <option value="none" default />
-                        <option value="positive" default />
-                        <option value="negative" default />
-                    </select>
-                    <span readonly name="attr_{{field.attr_name}}_bonus"></span>
+                    {# This select is for styli#}
+                    <input class="sheet-znz-hidden sheet-znz-bonus-checker-minus" type="checkbox" name="attr_{{ field.attr_name}}_bonus_check" value="negative" />
+                    <input class="sheet-znz-hidden sheet-znz-bonus-checker-plus" type="checkbox" name="attr_{{ field.attr_name}}_bonus_check" value="positive" />
+                    <span readonly class="sheet-znz-bonus-display" name="attr_{{field.attr_name}}_bonus"></span>
                 </div>
             </div>
         </td>

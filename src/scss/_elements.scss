@@ -80,3 +80,42 @@ input.sheet-znz-line-input {
     }
 }
 
+
+
+// Bonus
+
+.sheet-znz-bonus-checker-plus {
+    display: none;
+
+    &:checked {
+        ~ .sheet-znz-bonus-display {
+            display: block;
+            color: darkgreen;
+
+            &:before {
+                content: "(+"
+            }
+        }
+    }
+}
+
+.sheet-znz-bonus-checker-minus {
+    &:checked {
+        ~ .sheet-znz-bonus-display {
+            display: block;
+            color: red;
+
+            &:before {
+                content: "("
+            }
+        }
+    }
+}
+
+.sheet-znz-bonus-display {
+    display: none;
+
+    &:after {
+        content: ")";
+    }
+}
