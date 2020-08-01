@@ -65,6 +65,12 @@
             </div>
         </div>
 
+        {#----- Hit Area ------#}
+        <div class="sheet-znz-section-hit">
+            {{ fieldCreate.outputField( field=jsonData.fields.hitroll.ranged, header="h3", class="sheet-znz-dice-prefixed-input sheet-znz-line-input") }}
+            {{ fieldCreate.outputField( field=jsonData.fields.hitroll.melee, header="h3", class="sheet-znz-dice-prefixed-input sheet-znz-line-input") }}
+        </div>
+
         {#----- Equipped Weapons ----- #}
         <div class="sheet-znz-section-weapons sheet-znz-equipped">
             <div class="sheet-znz-block sheet-znz-equipped-ranged">
@@ -119,7 +125,7 @@
                 <div class="sheet-znz-inventory-weight">
                     <div class="sheet-znz-field">
                         <h3>{{ jsonData.fields.inventory.weight.display_name }}</h3>
-                        <input class="sheet-znz-hidden sheet-znz-inventory-weight-check" type="checkbox" name="attr_{{ jsonData.fields.inventory.weight.attr_name }}_{{ jsonData.fields.inventory.weight.check_attr}}">
+                        <input class="sheet-znz-hidden sheet-znz-inventory-weight-check" type="checkbox" name="attr_{{ jsonData.fields.inventory.weight.attr_name }}_check">
                         <input class="sheet-znz-inventory-weight" type="number" name="attr_{{ jsonData.fields.inventory.weight.attr_name }}" min="0" readonly>
                     </div>
                     <div class="sheet-znz-field">

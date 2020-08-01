@@ -49,19 +49,16 @@ textarea {
   margin-top: 3px;
   font-size: 9px; }
 
-.sheet-znz-prefixed-input span {
-  border: 1px #ccc solid;
-  border-radius: 3px;
-  padding: 4px;
-  color: #555;
-  font-weight: normal;
-  vertical-align: middle;
-  display: inline-block; }
-  .sheet-znz-prefixed-input span input {
-    border: none;
-    padding: 0;
-    margin: 0;
-    vertical-align: auto; }
+.sheet-znz-dice-prefixed-input .sheet-znz-field-input {
+  padding-left: 10px;
+  position: relative; }
+  .sheet-znz-dice-prefixed-input .sheet-znz-field-input:before {
+    content: 'D';
+    position: absolute;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0; }
 
 .sheet-divider {
   font-size: 13px;
@@ -75,6 +72,14 @@ textarea {
   height: 50px; }
 
 input.sheet-znz-line-input {
+  margin: 0;
+  border: 0;
+  padding: 2px;
+  border-bottom: 1px solid gray;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.sheet-znz-line-input input {
   margin: 0;
   border: 0;
   padding: 2px;
@@ -180,6 +185,18 @@ input.sheet-znz-line-input {
 .sheet-znz-section-attributes {
   margin-bottom: 16px; }
 
+.sheet-znz-section-hit {
+  display: flex; }
+  .sheet-znz-section-hit .sheet-znz-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    padding: 5px;
+    border: solid 1px lightgray; }
+    .sheet-znz-section-hit .sheet-znz-field:first-child {
+      margin-right: 10px; }
+
 .sheet-znz-section-flashlight .sheet-znz-field {
   display: flex;
   justify-content: space-between;
@@ -207,7 +224,7 @@ input.sheet-znz-line-input {
     width: 50%; }
   .sheet-znz-section-weapons.sheet-znz-equipped h2, .sheet-znz-section-equipment.sheet-znz-equipped h2 {
     text-align: center; }
-  .sheet-znz-section-weapons.sheet-znz-equipped .sheet-znz-item-card-equipped, .sheet-znz-section-equipment.sheet-znz-equipped .sheet-znz-item-card-equipped {
+  .sheet-znz-section-weapons.sheet-znz-equipped .sheet-znz-item-card-equipped:first-child, .sheet-znz-section-equipment.sheet-znz-equipped .sheet-znz-item-card-equipped:first-child {
     margin-right: 10px; }
 
 .sheet-znz-area-quirks {

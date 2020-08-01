@@ -1,7 +1,6 @@
 
 const gulp = require('gulp');
 const sass = require('gulp-sass');
-const fileInclude = require('gulp-file-include');
 const replace = require('gulp-replace');
 const nunjucksRender = require('gulp-nunjucks-render');
 const data = require('gulp-data');
@@ -14,6 +13,7 @@ const log = require('fancy-log'); //for testing
 
 const dataFolder = './data/';
 const queryFolder = './data-query/';
+const prefixPath = './data/prefixes.json';
 
 //compile scss into css
 gulp.task('style', function() {
@@ -25,16 +25,18 @@ gulp.task('style', function() {
 //build character sheet and workers.
 gulp.task('sheet', function(){
     return gulp.src('src/templates/*.njk')
-        .pipe(fileInclude({
-            prefix: '@@',
-            basepath: '@file'
-        }))
         .pipe(data(getAllJsonData)) //pass all json data into Templates. should be done first since it also clears require() json cache
         .pipe(data(getAllDataQuery)) //pass all data queries into templates
         .pipe(nunjucksRender({
             path:['src/templates']
         }))
-        .pipe(inject(findDataQuery('src/workers/*.js'), { //process data queries in sheet workers and them into template
+        .pipe(inject((() => { //process data queries in sheet workers and them into template (first param is an iife)
+            return gulp.src(['src/workers/*.js'])
+            //regex searches for all cases of [[[dataquery:'{text}']]]. Any text between single quotes are captured.
+            .pipe(replace(/\[\[{dataquery:\s*['"](.*?)['"]}\]\]/g, replaceWithFileContent))
+            .pipe(replace(/\[\[{attrlookup:\s*['"](.*?)['"]}\]\]/g, replaceCanonicalWithAttrName))
+            .pipe((replace(/\[\[{prefix:\s*['"](.*?)['"]}\]\]/g, replaceWithPrefix)));
+        })(), { 
             //Inject Options
                 starttag: '/** inject:workers **/',
                 endtag: '/** endinject **/',
@@ -47,7 +49,14 @@ gulp.task('sheet', function(){
         .pipe(gulp.dest('./sheet'));
 });
 
-
+//build API scripts
+gulp.task('scripts', function(){
+    return gulp.src('src/scripts/*.js')
+        .pipe((replace(/\[\[{dataquery:\s*['"](.*?)['"]}\]\]/g, replaceWithFileContent)))
+        .pipe((replace(/\[\[{attrlookup:\s*['"](.*?)['"]}\]\]/g, replaceCanonicalWithAttrName)))
+        .pipe((replace(/\[\[{prefix:\s*['"](.*?)['"]}\]\]/g, replaceWithPrefix)))
+        .pipe(gulp.dest('./sheet'));
+});
 
 
 //watch sheets and styles
@@ -55,8 +64,9 @@ gulp.task('watch', function(){
     gulp.watch('./src/scss/*.scss', gulp.series(['style']));
     gulp.watch('./src/workers/*.js' , gulp.series(['sheet']));
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
-    gulp.watch('./data/*.json' , gulp.series(['sheet']));
-    gulp.watch('./data-query/*.js' , gulp.series(['sheet']));
+    gulp.watch('./data/*.json' , gulp.series(['sheet','scripts']));
+    gulp.watch('./data-query/*.js' , gulp.series(['sheet','scripts']));
+    gulp.watch('./src/scripts/*.js' , gulp.series(['scripts']));
 });
 
 //build sheets and styles
@@ -98,24 +108,125 @@ function getAllDataQuery(){
 }
 
 
-//Processes any data queries inside a specific file
-function findDataQuery(src){
-    return gulp.src([src])
-        .pipe(replace(/\[\[{dataquery:\s*['"](.*)['"]}\]\]/, function(match, capture){ 
-            //regex searches for all cases of [[[data-query='{text}']]],
-            //param match - the whole instance found
-            //param capture - the text captured between single quotes
-            //We use the capture to try and find an appropriate data-query file and then replace contents.
-            let importPath = queryFolder + '/' + capture + ".js";
+/**
+ * Looks at the capture, see if its a key in the prefixes object, and replaces it with the matching value
+ * 
+ * @param {string} match The full match of the regex. Unused but needed for gulp-replace
+ * @param {string} capture Anything captured in the regex. In this case, it should be a property in the prefix file with a prefix.
+ */
+function replaceWithPrefix(match, capture){
+    delete require.cache[require.resolve(prefixPath)]; //clear cache
+    const prefixes = require(prefixPath);
 
-            if (fs.existsSync(importPath)) {
-                //if file exists, we can just require and then return it, so long as the data query exports valid JSON.
-                let importData = require(importPath);
-                delete require.cache[require.resolve(importPath)]; //clear cache
-                return JSON.stringify(importData);
-            } else {
-                log("Located a data-query but did not find the specified data-query file!");
-                return "\'\'";
-            }}
-        ));
+    if (capture in prefixes){
+        return prefixes[capture];
+    } else {
+        return '\'\'';
+    }
+
 }
+
+
+/**
+ * Looks at the capture and then tries to locate the file in the dataquery folder. If it finds one, it'll return its file contents.
+ * This is used in the gulp-replace callback to replace a match with a specified file's contents.
+ * 
+ * @param {string} match The full match of the regex. Unused but needed for gulp-replace
+ * @param {string} capture Anything captured in the regex. In this case, it should be a filename to a query file in data-query.
+ */
+function replaceWithFileContent(match, capture){
+    //We use the capture to try and find an appropriate data-query file and then replace contents.
+    let importPath = queryFolder + '/' + capture + ".js";
+
+    if (fs.existsSync(importPath)) {
+        //if file exists, we can just require and then return it, so long as the data query exports valid JSON.
+        let importData = require(importPath);
+        delete require.cache[require.resolve(importPath)]; //clear cache
+        return JSON.stringify(importData);
+    } else {
+        log("Located a data-query but did not find the specified data-query file!");
+        return "\'\'";
+    }
+}
+
+/**
+ * Looks at the capture and tries to locate any object in the JSON folder with a matching canonical property that has an attr_name property.
+ * 
+ * @param {string} match Full match of the regex. Unused but needed for gulp-replace
+ * @param {string} capture Anything captured in the regex. In this case, it should be the text value of a canonical property. 
+ */
+function replaceCanonicalWithAttrName(match, capture){
+    let files = fs.readdirSync(dataFolder);
+    var result = null;
+
+    files.forEach(file => {
+        if (path.extname(file) === '.json' && file.indexOf('schema') < 0){ //ignore schema
+            let filename = path.basename(file, '.json');
+            delete require.cache[require.resolve(dataFolder + file)]; //clear cache to get most recent.
+
+            let data = JSON.parse(fs.readFileSync(dataFolder + file)),
+                found = getAttrOfCanonical(capture, data);
+
+            if (found != null){
+                result = getAttrOfCanonical(capture, data)
+            }
+        }
+    });
+
+    if (result){
+        return result;
+    } else {
+        return '\'\'';
+    }
+
+}
+
+/**
+ * This is a recursive function that recurses through a JSON object. It'll look through all other objects and arrays
+ * in the object to search for a "canonical" property that matches a string. If it finds it, it will return a "attr_name" in the same property.
+ * 
+ * @param {string} canon canonical string to search for in object
+ * @param {object} object the data object
+ * @returns string value of "attr_name" if the appropriate canonical has been located, or null if nothing has been found.
+ */
+function getAttrOfCanonical(canon, object){
+    // Fail case - nothing has been found
+    if (object == null){
+        return null; 
+    }
+
+    //Success case - found canonical
+    if (typeof object === "object" && "canonical" in object && "attr_name" in object && object.canonical == canon) {
+        return object['attr_name'];
+    } 
+    
+    //Array - search search array
+    else if (typeof object == "array"){
+        for (let arrItem of array){
+             let val = getAttrOfCanonical(canon, arrItem);
+
+             if (val != null){
+                 return val;
+             }
+        }
+        return null;
+    } 
+
+    //Object - search all properties in object
+    else if (typeof object == "object"){
+        for (let key of Object.keys(object)){
+            let val = getAttrOfCanonical(canon, object[key]);
+
+            if (val != null){
+                return val;
+            }
+        }
+        return null;
+    }
+
+    //End case - not an object or array
+    else {
+        return null;
+    }
+}
+

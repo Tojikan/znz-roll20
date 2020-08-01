@@ -1,5 +1,5 @@
 {
-    "$schema": "./fies.schema.json",
+    "$schema": "./fields.schema.json",
     "nameArea": [
         {
             "display_name": "Name",
@@ -40,7 +40,7 @@
             "counts": "stats",
             "counts_max": true,
             "description": "",
-            "default_value" : 150,
+            "default_value" : 120,
             "area": "counts"
         },
         {
@@ -77,10 +77,11 @@
             "field_max": "",  
             "field_class": "",
             "description": "",
-            "default_value": 50,
+            "default_value": 40,
             "has_max": true,
             "explanation_text": "",
-            "area": "stat"
+            "area": "stat",
+            "canonical": "hitpoints"
         },
         {
             "display_name": "Sanity",
@@ -90,10 +91,11 @@
             "field_max": "",  
             "field_class": "",
             "description": "",
-            "default_value": 50,
+            "default_value": 40,
             "has_max": true,
             "explanation_text": "",
-            "area": "stat"
+            "area": "stat",
+            "canonical": "mentalhp"
         },
         {
             "display_name": "Energy",
@@ -103,10 +105,11 @@
             "field_max": "",  
             "field_class": "",
             "description": "",
-            "default_value": 50,
+            "default_value": 40,
             "has_max": true,
             "explanation_text": "",
-            "area": "stat"
+            "area": "stat",
+            "canonical": "energy"
         },
         {
             "display_name": "EXP",
@@ -118,16 +121,48 @@
             "description": "",
             "default_value": 0,
             "has_max": false,
-            "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +5 to any stat max  </div><div class=\"sheet-znz-xp-text\"> <span>20</span>: +1 to attr/skill/prof </div><div class=\"sheet-znz-xp-text\"> <span>50</span>: Learn new ability </div>",
-            "area": "stat"
+            "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +5 to any stat max  </div><div class=\"sheet-znz-xp-text\"> <span>20</span>: +1 to attr/skill/prof </div><div class=\"sheet-znz-xp-text\"> <span>60</span>: Learn new ability </div>",
+            "area": "stat",
+            "canonical": "exp"
         }
     ],
+
+    "hitroll" : {
+        "ranged" : {
+            "display_name" : "Ranged Hit Roll",
+            "attr_name" : "ranged_hit",
+            "attr_prefixed" : false,
+            "has_max" : false,
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "",
+            "field_max" : "",
+            "default_value" : "10",
+            "field_note" : "",
+            "description" : "",
+            "area" : "hitroll"
+        },
+        "melee" : {
+            "display_name" : "Melee Hit Roll",
+            "attr_name" : "melee_hit",
+            "attr_prefixed" : false,
+            "has_max" : false,
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "",
+            "field_max" : "",
+            "default_value" : "10",
+            "field_note" : "",
+            "description" : "",
+            "area" : "hitroll"
+        }
+    },
 
     "attributes": [
         {
             "display_name": "Strength",
             "attr_name": "strength",
-            "reminder_note": "Melee Damage",
+            "reminder_note": "Melee Damage, Grappling",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,
@@ -139,7 +174,7 @@
         {
             "display_name": "Dexterity",
             "attr_name": "dexterity",
-            "reminder_note": "Dodging, Initiative",
+            "reminder_note": "Dodging, Melee Hit, Initiative",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,
@@ -175,7 +210,7 @@
         {
             "display_name": "Tenacity",
             "attr_name": "tenacity",
-            "reminder_note": "Mental fortitude, Resistance",
+            "reminder_note": "Mental Fortitude and Nerves",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,
@@ -187,7 +222,7 @@
         {
             "display_name": "Humanity",
             "attr_name": "humanity",
-            "reminder_note": "Socialability, Sanity Restore",
+            "reminder_note": "Socialability, Stress Reduce",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,
@@ -393,6 +428,7 @@
             "attr_name": "prof_handguns",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -401,6 +437,7 @@
             "attr_name": "prof_shotguns",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -409,6 +446,7 @@
             "attr_name": "prof_rifles",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -417,6 +455,7 @@
             "attr_name": "prof_projectile",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -425,14 +464,7 @@
             "attr_name": "prof_throwing",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
-            "area": "proficiencies"
-        },
-        {
-            "display_name": "Hand to Hand",
-            "attr_name": "prof_unarmed",
-            "has_bonus": true,
-            "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -441,6 +473,7 @@
             "attr_name": "prof_sharp_melee",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -449,6 +482,7 @@
             "attr_name": "prof_blunt_melee",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -457,6 +491,16 @@
             "attr_name": "prof_heavy_melee",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": true,
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Hand to Hand",
+            "attr_name": "prof_unarmed",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
             "description": "",
             "area": "proficiencies"
         },
@@ -465,6 +509,7 @@
             "attr_name": "prof_stealth",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -473,6 +518,7 @@
             "attr_name": "prof_first_aid",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -481,6 +527,7 @@
             "attr_name": "prof_crafting",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -489,6 +536,7 @@
             "attr_name": "prof_cooking",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -497,6 +545,7 @@
             "attr_name": "prof_driving",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -505,6 +554,7 @@
             "attr_name": "prof_investigation",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -513,6 +563,7 @@
             "attr_name": "prof_orientation",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -522,6 +573,7 @@
             "attr_name": "prof_swimming",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -530,6 +582,7 @@
             "attr_name": "prof_climbing",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -538,6 +591,7 @@
             "attr_name": "prof_negotiation",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         },
@@ -546,6 +600,7 @@
             "attr_name": "prof_performance",
             "has_bonus": true,
             "has_bonus_check" : true,
+            "affects_combat": false,
             "description": "",
             "area": "proficiencies"
         }
@@ -670,7 +725,8 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "meleetype"
             },
             {
                 "display_name": "Durability",
@@ -686,7 +742,8 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "durability"
             },
             {
                 "display_name": "Energy Cost",
@@ -702,7 +759,8 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "meleecost"
             },
             {
                 "display_name": "Ranged Type",
@@ -742,7 +800,8 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "rangedtype"
             },
             {
                 "display_name": "Ammo",
@@ -758,7 +817,8 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "ammo"
             },
             {
                 "display_name": "Reloads",
@@ -774,20 +834,8 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
-            },
-            {
-                "display_name": "Hit Roll",
-                "attr_name": "weapon_hit",
-                "attr_prefixed": true,
-                "field_type": "text",
-                "field_class": "sheet-znz-dice-field",
-                "field_placeholder": "1d4+1",
-                "weapon_category": "standard",
-                "field_note": "",
-                "description": "",
-                "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "reloads"
             },
             {
                 "display_name": "Damage Roll",
@@ -800,11 +848,29 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "weapondamage"
             },
             {
-                "display_name": "Attacks Per Action",
-                "attr_name": "weapon_attacks",
+                "display_name": "Hit Bonus",
+                "attr_name": "weapon_hit_bonus",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "0",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "standard",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "hitbonus"
+            },
+            {
+                "display_name": "Crit Bonus",
+                "attr_name": "weapon_crit_bonus",
                 "attr_prefixed": true,
                 "has_max": false,
                 "field_type": "number",
@@ -816,13 +882,14 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "crit"
             },
             {
-                "display_name": "Range",
+                "display_name": "Effective Range",
                 "attr_name": "weapon_range",
                 "attr_prefixed": true,
-                "has_max": false,
+                "has_max": true,
                 "field_type": "number",
                 "field_class": "",
                 "field_min": "1",
@@ -936,9 +1003,8 @@
             "display_name" : "Total Weight",
             "attr_name" : "inv_weight_total",
             "has_max" : false,
-            "has_check" : false,
+            "has_check" : true,
             "readonly" : true,
-            "check_attr": "check",
             "field_type" : "number",
             "field_class" : "",
             "field_min" : "0",

@@ -18,5 +18,5 @@ module.exports = {
     quantity : fields.config.item_prefixes.inventory + "_" + quantity,
     total : fields.inventory.weight.attr_name,
     max : fields.inventory.max_weight.attr_name,
-    check : fields.inventory.weight.attr_name + "_" + fields.inventory.weight.check_attr
+    check : fields.inventory.weight.attr_name + "_check"
 };

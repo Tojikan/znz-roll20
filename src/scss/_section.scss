@@ -14,6 +14,25 @@
     margin-bottom: 16px;
 }
 
+//Hit roll
+.sheet-znz-section-hit {
+    display: flex;
+
+    .sheet-znz-field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+        padding: 5px;
+        border: solid 1px $lightgray;
+         
+        &:first-child {
+            margin-right: $gridgap;
+        }
+    }
+}
+
+
 //Flashlight
 .sheet-znz-section-flashlight {
     .sheet-znz-field {
@@ -65,7 +84,10 @@
         }
 
         .sheet-znz-item-card-equipped {
-            margin-right: $gridgap;
+
+            &:first-child {
+                margin-right: $gridgap;
+            }
         }
     }
 }

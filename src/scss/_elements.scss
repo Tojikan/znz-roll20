@@ -25,21 +25,18 @@
 }
 
 //span with a character and then the input
-.sheet-znz-prefixed-input {
-    span {
-        border: 1px #ccc solid;
-        border-radius: 3px;
-        padding: 4px;
-        color: #555;
-        font-weight: normal;
-        vertical-align: middle;
-        display: inline-block;
+.sheet-znz-dice-prefixed-input {
     
-        input {
-            border: none;
-            padding: 0;
-            margin: 0;
-            vertical-align: auto;
+    .sheet-znz-field-input {
+        padding-left: 10px;
+        position: relative;
+        &:before {
+            content: 'D';
+            position: absolute;
+            display: block;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
         }
     }
 }
@@ -72,6 +69,17 @@ input.sheet-znz-line-input {
     border-bottom: 1px solid $gray;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.sheet-znz-line-input {
+    input {
+        margin: 0;
+        border: 0;
+        padding: 2px;
+        border-bottom: 1px solid $gray;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 }
 
 .sheet-znz-dice-field {
