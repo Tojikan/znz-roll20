@@ -1,9 +1,10 @@
 var Attack = Attack || (function() {
     'use strict';
-    const damageRoll =[[{attrLookup:'weapondamage'}]],
-    
-    rangedPrefix =equipped_ranged_weapon,
-    meleePrefix = equipped_melee_weapon;
+    const  fields = {"meleeHitRoll":"melee_hit","rangedHitRoll":"ranged_hit","weaponFields":{"melee_type":"melee_type","melee_durability":"melee_durability","melee_energy_cost":"melee_energy_cost","ranged_type":"ranged_type","ranged_ammo":"ranged_ammo","ranged_reloads":"ranged_reloads","weapon_damage":"weapon_damage","weapon_hit_bonus":"weapon_hit_bonus","weapon_crit_bonus":"weapon_crit_bonus","weapon_range":"weapon_range"},"combatProficiencies":["prof_handguns","prof_shotguns","prof_rifles","prof_projectile","prof_throwing","prof_sharp_melee","prof_blunt_melee","prof_heavy_melee","prof_unarmed"]},
+    strengthAttr = "strength",
+    dextAttr = "dexterity",
+    rangedPrefix ="equipped_ranged_weapon",
+    meleePrefix = "equipped_melee_weapon",
 
     HandleInput = function(msg) {
         if (msg.type !== "api") {
@@ -13,40 +14,47 @@ var Attack = Attack || (function() {
         if (!msg.content.startsWith("!!attack")){
             return;
         }
-        var sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
-            character = getCharacter(sender, msg);
 
+        var sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
+            character = getCharacter(sender, msg),
+            args = splitArgs(msg.content);
 
-        //Handle Reload
-        let reloads = attrLookup(character, RELOADS_ATTR),
-        ammo = attrLookup(character, AMMO_ATTR);
-
-        if (!reloads || !ammo){
-            sendMessage("Could not find attribute. Please verify this character has an initialized character sheet.", sender, true, "danger");
-            return;
+        //!!attack should be in 0. If not, they probably forgot to put a space between !!attack and an arg.
+        if (!("0" in args)){
+            sendMessage("Unspecified attack error. Did you forget to put a space somewhere?", sender, true, "danger");
+            return; 
         }
 
+        //so we can use attackmelee or attackranged as a shorthand.
+        if (args[0].indexOf('melee') > 0 && args[0].indexOf('ranged') > 0){
+            sendMessage("You can't have it both ways", sender, true, "danger");
+            return; 
+        } else if (args[0].indexOf('melee') > 0){
+            args.type = 'melee';
+        } else if (args[0].indexOf('ranged') > 0) {
+            args.type = 'ranged';
+        }
         
-        if ((!reloads.get("current") && reloads.get("current") !== 0)|| !ammo.get("max")){
-            sendMessage("Your character either has no ranged weapon equipped or the reloads / max Ammo field(s) is empty!", sender, true, "danger");
+        HandleAttack(sender,character,args);
+    },
+    HandleAttack = function(sender, character, args) {
+        log(args);
+        log("type" in args);
+
+        if (!("type" in args) || (args.type !== "melee" && args.type !== "ranged")){
+            sendMessage("You must indicate if this is a melee or ranged attack in order to attack!", sender, true, "danger");
             return;
         }
 
-        let currReloads = parseInt(reloads.get("current"), 10) || 0,
-            ammoMax = parseInt(ammo.get("max"), 10) || 0;
-
-
-        if (currReloads <= 0){
-            sendMessage(character.get('name') + " has no more reloads left.", sender, false, "danger");
-            return;
-        } else if (currReloads === 1){
-            sendMessage(character.get('name') + " uses their last reload. Make it count.", sender, false, "warning");
-        } else {
-            sendMessage(character.get('name') + " reloads their ranged weapon!", sender, false);
+        if (("difficulty" in args) && [0,1,2,3,4].indexOf(args.difficulty) == -1 ) {
+            sendMessage("You have input an invalid difficulty level. Difficulty will now default to medium.", sender, true, "danger");
+            args.difficulty = 1;
         }
 
-        ammo.setWithWorker({current: ammoMax});
-        reloads.setWithWorker({current: (currReloads - 1)});
+        // Player Inputs
+        var numAttacks = args.attacks || 1,
+            hitbonus = args.bonus || 0,
+            difficulty = args.difficulty * 3 || 3;
 
     },
     getCharacter = function(sender, msg){
@@ -76,6 +84,30 @@ var Attack = Attack || (function() {
 
         return character;
 
+    },
+    splitArgs = function(input) {
+        var arr = input.split(' '),
+            result = {};
+        const argsRegex = /(.*)=(.*)/; //can't be global but shouldn't need it as we are splitting args. 
+            
+        for (let i = 0; i < arr.length; i++){
+            let match = argsRegex.exec(arr[i]); //Regex to match anything before/after '='. G1 is before and G2 is after
+
+            if (match !== null) {
+                let value = match[2];
+                
+                //Convert if types
+                if ( !isNaN(value)){value = parseInt(match[2], 10)}
+                if ( value === 'true'){value = true}
+                if ( value === 'false'){value = false}
+
+                result[match[1]] = value;
+            } else {
+                result[i] = arr[i];
+            }
+        }
+        return result;
+            
     },
     attrLookup = function(character, name){
         return findObjs({type: 'attribute', characterid: character.id, name: name})[0];
