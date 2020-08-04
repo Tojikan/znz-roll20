@@ -141,7 +141,7 @@
             "field_note" : "",
             "description" : "",
             "area" : "hitroll",
-            "canonical" : "meleehitroll"
+            "canonical" : "rangedhitroll"
         },
         "melee" : {
             "display_name" : "Melee Hit Roll",
@@ -156,7 +156,7 @@
             "field_note" : "",
             "description" : "",
             "area" : "hitroll",
-            "canonical" : "rangedhitroll"
+            "canonical" : "meleehitroll"
         }
     },
 
@@ -438,6 +438,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "ranged",
             "description": "",
             "area": "proficiencies"
         },
@@ -447,6 +448,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "ranged",
             "description": "",
             "area": "proficiencies"
         },
@@ -456,6 +458,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "ranged",
             "description": "",
             "area": "proficiencies"
         },
@@ -465,6 +468,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "ranged",
             "description": "",
             "area": "proficiencies"
         },
@@ -474,6 +478,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "ranged",
             "description": "",
             "area": "proficiencies"
         },
@@ -483,6 +488,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "melee",
             "description": "",
             "area": "proficiencies"
         },
@@ -492,6 +498,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "melee",
             "description": "",
             "area": "proficiencies"
         },
@@ -501,6 +508,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": true,
+            "combat_type": "melee",
             "description": "",
             "area": "proficiencies"
         },
@@ -509,7 +517,8 @@
             "attr_name": "prof_unarmed",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "affects_combat": true,
+            "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -519,6 +528,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -528,6 +538,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -537,6 +548,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -546,6 +558,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -555,6 +568,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -564,6 +578,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -573,6 +588,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -583,6 +599,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -592,6 +609,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -601,6 +619,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         },
@@ -610,6 +629,7 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "affects_combat": false,
+            "combat_type": "",
             "description": "",
             "area": "proficiencies"
         }
@@ -658,7 +678,7 @@
                     }
                 ],
                 "description": "",
-                "canonical": "item_type",
+                "canonical": "itemtype",
                 "area": "item",
                 "area_subcat": "standard"
             },
@@ -669,7 +689,7 @@
                 "field_type": "text",
                 "field_class": "sheet-center",
                 "description": "",
-                "canonical": "item_name",
+                "canonical": "itemname",
                 "area": "item",
                 "area_subcat": "standard"
             },
@@ -681,7 +701,7 @@
                 "field_min": 0,
                 "field_class": "sheet-center",
                 "description": "",
-                "canonical": "item_weight",
+                "canonical": "itemweight",
                 "area": "item",
                 "area_subcat": "standard"
             },
@@ -698,7 +718,7 @@
                 "misc_category": "",
                 "field_note": "",
                 "description": "",
-                "canonical": "item_quantity",
+                "canonical": "itemquantity",
                 "area": "item",
                 "area_subcat": "standard"
             }
@@ -711,25 +731,8 @@
                 "field_type": "select",
                 "field_class": "",
                 "field_selected": "blunt",
-                "field_options_type": "array",
-                "field_options": [
-                    {
-                        "name": "Select Type",
-                        "value": ""
-                    },
-                    {
-                        "name": "Blunt",
-                        "value": "blunt"
-                    },
-                    {
-                        "name": "Sharp",
-                        "value": "sharp"
-                    },
-                    {
-                        "name": "Heavy",
-                        "value": "heavy"
-                    }
-                ],
+                "field_options_type": "external",
+                "field_options": "",
                 "weapon_category": "melee",
                 "field_note": "",
                 "description": "",
@@ -778,33 +781,8 @@
                 "field_type": "select",
                 "field_class": "",
                 "field_selected": "handgun",
-                "field_options_type": "array",
-                "field_options": [
-                    {
-                        "name": "Select Type",
-                        "value": ""
-                    },
-                    {
-                        "name": "Handgun",
-                        "value": "handgun"
-                    },
-                    {
-                        "name": "Shotgun",
-                        "value": "shotgun"
-                    },
-                    {
-                        "name": "Rifle",
-                        "value": "rifle"
-                    },
-                    {
-                        "name": "Projectile",
-                        "value": "projectile"
-                    },
-                    {
-                        "name": "Throwing",
-                        "value": "throwing"
-                    }
-                ],
+                "field_options_type": "external",
+                "field_options": "",
                 "weapon_category": "ranged",
                 "field_note": "",
                 "description": "",
@@ -908,7 +886,8 @@
                 "field_note": "",
                 "description": "",
                 "area": "item",
-                "area_sub": "weapon"
+                "area_sub": "weapon",
+                "canonical": "range"
             }
             
         ],

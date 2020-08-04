@@ -1,8 +1,11 @@
 var Attack = Attack || (function() {
     'use strict';
     const  fields = [[{dataquery:'attackFields'}]],
-    strengthAttr = "[[{attrlookup:'strength'}]]",
-    dextAttr = "[[{attrlookup:'dexterity'}]]",
+    strengthAttr = "[[{attrlookup:'strength'}]]_mod",
+    dextAttr = "[[{attrlookup:'dexterity'}]]_mod",
+    energyStat = "[[{attrlookup:'energy'}]]",
+    meleeHitRoll = "[[{attrlookup:'meleehitroll'}]]",
+    rangedHitRoll = "[[{attrlookup:'rangedhitroll'}]]",
     rangedPrefix ="[[{prefix:'eq_ranged'}]]",
     meleePrefix = "[[{prefix:'eq_melee'}]]",
 
@@ -38,8 +41,8 @@ var Attack = Attack || (function() {
         HandleAttack(sender,character,args);
     },
     HandleAttack = function(sender, character, args) {
+        log("new attack!");
         log(args);
-        log("type" in args);
 
         if (!("type" in args) || (args.type !== "melee" && args.type !== "ranged")){
             sendMessage("You must indicate if this is a melee or ranged attack in order to attack!", sender, true, "danger");
@@ -52,16 +55,109 @@ var Attack = Attack || (function() {
         }
 
         // Player Inputs
-        var numAttacks = args.attacks || 1,
-            hitbonus = args.bonus || 0,
-            difficulty = args.difficulty * 3 || 3;
+        var numAttacks = parseInt(args.attacks,10) || 1,
+            hitbonus = parseInt(args.bonus,10) || 0,
+            difficulty = (parseInt(args.difficulty,10) * 3) || 3,
+            strength = (parseInt(getAttrByName(character.id, strengthAttr), 10)) || 0,
+            dexterity = (parseInt(getAttrByName(character.id, dextAttr), 10)) || 0,
+            rangedHit = (parseInt(getAttrByName(character.id, rangedHitRoll), 10)) || 10,
+            meleeHit = (parseInt(getAttrByName(character.id, meleeHitRoll), 10)) || 10;
+
+        log("numAttacks:" + numAttacks);
+        log("hitbonus:" + hitbonus);
+        log("difficulty:" + difficulty);
+        
+        log("strength: " + strength);
+        log("dexterity: " + dexterity);
+        log("rangedHit: " + rangedHit);
+        log("meleeHit: " + meleeHit);
+
+        for (let prof of fields.combatProfs) {
+            log(prof + ": " + ( parseInt(getAttrByName(character.id, prof), 10) || 0));
+        }
+
+        meleeAttack(strength, dexterity, meleeHit, numAttacks, hitbonus, difficulty, character.id, makePrefixedObject(meleePrefix, fields.weaponFields));
 
     },
+    meleeAttack = function(strength, dexterity, hit, numAttacks, hitbonus, baseDifficulty, id, fields){
+        var currentEnergy = parseInt(getAttrByName(id, energyStat), 10) || null,
+        meleeType = getAttrByName(id, fields.meleetype),
+        profBonus = parseInt(getAttrByName(id, meleeType), 10) || 0, //this only works if the types dropdown's values === proficiency attrs
+        energyCost = parseInt(getAttrByName(id, fields.meleecost), 10) || 1,
+        damageDice = parseDamageDice(getAttrByName(id, fields.weapondamage)) || null,
+        attackArr = [],
+        energyUsed = 0,
+        attackObj = {
+            type: "melee",
+            ranOut: false
+        };
+        
+        // if (currentEnergy == null || isNaN(hit)){
+        //     return null;
+        // }
+        
+        // for (let atk = 0; atk < numAttacks; atk++){
+            
+        //     if (currentEnergy < energyCost){
+        //         attackObj.ranOut = true;     
+        //         break;
+        //     }
+            
+        //     let attack = {},
+        //         roll = randomInteger(hit);
+        //         difficulty = baseDifficulty + (randomInteger(3)),
+
+        //     attack.roll = roll;
+        //     attack.difficulty = difficulty;
+        //     energyUsed += energyCost;
+
+        //     //calc crit
+        //     if ( roll >= 10){
+        //         attack.crit = true;
+        //         attack.hit = true;
+        //     } else {
+        //         attack.crit = false;
+        //         // calc hit
+        //         ( ( roll + dexterity + hitbonus + profBonus ) >= difficulty) ? attack.hit = true : attack.hit = false;
+        //     }
+
+        //     //calculate damage
+        //     if (attack.hit){
+
+
+        //     } else {
+        //         attack.damage = 0;
+        //     }
+        // }
+    },
+    //Parse a VERY basic dice expression. You can specify number of dice, the dice roll, any dice bonus and a brutal indicator
+    //Example: 1d6+10 - G1 = 1, G2 = 6, G3 = +10
+    //Example: 1d6+10>5 - G1 = 1, G2 = 6, G3 = +10, G4 = 5
+    parseDamageDice = function(diceExp) {
+        const expr = diceExp.trim().replace(/\s/g,''), //get rid of all whitespace for easier processing
+            diceRegex = /([\d]*?)?(?:[dD])([\d]*)([\+\-]\d*)?(?:[>])?(\d*)?/;
+
+        let match = diceRegex.exec(expr);
+        log(match);
+
+        return match;
+
+    },
+    //takes an object and adds a prefix to each of its values.
+    makePrefixedObject = function(prefix, obj){ 
+        var result = {};
+
+        for (const prop in obj){
+            result[prop] = `${meleePrefix}_${obj[prop]}`;
+        }
+
+        return result;
+    },
+    //Gets the character if a player sends a message while selecting a token AND they control the token. 
     getCharacter = function(sender, msg){
         let token,
             character = null;
         
-        //Get character from sending player's selected token
         if ("selected" in msg){
             token = getObj('graphic', msg.selected[0]._id);
 
@@ -85,6 +181,8 @@ var Attack = Attack || (function() {
         return character;
 
     },
+    //Takes chat input and split it into args using a '=' to denote an argument in the form of [arg]=[value]
+    //Example: in "!!attack type=melee attacks=3", there is a 'type' arg which is equal to 'melee' and an 'attacks' arg equal to '3'
     splitArgs = function(input) {
         var arr = input.split(' '),
             result = {};

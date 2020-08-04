@@ -32,7 +32,7 @@
         {# misc - weapon #}
         {% for fld in fields.weapon %}
             {% if type=="weapon" and ( fld.weapon_category == "standard" or fld.weapon_category == category ) %}
-                {{ fieldCreate.outputField(field=fld, header="h3", class="sheet-znz-item-row", prefix=attrPrefix) }}
+                {{ fieldCreate.outputField(field=fld, header="h3", class="sheet-znz-item-row", prefix=attrPrefix, options=options) }}
             {% else %}
                 {{ fieldCreate.createHidden(field=fld, prefix=attrPrefix) }}
             {% endif %}

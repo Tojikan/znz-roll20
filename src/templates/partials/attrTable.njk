@@ -26,7 +26,7 @@
         <td><input type="number" name="attr_{{field.attr_name}}" min="{{vals.min}}" value="{{vals.default}}" max="{{vals.max}}" /></td>
         <td>
             <div class="sheet-znz-attr-mod">
-                <input type="number" readonly name="attr_{{field.attr_name}}_mod" value="{{field.mod_default}}"/>
+                <input type="number" readonly name="attr_{{field.attr_name}}_mod" value={{field.mod_default}} />
                 <div class="sheet-znz-attr-bonus">
                     {# This select is for styli#}
                     <input class="sheet-znz-hidden sheet-znz-bonus-checker-minus" type="checkbox" name="attr_{{ field.attr_name}}_bonus_check" value="negative" />

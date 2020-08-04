@@ -75,11 +75,11 @@
         <div class="sheet-znz-section-weapons sheet-znz-equipped">
             <div class="sheet-znz-block sheet-znz-equipped-ranged">
                 <h2>Equipped Ranged Weapon</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_ranged, type="weapon", category="ranged") }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_ranged, type="weapon", category="ranged", options=queryData.weaponTypes.ranged) }}
             </div>
             <div class="sheet-znz-block sheet-znz-equipped-melee">
                 <h2>Equipped Melee Weapon</h2>
-                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_melee, type="weapon", category="melee") }}
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_melee, type="weapon", category="melee", options=queryData.weaponTypes.melee) }}
             </div>
         </div>
 
