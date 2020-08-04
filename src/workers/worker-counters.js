@@ -8,7 +8,7 @@ for (let count of counterData){
     
     on( changeStr, function(){
         getAttrs(count.attr_list, function(values) {
-            let vals = Object.values(values).map( (x) => { return parseInt(x,10)}),
+            let vals = Object.values(values).map( (x) => { return parseInt(x,10) || 0}),
             valSum = vals.reduce((a,b) => a + b, 0);
 
             let attrSet = {};

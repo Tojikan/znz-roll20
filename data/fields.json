@@ -775,6 +775,37 @@
                 "canonical": "meleecost"
             },
             {
+                "display_name": "Melee Damage",
+                "attr_name": "melee_damage",
+                "attr_prefixed": true,
+                "field_type": "text",
+                "field_class": "sheet-znz-dice-field",
+                "field_placeholder": "1d4+1",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "meleedamage"
+            },
+            {
+                "display_name": "Melee Crit Bonus",
+                "attr_name": "melee_crit_bonus",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "1",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "meleecrit"
+            },
+            {
                 "display_name": "Ranged Type",
                 "attr_name": "ranged_type",
                 "attr_prefixed": true,
@@ -825,38 +856,21 @@
                 "canonical": "reloads"
             },
             {
-                "display_name": "Damage Roll",
-                "attr_name": "weapon_damage",
+                "display_name": "Ranged Damage",
+                "attr_name": "ranged_damage",
                 "attr_prefixed": true,
                 "field_type": "text",
                 "field_class": "sheet-znz-dice-field",
                 "field_placeholder": "1d4+1",
-                "weapon_category": "standard",
+                "weapon_category": "ranged",
                 "field_note": "",
                 "description": "",
                 "area": "item",
                 "area_sub": "weapon",
-                "canonical": "weapondamage"
+                "canonical": "rangeddamage"
             },
             {
-                "display_name": "Hit Bonus",
-                "attr_name": "weapon_hit_bonus",
-                "attr_prefixed": true,
-                "has_max": false,
-                "field_type": "number",
-                "field_class": "",
-                "field_min": "0",
-                "field_max": "",
-                "default_value": "",
-                "weapon_category": "standard",
-                "field_note": "",
-                "description": "",
-                "area": "item",
-                "area_sub": "weapon",
-                "canonical": "hitbonus"
-            },
-            {
-                "display_name": "Crit Bonus",
+                "display_name": "Ranged Crit Bonus",
                 "attr_name": "weapon_crit_bonus",
                 "attr_prefixed": true,
                 "has_max": false,
@@ -865,12 +879,12 @@
                 "field_min": "1",
                 "field_max": "",
                 "default_value": "",
-                "weapon_category": "standard",
+                "weapon_category": "ranged",
                 "field_note": "",
                 "description": "",
                 "area": "item",
                 "area_sub": "weapon",
-                "canonical": "crit"
+                "canonical": "rangedcrit"
             },
             {
                 "display_name": "Effective Range",

@@ -41,8 +41,6 @@ var Attack = Attack || (function() {
         HandleAttack(sender,character,args);
     },
     HandleAttack = function(sender, character, args) {
-        log("new attack!");
-        log(args);
 
         if (!("type" in args) || (args.type !== "melee" && args.type !== "ranged")){
             sendMessage("You must indicate if this is a melee or ranged attack in order to attack!", sender, true, "danger");
@@ -56,89 +54,173 @@ var Attack = Attack || (function() {
 
         // Player Inputs
         var numAttacks = parseInt(args.attacks,10) || 1,
-            hitbonus = parseInt(args.bonus,10) || 0,
-            difficulty = (parseInt(args.difficulty,10) * 3) || 3,
-            strength = (parseInt(getAttrByName(character.id, strengthAttr), 10)) || 0,
-            dexterity = (parseInt(getAttrByName(character.id, dextAttr), 10)) || 0,
-            rangedHit = (parseInt(getAttrByName(character.id, rangedHitRoll), 10)) || 10,
-            meleeHit = (parseInt(getAttrByName(character.id, meleeHitRoll), 10)) || 10;
+            hitRoll =  ( (args.type == "melee") ? (parseInt(getAttrByName(character.id, meleeHitRoll), 10)) : (parseInt(getAttrByName(character.id, rangedHitRoll))) ) || 10,
+            hitBonus = parseInt(args.bonus,10) || 0,
+            baseDifficulty = (parseInt(args.difficulty,10) * 3) || 3;
 
-        log("numAttacks:" + numAttacks);
-        log("hitbonus:" + hitbonus);
-        log("difficulty:" + difficulty);
+        log(calculateAttack(makePrefixedObject(meleePrefix, fields.weaponFields), character.id, args.type, numAttacks, hitRoll, hitBonus, baseDifficulty));
+        // attrLookup(character,).setWithWorker({current: (attackResult.startingResource - attackResult.resourceUsed)});
+
+    },
+    calculateAttack = function(fields, id, type, numAttacks, hitRoll, hitBonus, baseDifficulty) {
+        var currResource = (type === "melee") ? parseInt(getAttrByName(id, energyStat), 10) : parseInt(getAttrByName(id, field.ammo), 10), //energy or ammo
+            damageDice = (type === "melee") ? parseDamageDice(getAttrByName(id, fields.meleedamage)) : parseDamageDice(getAttrByName(id, fields.rangeddamage)), //melee or ranged dmg
+            attrHitBonus = (type === "melee") ? (parseInt(getAttrByName(id, strengthAttr), 10)) : (parseInt(getAttrByName(id, dextAttr), 10)), //add str/dext to attack
+            resourceCost = ( (type === "melee") ? parseInt(getAttrByName(id, fields.meleecost), 10) : 1) || 1, //energy cost or 1
+            typeProf = ( (type === "melee") ? getAttrByName(id, fields.meleetype) : getAttrByName(id, fields.rangedtype) ), //get the type
+            durability = parseInt(getAttrByName(id, fields.durability), 10) || 1,
+            profBonus =  parseInt(getAttrByName(id, typeProf)) || 0, //Get prof bonus. This only works if the weapon type dropdown values equals a proficiency attr.
+            resourceUsed = 0,
+            finalDamage = 0,
+            durabilityLost = 0,
+            attackResult = {
+                type: type,
+                hitBonus: hitBonus,
+                attrBonus: attrHitBonus,
+                profBonus: profBonus,
+                startingResource: currResource,
+                startingDurability: durability,
+                damageDice: damageDice,
+                resourceCost: resourceCost,
+                weaponBroken: false,
+                exhausted: false,
+                attacks: []
+            };
+
+        // Required fields for calculating an attack. Other ones have a default value. 
+        if ( isNaN(currResource) || isNaN(attrHitBonus) || damageDice === null) {
+            log(`One of the required fields for an attack was invalid.`);
+            log(`Current Resource: ${currResource}`);
+            log(`Attr Hit Bonus: ${attrHitBonus}`);
+            log(`Damage Dice: ${damageDice}`);
+            return null;
+        } 
         
-        log("strength: " + strength);
-        log("dexterity: " + dexterity);
-        log("rangedHit: " + rangedHit);
-        log("meleeHit: " + meleeHit);
+        //Per Attack
+        for (let atk = 0; atk < numAttacks; atk++){
+            
+            /*** Check and calculate Resources *******/
+            if (currResource < resourceCost){
+                attackResult.exhausted = true;     
+                break;
+            }
+            resourceUsed += resourceCost;
+            currResource -= resourceCost;
 
-        for (let prof of fields.combatProfs) {
-            log(prof + ": " + ( parseInt(getAttrByName(character.id, prof), 10) || 0));
+            /****** calculate roll and difficulty. ******/
+            let attack = {},
+                roll = randomInteger(hitRoll),
+                difficulty = baseDifficulty + (randomInteger(3));
+
+            //Store results
+            attack.hitRollRaw = roll;
+            attack.hitRollTotal = roll + hitBonus + attrHitBonus + profBonus;
+            attack.difficulty = difficulty;
+    
+
+            /****** calculate hit and crit ******/
+            if ( roll >= 10){//crit if nat 10 and above
+                attack.atkCrit = true;
+                attack.atkHit = true;
+                attack.atkFail = false;
+                attack.hitRollTotal = roll;
+            } else if (roll == 1){//miss
+                attack.atkHit = false;
+                attack.atkCrit = false;
+                attack.atkFail = true;
+                if(type === "melee") {
+                    durabilityLost++;
+                    if (durabilityLost >= durability){
+                        attackResult.weaponBroken = true;
+                        break;
+                    }
+                }
+            }else {//hit
+                attack.atkCrit = false;
+                attack.atkFail = false;
+                ( attack.hitRollTotal >= difficulty) ? attack.atkHit = true : attack.atkHit = false; //meets it, beats it
+                
+            }
+
+            /****** Calculate Damage *******/
+            if (attack.atkHit){
+                /** Note on parsed dice
+                 * [0] - full match [1d6+3>2]
+                 * [1] - amount of dice (1) (optional, defaults to 1)
+                 * [2] - the dice [d6] (required)
+                 * [3] - dice bonus [+3] (optional)
+                 * [4] - dice mins, if present [>2] (optional)
+                 */
+
+                var numRolls = parseInt(damageDice[1], 10) || 1,
+                    dmgRoll = parseInt(damageDice[2], 10) || null,
+                    dmgBonus = parseInt(damageDice[3], 10) || 0,
+                    dmgMin = parseInt(damageDice[4], 10) || 0,
+                    atkDmg = 0,
+                    atkRolls = [];
+                
+                //one final check for roll, in case parseInt does something weird. 
+                if (dmgRoll == null) {
+                    log(`Error getting dmgRoll! Expected an int and received ${dmgRoll}`);
+                    return null;
+                }
+
+                if (attack.atkcrit){
+                    let addedCritRolls = ( (type === "melee") ? parseInt(getAttrByName(id, fields.meleecrit), 10) : parseInt(getAttrByName(id, fields.rangedcrit), 10) ) || 1
+                    numRolls = numRolls + (addedCritRolls * numRolls);
+                }
+
+                while (atkDmg == 0 || atkDmg < dmgMin) {
+                    atkDmg = 0;
+                    atkRolls = [];
+
+                    for(let i = 0; i < numRolls; i++){
+                        let damage = randomInteger(dmgRoll);
+                        atkDmg += damage;
+                        atkRolls.push(damage);
+                    }
+                }
+
+                attack.totalDamage = atkDmg + dmgBonus;
+                attack.rawDamage = atkDmg;
+                attack.damageRolls = atkRolls;
+                finalDamage += attack.totalDamage;
+            } else {
+                attack.damage = 0;
+            }
+            /*** Finalize this Attack and add to result. Go to next loop iteration. */
+            attackResult.attacks.push(attack);
         }
 
-        meleeAttack(strength, dexterity, meleeHit, numAttacks, hitbonus, difficulty, character.id, makePrefixedObject(meleePrefix, fields.weaponFields));
-
+        //Summary numbers
+        attackResult.finalDamage = finalDamage;
+        attackResult.resourceUsed = resourceUsed;
+        attackResult.durabilityLost = durabilityLost;
+        return attackResult;
     },
-    meleeAttack = function(strength, dexterity, hit, numAttacks, hitbonus, baseDifficulty, id, fields){
-        var currentEnergy = parseInt(getAttrByName(id, energyStat), 10) || null,
-        meleeType = getAttrByName(id, fields.meleetype),
-        profBonus = parseInt(getAttrByName(id, meleeType), 10) || 0, //this only works if the types dropdown's values === proficiency attrs
-        energyCost = parseInt(getAttrByName(id, fields.meleecost), 10) || 1,
-        damageDice = parseDamageDice(getAttrByName(id, fields.weapondamage)) || null,
-        attackArr = [],
-        energyUsed = 0,
-        attackObj = {
-            type: "melee",
-            ranOut: false
-        };
-        
-        // if (currentEnergy == null || isNaN(hit)){
-        //     return null;
-        // }
-        
-        // for (let atk = 0; atk < numAttacks; atk++){
-            
-        //     if (currentEnergy < energyCost){
-        //         attackObj.ranOut = true;     
-        //         break;
-        //     }
-            
-        //     let attack = {},
-        //         roll = randomInteger(hit);
-        //         difficulty = baseDifficulty + (randomInteger(3)),
-
-        //     attack.roll = roll;
-        //     attack.difficulty = difficulty;
-        //     energyUsed += energyCost;
-
-        //     //calc crit
-        //     if ( roll >= 10){
-        //         attack.crit = true;
-        //         attack.hit = true;
-        //     } else {
-        //         attack.crit = false;
-        //         // calc hit
-        //         ( ( roll + dexterity + hitbonus + profBonus ) >= difficulty) ? attack.hit = true : attack.hit = false;
-        //     }
-
-        //     //calculate damage
-        //     if (attack.hit){
-
-
-        //     } else {
-        //         attack.damage = 0;
-        //     }
-        // }
-    },
-    //Parse a VERY basic dice expression. You can specify number of dice, the dice roll, any dice bonus and a brutal indicator
-    //Example: 1d6+10 - G1 = 1, G2 = 6, G3 = +10
-    //Example: 1d6+10>5 - G1 = 1, G2 = 6, G3 = +10, G4 = 5
+    /**
+     * Regex parse a VERY basic dice expression specific for the type of dice expressions needed for an attack roll in this game.
+     * You can specify number of dice, the dice roll, any dice bonus and a roll minimum.
+     * 
+     * Regex has 4 capturing groups. This function would return an array such as the following:
+     * Example: 1d6+3>2
+     * [0] - the full match of the roll (1d6+3>2)
+     * [1] - amount of dice (1) (optional, defaults to 1)
+     * [2] - the dice [d6] (required)
+     * [3] - dice bonus [+3] (optional)
+     * [4] - dice mins, if present [>2] (optional)
+     */
     parseDamageDice = function(diceExp) {
         const expr = diceExp.trim().replace(/\s/g,''), //get rid of all whitespace for easier processing
             diceRegex = /([\d]*?)?(?:[dD])([\d]*)([\+\-]\d*)?(?:[>])?(\d*)?/;
 
         let match = diceRegex.exec(expr);
-        log(match);
+        
+        if (match[2] == null){
+            log("Invalid Dice Regex! Got:");
+            log(match);
+            return null;
+        }
 
         return match;
 
