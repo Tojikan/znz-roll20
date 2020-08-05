@@ -1,13 +1,14 @@
 var Attack = Attack || (function() {
     'use strict';
     const  fields = [[{dataquery:'attackFields'}]],
-    strengthAttr = "[[{attrlookup:'strength'}]]_mod",
-    dextAttr = "[[{attrlookup:'dexterity'}]]_mod",
-    energyStat = "[[{attrlookup:'energy'}]]",
-    meleeHitRoll = "[[{attrlookup:'meleehitroll'}]]",
-    rangedHitRoll = "[[{attrlookup:'rangedhitroll'}]]",
-    rangedPrefix ="[[{prefix:'eq_ranged'}]]",
-    meleePrefix = "[[{prefix:'eq_melee'}]]",
+        strengthAttr = "[[{attrlookup:'strength'}]]",
+        dextAttr = "[[{attrlookup:'dexterity'}]]",
+        energyStat = "[[{attrlookup:'energy'}]]",
+        meleeHitRoll = "[[{attrlookup:'meleehitroll'}]]",
+        rangedHitRoll = "[[{attrlookup:'rangedhitroll'}]]",
+        rangedPrefix ="[[{prefix:'eq_ranged'}]]",
+        meleePrefix = "[[{prefix:'eq_melee'}]]",
+        weaponNameField = "[[{attrlookup:'itemname'}]]",
 
     HandleInput = function(msg) {
         if (msg.type !== "api") {
@@ -21,6 +22,11 @@ var Attack = Attack || (function() {
         var sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
             character = getCharacter(sender, msg),
             args = splitArgs(msg.content);
+
+
+        if (!character){
+            return;
+        }
 
         //!!attack should be in 0. If not, they probably forgot to put a space between !!attack and an arg.
         if (!("0" in args)){
@@ -56,54 +62,148 @@ var Attack = Attack || (function() {
         var numAttacks = parseInt(args.attacks,10) || 1,
             hitRoll =  ( (args.type == "melee") ? (parseInt(getAttrByName(character.id, meleeHitRoll), 10)) : (parseInt(getAttrByName(character.id, rangedHitRoll))) ) || 10,
             hitBonus = parseInt(args.bonus,10) || 0,
-            baseDifficulty = (parseInt(args.difficulty,10) * 3) || 3;
+            prefix = args.type == "melee" ? meleePrefix : rangedPrefix,
+            weaponName =getAttrByName(character.id, prefix + "_" + weaponNameField) || '', //set this here out of laziness, this gets used in outputAttack
+            baseDifficulty = (args.difficulty == "0") ? 0 : ((parseInt(args.difficulty,10) * 3) || 3),
+            inputFields = makePrefixedObject(prefix, fields.weaponFields),
+            attackResult = null;
+        
+        try{
+            attackResult = calculateAttack(inputFields, character.id, args.type, numAttacks, hitRoll, hitBonus, baseDifficulty)
 
-        log(calculateAttack(makePrefixedObject(meleePrefix, fields.weaponFields), character.id, args.type, numAttacks, hitRoll, hitBonus, baseDifficulty));
-        // attrLookup(character,).setWithWorker({current: (attackResult.startingResource - attackResult.resourceUsed)});
+        } catch(e){
+            sendMessage(`The following error occurred while calculating your ${args.type} attack. Please make sure all the sheet fields are entered properly with the correct format and try again. <br/><br/>'${e}'`, sender, true, "danger");
+            log(`Error when making a ${args.type} attack by ${sender}`);
+        }
+        
+        
+        if (attackResult) {
+            try {
+                attrLookup(character, attackResult.resourceType).setWithWorker({current: (attackResult.startingResource - attackResult.resourceUsed)});
+    
+                if (args.type == "melee"){
+                    attrLookup(character, `${meleePrefix}_${fields.weaponFields.durability}`).setWithWorker({current: (attackResult.startingDurability - attackResult.durabilityLost)});
+                }
+            } catch(e){
+                sendMessage(`The following error occurred while subtracting resources for your ${args.type} attack. The resource was ${attackREsult.resourcetype}, the starting amount was ${attackResult.startingResource} and the spent amount was ${attackResult.resourceUsed}. <br/><br/>'${e}'`, sender, true, "danger");
+                log(`Error when subtracting a ${args.type} attack by ${sender}`);
+            }
 
+            outputAttack(attackResult, character.get('name'), sender, args.type, weaponName);
+            
+            try{
+                //For Debugging 
+                if ("debug" in args && args.debug == true){
+                    log("------Debug---------");
+                    log("args:");
+                    log(args);
+                    log("fields:");
+                    log(fields);
+                    log("numAttacks: " + numAttacks);
+                    log("hitRoll: " + hitRoll);
+                    log("hitBonus: " + hitBonus);
+                    log("prefix: " + prefix);
+                    log("baseDifficulty: " + baseDifficulty);
+                    log("attackResult: ");
+                    log(attackResult);
+                }
+                
+                //For testing results
+                if ("test" in args && args.test == true){
+                    log("------Test---------");
+                    log(attackResult);
+                    log(`Total Damage: ${attackResult.finalDamage}`);
+                    log(`Total Hit Bonus: ${attackResult.attrBonus + attackResult.profBonus + hitBonus}`);
+                    log(`Resource Spent: ${attackResult.resourceUsed}`);
+                    log(`Durability Lost: ${attackResult.durabilityLost}`);
+                    log(`Exhausted: ${attackResult.exhausted}`);
+                    log(`Weapon Break: ${attackResult.weaponBroken}`);
+                    
+                    var critCount = 0,
+                        failCount = 0,
+                        regHitCount = 0,
+                        regMissCount = 0;
+    
+                    for (const atk of attackResult.rolls){
+                        if (atk.atkCrit){
+                            critCount++;
+                        } else if (atk.atkFail){
+                            failCount++;
+                        } else if (atk.atkHit && !atk.atkCrit){
+                            regHitCount++;
+                        } else if (!atk.atkHit && !atk.atkFail){
+                            regMissCount++;
+                        }
+                    }
+    
+                    log(`Number of Critical Hits: ${critCount}`);
+                    log(`Number of Critical Fails: ${failCount}`);
+                    log(`Regular Hits: ${regHitCount}`);
+                    log(`Regular Misses: ${regMissCount}`);
+                }
+            } catch(e){
+                sendMessage(`Debug/Test Error. <br/><br/>'${e}'`, sender, true, "danger");
+                log(`Error during debug/test - ${e}`);
+            }
+        }
     },
     calculateAttack = function(fields, id, type, numAttacks, hitRoll, hitBonus, baseDifficulty) {
-        var currResource = (type === "melee") ? parseInt(getAttrByName(id, energyStat), 10) : parseInt(getAttrByName(id, field.ammo), 10), //energy or ammo
-            damageDice = (type === "melee") ? parseDamageDice(getAttrByName(id, fields.meleedamage)) : parseDamageDice(getAttrByName(id, fields.rangeddamage)), //melee or ranged dmg
-            attrHitBonus = (type === "melee") ? (parseInt(getAttrByName(id, strengthAttr), 10)) : (parseInt(getAttrByName(id, dextAttr), 10)), //add str/dext to attack
-            resourceCost = ( (type === "melee") ? parseInt(getAttrByName(id, fields.meleecost), 10) : 1) || 1, //energy cost or 1
-            typeProf = ( (type === "melee") ? getAttrByName(id, fields.meleetype) : getAttrByName(id, fields.rangedtype) ), //get the type
-            durability = parseInt(getAttrByName(id, fields.durability), 10) || 1,
-            profBonus =  parseInt(getAttrByName(id, typeProf)) || 0, //Get prof bonus. This only works if the weapon type dropdown values equals a proficiency attr.
+        
+        var isMelee = (type === "melee"),
+            currResource = isMelee ? parseInt(getAttrByName(id, energyStat), 10) : parseInt(getAttrByName(id, fields.ammo), 10), //energy or ammo
+            damageDice = isMelee ? parseDamageDice(getAttrByName(id, fields.meleedamage)) : parseDamageDice(getAttrByName(id, fields.rangeddamage)), //melee or ranged dmg
+            attrHitBonus = isMelee ? getAttrModAndBonus(strengthAttr, id, true) : getAttrModAndBonus(dextAttr, id, true), //add str/dext to attack
+            resourceCost = ( isMelee ? parseInt(getAttrByName(id, fields.meleecost), 10) : 1) || 1, //energy cost or 1
+            typeProf = ( isMelee ? getAttrByName(id, fields.meleetype) : getAttrByName(id, fields.rangedtype) ), //get the weapon type value
+            profBonus =  getAttrModAndBonus(typeProf, id, false), //The weapon type value equals a proficiency attr, so we can use that in getAttrByName
+            durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
+            critBonus = ( isMelee ? parseInt(getAttrByName(id, fields.meleecrit), 10) : parseInt(getAttrByName(id, fields.rangedcrit), 10) ) || 1,
             resourceUsed = 0,
             finalDamage = 0,
             durabilityLost = 0,
             attackResult = {
                 type: type,
+                resourceType: isMelee ? energyStat : fields.ammo,
+                baseDifficulty: baseDifficulty,
+                numAttacks: numAttacks,
+                hitRoll: hitRoll,
                 hitBonus: hitBonus,
                 attrBonus: attrHitBonus,
                 profBonus: profBonus,
                 startingResource: currResource,
                 startingDurability: durability,
                 damageDice: damageDice,
+                critBonus: critBonus,
                 resourceCost: resourceCost,
                 weaponBroken: false,
                 exhausted: false,
-                attacks: []
+                rolls: []
             };
 
         // Required fields for calculating an attack. Other ones have a default value. 
         if ( isNaN(currResource) || isNaN(attrHitBonus) || damageDice === null) {
+            log(`======================= Attack Script Error =====================`);
             log(`One of the required fields for an attack was invalid.`);
             log(`Current Resource: ${currResource}`);
             log(`Attr Hit Bonus: ${attrHitBonus}`);
             log(`Damage Dice: ${damageDice}`);
-            return null;
+            throw `One of the required fields for a ${type} attack was empty or incorrectly entered.`;
         } 
         
         //Per Attack
-        for (let atk = 0; atk < numAttacks; atk++){
+        for (let i = 0; i < numAttacks; i++){
             
             /*** Check and calculate Resources *******/
-            if (currResource < resourceCost){
+            if (currResource < resourceCost ){
                 attackResult.exhausted = true;     
                 break;
             }
+
+            if (isMelee && (durability <= 0 || attackResult.weaponBroken)){
+                attackResult.weaponBroken = true;
+                break;
+            }
+
             resourceUsed += resourceCost;
             currResource -= resourceCost;
 
@@ -128,14 +228,13 @@ var Attack = Attack || (function() {
                 attack.atkHit = false;
                 attack.atkCrit = false;
                 attack.atkFail = true;
-                if(type === "melee") {
+                if (isMelee) {
                     durabilityLost++;
                     if (durabilityLost >= durability){
-                        attackResult.weaponBroken = true;
-                        break;
+                        attackResult.weaponBroken = true; // this stops the loop after the next iteration.
                     }
                 }
-            }else {//hit
+            } else {//hit
                 attack.atkCrit = false;
                 attack.atkFail = false;
                 ( attack.hitRollTotal >= difficulty) ? attack.atkHit = true : attack.atkHit = false; //meets it, beats it
@@ -161,20 +260,20 @@ var Attack = Attack || (function() {
                 
                 //one final check for roll, in case parseInt does something weird. 
                 if (dmgRoll == null) {
-                    log(`Error getting dmgRoll! Expected an int and received ${dmgRoll}`);
-                    return null;
+                    log(`======================= Attack Script Error =====================`);
+                    log(`No Damage Roll was found.`);
+                    throw `The damage roll set for a ${type} attack could not be parsed.`;
                 }
 
-                if (attack.atkcrit){
-                    let addedCritRolls = ( (type === "melee") ? parseInt(getAttrByName(id, fields.meleecrit), 10) : parseInt(getAttrByName(id, fields.rangedcrit), 10) ) || 1
-                    numRolls = numRolls + (addedCritRolls * numRolls);
+                if (attack.atkCrit){
+                    numRolls = numRolls + (critBonus * numRolls);
                 }
 
                 while (atkDmg == 0 || atkDmg < dmgMin) {
                     atkDmg = 0;
                     atkRolls = [];
 
-                    for(let i = 0; i < numRolls; i++){
+                    for (let j = 0; j < numRolls; j++){
                         let damage = randomInteger(dmgRoll);
                         atkDmg += damage;
                         atkRolls.push(damage);
@@ -186,10 +285,12 @@ var Attack = Attack || (function() {
                 attack.damageRolls = atkRolls;
                 finalDamage += attack.totalDamage;
             } else {
-                attack.damage = 0;
+                attack.totalDamage = 0;
+                attack.rawDamage = 0;
+                attack.damageRolls = [];
             }
             /*** Finalize this Attack and add to result. Go to next loop iteration. */
-            attackResult.attacks.push(attack);
+            attackResult.rolls.push(attack);
         }
 
         //Summary numbers
@@ -197,6 +298,46 @@ var Attack = Attack || (function() {
         attackResult.resourceUsed = resourceUsed;
         attackResult.durabilityLost = durabilityLost;
         return attackResult;
+    },
+    /**
+     * Output the results of the attack into chat.
+     */
+    outputAttack = function(attack, name, sender, type, weaponName=''){
+        var totalBonus = attack.attrBonus + attack.hitBonus + attack.profBonus;
+        var outputText = `<div style="color: white; background-color: #800080; padding: 1px 3px;">${name} makes a ${type} attack with their ${weaponName}!</div>\ `
+        for (const atk of attack.rolls){
+            outputText += 
+            `<div style="display:flex; align-items: top; padding: 1px 3px;>\
+                <div>\
+                    <div>${atk.hitRollTotal}</div>
+                    <span style="font-weight: 900; background-color:yellow; ${(atk.atkCrit) ? 'color:darkgreen;' : ((atk.atkFail) ? 'color:red;' : 'color:black;')}">${atk.hitRollRaw}</span> \
+                    + ${totalBonus} = <span style="font-weight: 900;\
+                </div>\
+                </td>\
+                <td>\
+                    <div style="font-weight: 900;">vs. ${atk.difficulty}</div>\
+                </td>\
+                <td>\
+                    <div style="font-weight: 900;">${ (atk.atkCrit) ? 'Crit!' : ( (atk.atkFail) ? 'Fail!' : ( (atk.atkHit) ? 'Hit!' : 'Miss!'))}</div>\
+                </td>\
+                <td>\
+                    <div style="font-weight: 900;">${ atk.totalDamage}</div>\
+                    <div style="font-size: 10px;"><span style="border: solid 1px lightgray; padding: 2px;">${ atk.damageRolls.join(' + ')}</span>${ (attack.damageDice[4] != null) ? attack.damageDice[4] : ''} </div>\
+                </td>\
+            </tr>\ `
+        }
+
+        outputText += `</table>\
+            ${attack.weaponBroken ? `<div style="color:red">The weapon broke after the last roll!</div>` : ''}\
+            ${attack.exhausted ? `<div style="color:red"> ${name} ran out of ${ (type === 'melee') ? 'energy' : 'ammo'} after the last roll!</div>` : ''}\
+            <div>The total amount of damage was <strong>${attack.finalDamage}</strong></div>\
+            <div>${name} used <strong>${attack.resourceUsed}</strong> ${ (type === 'melee') ? 'energy' : 'ammo'}!</div>\
+            ${(type === 'melee') ? `<div>The weapon lost ${attack.durabilityLost} durability!</div>` : ''} `;
+
+        sendChat(
+            'ZnZ - Attack Action',
+            `<div style="border: solid 1px lightgray; color:black; background-color:white;"> ${outputText}</div>`
+        );
     },
     /**
      * Regex parse a VERY basic dice expression specific for the type of dice expressions needed for an attack roll in this game.
@@ -216,9 +357,8 @@ var Attack = Attack || (function() {
 
         let match = diceRegex.exec(expr);
         
-        if (match[2] == null){
-            log("Invalid Dice Regex! Got:");
-            log(match);
+        if (match == null || match.length < 5 || match[2] == null){
+            log(`Invalid Dice Regex! Got: ${match} from ${diceExp}`);
             return null;
         }
 
@@ -230,7 +370,7 @@ var Attack = Attack || (function() {
         var result = {};
 
         for (const prop in obj){
-            result[prop] = `${meleePrefix}_${obj[prop]}`;
+            result[prop] = `${prefix}_${obj[prop]}`;
         }
 
         return result;
@@ -267,8 +407,8 @@ var Attack = Attack || (function() {
     //Example: in "!!attack type=melee attacks=3", there is a 'type' arg which is equal to 'melee' and an 'attacks' arg equal to '3'
     splitArgs = function(input) {
         var arr = input.split(' '),
-            result = {};
-        const argsRegex = /(.*)=(.*)/; //can't be global but shouldn't need it as we are splitting args. 
+            result = {},
+            argsRegex = /(.*)=(.*)/; //can't be global but shouldn't need it as we are splitting args. 
             
         for (let i = 0; i < arr.length; i++){
             let match = argsRegex.exec(arr[i]); //Regex to match anything before/after '='. G1 is before and G2 is after
@@ -289,6 +429,18 @@ var Attack = Attack || (function() {
         return result;
             
     },
+    //Gets a Attrs mod and its bonus together
+    getAttrModAndBonus = function(attr, id, appendMod){
+        if (appendMod == true){
+            var attrMod = attr + '_mod'; //some have _mod, some don't. so we use this in the first getAttr since bonus never has _mod
+        } else {
+            var attrMod = attr;
+        }
+        
+        return (parseInt(getAttrByName(id, attrMod), 10) || 0) 
+             + (parseInt(getAttrByName(id, attr + "_bonus"), 10) || 0);
+
+    },
     attrLookup = function(character, name){
         return findObjs({type: 'attribute', characterid: character.id, name: name})[0];
     },
@@ -299,9 +451,9 @@ var Attack = Attack || (function() {
     },
     sendMessage = function(message, who, whisper, type="info" ) {
         let textColor = '#006400',
-            bgColor = '#98FB98';
+        bgColor = '#98FB98';
 
-        
+    
         switch (type) {
             case "danger":
                 textColor = '#8B0000';
@@ -312,7 +464,6 @@ var Attack = Attack || (function() {
                 bgColor = '#F0E68C';
                 break;
         }
-
 
 		sendChat(
             'ZnZ Action - Attack',

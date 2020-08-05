@@ -18,9 +18,9 @@
 <div class="sheet-znz-item-card-equipped">
     <div class="sheet-znz-item-header">
     {% for stdfld in fields.standard %}
-        {% if stdfld.canonical == 'item_name' %}
+        {% if stdfld.canonical == 'itemname' %}
             {{ fieldCreate.outputField(field=stdfld, header="h3", prefix=attrPrefix) }}
-        {% elif stdfld.canonical == 'item_type' %}
+        {% elif stdfld.canonical == 'itemtype' %}
             {{ fieldCreate.createHidden(field=stdfld, header="h3", prefix=attrPrefix, defaultValue=category) }}
         {% else %}
             {{ fieldCreate.createHidden(field=stdfld, prefix=attrPrefix) }}
@@ -74,12 +74,12 @@
 <div class="sheet-znz-item-card-inventory">
     <div class="sheet-znz-item-header">
     {% for stdfld in fields.standard %}
-        {% if stdfld.canonical == 'item_name' %}
+        {% if stdfld.canonical == 'itemname' %}
             {{ fieldCreate.outputField(field=stdfld, header="h3", prefix=attrPrefix) }}
         {% endif %}
 
         {# retrieve types #}
-        {% if stdfld.canonical == "item_type" %}
+        {% if stdfld.canonical == "itemtype" %}
             {% set itemTypes = stdfld.field_options %}
             {% set typeAttr = stdfld.attr_name %}
         {% endif %}
@@ -87,7 +87,7 @@
 
         <div class="sheet-znz-row">
         {% for stdfld in fields.standard %}
-            {% if stdfld.canonical != 'item_name' %}
+            {% if stdfld.canonical != 'itemname' %}
                 {{ fieldCreate.outputField(field=stdfld, header="h3", prefix=attrPrefix) }}
             {% endif %}
         {% endfor %}
