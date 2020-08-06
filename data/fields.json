@@ -121,7 +121,7 @@
             "description": "",
             "default_value": 0,
             "has_max": false,
-            "explanation_text": "<div class=\"sheet-znz-xp-text\"> <span>10</span>: +5 to any stat max  </div><div class=\"sheet-znz-xp-text\"> <span>20</span>: +1 to attr/skill/prof </div><div class=\"sheet-znz-xp-text\"> <span>60</span>: Learn new ability </div>",
+            "explanation_text": "<div>10:stat | 20: skill/hit</div><div>30: attr | 60:ability</div>",
             "area": "stat",
             "canonical": "exp"
         }

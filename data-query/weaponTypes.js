@@ -3,8 +3,8 @@ const data = require('../data/fields.json');
 
 var result = {};
 
-result.melee = [];
-result.ranged = [];
+result.melee = [{name:"", value:""}];
+result.ranged = [{name:"", value:""}];
 
 
 for (const attr of data.proficiencies){

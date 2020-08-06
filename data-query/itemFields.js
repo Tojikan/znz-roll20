@@ -26,7 +26,7 @@ module.exports = results;
 function getAttrsForField(field) {
     var result = [];
 
-    if( "canonical" in field && field.canonical == "item_type"){ ignoreEmpty = field.attr_name};
+    if( "canonical" in field && field.canonical == "itemtype"){ ignoreEmpty = field.attr_name};
     
     if (field.field_type == 'repeater'){
         let count = parseInt(field.count, 10);

@@ -135,7 +135,7 @@
                 </div>
                 <div class="sheet-znz-inventory-items">
                     <fieldset class="repeating_inventory">
-                        {{ item.inventoryItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.inventory, options=queryData.equipmentStatsOptions) }}
+                        {{ item.inventoryItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.inventory, statOptions=queryData.equipmentStatsOptions, rangedOptions=queryData.weaponTypes.ranged, meleeOptions=queryData.weaponTypes.melee) }}
                     </fieldset>
                 </div>
             </div>

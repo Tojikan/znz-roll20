@@ -67,7 +67,7 @@
 
 {% endmacro %}
 
-{% macro inventoryItem(fields='', attrPrefix='inv', options='') %}
+{% macro inventoryItem(fields='', attrPrefix='inv', statOptions='', rangedOptions='', meleeOptions='') %}
 {% set itemTypes = [] %}
 {% set typeAttr = "" %}
 
@@ -112,13 +112,21 @@
         {# misc - weapon #}
         {% for fld in fields.weapon %}
             {% set classText = ["sheet-znz-item-row ", "sheet-znz-field ", "sheet-znz-", fld.weapon_category, "-field"] %}
+            
+            {% if fld.canonical == "rangedtype" %}
+            {{ fieldCreate.outputField(field=fld, header="h3", class=classText | join, prefix=attrPrefix, options=rangedOptions) }}
+            {% elif fld.canonical == "meleetype" %}
+            {{ fieldCreate.outputField(field=fld, header="h3", class=classText | join, prefix=attrPrefix, options=meleeOptions) }}
+            {% else %}
             {{ fieldCreate.outputField(field=fld, header="h3", class=classText | join, prefix=attrPrefix) }}
+            {% endif%}
+
         {% endfor %}
         
         {# equipment #}
         {% for fld in fields.equipment %}
             {% if fld.field_type == "repeater" %}
-                {{ equipmentStatRepeater(field=fld, prefix=attrPrefix, options=options, header='Equipment Stats', class='')}}
+                {{ equipmentStatRepeater(field=fld, prefix=attrPrefix, options=statOptions, header='Equipment Stats', class='')}}
             {% else %}
                 {{ fieldCreate.outputField(field=fld, header="h3", class="sheet-znz-item-row", prefix=attrPrefix) }}
             {% endif %}
@@ -127,8 +135,6 @@
 
     {{ fieldCreate.outputField(field=fields.effect, header="h3", class="", prefix=attrPrefix) }}
     {{ fieldCreate.outputField(field=fields.note, header="h3", class="", prefix=attrPrefix) }}
-
-
 
     <div class="sheet-znz-item-buttons">
     {# hidden checks for showing specific fields #}

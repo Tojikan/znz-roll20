@@ -4,10 +4,10 @@ var individual = '',
     quantity = '';
 
 for (let itm of fields.item.standard) {
-    if (itm.canonical == "item_weight") {
+    if (itm.canonical == "itemweight") {
         individual = itm['attr_name'];
     }    
-    if (itm.canonical == "item_quantity") {
+    if (itm.canonical == "itemquantity") {
         quantity = itm['attr_name'];
     }
 }

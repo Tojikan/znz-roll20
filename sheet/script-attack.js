@@ -58,26 +58,38 @@ var Attack = Attack || (function() {
             args.difficulty = 1;
         }
 
+        //Determine Prefix
+        var prefix = args.type == "melee" ? meleePrefix : rangedPrefix,
+            reversed = false;
+
+            
         // Player Inputs
         var numAttacks = parseInt(args.attacks,10) || 1,
-            hitRoll =  ( (args.type == "melee") ? (parseInt(getAttrByName(character.id, meleeHitRoll), 10)) : (parseInt(getAttrByName(character.id, rangedHitRoll))) ) || 10,
-            hitBonus = parseInt(args.bonus,10) || 0,
-            prefix = args.type == "melee" ? meleePrefix : rangedPrefix,
-            weaponName =getAttrByName(character.id, prefix + "_" + weaponNameField) || '', //set this here out of laziness, this gets used in outputAttack
-            baseDifficulty = (args.difficulty == "0") ? 0 : ((parseInt(args.difficulty,10) * 3) || 3),
-            inputFields = makePrefixedObject(prefix, fields.weaponFields),
-            attackResult = null;
-        
+        hitRoll =  ( (args.type == "melee") ? (parseInt(getAttrByName(character.id, meleeHitRoll), 10)) : (parseInt(getAttrByName(character.id, rangedHitRoll))) ) || 10,
+        hitBonus = parseInt(args.bonus,10) || 0,
+        weaponName =getAttrByName(character.id, prefix + "_" + weaponNameField) || '', //set this here out of laziness, this gets used in outputAttack
+        baseDifficulty = (args.difficulty == "0") ? 0 : ((parseInt(args.difficulty,10) * 3) || 3),
+        inputFields = makePrefixedObject(prefix, fields.weaponFields),
+        attackResult = null;
+
+        //If alternate, we melee with our ranged weapon and throw our melee weapon.
+        if (("reversed") in args && args.reversed == true){
+            args.type = (args.type == "melee") ? "ranged" : "melee";
+            reversed = true;
+        }
+
+        //Calculate an Attack
         try{
-            attackResult = calculateAttack(inputFields, character.id, args.type, numAttacks, hitRoll, hitBonus, baseDifficulty)
+            attackResult = calculateAttack(inputFields, character.id, args.type, numAttacks, hitRoll, hitBonus, baseDifficulty, reversed)
 
         } catch(e){
             sendMessage(`The following error occurred while calculating your ${args.type} attack. Please make sure all the sheet fields are entered properly with the correct format and try again. <br/><br/>'${e}'`, sender, true, "danger");
             log(`Error when making a ${args.type} attack by ${sender}`);
         }
         
-        
+        //With the results from a calculated attack
         if (attackResult) {
+            //Set Attrs
             try {
                 attrLookup(character, attackResult.resourceType).setWithWorker({current: (attackResult.startingResource - attackResult.resourceUsed)});
     
@@ -89,7 +101,8 @@ var Attack = Attack || (function() {
                 log(`Error when subtracting a ${args.type} attack by ${sender}`);
             }
 
-            outputAttack(attackResult, character.get('name'), sender, args.type, weaponName);
+            //Output into the chat. 
+            outputAttack(attackResult, character.get('name'), args.type, weaponName);
             
             try{
                 //For Debugging 
@@ -147,7 +160,11 @@ var Attack = Attack || (function() {
             }
         }
     },
-    calculateAttack = function(fields, id, type, numAttacks, hitRoll, hitBonus, baseDifficulty) {
+    /**
+     * This method calculates an attack based on inputs and returns a JSON object representing the results of an attack.
+     * There are some global properties which describe the circumstances of the attack and an Attacks array which stores the result of each attack and their rolls.
+     */
+    calculateAttack = function(fields, id, type, numAttacks, hitRoll, hitBonus, baseDifficulty, reversed) {
         
         var isMelee = (type === "melee"),
             currResource = isMelee ? parseInt(getAttrByName(id, energyStat), 10) : parseInt(getAttrByName(id, fields.ammo), 10), //energy or ammo
@@ -164,6 +181,7 @@ var Attack = Attack || (function() {
             attackResult = {
                 type: type,
                 resourceType: isMelee ? energyStat : fields.ammo,
+                reversed: reversed,
                 baseDifficulty: baseDifficulty,
                 numAttacks: numAttacks,
                 hitRoll: hitRoll,
@@ -302,44 +320,71 @@ var Attack = Attack || (function() {
     /**
      * Output the results of the attack into chat.
      */
-    outputAttack = function(attack, name, sender, type, weaponName=''){
-        var outputText = `${name} makes a ${type} attack with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}\
-        <h3>Rolls</h3> \n`;//need line break to append roll templates
+    outputAttack = function(attack, name, type, weaponName=''){
+        
+        const tableStyle = 'style="width:100%; text-align:center; margin-bottom: 10px;"',
+            thStyle = 'style="text-align:center"',
+            trStyle = 'style="margin-top: 10px; border-top: solid 1px #d3d3d3; border-bottom: solid 1px #d3d3d3"',
+            tdStyle = 'vertical-align: top; padding: 10px;', //no style declaration
+            divStyle = 'style="font-size: 21px; font-weight: 700; margin-bottom: 7px;"',
+            rollStyle = 'style="border: solid 1px #d3d3d3; padding: 2px; background: white;"',
+            msgStyle = 'style="border: solid 1px lightgray; padding: 1px 3px; background: white;"',
+            wrapperStyle = 'style="border: solid 1px lightgray; padding: 3px;"',
+            isMelee = (type == "melee"),
+            typeText = isMelee ? 'Melee' : 'Ranged',
+            attrType = isMelee ? 'Strength' : 'Dexterity',
+            totalAttackBonus = attack.profBonus + attack.attrBonus + attack.hitBonus;
 
+        log(type);
+
+        
+        var outputText = `\
+        <h4>${typeText} Attack</h4>\
+        <div>${name} tries to attack ${attack.numAttacks} time(s) with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}</div><br/>\
+        ${attack.reversed ? (isMelee ? `<div>${name} melee attacks with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
+        <div>Crit Multiplier: <strong>${attack.critBonus}x</strong></div>\
+        <div style="margin-bottom: 10px;">${attrType} Bonus: <strong>${attack.attrBonus}</strong>  |  Proficiency Bonus: <strong>${attack.profBonus}</strong>  |  Misc Bonus: <strong>${attack.hitBonus}</strong>  |  Total Bonus: <strong>${totalAttackBonus}</strong></div>`;
+
+        
+
+        outputText += `<table ${tableStyle}><tr><th ${thStyle}>Hit</th><th ${thStyle}>Challenge</th><th ${thStyle}>Damage</th></tr> `;
         //Can't output rolltemplate and regular text in the same message
         for (let i = 0; i < attack.rolls.length; i++){
             let atk = attack.rolls[i],
-            hitresult = atk.atkCrit ? 'crit' : (atk.atkFail ? 'fail' : (atk.atkHit ? 'hit' : 'fail')),
-            hitdescript = hitresult.charAt(0).toUpperCase() + hitresult.slice(1),
+            hitresult = atk.atkCrit ? 'Crit' : (atk.atkFail ? 'Fail' : (atk.atkHit ? 'Hit' : 'Miss')),
+            hitstyle = atk.atkCrit ? 'color:#135314; background:#baedc3' : (atk.atkFail ? 'color:#791006; background:#FFCCCB' : (atk.atkHit ? 'background:#FFFFBF' : '')),
             difficulty = atk.difficulty,
-            attrType = (type == 'melee') ? 'str' : 'dext',
-            damage = attack.finalDamage,
-            dmgDescript = atk.damageRolls.map((x) => {return `[[${x}]]`}).join('+') + (attack.damageDice[3] !== null ? attack.damageDice[3] : ''),
+            miniAttr = isMelee ? 'str' : 'dext',
+            dmgDescript = atk.damageRolls.map((x)=>{return `<span ${rollStyle}>${x}</span>`}).join('+') + (attack.damageDice[3] && attack.damageDice[3] > 0 && atk.atkHit ? attack.damageDice[3] : ''),
+            difficultyDescript = `<span ${rollStyle}>${difficulty}</span> ${totalAttackBonus == 0 ? '' : ` - ${totalAttackBonus}`}`;
             
-            difficultyDescript = `[[${difficulty}]]${attack.attrBonus == 0 ? '' : `${attack.attrBonus > 0 ? ' + ' : ' - '}${attack.attrBonus}(${attrType})`}${attack.profBonus == 0 ? '' : `${attack.profBonus > 0 ? ' + ' : ' - '}${attack.profBonus}(prof)`}${attack.hitBonus == 0 ? '' : `${attack.hitBonus > 0 ? ' + ' : ' - '}${attack.hitBonus}(bonus)`}\ `;
-            
-            outputText += ` &{template:attackresult} {{attackNo=${i+1}} {{hitStyle=${hitresult}}} {{hitRoll=${atk.hitRollRaw}}} {{hitDescript=${hitdescript}}} {{difficulty=${atk.difficulty}}} {{difficultyDescript=${difficultyDescript}}} {{damage=${atk.totalDamage}}} {{damageDescript=${dmgDescript}}} \n `;//need a line break at the end
+            outputText += `<tr ${trStyle}>\
+            <td style="${tdStyle} ${hitstyle}"><div ${divStyle}>${atk.hitRollRaw}</div> <div>${hitresult}</div></td>\
+            <td style="${tdStyle}"><div ${divStyle}>${atk.difficulty - (attack.profBonus + attack.attrBonus + attack.hitBonus)}</div> <div style="font-size:11px;">${difficultyDescript}</div></td>\
+            <td style="${tdStyle}"><div ${divStyle}>${atk.totalDamage}</div> <div style="font-size:11px;">${dmgDescript.length ? `(${dmgDescript})` : ''}</div></td>\
+            </tr>`
         }
+        outputText += '</table>';
         
         
-        outputText += `<div style="border: solid 1px lightgray; padding: 1px 3px; background: white">\
+        outputText += `\
+        <div ${msgStyle}>\
         <h4>Attack Summary</h4>\
-        ${attack.weaponBroken && type == "melee" ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
-        ${attack.exhausted ? `<div style="color:red"> ${name} is out of ${ (type === 'melee') ? 'energy' : 'ammo'}!</div>` : ''}\
+        ${attack.weaponBroken && isMelee ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
+        ${attack.exhausted ? `<div style="color:red"> ${name} is out of ${ isMelee ? 'energy' : 'ammo'}!</div>` : ''}\
         <div>Total Damage: <strong>${attack.finalDamage}</strong></div>\
-        <div>${ (type === 'melee') ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
-        ${(type === 'melee') ? `<div>Durability Lost:  <strong>${attack.durabilityLost}</strong></div>` : ''}\
-        </div>`;
+        <div>${ isMelee ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
+        ${isMelee ? `<div>Durability Lost:  <strong>${attack.durabilityLost}</strong></div>` : ''}\
+        </div>\ `;
         
-
         sendChat(
-            `ZnZ - ${type.charAt(0).toUpperCase() + type.slice(1)} Attack Script`,
-            outputText
+            `ZnZ - Attack Script`,
+            `<div ${wrapperStyle}>${outputText}</div>`
         );
 
-        },
-        /**
-         * Regex parse a VERY basic dice expression specific for the type of dice expressions needed for an attack roll in this game.
+    },
+    /**
+     * Regex parse a VERY basic dice expression specific for the type of dice expressions needed for an attack roll in this game.
      * You can specify number of dice, the dice roll, any dice bonus and a roll minimum.
      * 
      * Regex has 4 capturing groups. This function would return an array such as the following:
@@ -440,6 +485,7 @@ var Attack = Attack || (function() {
              + (parseInt(getAttrByName(id, attr + "_bonus"), 10) || 0);
 
     },
+    //get attr oject
     attrLookup = function(character, name){
         return findObjs({type: 'attribute', characterid: character.id, name: name})[0];
     },
@@ -448,6 +494,7 @@ var Attack = Attack || (function() {
         _.contains(character.get('controlledby').split(','),playerId) || 
         _.contains(character.get('controlledby').split(','),'all');
     },
+    //generic message
     sendMessage = function(message, who, whisper, type="info" ) {
         let textColor = '#135314',
         bgColor = '#baedc3';
