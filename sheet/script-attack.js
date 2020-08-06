@@ -303,44 +303,43 @@ var Attack = Attack || (function() {
      * Output the results of the attack into chat.
      */
     outputAttack = function(attack, name, sender, type, weaponName=''){
-        var totalBonus = attack.attrBonus + attack.hitBonus + attack.profBonus;
-        var outputText = `<div style="color: white; background-color: #800080; padding: 1px 3px;">${name} makes a ${type} attack with their ${weaponName}!</div>\ `
-        for (const atk of attack.rolls){
-            outputText += 
-            `<div style="display:flex; align-items: top; padding: 1px 3px;>\
-                <div>\
-                    <div>${atk.hitRollTotal}</div>
-                    <span style="font-weight: 900; background-color:yellow; ${(atk.atkCrit) ? 'color:darkgreen;' : ((atk.atkFail) ? 'color:red;' : 'color:black;')}">${atk.hitRollRaw}</span> \
-                    + ${totalBonus} = <span style="font-weight: 900;\
-                </div>\
-                </td>\
-                <td>\
-                    <div style="font-weight: 900;">vs. ${atk.difficulty}</div>\
-                </td>\
-                <td>\
-                    <div style="font-weight: 900;">${ (atk.atkCrit) ? 'Crit!' : ( (atk.atkFail) ? 'Fail!' : ( (atk.atkHit) ? 'Hit!' : 'Miss!'))}</div>\
-                </td>\
-                <td>\
-                    <div style="font-weight: 900;">${ atk.totalDamage}</div>\
-                    <div style="font-size: 10px;"><span style="border: solid 1px lightgray; padding: 2px;">${ atk.damageRolls.join(' + ')}</span>${ (attack.damageDice[4] != null) ? attack.damageDice[4] : ''} </div>\
-                </td>\
-            </tr>\ `
-        }
+        var outputText = `${name} makes a ${type} attack with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}\
+        <h3>Rolls</h3> \n`;//need line break to append roll templates
 
-        outputText += `</table>\
-            ${attack.weaponBroken ? `<div style="color:red">The weapon broke after the last roll!</div>` : ''}\
-            ${attack.exhausted ? `<div style="color:red"> ${name} ran out of ${ (type === 'melee') ? 'energy' : 'ammo'} after the last roll!</div>` : ''}\
-            <div>The total amount of damage was <strong>${attack.finalDamage}</strong></div>\
-            <div>${name} used <strong>${attack.resourceUsed}</strong> ${ (type === 'melee') ? 'energy' : 'ammo'}!</div>\
-            ${(type === 'melee') ? `<div>The weapon lost ${attack.durabilityLost} durability!</div>` : ''} `;
+        //Can't output rolltemplate and regular text in the same message
+        for (let i = 0; i < attack.rolls.length; i++){
+            let atk = attack.rolls[i],
+            hitresult = atk.atkCrit ? 'crit' : (atk.atkFail ? 'fail' : (atk.atkHit ? 'hit' : 'fail')),
+            hitdescript = hitresult.charAt(0).toUpperCase() + hitresult.slice(1),
+            difficulty = atk.difficulty,
+            attrType = (type == 'melee') ? 'str' : 'dext',
+            damage = attack.finalDamage,
+            dmgDescript = atk.damageRolls.map((x) => {return `[[${x}]]`}).join('+') + (attack.damageDice[3] !== null ? attack.damageDice[3] : ''),
+            
+            difficultyDescript = `[[${difficulty}]]${attack.attrBonus == 0 ? '' : `${attack.attrBonus > 0 ? ' + ' : ' - '}${attack.attrBonus}(${attrType})`}${attack.profBonus == 0 ? '' : `${attack.profBonus > 0 ? ' + ' : ' - '}${attack.profBonus}(prof)`}${attack.hitBonus == 0 ? '' : `${attack.hitBonus > 0 ? ' + ' : ' - '}${attack.hitBonus}(bonus)`}\ `;
+            
+            outputText += ` &{template:attackresult} {{attackNo=${i+1}} {{hitStyle=${hitresult}}} {{hitRoll=${atk.hitRollRaw}}} {{hitDescript=${hitdescript}}} {{difficulty=${atk.difficulty}}} {{difficultyDescript=${difficultyDescript}}} {{damage=${atk.totalDamage}}} {{damageDescript=${dmgDescript}}} \n `;//need a line break at the end
+        }
+        
+        
+        outputText += `<div style="border: solid 1px lightgray; padding: 1px 3px; background: white">\
+        <h4>Attack Summary</h4>\
+        ${attack.weaponBroken && type == "melee" ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
+        ${attack.exhausted ? `<div style="color:red"> ${name} is out of ${ (type === 'melee') ? 'energy' : 'ammo'}!</div>` : ''}\
+        <div>Total Damage: <strong>${attack.finalDamage}</strong></div>\
+        <div>${ (type === 'melee') ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
+        ${(type === 'melee') ? `<div>Durability Lost:  <strong>${attack.durabilityLost}</strong></div>` : ''}\
+        </div>`;
+        
 
         sendChat(
-            'ZnZ - Attack Action',
-            `<div style="border: solid 1px lightgray; color:black; background-color:white;"> ${outputText}</div>`
+            `ZnZ - ${type.charAt(0).toUpperCase() + type.slice(1)} Attack Script`,
+            outputText
         );
-    },
-    /**
-     * Regex parse a VERY basic dice expression specific for the type of dice expressions needed for an attack roll in this game.
+
+        },
+        /**
+         * Regex parse a VERY basic dice expression specific for the type of dice expressions needed for an attack roll in this game.
      * You can specify number of dice, the dice roll, any dice bonus and a roll minimum.
      * 
      * Regex has 4 capturing groups. This function would return an array such as the following:
@@ -450,18 +449,18 @@ var Attack = Attack || (function() {
         _.contains(character.get('controlledby').split(','),'all');
     },
     sendMessage = function(message, who, whisper, type="info" ) {
-        let textColor = '#006400',
-        bgColor = '#98FB98';
+        let textColor = '#135314',
+        bgColor = '#baedc3';
 
     
         switch (type) {
             case "danger":
-                textColor = '#8B0000';
-                bgColor = '#FFA07A';
+                textColor = '#791006';
+                bgColor = '#FFCCCB';
                 break;
             case "warning":
-                textColor = '#8B4513';
-                bgColor = '#F0E68C';
+                textColor = '#cd5b04';
+                bgColor = '#FFFFBF';
                 break;
         }
 

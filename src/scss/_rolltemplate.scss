@@ -1,0 +1,92 @@
+.sheet-rolltemplate-attackresult {
+
+    .sheet-template-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        .sheet-template-count {
+            font-size: 16px;
+            align-self: center;
+            flex-basis: 10%;
+            margin-right: 10px;
+        }
+
+        .sheet-template-block {
+            flex-basis: 30%;
+            text-align: center;
+            border: solid 1px lightgray;
+            overflow-wrap: anywhere;
+
+            .sheet-template-block-header {
+                opacity: 0.7;
+                margin-bottom: 5px;
+                display: inline-block;
+                border: solid 1px lightgray;
+                border-top: none;
+                border-radius: 10%;
+                padding: 1px 2px;
+            }
+
+            .sheet-template-result {
+                font-size: 21px;
+                font-weight: 700;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
+            .sheet-template-description {
+                margin: 5px 0;
+                font-size: 10px;
+                opacity: 0.8;
+
+                &.sheet-template-text {
+                    font-size: 14px;
+                }
+            }
+
+            //hit styling
+            &.sheet-template-hit {
+                &.sheet-template-description {
+                    font-size: 14px;
+                }
+            }
+
+            //dmg styling
+            &.sheet-template-dmg {
+                .sheet-template-description {
+                    font-size: 10px;
+                }
+            }
+        }
+
+        &.sheet-crit {
+            .sheet-template-block {
+                background-color: #baedc3;
+
+                &.sheet-template-hit {
+                    .sheet-template-result {
+                        color: #135314;
+                    }
+                }
+            }
+        }
+
+        &.sheet-fail {
+            .sheet-template-block {
+                background-color: #FFCCCB;
+
+                &.sheet-template-hit {
+                    .sheet-template-result {
+                        color: #791006;
+                    }
+                }
+            }
+        }
+
+        &.sheet-hit {
+            .sheet-template-block {
+                background-color: #FFFFBF;
+            }     
+        }
+    }
+}
