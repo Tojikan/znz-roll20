@@ -3,10 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="{{site.baseurl}}/assets/css/styles.css">
   </head>
   <body>
-    {% include sidebar.html %}
-    {{ content }}
+    <div class="layout">
+        <div class="side">
+            {% include sidebar.html %}
+        </div>
+        <div class="main">
+            {{ content }}
+        </div>
+    </div>
   </body>
 </html>
