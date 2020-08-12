@@ -9,6 +9,7 @@ const path = require('path');
 const tap = require('gulp-tap');
 const inject = require('gulp-inject');
 const removeEmptyLines = require('gulp-remove-empty-lines');
+const del = require('del');
 const log = require('fancy-log'); //for testing
 
 const dataFolder = './data/';
@@ -21,6 +22,16 @@ gulp.task('style', function() {
         .pipe(sass().on('error',sass.logError))
         .pipe(gulp.dest('sheet'));
 });
+
+
+gulp.task('data', function() {
+    del(['gameguide/_data/**']);
+    
+    return gulp.src('data/*.json')
+        .pipe(gulp.dest('gameguide/_data'));
+});
+
+
 
 //build character sheet and workers.
 gulp.task('sheet', function(){
@@ -64,7 +75,7 @@ gulp.task('watch', function(){
     gulp.watch('./src/scss/*.scss', gulp.series(['style']));
     gulp.watch('./src/workers/*.js' , gulp.series(['sheet']));
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
-    gulp.watch('./data/*.json' , gulp.series(['sheet','scripts']));
+    gulp.watch('./data/*.json' , gulp.series(['sheet','scripts', 'data']));
     gulp.watch('./data-query/*.js' , gulp.series(['sheet','scripts']));
     gulp.watch('./src/scripts/*.js' , gulp.series(['scripts']));
 });

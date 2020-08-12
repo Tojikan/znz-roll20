@@ -1,0 +1,103 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Roll20 Fields Schema",
+    "description": "List of fields and their properties for inclusion into a custom Roll20 character sheet",
+    "type": "object",
+    "definitions": {
+        "field" : {
+            "type": "object",
+            "properties": {
+                "display_name" : {
+                    "type": "string",
+                    "description": "The name of the field as displayed to users."
+                },
+                "attr_name" : {
+                    "type": "string",
+                    "description": "The name of the attribute as used by Roll20."
+                },
+                "field_type" : {
+                    "type" : "string",
+                    "enum": ["text", "textarea", "number", "select", "repeater"],
+                    "description" : "The input type of the of the field."
+                },
+                "field_class" : {
+                    "type" : "string",
+                    "description" : "A class to be applied to the field's wrapper."
+                },
+                "description" : {
+                    "type" : "string",
+                    "description" : "A text description of the field."
+                },
+                "canonical" : {
+                    "type" : "string",
+                    "description" : "This represents a non-changing definition of what the field defines. This field should never change. When a template, worker, or script needs to find an exact field via a string literal, it needs to rely on an un-changing property."
+                },
+                "readonly" : {
+                    "type" : "boolean",
+                    "description" : "If the field is read-only or not.",
+                    "default" : false
+                },
+                "default_value" : {
+                    "anyOf": [
+                        {"type" : "integer"},
+                        {"type" : "null"}
+                    ],
+                    "description": "The default value of this field."
+                },
+                "area" : {
+                    "type": "string",
+                    "description": "The area of the sheet in which this field appears, used for categorical purposes."
+                }
+            },
+            "required": ["display_name", "attr_name", "field_type", "area"]
+        },
+        "numberField" : {
+            "type": "object",
+            "allOf": [{ "$ref": "#/definitions/field" }],
+            "properties": {
+                "field_min" : {
+                    "anyOf": [
+                        {"type" : "integer"},
+                        {"type" : "null"}
+                    ],
+                    "description": "Minimum of number field."
+                },
+                "field_max" : {
+                    "anyOf": [
+                        {"type" : "integer"},
+                        {"type" : "null"}
+                    ],
+                    "description": "Maximum of number field."
+                },
+                "has_max" : {
+                    "type" : "boolean",
+                    "description": "If this number has a accompanying max field.",
+                    "default": false
+                }
+            },
+            "if": {
+                "properties": {
+                    "field_type" : {
+                        "const" : "number"
+                    }
+                }
+            }
+        }
+    },
+    "properties": {
+        "item" : {
+            "type": "object",
+            "properties": {
+                "standard" : {
+                    "type" : "array",
+                    "items" : {
+                        "type": "object",
+                        "oneOf":[
+                            {"$ref" : "#/definitions/numberField"}
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

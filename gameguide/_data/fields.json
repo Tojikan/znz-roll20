@@ -1,0 +1,1050 @@
+{
+    "$schema": "./fields.schema.json",
+    "nameArea": [
+        {
+            "display_name": "Name",
+            "attr_name": "char_name",
+            "field_type": "text",
+            "field_class": "",
+            "field_placeholder": "text",
+            "description": "",
+            "area": "name"
+        },
+        {
+            "display_name": "Character Notes",
+            "attr_name": "char_note",
+            "field_type": "textarea",
+            "field_class": "sheet-znz-note-tiny",
+            "description": "",
+            "area": "name"
+        }
+    ],
+
+    "counters": [ 
+        {
+            "display_name": "Attributes",
+            "attr_name": "attrib_count",
+            "readonly": true,
+            "field_type" : "number",
+            "counts": "attributes",
+            "counts_max": false,
+            "description": "",
+            "default_value" : 21,
+            "area": "counts"
+        },
+        {
+            "display_name": "Stat Max",
+            "attr_name": "stats_count",
+            "readonly": true,
+            "field_type" : "number",
+            "counts": "stats",
+            "counts_max": true,
+            "description": "",
+            "default_value" : 120,
+            "area": "counts"
+        },
+        {
+            "display_name" : "Skills",
+            "attr_name" : "skills_count",
+            "readonly" : true,
+            "field_type" : "number",
+            "counts" : "skills",
+            "counts_max": false,
+            "description" : "",
+            "default_value" : 0,
+            "area" : "counts"
+        },
+        {
+            "display_name" : "Proficiencies",
+            "attr_name" : "profs_count",
+            "readonly" : true,
+            "field_type" : "number",
+            "counts" : "proficiencies",
+            "counts_max": false,
+            "description" : "",
+            "default_value" : 0,
+            "area" : "counts"
+        }
+
+    ],
+
+    "stats": [
+        {
+            "display_name": "Health",
+            "attr_name": "health",
+            "field_type": "number",
+            "field_min": "0",
+            "field_max": "",  
+            "field_class": "",
+            "description": "",
+            "default_value": 40,
+            "has_max": true,
+            "explanation_text": "",
+            "area": "stat",
+            "canonical": "hitpoints"
+        },
+        {
+            "display_name": "Sanity",
+            "attr_name": "sanity",
+            "field_type": "number",
+            "field_min": "",
+            "field_max": "",  
+            "field_class": "",
+            "description": "",
+            "default_value": 40,
+            "has_max": true,
+            "explanation_text": "",
+            "area": "stat",
+            "canonical": "mentalhp"
+        },
+        {
+            "display_name": "Energy",
+            "attr_name": "energy",
+            "field_type": "number",
+            "field_min": "",
+            "field_max": "",  
+            "field_class": "",
+            "description": "",
+            "default_value": 40,
+            "has_max": true,
+            "explanation_text": "",
+            "area": "stat",
+            "canonical": "energy"
+        },
+        {
+            "display_name": "EXP",
+            "attr_name": "exp",
+            "field_type": "number",
+            "field_min": "",
+            "field_max": "",  
+            "field_class": "",
+            "description": "",
+            "default_value": 0,
+            "has_max": false,
+            "explanation_text": "<div>10:stat | 20: skill/hit</div><div>30: attr | 60:ability</div>",
+            "area": "stat",
+            "canonical": "exp"
+        }
+    ],
+
+    "hitroll" : {
+        "ranged" : {
+            "display_name" : "Ranged Hit Roll",
+            "attr_name" : "ranged_hit",
+            "attr_prefixed" : false,
+            "has_max" : false,
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "",
+            "field_max" : "",
+            "default_value" : "10",
+            "field_note" : "",
+            "description" : "",
+            "area" : "hitroll",
+            "canonical" : "rangedhitroll"
+        },
+        "melee" : {
+            "display_name" : "Melee Hit Roll",
+            "attr_name" : "melee_hit",
+            "attr_prefixed" : false,
+            "has_max" : false,
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "",
+            "field_max" : "",
+            "default_value" : "10",
+            "field_note" : "",
+            "description" : "",
+            "area" : "hitroll",
+            "canonical" : "meleehitroll"
+        }
+    },
+
+    "attributes": [
+        {
+            "display_name": "Strength",
+            "attr_name": "strength",
+            "reminder_note": "Melee Damage, Grappling",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "default_value": 3,
+            "mod_default": 0,
+            "description": "",
+            "area": "attributes",
+            "canonical": "strength"
+        },
+        {
+            "display_name": "Dexterity",
+            "attr_name": "dexterity",
+            "reminder_note": "Dodging, Melee Hit, Initiative",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "default_value": 3,
+            "mod_default": 0,
+            "description": "",
+            "area": "attributes",
+            "canonical": "dexterity"
+        },
+        {
+            "display_name": "Perception",
+            "attr_name": "perception",
+            "reminder_note": "Scouting, Senses",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "default_value": 3,
+            "mod_default": 0,
+            "description": "",
+            "area": "attributes",
+            "canonical": "perception"
+        },
+        {
+            "display_name": "Intelligence",
+            "attr_name": "intelligence",
+            "reminder_note": "XP Gain, Knowledge, Clues",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "default_value": 3,
+            "mod_default": 0,
+            "description": "",
+            "area": "attributes",
+            "canonical": "intelligence"
+        },
+        {
+            "display_name": "Tenacity",
+            "attr_name": "tenacity",
+            "reminder_note": "Mental Fortitude and Nerves",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "default_value": 3,
+            "mod_default": 0,
+            "description": "",
+            "area": "attributes",
+            "canonical": "tenacity"
+        },
+        {
+            "display_name": "Humanity",
+            "attr_name": "humanity",
+            "reminder_note": "Socialability, Stress Reduce",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "default_value": 3,
+            "mod_default": 0,
+            "description": "",
+            "area": "attributes",
+            "canonical": "humanity"
+        },
+        {
+            "display_name": "Luck",
+            "attr_name": "luck",
+            "reminder_note": "Chance, Loot",
+            "has_mod": true,
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "default_value": 3,
+            "mod_default": 0,
+            "description": "",
+            "area": "attributes",
+            "canonical": "luck"
+        }
+    ],
+
+    "flashlight": {
+        "display_name" : "Flashlight Distance",
+        "attr_name" : "flashlight",
+        "has_max" : false,
+        "field_type" : "number",
+        "field_class" : "",
+        "field_min" : "0",
+        "field_max" : "",
+        "default_value" : "10",
+        "field_note" : "",
+        "description" : "",
+        "area" : "flashlight"
+    },
+
+    "skills": [
+        {
+            "display_name": "Lockpicking",
+            "attr_name": "lockpicking",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Hotwiring",
+            "attr_name": "hotwiring",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Hacking",
+            "attr_name": "hacking",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Sleight of Hand",
+            "attr_name": "sleight_of_hand",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Chemistry",
+            "attr_name": "chemistry",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Engineering",
+            "attr_name": "engineering",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Electrical",
+            "attr_name": "electrical",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Electronics",
+            "attr_name": "electronics",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Medicine",
+            "attr_name": "medicine",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Explosives",
+            "attr_name": "explosives",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Boat Piloting",
+            "attr_name": "boat_piloting",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Plane Piloting",
+            "attr_name": "plane_piloting",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Nature",
+            "attr_name": "nature",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Tailoring",
+            "attr_name": "tailoring",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Construction",
+            "attr_name": "construction",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Gunsmithing",
+            "attr_name": "gunsmmithing",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Leatherworking",
+            "attr_name": "leatherworking",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Metalworking",
+            "attr_name": "metalworking",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Husbandry",
+            "attr_name": "husbandry",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        },
+        {
+            "display_name": "Gardening",
+            "attr_name": "gardening",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "",
+            "area": "skills"
+        }
+    ],
+
+    "proficiencies": [
+        {
+            "display_name": "Handguns",
+            "attr_name": "prof_handguns",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "ranged",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Shotguns",
+            "attr_name": "prof_shotguns",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "ranged",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Rifles",
+            "attr_name": "prof_rifles",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "ranged",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Projectiles",
+            "attr_name": "prof_projectile",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "ranged",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Throwing",
+            "attr_name": "prof_throwing",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "ranged",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Sharp Melee",
+            "attr_name": "prof_sharp_melee",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "melee",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Blunt Melee",
+            "attr_name": "prof_blunt_melee",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "melee",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Heavy Melee",
+            "attr_name": "prof_heavy_melee",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": true,
+            "combat_type": "melee",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Hand to Hand",
+            "attr_name": "prof_unarmed",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Stealth",
+            "attr_name": "prof_stealth",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "First Aid",
+            "attr_name": "prof_first_aid",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Crafting",
+            "attr_name": "prof_crafting",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Cooking",
+            "attr_name": "prof_cooking",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Driving",
+            "attr_name": "prof_driving",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Investigation",
+            "attr_name": "prof_investigation",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Orientation",
+            "attr_name": "prof_orientation",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+
+        {
+            "display_name": "Swimming",
+            "attr_name": "prof_swimming",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Climbing",
+            "attr_name": "prof_climbing",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Negotiation",
+            "attr_name": "prof_negotiation",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Performance",
+            "attr_name": "prof_performance",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "",
+            "area": "proficiencies"
+        }
+    ],
+
+    "item": {
+        "standard": [
+            {
+                "display_name": "Item Type",
+                "attr_name": "item_type",
+                "attr_prefixed": true,
+                "field_type": "select",
+                "field_class": "",
+                "field_selected": "misc",
+                "field_options_type": "array",
+                "field_options": [
+                    {
+                        "name": "Misc",
+                        "value": "misc",
+                        "id" : 1,
+                        "default" : true
+                    },
+                    {
+                        "name": "Melee Weapon",
+                        "value": "melee",
+                        "id" : 2,
+                        "equippable" : true
+                    },
+                    {
+                        "name": "Ranged Weapon",
+                        "value": "ranged",
+                        "id" : 3,
+                        "equippable" : true
+                    },
+                    {
+                        "name": "Head",
+                        "value": "head",
+                        "id" : 4,
+                        "equippable" : true
+                    },
+                    {
+                        "name": "Body",
+                        "value": "body",
+                        "id" : 5,
+                        "equippable" : true
+                    }
+                ],
+                "description": "",
+                "canonical": "itemtype",
+                "area": "item",
+                "area_subcat": "standard"
+            },
+            {
+                "display_name": "Name",
+                "attr_prefixed": true,
+                "attr_name": "item_name",
+                "field_type": "text",
+                "field_class": "sheet-center",
+                "description": "",
+                "canonical": "itemname",
+                "area": "item",
+                "area_subcat": "standard"
+            },
+            {
+                "display_name": "Weight",
+                "attr_prefixed": true,
+                "attr_name": "item_weight",
+                "field_type": "number",
+                "field_min": 0,
+                "field_class": "sheet-center",
+                "description": "",
+                "canonical": "itemweight",
+                "area": "item",
+                "area_subcat": "standard"
+            },
+            {
+                "display_name": "Quantity",
+                "attr_name": "item_quantity",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "sheet-center",
+                "field_min": 0,
+                "field_max": null,
+                "default_value": null,
+                "misc_category": "",
+                "field_note": "",
+                "description": "",
+                "canonical": "itemquantity",
+                "area": "item",
+                "area_subcat": "standard"
+            }
+        ],
+        "weapon": [
+            {
+                "display_name": "Melee Type",
+                "attr_name": "melee_type",
+                "attr_prefixed": true,
+                "field_type": "select",
+                "field_class": "",
+                "field_selected": "blunt",
+                "field_options_type": "external",
+                "field_options": "",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "meleetype"
+            },
+            {
+                "display_name": "Durability",
+                "attr_name": "melee_durability",
+                "attr_prefixed": true,
+                "has_max": true,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "0",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "durability"
+            },
+            {
+                "display_name": "Energy Cost",
+                "attr_name": "melee_energy_cost",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "1",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "meleecost"
+            },
+            {
+                "display_name": "Melee Damage",
+                "attr_name": "melee_damage",
+                "attr_prefixed": true,
+                "field_type": "text",
+                "field_class": "sheet-znz-dice-field",
+                "field_placeholder": "1d4+1",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "meleedamage"
+            },
+            {
+                "display_name": "Melee Crit Bonus",
+                "attr_name": "melee_crit_bonus",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "1",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "meleecrit"
+            },
+            {
+                "display_name": "Ranged Type",
+                "attr_name": "ranged_type",
+                "attr_prefixed": true,
+                "field_type": "select",
+                "field_class": "",
+                "field_selected": "handgun",
+                "field_options_type": "external",
+                "field_options": "",
+                "weapon_category": "ranged",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "rangedtype"
+            },
+            {
+                "display_name": "Ammo",
+                "attr_name": "ranged_ammo",
+                "attr_prefixed": true,
+                "has_max": true,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "0",
+                "field_max": "",
+                "default_value": "",    
+                "weapon_category": "ranged",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "ammo"
+            },
+            {
+                "display_name": "Reloads",
+                "attr_name": "ranged_reloads",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "0",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "ranged",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "reloads"
+            },
+            {
+                "display_name": "Ranged Damage",
+                "attr_name": "ranged_damage",
+                "attr_prefixed": true,
+                "field_type": "text",
+                "field_class": "sheet-znz-dice-field",
+                "field_placeholder": "1d4+1",
+                "weapon_category": "ranged",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "rangeddamage"
+            },
+            {
+                "display_name": "Ranged Crit Bonus",
+                "attr_name": "weapon_crit_bonus",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "1",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "ranged",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "rangedcrit"
+            },
+            {
+                "display_name": "Effective Range",
+                "attr_name": "weapon_range",
+                "attr_prefixed": true,
+                "has_max": true,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "1",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "standard",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "range"
+            }
+            
+        ],
+        "equipment": [
+            {
+                "display_name" : "Damage Reduction",
+                "attr_name" : "equipment_dmg_reduce",
+                "attr_prefixed" : true,
+                "has_max" : false,
+                "field_type" : "number",
+                "field_class" : "",
+                "field_min" : "",
+                "field_max" : "",
+                "default_value" : "",
+                "field_note" : "",
+                "description" : "",
+                "area" : "item",
+                "area_subcat": "equipment"
+            },
+            {
+                "display_name": "Equipment Stat",
+                "attr_name": "equipment_stat",
+                "attr_prefixed": true,
+                "looped": true,
+                "field_type": "repeater",
+                "repeater_type": "select",
+                "count": "3",
+                "field_class": "",
+                "field_selected": "",
+                "field_options_type": "external",
+                "field_options": "",
+                "has_mod": true,
+                "equipment_category": "",
+                "field_note": "",
+                "description": "",
+                "hint": "Dropdown should be generated dynamically based on skills/profs",
+                "canonical": "equipment_stat",
+                "area": "item",
+                "area_subcat": "equipment"
+            }
+        ],
+        "effect": {
+            "display_name": "Effect",
+            "attr_name": "item_effect",
+            "attr_prefixed": true,
+            "field_type": "text",
+            "field_class": "",
+            "field_placeholder": "",
+            "field_note": "",
+            "description": "",
+            "area": "item"
+        },
+        "note": {
+            "display_name": "Notes",
+            "attr_name": "item_note",
+            "attr_prefixed": true,
+            "field_type": "textarea",
+            "field_class": "",
+            "field_note": "",
+            "description": "",
+            "area": "item"
+        }
+    },
+
+    "quirks" : {
+        "abilities" : {
+            "display_name" : "Abilities",
+            "attr_name" : "ability",
+            "repeating" : true,
+            "repeating_attr": "abilities",
+            "text_attr": "text",
+            "field_type" : "select",
+            "field_options_type" : "external",
+            "field_options" : "",
+            "field_selected" : "",
+            "field_class" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "quirks"
+        },
+
+        "flaws" : {
+            "display_name" : "Flaws",
+            "attr_name" : "flaw",
+            "repeating" : true,
+            "repeating_attr": "flaws",
+            "text_attr": "text",
+            "field_type" : "select",
+            "field_options_type" : "external",
+            "field_options" : "",
+            "field_selected" : "",
+            "field_class" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "quirks"
+        }
+    },
+
+    "inventory" : {
+        "weight" : {
+            "display_name" : "Total Weight",
+            "attr_name" : "inv_weight_total",
+            "has_max" : false,
+            "has_check" : true,
+            "readonly" : true,
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "0",
+            "field_max" : "",
+            "default_value" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "inventory"
+        },
+        "max_weight" : {
+            "display_name" : "Max Weight",
+            "attr_name" : "inv_weight_max",
+            "has_max" : false,
+            "has_check" : false,
+            "readonly" : true,
+            "field_type" : "number",
+            "field_class" : "",
+            "field_min" : "0",
+            "field_max" : "",
+            "default_value" : "",
+            "field_note" : "",
+            "description" : "",
+            "area" : "inventory"
+        }
+    },
+
+    "config": {
+        "item_prefixes": {
+            "eq_ranged": "equipped_ranged_weapon",
+            "eq_melee": "equipped_melee_weapon",
+            "eq_head": "equipped_head",
+            "eq_body": "equipped_body",
+            "inventory": "inv"
+        },
+        "attribute_values": {
+            "min": 1,
+            "default": 3,
+            "max": 6
+        }
+    }
+}

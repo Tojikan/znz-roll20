@@ -10,4 +10,12 @@
         text-align: center;
         color: $darkred;
     }
+    
+
+    code {
+        background: $lightgray;
+        padding: 2rem;
+        border: solid 1px $gray;
+        display: block;
+    }
 }

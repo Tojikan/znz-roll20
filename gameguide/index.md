@@ -9,8 +9,11 @@ ZnZ is a Virtual Tabletop RPG designed to be played on Roll20. In this game, you
 
 Each player has a character with various Stats, Attributes, Skills, and Abilities. They must scavenge and utilize a variety of items and weapons to allow them to survive. They must carefully manage their resources, their own physical and mental health, and most importantly work together in order to survive. 
 
+The game is governed by the ZM (Zombie Master) who designs the scenario and controls all enemies and NPCs. The ZM will create the challenges that the players must survive. This is not meant to be a exhaustive set of rules - the ZM may loosely interpret the game and players are encouraged to make their case if they believe an interpretation should go differently. Ultimately, the ZM makes the final call and decision in any outcome in the game. 
+
 **Death in this game is permanent.** If a player dies, their character is gone forever. Of course that doesn't mean they won't rise again...
 
 **There is no immunity.** If your character gets bitten, they will eventually succumb to the infection and die. 
 
 This is the undead apocalypse. Will you survive?
+
