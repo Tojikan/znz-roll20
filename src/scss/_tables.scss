@@ -1,0 +1,78 @@
+//ATTRIBUTES
+table.sheet-znz-row-table {
+    width: 100%;
+
+    td {
+        padding: 10px 5px;
+
+        .sheet-znz-attr-mod {
+            position: relative;
+
+            input {
+                width: 30px;
+                margin-right: 5px;
+            }
+
+            .sheet-znz-attr-bonus {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    tr {
+        border-top: thin solid;
+        border-bottom: thin solid;
+        border-color: lightgrey;
+
+        &.sheet-znz-header{
+            border: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.sheet-znz-skill-table {
+    width: 100%;
+
+    tr {
+        margin-bottom: 2px;
+
+        &.sheet-znz-header {
+            border-bottom: solid 1px black;
+        }
+
+        td {
+            vertical-align: bottom;
+
+            .sheet-znz-line-input {
+                padding: 0;
+                margin-bottom: 4px;
+                margin-right: 3px;
+                text-align: center;
+            }
+
+            &.sheet-znz-input {
+                text-align: right;
+            }
+
+            &.sheet-znz-label {
+                white-space: nowrap;
+            }
+
+            .sheet-znz-bonus-checker-plus:checked,
+            .sheet-znz-bonus-checker-minus:checked {
+                ~ .sheet-znz-bonus-display {
+                    display: inline;
+                }
+            }
+        }
+    }
+}

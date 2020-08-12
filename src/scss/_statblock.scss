@@ -1,40 +1,33 @@
-
-// IN SECTION
-.sheet-znz-section-status{
-    display: flex;
-    padding: 0 15px;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    .sheet-znz-block-stat{
-        margin: 0 25px;
-
-        &:last-child{
-            margin-right: 0px;
-        }
+//Stat Row
+.sheet-znz-area-status {
+    > .sheet-znz-row {
+        margin: 0;
+        align-items: flex-start;
+        height: 100%;
     }
 }
 
-
-// INDIVIDUAL
-.sheet-znz-block-stat{
-    input{
-        padding: 8px;
-        font-size: 18px;
-        margin-bottom: 2px;
+.sheet-znz-stat-block {
+    text-align: center;
+    
+    h2 {
+        font-size: $xLarge;
+    }
+    
+    input {
+        font-size: $large;
     }
 
-    .sheet-znz-label-text{
+    .sheet-znz-description {
+        font-size: $regular;
         margin-top: 2px;
-        font-size: 14px;
-
-        .sheet-znz-stat-max-text{
+        
+        span {
             font-weight: 700;
         }
+    }
 
-        .sheet-znz-text-subtitle {
-            display: flex;
-
-        }
+    .sheet-znz-max {
+        font-size: $regular;
     }
 }

@@ -1,0 +1,96 @@
+{
+    "abilities" : [
+        {
+            "name" : "Select Ability",
+            "value" : "none",
+            "description" : "Select an ability to see its description."
+        },
+        {
+            "name" : "Mulligan",
+            "value" : "mulligan",
+            "description" : "Two times a play session, you may re-roll any roll but must accept the results of the re-roll. You can refund any resources spent on the first roll."
+        },
+        {
+            "name" : "High Octane",
+            "value" : "high_octane",
+            "description" : "You can spend 3 energy on your turn in order to take one additional action. This additional action can be an attack."
+        },
+        {
+            "name" : "Triage",
+            "value" : "triage",
+            "description" : "You can use an action to determine the exact health of up to three enemy targets. This can be repeated in a turn without an energy price. "
+        },
+        {
+            "name" : "Cheerleader",
+            "value" : "cheerleader",
+            "description" : "You can give any player a +2 bonus to their next roll. You can do this during combat as an action but you can only do this 3 times a play session out of combat. "
+        },
+        {
+            "name" : "Encyclopedia",
+            "value" : "encyclopedia",
+            "description" : "You can attempt any skill roll even for a skill you don't possess by passing an Intelligence check first."
+        },
+        {
+            "name" : "Gotta Go Fast",
+            "value" : "speedster",
+            "description" : "Gain an additional 2 movement speed. During successful dodges, you can jump back 2 spaces."
+        },
+        {
+            "name" : "Martial Artist",
+            "value" : "Martial Artist",
+            "description" : "Successful dodging gives you a free melee attack opportunity. Chance to receive Hard+ melee attack difficulty reduced."
+        },
+        {
+            "name" : "Sniper",
+            "value" : "sniper",
+            "description" : "You can spend one action to give your ranged attack action in the same turn a +4 hit bonus. Increase Ranged "
+        }
+    ],
+    "flaws" : [
+        {
+            "name" : "Select Flaw",
+            "value" : "none",
+            "description" : "Select a flaw to see its description"
+        },
+        {
+            "name" : "Ill-Fated",
+            "value" : "illfated",
+            "description" : "Three times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
+        },
+        {
+            "name" : "Fainthearted",
+            "value" : "fainthearted",
+            "description" : "During most combat encounters and high-stress situations, you must roll a Tenacity check. If you fail the check, you lose your first turn."
+        },
+        {
+            "name" : "Clumsy",
+            "value" : "clumsy",
+            "description" : "You occasionally has accidents which can cause problems. \n\n You can sometimes prevent this accident by spending a certain amount of resources dictated by the ZM."
+        },
+        {
+            "name" : "Alcoholic",
+            "value" : "alcoholic",
+            "description" : "Your character cannot rest unless they consume alcohol. \n\n Start the game with 5 uses of alcohol.  "
+        },
+        {
+            "name" : "Vulnerable",
+            "value" : "vulnerable",
+            "description" : "Your character takes double damage."
+        },
+        {
+            "name" : "Nearsighted",
+            "value" : "nearsighted",
+            "description" : "Every time you roll a critical fail, your glasses falls off. All Perception checks fail and ranged attacks receive Impossible+ difficulty until you put it back on."
+        },
+        {
+            "name" : "Curious",
+            "value" : "curious",
+            "description" : ""
+        },
+        {
+            "name" : "Diabetic",
+            "value" : "diabetic",
+            "description" : "You need to take a shot of insulin every day in order to survive. If you do not take insulin each day, you will take a third of your max health. Start the game with 3 insulin in your inventory.  "
+        }
+    ]
+}

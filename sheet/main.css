@@ -1,0 +1,593 @@
+/**
+* Variables used throughout styles
+*/
+/**
+* Styles applied globally to elements
+*/
+h2 {
+  font-size: 13px;
+  line-height: 13px;
+  margin-bottom: 5px; }
+
+h3 {
+  font-size: 13px;
+  line-height: 13px;
+  margin-bottom: 3px; }
+
+.sheet-znz-character-sheet {
+  font-size: 11px; }
+
+input {
+  width: 100%;
+  font-size: 11px;
+  line-height: 11px; }
+  input:read-only {
+    -moz-appearance: textfield; }
+    input:read-only::-webkit-outer-spin-button, input:read-only::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
+
+textarea {
+  max-width: 100%;
+  box-sizing: border-box; }
+
+/**
+* Reusable classes and elements across the sheet. 
+*/
+.sheet-znz-center {
+  text-align: center; }
+
+.sheet-znz-hidden {
+  display: none; }
+
+.sheet-znz-flex {
+  display: flex; }
+  .sheet-znz-flex.sheet-spaced-between {
+    justify-content: space-between; }
+
+.sheet-znz-description {
+  margin-top: 3px;
+  font-size: 9px; }
+
+.sheet-znz-dice-prefixed-input .sheet-znz-field-input {
+  padding-left: 10px;
+  position: relative; }
+  .sheet-znz-dice-prefixed-input .sheet-znz-field-input:before {
+    content: 'D';
+    position: absolute;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0; }
+
+.sheet-divider {
+  font-size: 13px;
+  margin: 0 6px;
+  font-weight: 900; }
+
+.sheet-znz-note-tiny textarea {
+  height: 30px; }
+
+.sheet-znz-note-small textarea {
+  height: 50px; }
+
+input.sheet-znz-line-input {
+  margin: 0;
+  border: 0;
+  padding: 2px;
+  border-bottom: 1px solid gray;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.sheet-znz-line-input input {
+  margin: 0;
+  border: 0;
+  padding: 2px;
+  border-bottom: 1px solid gray;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.sheet-znz-dice-field input[type=text] {
+  width: 75px; }
+
+.sheet-znz-bonus-checker-plus {
+  display: none; }
+  .sheet-znz-bonus-checker-plus:checked ~ .sheet-znz-bonus-display {
+    display: block;
+    color: darkgreen; }
+    .sheet-znz-bonus-checker-plus:checked ~ .sheet-znz-bonus-display:before {
+      content: "(+"; }
+
+.sheet-znz-bonus-checker-minus:checked ~ .sheet-znz-bonus-display {
+  display: block;
+  color: red; }
+  .sheet-znz-bonus-checker-minus:checked ~ .sheet-znz-bonus-display:before {
+    content: "("; }
+
+.sheet-znz-bonus-display {
+  display: none; }
+  .sheet-znz-bonus-display:after {
+    content: ")"; }
+
+/**
+* Overall layout for the sheet
+*/
+.sheet-znz-character-sheet.sheet-znz-layout {
+  display: flex; }
+
+.sheet-znz-character-sheet.sheet-znz-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(50px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 20px; }
+
+.sheet-znz-character-sheet .sheet-znz-grid-sidebar {
+  grid-column: 1;
+  grid-column-end: 6; }
+
+.sheet-znz-character-sheet .sheet-znz-grid-main {
+  grid-column-start: 6;
+  grid-column-end: 13; }
+
+.sheet-znz-character-sheet .sheet-znz-grid-full-width {
+  grid-column-start: 1;
+  grid-column-end: 13; }
+
+/*** Row Layout System for ZnZ ***/
+.sheet-znz-field {
+  margin-bottom: 8px;
+  width: 100%; }
+  .sheet-znz-field .sheet-znz-description {
+    margin-top: 3px;
+    font-size: 9px; }
+
+.sheet-znz-row {
+  display: flex;
+  margin-bottom: 8px;
+  justify-content: space-between; }
+  .sheet-znz-row .sheet-znz-field.sheet-right {
+    text-align: right; }
+    .sheet-znz-row .sheet-znz-field.sheet-right input {
+      display: block;
+      margin-left: auto; }
+  .sheet-znz-row .sheet-znz-field.sheet-center {
+    text-align: center; }
+  .sheet-znz-row .sheet-znz-field.sheet-0 {
+    flex-basis: 0; }
+  .sheet-znz-row .sheet-znz-field.sheet-15 {
+    flex-basis: 15%; }
+  .sheet-znz-row .sheet-znz-field.sheet-25 {
+    flex-basis: 25%; }
+  .sheet-znz-row .sheet-znz-field.sheet-33 {
+    flex-basis: 33%; }
+  .sheet-znz-row .sheet-znz-field.sheet-40 {
+    flex-basis: 40%; }
+  .sheet-znz-row .sheet-znz-field.sheet-50 {
+    flex-basis: 50%; }
+  .sheet-znz-row .sheet-znz-field.sheet-60 {
+    flex-basis: 60%; }
+  .sheet-znz-row .sheet-znz-field.sheet-75 {
+    flex-basis: 75%; }
+  .sheet-znz-row .sheet-znz-field.sheet-full {
+    flex: 1 1 100%; }
+  .sheet-znz-row .sheet-znz-field select {
+    width: auto; }
+  .sheet-znz-row .sheet-znz-inner-row {
+    display: flex;
+    align-items: baseline; }
+
+/**
+* Section specific styles
+*/
+.sheet-znz-area-name h2 {
+  font-size: 16px; }
+
+.sheet-znz-section-attributes {
+  margin-bottom: 16px; }
+
+.sheet-znz-section-hit {
+  display: flex; }
+  .sheet-znz-section-hit .sheet-znz-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    padding: 5px;
+    border: solid 1px lightgray; }
+    .sheet-znz-section-hit .sheet-znz-field:first-child {
+      margin-right: 10px; }
+
+.sheet-znz-section-flashlight .sheet-znz-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px lightgray;
+  padding: 5px 10px;
+  margin-bottom: 12px;
+  box-sizing: border-box; }
+  .sheet-znz-section-flashlight .sheet-znz-field h2 {
+    margin: 0; }
+  .sheet-znz-section-flashlight .sheet-znz-field input {
+    width: 50px; }
+
+.sheet-znz-area-counter {
+  font-size: 10px; }
+  .sheet-znz-area-counter h2, .sheet-znz-area-counter h3 {
+    font-size: 10px; }
+  .sheet-znz-area-counter .sheet-znz-counter-label {
+    margin-right: 8px; }
+
+.sheet-znz-section-weapons.sheet-znz-equipped, .sheet-znz-section-equipment.sheet-znz-equipped {
+  display: flex;
+  margin-bottom: 16px; }
+  .sheet-znz-section-weapons.sheet-znz-equipped .sheet-znz-block, .sheet-znz-section-equipment.sheet-znz-equipped .sheet-znz-block {
+    width: 50%; }
+  .sheet-znz-section-weapons.sheet-znz-equipped h2, .sheet-znz-section-equipment.sheet-znz-equipped h2 {
+    text-align: center; }
+  .sheet-znz-section-weapons.sheet-znz-equipped .sheet-znz-item-card-equipped:first-child, .sheet-znz-section-equipment.sheet-znz-equipped .sheet-znz-item-card-equipped:first-child {
+    margin-right: 10px; }
+
+.sheet-znz-area-quirks {
+  display: flex; }
+  .sheet-znz-area-quirks .sheet-znz-section-quirk {
+    width: 50%;
+    margin-right: 20px; }
+    .sheet-znz-area-quirks .sheet-znz-section-quirk .sheet-znz-block-quirk {
+      padding: 12px 0;
+      border-top: solid 1px lightgrey; }
+      .sheet-znz-area-quirks .sheet-znz-section-quirk .sheet-znz-block-quirk textarea {
+        height: 75px; }
+    .sheet-znz-area-quirks .sheet-znz-section-quirk .sheet-znz-quirk {
+      margin-bottom: 20px; }
+      .sheet-znz-area-quirks .sheet-znz-section-quirk .sheet-znz-quirk .sheet-znz-field-quirk-select {
+        display: flex;
+        justify-content: space-between; }
+
+/** Show more toggle **/
+.sheet-znz-expandable {
+  display: none;
+  margin: 20px 0; }
+
+input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
+  display: block; }
+
+.sheet-znz-expand-button {
+  position: relative; }
+  .sheet-znz-expand-button input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    margin: 0; }
+  .sheet-znz-expand-button .sheet-label {
+    color: #666;
+    font-size: 12px;
+    margin: auto; }
+    .sheet-znz-expand-button .sheet-label:after {
+      content: '';
+      border: solid #666;
+      border-width: 0 3px 3px 0;
+      padding: 3px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      position: absolute;
+      top: 3px;
+      margin-left: 10px;
+      transition: transform 0.3s; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-label:after, .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-label:before {
+    transform: rotate(225deg) rotateY(360deg);
+    top: 5px; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-znz-expand-text {
+    display: none; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-znz-collapse-text {
+    display: block; }
+  .sheet-znz-expand-button input[type=checkbox]:not(:checked) ~ .sheet-znz-expand-text {
+    display: block; }
+  .sheet-znz-expand-button input[type=checkbox]:not(:checked) ~ .sheet-znz-collapse-text {
+    display: none; }
+  .sheet-znz-expand-button.sheet-znz-expandable-section {
+    margin: 5px 0;
+    border-bottom: solid 1px lightgray; }
+    .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label {
+      text-align: center; }
+      .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label:before {
+        content: '';
+        border: solid #666;
+        border-width: 0 3px 3px 0;
+        padding: 3px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        position: absolute;
+        top: 3px;
+        margin-left: -20px;
+        transition: transform 0.3s; }
+
+.sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label {
+  color: darkgray; }
+  .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label:before, .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label:after {
+    border-color: darkgray;
+    border-style: dashed; }
+  .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label span:before, .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label span:after {
+    border-style: dashed;
+    border-color: darkgray; }
+
+.sheet-znz-expandable .sheet-znz-expandable {
+  border-bottom: dashed 1px darkgray; }
+
+/**
+* Styling for item cards, Inventory, and Equipped Items
+*/
+[class^='sheet-znz-item-card'] {
+  border: solid 1px lightgray;
+  padding: 10px; }
+  [class^='sheet-znz-item-card'] textarea {
+    height: 28px;
+    max-width: 100%; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-row-area {
+    margin-bottom: 12px; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row-area input, [class^='sheet-znz-item-card'] .sheet-znz-item-row-area select {
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      border-bottom: solid 1px lightgray;
+      text-align: center; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 11px; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row h2, [class^='sheet-znz-item-card'] .sheet-znz-item-row h3 {
+      margin-bottom: 0;
+      font-size: 11px; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row .sheet-znz-field-label {
+      text-align: right;
+      margin-right: 8px;
+      width: 55%; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row.sheet-znz-field-select .sheet-znz-field-label {
+      align-self: center; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row .sheet-znz-field-input {
+      width: 45%; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-row select {
+      max-width: 100%; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-buttons {
+    display: flex;
+    justify-content: space-around; }
+    [class^='sheet-znz-item-card'] .sheet-znz-item-buttons button {
+      font-size: 11px; }
+  [class^='sheet-znz-item-card'] .sheet-znz-item-header select {
+    height: 100%; }
+
+.sheet-znz-equipment-stat-repeater {
+  margin: 12px 0; }
+  .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-label {
+    font-size: 11px;
+    width: 55%;
+    text-align: right; }
+  .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0; }
+    .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input select {
+      width: 120px;
+      height: 100%; }
+    .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input select, .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input input {
+      padding-bottom: 2px; }
+    .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input .sheet-znz-equipment-stat {
+      margin-right: 12px; }
+    .sheet-znz-equipment-stat-repeater .sheet-znz-repeater-input .sheet-znz-equipment-stat-mod {
+      align-self: flex-end;
+      margin-bottom: -1px; }
+
+.sheet-znz-item-card-inventory .sheet-znz-row {
+  margin-bottom: 0; }
+
+.sheet-znz-item-card-inventory .sheet-znz-item-row-area .sheet-znz-field, .sheet-znz-item-card-inventory .sheet-znz-item-row-area .sheet-znz-equipment-stat-repeater {
+  display: none; }
+
+.sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-2:checked ~ .sheet-znz-melee-field, .sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-2:checked ~ .sheet-znz-standard-field,
+.sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-3:checked ~ .sheet-znz-ranged-field, .sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-3:checked ~ .sheet-znz-standard-field,
+.sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-4:checked ~ .sheet-znz-head-field, .sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-4:checked ~ .sheet-znz-equipment-field,
+.sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-5:checked ~ .sheet-znz-body-field, .sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-5:checked ~ .sheet-znz-equipment-field {
+  display: flex; }
+
+.sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-4:checked ~ .sheet-znz-equipment-stat-repeater,
+.sheet-znz-item-card-inventory .sheet-znz-item-row-area input.sheet-znz-item-type-5:checked ~ .sheet-znz-equipment-stat-repeater {
+  display: block; }
+
+.sheet-znz-item-card-inventory .sheet-znz-item-buttons button {
+  display: none; }
+
+.sheet-znz-item-card-inventory .sheet-znz-item-buttons input.sheet-znz-item-type-2:checked ~ button.sheet-znz-melee-field,
+.sheet-znz-item-card-inventory .sheet-znz-item-buttons input.sheet-znz-item-type-3:checked ~ button.sheet-znz-ranged-field,
+.sheet-znz-item-card-inventory .sheet-znz-item-buttons input.sheet-znz-item-type-4:checked ~ button.sheet-znz-head-field,
+.sheet-znz-item-card-inventory .sheet-znz-item-buttons input.sheet-znz-item-type-5:checked ~ button.sheet-znz-body-field {
+  display: block; }
+
+.sheet-znz-area-inventory {
+  margin: 20px 0; }
+  .sheet-znz-area-inventory .sheet-znz-section-inventory {
+    border: solid 1px lightgray;
+    padding: 20px;
+    /** CSS Only Masonry Grid - https://tobiasahlin.com/blog/masonry-with-css/ **/ }
+    .sheet-znz-area-inventory .sheet-znz-section-inventory > h2 {
+      font-size: 16px;
+      display: inline-block; }
+    .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-controls {
+      float: right; }
+    .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight {
+      display: flex;
+      justify-content: center; }
+      .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-field {
+        width: 25%;
+        text-align: center; }
+        .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-field input[type=number] {
+          display: block;
+          margin: auto;
+          width: 50px; }
+      .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-weight .sheet-znz-inventory-weight-check:checked ~ .sheet-znz-inventory-weight {
+        color: red; }
+    .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items {
+      display: flex;
+      flex-direction: column; }
+      .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .sheet-znz-item-card-inventory {
+        border: solid 1px black; }
+      .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontrol {
+        order: 1;
+        margin-bottom: 15px; }
+      .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontainer {
+        order: 2;
+        display: flex;
+        flex-flow: column wrap;
+        align-content: space-between;
+        height: 2050px; }
+        .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontainer .repitem {
+          width: 32%;
+          margin-bottom: 2%; }
+          .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontainer .repitem:nth-child(3n+1) {
+            order: 1; }
+          .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontainer .repitem:nth-child(3n+2) {
+            order: 2; }
+          .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontainer .repitem:nth-child(3n) {
+            order: 3; }
+        .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontainer::before, .sheet-znz-area-inventory .sheet-znz-section-inventory .sheet-znz-inventory-items .repcontainer::after {
+          content: "";
+          flex-basis: 100%;
+          width: 0;
+          order: 2; }
+
+table.sheet-znz-row-table {
+  width: 100%; }
+  table.sheet-znz-row-table td {
+    padding: 10px 5px; }
+    table.sheet-znz-row-table td .sheet-znz-attr-mod {
+      position: relative; }
+      table.sheet-znz-row-table td .sheet-znz-attr-mod input {
+        width: 30px;
+        margin-right: 5px; }
+      table.sheet-znz-row-table td .sheet-znz-attr-mod .sheet-znz-attr-bonus {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        display: flex;
+        align-items: center; }
+  table.sheet-znz-row-table tr {
+    border-top: thin solid;
+    border-bottom: thin solid;
+    border-color: lightgrey; }
+    table.sheet-znz-row-table tr.sheet-znz-header {
+      border: none; }
+    table.sheet-znz-row-table tr:last-child {
+      border-bottom: none; }
+
+.sheet-znz-skill-table {
+  width: 100%; }
+  .sheet-znz-skill-table tr {
+    margin-bottom: 2px; }
+    .sheet-znz-skill-table tr.sheet-znz-header {
+      border-bottom: solid 1px black; }
+    .sheet-znz-skill-table tr td {
+      vertical-align: bottom; }
+      .sheet-znz-skill-table tr td .sheet-znz-line-input {
+        padding: 0;
+        margin-bottom: 4px;
+        margin-right: 3px;
+        text-align: center; }
+      .sheet-znz-skill-table tr td.sheet-znz-input {
+        text-align: right; }
+      .sheet-znz-skill-table tr td.sheet-znz-label {
+        white-space: nowrap; }
+      .sheet-znz-skill-table tr td .sheet-znz-bonus-checker-plus:checked ~ .sheet-znz-bonus-display,
+      .sheet-znz-skill-table tr td .sheet-znz-bonus-checker-minus:checked ~ .sheet-znz-bonus-display {
+        display: inline; }
+
+.sheet-znz-area-status > .sheet-znz-row {
+  margin: 0;
+  align-items: flex-start;
+  height: 100%; }
+
+.sheet-znz-stat-block {
+  text-align: center; }
+  .sheet-znz-stat-block h2 {
+    font-size: 16px; }
+  .sheet-znz-stat-block input {
+    font-size: 13px; }
+  .sheet-znz-stat-block .sheet-znz-description {
+    font-size: 11px;
+    margin-top: 2px; }
+    .sheet-znz-stat-block .sheet-znz-description span {
+      font-weight: 700; }
+  .sheet-znz-stat-block .sheet-znz-max {
+    font-size: 11px; }
+
+.sheet-znz-section-skills {
+  display: flex; }
+  .sheet-znz-section-skills h2 {
+    text-align: center;
+    border-bottom: solid 1px black;
+    padding-bottom: 5px; }
+  .sheet-znz-section-skills .sheet-znz-block {
+    width: 50%;
+    flex: 50%; }
+
+.sheet-znz-skill-select .sheet-znz-skill {
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: start; }
+  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-input {
+    margin: 0 3px 3px 0; }
+  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-label {
+    display: flex;
+    align-items: flex-end; }
+  .sheet-znz-skill-select .sheet-znz-skill .sheet-znz-mod {
+    margin-left: 2px;
+    font-size: 9px; }
+
+.sheet-rolltemplate-attackresult .sheet-template-wrapper {
+  display: flex;
+  justify-content: space-between; }
+  .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-count {
+    font-size: 16px;
+    align-self: center;
+    flex-basis: 10%;
+    margin-right: 10px; }
+  .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-block {
+    flex-basis: 30%;
+    text-align: center;
+    border: solid 1px lightgray;
+    overflow-wrap: anywhere; }
+    .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-block .sheet-template-block-header {
+      opacity: 0.7;
+      margin-bottom: 5px;
+      display: inline-block;
+      border: solid 1px lightgray;
+      border-top: none;
+      border-radius: 10%;
+      padding: 1px 2px; }
+    .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-block .sheet-template-result {
+      font-size: 21px;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-bottom: 20px; }
+    .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-block .sheet-template-description {
+      margin: 5px 0;
+      font-size: 10px;
+      opacity: 0.8; }
+      .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-block .sheet-template-description.sheet-template-text {
+        font-size: 14px; }
+    .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-block.sheet-template-hit.sheet-template-description {
+      font-size: 14px; }
+    .sheet-rolltemplate-attackresult .sheet-template-wrapper .sheet-template-block.sheet-template-dmg .sheet-template-description {
+      font-size: 10px; }
+  .sheet-rolltemplate-attackresult .sheet-template-wrapper.sheet-crit .sheet-template-block {
+    background-color: #baedc3; }
+    .sheet-rolltemplate-attackresult .sheet-template-wrapper.sheet-crit .sheet-template-block.sheet-template-hit .sheet-template-result {
+      color: #135314; }
+  .sheet-rolltemplate-attackresult .sheet-template-wrapper.sheet-fail .sheet-template-block {
+    background-color: #FFCCCB; }
+    .sheet-rolltemplate-attackresult .sheet-template-wrapper.sheet-fail .sheet-template-block.sheet-template-hit .sheet-template-result {
+      color: #791006; }
+  .sheet-rolltemplate-attackresult .sheet-template-wrapper.sheet-hit .sheet-template-block {
+    background-color: #FFFFBF; }

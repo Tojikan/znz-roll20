@@ -1,0 +1,153 @@
+{#  
+    In the Gulp process, certain data is pulled in and added to the templates
+    jsonData is an object containing all JSON data in the data folder 
+    queryData is an object containing the exported results of any JS file in the data-query folder
+   
+    Access any data through the filename 
+        example - Any JSON in /data/example.json can be accessed through jsonData.example
+#}
+
+{% import 'partials/attrTable.njk' as attrTable %}
+{% import 'partials/fields.njk' as fieldCreate %}
+{% import 'partials/item.njk' as item %}
+{% import 'partials/skillTable.njk' as skillTable %}
+{% import 'partials/statblock.njk' as statblock %}
+{% import 'partials/quirk.njk' as quirk %}
+<div class="sheet-znz-character-sheet sheet-znz-grid-layout">
+
+    <div class="sheet-znz-grid-sidebar">
+        {#----- Name Area ----- #}
+        <div class="sheet-znz-area-name">
+            {% for fld in jsonData.fields.nameArea %}
+                {{ fieldCreate.outputField( field=fld)}}
+            {% endfor %}
+        </div>
+
+        {#----- Counter Area ----#}
+        <div class="sheet-znz-area-counter">
+            <div class="sheet-znz-flex">
+                <div class="sheet-znz-counter-label">Total: </div>
+                {% for fld in jsonData.fields.counters %}
+                    {{ fieldCreate.outputField( field=fld, header="h3") }}
+                {% endfor %}
+            </div>
+        </div>
+
+        {#----- Attributes ----- #}
+        <div class="sheet-znz-section-attributes">
+            {{ attrTable.create(jsonData.fields.attributes, jsonData.fields.config.attribute_values) }}
+        </div>
+
+        {#---- Flashlight ----- #}
+        <div class="sheet-znz-section-flashlight">
+            {{ fieldCreate.outputField( field=jsonData.fields.flashlight)}}
+        </div>
+
+        {#----- Skills & Proficiencies ----- #}
+        <div class="sheet-znz-section-skills">
+            <div class="sheet-znz-block">
+                {{ skillTable.create(jsonData.fields.skills, "Skills") }}
+            </div>
+
+            <div class="sheet-znz-block">
+                {{ skillTable.create(jsonData.fields.proficiencies, "Proficiencies") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-znz-grid-main">
+        {#----- Stats ----- #}
+        <div class="sheet-znz-area-status">
+            <div class="sheet-znz-row">
+                {% for stat in jsonData.fields.stats %}
+                {{ statblock.create(stat) }}
+                {% endfor %}
+            </div>
+        </div>
+
+        {#----- Hit Area ------#}
+        <div class="sheet-znz-section-hit">
+            {{ fieldCreate.outputField( field=jsonData.fields.hitroll.ranged, header="h3", class="sheet-znz-dice-prefixed-input sheet-znz-line-input") }}
+            {{ fieldCreate.outputField( field=jsonData.fields.hitroll.melee, header="h3", class="sheet-znz-dice-prefixed-input sheet-znz-line-input") }}
+        </div>
+
+        {#----- Equipped Weapons ----- #}
+        <div class="sheet-znz-section-weapons sheet-znz-equipped">
+            <div class="sheet-znz-block sheet-znz-equipped-ranged">
+                <h2>Equipped Ranged Weapon</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_ranged, type="weapon", category="ranged", options=queryData.weaponTypes.ranged) }}
+            </div>
+            <div class="sheet-znz-block sheet-znz-equipped-melee">
+                <h2>Equipped Melee Weapon</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_melee, type="weapon", category="melee", options=queryData.weaponTypes.melee) }}
+            </div>
+        </div>
+
+        {#------- Equipped Armor ------ #}
+        <div class="sheet-znz-section-equipment sheet-znz-equipped">
+            <div class="sheet-znz-block sheet-znz-equipped-head">
+                <h2>Equipped on Head</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_head, type="equipment", category="head", options=queryData.equipmentStatsOptions) }}
+            </div>
+            <div class="sheet-znz-block sheet-znz-equipped-body">
+                <h2>Equipped on Body</h2>
+                {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_body, type="equipment", category="body", options=queryData.equipmentStatsOptions) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-znz-grid-full-width">
+        <div class="sheet-znz-area-quirks">
+            <div class="sheet-znz-section-quirk sheet-znz-section-abilities">
+            <div class="sheet-znz-flex sheet-spaced-between">
+                <h2>Abilities</h2>
+                <button type="action" name="act_randomizeability">Random Ability </button>
+            </div>
+            
+                {{ quirk.create(data=jsonData.fields.quirks.abilities, options=jsonData.quirks.abilities, randomizeButton=true)}}
+            </div>
+
+            <div class="sheet-znz-section-quirk sheet-znz-section-flaws">
+                <div class="sheet-znz-flex sheet-spaced-between">
+                    <h2>Flaws</h2>
+                    <button type="action" name="act_randomizeflaw">Random Flaw </button>
+                </div>
+                {{ quirk.create(data=jsonData.fields.quirks.flaws, options=jsonData.quirks.flaws, randomizeButton=true)}}
+            </div>
+        </div>
+        <div class="sheet-znz-area-inventory">
+            <div class="sheet-znz-section-inventory">
+                <h2>Inventory</h2>
+                <div class="sheet-znz-inventory-controls">
+                    <button type="action"name="act_inventoryshow">Expand All</button>
+                    <button type="action"name="act_inventoryhide">Collapse All</button>
+                </div>
+                <div class="sheet-znz-inventory-weight">
+                    <div class="sheet-znz-field">
+                        <h3>{{ jsonData.fields.inventory.weight.display_name }}</h3>
+                        <input class="sheet-znz-hidden sheet-znz-inventory-weight-check" type="checkbox" name="attr_{{ jsonData.fields.inventory.weight.attr_name }}_check">
+                        <input class="sheet-znz-inventory-weight" type="number" name="attr_{{ jsonData.fields.inventory.weight.attr_name }}" min="0" readonly>
+                    </div>
+                    <div class="sheet-znz-field">
+                        <h3>{{ jsonData.fields.inventory.max_weight.display_name }}</h3>
+                        <input type="number" name="attr_{{ jsonData.fields.inventory.max_weight.attr_name }}" min="{{jsonData.fields.inventory.max_weight.field_min}}">
+                    </div>
+                </div>
+                <div class="sheet-znz-inventory-items">
+                    <fieldset class="repeating_inventory">
+                        {{ item.inventoryItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.inventory, statOptions=queryData.equipmentStatsOptions, rangedOptions=queryData.weaponTypes.ranged, meleeOptions=queryData.weaponTypes.melee) }}
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/worker">
+    /** inject:workers **/
+    /** endinject **/
+</script>
+
+
+{% include "partials/attackRollTemplate.njk" %}

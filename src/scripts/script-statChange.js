@@ -1,27 +1,14 @@
 on("change:attribute", function(obj, prev){
-    let attr;
+    const attrData = [[{dataquery:'charStats'}]];
+    var attr;
 
-    switch (obj.get("name")){
-        case "energy":
-            attr = "Energy";
-        break;
 
-        case "hp":
-            attr = "Hit";
-
-        break;
-
-        case "sanity":
-            attr = "sanity";
-        break;
-
-        case "exp":
-            attr = "Exp";
-        break;
-
-        default:
-            return;
+    if (obj.get("name") in attrData){
+        attr = attrData[obj.get("name")];
+    } else {
+        return;
     }
+
 
     let textColor = '#800080',
         bgColor = '#e6e6fa',
@@ -41,7 +28,6 @@ on("change:attribute", function(obj, prev){
     }
 
     diff = Math.abs(curVal - prevVal);
-    
 
     sendChat(
         'ZnZ Resource Spent',

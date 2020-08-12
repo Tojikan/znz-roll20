@@ -1,0 +1,156 @@
+/**
+* Styling for item cards, Inventory, and Equipped Items
+*/ 
+
+//All Items
+[class^='sheet-znz-item-card']{
+    border: solid 1px $lightgray;
+    padding: $gridgap;
+
+    textarea {
+        height: 28px;
+        max-width: 100%;
+    }
+
+    .sheet-znz-item-row-area {
+        margin-bottom: 12px;
+        // padding: 0 15px;
+    
+        input, select {
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            border-bottom: solid 1px $lightgray;
+            text-align: center;
+        }
+    }
+    
+    .sheet-znz-item-row {
+        display: flex;
+        justify-content: space-around;
+        font-size: $regular;
+        
+        h2, h3 {
+            margin-bottom: 0;
+            font-size: $regular;
+        }
+
+        .sheet-znz-field-label {
+            text-align: right;
+            margin-right: 8px;
+            width: 55%;
+        }
+        
+        &.sheet-znz-field-select {
+            .sheet-znz-field-label {
+                align-self: center;
+            }
+        }
+
+        .sheet-znz-field-input {
+            width: 45%;
+        }
+
+        select {
+            max-width: 100%;
+        }
+    }
+    
+    .sheet-znz-item-buttons {
+        display: flex;
+        justify-content: space-around;
+
+        button {
+            font-size: $regular;
+        }
+    }
+
+    .sheet-znz-item-header {
+        select {
+            height: 100%;
+        }
+    }
+}
+
+
+//Equipment Stat repeater
+.sheet-znz-equipment-stat-repeater {
+    margin: 12px 0;
+
+    .sheet-znz-repeater-label {
+        font-size: $regular;
+        width: 55%;
+        text-align: right;
+    }
+
+    .sheet-znz-repeater-input {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+
+
+        select {
+            width: 120px;
+            height: 100%;
+        }
+
+        select, input {
+            padding-bottom: 2px;
+        }
+
+        
+
+        .sheet-znz-equipment-stat {
+            margin-right: 12px;
+        }
+
+        .sheet-znz-equipment-stat-mod {
+            align-self: flex-end;
+            margin-bottom: -1px;
+        }
+    }
+}
+
+
+// Show/hide based on item type
+.sheet-znz-item-card-inventory {
+
+    .sheet-znz-row {
+        margin-bottom: 0;
+    }
+
+    .sheet-znz-item-row-area{
+        .sheet-znz-field, .sheet-znz-equipment-stat-repeater{
+            display: none;
+        }
+
+
+        input.sheet-znz-item-type-2:checked ~ .sheet-znz-melee-field, input.sheet-znz-item-type-2:checked ~ .sheet-znz-standard-field,
+        input.sheet-znz-item-type-3:checked ~ .sheet-znz-ranged-field, input.sheet-znz-item-type-3:checked ~ .sheet-znz-standard-field,
+        input.sheet-znz-item-type-4:checked ~ .sheet-znz-head-field, input.sheet-znz-item-type-4:checked ~ .sheet-znz-equipment-field,
+        input.sheet-znz-item-type-5:checked ~ .sheet-znz-body-field, input.sheet-znz-item-type-5:checked ~ .sheet-znz-equipment-field
+        {
+            display: flex;
+        }
+
+        input.sheet-znz-item-type-4:checked ~ .sheet-znz-equipment-stat-repeater,
+        input.sheet-znz-item-type-5:checked ~ .sheet-znz-equipment-stat-repeater {
+            display: block;
+        }
+    }
+
+    .sheet-znz-item-buttons {
+        button {
+            display: none;
+        }
+
+        input.sheet-znz-item-type-2:checked ~ button.sheet-znz-melee-field,
+        input.sheet-znz-item-type-3:checked ~ button.sheet-znz-ranged-field,
+        input.sheet-znz-item-type-4:checked ~ button.sheet-znz-head-field,
+        input.sheet-znz-item-type-5:checked ~ button.sheet-znz-body-field {
+            display: block;
+        }
+    }
+
+}

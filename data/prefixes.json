@@ -1,0 +1,7 @@
+{
+    "eq_ranged": "equipped_ranged_weapon",
+    "eq_melee": "equipped_melee_weapon",
+    "eq_head": "equipped_head",
+    "eq_body": "equipped_body",
+    "inventory": "inv"
+}
