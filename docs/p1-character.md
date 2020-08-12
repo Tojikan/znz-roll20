@@ -14,7 +14,7 @@ On the sheet, there are several sections that each detail an individual aspect o
 
 ### Stats ###
 
-Stats track the current physical and mental status, as well as growth of the character. This represents the character's current status and ability to complete actions, and are often used as resources for various actions and  throughout the game. 
+Stats track the current physical and mental status, as well as growth of the character. This represents the character's current status and ability to complete actions, and are often used as resources for various actions and <a href="{{site.baseurl}}/p0-rolls.html">rolls</a> throughout the game. 
 
 - **Health** 
 
@@ -40,7 +40,7 @@ Stats track the current physical and mental status, as well as growth of the cha
 
 - **Energy**
 
-    The player's physical stamina. This is a measure of a player's ability to complete physical actions. Every melee attack roll requires energy to make. Strenuous activities such as running, jumping or climbing may cost energy to attempt and requires a  %}). 
+    The player's physical stamina. This is a measure of a player's ability to complete physical actions. Every melee attack roll requires energy to make. Strenuous activities such as running, jumping or climbing may cost energy to attempt and requires a<a href="{{site.baseurl}}/p0-rolls.html">Resource Roll</a>. 
 
     If a player runs out of energy, they become become **exhausted**. Exhausted characters:
 
