@@ -1,0 +1,26 @@
+html, body {
+    height: 100%;
+}
+
+
+@media (min-width: $bp-mobile) {
+.layout {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-areas:
+        "side main";
+    height: 100%;
+
+    .side {
+            grid-area: side;
+            position: fixed;
+            width: 25%;
+            height: 100%;
+        } 
+        
+        .main {
+            grid-area: main;
+            height: 100%;
+        }
+    }
+}
