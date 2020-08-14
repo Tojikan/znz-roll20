@@ -5,19 +5,19 @@ title: Gambit Roll System
 
 ## The Gambit Roll System ##
 
-As most Tabletop RPGs, ZnZ uses dice rolls to determine the outcome of actions. The main characteristic for this particular game is the idea of *gambling resources* to improve your roll results.
+As most Tabletop RPGs, ZnZ uses dice rolls to determine the outcome of actions. The Gambit Roll system allows you to improve the results of your roll by *gambling resources*.
   <br/><br/>
 
 
 ### Rolls ###
 
-In this game, the primary dice roll is the **D10** (10-sided dice). When the player attempts an action, they roll their dice and then add on any bonuses, modifiers, or penalties that affect the roll.
+In this game, the primary dice roll is the **D10** (10-sided dice). When the player attempts an action, they roll their dice and then add any bonuses, modifiers, or penalties that affect the roll.
 
 Example:
 
 `Player tries to move a heavy crate. They roll a D10 and roll a 5. Because this action requires strength, the player can add their character's Strength attribute modifier (+1 as an example) as a bonus to the roll, which would make the final roll a 6.`
 
-For every action that might fail, the ZM determines a challenge level, which is a number that the roll must beat. To succeed with their action, the players must roll a number that **match or exceed** this challenge level.
+For every action that might fail, the ZM determines a challenge level, which is a number that the roll must beat or meet. To succeed with their action, the players must roll a number that **match or exceed** this challenge level.
   <br/><br/>
 
 
@@ -37,30 +37,28 @@ The challenge level has 5 different categories depending on what the challenge l
 
 ### Resources ###
 
-As mentioned before, the defining characteristic of this roll system is the idea of spending resources to improve the results of any roll. **Prior to rolling**, players can decide to spend additional resources to improve their roll. These resources all have the impact of improving the outcome of the roll.
+**Prior to rolling**, players can decide to spend additional resources to improve their roll by first asking the ZM if they can improve their roll. If the ZM permits it, the players can then spend resources to improve the results of their roll.
 
 Examples:
 
-`Player shoots with their gun. They can spend additional ammo to make more attacks.`
-`Player is hacking a computer. They can spend additional sanity (mental health points) to add a bonus to their roll.`
-`Player is trying to kick down a door. They can spend additional energy or health points to add a bonus to their roll.`
+`Player shoots with their gun. They spend 3 ammo to make 3 attacks.`
+`Player is trying to kick down a door. They can spend an additional 3 energy (physical action points) to improve the results of their roll by 3.`
 
-Adding resources is a great way to ensure certain actions succeed. At the same time, if the roll fails, the player loses the resources they spent without achieving the desired result. At the same time, the player must be careful not to deplete all of their resources. Players might find themselves needing those resources at a more crucial time. If a resource is completely depleted, the players will suffer extreme negative consequences, all the way up to death.
-
-Therefore, players must manage their resources carefully and decide when to spend it and when to reserve it. At what point is the risk worth the reward? Do they choose to engage in a course of action or do they avoid it based on the resources they have left? Can they find a way to resolve a conflict efficiently without spending resources? These are the many questions that may determine whether you survive or die.
+Adding resources is a great way to ensure certain actions succeed and efficiently resolve conflicts. At the same time, if the roll fails, the player loses the resources they spent without achieving the desired result. Player should manage resources carefully and decide when to spend it and when to reserve it for more dire situations. If they completely run out of a resource, the character will suffer harsh consequences up to even potentially death.
 <br/><br/>
     
 
+### Standard Rolls ###
 
-### Non-Combat Rolls ###
-
-A non-combat roll is any action that is not a direct attack against an enemy. These rolls all utilize a single roll for the action. Players can add their bonuses and modifiers to the roll. Any additional resources spent gain a flat bonus to the roll result.
+A standard roll is used for any action that is not a direct attack against an enemy. These rolls all utilize a single D10 roll for the action and add any bonuses to the roll. Any additional resources spent gain a flat bonus to the roll result.
 
 Example:
 
 `Player spends 3 energy on jump action over a large gap. They roll a 5 with no bonuses or modifiers. The final result of the roll is 8`
 
-For non-combat rolls, there are no critical successes (natural 10) or critical failures (natural 1s). A higher result always result in a better outcome and a player can overcome a natural 1 by spending enough resources.
+For standard rolls, a critical failure (natural 1) always results in a a 
+
+there are no critical successes (natural 10) or critical failures (natural 1s). A higher result always result in a better outcome and vice versa with lower results. Players can even overcome a natural 1 by spending enough resources.
 <br/><br/>
     
 
