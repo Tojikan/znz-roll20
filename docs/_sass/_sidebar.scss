@@ -55,6 +55,11 @@
             .sidebar-nav-link {
                 padding: 0.5rem 1rem;
                 display: block;
+
+                &.subpage {
+                    padding-left: 3rem;
+                    position: relative;
+                }
             }
         }
     }
