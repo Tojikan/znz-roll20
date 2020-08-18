@@ -38,12 +38,17 @@
         {
             "name" : "Martial Artist",
             "value" : "Martial Artist",
-            "description" : "Successful dodging gives you a free melee attack opportunity. Any hand to hand combat attack always has easy difficulty. "
+            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1."
         },
         {
             "name" : "Sniper",
             "value" : "sniper",
-            "description" : "You can spend one action to give your ranged attack action in the same turn a +3 hit bonus. Increase ranged hit roll by 2"
+            "description" : "You can spend one action to give your ranged attack action in the same turn a +3 hit bonus. Increase ranged hit roll by 2."
+        },
+        {
+            "name" : "Battle Hardened",
+            "value" : "battlehardened",
+            "description" : "Any combat burdens are reduced by half."
         }
     ],
     "flaws" : [
@@ -63,14 +68,19 @@
             "description" : "Everytime you roll a natural 1, your glasses will fall off. All Perception checks fail and ranged attacks receive Impossible+ difficulty until you spend an action to pick them up and put them back on. Your glasses can break."
         },
         {
-            "name" : "Ill-Fated",
-            "value" : "illfated",
+            "name" : "Unlucky",
+            "value" : "lucky",
             "description" : "Two times a play session, the ZM can force you to re-roll any non-attack roll. Any resources spent on the first roll are refunded."
         },
         {
             "name" : "Clumsy",
             "value" : "clumsy",
             "description" : "Your character occasionally slips up and causes an accident. This can occur no more than two times a play session."
+        },
+        {
+            "name" : "Catastrophic Failure",
+            "value" : "catastrophic",
+            "description" : "Whenever you roll a natural 1, there is a chance the outcome becomes a catastrophic failure, leading to a butterfly effect chain that ends in a truly horrible outcome. This can occur no more than once a play session."
         },
         {
             "name" : "Addict",
@@ -90,7 +100,7 @@
         {
             "name" : "Traumatized",
             "value" : "Traumatized",
-            "description" : "Each round of combat consumes 3 sanity instead of 2. "
+            "description" : "Each round of combat consumes an additional 2 sanity."
         }
     ]
 }

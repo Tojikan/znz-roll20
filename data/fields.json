@@ -203,7 +203,7 @@
         {
             "display_name": "Dexterity",
             "attr_name": "dexterity",
-            "reminder_note": "Dodging, Melee Hit, Initiative",
+            "reminder_note": "Dodging, Ranged Hit",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,
@@ -235,7 +235,7 @@
             "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
-            "description": "Humanity is the unique quality of human beings to connect with other people. Humanity allows you to improve how you interact with other survivors and people. Humanity helps players cope with the struggles of the apocalyptic world, giv",
+            "description": "Humanity is the unique quality of human beings to connect with other people. Humanity allows you to improve how you interact with other survivors and people. Humanity helps players cope with the struggles of the apocalyptic world, increasing the amount of sanity restored from environmental effects and socialize.",
             "area": "attributes",
             "canonical": "humanity"
         },
@@ -841,6 +841,23 @@
                 "canonical": "meleecrit"
             },
             {
+                "display_name": "Weapon Reach",
+                "attr_name": "weapon_reach",
+                "attr_prefixed": true,
+                "has_max": false,
+                "field_type": "number",
+                "field_class": "",
+                "field_min": "1",
+                "field_max": "",
+                "default_value": "",
+                "weapon_category": "melee",
+                "field_note": "",
+                "description": "",
+                "area": "item",
+                "area_sub": "weapon",
+                "canonical": "reach"
+            },
+            {
                 "display_name": "Ranged Type",
                 "attr_name": "ranged_type",
                 "attr_prefixed": true,
@@ -922,7 +939,7 @@
                 "canonical": "rangedcrit"
             },
             {
-                "display_name": "Effective Range",
+                "display_name": "Weapon Range",
                 "attr_name": "weapon_range",
                 "attr_prefixed": true,
                 "has_max": true,
@@ -931,7 +948,7 @@
                 "field_min": "1",
                 "field_max": "",
                 "default_value": "",
-                "weapon_category": "standard",
+                "weapon_category": "ranged",
                 "field_note": "",
                 "description": "",
                 "area": "item",

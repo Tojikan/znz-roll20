@@ -335,13 +335,33 @@ var Attack = Attack || (function() {
             attrType = isMelee ? 'Strength' : 'Dexterity',
             totalAttackBonus = attack.profBonus + attack.attrBonus + attack.hitBonus;
 
-        log(type);
+        var difficulty = ""
+        switch(attack.baseDifficulty) {
+            case 0:
+                difficulty = "Easy";
+                break;
+            case 1:
+                difficulty = "Medium";
+                break;
+            case 2:
+                difficulty = "Hard";
+                break;
+            case 3:
+                difficulty = "Insane";
+                break;
+            case 4:
+                difficulty = "Impossible";
+                break;
+            default:
+                difficulty = "Medium (Unk)"
 
+        }
         
         var outputText = `\
         <h4>${typeText} Attack</h4>\
         <div>${name} tries to attack ${attack.numAttacks} time(s) with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}</div><br/>\
         ${attack.reversed ? (isMelee ? `<div>${name} melee attacks with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
+        <div>Difficulty: ${difficulty}</div><br/>\
         <div>Crit Multiplier: <strong>${attack.critBonus}x</strong></div>\
         <div style="margin-bottom: 10px;">${attrType} Bonus: <strong>${attack.attrBonus}</strong>  |  Proficiency Bonus: <strong>${attack.profBonus}</strong>  |  Misc Bonus: <strong>${attack.hitBonus}</strong>  |  Total Bonus: <strong>${totalAttackBonus}</strong></div>`;
 
