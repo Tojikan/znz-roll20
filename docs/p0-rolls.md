@@ -90,7 +90,9 @@ Example:
 
 ### Double Down ###
 
-If a player is not happy with the result of the roll but before the ZM declares the outcome of the roll, they can petition the ZM to *Double-Down* on their roll. A Double-Down allows a player to re-roll the same roll if they pay a sum of resources that is specified by the ZM. If the ZM agrees to allow the double-down, they will then state the cost of the Double-Down. If the player accepts and spends that cost, they may re-roll that roll **but must accept the results of the second roll**. Players **cannot** double-down again on the same action. The ZM can always refuse a double-down request at anytime.
+If a player is not happy with the result of a non-attack roll but before the ZM declares the outcome of the roll, they can petition the ZM to *Double-Down* on their roll. A Double-Down allows a player to re-roll the same roll if they pay a sum of resources that is specified by the ZM. If the ZM agrees to allow the double-down, they will then state the cost of the Double-Down. If the player accepts and spends that cost, they may re-roll that roll **but must accept the results of the second roll**. Players **cannot** double-down again on the same action. 
+
+The ZM can always refuse a double-down request at anytime. Any previously spent resources are not refunded.
 <br/><br/>
 
 
@@ -99,5 +101,5 @@ If a player is not happy with the result of the roll but before the ZM declares 
 
 The **All-In** is a last resort action a player can make. Similar to a double-down, the player can petition the ZM to all-in on a roll. If the ZM accepts it, they will specify a cost that the player may choose to accept and pay. This cost is usually exorbitant and demanding **but by paying it, the action will succeed without needing to roll**.
 
-The ZM can always refuse an All-In.
+The ZM can always refuse an All-In. Any previously spent resources are not refunded.
 <br/><br/>

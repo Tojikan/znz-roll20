@@ -47,7 +47,7 @@ If a player runs out of energy, they become **exhausted**. Exhausted characters:
 EXP is used to enable character growth. Players obtain EXP for completing tasks or successfully winning encounters. Players can then use EXP to purchase additional enhancements to their character.
 
 - **Increase a Stat's Maximum Value by 5** - 10 EXP
-- **Add a skill/proficiency point** - 20 EXP
-- **Add an attribute point** - 40 EXP
+- **Add a skill/proficiency point or improve a hit roll** - 20 EXP
+- **Add an attribute point** - 30 EXP
 - **Gain a new abaility** - 80 EXP
 <br/><br/>

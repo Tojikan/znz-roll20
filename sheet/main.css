@@ -210,6 +210,12 @@ input.sheet-znz-line-input {
   .sheet-znz-section-flashlight .sheet-znz-field input {
     width: 50px; }
 
+.sheet-znz-section-area-status {
+  margin-bottom: 10px; }
+
+.sheet-znz-section-hit {
+  margin-bottom: 10px; }
+
 .sheet-znz-area-counter {
   font-size: 10px; }
   .sheet-znz-area-counter h2, .sheet-znz-area-counter h3 {

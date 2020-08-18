@@ -14,3 +14,22 @@ body {
     src: url('/assets/fonts/Youmurdererbb-pwoK.otf') format('OpenType');
     src: url('/ZnZ-Roll20/assets/fonts/Youmurdererbb-pwoK.otf') format('OpenType');
 }
+
+
+table {
+    border: solid 1px $gray;
+    
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border: solid 1px $lightgray;
+    }
+
+    tr {
+        td {
+            &:first-child {
+                font-weight: 600;
+            }
+        }
+    }
+}

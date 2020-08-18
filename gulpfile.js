@@ -25,10 +25,10 @@ gulp.task('style', function() {
 
 
 gulp.task('data', function() {
-    del(['gameguide/_data/**']);
+    del(['docs/_data/**']);
     
     return gulp.src('data/*.json')
-        .pipe(gulp.dest('gameguide/_data'));
+        .pipe(gulp.dest('docs/_data'));
 });
 
 

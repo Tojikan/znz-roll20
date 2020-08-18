@@ -121,7 +121,7 @@
             "description": "",
             "default_value": 0,
             "has_max": false,
-            "explanation_text": "<div>10:stat | 20: skill/hit</div><div>30: attr | 60:ability</div>",
+            "explanation_text": "<div>10:stat | 20: skill/hit</div><div>30: attr | 80:ability</div>",
             "area": "stat",
             "canonical": "exp"
         }
@@ -274,7 +274,7 @@
             "attr_name": "lockpicking",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to attempt to pick standard locks.",
             "area": "skills"
         },
         {
@@ -282,7 +282,7 @@
             "attr_name": "hotwiring",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to attempt to hotwire a vehicle.",
             "area": "skills"
         },
         {
@@ -290,15 +290,15 @@
             "attr_name": "hacking",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to hack or gain access to computer systems.",
             "area": "skills"
         },
         {
-            "display_name": "Sleight of Hand",
-            "attr_name": "sleight_of_hand",
+            "display_name": "Machinery",
+            "attr_name": "machinery",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to use tools to build, maintain, or repair machinery. ",
             "area": "skills"
         },
         {
@@ -306,15 +306,15 @@
             "attr_name": "chemistry",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Knowledge in the structure, composition, and creation of various substances.",
             "area": "skills"
         },
         {
-            "display_name": "Engineering",
-            "attr_name": "engineering",
+            "display_name": "Biology",
+            "attr_name": "biology",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Knowledge in the structure and composition of life.",
             "area": "skills"
         },
         {
@@ -322,7 +322,7 @@
             "attr_name": "electrical",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "The ability to build, maintain, or repair electrical systems.",
             "area": "skills"
         },
         {
@@ -330,7 +330,7 @@
             "attr_name": "electronics",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "The ability to build, maintain, or repair consumer electronics and devices.",
             "area": "skills"
         },
         {
@@ -338,7 +338,7 @@
             "attr_name": "medicine",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Knowledge in various medicines and the diagnosis, treatment, and prevention of disease. This skill differs from First Aid and is focused on specialized medical issues.",
             "area": "skills"
         },
         {
@@ -346,7 +346,7 @@
             "attr_name": "explosives",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Knowledge in the composition, creation, and usage of explosives.",
             "area": "skills"
         },
         {
@@ -354,7 +354,7 @@
             "attr_name": "boat_piloting",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Ability to pilot a boat.",
             "area": "skills"
         },
         {
@@ -362,7 +362,7 @@
             "attr_name": "plane_piloting",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Ability to pilot a plane.",
             "area": "skills"
         },
         {
@@ -370,7 +370,7 @@
             "attr_name": "nature",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Generic knowledge of survival in the wilderness and animals.",
             "area": "skills"
         },
         {
@@ -378,31 +378,7 @@
             "attr_name": "tailoring",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
-            "area": "skills"
-        },
-        {
-            "display_name": "Construction",
-            "attr_name": "construction",
-            "has_bonus": true,
-            "has_bonus_check" : true,
-            "description": "",
-            "area": "skills"
-        },
-        {
-            "display_name": "Gunsmithing",
-            "attr_name": "gunsmmithing",
-            "has_bonus": true,
-            "has_bonus_check" : true,
-            "description": "",
-            "area": "skills"
-        },
-        {
-            "display_name": "Leatherworking",
-            "attr_name": "leatherworking",
-            "has_bonus": true,
-            "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to craft clothes.",
             "area": "skills"
         },
         {
@@ -410,23 +386,63 @@
             "attr_name": "metalworking",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to craft objects made of metal.",
             "area": "skills"
         },
         {
-            "display_name": "Husbandry",
-            "attr_name": "husbandry",
+            "display_name": "Construction",
+            "attr_name": "construction",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to build more sturdier and advanced structures.",
             "area": "skills"
         },
         {
-            "display_name": "Gardening",
-            "attr_name": "gardening",
+            "display_name": "Gunsmithing",
+            "attr_name": "gunsmmithing",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "",
+            "description": "Allows you to craft, repair, and improve upon firearms.",
+            "area": "skills"
+        },
+        {
+            "display_name": "Advanced Knots",
+            "attr_name": "knots",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "Tie and untie difficult knots.",
+            "area": "skills"
+        },
+        {
+            "display_name": "Animals",
+            "attr_name": "animals",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "Knowledge on raising and taking care of animals.",
+            "area": "skills"
+        },
+        {
+            "display_name": "Riding",
+            "attr_name": "riding",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "Ability to ride and tame a horse.",
+            "area": "skills"
+        },
+        {
+            "display_name": "Farming",
+            "attr_name": "farming",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "Grow and take care of plants.",
+            "area": "skills"
+        },
+        {
+            "display_name": "Navigation",
+            "attr_name": "navigation",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "Ability to read a map and navigate.",
             "area": "skills"
         }
     ],
@@ -439,7 +455,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "ranged",
-            "description": "",
+            "description": "Improves aim with short-barreled guns like pistols and revolvers.",
             "area": "proficiencies"
         },
         {
@@ -449,7 +465,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "ranged",
-            "description": "",
+            "description": "Improves aim with shotguns.",
             "area": "proficiencies"
         },
         {
@@ -459,7 +475,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "ranged",
-            "description": "",
+            "description": "Improves aim with long-barreled guns like rifles and submachine guns.",
             "area": "proficiencies"
         },
         {
@@ -469,7 +485,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "ranged",
-            "description": "",
+            "description": "Improves aims with launching weapons such as bows and slingshots.",
             "area": "proficiencies"
         },
         {
@@ -479,7 +495,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "ranged",
-            "description": "",
+            "description": "Improves aim with throwing.",
             "area": "proficiencies"
         },
         {
@@ -489,7 +505,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "melee",
-            "description": "",
+            "description": "Improves aim with sharp-edged melee weapons.",
             "area": "proficiencies"
         },
         {
@@ -499,7 +515,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "melee",
-            "description": "",
+            "description": "Improves aim with blunt melee weapons.",
             "area": "proficiencies"
         },
         {
@@ -509,7 +525,7 @@
             "has_bonus_check" : true,
             "affects_combat": true,
             "combat_type": "melee",
-            "description": "",
+            "description": "Improves aim with heavy melee weapons.",
             "area": "proficiencies"
         },
         {
@@ -519,7 +535,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Improves aim and damage of unarmed attacks.",
             "area": "proficiencies"
         },
         {
@@ -529,7 +545,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Improves your ability to sneak and go unnoticed.",
             "area": "proficiencies"
         },
         {
@@ -539,7 +555,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Used when applying medicine or first-aid kits.",
             "area": "proficiencies"
         },
         {
@@ -549,7 +565,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Used when making improvised gear or weapons.",
             "area": "proficiencies"
         },
         {
@@ -559,7 +575,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Used when cooking to improve the effects of the dish.",
             "area": "proficiencies"
         },
         {
@@ -569,7 +585,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Allows you to perform more difficult maneuvers and maintain control in a car.",
             "area": "proficiencies"
         },
         {
@@ -579,7 +595,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Used when examining a situation and determining what happened.",
             "area": "proficiencies"
         },
         {
@@ -589,10 +605,9 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Ability to know where you are and what direction to go to. ",
             "area": "proficiencies"
         },
-
         {
             "display_name": "Swimming",
             "attr_name": "prof_swimming",
@@ -600,7 +615,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Improves any swim actions.",
             "area": "proficiencies"
         },
         {
@@ -610,7 +625,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Improves any attempt to climb an object.",
             "area": "proficiencies"
         },
         {
@@ -620,7 +635,17 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Make it easier to make deals and truces with other human survivors.",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Intimidation",
+            "attr_name": "prof_intimidation",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "Make it easier to intimidate or scare other human survivors.",
             "area": "proficiencies"
         },
         {
@@ -630,7 +655,17 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
-            "description": "",
+            "description": "Ability to act or put on a show.",
+            "area": "proficiencies"
+        },
+        {
+            "display_name": "Sleight of Hand",
+            "attr_name": "prof_sleighthand",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "affects_combat": false,
+            "combat_type": "",
+            "description": "Ability to deftly manipulate objects you are holding in order to perform tricks.",
             "area": "proficiencies"
         }
     ],
