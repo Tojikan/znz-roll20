@@ -47,7 +47,8 @@ textarea {
 
 .sheet-znz-description {
   margin-top: 3px;
-  font-size: 9px; }
+  font-size: 9px;
+  line-height: 9px; }
 
 .sheet-znz-dice-prefixed-input .sheet-znz-field-input {
   padding-left: 10px;
@@ -108,6 +109,24 @@ input.sheet-znz-line-input {
   display: none; }
   .sheet-znz-bonus-display:after {
     content: ")"; }
+
+.sheet-znz-hidden-roll-button {
+  background-color: transparent;
+  border: none;
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+  text-align: left;
+  transition: 0.3s;
+  font-size: inherit !important; }
+  .sheet-znz-hidden-roll-button:before {
+    content: none !important; }
+  .sheet-znz-hidden-roll-button:hover {
+    background-color: darkorange; }
 
 /**
 * Overall layout for the sheet

@@ -12,11 +12,13 @@
         <tr>
             <td class="sheet-znz-input"><input type="number" class="sheet-znz-line-input" name="attr_{{ field.attr_name }}"/></td>
             <td class="sheet-znz-label">
+                <button type="roll" class="sheet-znz-hidden-roll-button" value="/roll 1d10 + 0@{{'{'}}{{field.attr_name}}{{'}'}} + 0@{{'{'}}{{field.attr_name}}_bonus{{'}'}}  ({{field.display_name}} Check)" name="roll_{{field.attr_name}}check">
                 {{field.display_name}} 
                 {# This select is for styling the bonus #}
                 <input class="sheet-znz-hidden sheet-znz-bonus-checker-plus" type="checkbox" name="attr_{{ field.attr_name}}_bonus_check" value="positive" />
                 <input class="sheet-znz-hidden sheet-znz-bonus-checker-minus" type="checkbox" name="attr_{{ field.attr_name}}_bonus_check" value="negative" />
                 <span class="sheet-znz-mod sheet-znz-bonus-display" name="attr_{{ field.attr_name }}_bonus"/>
+                </button>
             </td>
         </tr>
         {% endfor %}

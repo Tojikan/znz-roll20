@@ -22,6 +22,7 @@
 .sheet-znz-description {
     margin-top: 3px;
     font-size: $small;
+    line-height: $small;
 }
 
 //span with a character and then the input
@@ -125,5 +126,29 @@ input.sheet-znz-line-input {
 
     &:after {
         content: ")";
+    }
+}
+
+
+.sheet-znz-hidden-roll-button {
+    background-color: transparent;
+    border: none;
+    background-image: none;
+    text-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding: 0!important;
+    margin: 0!important;
+    width: 100%;
+    text-align: left;
+    transition: 0.3s;
+    font-size: inherit!important;
+
+    &:before {
+        content: none!important;
+    }
+
+    &:hover {
+        background-color: $orange;
     }
 }

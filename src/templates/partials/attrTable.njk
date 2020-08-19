@@ -18,10 +18,12 @@
     {% for field in data %}
     <tr>
         <td>
+            <button type="roll" class="sheet-znz-hidden-roll-button" value="/roll 1d10 + 0@{{'{'}}{{field.attr_name}}_mod{{'}'}}  + 0@{{'{'}}{{field.attr_name}}_bonus{{'}'}}  ({{field.display_name}} Check)" name="roll_{{field.attr_name}}check">
             <h3>{{field.display_name}}</h3>
             <div class="sheet-znz-description">
                 {{field.reminder_note}}
             </div>
+            </button>
         </td>
         <td><input type="number" name="attr_{{field.attr_name}}" min="{{vals.min}}" value="{{vals.default}}" max="{{vals.max}}" /></td>
         <td>

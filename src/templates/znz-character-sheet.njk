@@ -38,11 +38,6 @@
             {{ attrTable.create(jsonData.fields.attributes, jsonData.fields.config.attribute_values) }}
         </div>
 
-        {#---- Flashlight ----- #}
-        <div class="sheet-znz-section-flashlight">
-            {{ fieldCreate.outputField( field=jsonData.fields.flashlight)}}
-        </div>
-
         {#----- Skills & Proficiencies ----- #}
         <div class="sheet-znz-section-skills">
             <div class="sheet-znz-block">
@@ -93,6 +88,11 @@
                 <h2>Equipped on Body</h2>
                 {{ item.equippedItem(fields=jsonData.fields.item, attrPrefix=jsonData.fields.config.item_prefixes.eq_body, type="equipment", category="body", options=queryData.equipmentStatsOptions) }}
             </div>
+        </div>
+
+        {#---- Flashlight ----- #}
+        <div class="sheet-znz-section-flashlight">
+            {{ fieldCreate.outputField( field=jsonData.fields.flashlight)}}
         </div>
     </div>
 
