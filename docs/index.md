@@ -17,3 +17,22 @@ The game is governed by the ZM (Zombie Master) who designs the scenario and cont
 
 This is the undead apocalypse. Will you survive?
 
+<br/><br/><br/>
+
+
+
+### Quickstart Guide ###
+
+Don't have time to read it all? Here's the general bullet points of the rules
+
+- Actions and outcomes are determined by dice rolls and the standard roll is D10.
+- Players have typical attributes such as strength, intelligence, and dexterity that can be added to a roll that uses that attribute.
+- Players have training in various skills and proficiencies that add bonuses when they do an action related to the training.
+- Players have Health (physical HP), Sanity (mental HP), and Energy (action points) that measure their current status.
+- When doing non-combat rolls, players can spend their Health, Sanity, and Energy to add a flat bonus to rolls.
+- Players have Abilities they can use to help them. They also have Flaws that can cause negative consequences.
+- Combat is turn-based. Players have two actions they can make on their turn which can be a combination of moving, attacking, dodging any enemy attacks or taking some other action.
+- Each attack consumes resources. Players can make multiple attacks on their turn by spending more resources.
+- Infected always attack at the end of the round. They will try to bite you causing you to wrestle to push them away. If you end another turn still grappled, you get bit.
+- You need to equip weapons to attack. You can have one melee and one ranged weapon. 
+

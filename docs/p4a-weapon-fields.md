@@ -97,8 +97,8 @@ A reach of 2 means they can be 1 space away from the target.
 
 ### Fields are Interchangeable ###
 
-With the Unified Inventory System, you'll notice that all items go in the same inventory and that you can switch the item type. Conceivably, you can turn a melee weapon into a ranged weapon and a ranged weapon in a melee weapon in the character sheet.
+With the inventory, you'll notice that all items go in the same inventory and that you can switch the item type. Conceivably, you can turn a melee weapon into a ranged weapon and a ranged weapon to melee in the character sheet.
 
 Functionally, this is the equivalent of A)Throwing a melee weapon at a target or B) Melee attacking with the butt of your ranaged weapon.
 
-This is determined to be valid and there is some support for this in the Attack Script. 
+This is determined to be valid.

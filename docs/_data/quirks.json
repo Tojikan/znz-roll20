@@ -38,7 +38,7 @@
         {
             "name" : "Martial Artist",
             "value" : "Martial Artist",
-            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1."
+            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1. You can add your strength modifier to unarmed attack damage."
         },
         {
             "name" : "Sniper",
@@ -48,7 +48,7 @@
         {
             "name" : "Battle Hardened",
             "value" : "battlehardened",
-            "description" : "Any combat burdens are reduced by half."
+            "description" : "Any combat burdens (resource cost per round of combat) and Sanity loss due to traumatic scenes are reduced by half."
         }
     ],
     "flaws" : [

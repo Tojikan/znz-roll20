@@ -8,22 +8,22 @@
         {
             "name" : "Mulligan",
             "value" : "mulligan",
-            "description" : "Two times a play session, you may re-roll any roll but must accept the results of the re-roll. You can refund any resources spent on the first roll."
+            "description" : "Two times a play session, you can make a Double Down (re-roll a roll) without any cost"
         },
         {
             "name" : "High Octane",
             "value" : "high_octane",
-            "description" : "You can spend 3 energy on your turn in order to take one additional action. This additional action can be an attack."
+            "description" : "You can take one additional action on your turn by spending 3 energy."
         },
         {
             "name" : "Triage",
             "value" : "triage",
-            "description" : "You can use an action to determine the exact health of up to three enemy targets. This can be repeated in a turn without an energy price. "
+            "description" : "You can use an action to determine the exact health of up to three enemy targets. This can be repeated in a turn without having to spend energy. "
         },
         {
             "name" : "Cheerleader",
             "value" : "cheerleader",
-            "description" : "You can give any player a +2 bonus to their next roll. You can do this during combat as an action but you can only do this 3 times a play session out of combat. "
+            "description" : "5 times a play session, you can give any player a +2 bonus to their next roll."
         },
         {
             "name" : "Encyclopedia",
@@ -33,17 +33,22 @@
         {
             "name" : "Gotta Go Fast",
             "value" : "speedster",
-            "description" : "Gain an additional 2 movement speed. During successful dodges, you can jump back 2 spaces."
+            "description" : "Gain an additional 2 movement speed."
         },
         {
             "name" : "Martial Artist",
             "value" : "Martial Artist",
-            "description" : "Successful dodging gives you a free melee attack opportunity. Chance to receive Hard+ melee attack difficulty reduced."
+            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1. You can add your strength modifier to unarmed attack damage."
         },
         {
             "name" : "Sniper",
             "value" : "sniper",
-            "description" : "You can spend one action to give your ranged attack action in the same turn a +4 hit bonus. Increase Ranged "
+            "description" : "You can spend one action to give your ranged attack action in the same turn a +3 hit bonus. Increase ranged hit roll by 2."
+        },
+        {
+            "name" : "Battle Hardened",
+            "value" : "battlehardened",
+            "description" : "Any combat burdens (resource cost per round of combat) and Sanity loss due to traumatic scenes are reduced by half."
         }
     ],
     "flaws" : [
@@ -53,24 +58,39 @@
             "description" : "Select a flaw to see its description"
         },
         {
-            "name" : "Ill-Fated",
-            "value" : "illfated",
-            "description" : "Three times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
-        },
-        {
             "name" : "Fainthearted",
             "value" : "fainthearted",
-            "description" : "During most combat encounters and high-stress situations, you must roll a Tenacity check. If you fail the check, you lose your first turn."
+            "description" : "If you roll initiative of 3 or lower, your first action in combat is to freeze up. "
+        },
+        {
+            "name" : "Nearsighted",
+            "value" : "nearsighted",
+            "description" : "Everytime you roll a natural 1, your glasses will fall off. All Perception checks fail and ranged attacks receive Impossible+ difficulty until you spend an action to pick them up and put them back on. Your glasses can break."
+        },
+        {
+            "name" : "Unlucky",
+            "value" : "lucky",
+            "description" : "Two times a play session, the ZM can force you to re-roll any non-attack roll. Any resources spent on the first roll are refunded."
         },
         {
             "name" : "Clumsy",
             "value" : "clumsy",
-            "description" : "You occasionally has accidents which can cause problems. \n\n You can sometimes prevent this accident by spending a certain amount of resources dictated by the ZM."
+            "description" : "Your character occasionally slips up and causes an accident. This can occur no more than two times a play session."
         },
         {
-            "name" : "Alcoholic",
-            "value" : "alcoholic",
-            "description" : "Your character cannot rest unless they consume alcohol. \n\n Start the game with 5 uses of alcohol.  "
+            "name" : "Catastrophic Failure",
+            "value" : "catastrophic",
+            "description" : "Whenever you roll a natural 1, there is a chance the outcome becomes a catastrophic failure, leading to a butterfly effect chain that ends in a truly horrible outcome. This can occur no more than once a play session."
+        },
+        {
+            "name" : "Addict",
+            "value" : "addict",
+            "description" : "In order to take a short or long rest, your character must either consume either alcohol, painkillers, or some other drug. Start with 5 units of alcohol."
+        },
+        {
+            "name" : "Sickly",
+            "value" : "sickly",
+            "description" : "Your character has a rare, incurable disease. You must take Special Medicine everyday at the start of the day. Failure to do so causes you to lose half of your max health and energy. If starting the game with this flaw, start with 2 special medicine."
         },
         {
             "name" : "Vulnerable",
@@ -78,19 +98,9 @@
             "description" : "Your character takes double damage."
         },
         {
-            "name" : "Nearsighted",
-            "value" : "nearsighted",
-            "description" : "Every time you roll a critical fail, your glasses falls off. All Perception checks fail and ranged attacks receive Impossible+ difficulty until you put it back on."
-        },
-        {
-            "name" : "Curious",
-            "value" : "curious",
-            "description" : ""
-        },
-        {
-            "name" : "Diabetic",
-            "value" : "diabetic",
-            "description" : "You need to take a shot of insulin every day in order to survive. If you do not take insulin each day, you will take a third of your max health. Start the game with 3 insulin in your inventory.  "
+            "name" : "Traumatized",
+            "value" : "Traumatized",
+            "description" : "Each round of combat consumes an additional 2 sanity."
         }
     ]
 }

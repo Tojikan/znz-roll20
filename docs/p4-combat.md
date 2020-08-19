@@ -11,9 +11,9 @@ Combat encounters form a major part of this game. As most games, ZnZ combat is t
 
 ### Initiative ###
 
-A combat encounter begins with all players rolling initiative. They can roll their initiative directly into the Roll20 Turn Tracker by selecting their token and using the Initiative Tracker or typing in `/roll 1d10 &{tracker}`.
+A combat encounter begins with all players rolling initiative. They can roll their initiative directly into the Roll20 Turn Tracker by selecting their token and using the Initiative Macro button or typing in "/roll 1d10 &{tracker}.
 
-Players then go in order of their initiative.
+Players go in order of their initiative.
 <br/><br/>
 
 ### Rounds ###
@@ -49,7 +49,7 @@ When it is a player's turn, they can take up to **2 Actions**. Available actions
 - Moving to a target location. This includes traversals such as climbing over an obstacle.
 - Reloading a weapon
 - Equipping a new weapon from the inventory.
-- Preparing to dodge against an attack. (If you have an action remaining, this is assumed by default to be your other action)
+- Preparing to Dodge against an attack.
 - Recover from a knockback or prone position.
 - Use a character or equipment ability.
 - Make a reaction trigger for a specific event occurring.
@@ -57,12 +57,23 @@ When it is a player's turn, they can take up to **2 Actions**. Available actions
 
 Once a player does an action, they cannot repeat it again that round (such as moving twice or attacking twice) **unless** they spend an additional **2 energy**. By spending this energy, they are able to repeat an action.
 
+If you have an action remaining at the end of your turn, you will automatically Prepare to Doge.
+
 ``` A player moves and attacks an enemy for a total of 2 actions. Their turn ends. ```
 
 ``` A player moves and then moves again to sprint away from danger. They must spend 2 energy to do so. ```
 
 ``` A player moves and then prepares to dodge. Their turn ends and they are ready to dodge an enemy attack. ```
 <br/><br/>
+
+### Free Actions ###
+
+In addition, Players get a single Free Action on their turn. Free actions are basic actions that include:
+
+- Shouting, Whispering, or saying something.
+- An awareness or other check to spot something.
+<br/><br/>
+
 
 ### Attacking ###
 
@@ -140,30 +151,17 @@ The above isn't meant to be conclusive. The ZM can decide a challenge level at w
 <br/><br/>
 
 
-## Don't get bitten ##
+### Unarmed Attacks ###
 
-If your character gets bitten during combat, they will be infected and eventually die. If you are within the movement range of a zombie at the end of a round, they *will* try to bite you.
+An unarmed attacks functions similarly to a melee attack but a melee attack will only deal 1 flat damage without any rolling.
 
-By using **Prepare to Dodge** as an action on your turn, your character is available to avoid an attack by a zombie. A dodge action is resolved at the end of the round. If a zombie attacks you while you are prepared to dodge, your character can roll a Dexterity check to avoid the attack. If you successfully dodge, you avoid any damage or effect.
-
-If you fail the dodge roll or did not use the Prepare to Dodge action,  you enter a **grapple** with the zombie where the zombie tries to bite your face off and you're trying to push them back. You will take HP damage and Sanity damage when grappled. On your next turn, you can only attempt the break the grapple as an action using a Strength check. If you beat the challenge, you will break the grab. If you fail to do so, you will remained grabbed. 
-
-If you are still grabbed by a zombie by the end of the round, the Zombie **will bite you.** Therefore, you must aim to avoid being grabbed or break out of a grab at all costs.
 <br/><br/>
 
-## Don't Be Alone ##
-
-Your dodge action can only avoid one attack from one zombie. Therefore, if multiple zombies attack you from a single direction, you can still get grabbed even if you succeed your dodge roll. If attacked by multiple zombies, the challenge roll to break out of a grapple is **multipled** by the number of zombies attacking you, making it nearly impossible to break out. 
 
 
-Sticking with your team is important, or else you may get overwhelmed by multiple attackers.
+### Infected Round ###
 
-
-## Don't Get Surrounded ##
-
-If you are attacked on both sides (front and back), you are **surrounded**. There is no grab phase. You will be bitten, whether by the zombie in front of you or the zombie sneaking up behind you.
-
-Avoid being surrounded at all costs. 
+At the end of the round, all combat with the Infected are resolved. See [Fighting the Infected]({{site.baseurl}}/p4b-infected-combat.html)
 
 
 
