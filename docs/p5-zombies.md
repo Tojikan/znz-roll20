@@ -10,7 +10,7 @@ An unknown, virulent disease has spread through the human population, turning th
 
 #### Walkers ####
 
-When a corpse or dead human gets infected, the body reanimates and becomes a lumbering corpse. At this point, the rigor mortis has set in and the body becomes stiff and unyielding. Walkers are slow but are incredibly durable and tough. Only by dealing large amounts of damage to the vital organs and the brain, will the Walker finally fall down for the last time. 
+When a corpse becomes infected, the body reanimates and becomes a lumbering shell of its former self. At this point, the rigor mortis has set in and the body becomes stiff and unyielding. Walkers are slow but are incredibly durable and tough. Only by dealing large amounts of damage to the vital organs and the brain, will the Walker finally fall down for the last time. 
 
 Walkers are a slow but dangerous threat, doggedly marching forward until you are cornered with no escape. 
 
@@ -19,7 +19,7 @@ A walker appears bloated with discolored skin. Their body appears to be decayed 
 
 #### Runners ####
 
-When a living human gets bitten, they do not immediately succumb to the virus. Slowly, but surely, the human begins to descend into a feverish insanity as they lose all sense of self while the virus attacks their brain. At the final moment, the virus finally takes over and the human is no more. Since runners are still technically living, they are capable of running and moving incredibly quick. They are less durable than runners and can be killed by dealing enough damage to their body. However, be sure to completely destroy them as a dead Runner may eventually become a walker.
+When a living human gets bitten, they do not immediately succumb to the virus. Slowly, but surely, the human begins to descend into a feverish insanity as they lose all sense of self while the virus attacks their brain. At the final moment, the virus finally takes over and the human is no more. Since runners are still technically living, they are capable of running and moving incredibly quick. They are less durable than runners and can be killed by dealing enough damage to their body. However, be sure to completely destroy them as a dead Runner may eventually become a Walker.
 
 Runners are quick and dangerous. They can easily chase down a group of survivors and overwhelm them with speed. Be sure to take them out first.
 

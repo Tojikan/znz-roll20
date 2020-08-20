@@ -20,9 +20,9 @@ Your only defense is by spending an action on your turn to **Prepare to Dodge** 
 
 If your character gets bitten during combat, they will be infected and eventually die. If you are within the movement range of a Infected at the end of a round, they *will* try to bite you.
 
-When the Infected attempt to bite your character and you fail to dodge, your character will fight back and try to push them away. This causes you to enter a **grapple** where the Infected is trying to bite your face off and you're trying to not let that happen.  You will take HP damage and Sanity damage when entering a grapple. If you are grappled by the start of your next turn, the only action you can take is to attempt the break the grapple as an action using a Strength check. If you beat the challenge, you will break the grab. If you fail to do so, you will remained grabbed. 
+When the Infected attempt to bite your character and you fail to dodge, your character will fight back and try to push them away. This causes you to enter a **grapple** where the Infected is trying to bite your face off and you're trying to not let that happen.  **You will take HP damage and Sanity damage when entering a grapple**. If you are grappled by the start of your next turn, the only action you can take is to attempt the break the grapple as an action using a Strength check. If you beat the challenge, you will break the grab. If you fail to do so, you will remained grabbed. 
 
-If you remain grabbed by an Infected by the end of the round, the Infected **will bite you.** Therefore, it is of the utmost importance to try and break grabs on yourself or your allies.
+If you remain grabbed by the Infected by the start of its turn at the end of the round, the Infected **will bite you.** Therefore, it is of the utmost importance to try and break grabs on yourself or your allies.
 <br/><br/>
 
 #### Don't Be Alone ####

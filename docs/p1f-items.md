@@ -26,12 +26,12 @@ Players can improve the max weight of their inventory by finding bags and other 
 
 ### Equippables ###
 
-Weapons and armor can be equipped. In order for players to use the weapons and gain the benefits of any armor, they must first equip it. Equipping is handled through the equip buttons on the character sheet. Players can quickly equip or unequip an item by pressing the Equip/Unequip buttons.
+Weapons and armor can be equipped. In order for players to use the weapons and gain the benefits of any armor, they must first equip it. Equipping and unequipping is handled through the equip/unequip buttons on the character sheet. 
 
 
 ### Weapons ###
 
-If an item is a weapon, it will have certain fields. Please refer to the combat section for more information on what each field represents. It should be noted that any melee weapon can become a ranged weapon and any ranged weapon can become a melee weapon.
+If an item is a weapon, it will have certain fields. Please refer to the (See [Weapon Fields]({{site.baseurl}}/p4a-weapon-fields.html) )for more information on what each field represents. It should be noted that any melee weapon can become a ranged weapon and any ranged weapon can become a melee weapon.
 
 
 ### Armor ###
@@ -41,6 +41,6 @@ Armor are items that are worn on the head and body. They convey some sort of ben
 Armor can have **Damage Reduction** which reduces any combat damage that a player receives. 
 
 
-### Equip Script ###
+### Pickup Script ###
 
 TBD

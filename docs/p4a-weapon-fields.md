@@ -31,12 +31,12 @@ Durability is a measure of a melee weapon's stat. It can be seen as the weapon's
 
 ### Energy Cost ###
 
-When making a melee attack, different weapons have different energy requirements. After all, swinging a heavy chainsaw is much more energy-intensive then stabbing with a knife. Each melee attack consumes energy and the Energy cost field determines how much energy.
+When making a melee attack, different weapons have different energy requirements. After all, swinging a heavy chainsaw is much more energy-intensive then stabbing with a knife. Each melee attack consumes energy and the Energy cost field determines how much energy is used.
 
 
 ### Damage ###
 
-Both melee and ranged weapons have a damage field. Damage fields are straightforward - you type in the dice rolled when determining damage, such as 1d6 or 1d10+2.
+Both melee and ranged weapons have a damage field. Damage fields are simple dice notation, such as 1d6 or 1d10+2.
 
 You can enter a limited set of dice notation:
 
@@ -46,14 +46,14 @@ You can enter a limited set of dice notation:
 
 A damage dice might look like
 
-1d6
-1d6+2 
-1d6+2>3 (3 damage minimum)
+- 1d6
+- 1d6+2 
+- 1d6+2>3 (3 damage minimum)
 
 
 ### Crit Bonus ###
 
-Crit bonus determines how many additional damage dice to add if your weapon crits (roll a natural 10 or higher). This bonus is *additive*. Meaning you roll the original damage dice and then roll an additional times equal to the bonus. Note that this doesn't apply to a roll bonus but only to the dice itself.
+Crit bonus determines how many additional damage dice to add if your weapon crits (roll a natural 10 or higher). This bonus is *additive*. Meaning you roll the original damage dice and then roll an additional times equal to the bonus. **Note that this doesn't apply to a roll bonus but only to the dice itself**.
 
 Example:
 
@@ -87,7 +87,7 @@ Examples: Range of 5/10
 
 ### Weapon Reach ###
 
-Melee weapons have a weapon reach. This is a single number. This simply indicates how far away a player can make a melee attack.
+Melee weapons have a weapon reach. This indicates how far away a player can make a melee attack.
 
 A reach of 1 means they must be directly adjacent to a target.
 
@@ -100,5 +100,3 @@ A reach of 2 means they can be 1 space away from the target.
 With the inventory, you'll notice that all items go in the same inventory and that you can switch the item type. Conceivably, you can turn a melee weapon into a ranged weapon and a ranged weapon to melee in the character sheet.
 
 Functionally, this is the equivalent of A)Throwing a melee weapon at a target or B) Melee attacking with the butt of your ranaged weapon.
-
-This is determined to be valid.

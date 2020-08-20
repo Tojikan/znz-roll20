@@ -43,7 +43,7 @@
         {
             "name" : "Sniper",
             "value" : "sniper",
-            "description" : "You can spend one action to give your ranged attack action in the same turn a +3 hit bonus. Increase ranged hit roll by 2."
+            "description" : "You can spend one action to give your ranged attack action in the same turn a +4 hit bonus. Increase ranged hit roll by 2."
         },
         {
             "name" : "Battle Hardened",
@@ -60,7 +60,7 @@
         {
             "name" : "Fainthearted",
             "value" : "fainthearted",
-            "description" : "If you roll initiative of 3 or lower, your first action in combat is to freeze up. "
+            "description" : "If you roll an initiative of 3 or lower, your first action in combat is to freeze up. "
         },
         {
             "name" : "Nearsighted",
@@ -70,7 +70,7 @@
         {
             "name" : "Unlucky",
             "value" : "lucky",
-            "description" : "Two times a play session, the ZM can force you to re-roll any non-attack roll. Any resources spent on the first roll are refunded."
+            "description" : "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
         },
         {
             "name" : "Clumsy",

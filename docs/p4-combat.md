@@ -11,19 +11,20 @@ Combat encounters form a major part of this game. As most games, ZnZ combat is t
 
 ### Initiative ###
 
-A combat encounter begins with all players rolling initiative. They can roll their initiative directly into the Roll20 Turn Tracker by selecting their token and using the Initiative Macro button or typing in "/roll 1d10 &{tracker}.
+A combat encounter begins with all players rolling initiative which is a flat D10 roll. Initiative is tracked in the Roll20 Turn Tracker.
+
+Players can roll initiative directly into the tracker by using the Initiative Macro (see [Scripts]({{site.baseurl}}/p7-scripts-macros.html). 
 
 Players go in order of their initiative.
 <br/><br/>
 
 ### Rounds ###
 
-A combat round ends once all players have completed their turns. However, there are some notable occurrences once a combat round ends.
+A combat round ends once all players have completed their turns. When a round ends, all undead enemies will then begin their actions and resolve their movement and attacks.
 
-- All undead enemies will then begin their actions. Enemy movements, attacks, and actions are resolved at the end of the round.
-- Each round of combat adds an additional amount to the final **Combat Burden**.
 
-Once the round ends, the order resets for the next round.
+When a new round begins, the initiative order resets. In addition, the ZM will add another additional amount to the final **Combat Burden**.
+
 <br/><br/>
 
 ### Combat Burden ###
@@ -46,7 +47,7 @@ Examples:
 When it is a player's turn, they can take up to **2 Actions**. Available actions include:
 
 - Firing a weapon or making a melee attack
-- Moving to a target location. This includes traversals such as climbing over an obstacle.
+- Moving their move speed to a target location. This includes traversals such as climbing over an obstacle.
 - Reloading a weapon
 - Equipping a new weapon from the inventory.
 - Preparing to Dodge against an attack.
@@ -55,7 +56,7 @@ When it is a player's turn, they can take up to **2 Actions**. Available actions
 - Make a reaction trigger for a specific event occurring.
 - Doing any sort of skill or attribute check.
 
-Once a player does an action, they cannot repeat it again that round (such as moving twice or attacking twice) **unless** they spend an additional **2 energy**. By spending this energy, they are able to repeat an action.
+Once a player does an action, they cannot repeat it again that turn (such as moving twice or attacking twice) **unless** they spend an additional **2 energy** to repeat it.
 
 If you have an action remaining at the end of your turn, you will automatically Prepare to Doge.
 
@@ -71,35 +72,35 @@ If you have an action remaining at the end of your turn, you will automatically 
 In addition, Players get a single Free Action on their turn. Free actions are basic actions that include:
 
 - Shouting, Whispering, or saying something.
-- An awareness or other check to spot something.
+- An perception check to spot something in the environment.
 <br/><br/>
 
 
 ### Attacking ###
 
-Players can make ranged, melee, or unarmed attacks. When players attack, they specify the **number of attacks** they wish to make (for melee attacks, you can see this as just hitting really hard as opposed to hitting multiple times). Then the player rolls a **Hit Roll** for each attack they decided to make to determine if the attack hits. The hit roll is determined in the character sheet and defaults to D10.
+Players can make ranged, melee, or unarmed attacks. When players attack, they specify the **number of attacks** they wish to make (for melee attacks, you can see this as just hitting really hard as opposed to hitting multiple times). Then the player rolls a **Hit Roll** for each attack they decided to make. The hit roll is determined in the character sheet and defaults to D10. Having a higher hit roll improves your chance to land a critical strike.
 
 
-Each individual Hit Roll will have a challenge level to see if the attack hits or not (see below for general guidelines on how the challenge level is determined). Additionally, players add on attributes (*Strength for melee; Dexterity for ranged*) and any weapon proficiencies to reduce this challenge level.
+The Hit Roll decides if the attack will hit. Each roll will have a challenge level that the roll must beat in order for the attack to hit (see below for general guidelines on how the challenge level is determined). Additionally, players can add on attributes (*Strength for melee; Dexterity for ranged*) and any weapon proficiencies to reduce this challenge level.
 
 If the Hit Roll beats the challenge, then the attack succeeds and the player rolls a **Damage Roll** based on the weapon damage of their equipped melee/ranged weapon.  All damage from all successful Hits is added up to arrive at a final damage figure.
 
 Players must spend a resource for each attack. Melee attacks consume Energy and Ranged attacks consume Ammo.
 
-If a player rolls a natural 1 on the attack roll, the attack automatically fails. On a melee attack, the weapon's durability is reduced by 1. If the durability drops to 0, the weapon breaks can cannot be used. 
+If a player rolls a natural 1 on the attack roll, the attack automatically fails. On a melee attack, the weapon's durability is reduced by 1. If the durability drops to 0, the weapon breaks and cannot be used again. 
 
-If the player rolls a natural *10 or higher* on the roll, then the attack *critically strikes* and the damage roll is rolled multiple times based on the weapons crit bonus.
+If the player rolls a natural *10 or higher* on the roll, then the attack *critically strikes*. During a critical strike, the amount of times the damage roll is made is multiplied based on the weapon's crit bonus stat (i.e. 1d10 can become 3d10 if the crit bonus is a 2). 
 
 Please see the [Weapon Fields]({{site.baseurl}}/p4a-weapon-fields.html) page for more detailed information on the various weapon fields and what they represent.
 
 
 Examples: 
 
-``` A player does a ranged attack with 3 attacks. The first attacks rolls a 6 against a challenge of 5, which is reduced by the player's dexterity and weapon proficiency to 3. The attack succeeds and the player rolls a damage of 2. The second attack is a 3 against 6, which fails, and the third attack is a 9 against a challenge of 4, which succeeds for a damage of 5. The total damage dealt is 7 (2+5). The player spends 3 ammo.```
+``` A player does a ranged attack with 3 attacks. The first attacks rolls a 6 against a challenge of 5, which is reduced by the player's dexterity(+1) and weapon proficiency(+1) to 3. The attack succeeds and the player rolls a damage of 2. The second attack is a 3 against 6, which fails, and the third attack is a 9 against a challenge of 4, which succeeds for a damage of 5. The total damage dealt is 7 (2+5). The player spends 3 ammo.```
 
 ``` A player makes a melee attack with 2 attacks. One attack succeeds and one attack was a natural 1. That attack fails and their melee weapon loses 1 durability. They roll the damage dice for the successful attack to determine damage. Then the player spends 2 energy.  ```
 
-``` A player does a ranged attack with 3 attacks. 2 of those attacks miss and 1 attack critically strikes. Normally the player rolls the weapon damage once, but since it is a crit, they rolls the damage 3 times since the weapon had a Crit Bonus of 2 (regular roll + 2 rolls). They spends 3 ammo. ```
+``` A player does a ranged attack with 3 attacks. 2 of those attacks miss and 1 attack critically strikes. Normally the player rolls the weapon damage once, but since it is a crit, they roll the damage 3 times since the weapon had a Crit Bonus of 2 (add 2 rolls on top of the regular roll). They spends 3 ammo. ```
 
 <br/><br/>
 
