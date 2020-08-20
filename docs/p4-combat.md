@@ -81,7 +81,7 @@ In addition, Players get a single Free Action on their turn. Free actions are ba
 Players can make ranged, melee, or unarmed attacks. When players attack, they specify the **number of attacks** they wish to make (for melee attacks, you can see this as just hitting really hard as opposed to hitting multiple times). Then the player rolls a **Hit Roll** for each attack they decided to make. The hit roll is determined in the character sheet and defaults to D10. Having a higher hit roll improves your chance to land a critical strike.
 
 
-The Hit Roll decides if the attack will hit. Each roll will have a challenge level that the roll must beat in order for the attack to hit (see below for general guidelines on how the challenge level is determined). Additionally, players can add on attributes (*Strength for melee; Dexterity for ranged*) and any weapon proficiencies to reduce this challenge level.
+The results of the Hit Roll decides if the attack will hit. Each roll will have a challenge level that the roll must beat in order for the attack to hit (see below for general guidelines on how the challenge level is determined). Additionally, players can add on attributes (*Strength for melee; Dexterity for ranged*) and any weapon proficiencies to reduce this challenge level.
 
 If the Hit Roll beats the challenge, then the attack succeeds and the player rolls a **Damage Roll** based on the weapon damage of their equipped melee/ranged weapon.  All damage from all successful Hits is added up to arrive at a final damage figure.
 
