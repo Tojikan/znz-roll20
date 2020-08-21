@@ -1,6 +1,11 @@
 var Pickup = Pickup || (function() {
     'use strict';
-    const templates = '',
+    const templates = {"snacks":{"item_name":"Snacks","item_type":"misc","item_weight":0.5,"item_quantity":1,"item_effect":"Consume to restore 5 energy during a rest."},"meal":{"item_name":"Meal","item_type":"misc","item_weight":1,"item_quantity":1,"item_effect":"Consume to restore 10 energy during a rest."},"bandages":{"item_name":"Bandages","item_type":"misc","item_weight":0.5,"item_quantity":1,"item_effect":"Use to restore 5 health during a rest."},"painkillers":{"item_name":"painkillers","item_type":"misc","item_weight":0.1,"item_quantity":1,"item_effect":"Use to restore 2 health. Can be taken outside a rest. Consuming more than 4 a day can cause negative side effects."},"firstaidkit":{"item_name":"First Aid Kit","item_weight":"1","item_quantity":"1","item_type":"misc","item_effect":"Use to restore 10 health during a rest.","melee_type":"prof_blunt_melee","melee_durability":1,"melee_energy_cost":1,"melee_damage":"1d2","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_throwing","ranged_ammo":1,"ranged_ammo_max":1,"ranged_reloads":0,"ranged_damage":"1d2","ranged_crit_bonus":1,"weapon_range":3,"weapon_range_max":6},"alcohol":{"item_name":"Alcohol","item_weight":"0.5","item_quantity":"1","item_type":"misc","item_effect":"Consume to restore 5 sanity during a rest. Having more than one within a short time period can cause attribute penalties.","melee_type":"prof_blunt_melee","melee_durability":1,"melee_energy_cost":1,"melee_damage":"1d4","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_throwing","ranged_ammo":1,"ranged_ammo_max":1,"ranged_reloads":0,"ranged_damage":"1d4","ranged_crit_bonus":1,"weapon_range":4,"weapon_range_max":8},"ducttapearmor":{"item_name":"Duct Tape Armor","item_weight":"1","item_quantity":"1","item_type":"body","equipment_dmg_reduce":1,"equipment_stat_0":"dexterity","equipment_stat_0_mod":-1},"footballpads":{"item_name":"Football Pads","item_weight":"1","item_quantity":"1","item_type":"body","equipment_dmg_reduce":2,"equipment_stat_0":"dexterity","equipment_stat_0_mod":-1},"bicyclehelmet":{"item_name":"Bicycle Helmet","item_weight":"1","item_quantity":"1","item_type":"head","equipment_dmg_reduce":1},"footballhelmet":{"item_name":"Football Helmet","item_weight":"1","item_quantity":"1","item_type":"head","equipment_dmg_reduce":2,"equipment_stat_0":"dexterity","equipment_stat_0_mod":-1},"blunt1":{"item_type":"melee","item_name":"Blunt Weapon 1","item_weight":1,"item_quantity":1,"melee_type":"prof_blunt_melee","melee_durability":4,"melee_durability_max":4,"melee_energy_cost":1,"melee_damage":"1d4+1","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_throwing","ranged_ammo":1,"ranged_reloads":0,"ranged_damage":"1d4+1","ranged_crit_bonus":1,"weapon_range":4,"weapon_range_max":8},"blunt2":{"item_type":"melee","item_name":"Blunt Weapon 2","item_weight":2,"item_quantity":1,"melee_type":"prof_blunt_melee","melee_durability":8,"melee_durability_max":8,"melee_energy_cost":1,"melee_damage":"1d6+2","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_throwing","ranged_ammo":1,"ranged_reloads":0,"ranged_damage":"1d6+2","ranged_crit_bonus":1,"weapon_range":3,"weapon_range_max":6},"sharp1":{"item_type":"melee","item_name":"Sharp Weapon 1","item_weight":1,"item_quantity":1,"melee_type":"prof_sharp_melee","melee_durability":2,"melee_durability_max":2,"melee_energy_cost":1,"melee_damage":"1d6+2","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_throwing","ranged_ammo":1,"ranged_reloads":0,"ranged_damage":"1d6+2","ranged_crit_bonus":1,"weapon_range":4,"weapon_range_max":8},"heavy1":{"item_type":"melee","item_name":"Heavy Weapon 1","item_weight":3,"item_quantity":1,"melee_type":"prof_heavy_melee","melee_durability":3,"melee_durability_max":3,"melee_energy_cost":2,"melee_damage":"1d10+1>3","melee_crit_bonus":2,"weapon_reach":1,"ranged_type":"prof_throwing","ranged_ammo":1,"ranged_reloads":0,"ranged_damage":"1d10+1","ranged_crit_bonus":1,"weapon_range":3,"weapon_range_max":6},"pistol1":{"item_type":"ranged","item_name":"Pistol 1","item_weight":2,"item_quantity":1,"melee_type":"prof_blunt_melee","melee_durability":2,"melee_energy_cost":1,"melee_damage":"1d3+1","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_handguns","ranged_ammo":7,"ranged_reloads":2,"ranged_damage":"1d6+1","ranged_crit_bonus":1,"weapon_range":6,"weapon_range_max":12},"revolver1":{"item_type":"ranged","item_name":"Revolver 1","item_weight":2,"item_quantity":1,"melee_type":"prof_blunt_melee","melee_durability":2,"melee_energy_cost":1,"melee_damage":"1d3+1","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_handguns","ranged_ammo":4,"ranged_reloads":3,"ranged_damage":"1d7+2","ranged_crit_bonus":2,"weapon_range":4,"weapon_range_max":8},"shotgun1":{"item_type":"ranged","item_name":"Shotgun 1","item_weight":2,"item_quantity":1,"melee_type":"prof_blunt_melee","melee_durability":2,"melee_energy_cost":1,"melee_damage":"1d6+1","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_shotguns","ranged_ammo":5,"ranged_reloads":2,"ranged_damage":"4d3+2","ranged_crit_bonus":1,"weapon_range":3,"weapon_range_max":6},"rifle1":{"item_type":"ranged","item_name":"Rifle 1","item_weight":2,"item_quantity":1,"melee_type":"prof_blunt_melee","melee_durability":2,"melee_energy_cost":1,"melee_damage":"1d6+1","melee_crit_bonus":1,"weapon_reach":1,"ranged_type":"prof_rifles","ranged_ammo":8,"ranged_reloads":0,"ranged_damage":"1d8+1","ranged_crit_bonus":1,"weapon_range":6,"weapon_range_max":12}},
+    //How args translate to itemfields
+    argOptions = {"name":"item_name","weight":"item_weight","quantity":"item_quantity","type":"item_type","note":"item_note","effect":"item_effect","melee_type":"melee_type","durability":"melee_durability","durability_max":"melee_durability_max","energy":"melee_energy_cost","melee_damage":"melee_damage","melee_crit":"melee_crit_bonus","reach":"weapon_reach","ranged_type":"ranged_type","ammo":"ranged_ammo","ammo_max":"ranged_ammo_max","reloads":"ranged_reloads","damage":"ranged_damage","ranged_crit":"ranged_crit_bonus","range":"weapon_range","range_max":"weapon_range_max","armor":"equipment_dmg_reduce","stat0":"equipment_stat_0","stat0mod":"equipment_stat_0_mod","stat1":"equipment_stat_1","stat1mod":"equipment_stat_1_mod","stat2":"equipment_stat_2","stat2mod":"equipment_stat_2_mod"},
+    hasMaxField = ["melee_durability","ranged_ammo","weapon_range"],
+    invPrefix = "inv",
+    repeatingInv = "repeating_inventory",
 
     HandleInput = function(msg) {
         if (msg.type !== "api") {
@@ -15,9 +20,6 @@ var Pickup = Pickup || (function() {
             character = getCharacter(sender, msg),
             args = splitArgs(msg.content);
 
-        log(args);
-
-
         if (!character){
             return;
         }
@@ -27,6 +29,77 @@ var Pickup = Pickup || (function() {
             sendMessage("Unspecified attack error. Did you forget to put a space somewhere?", sender, true, "danger");
             return; 
         };
+
+        let itemValues = getNewItemFieldValuesFromArgs(args);
+        createNewItemRow(itemValues, character);
+
+    },
+    /**
+     * Takes the args that were entered into the chat and then tries to determine what values to set the new item's fields to.
+     * Will also retrieve any templates. It is important that the template properties are field attr names.
+     * 
+     * @param args - the tokenized parameters passed into the API script from chat.
+     * @returns object where each pair is the field attr_name and the value to set it to.
+     */
+    getNewItemFieldValuesFromArgs = function(args) {
+        const argKeys = Object.keys(args);
+        var ret = {};
+
+        //Get fields and values from templates based on item arg
+        if ("item" in args && args["item"] in templates) {
+            let templateName = args["item"];
+            var template = templates[templateName];
+
+            for (let prop in template) {
+                ret[prop] = template[prop];
+            }
+        }
+
+        //Get fields and values from args.
+        for (let key of argKeys){
+            if (key in argOptions){ //the arg keys are shorthand for field names (notes = item_notes), so must retrieve the full field name from argOptions.
+                ret[argOptions[key]] = args[key];
+            }
+        }
+        return ret;
+    },
+    /**
+     * Constructs a new attribute object from itemValues, and then creates it. This assumes it is creating for a repeating field section and so it'll generate a row ID.
+     * 
+     * @param itemValues - object where each key is the field attr_name and the value is the value to set the field to. Create from getNewItemFieldValuesFromArgs
+     * @param character - selected Character. Just need id.
+     */
+    createNewItemRow = function(itemValues, character) {
+        var newRowId = generateRowID();
+
+        for (let field in itemValues) {
+            if (itemValues.hasOwnProperty(field)) {
+
+                //Don't individually handle max fields since max can be set as property when creating a new attribute.
+                //It won't work if you individually create an Obj for a max
+                if(field.endsWith("_max")){
+                    continue;
+                }
+
+                var attr = {};
+                attr.name = repeatingInv + "_" + newRowId + "_" + invPrefix + "_" + field;
+                attr.current = itemValues[field];
+                attr.characterid = character.id;
+
+                //Handle field with max
+                var attrMax = field + "_max";
+                if (attrMax in itemValues){ //if the max is specified in the args or the template, just pull that.
+                    if (itemValues.hasOwnProperty(attrMax)){
+                        attr.max = itemValues[attrMax];
+                    }
+                } else if (hasMaxField.includes(field)){ //if not specified but the field has a max, just set the max to current.
+                    attr.max = attr.current;
+                }
+
+
+                createObj("attribute", attr);
+            }
+        }
     },
     /**
      * Output the results of the attack into chat.
@@ -156,15 +229,17 @@ var Pickup = Pickup || (function() {
     /**
      * Tokenizes chat inputs for API commands
      * 
-     * First, splits a chat message by space unless the space is within single or double quotes.              Example: !example with 'text line' "hello world" gets split to ["!example", "with", "text line" "hello world"]
-     * Then tokenize into a struct using a '=' to denote an argument in the form of [arg]=[value].            Example: !example test="hello world" is {0:"!example" test: "hello world"}
-     * Everything to left of '=' becomes the key and everything to the right becomes the value
-     * If no '=', the key is the array position of the split
-     * There can't be spaces between the '=' and the args/values
+     * Step 1 - Splits chat by space unless the space is within single or double quotes.                                    Example: !example with 'text line' "hello world" gets split to ["!example", "with", "text line" "hello world"]
+     * Step 2 - Tokenize everything into a Struct using a '=' to denote an argument in the form of [arg]=[value].           Example: !example test="hello world" is {0:"!example" test: "hello world"}
+     * Step 2a - Everything to left of '=' becomes the key and everything to the right becomes the value
+     * Step 2b - If no '=', the key is the array position of the split
+     * Return the struct
+     * 
+     * There should not be spaces between '=' and the arg/value
+     * 
      */
     splitArgs = function(input) {
-        var arr = input.split(' '),
-            result = {},
+        var result = {},
             argsRegex = /(.*)=(.*)/, //can't be global but shouldn't need it as we are splitting args. 
             quoteRegex = /(?:[^\s"']+|"[^"]*"|'[^']*')+/g; //Split on spaces unless space is within single or double quotes - https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
         
@@ -196,6 +271,42 @@ var Pickup = Pickup || (function() {
     //get attr oject
     attrLookup = function(character, name){
         return findObjs({type: 'attribute', characterid: character.id, name: name})[0];
+    },
+    /**
+     * Generates a UUID for a repeater section, just how Roll20 does it in the character sheet.
+     * https://app.roll20.net/forum/post/3025111/api-and-repeating-sections-on-character-sheets/?pageforid=3037403#post-3037403
+     */
+    generateUUID = function() { 
+        "use strict";
+    
+        var a = 0, b = [];
+        return function() {
+            var c = (new Date()).getTime() + 0, d = c === a;
+            a = c;
+            for (var e = new Array(8), f = 7; 0 <= f; f--) {
+                e[f] = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(c % 64);
+                c = Math.floor(c / 64);
+            }
+            c = e.join("");
+            if (d) {
+                for (f = 11; 0 <= f && 63 === b[f]; f--) {
+                    b[f] = 0;
+                }
+                b[f]++;
+            } else {
+                for (f = 0; 12 > f; f++) {
+                    b[f] = Math.floor(64 * Math.random());
+                }
+            }
+            for (f = 0; 12 > f; f++){
+                c += "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(b[f]);
+            }
+            return c;
+        };
+    }(),
+    generateRowID = function () {
+        "use strict";
+        return generateUUID().replace(/_/g, "Z");
     },
     validatePlayerControl = function(character, playerId){
         return playerIsGM(playerId) ||  

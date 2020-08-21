@@ -1,0 +1,32 @@
+{
+    "args" : {
+        "name" : "item_name",
+        "weight" : "item_weight",
+        "quantity" : "item_quantity",
+        "type" : "item_type",
+        "note" : "item_note",
+        "effect" : "item_effect",
+        "melee_type" : "melee_type",
+        "durability" : "melee_durability",
+        "durability_max" : "melee_durability_max",
+        "energy" : "melee_energy_cost",
+        "melee_damage" : "melee_damage",
+        "melee_crit" : "melee_crit_bonus",
+        "reach" : "weapon_reach",
+        "ranged_type" : "ranged_type",
+        "ammo" : "ranged_ammo",
+        "ammo_max" : "ranged_ammo_max",
+        "reloads" : "ranged_reloads",
+        "damage" : "ranged_damage",
+        "ranged_crit" : "ranged_crit_bonus",
+        "range" : "weapon_range",
+        "range_max" : "weapon_range_max",
+        "armor" : "equipment_dmg_reduce",
+        "stat0" : "equipment_stat_0",
+        "stat0mod" : "equipment_stat_0_mod",
+        "stat1" : "equipment_stat_1",
+        "stat1mod" : "equipment_stat_1_mod",
+        "stat2" : "equipment_stat_2",
+        "stat2mod" : "equipment_stat_2_mod"
+    }
+}

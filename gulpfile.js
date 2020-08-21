@@ -46,6 +46,8 @@ gulp.task('sheet', function(){
             //regex searches for all cases of [[[dataquery:'{text}']]]. Any text between single quotes are captured.
             .pipe(replace(/\[\[{dataquery:\s*['"](.*?)['"]}\]\]/g, replaceWithFileContent))
             .pipe(replace(/\[\[{attrlookup:\s*['"](.*?)['"]}\]\]/g, replaceCanonicalWithAttrName))
+            .pipe(replace(/\(\(\({runFunc:.*?{(.*?)}}\)\)\)/gs, runFunction))
+            .pipe(replace(/\(\(\({datasrc:\s*['"](.*?)['"]}\)\)\)/g, getData))
             .pipe((replace(/\[\[{prefix:\s*['"](.*?)['"]}\]\]/g, replaceWithPrefix)));
         })(), { 
             //Inject Options
@@ -65,6 +67,8 @@ gulp.task('scripts', function(){
     return gulp.src('src/scripts/*.js')
         .pipe((replace(/\[\[{dataquery:\s*['"](.*?)['"]}\]\]/g, replaceWithFileContent)))
         .pipe((replace(/\[\[{attrlookup:\s*['"](.*?)['"]}\]\]/g, replaceCanonicalWithAttrName)))
+        .pipe(replace(/\(\(\({runFunc:.*?{(.*?)}}\)\)\)/gs, runFunction))
+        .pipe(replace(/\(\(\({datasrc:\s*['"](.*?)['"]}\)\)\)/g, getData))
         .pipe((replace(/\[\[{prefix:\s*['"](.*?)['"]}\]\]/g, replaceWithPrefix)))
         .pipe(gulp.dest('./sheet'));
 });
@@ -117,6 +121,45 @@ function getAllDataQuery(){
 
     return { queryData };
 }
+
+/**
+ * Looks at capture, converts to a function, and runs it.
+ * 
+ * @param {string} match 
+ * @param {string} capture 
+ */
+function runFunction(match, capture){
+    const req = require;
+
+    let func = new Function('require',capture);
+    let results = JSON.stringify(func(req)) || "\'\'";
+
+    return results;
+}
+
+/**
+ * Looks at capture, gets a data file, and returns it
+ * 
+ * @param {string} match 
+ * @param {string} capture 
+ */
+function getData(match, capture){
+    let importPath = dataFolder + '/' + capture + ".json";
+    delete require.cache[require.resolve(importPath)]; //clear cache
+    
+    if (fs.existsSync(importPath)) {
+        //if file exists, we can just require and then return it, so long as the data query exports valid JSON.
+        let importData = require(importPath);
+        delete require.cache[require.resolve(importPath)]; //clear cache
+        delete importData['$schema'] //ignore schema
+
+        return JSON.stringify(importData);
+    } else {
+        log("Located a data path but did not find the specified data file!");
+        return "\'\'";
+    }
+}
+
 
 
 /**
