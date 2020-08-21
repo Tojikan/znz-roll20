@@ -23,9 +23,9 @@ Example:
 
 ### Challenge Levels ###
 
-For every action that might fail, the ZM determines a **challenge level** which is a single level. The player's roll must either **meet or beat** this number in order to succeed. 
+For every action that might fail, the ZM determines a **challenge level** which is a number. The player's roll must either **meet or beat** this number in order to succeed. 
 
-Challenge levels are often described in tiers. The ZM will usually refer to the level by its tier and must challenge levels are determined based around these tiers. There are 5 different tiers of challenge levels. 
+Challenge levels are often described in tiers. The ZM will usually refer to the level by its tier. The tiers are: 
 
 - **Easy**: 1-3
 - **Medium**: 4-6
@@ -47,13 +47,13 @@ Examples:
 `Player shoots with their gun. They spend 3 ammo to make 3 attacks.`
 `Player is trying to kick down a door. They can spend an additional 3 energy (physical action points) to improve the results of their roll by 3.`
 
-Adding resources can help ensure certain actions succeed. If the roll still fails, the player loses the resources they spent without achieving the desired result. Player should manage resources carefully and decide when to spend it and when to reserve it for more dire situations. If they completely run out of a resource, the character may suffer harsh consequences.
+Adding resources can help ensure certain actions succeed. If the roll still fails, the player loses the resources they spent without achieving the desired result. Player should manage resources carefully and decide when to spend it and when to reserve it for more dire situations. If they completely run out of a resource, the character will suffer harsh consequences and possibly death.
 <br/><br/>
     
 
 ### Standard Rolls ###
 
-A standard roll is the common roll used for any action that is not a direct attack against an enemy. These rolls all utilize a single D10 roll for the action and any bonuses are added to the roll. Any additional resources spent gain a flat bonus to the roll result. Players can even overcome natural 1s by spending enough resources.
+A standard roll is the common roll used for any action that is not a direct attack against an enemy. These rolls all utilize a single D10 roll for the action and any bonuses are added to the roll. Any additional resources spent will add a flat bonus to the roll result. Players can even overcome rolls of natural 1s by spending enough resources.
 
 Example:
 
@@ -62,7 +62,7 @@ Example:
 
 ### Resource Roll ####
 
-A resource roll is used for any action that is more challenging than a normal action, such as climbing a wall or swimming across a river. Simply attempting these actions will cost resources such as energy. The result of the roll is used to determine the final resource cost of the action. A higher roll means the final cost has reduced costs. **If the player does not have the resources to complete the action, then it fails regardless of their initial roll**.
+A resource roll is used for any action that is more challenging than a normal action, such as climbing a wall or swimming across a river. Simply attempting these actions will cost resources such as energy. The result of the roll is used to determine the final resource cost of the action. A higher roll means the final cost will be reduced. **If the player does not have the resources to complete the action, then it fails regardless of their initial roll**.
 
 Players can still add on modifiers and bonuses, and spend resources initially to enhance the results of this roll. This may reduce the final resource cost of the action.
 
@@ -91,7 +91,7 @@ Example:
 
 ### Double Down ###
 
-If a player is not happy with the result of a non-combat roll but before the ZM declares the outcome of the roll, they can petition the ZM to *Double-Down* on their roll. A Double-Down allows a player to re-roll the same roll if they pay a sum of resources that is specified by the ZM. If the ZM agrees to allow the double-down, they will then state the cost of the Double-Down. If the player accepts and spends that cost, they may re-roll that roll **but must accept the results of the second roll**. Players **cannot** double-down again on the same action. 
+If a player is not happy with the result of a non-combat roll but before the ZM declares the outcome of the roll, they can petition the ZM to *Double-Down* on their roll. A Double-Down allows a player to re-roll the same roll if they pay a sum of resources that is specified by the ZM. If the ZM agrees to allow the Double-Down, they will then state the cost. If the player accepts and spends that cost, they may re-roll that roll **but must accept the results of the second roll**. Players **cannot** double-down again on the same action. 
 
 The ZM can always refuse a double-down request at anytime. Any previously spent resources are not refunded.
 <br/><br/>

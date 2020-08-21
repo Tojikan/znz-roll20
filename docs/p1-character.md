@@ -16,9 +16,7 @@ On the sheet, there are several sections that each detail an individual aspect o
 
 If running on Roll20, your character will be represented by a character token. You can make adjustments to your health, sanity, and energy through the Roll20 radial buttons.
 
-Players can open the character sheet  in order to manage information or refer to their stats. 
-
-In addition there are some useful features built-in to this game.
+Players can open the character sheet  in order to manage information or refer to their stats. There are additional features built-in to the sheet to automate or simplify processes.
 <br/><br/>
 
 ### Flashlight ###
@@ -31,28 +29,37 @@ On environments with no lighting, your character token will emit a light which i
 
 <br/><br/>
 
-### Macros ###
-
-Macros are a Roll20 feature that allow you to quickly execute a command such as rolling a dice with the click of a button. For some of the more complicated actions, either you or the ZM can add Macros. See the [Scripts and Macros]({{site.baseurl}}/p7-scripts-macros.html) page for more details.
-<br/><br/>
-
-
-### Sheet Rolls ###
+### Rolls and Sheet Rolls ###
 
 Players can make a roll in Roll20 by typing in "/roll" in the chat and entering in a dice notation (such as 1d10+2). This requires you to manually type in the roll and also add up any bonuses.
 
-The ZnZ Character Sheet has built-in rolls on all Attributes, Skills, and Proficiencies. Simply click on the skill or attribute you would like to roll and it should automatically roll your stat, add on any modifiers and equipment bonuses.
+The ZnZ Character Sheet has built-in rolls on all Attributes, Skills, and Proficiencies. Simply click on the skill or attribute you would like to roll and it should automatically roll your stat, add on any modifiers and bonuses.
 <br/><br/>
 
+### Inventory Management ###
 
-### Sheet Workers ###
+Each character sheet comes with an inventory that player's can add items to. To add an item, click on the Add button. To delete or re-order an item, click on the Modify button.
 
-There are a number of Character Sheet scripts that provide useful functionality when managing the sheet
+Certain items will have equip buttons. These will equip the item to a designated slot on the character sheet. This allows you to use the item as a weapon or wear it.
 
-- Calculating Modifiers and Bonuses for Attributes or Skills.
-- Equipping/Unequipping a weapon.
-- Counting up all points added to the sheet.
-- Displaying the description of any Ability/Flaw.
+<br /><br />
+
+### Roll20 Radial Buttons ###
+
+When you click your token in the Roll20 map, 3 radial buttons should appear. These allow you to manipulate your Health, Sanity, and Energy, respectively.
+
+You can modify these Stats by typing numbers in the radial button.
+
+Adding: +(number)
+Subtracting: -(number)
+Setting: (number)
+
+<br /><br />
+
+
+### Macros ###
+
+Macros are a Roll20 feature that allow you to quickly execute a command such as rolling a dice with the click of a button. For some of the more complicated actions, either you or the ZM can add Macros. See the [Scripts and Macros]({{site.baseurl}}/p7-scripts-macros.html) page for more details.
 <br/><br/>
 
 ### API Scripts ###
@@ -64,6 +71,6 @@ ZnZ comes built-in with some Roll20 API Scripts to automate common actions in th
 - Add a new item to your inventory.
 - and more!
 
-Scripts are usually called by typing in a certain command but can also be used in a macro. 
+Scripts are usually called by typing in a certain command and can also be used in a macro. 
 
 See the [Scripts and Macros]({{site.baseurl}}/p7-scripts-macros.html) page for more details.

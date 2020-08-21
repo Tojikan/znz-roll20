@@ -13,7 +13,7 @@ Combat encounters form a major part of this game. As most games, ZnZ combat is t
 
 A combat encounter begins with all players rolling initiative which is a flat D10 roll. Initiative is tracked in the Roll20 Turn Tracker.
 
-Players can roll initiative directly into the tracker by using the Initiative Macro (see [Scripts]({{site.baseurl}}/p7-scripts-macros.html). 
+Players can roll initiative directly into the tracker by using the Initiative Macro (see [Scripts]({{site.baseurl}}/p7-scripts-macros.html) ). 
 
 Players go in order of their initiative.
 <br/><br/>
@@ -23,13 +23,13 @@ Players go in order of their initiative.
 A combat round ends once all players have completed their turns. When a round ends, all undead enemies will then begin their actions and resolve their movement and attacks.
 
 
-When a new round begins, the initiative order resets. In addition, the ZM will add another additional amount to the final **Combat Burden**.
+When a new round begins, the initiative order resets. In addition, the ZM will add more to the final **Combat Burden**.
 
 <br/><br/>
 
 ### Combat Burden ###
 
-Fighting is stressful and taxing and wears away against a person's mental and physical faculties. As the adrenaline begins to wear off after a hard-fought battle, people begin to feel the true burden of the fight and their resources(usually sanity or energy) are taxed depending on the duration and intensity of the fight.
+Fighting is stressful and taxing and wears down a person's mental and physical faculties. As the adrenaline begins to wear off after a hard-fought battle, people begin to feel the true burden of the fight and their resources(usually sanity or energy) are taxed depending on the duration and intensity of the fight.
 
 Each round of combat adds to the final combat burden. Players must therefore balance between spending resources to finish combat early to reduce the tax or carefully measuring resource usage at the risk of a higher combat burden. 
 
@@ -47,7 +47,7 @@ Examples:
 When it is a player's turn, they can take up to **2 Actions**. Available actions include:
 
 - Firing a weapon or making a melee attack
-- Moving their move speed to a target location. This includes traversals such as climbing over an obstacle.
+- Moving their move speed to a target location. This includes traversing over an obstacle, such as climbing over a barricade.
 - Reloading a weapon
 - Equipping a new weapon from the inventory.
 - Preparing to Dodge against an attack.
@@ -100,7 +100,7 @@ Examples:
 
 ``` A player makes a melee attack with 2 attacks. One attack succeeds and one attack was a natural 1. That attack fails and their melee weapon loses 1 durability. They roll the damage dice for the successful attack to determine damage. Then the player spends 2 energy.  ```
 
-``` A player does a ranged attack with 3 attacks. 2 of those attacks miss and 1 attack critically strikes. Normally the player rolls the weapon damage once, but since it is a crit, they roll the damage 3 times since the weapon had a Crit Bonus of 2 (add 2 rolls on top of the regular roll). They spends 3 ammo. ```
+``` A player does a ranged attack with 3 attacks. 2 of those attacks miss and 1 attack critically strikes. Normally the player rolls the weapon damage once, but since it is a crit, they roll the damage 3 times since the weapon had a Crit Bonus of 2 (add 2 rolls on top of the regular roll). They spend 3 ammo. ```
 
 <br/><br/>
 
@@ -110,7 +110,7 @@ If the above sounds complicated, that's probably because it is. Fortunately, if 
 
 The script will automatically calculate the results of your attack, subtracts the necessary resources, and outputs the attack results into the chat.
 
-Please see the [Scripts]({{site.baseurl}}/pX1-scripts.html) page for more details.
+Please see the [Attack Script]({{site.baseurl}}/p7a-attack-script.html) page for more details.
 <br/><br/>
 
 
@@ -126,7 +126,7 @@ Ranged weapons all have a Weapon Range field consists of two numbers (looking li
 
 In general:
 
-- If your character in point-blank range (1 space away) of the target, the attack will be an **Easy** challenge.
+- If your character is in point-blank range (1 space away) of the target, the attack will be an **Easy** challenge.
 - If your character is within the effective range, the attack will be a **Medium** challenge.
 - If your character is outside the effective range but within the max range, the attack will be a **Hard** challenge.
 - If your character is outside of the max range, the attack will be an **Insane** or **Impossible** challenge.

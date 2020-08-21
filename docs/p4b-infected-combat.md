@@ -22,7 +22,7 @@ If your character gets bitten during combat, they will be infected and eventuall
 
 When the Infected attempt to bite your character and you fail to dodge, your character will fight back and try to push them away. This causes you to enter a **grapple** where the Infected is trying to bite your face off and you're trying to not let that happen.  **You will take HP damage and Sanity damage when entering a grapple**. If you are grappled by the start of your next turn, the only action you can take is to attempt the break the grapple as an action using a Strength check. If you beat the challenge, you will break the grab. If you fail to do so, you will remained grabbed. 
 
-If you remain grabbed by the Infected by the start of its turn at the end of the round, the Infected **will bite you.** Therefore, it is of the utmost importance to try and break grabs on yourself or your allies.
+If you remain grabbed by the Infected by the start of its turn at the end of the round, the Infected **will bite you.**. Essentially, you have one round to try and break a grab. Therefore, it is of the utmost importance to try and break grabs on yourself or your allies.
 <br/><br/>
 
 #### Don't Be Alone ####

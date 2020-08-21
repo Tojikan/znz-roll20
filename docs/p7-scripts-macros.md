@@ -57,5 +57,5 @@ There are additional parameters you can add to this command to customize your at
 
 ### Pickup Script ###
 
-Items have several fields and it can be a pain to pick them up. Luckily, there's a script that allows you to quickly pick up pre-made items. This is a more complicated script so definitely refer to  [pickup script]]({{site.baseurl}}/p7a-pickup-script.html)
+Items have several fields and it can be a pain to pick them up. Luckily, there's a script that allows you to quickly pick up pre-made items. This is a more complicated script so definitely refer to  [pickup script]({{site.baseurl}}/p7a-pickup-script.html)
 

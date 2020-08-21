@@ -43,4 +43,6 @@ Armor can have **Damage Reduction** which reduces any combat damage that a playe
 
 ### Pickup Script ###
 
-TBD
+The pickup script can be used to add items to your inventory right from the chat. The most useful feature is the ability to add an item template, which is an item with fields prefilled.
+
+See [Pick up Script]({{site.baseurl}}/p7b-pickup-script.html) for more information.

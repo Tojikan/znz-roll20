@@ -26,5 +26,5 @@ A long rest is a full night's rest, where a player can safely spend 8 hours to r
 The long rest confers several benefits over a short rest.
 
 - Any food, medicine, or consumable has a 1.5x effect (Restores 1.5x as much stats, rounded down).
-- Players can spend XP to learn improve their characters.
+- Players can spend XP to improve their characters.
 - Socializing with a Humanity check has a 1.5x multiplier to the roll. Players can also use the check to restore health.

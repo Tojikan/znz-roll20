@@ -51,5 +51,5 @@ EXP is used to enable character growth. Players obtain EXP for completing tasks 
 - **Increase a Stat's Maximum Value by 5** - 10 EXP
 - **Add a skill/proficiency point or improve a hit roll** - 20 EXP
 - **Add an attribute point** - 30 EXP
-- **Gain a new abaility** - 80 EXP
+- **Gain a new ability** - 80 EXP
 <br/><br/>
