@@ -13,7 +13,7 @@
         {
             "name" : "High Octane",
             "value" : "high_octane",
-            "description" : "You can take one additional action on your turn by spending 3 energy."
+            "description" : "You can take one additional action on your turn by spending 2 energy."
         },
         {
             "name" : "Triage",

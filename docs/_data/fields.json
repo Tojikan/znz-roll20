@@ -235,7 +235,7 @@
             "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
-            "description": "Humanity is the unique quality of human beings to connect with other people. Humanity allows you to improve how you interact with other survivors. Humanity helps players cope with the struggles of the apocalyptic world, increasing the amount of Sanity or Energy restored from environmental effects and socializing.",
+            "description": "Humanity is the unique quality of human beings to connect with other people. Humanity allows you to improve how you interact with other survivors. Humanity helps players cope with the struggles of the apocalyptic world, increasing the amount resource restored from environmental effects and certain Resting actions.",
             "area": "attributes",
             "canonical": "humanity"
         },
@@ -248,7 +248,7 @@
             "has_bonus_check" : true,
             "default_value": 3,
             "mod_default": 0,
-            "description": "Luck is a mysterious attribute that represents your characters fortune in various scenarios. Higher luck allows you to scavenge better loot. In certain situations where your other attributes can't help, luck can be the deciding factor. Luck also increases your critical hit chance - every time you increase your luck modifier, you can add a +1 to either your melee or ranged hit roll in the character sheet, which improves your chance of landing a critical strike. ",
+            "description": "Luck is a mysterious attribute that represents your character's fortune in various scenarios. Higher luck allows you to scavenge better loot. In certain situations where your other attributes can't help, luck can be the deciding factor. Luck also increases your critical hit chance - every time you increase your luck modifier, you can add a +1 to either your melee or ranged hit roll in the character sheet, which improves your chance of landing a critical strike. ",
             "area": "attributes",
             "canonical": "luck"
         }
@@ -425,7 +425,7 @@
             "attr_name": "riding",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "Ability to ride and tame a horse.",
+            "description": "Ability to ride vehicles such as motorcycles or a horse.",
             "area": "skills"
         },
         {
