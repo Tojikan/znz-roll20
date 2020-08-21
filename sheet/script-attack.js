@@ -6,6 +6,7 @@ var Attack = Attack || (function() {
         energyStat = "energy",
         meleeHitRoll = "melee_hit",
         rangedHitRoll = "ranged_hit",
+        unarmedProf = "prof_unarmed",
         rangedPrefix ="equipped_ranged_weapon",
         meleePrefix = "equipped_melee_weapon",
         weaponNameField = "item_name",
@@ -58,19 +59,16 @@ var Attack = Attack || (function() {
             args.difficulty = 1;
         }
 
-        //Determine Prefix
+        //Determine and Inputs
         var prefix = args.type == "melee" ? meleePrefix : rangedPrefix,
-            reversed = false;
-
-            
-        // Player Inputs
-        var numAttacks = parseInt(args.attacks,10) || 1,
-        hitRoll =  ( (args.type == "melee") ? (parseInt(getAttrByName(character.id, meleeHitRoll), 10)) : (parseInt(getAttrByName(character.id, rangedHitRoll))) ) || 10,
-        hitBonus = parseInt(args.bonus,10) || 0,
-        weaponName =getAttrByName(character.id, prefix + "_" + weaponNameField) || '', //set this here out of laziness, this gets used in outputAttack
-        baseDifficulty = (args.difficulty == "0") ? 0 : ((parseInt(args.difficulty,10) * 3) || 3),
-        inputFields = makePrefixedObject(prefix, fields.weaponFields),
-        attackResult = null;
+            numAttacks = parseInt(args.attacks,10) || 1,
+            baseDifficulty = (args.difficulty == "0") ? 0 : ((parseInt(args.difficulty,10) * 3) || 3),
+            weaponName = getAttrByName(character.id, prefix + "_" + weaponNameField) || '', //set this here out of laziness, this gets used in outputAttack
+            inputFields = makePrefixedObject(prefix, fields.weaponFields),
+            hitBonus = parseInt(args.bonus,10) || 0,
+            unarmed = false,
+            reversed = false,
+            attackResult = null;
 
         //If alternate, we melee with our ranged weapon and throw our melee weapon.
         if (("reversed") in args && args.reversed == true){
@@ -78,9 +76,16 @@ var Attack = Attack || (function() {
             reversed = true;
         }
 
+        //If alternate, we melee with our ranged weapon and throw our melee weapon.
+        if (("unarmed") in args && args.unarmed == true){
+            if (args.type === "melee"){
+                unarmed = true;
+            }
+        }
+
         //Calculate an Attack
         try{
-            attackResult = calculateAttack(inputFields, character.id, args.type, numAttacks, hitRoll, hitBonus, baseDifficulty, reversed)
+            attackResult = calculateAttack(inputFields, character.id, args.type, numAttacks, baseDifficulty, hitBonus, reversed, unarmed)
 
         } catch(e){
             sendMessage(`The following error occurred while calculating your ${args.type} attack. Please make sure all the sheet fields are entered properly with the correct format and try again. <br/><br/>'${e}'`, sender, true, "danger");
@@ -103,87 +108,44 @@ var Attack = Attack || (function() {
 
             //Output into the chat. 
             outputAttack(attackResult, character.get('name'), args.type, weaponName);
-            
-            try{
-                //For Debugging 
-                if ("debug" in args && args.debug == true){
-                    log("------Debug---------");
-                    log("args:");
-                    log(args);
-                    log("fields:");
-                    log(fields);
-                    log("numAttacks: " + numAttacks);
-                    log("hitRoll: " + hitRoll);
-                    log("hitBonus: " + hitBonus);
-                    log("prefix: " + prefix);
-                    log("baseDifficulty: " + baseDifficulty);
-                    log("attackResult: ");
-                    log(attackResult);
-                }
-                
-                //For testing results
-                if ("test" in args && args.test == true){
-                    log("------Test---------");
-                    log(attackResult);
-                    log(`Total Damage: ${attackResult.finalDamage}`);
-                    log(`Total Hit Bonus: ${attackResult.attrBonus + attackResult.profBonus + hitBonus}`);
-                    log(`Resource Spent: ${attackResult.resourceUsed}`);
-                    log(`Durability Lost: ${attackResult.durabilityLost}`);
-                    log(`Exhausted: ${attackResult.exhausted}`);
-                    log(`Weapon Break: ${attackResult.weaponBroken}`);
-                    
-                    var critCount = 0,
-                        failCount = 0,
-                        regHitCount = 0,
-                        regMissCount = 0;
-    
-                    for (const atk of attackResult.rolls){
-                        if (atk.atkCrit){
-                            critCount++;
-                        } else if (atk.atkFail){
-                            failCount++;
-                        } else if (atk.atkHit && !atk.atkCrit){
-                            regHitCount++;
-                        } else if (!atk.atkHit && !atk.atkFail){
-                            regMissCount++;
-                        }
-                    }
-    
-                    log(`Number of Critical Hits: ${critCount}`);
-                    log(`Number of Critical Fails: ${failCount}`);
-                    log(`Regular Hits: ${regHitCount}`);
-                    log(`Regular Misses: ${regMissCount}`);
-                }
-            } catch(e){
-                sendMessage(`Debug/Test Error. <br/><br/>'${e}'`, sender, true, "danger");
-                log(`Error during debug/test - ${e}`);
-            }
         }
     },
     /**
+     * TODO - rework this
+     * 
      * This method calculates an attack based on inputs and returns a JSON object representing the results of an attack.
      * There are some global properties which describe the circumstances of the attack and an Attacks array which stores the result of each attack and their rolls.
      */
-    calculateAttack = function(fields, id, type, numAttacks, hitRoll, hitBonus, baseDifficulty, reversed) {
-        
-        var isMelee = (type === "melee"),
-            currResource = isMelee ? parseInt(getAttrByName(id, energyStat), 10) : parseInt(getAttrByName(id, fields.ammo), 10), //energy or ammo
-            damageDice = isMelee ? parseDamageDice(getAttrByName(id, fields.meleedamage)) : parseDamageDice(getAttrByName(id, fields.rangeddamage)), //melee or ranged dmg
-            attrHitBonus = isMelee ? getAttrModAndBonus(strengthAttr, id, true) : getAttrModAndBonus(dextAttr, id, true), //add str/dext to attack
-            resourceCost = ( isMelee ? parseInt(getAttrByName(id, fields.meleecost), 10) : 1) || 1, //energy cost or 1
-            typeProf = ( isMelee ? getAttrByName(id, fields.meleetype) : getAttrByName(id, fields.rangedtype) ), //get the weapon type value
-            profBonus =  getAttrModAndBonus(typeProf, id, false), //The weapon type value equals a proficiency attr, so we can use that in getAttrByName
+    calculateAttack = function(fields, id, type, numAttacks, baseDifficulty, hitBonus, reversed, unarmed) {
+
+        //Select fields based off if melee or not.
+        const isMelee = (type === "melee"),
+            resourceType = isMelee ? energyStat : fields.ammo,
+            hitAttr = isMelee ? strengthAttr : dextAttr,
+            attackProf = unarmed ? unarmedProf : (isMelee ? fields.meleetype : fields.rangedtype),
+            damageType = isMelee ? fields.meleedamage : fields.rangeddamage,
+            critType = isMelee ? fields.meleecrit : fields.rangedcrit,
+            resourceCost = isMelee ? parseInt(getAttrByName(id, fields.meleecost), 10) : 1,
+            hitRollType = isMelee ? meleeHitRoll : rangedHitRoll;
+
+        var currResource =  parseInt(getAttrByName(id, resourceType), 10),
+            damageDice = unarmed ? parseDamageDice('1d1') : parseDamageDice(getAttrByName(id, damageType)),
+            hitRoll = parseInt(getAttrByName(id, hitRollType)) || 10,
+            profBonus =  getAttrModAndBonus(attackProf, id, false), //The weapon type value equals a proficiency attr, so we can directly retrieve a weapon proficiency using weapon type field
             durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
-            critBonus = ( isMelee ? parseInt(getAttrByName(id, fields.meleecrit), 10) : parseInt(getAttrByName(id, fields.rangedcrit), 10) ) || 1,
+            attrHitBonus =  getAttrModAndBonus(hitAttr, id, true), //add str/dext to attack
+            critBonus =  parseInt(getAttrByName(id, critType), 10) || 1,
+            durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
             resourceUsed = 0,
             finalDamage = 0,
             durabilityLost = 0,
             attackResult = {
                 type: type,
-                resourceType: isMelee ? energyStat : fields.ammo,
-                reversed: reversed,
-                baseDifficulty: baseDifficulty,
                 numAttacks: numAttacks,
+                baseDifficulty: baseDifficulty,
+                resourceType: resourceType,
+                reversed: reversed,
+                unarmed: unarmed,
                 hitRoll: hitRoll,
                 hitBonus: hitBonus,
                 attrBonus: attrHitBonus,
@@ -197,6 +159,7 @@ var Attack = Attack || (function() {
                 exhausted: false,
                 rolls: []
             };
+
 
         // Required fields for calculating an attack. Other ones have a default value. 
         if ( isNaN(currResource) || isNaN(attrHitBonus) || damageDice === null) {
@@ -246,7 +209,7 @@ var Attack = Attack || (function() {
                 attack.atkHit = false;
                 attack.atkCrit = false;
                 attack.atkFail = true;
-                if (isMelee) {
+                if (isMelee && !unarmed) {
                     durabilityLost++;
                     if (durabilityLost >= durability){
                         attackResult.weaponBroken = true; // this stops the loop after the next iteration.
@@ -340,16 +303,16 @@ var Attack = Attack || (function() {
             case 0:
                 difficulty = "Easy";
                 break;
-            case 1:
+            case 3:
                 difficulty = "Medium";
                 break;
-            case 2:
+            case 6:
                 difficulty = "Hard";
                 break;
-            case 3:
+            case 9:
                 difficulty = "Insane";
                 break;
-            case 4:
+            case 12:
                 difficulty = "Impossible";
                 break;
             default:
@@ -359,7 +322,7 @@ var Attack = Attack || (function() {
         
         var outputText = `\
         <h4>${typeText} Attack</h4>\
-        <div>${name} tries to attack ${attack.numAttacks} time(s) with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}</div><br/>\
+        <div>${attack.unarmed ? `${name} makes an unarmed attack! ` : `${name} tries to attack ${attack.numAttacks} time(s) with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}`}</div><br/>\
         ${attack.reversed ? (isMelee ? `<div>${name} melee attacks with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
         <div>Difficulty: ${difficulty}</div><br/>\
         <div>Crit Multiplier: <strong>${attack.critBonus}x</strong></div>\
@@ -395,6 +358,7 @@ var Attack = Attack || (function() {
         <div>Total Damage: <strong>${attack.finalDamage}</strong></div>\
         <div>${ isMelee ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
         ${isMelee ? `<div>Durability Lost:  <strong>${attack.durabilityLost}</strong></div>` : ''}\
+        <div>Attacks Made:  <strong>${attack.rolls.length}</strong></div>\
         </div>\ `;
         
         sendChat(

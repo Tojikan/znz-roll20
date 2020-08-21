@@ -433,7 +433,7 @@
             "attr_name": "botany",
             "has_bonus": true,
             "has_bonus_check" : true,
-            "description": "Knowledge and ability on growing and taking care of plants.",
+            "description": "Knowledge and ability on plants and how to grow/take care of them.",
             "area": "skills"
         },
         {
@@ -534,6 +534,7 @@
             "has_bonus_check" : true,
             "affects_combat": false,
             "combat_type": "",
+            "canonical": "unarmedprof",
             "description": "Improves aim of unarmed attacks.",
             "area": "proficiencies"
         },

@@ -14,7 +14,11 @@ var Pickup = Pickup || (function() {
     //How args translate to itemfields
     argOptions = ((({runFunc: () => { 
         let data = require('./data/itemfield-shorthand.json');
-        return data.args; 
+        let result = {};
+        for (let key of data.args){
+            result[key.name] = key.field;
+        }
+        return result; 
     }}))),
     hasMaxField = ((({runFunc: () => {
         let data = require('./data/fields.json'),
