@@ -255,7 +255,7 @@
         "weapon_range": 3,
         "weapon_range_max": 6
     },
-    "shotgun1" : {
+    "shotgun2" : {
         "item_type": "ranged",
         "item_name": "Shotgun 2",
         "item_weight": 4,
