@@ -16,6 +16,30 @@ const dataFolder = './data/';
 const queryFolder = './data-query/';
 const prefixPath = './data/prefixes.json';
 
+
+
+
+gulp.task('test', function() {
+    return gulp.src(['test/dataQueryTestVars.js'])
+        .pipe(replace(/\(\(\({(.*?)}\)\)\)/gs, function(match, capture){
+            // log(match);
+            // log(capture);
+            
+            let obj = eval(match);
+            
+            delete require.cache[require.resolve("./data-query.js")]; //Clear cache
+            let query = require("./data-query.js");
+
+            console.log(query.handleDataQuery(obj))
+
+            // return query.handleDataQuery(obj);
+
+    }));
+});
+
+
+
+
 //compile scss into css
 gulp.task('style', function() {
     return gulp.src('src/scss/main.scss')
