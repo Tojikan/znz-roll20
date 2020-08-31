@@ -45,10 +45,8 @@ This is valid:
 
 ### Available Parameters ###
 
-| Skill | Description |
-| ---------------------- | ----------------------------- | 
 {% for field in site.data.itemfield-shorthand.args -%}
-| {{field.name}} | {{field.hint}}         |
+- **{{field.name}}**: {{field.hint}} 
 {% endfor -%}
 
 
