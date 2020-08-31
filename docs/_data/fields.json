@@ -349,6 +349,14 @@
             "area": "skills"
         },
         {
+            "display_name": "Foreign Language",
+            "attr_name": "foreign_language",
+            "has_bonus": true,
+            "has_bonus_check" : true,
+            "description": "Knowledge in a specific language. Every time you add a point to this skill, you may add a Language that your character knows.",
+            "area": "skills"
+        },
+        {
             "display_name": "Boat Piloting",
             "attr_name": "boat_piloting",
             "has_bonus": true,
@@ -378,14 +386,6 @@
             "has_bonus": true,
             "has_bonus_check" : true,
             "description": "Allows you to craft clothes.",
-            "area": "skills"
-        },
-        {
-            "display_name": "Metalworking",
-            "attr_name": "metalworking",
-            "has_bonus": true,
-            "has_bonus_check" : true,
-            "description": "Allows you to craft objects made of metal.",
             "area": "skills"
         },
         {

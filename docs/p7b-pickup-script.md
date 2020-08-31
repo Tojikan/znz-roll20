@@ -75,7 +75,7 @@ This will add a blunt1 template item with the name "Real name"
 
 {% for item in site.data.items-weapon -%}
 {% if item[0] != '$schema' -%}
-- {{ item[0] }}
+- **{{ item[0] }}** - {{ item[1].description }}
 {% endif -%}
 {% endfor -%}
 
@@ -86,7 +86,7 @@ This will add a blunt1 template item with the name "Real name"
 
 {% for item in site.data.items-armor -%}
 {% if item[0] != '$schema' -%}
-- {{ item[0] }}
+- **{{ item[0] }}** - {{ item[1].description }}
 {% endif -%}
 {% endfor -%}
 <br>
@@ -95,7 +95,7 @@ This will add a blunt1 template item with the name "Real name"
 
 {% for item in site.data.items-misc -%}
 {% if item[0] != '$schema' -%}
-- {{ item[0] }}
+- **{{ item[0] }}** - {{ item[1].item_effect }}
 {% endif -%}
 {% endfor -%}
 <br>

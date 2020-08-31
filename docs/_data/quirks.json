@@ -23,7 +23,7 @@
         {
             "name" : "Cheerleader",
             "value" : "cheerleader",
-            "description" : "5 times a play session, you can give any player a +2 bonus to their next roll."
+            "description" : "You spend your own Health, Energy, or Sanity to improve the rolls of other players prior to them making a roll."
         },
         {
             "name" : "Encyclopedia",
@@ -60,12 +60,12 @@
         {
             "name" : "Fainthearted",
             "value" : "fainthearted",
-            "description" : "If you roll an initiative of 3 or lower, your first action in combat is to freeze up. "
+            "description" : "If you roll an initiative of 6 or lower, your first action in combat is to freeze up. "
         },
         {
             "name" : "Nearsighted",
             "value" : "nearsighted",
-            "description" : "Everytime you roll a natural 1, your glasses will fall off. All Perception checks fail and ranged attacks receive Impossible+ difficulty until you spend an action to pick them up and put them back on. Your glasses can break."
+            "description" : "Anytime you roll a natural 1, your glasses may fall off. All Perception checks fail and ranged attacks receive Impossible+ difficulty until you spend an action to pick them up and put them back on. Your glasses can break."
         },
         {
             "name" : "Unlucky",

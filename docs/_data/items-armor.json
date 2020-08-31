@@ -7,7 +7,8 @@
         "item_type" : "body",
         "equipment_dmg_reduce" : 1,
         "equipment_stat_0" : "dexterity",
-        "equipment_stat_0_mod" : -1
+        "equipment_stat_0_mod" : -1,
+        "description": "Reduces damage and dexterity by 1"
     },
     "footballpads": {
         "item_name" : "Football Pads",
@@ -16,14 +17,16 @@
         "item_type" : "body",
         "equipment_dmg_reduce" : 2,
         "equipment_stat_0" : "dexterity",
-        "equipment_stat_0_mod" : -1
+        "equipment_stat_0_mod" : -1,
+        "description": "Reduces damage by 2 and dexterity by 1"
     },
     "bicyclehelmet": {
         "item_name" : "Bicycle Helmet",
         "item_weight" : "1",
         "item_quantity" : "1",
         "item_type" : "head",
-        "equipment_dmg_reduce" : 1
+        "equipment_dmg_reduce" : 1,
+        "description": "Reduces damage by 1"
     },
     "footballhelmet": {
         "item_name" : "Football Helmet",
@@ -31,7 +34,8 @@
         "item_quantity" : "1",
         "item_type" : "head",
         "equipment_dmg_reduce" : 2,
-        "equipment_stat_0" : "dexterity",
-        "equipment_stat_0_mod" : -1
+        "equipment_stat_0" : "perception",
+        "equipment_stat_0_mod" : -1,
+        "description": "Reduces damage by 2 and perception by 2"
     }
 }

@@ -18,7 +18,8 @@
         "ranged_damage": "1d4+1",
         "ranged_crit_bonus": 1,
         "weapon_range": 4,
-        "weapon_range_max": 8
+        "weapon_range_max": 8,
+        "description": "High Durability Melee"
     },
     "blunt2" : {
         "item_type": "melee",
@@ -38,7 +39,8 @@
         "ranged_damage": "1d6+2",
         "ranged_crit_bonus": 1,
         "weapon_range": 3,
-        "weapon_range_max": 6
+        "weapon_range_max": 6,
+        "description": "High Durability Melee"
     },
     "sharp1" : {
         "item_type": "melee",
@@ -58,7 +60,8 @@
         "ranged_damage": "1d6+2",
         "ranged_crit_bonus": 1,
         "weapon_range": 4,
-        "weapon_range_max": 8
+        "weapon_range_max": 8,
+        "description": "High Damage Melee"
     },
     "sharp2" : {
         "item_type": "melee",
@@ -69,16 +72,17 @@
         "melee_durability": 4,
         "melee_durability_max": 4,
         "melee_energy_cost": 1,
-        "melee_damage": "1d8+2",
+        "melee_damage": "1d8+3",
         "melee_crit_bonus": 1,
         "weapon_reach": 1,
         "ranged_type": "prof_throwing",
         "ranged_ammo": 1,
         "ranged_reloads": 0,
-        "ranged_damage": "1d8+2",
+        "ranged_damage": "1d8+3",
         "ranged_crit_bonus": 1,
         "weapon_range": 3,
-        "weapon_range_max": 6
+        "weapon_range_max": 6,
+        "description": "High Damage Melee"
     },
     "heavy1" : {
         "item_type": "melee",
@@ -86,39 +90,41 @@
         "item_weight": 3,
         "item_quantity": 1,
         "melee_type": "prof_heavy_melee",
-        "melee_durability": 3,
-        "melee_durability_max": 3,
+        "melee_durability": 4,
+        "melee_durability_max": 4,
         "melee_energy_cost": 2,
-        "melee_damage": "1d10+1>3",
+        "melee_damage": "1d8+2>3",
         "melee_crit_bonus": 2,
         "weapon_reach": 1,
         "ranged_type": "prof_throwing",
         "ranged_ammo": 1,
         "ranged_reloads": 0,
-        "ranged_damage": "1d10+1",
+        "ranged_damage": "1d8+2",
         "ranged_crit_bonus": 1,
         "weapon_range": 3,
-        "weapon_range_max": 6
+        "weapon_range_max": 6,
+        "description": "High Damage and Durability Melee with High Energy Cost"
     },
     "heavy2" : {
         "item_type": "melee",
-        "item_name": "Heavy Weapon 1",
+        "item_name": "Heavy Weapon 2",
         "item_weight": 4,
         "item_quantity": 1,
         "melee_type": "prof_heavy_melee",
-        "melee_durability": 5,
-        "melee_durability_max": 5,
+        "melee_durability": 7,
+        "melee_durability_max": 7,
         "melee_energy_cost": 3,
-        "melee_damage": "1d12+1>4",
+        "melee_damage": "1d10+3>4",
         "melee_crit_bonus": 2,
         "weapon_reach": 1,
         "ranged_type": "prof_throwing",
         "ranged_ammo": 1,
         "ranged_reloads": 0,
-        "ranged_damage": "1d12+1",
+        "ranged_damage": "1d10+3",
         "ranged_crit_bonus": 2,
         "weapon_range": 2,
-        "weapon_range_max": 4
+        "weapon_range_max": 4,
+        "description": "High Damage and Durability Melee with High Energy Cost"
     },
     "long1" : {
         "item_type": "melee",
@@ -138,7 +144,8 @@
         "ranged_damage": "1d6+1",
         "ranged_crit_bonus": 1,
         "weapon_range": 3,
-        "weapon_range_max": 5
+        "weapon_range_max": 5,
+        "description": "High Reach Blunt Weapon"
     },
     "long2" : {
         "item_type": "melee",
@@ -158,7 +165,8 @@
         "ranged_damage": "1d8+1",
         "ranged_crit_bonus": 1,
         "weapon_range": 2,
-        "weapon_range_max": 4
+        "weapon_range_max": 4,
+        "description": "High Reach Blunt Weapon"
     },
     "pistol1" : {
         "item_type": "ranged",
@@ -177,7 +185,8 @@
         "ranged_damage": "1d6+1",
         "ranged_crit_bonus": 1,
         "weapon_range": 6,
-        "weapon_range_max": 12
+        "weapon_range_max": 12,
+        "description": "High Range Pistol"
     },
     "pistol2" : {
         "item_type": "ranged",
@@ -196,7 +205,8 @@
         "ranged_damage": "1d8+1>2",
         "ranged_crit_bonus": 1,
         "weapon_range": 6,
-        "weapon_range_max": 12
+        "weapon_range_max": 12,
+        "description": "High Range High Capacity Pistol"
     },
     "revolver1" : {
         "item_type": "ranged",
@@ -212,10 +222,11 @@
         "ranged_type": "prof_handguns",
         "ranged_ammo": 4,
         "ranged_reloads": 3,
-        "ranged_damage": "1d7+2",
+        "ranged_damage": "1d8+2>2",
         "ranged_crit_bonus": 2,
         "weapon_range": 4,
-        "weapon_range_max": 8
+        "weapon_range_max": 8,
+        "description": "High Damage Low Capacity Pistol"
     },
     "revolver2" : {
         "item_type": "ranged",
@@ -234,7 +245,8 @@
         "ranged_damage": "1d10+2>3",
         "ranged_crit_bonus": 2,
         "weapon_range": 4,
-        "weapon_range_max": 8
+        "weapon_range_max": 8,
+        "description": "High Damage Pistol"
     },
     "shotgun1" : {
         "item_type": "ranged",
@@ -253,7 +265,8 @@
         "ranged_damage": "4d3+2",
         "ranged_crit_bonus": 1,
         "weapon_range": 3,
-        "weapon_range_max": 6
+        "weapon_range_max": 6,
+        "description": "Low Range, High Damage"
     },
     "shotgun2" : {
         "item_type": "ranged",
@@ -272,7 +285,8 @@
         "ranged_damage": "4d4+3",
         "ranged_crit_bonus": 1,
         "weapon_range": 3,
-        "weapon_range_max": 5
+        "weapon_range_max": 5,
+        "description": "Low Range, High Damage"
     },
     "rifle1" : {
         "item_type": "ranged",
@@ -286,12 +300,13 @@
         "melee_crit_bonus": 1,
         "weapon_reach": 1,
         "ranged_type": "prof_rifles",
-        "ranged_ammo": 8,
+        "ranged_ammo": 5,
         "ranged_reloads": 0,
-        "ranged_damage": "1d8+1",
+        "ranged_damage": "1d10+1",
         "ranged_crit_bonus": 1,
-        "weapon_range": 6,
-        "weapon_range_max": 12
+        "weapon_range": 7,
+        "weapon_range_max": 14,
+        "description": "High Range, High Damage, Low Capacity"
     },
     "rifle2" : {
         "item_type": "ranged",
@@ -307,9 +322,50 @@
         "ranged_type": "prof_rifles",
         "ranged_ammo": 10,
         "ranged_reloads": 0,
-        "ranged_damage": "1d10+2",
+        "ranged_damage": "1d8+3",
         "ranged_crit_bonus": 2,
-        "weapon_range": 6,
-        "weapon_range_max": 12
+        "weapon_range": 7,
+        "weapon_range_max": 14,
+        "description": "High Range, High Capacity"
+    },
+    "smg1" : {
+        "item_type": "ranged",
+        "item_name": "SMG 1",
+        "item_weight": 4,
+        "item_quantity": 1,
+        "melee_type": "prof_blunt_melee",
+        "melee_durability": 2,
+        "melee_energy_cost": 1,
+        "melee_damage": "1d6+1",
+        "melee_crit_bonus": 1,
+        "weapon_reach": 1,
+        "ranged_type": "prof_rifles",
+        "ranged_ammo": 8,
+        "ranged_reloads": 0,
+        "ranged_damage": "1d8+1",
+        "ranged_crit_bonus": 2,
+        "weapon_range": 5,
+        "weapon_range_max": 10,
+        "description": "Medium Range, Capacity, and Damage"
+    },
+    "smg2" : {
+        "item_type": "ranged",
+        "item_name": "SMG 2",
+        "item_weight": 4,
+        "item_quantity": 1,
+        "melee_type": "prof_blunt_melee",
+        "melee_durability": 2,
+        "melee_energy_cost": 1,
+        "melee_damage": "1d6+1",
+        "melee_crit_bonus": 1,
+        "weapon_reach": 1,
+        "ranged_type": "prof_rifles",
+        "ranged_ammo": 12,
+        "ranged_reloads": 0,
+        "ranged_damage": "1d8+3",
+        "ranged_crit_bonus": 2,
+        "weapon_range": 5,
+        "weapon_range_max": 10,
+        "description": "Medium Range and Damage, High Capacity"
     }
 }
