@@ -203,7 +203,7 @@
         {
             "display_name": "Dexterity",
             "attr_name": "dexterity",
-            "reminder_note": "Dodging, Ranged Hit",
+            "reminder_note": "Ranged Hit, Dodging",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,
@@ -216,7 +216,7 @@
         {
             "display_name": "Tenacity",
             "attr_name": "tenacity",
-            "reminder_note": "Mental Fortitude and Nerves",
+            "reminder_note": "Mental Fortitude, Nerves, Endurance",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,
@@ -229,7 +229,7 @@
         {
             "display_name": "Humanity",
             "attr_name": "humanity",
-            "reminder_note": "Socialability, Stress Reduce",
+            "reminder_note": "Socialability, Resting",
             "has_mod": true,
             "has_bonus": true,
             "has_bonus_check" : true,

@@ -55,12 +55,13 @@ var Pickup = Pickup || (function() {
 
         //!!attack should be in 0. If not, they probably forgot to put a space between !!attack and an arg.
         if (!("0" in args)){
-            sendMessage("Unspecified attack error. Did you forget to put a space somewhere?", sender, true, "danger");
+            sendMessage("Unspecified pickup error. Did you forget to put a space somewhere?", sender, true, "danger");
             return; 
         };
 
         let itemValues = getNewItemFieldValuesFromArgs(args);
         createNewItemRow(itemValues, character);
+        sendMessage(`${character.get('name')} picked up ${itemValues.item_quantity || 1} ${itemValues.item_name}(s)`, sender, false, "info");
 
     },
     /**
@@ -129,102 +130,6 @@ var Pickup = Pickup || (function() {
                 createObj("attribute", attr);
             }
         }
-    },
-    /**
-     * Output the results of the attack into chat.
-     */
-    outputAttack = function(attack, name, type, weaponName=''){
-        
-        const tableStyle = 'style="width:100%; text-align:center; margin-bottom: 10px;"',
-            thStyle = 'style="text-align:center"',
-            trStyle = 'style="margin-top: 10px; border-top: solid 1px #d3d3d3; border-bottom: solid 1px #d3d3d3"',
-            tdStyle = 'vertical-align: top; padding: 10px;', //no style declaration
-            divStyle = 'style="font-size: 21px; font-weight: 700; margin-bottom: 7px;"',
-            rollStyle = 'style="border: solid 1px #d3d3d3; padding: 2px; background: white;"',
-            msgStyle = 'style="border: solid 1px lightgray; padding: 1px 3px; background: white;"',
-            wrapperStyle = 'style="border: solid 1px lightgray; padding: 3px;"',
-            isMelee = (type == "melee"),
-            typeText = isMelee ? 'Melee' : 'Ranged',
-            attrType = isMelee ? 'Strength' : 'Dexterity',
-            totalAttackBonus = attack.profBonus + attack.attrBonus + attack.hitBonus;
-
-        var difficulty = ""
-        switch(attack.baseDifficulty) {
-            case 0:
-                difficulty = "Easy";
-                break;
-            case 1:
-                difficulty = "Medium";
-                break;
-            case 2:
-                difficulty = "Hard";
-                break;
-            case 3:
-                difficulty = "Insane";
-                break;
-            case 4:
-                difficulty = "Impossible";
-                break;
-            default:
-                difficulty = "Medium (Unk)"
-
-        }
-        
-        var outputText = `\
-        <h4>${typeText} Attack</h4>\
-        <div>${name} tries to attack ${attack.numAttacks} time(s) with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}</div><br/>\
-        ${attack.reversed ? (isMelee ? `<div>${name} melee attacks with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
-        <div>Difficulty: ${difficulty}</div><br/>\
-        <div>Crit Multiplier: <strong>${attack.critBonus}x</strong></div>\
-        <div style="margin-bottom: 10px;">${attrType} Bonus: <strong>${attack.attrBonus}</strong>  |  Proficiency Bonus: <strong>${attack.profBonus}</strong>  |  Misc Bonus: <strong>${attack.hitBonus}</strong>  |  Total Bonus: <strong>${totalAttackBonus}</strong></div>`;
-
-        
-
-        outputText += `<table ${tableStyle}><tr><th ${thStyle}>Hit</th><th ${thStyle}>Challenge</th><th ${thStyle}>Damage</th></tr> `;
-        //Can't output rolltemplate and regular text in the same message
-        for (let i = 0; i < attack.rolls.length; i++){
-            let atk = attack.rolls[i],
-            hitresult = atk.atkCrit ? 'Crit' : (atk.atkFail ? 'Fail' : (atk.atkHit ? 'Hit' : 'Miss')),
-            hitstyle = atk.atkCrit ? 'color:#135314; background:#baedc3' : (atk.atkFail ? 'color:#791006; background:#FFCCCB' : (atk.atkHit ? 'background:#FFFFBF' : '')),
-            difficulty = atk.difficulty,
-            miniAttr = isMelee ? 'str' : 'dext',
-            dmgDescript = atk.damageRolls.map((x)=>{return `<span ${rollStyle}>${x}</span>`}).join('+') + (attack.damageDice[3] && attack.damageDice[3] > 0 && atk.atkHit ? attack.damageDice[3] : ''),
-            difficultyDescript = `<span ${rollStyle}>${difficulty}</span> ${totalAttackBonus == 0 ? '' : ` - ${totalAttackBonus}`}`;
-            
-            outputText += `<tr ${trStyle}>\
-            <td style="${tdStyle} ${hitstyle}"><div ${divStyle}>${atk.hitRollRaw}</div> <div>${hitresult}</div></td>\
-            <td style="${tdStyle}"><div ${divStyle}>${atk.difficulty - (attack.profBonus + attack.attrBonus + attack.hitBonus)}</div> <div style="font-size:11px;">${difficultyDescript}</div></td>\
-            <td style="${tdStyle}"><div ${divStyle}>${atk.totalDamage}</div> <div style="font-size:11px;">${dmgDescript.length ? `(${dmgDescript})` : ''}</div></td>\
-            </tr>`
-        }
-        outputText += '</table>';
-        
-        
-        outputText += `\
-        <div ${msgStyle}>\
-        <h4>Attack Summary</h4>\
-        ${attack.weaponBroken && isMelee ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
-        ${attack.exhausted ? `<div style="color:red"> ${name} is out of ${ isMelee ? 'energy' : 'ammo'}!</div>` : ''}\
-        <div>Total Damage: <strong>${attack.finalDamage}</strong></div>\
-        <div>${ isMelee ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
-        ${isMelee ? `<div>Durability Lost:  <strong>${attack.durabilityLost}</strong></div>` : ''}\
-        </div>\ `;
-        
-        sendChat(
-            `ZnZ - Attack Script`,
-            `<div ${wrapperStyle}>${outputText}</div>`
-        );
-
-    },
-    //takes an object and adds a prefix to each of its values.
-    makePrefixedObject = function(prefix, obj){ 
-        var result = {};
-
-        for (const prop in obj){
-            result[prop] = `${prefix}_${obj[prop]}`;
-        }
-
-        return result;
     },
     //Gets the character if a player sends a message while selecting a token AND they control the token. 
     getCharacter = function(sender, msg){
