@@ -102,7 +102,7 @@ var Attack = Attack || (function() {
                     attrLookup(character, `${meleePrefix}_${fields.weaponFields.durability}`).setWithWorker({current: (attackResult.startingDurability - attackResult.durabilityLost)});
                 }
             } catch(e){
-                sendMessage(`The following error occurred while subtracting resources for your ${args.type} attack. The resource was ${attackREsult.resourcetype}, the starting amount was ${attackResult.startingResource} and the spent amount was ${attackResult.resourceUsed}. <br/><br/>'${e}'`, sender, true, "danger");
+                sendMessage(`The following error occurred while subtracting resources for your ${args.type} attack. The resource was ${attackResult.resourcetype}, the starting amount was ${attackResult.startingResource} and the spent amount was ${attackResult.resourceUsed}. <br/><br/>'${e}'`, sender, true, "danger");
                 log(`Error when subtracting a ${args.type} attack by ${sender}`);
             }
 
@@ -125,15 +125,15 @@ var Attack = Attack || (function() {
             attackProf = unarmed ? unarmedProf : (isMelee ? fields.meleetype : fields.rangedtype),
             damageType = isMelee ? fields.meleedamage : fields.rangeddamage,
             critType = isMelee ? fields.meleecrit : fields.rangedcrit,
-            resourceCost = isMelee ? parseInt(getAttrByName(id, fields.meleecost), 10) : 1,
+            resourceCost = isMelee ? (parseInt(getAttrByName(id, fields.meleecost), 10) || 1 ): 1,
             hitRollType = isMelee ? meleeHitRoll : rangedHitRoll;
 
         var currResource =  parseInt(getAttrByName(id, resourceType), 10),
             damageDice = unarmed ? parseDamageDice('1d1') : parseDamageDice(getAttrByName(id, damageType)),
             hitRoll = parseInt(getAttrByName(id, hitRollType)) || 10,
-            profBonus =  getAttrModAndBonus(attackProf, id, false), //The weapon type value equals a proficiency attr, so we can directly retrieve a weapon proficiency using weapon type field
+            profBonus =  parseInt(getAttrModAndBonus(attackProf, id, false), 10) || 0, //The weapon type value equals a proficiency attr, so we can directly retrieve a weapon proficiency using weapon type field
             durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
-            attrHitBonus =  getAttrModAndBonus(hitAttr, id, true), //add str/dext to attack
+            attrHitBonus =  parseInt(getAttrModAndBonus(hitAttr, id, true), 10) || 0, //add str/dext to attack
             critBonus =  parseInt(getAttrByName(id, critType), 10) || 1,
             durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
             resourceUsed = 0,
@@ -180,7 +180,7 @@ var Attack = Attack || (function() {
                 break;
             }
 
-            if (isMelee && (durability <= 0 || attackResult.weaponBroken)){
+            if (isMelee && !unarmed && (durability <= 0 || attackResult.weaponBroken)){
                 attackResult.weaponBroken = true;
                 break;
             }
@@ -247,7 +247,11 @@ var Attack = Attack || (function() {
                 }
 
                 if (attack.atkCrit){
-                    numRolls = numRolls + (critBonus * numRolls);
+                    if (!unarmed){
+                        numRolls = numRolls + (critBonus * numRolls);
+                    } else {
+                        numRolls++;
+                    }   
                 }
 
                 while (atkDmg == 0 || atkDmg < dmgMin) {
@@ -353,7 +357,7 @@ var Attack = Attack || (function() {
         outputText += `\
         <div ${msgStyle}>\
         <h4>Attack Summary</h4>\
-        ${attack.weaponBroken && isMelee ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
+        ${attack.weaponBroken && isMelee && !attack.unarmed ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
         ${attack.exhausted ? `<div style="color:red"> ${name} is out of ${ isMelee ? 'energy' : 'ammo'}!</div>` : ''}\
         <div>Total Damage: <strong>${attack.finalDamage}</strong></div>\
         <div>${ isMelee ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
