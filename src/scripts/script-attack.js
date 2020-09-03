@@ -35,29 +35,208 @@ var Attack = Attack || (function() {
             return; 
         }
 
-        //so we can use attackmelee or attackranged as a shorthand.
-        if (args[0].indexOf('melee') > 0 && args[0].indexOf('ranged') > 0){
-            sendMessage("You can't have it both ways", sender, true, "danger");
+        const params = validateParams(args); //returns string on error or object of validated api command inputs
+
+        if (typeof params == "string" ){
+            sendMessage("Error! " + params , sender, true, "danger");
             return; 
-        } else if (args[0].indexOf('melee') > 0){
-            args.type = 'melee';
-        } else if (args[0].indexOf('ranged') > 0) {
-            args.type = 'ranged';
         }
+
+
+        const attackArgs = getAttackArgs(params);
         
         HandleAttack(sender,character,args);
     },
+    /**
+     * Validates params are properly input in the correct format. Assigns default values where possible.
+     * Ensures that only proper params will be passed forward.
+     * 
+     * @param args A tokenized API Chat command from the splitArgs() function.
+     * @returns an object containing validated parameters and values or a string if a fatal invalidation occurred.
+     */
+    validateParams = function(args) {
+
+        var retObj = {};
+        const integerParams = ["attacks", "hitbonus", "critbonus", "damagebonus"],
+            flagParams = ['unarmed', 'alt'];
+
+
+        // Handle Type
+        if (args[0].indexOf('melee') > 0){ //allow use of !!attackmelee shorthand
+            retObj.type = 'melee';
+        } else if (args[0].indexOf('ranged') > 0) { //!!attackranged shorthand
+            retObj.type = 'ranged';
+        } else if ("type" in args) {
+            retObj.type = args.type;
+        } else {
+            return "No attack type was specified! You must specify if this is a melee or ranged attack! Add 'type=melee' or 'type=ranged'.";
+        }
+
+        // Verify correct type
+        if (retObj.type !== 'melee' || retObj.type !== 'ranged') {
+            return "Invalid attack type. Type must be melee or ranged. Add 'type=melee' or 'type=ranged'.";
+        }
+
+        // Handle Difficulty
+        if ("difficulty" in args) {
+            if ( [0,1,2,3,4].indexOf(args.difficulty) == -1 ) {
+                return "Invalid Difficulty. Base Difficulty must be 0, 1, 2, 3, or 4"
+            } else {
+                retObj.difficulty = args.difficulty;
+            }
+        } else {
+            retObj.difficulty = 1; //Set Default
+        }
+
+        //Handle Integer Params
+        for (const param in integerParams) {
+            if (param in args) {
+                let paramInt = parseInt(args[param], 10);
+                if (isNaN(paramInt)){ return `Invalid value supplied for parameter '${param}'. '${param}' must be an integer.`};
+                
+                if (paramInt < 0){
+                    paramInt = 0;
+                }
+
+                retObj[param] = paramInt;
+                continue;
+            } else {
+                retObj[param] = 0;
+            }
+        }
+
+        //Handle Flags
+        for (const param in flagParams) {
+            if (param in args) {
+                if (typeof args[param] !== "boolean") { return `Invalid value supplied for parameter '${param}'. '${param}' must be true or false`}
+                retObj[prop] = args[prop]
+            } else {
+                retObj[prop] = false;
+            }
+        }
+
+        // Verify Attacks. This may have been handled already in integer Params
+        if (!("attacks" in retObj) || !Number.isInteger(retObj.attacks) || retObj.attacks < 0  ) {
+            retObj.attacks = 1 //Default value
+        }
+
+        // Don't allow an alt unarmed attack
+        if (retObj.alt && retObj.unarmed) {
+            return "You cannot make an alternative attack if you are making an unarmed attack!";
+        }
+
+        return retObj;
+
+    },
+    /**
+     * Gathers all information around an attack from params, pulls any information from the character sheet and generates an
+     * object to be ready for calculating an attack result.
+     * @param params - params object created from validateParams
+     * @param id - Character Id
+     * @returns an Attack object containing all values necessary to calculate an attack. 
+     */
+    generateAttackObject = function(params, id) {
+        var isMelee = (params.type === 'melee'),
+            prefix = isMelee ? meleePrefix : rangedPrefix,
+            type = params.type;
+
+        //Flip fields for alt attacks - melee with ranged weapon or throw melee weapon
+        if (params.alt) { 
+            type = isMelee ? 'ranged' : 'melee';
+            prefix = isMelee ? rangedPrefix : meleePrefix; //flip prefixes
+            isMelee = !isMelee;
+        }
+ 
+        const fields = makePrefixedObject(prefix, fields.weaponFields), //retrieve melee slot weapon or ranged slot weapon
+            resourceType = isMelee ? energyStat : fields.ammo,
+            hitAttr = isMelee ? strengthAttr : dextAttr,
+            hitRollType = isMelee ? meleeHitRoll : rangedHitRoll;
+
+
+        var attackProf, damageDice, critMultiplier, resourceCost;
+
+            
+        // special values for unarmed - a 1d1 melee attack.
+        if (params.unarmed && isMelee) {
+            attackProf = parseInt(getAttrByName(id, unarmedProf), 10);
+            damageDice = '1d1';
+            critMultiplier = 2;
+            resourceCost = 1;
+            startDurability = 999999 //some sufficiently high number
+        } else {
+            damageDice = getAttrByName(id, ( isMelee ? fields.meleedamage : fields.rangeddamage )) || '' ;
+            attackProf = parseInt(getAttrByName(id, ( isMelee ? fields.meleetype : fields.rangedtype )), 10);
+            critMultiplier = parseInt(getAttrByName(id, ( isMelee ? fields.meleecrit : fields.rangedcrit )), 10);
+            resourceCost = isMelee ? ( parseInt(getAttrByName(id, fields.meleecost), 10) || 1 ) : 1;
+            startDurability = parseInt(getAttrByName(id, fields.durability), 10) || 0;
+        }
+
+        return {
+            type: type,
+            // passed from param
+            numAttacks: params.attacks,  // number of attack rolls to make
+            difficulty: params.difficulty,  // base difficulty level, 0-4
+            unarmed: ( params.unarmed && isMelee ), // unarmed strike
+            alternative: params.alt, // flipped weapon fields
+            hitbonus: params.hitbonus, // additional flat bonus on top of hit dice results, added via params
+            critbonus: params.critbonus, // additional bonus directly to hit dice for higher hit/crit chance, added via params  
+            damagebonus: params.damagebonus, // additional bonus to each damage, added via params
+            // Affected by unarmed
+            attackProf: attackProf, // weapon proficiency mod
+            damageDice: damageDice, // weapon damage dice
+            critMultiplier: critMultiplier, // weapon crit multiplier
+            resourceCost: resourceCost, // energy cost for melee weapon, otherwise 1
+            startDurability: startDurability, // starting weapon durability
+            // Char sheet fields
+            weaponName: getAttrByName(id, prefix + "_" + weaponNameField) || '',
+            hitRoll: parseInt(getAttrByName(id, hitRollType)) || 10, // character's hit roll
+            attrHitMod: parseInt(getAttrModAndBonus(hitAttr, id, true), 10) || 0, // str/dext modifier added to attack
+            startResource: parseInt(getAttrByName(id, resourceType), 10), // starting resource
+            // To be populated by calculateAttackResults().
+            rolls: [],
+            weaponBroken: false,
+            exhausted: false
+        };
+    },
+    calculateAttackResults = function(attack){
+        var attackResult = attack;
+
+        const dmgDice = parseDamageDice(damageDice),
+            isMelee = (type === 'melee');
+
+        // Required fields for calculating an attack.
+        if ( isNaN(startResource)){
+            log(`Attack Script Error! Starting Resource ${isMelee ? 'Energy' : 'Ammo'} is not a number!`);
+            throw `The field for the ${isMelee ? 'Energy' : 'Ammo'} resource is not a valid value!`;
+        } 
+        if ( dmgDice == null){
+            log(`Attack Script Error! Could not parse damage dice!`);
+            throw `Weapon damage field for ${weaponName} is an invalid value!`;
+        } 
+
+
+        for (let i = 0; i < attack.numAttacks; i++){
+            /*** Check and calculate Resources *******/
+            if (currResource < resourceCost ){
+                attackResult.exhausted = true;     
+                break;
+            }
+
+            if (isMelee && !unarmed && (durability <= 0 || attackResult.weaponBroken)){
+                attackResult.weaponBroken = true;
+                break;
+            }
+
+            resourceUsed += resourceCost;
+            currResource -= resourceCost;
+
+        }
+    },
+
+
+
     HandleAttack = function(sender, character, args) {
 
-        if (!("type" in args) || (args.type !== "melee" && args.type !== "ranged")){
-            sendMessage("You must indicate if this is a melee or ranged attack in order to attack!", sender, true, "danger");
-            return;
-        }
-
-        if (("difficulty" in args) && [0,1,2,3,4].indexOf(args.difficulty) == -1 ) {
-            sendMessage("You have input an invalid difficulty level. Difficulty will now default to medium.", sender, true, "danger");
-            args.difficulty = 1;
-        }
 
         //Determine and Inputs
         var prefix = args.type == "melee" ? meleePrefix : rangedPrefix,
@@ -102,7 +281,7 @@ var Attack = Attack || (function() {
                     attrLookup(character, `${meleePrefix}_${fields.weaponFields.durability}`).setWithWorker({current: (attackResult.startingDurability - attackResult.durabilityLost)});
                 }
             } catch(e){
-                sendMessage(`The following error occurred while subtracting resources for your ${args.type} attack. The resource was ${attackREsult.resourcetype}, the starting amount was ${attackResult.startingResource} and the spent amount was ${attackResult.resourceUsed}. <br/><br/>'${e}'`, sender, true, "danger");
+                sendMessage(`The following error occurred while subtracting resources for your ${args.type} attack. The resource was ${attackResult.resourcetype}, the starting amount was ${attackResult.startingResource} and the spent amount was ${attackResult.resourceUsed}. <br/><br/>'${e}'`, sender, true, "danger");
                 log(`Error when subtracting a ${args.type} attack by ${sender}`);
             }
 
@@ -120,20 +299,20 @@ var Attack = Attack || (function() {
 
         //Select fields based off if melee or not.
         const isMelee = (type === "melee"),
-            resourceType = isMelee ? energyStat : fields.ammo,
-            hitAttr = isMelee ? strengthAttr : dextAttr,
-            attackProf = unarmed ? unarmedProf : (isMelee ? fields.meleetype : fields.rangedtype),
-            damageType = isMelee ? fields.meleedamage : fields.rangeddamage,
-            critType = isMelee ? fields.meleecrit : fields.rangedcrit,
-            resourceCost = isMelee ? parseInt(getAttrByName(id, fields.meleecost), 10) : 1,
+                resourceType = isMelee ? energyStat : fields.ammo,
+                hitAttr = isMelee ? strengthAttr : dextAttr,
+        attackProf = unarmed ? unarmedProf : (isMelee ? fields.meleetype : fields.rangedtype),
+        damageType = isMelee ? fields.meleedamage : fields.rangeddamage,
+        critType = isMelee ? fields.meleecrit : fields.rangedcrit,
+        resourceCost = isMelee ? (parseInt(getAttrByName(id, fields.meleecost), 10) || 1 ): 1,
             hitRollType = isMelee ? meleeHitRoll : rangedHitRoll;
 
         var currResource =  parseInt(getAttrByName(id, resourceType), 10),
             damageDice = unarmed ? parseDamageDice('1d1') : parseDamageDice(getAttrByName(id, damageType)),
             hitRoll = parseInt(getAttrByName(id, hitRollType)) || 10,
-            profBonus =  getAttrModAndBonus(attackProf, id, false), //The weapon type value equals a proficiency attr, so we can directly retrieve a weapon proficiency using weapon type field
+            profBonus =  parseInt(getAttrModAndBonus(attackProf, id, false), 10) || 0, //The weapon type value equals a proficiency attr, so we can directly retrieve a weapon proficiency using weapon type field
             durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
-            attrHitBonus =  getAttrModAndBonus(hitAttr, id, true), //add str/dext to attack
+            attrHitBonus =  parseInt(getAttrModAndBonus(hitAttr, id, true), 10) || 0, //add str/dext to attack
             critBonus =  parseInt(getAttrByName(id, critType), 10) || 1,
             durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
             resourceUsed = 0,
@@ -143,18 +322,20 @@ var Attack = Attack || (function() {
                 type: type,
                 numAttacks: numAttacks,
                 baseDifficulty: baseDifficulty,
-                resourceType: resourceType,
-                reversed: reversed,
                 unarmed: unarmed,
-                hitRoll: hitRoll,
-                hitBonus: hitBonus,
-                attrBonus: attrHitBonus,
+                reversed: reversed,
                 profBonus: profBonus,
-                startingResource: currResource,
-                startingDurability: durability,
                 damageDice: damageDice,
                 critBonus: critBonus,
+                attrBonus: attrHitBonus,
                 resourceCost: resourceCost,
+
+
+                hitRoll: hitRoll,
+                hitBonus: hitBonus,
+                resourceType: resourceType,
+                startingResource: currResource,
+                startingDurability: durability,
                 weaponBroken: false,
                 exhausted: false,
                 rolls: []
@@ -180,7 +361,7 @@ var Attack = Attack || (function() {
                 break;
             }
 
-            if (isMelee && (durability <= 0 || attackResult.weaponBroken)){
+            if (isMelee && !unarmed && (durability <= 0 || attackResult.weaponBroken)){
                 attackResult.weaponBroken = true;
                 break;
             }
@@ -247,7 +428,11 @@ var Attack = Attack || (function() {
                 }
 
                 if (attack.atkCrit){
-                    numRolls = numRolls + (critBonus * numRolls);
+                    if (!unarmed){
+                        numRolls = numRolls + (critBonus * numRolls);
+                    } else {
+                        numRolls++;
+                    }   
                 }
 
                 while (atkDmg == 0 || atkDmg < dmgMin) {
@@ -353,7 +538,7 @@ var Attack = Attack || (function() {
         outputText += `\
         <div ${msgStyle}>\
         <h4>Attack Summary</h4>\
-        ${attack.weaponBroken && isMelee ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
+        ${attack.weaponBroken && isMelee && !attack.unarmed ? `<div style="color:red"> The weapon was broken!</div>` : ''}\
         ${attack.exhausted ? `<div style="color:red"> ${name} is out of ${ isMelee ? 'energy' : 'ammo'}!</div>` : ''}\
         <div>Total Damage: <strong>${attack.finalDamage}</strong></div>\
         <div>${ isMelee ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
@@ -431,27 +616,46 @@ var Attack = Attack || (function() {
         return character;
 
     },
-    //Takes chat input and split it into args using a '=' to denote an argument in the form of [arg]=[value]
-    //Example: in "!!attack type=melee attacks=3", there is a 'type' arg which is equal to 'melee' and an 'attacks' arg equal to '3'
+    /**
+     * Tokenizes chat inputs for API commands
+     * 
+     * Step 1 - Splits chat by space unless the space is within single or double quotes.                                    Example: !example with 'text line' "hello world" gets split to ["!example", "with", "text line" "hello world"]
+     * Step 2 - Tokenize everything into a Struct using a '=' to denote an argument in the form of [arg]=[value].           Example: !example test="hello world" is {0:"!example" test: "hello world"}
+     * Step 2a - Everything to left of '=' becomes the key and everything to the right becomes the value
+     * Step 2b - If no '=', the key is the array position of the split
+     * Step 3 - If no regex match for =, check for any flags in the form of --flag                                          Example: --unarmed    
+     * Return the struct
+     * 
+     * There should not be spaces between '=' and the arg/value
+     */
     splitArgs = function(input) {
-        var arr = input.split(' '),
-            result = {},
-            argsRegex = /(.*)=(.*)/; //can't be global but shouldn't need it as we are splitting args. 
+        var result = {},
+            argsRegex = /(.*)=(.*)/, //can't be global but shouldn't need it as we are splitting args. 
+            quoteRegex = /(?:[^\s"']+|"[^"]*"|'[^']*')+/g; //Split on spaces unless space is within single or double quotes - https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
+        
+            var quoteSplit = input.match(quoteRegex).map(e => {
+                return e.replace(/['"]+/g, ''); //remove quotes
+            });
+    
             
-        for (let i = 0; i < arr.length; i++){
-            let match = argsRegex.exec(arr[i]); //Regex to match anything before/after '='. G1 is before and G2 is after
+        // This is our own code below for splitting along "="
+        for (let i = 0; i < quoteSplit.length; i++){ 
+            let match = argsRegex.exec(quoteSplit[i]); //Regex to match anything before/after '='. G1 is before and G2 is after
 
-            if (match !== null) {
+            if (match !== null) { //
                 let value = match[2];
                 
-                //Convert if types
+                //Convert types
                 if ( !isNaN(value)){value = parseInt(match[2], 10)}
                 if ( value === 'true'){value = true}
                 if ( value === 'false'){value = false}
 
                 result[match[1]] = value;
-            } else {
-                result[i] = arr[i];
+            } else if (quoteSplit[i].startsWith('--')) { //Handle Flags
+                let flag = quoteSplit[i].substring(2);
+                result[flag] = true;
+            } else { //Default - array position
+                result[i] = quoteSplit[i];
             }
         }
         return result;
