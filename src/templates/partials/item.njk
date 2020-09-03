@@ -56,9 +56,6 @@
     {{ fieldCreate.outputField(field=fields.note, header="h3", class="", prefix=attrPrefix) }}
 
     <div class="sheet-znz-item-buttons">
-        {% if type=="weapon" %}
-            <button type="action" name="act_{{category}}attack"> {{category | capitalize}} Attack </button>
-        {% endif %}
         <button type="action" name="act_unequip_{{category}}">Unequip {{category | capitalize}} </button>
     </div>
 

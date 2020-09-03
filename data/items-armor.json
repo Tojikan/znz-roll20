@@ -51,7 +51,7 @@
         "description": "Reduces damage by 2 and perception by 1"
     },
     "riothelmet": {
-        "item_name" : "Football Helmet",
+        "item_name" : "Riot Helmet",
         "item_weight" : "1",
         "item_quantity" : "1",
         "item_type" : "head",

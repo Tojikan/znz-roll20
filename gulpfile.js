@@ -85,7 +85,7 @@ gulp.task('watch', function(){
 });
 
 //build sheets and styles
-gulp.task('build', gulp.series(['style', 'sheet']));
+gulp.task('build', gulp.series(['style', 'sheet', 'scripts', 'data']));
 
 
 //Read all json files in data folder and save it in a data object with filename as key. Then passed in via gulp-data
