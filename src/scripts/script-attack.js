@@ -439,12 +439,14 @@ var Attack = Attack || (function() {
         var outputText = `\
         <h4>${typeText} Attack</h4>\
         <div>${attack.unarmed ? `${name} makes an unarmed attack! ` : `${name} tries to attack ${attack.numAttacks} time(s) with ${attack.weaponName.length > 0 ? `their ${attack.weaponName}` : 'their weapon'}`}</div><br/>\
-        ${attack.alternative ? (isMelee ? `<div>${name} melee attacks with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
+        ${attack.alternative ? (isMelee ? `<div>${name} melees with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
         <div><strong>Difficulty</strong>: ${difficultyText}</div><br/>\
         <div><strong>Crit Multiplier</strong>: <strong>${attack.critMultiplier}x</div>\
-        <div><strong>${attrType} Modifier: </strong>${attack.attrHitMod}</div>
-        <div><strong>Weapon Proficiency: </strong>${attack.weaponProfMod}</div>`;
-        
+        <div><strong>${attrType} Modifier: </strong>${attack.attrHitMod}</div>\
+        <div><strong>Weapon Proficiency: </strong>${attack.weaponProfMod}</div>\
+        ${ attack.hitbonus > 0 ? `<div><strong>Hit Bonus:</strong> ${attack.hitbonus} </div>` : ''}\
+        ${ attack.critbonus > 0 ? `<div><strong>Crit Chance Bonus :</strong> ${attack.critbonus} </div>` : ''}\
+        ${ attack.damagebonus > 0 ? `<div><strong>Damage Bonus:</strong> ${attack.damagebonus} </div>` : ''}<br/><br/>`;
 
         outputText += `<table ${tableStyle}><tr><th ${thStyle}>Hit</th><th ${thStyle}>Challenge</th><th ${thStyle}>Damage</th></tr> `;
         for (let i = 0; i < attack.attacksMade.length; i++){
