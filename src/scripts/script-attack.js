@@ -10,6 +10,12 @@ var Attack = Attack || (function() {
         rangedPrefix ="[[{prefix:'eq_ranged'}]]",
         meleePrefix = "[[{prefix:'eq_melee'}]]",
         weaponNameField = "[[{attrlookup:'itemname'}]]",
+        ATKSTATUS = {
+            MISS: 'miss',
+            FAIL: 'fail',
+            HIT: 'hit',
+            CRIT: 'crit',
+        },
 
     HandleInput = function(msg) {
         if (msg.type !== "api") {
@@ -153,19 +159,19 @@ var Attack = Attack || (function() {
             hitRollType = isMelee ? meleeHitRoll : rangedHitRoll;
 
 
-        var attackProf, damageDice, critMultiplier, resourceCost;
+        var weaponProfMod, damageDice, critMultiplier, resourceCost;
 
             
         // special values for unarmed - a 1d1 melee attack.
         if (params.unarmed && isMelee) {
-            attackProf = parseInt(getAttrByName(id, unarmedProf), 10);
+            weaponProfMod = parseInt(getAttrByName(id, unarmedProf), 10);
             damageDice = '1d1';
             critMultiplier = 2;
             resourceCost = 1;
             startDurability = 999999 //some sufficiently high number
         } else {
             damageDice = getAttrByName(id, ( isMelee ? fields.meleedamage : fields.rangeddamage )) || '' ;
-            attackProf = parseInt(getAttrByName(id, ( isMelee ? fields.meleetype : fields.rangedtype )), 10);
+            weaponProfMod = parseInt(getAttrByName(id, ( isMelee ? fields.meleetype : fields.rangedtype )), 10);
             critMultiplier = parseInt(getAttrByName(id, ( isMelee ? fields.meleecrit : fields.rangedcrit )), 10);
             resourceCost = isMelee ? ( parseInt(getAttrByName(id, fields.meleecost), 10) || 1 ) : 1;
             startDurability = parseInt(getAttrByName(id, fields.durability), 10) || 0;
@@ -175,14 +181,14 @@ var Attack = Attack || (function() {
             type: type,
             // passed from param
             numAttacks: params.attacks,  // number of attack rolls to make
-            difficulty: params.difficulty,  // base difficulty level, 0-4
+            baseDifficulty: params.difficulty,  // base difficulty level, 0-4
             unarmed: ( params.unarmed && isMelee ), // unarmed strike
             alternative: params.alt, // flipped weapon fields
             hitbonus: params.hitbonus, // additional flat bonus on top of hit dice results, added via params
             critbonus: params.critbonus, // additional bonus directly to hit dice for higher hit/crit chance, added via params  
             damagebonus: params.damagebonus, // additional bonus to each damage, added via params
             // Affected by unarmed
-            attackProf: attackProf, // weapon proficiency mod
+            weaponProfMod: weaponProfMod, // weapon proficiency mod
             damageDice: damageDice, // weapon damage dice
             critMultiplier: critMultiplier, // weapon crit multiplier
             resourceCost: resourceCost, // energy cost for melee weapon, otherwise 1
@@ -192,19 +198,20 @@ var Attack = Attack || (function() {
             hitRoll: parseInt(getAttrByName(id, hitRollType)) || 10, // character's hit roll
             attrHitMod: parseInt(getAttrModAndBonus(hitAttr, id, true), 10) || 0, // str/dext modifier added to attack
             startResource: parseInt(getAttrByName(id, resourceType), 10), // starting resource
-            // To be populated by calculateAttackResults().
-            rolls: [],
-            weaponBroken: false,
-            exhausted: false
+            
         };
     },
-    calculateAttackResults = function(attack){
-        var attackResult = attack;
+    calculateAttackResults = function(attackObj){
+        //Destructure from attackObject
+        const { type, numAttacks, baseDifficulty, unarmed, hitbonus, critbonus, damagebonus, weaponProfMod, 
+            damageDice, critMultiplier, startDurability, resourceCost, hitRoll, attrHitMod, startResource, 
+            weaponName } = attackObj;
 
+        // Set up Constants
         const dmgDice = parseDamageDice(damageDice),
             isMelee = (type === 'melee');
-
-        // Required fields for calculating an attack.
+            
+        // Check Required fields for calculating an attack.
         if ( isNaN(startResource)){
             log(`Attack Script Error! Starting Resource ${isMelee ? 'Energy' : 'Ammo'} is not a number!`);
             throw `The field for the ${isMelee ? 'Energy' : 'Ammo'} resource is not a valid value!`;
@@ -212,32 +219,127 @@ var Attack = Attack || (function() {
         if ( dmgDice == null){
             log(`Attack Script Error! Could not parse damage dice!`);
             throw `Weapon damage field for ${weaponName} is an invalid value!`;
-        } 
+        }
+         
+        // Set up Vars for Tracking
+        var attackResult = { ...attackObj};
+            currResource = startResource,
+            currDurability = startDurability,
+            resourceUsed = 0,
+            finalDamage = 0;
 
+        attackResult.weaponBroken = false;
+        attackResult.exhausted = false;
+        attackResult.attacksMade = [];
 
-        for (let i = 0; i < attack.numAttacks; i++){
+        for (let i = 0; i < numAttacks; i++){
+
             /*** Check and calculate Resources *******/
             if (currResource < resourceCost ){
                 attackResult.exhausted = true;     
                 break;
             }
 
-            if (isMelee && !unarmed && (durability <= 0 || attackResult.weaponBroken)){
+            if (isMelee && !unarmed && (currDurability <= 0 || attackResult.weaponBroken)){
                 attackResult.weaponBroken = true;
                 break;
             }
-
             resourceUsed += resourceCost;
             currResource -= resourceCost;
+            
+            
+            /****** calculate hit roll and difficulty. ******/
+            var attack = {},
+                rawRoll = randomInteger(hitRoll + critbonus),
+                difficulty = baseDifficulty + (randomInteger(3)),
+                status = ATKSTATUS.MISS,
+                totalRoll = rawRoll + hitbonus + attrHitMod + weaponProfMod;
 
+            //Store rolled values
+            attack.hitRollRaw = rawRoll;
+            attack.totalRoll = totalRoll;
+            attack.difficulty = difficulty;
+
+            //Determine results
+            if ( rawRoll >= 10){
+                status = ATKSTATUS.CRIT;
+            } else if ( rawRoll == 1) {
+                status = ATKSTATUS.FAIL;
+                
+                //Melee durability
+                if (isMelee && !unarmed) {
+                    currDurability--;
+                    if (currDurability <= 0) {
+                        attackResult.weaponBroken = true;
+                    }
+                }
+            } else if ( totalRoll >= difficulty ) {
+                status = ATKSTATUS.HIT;
+            } else {
+                status = ATKSTATUS.MISS;
+            }
+            attack.status = status;
+            
+            //Damage Calculations
+            attack.totalDamage = 0;
+            attack.rawDamage = 0;
+            attack.bonusDamage = 0;
+            attack.damageRolls = [];
+            
+            if (status === ATKSTATUS.HIT || status === ATKSTATUS.CRIT) {
+                attack.damageRolls = rollTheDamage(dmgDice, (status === ATKSTATUS.CRIT), critMultiplier);
+                attack.rawDamage = attack.damageRolls.reduce((a,b) => a + b,0);
+                attack.bonusDamage = parseInt(dmgDice[3],10) + damagebonus;
+                attack.totalDamage = attack.rawDamage + attack.bonusDamage;
+
+                finalDamage += attack.totalDamage;
+            }
+
+            attackResult.attacksMade.push(attack);
         }
+
+        //Summary numbers
+        attackResult.finalDamage = finalDamage;
+        attackResult.resourceUsed = resourceUsed;
+        attackResult.newDurability = currDurability;
+        attackResult.durabilityLost = startDurability - currDurability;
+        return attackResult;
     },
+    rollTheDamage = function(dmgDice, didCrit, critBonus) {
+        /** Note on parsed dice
+         * [0] - full match [1d6+3>2]
+         * [1] - amount of dice (1) (optional, defaults to 1)
+         * [2] - the dice [d6] (required)
+         * [3] - dice bonus [+3] (optional) (this is a string)
+         * [4] - dice mins, if present [>2] (optional)
+         */
+        var numRolls = parseInt(dmgDice[1], 10) || 1,                                   
+            dmgRoll = parseInt(dmgDice[2], 10) || null,
+            dmgMin = parseInt(dmgDice[4], 10) || 0,
+            atkDmg = 0,
+            dmgRollResult = [];
 
+        // Add Crit Roll
+        if (didCrit) {
+            numRolls = numRolls + (critBonus * numRolls);
+        }
 
+        // Do the damage roll
+        while (atkDmg == 0 || (dmgMin > 0 && atkDmg < dmgMin)) {  // while loop handles minimimum damage.
+            atkDmg = 0; 
+            dmgRollResult = [];
+
+            for (let j = 0; j < numRolls; j++){
+                let damage = randomInteger(dmgRoll);
+                atkDmg += damage;
+                dmgRollResult.push(damage);
+            }
+        }
+
+        return dmgRollResult;
+    }
 
     HandleAttack = function(sender, character, args) {
-
-
         //Determine and Inputs
         var prefix = args.type == "melee" ? meleePrefix : rangedPrefix,
             numAttacks = parseInt(args.attacks,10) || 1,
@@ -290,185 +392,9 @@ var Attack = Attack || (function() {
         }
     },
     /**
-     * TODO - rework this
-     * 
-     * This method calculates an attack based on inputs and returns a JSON object representing the results of an attack.
-     * There are some global properties which describe the circumstances of the attack and an Attacks array which stores the result of each attack and their rolls.
-     */
-    calculateAttack = function(fields, id, type, numAttacks, baseDifficulty, hitBonus, reversed, unarmed) {
-
-        //Select fields based off if melee or not.
-        const isMelee = (type === "melee"),
-                resourceType = isMelee ? energyStat : fields.ammo,
-                hitAttr = isMelee ? strengthAttr : dextAttr,
-        attackProf = unarmed ? unarmedProf : (isMelee ? fields.meleetype : fields.rangedtype),
-        damageType = isMelee ? fields.meleedamage : fields.rangeddamage,
-        critType = isMelee ? fields.meleecrit : fields.rangedcrit,
-        resourceCost = isMelee ? (parseInt(getAttrByName(id, fields.meleecost), 10) || 1 ): 1,
-            hitRollType = isMelee ? meleeHitRoll : rangedHitRoll;
-
-        var currResource =  parseInt(getAttrByName(id, resourceType), 10),
-            damageDice = unarmed ? parseDamageDice('1d1') : parseDamageDice(getAttrByName(id, damageType)),
-            hitRoll = parseInt(getAttrByName(id, hitRollType)) || 10,
-            profBonus =  parseInt(getAttrModAndBonus(attackProf, id, false), 10) || 0, //The weapon type value equals a proficiency attr, so we can directly retrieve a weapon proficiency using weapon type field
-            durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
-            attrHitBonus =  parseInt(getAttrModAndBonus(hitAttr, id, true), 10) || 0, //add str/dext to attack
-            critBonus =  parseInt(getAttrByName(id, critType), 10) || 1,
-            durability = parseInt(getAttrByName(id, fields.durability), 10) || 0,
-            resourceUsed = 0,
-            finalDamage = 0,
-            durabilityLost = 0,
-            attackResult = {
-                type: type,
-                numAttacks: numAttacks,
-                baseDifficulty: baseDifficulty,
-                unarmed: unarmed,
-                reversed: reversed,
-                profBonus: profBonus,
-                damageDice: damageDice,
-                critBonus: critBonus,
-                attrBonus: attrHitBonus,
-                resourceCost: resourceCost,
-
-
-                hitRoll: hitRoll,
-                hitBonus: hitBonus,
-                resourceType: resourceType,
-                startingResource: currResource,
-                startingDurability: durability,
-                weaponBroken: false,
-                exhausted: false,
-                rolls: []
-            };
-
-
-        // Required fields for calculating an attack. Other ones have a default value. 
-        if ( isNaN(currResource) || isNaN(attrHitBonus) || damageDice === null) {
-            log(`======================= Attack Script Error =====================`);
-            log(`One of the required fields for an attack was invalid.`);
-            log(`Current Resource: ${currResource}`);
-            log(`Attr Hit Bonus: ${attrHitBonus}`);
-            log(`Damage Dice: ${damageDice}`);
-            throw `One of the required fields for a ${type} attack was empty or incorrectly entered.`;
-        } 
-        
-        //Per Attack
-        for (let i = 0; i < numAttacks; i++){
-            
-            /*** Check and calculate Resources *******/
-            if (currResource < resourceCost ){
-                attackResult.exhausted = true;     
-                break;
-            }
-
-            if (isMelee && !unarmed && (durability <= 0 || attackResult.weaponBroken)){
-                attackResult.weaponBroken = true;
-                break;
-            }
-
-            resourceUsed += resourceCost;
-            currResource -= resourceCost;
-
-            /****** calculate roll and difficulty. ******/
-            let attack = {},
-                roll = randomInteger(hitRoll),
-                difficulty = baseDifficulty + (randomInteger(3));
-
-            //Store results
-            attack.hitRollRaw = roll;
-            attack.hitRollTotal = roll + hitBonus + attrHitBonus + profBonus;
-            attack.difficulty = difficulty;
-    
-
-            /****** calculate hit and crit ******/
-            if ( roll >= 10){//crit if nat 10 and above
-                attack.atkCrit = true;
-                attack.atkHit = true;
-                attack.atkFail = false;
-                attack.hitRollTotal = roll;
-            } else if (roll == 1){//miss
-                attack.atkHit = false;
-                attack.atkCrit = false;
-                attack.atkFail = true;
-                if (isMelee && !unarmed) {
-                    durabilityLost++;
-                    if (durabilityLost >= durability){
-                        attackResult.weaponBroken = true; // this stops the loop after the next iteration.
-                    }
-                }
-            } else {//hit
-                attack.atkCrit = false;
-                attack.atkFail = false;
-                ( attack.hitRollTotal >= difficulty) ? attack.atkHit = true : attack.atkHit = false; //meets it, beats it
-                
-            }
-
-            /****** Calculate Damage *******/
-            if (attack.atkHit){
-                /** Note on parsed dice
-                 * [0] - full match [1d6+3>2]
-                 * [1] - amount of dice (1) (optional, defaults to 1)
-                 * [2] - the dice [d6] (required)
-                 * [3] - dice bonus [+3] (optional)
-                 * [4] - dice mins, if present [>2] (optional)
-                 */
-
-                var numRolls = parseInt(damageDice[1], 10) || 1,
-                    dmgRoll = parseInt(damageDice[2], 10) || null,
-                    dmgBonus = parseInt(damageDice[3], 10) || 0,
-                    dmgMin = parseInt(damageDice[4], 10) || 0,
-                    atkDmg = 0,
-                    atkRolls = [];
-                
-                //one final check for roll, in case parseInt does something weird. 
-                if (dmgRoll == null) {
-                    log(`======================= Attack Script Error =====================`);
-                    log(`No Damage Roll was found.`);
-                    throw `The damage roll set for a ${type} attack could not be parsed.`;
-                }
-
-                if (attack.atkCrit){
-                    if (!unarmed){
-                        numRolls = numRolls + (critBonus * numRolls);
-                    } else {
-                        numRolls++;
-                    }   
-                }
-
-                while (atkDmg == 0 || atkDmg < dmgMin) {
-                    atkDmg = 0;
-                    atkRolls = [];
-
-                    for (let j = 0; j < numRolls; j++){
-                        let damage = randomInteger(dmgRoll);
-                        atkDmg += damage;
-                        atkRolls.push(damage);
-                    }
-                }
-
-                attack.totalDamage = atkDmg + dmgBonus;
-                attack.rawDamage = atkDmg;
-                attack.damageRolls = atkRolls;
-                finalDamage += attack.totalDamage;
-            } else {
-                attack.totalDamage = 0;
-                attack.rawDamage = 0;
-                attack.damageRolls = [];
-            }
-            /*** Finalize this Attack and add to result. Go to next loop iteration. */
-            attackResult.rolls.push(attack);
-        }
-
-        //Summary numbers
-        attackResult.finalDamage = finalDamage;
-        attackResult.resourceUsed = resourceUsed;
-        attackResult.durabilityLost = durabilityLost;
-        return attackResult;
-    },
-    /**
      * Output the results of the attack into chat.
      */
-    outputAttack = function(attack, name, type, weaponName=''){
+    outputAttack = function(attack, name, type){
         
         const tableStyle = 'style="width:100%; text-align:center; margin-bottom: 10px;"',
             thStyle = 'style="text-align:center"',
@@ -478,57 +404,59 @@ var Attack = Attack || (function() {
             rollStyle = 'style="border: solid 1px #d3d3d3; padding: 2px; background: white;"',
             msgStyle = 'style="border: solid 1px lightgray; padding: 1px 3px; background: white;"',
             wrapperStyle = 'style="border: solid 1px lightgray; padding: 3px;"',
+            atkStyles = {
+                crit: 'color:#135314; background:#baedc3',
+                fail: 'color:#791006; background:#FFCCCB',
+                hit: 'background:#FFFFBF',
+            },
             isMelee = (type == "melee"),
             typeText = isMelee ? 'Melee' : 'Ranged',
-            attrType = isMelee ? 'Strength' : 'Dexterity',
-            totalAttackBonus = attack.profBonus + attack.attrBonus + attack.hitBonus;
+            attrType = isMelee ? 'Strength' : 'Dexterity';
 
-        var difficulty = ""
+        var allHitMods = [attack.attrHitMod, attack.weaponProfMod, attack.hitbonus ].filter( val => val > 0),
+            difficultyText = "";
+
         switch(attack.baseDifficulty) {
             case 0:
-                difficulty = "Easy";
+                difficultyText = "Easy";
+                break;
+            case 1:
+                difficultyText = "Medium";
+                break;
+            case 2:
+                difficultyText = "Hard";
                 break;
             case 3:
-                difficulty = "Medium";
+                difficultyText = "Insane";
                 break;
-            case 6:
-                difficulty = "Hard";
-                break;
-            case 9:
-                difficulty = "Insane";
-                break;
-            case 12:
-                difficulty = "Impossible";
+            case 4:
+                difficultyText = "Impossible";
                 break;
             default:
-                difficulty = "Medium (Unk)"
-
+                difficultyText = "Medium (Unk)";
         }
         
         var outputText = `\
         <h4>${typeText} Attack</h4>\
-        <div>${attack.unarmed ? `${name} makes an unarmed attack! ` : `${name} tries to attack ${attack.numAttacks} time(s) with ${weaponName.length > 0 ? `their ${weaponName}` : 'their weapon'}`}</div><br/>\
-        ${attack.reversed ? (isMelee ? `<div>${name} melee attacks with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
-        <div>Difficulty: ${difficulty}</div><br/>\
-        <div>Crit Multiplier: <strong>${attack.critBonus}x</strong></div>\
-        <div style="margin-bottom: 10px;">${attrType} Bonus: <strong>${attack.attrBonus}</strong>  |  Proficiency Bonus: <strong>${attack.profBonus}</strong>  |  Misc Bonus: <strong>${attack.hitBonus}</strong>  |  Total Bonus: <strong>${totalAttackBonus}</strong></div>`;
-
+        <div>${attack.unarmed ? `${name} makes an unarmed attack! ` : `${name} tries to attack ${attack.numAttacks} time(s) with ${attack.weaponName.length > 0 ? `their ${attack.weaponName}` : 'their weapon'}`}</div><br/>\
+        ${attack.alternative ? (isMelee ? `<div>${name} melee attacks with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
+        <div><strong>Difficulty</strong>: ${difficultyText}</div><br/>\
+        <div><strong>Crit Multiplier</strong>: <strong>${attack.critMultiplier}x</div>\
+        <div><strong>${attrType} Modifier: </strong>${attack.attrHitMod}</div>
+        <div><strong>Weapon Proficiency: </strong>${attack.weaponProfMod}</div>`;
         
 
         outputText += `<table ${tableStyle}><tr><th ${thStyle}>Hit</th><th ${thStyle}>Challenge</th><th ${thStyle}>Damage</th></tr> `;
-        //Can't output rolltemplate and regular text in the same message
-        for (let i = 0; i < attack.rolls.length; i++){
-            let atk = attack.rolls[i],
-            hitresult = atk.atkCrit ? 'Crit' : (atk.atkFail ? 'Fail' : (atk.atkHit ? 'Hit' : 'Miss')),
-            hitstyle = atk.atkCrit ? 'color:#135314; background:#baedc3' : (atk.atkFail ? 'color:#791006; background:#FFCCCB' : (atk.atkHit ? 'background:#FFFFBF' : '')),
+        for (let i = 0; i < attack.attacksMade.length; i++){
+
+            let atk = attack.attacksMade[i],
             difficulty = atk.difficulty,
-            miniAttr = isMelee ? 'str' : 'dext',
-            dmgDescript = atk.damageRolls.map((x)=>{return `<span ${rollStyle}>${x}</span>`}).join('+') + (attack.damageDice[3] && attack.damageDice[3] > 0 && atk.atkHit ? attack.damageDice[3] : ''),
-            difficultyDescript = `<span ${rollStyle}>${difficulty}</span> ${totalAttackBonus == 0 ? '' : ` - ${totalAttackBonus}`}`;
+            dmgDescript = atk.damageRolls.map((x)=>{return `<span ${rollStyle}>${x}</span>`}).join('+') + (attack.bonusDamage > 0 ? '+' + attack.bonusDamage : ''),
+            difficultyDescript = `<span ${rollStyle}>${difficulty}</span> ${ allHitMods.length > 0 ? '-' + allHitMods.join('-') : ''}`;
             
             outputText += `<tr ${trStyle}>\
-            <td style="${tdStyle} ${hitstyle}"><div ${divStyle}>${atk.hitRollRaw}</div> <div>${hitresult}</div></td>\
-            <td style="${tdStyle}"><div ${divStyle}>${atk.difficulty - (attack.profBonus + attack.attrBonus + attack.hitBonus)}</div> <div style="font-size:11px;">${difficultyDescript}</div></td>\
+            <td style="${tdStyle} ${ atkStyles[atk.status] }"><div ${divStyle}>${atk.hitRollRaw}</div> <div>${capitalizeWord(atk.status)}</div></td>\
+            <td style="${tdStyle}"><div ${divStyle}>${atk.difficulty - (attack.weaponProfMod + attack.attrHitMod + attack.hitbonus)}</div> <div style="font-size:11px;">(${difficultyDescript})</div></td>\
             <td style="${tdStyle}"><div ${divStyle}>${atk.totalDamage}</div> <div style="font-size:11px;">${dmgDescript.length ? `(${dmgDescript})` : ''}</div></td>\
             </tr>`
         }
@@ -543,7 +471,7 @@ var Attack = Attack || (function() {
         <div>Total Damage: <strong>${attack.finalDamage}</strong></div>\
         <div>${ isMelee ? 'Energy' : 'Ammo'} Spent: <strong>${attack.resourceUsed}</strong></div>\
         ${isMelee ? `<div>Durability Lost:  <strong>${attack.durabilityLost}</strong></div>` : ''}\
-        <div>Attacks Made:  <strong>${attack.rolls.length}</strong></div>\
+        <div>Attacks Made:  <strong>${attack.attacksMade.length}</strong></div>\
         </div>\ `;
         
         sendChat(
@@ -672,6 +600,9 @@ var Attack = Attack || (function() {
         return (parseInt(getAttrByName(id, attrMod), 10) || 0) 
              + (parseInt(getAttrByName(id, attr + "_bonus"), 10) || 0);
 
+    },
+    capitalizeWord = function(word){
+        return word.charAt(0).toUpperCase() + word.slice(1);
     },
     //get attr oject
     attrLookup = function(character, name){
