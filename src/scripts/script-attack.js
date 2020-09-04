@@ -41,30 +41,61 @@ var Attack = Attack || (function() {
             return; 
         }
 
-        const params = validateParams(args); //returns string on error or object of validated api command inputs
-
-        if (typeof params == "string" ){
-            sendMessage("Error! " + params , sender, true, "danger");
-            return; 
+        // Calculate Attack
+        var attackResult;
+        try {
+            const attackArgs = validateParams(args, character.id),
+                attackObj = generateAttackObject(attackArgs, character.id);
+                attackResult = calculateAttackResults(attackObj);
+        } catch (e) {
+            sendMessage('Error occurred while calculating an attack - ' + e, sender, true, "danger");
+            sendMessage('Error occurred while calculating an attack - ' + e, 'gm', true, "danger");
+            log('Error occurred while calculating an attack');
+            log(e);
+            return;
         }
 
+        // Update values on character sheet
+        try {
+            if (attackResult){
+                attrLookup(character, attackResult.resourceType).setWithWorker({current: (attackResult.startResource - attackResult.resourceUsed)});
+                if (attackResult.type == "melee" && !attackResult.unarmed){
+                    attrLookup(character, `${meleePrefix}_${fields.weaponFields.durability}`).setWithWorker({current: attackResult.newDurability });
+                }
+            }
+        } catch (e) {
+            sendMessage('Error occurred while writing attack results to character - ' + e, sender, true, "danger");
+            sendMessage('Error occurred while writing attack results to character - ' + e, 'gm', true, "danger");
+            log('Error occurred while writing attack results to character');
+            log(e);
+            return;
+        }
 
-        const attackArgs = getAttackArgs(params);
-        
-        HandleAttack(sender,character,args);
+        // Output attack results
+        try {
+            //Output into the chat. 
+            outputAttack(attackResult, character.get('name'));
+        } catch (e) {
+            sendMessage('Error occurred while outputting attack results. Attack was successful. - ' + e, sender, true, "danger");
+            sendMessage('Error occurred while outputting attack results. Attack was successful. - ' + e, 'gm', true, "danger");
+            log('Error occurred while outputting attack results. Attack was successful.');
+            log(e);
+            return;
+        }
     },
     /**
      * Validates params are properly input in the correct format. Assigns default values where possible.
      * Ensures that only proper params will be passed forward.
      * 
      * @param args A tokenized API Chat command from the splitArgs() function.
-     * @returns an object containing validated parameters and values or a string if a fatal invalidation occurred.
+     * @returns an object containing validated parameters
+     * @throws a message if invalid value was returned.
      */
-    validateParams = function(args) {
+    validateParams = function(args, id) {
 
         var retObj = {};
         const integerParams = ["attacks", "hitbonus", "critbonus", "damagebonus"],
-            flagParams = ['unarmed', 'alt'];
+            flagParams = ['unarmed', 'alt', 'snipe', 'kungfu'];
 
 
         // Handle Type
@@ -72,21 +103,24 @@ var Attack = Attack || (function() {
             retObj.type = 'melee';
         } else if (args[0].indexOf('ranged') > 0) { //!!attackranged shorthand
             retObj.type = 'ranged';
+        } else if(args[0].indexOf('unarmed') > 0){
+            retObj.type = 'melee';
+            retObj.unarmed = true;
         } else if ("type" in args) {
             retObj.type = args.type;
         } else {
-            return "No attack type was specified! You must specify if this is a melee or ranged attack! Add 'type=melee' or 'type=ranged'.";
+            throw "No attack type was specified! You must specify if this is a melee or ranged attack! Add 'type=melee' or 'type=ranged'.";
         }
 
         // Verify correct type
-        if (retObj.type !== 'melee' || retObj.type !== 'ranged') {
-            return "Invalid attack type. Type must be melee or ranged. Add 'type=melee' or 'type=ranged'.";
+        if (retObj.type !== 'melee' && retObj.type !== 'ranged') {
+            throw "Invalid attack type. Type must be melee or ranged. Add 'type=melee' or 'type=ranged'.";
         }
 
         // Handle Difficulty
         if ("difficulty" in args) {
             if ( [0,1,2,3,4].indexOf(args.difficulty) == -1 ) {
-                return "Invalid Difficulty. Base Difficulty must be 0, 1, 2, 3, or 4"
+                throw "Invalid Difficulty. Base Difficulty must be 0, 1, 2, 3, or 4"
             } else {
                 retObj.difficulty = args.difficulty;
             }
@@ -95,10 +129,10 @@ var Attack = Attack || (function() {
         }
 
         //Handle Integer Params
-        for (const param in integerParams) {
+        for (const param of integerParams) {
             if (param in args) {
                 let paramInt = parseInt(args[param], 10);
-                if (isNaN(paramInt)){ return `Invalid value supplied for parameter '${param}'. '${param}' must be an integer.`};
+                if (isNaN(paramInt)){ throw `Invalid value supplied for parameter '${param}'. '${param}' must be an integer.`};
                 
                 if (paramInt < 0){
                     paramInt = 0;
@@ -112,23 +146,25 @@ var Attack = Attack || (function() {
         }
 
         //Handle Flags
-        for (const param in flagParams) {
+        for (const param of flagParams) {
             if (param in args) {
-                if (typeof args[param] !== "boolean") { return `Invalid value supplied for parameter '${param}'. '${param}' must be true or false`}
-                retObj[prop] = args[prop]
+                if (typeof args[param] !== "boolean") { throw `Invalid value supplied for parameter '${param}'. '${param}' must be true or false`}
+                retObj[param] = args[param]
+            } else if( param in retObj){
+                //Do nothing if already added somehow
             } else {
-                retObj[prop] = false;
+                retObj[param] = false;
             }
         }
 
         // Verify Attacks. This may have been handled already in integer Params
-        if (!("attacks" in retObj) || !Number.isInteger(retObj.attacks) || retObj.attacks < 0  ) {
+        if (!("attacks" in retObj) || !Number.isInteger(retObj.attacks) || retObj.attacks <= 0  ) {
             retObj.attacks = 1 //Default value
         }
 
         // Don't allow an alt unarmed attack
         if (retObj.alt && retObj.unarmed) {
-            return "You cannot make an alternative attack if you are making an unarmed attack!";
+            throw "You cannot make an alternative attack if you are making an unarmed attack!";
         }
 
         return retObj;
@@ -149,58 +185,74 @@ var Attack = Attack || (function() {
         //Flip fields for alt attacks - melee with ranged weapon or throw melee weapon
         if (params.alt) { 
             type = isMelee ? 'ranged' : 'melee';
-            prefix = isMelee ? rangedPrefix : meleePrefix; //flip prefixes
             isMelee = !isMelee;
         }
  
-        const fields = makePrefixedObject(prefix, fields.weaponFields), //retrieve melee slot weapon or ranged slot weapon
-            resourceType = isMelee ? energyStat : fields.ammo,
+        const weapon = makePrefixedObject(prefix, fields.weaponFields), //retrieve melee slot weapon or ranged slot weapon
+            resourceType = isMelee ? energyStat : weapon.ammo,
             hitAttr = isMelee ? strengthAttr : dextAttr,
             hitRollType = isMelee ? meleeHitRoll : rangedHitRoll;
 
 
-        var weaponProfMod, damageDice, critMultiplier, resourceCost;
+        var weaponProf, damageDice, critMultiplier, resourceCost;
 
             
         // special values for unarmed - a 1d1 melee attack.
         if (params.unarmed && isMelee) {
-            weaponProfMod = parseInt(getAttrByName(id, unarmedProf), 10);
+            weaponProf = unarmedProf;
             damageDice = '1d1';
-            critMultiplier = 2;
+            critMultiplier = 1;
             resourceCost = 1;
-            startDurability = 999999 //some sufficiently high number
         } else {
-            damageDice = getAttrByName(id, ( isMelee ? fields.meleedamage : fields.rangeddamage )) || '' ;
-            weaponProfMod = parseInt(getAttrByName(id, ( isMelee ? fields.meleetype : fields.rangedtype )), 10);
-            critMultiplier = parseInt(getAttrByName(id, ( isMelee ? fields.meleecrit : fields.rangedcrit )), 10);
-            resourceCost = isMelee ? ( parseInt(getAttrByName(id, fields.meleecost), 10) || 1 ) : 1;
-            startDurability = parseInt(getAttrByName(id, fields.durability), 10) || 0;
+            damageDice = getAttrByName(id, ( isMelee ? weapon.meleedamage : weapon.rangeddamage )) || '' ;
+            weaponProf = getAttrByName(id, ( isMelee ? weapon.meleetype : weapon.rangedtype )) || '';
+            critMultiplier = parseInt(getAttrByName(id, ( isMelee ? weapon.meleecrit : weapon.rangedcrit )), 10) || 1;
+            resourceCost = isMelee ? ( parseInt(getAttrByName(id, weapon.meleecost), 10) || 1 ) : 1;
+        }
+
+        // Martial Artist flag
+        if (params.kungfu && isMelee && params.unarmed) {
+            let strMod = parseInt(getAttrModAndBonus(strengthAttr, id, true), 10) || 1;
+            params.damagebonus +=  ( strMod > 0 ? strMod : 1);
+        } 
+
+        // Sniper
+        if (params.snipe && !isMelee) {
+            params.hitbonus += 2;
+            params.critbonus += 2;
         }
 
         return {
             type: type,
+            resourceType: resourceType,
             // passed from param
             numAttacks: params.attacks,  // number of attack rolls to make
             baseDifficulty: params.difficulty,  // base difficulty level, 0-4
             unarmed: ( params.unarmed && isMelee ), // unarmed strike
             alternative: params.alt, // flipped weapon fields
+            snipe: (params.snipe && !isMelee),
+            kungfu: (params.kungfu && isMelee && params.unarmed),
             hitbonus: params.hitbonus, // additional flat bonus on top of hit dice results, added via params
             critbonus: params.critbonus, // additional bonus directly to hit dice for higher hit/crit chance, added via params  
             damagebonus: params.damagebonus, // additional bonus to each damage, added via params
             // Affected by unarmed
-            weaponProfMod: weaponProfMod, // weapon proficiency mod
+            weaponProf: weaponProf,
             damageDice: damageDice, // weapon damage dice
             critMultiplier: critMultiplier, // weapon crit multiplier
             resourceCost: resourceCost, // energy cost for melee weapon, otherwise 1
-            startDurability: startDurability, // starting weapon durability
             // Char sheet fields
+            weaponProfMod: parseInt(getAttrByName(id, weaponProf), 10) || 0, // weapon proficiency mod
             weaponName: getAttrByName(id, prefix + "_" + weaponNameField) || '',
+            startDurability: parseInt(getAttrByName(id, weapon.durability), 10) || 0, // starting weapon durability
             hitRoll: parseInt(getAttrByName(id, hitRollType)) || 10, // character's hit roll
             attrHitMod: parseInt(getAttrModAndBonus(hitAttr, id, true), 10) || 0, // str/dext modifier added to attack
             startResource: parseInt(getAttrByName(id, resourceType), 10), // starting resource
             
         };
     },
+    /**
+     * Main function to calculate results of an attack.
+     */
     calculateAttackResults = function(attackObj){
         //Destructure from attackObject
         const { type, numAttacks, baseDifficulty, unarmed, hitbonus, critbonus, damagebonus, weaponProfMod, 
@@ -216,13 +268,17 @@ var Attack = Attack || (function() {
             log(`Attack Script Error! Starting Resource ${isMelee ? 'Energy' : 'Ammo'} is not a number!`);
             throw `The field for the ${isMelee ? 'Energy' : 'Ammo'} resource is not a valid value!`;
         } 
+        if ( isMelee && !unarmed && isNaN(startDurability)){
+            log(`Attack Script Error! Weapon Durability Field is empty`);
+            throw `The field for the ${isMelee ? 'Energy' : 'Ammo'} resource is not a valid value!`;
+        } 
         if ( dmgDice == null){
             log(`Attack Script Error! Could not parse damage dice!`);
             throw `Weapon damage field for ${weaponName} is an invalid value!`;
         }
          
         // Set up Vars for Tracking
-        var attackResult = { ...attackObj};
+        var attackResult = { ...attackObj},
             currResource = startResource,
             currDurability = startDurability,
             resourceUsed = 0,
@@ -251,7 +307,7 @@ var Attack = Attack || (function() {
             /****** calculate hit roll and difficulty. ******/
             var attack = {},
                 rawRoll = randomInteger(hitRoll + critbonus),
-                difficulty = baseDifficulty + (randomInteger(3)),
+                difficulty = (baseDifficulty*3) + (randomInteger(3)),
                 status = ATKSTATUS.MISS,
                 totalRoll = rawRoll + hitbonus + attrHitMod + weaponProfMod;
 
@@ -289,7 +345,7 @@ var Attack = Attack || (function() {
             if (status === ATKSTATUS.HIT || status === ATKSTATUS.CRIT) {
                 attack.damageRolls = rollTheDamage(dmgDice, (status === ATKSTATUS.CRIT), critMultiplier);
                 attack.rawDamage = attack.damageRolls.reduce((a,b) => a + b,0);
-                attack.bonusDamage = parseInt(dmgDice[3],10) + damagebonus;
+                attack.bonusDamage = (parseInt(dmgDice[3],10) || 0) + damagebonus;
                 attack.totalDamage = attack.rawDamage + attack.bonusDamage;
 
                 finalDamage += attack.totalDamage;
@@ -305,6 +361,9 @@ var Attack = Attack || (function() {
         attackResult.durabilityLost = startDurability - currDurability;
         return attackResult;
     },
+    /**
+     * Rolls the damage rolls for successful attacks.
+     */
     rollTheDamage = function(dmgDice, didCrit, critBonus) {
         /** Note on parsed dice
          * [0] - full match [1d6+3>2]
@@ -337,64 +396,11 @@ var Attack = Attack || (function() {
         }
 
         return dmgRollResult;
-    }
-
-    HandleAttack = function(sender, character, args) {
-        //Determine and Inputs
-        var prefix = args.type == "melee" ? meleePrefix : rangedPrefix,
-            numAttacks = parseInt(args.attacks,10) || 1,
-            baseDifficulty = (args.difficulty == "0") ? 0 : ((parseInt(args.difficulty,10) * 3) || 3),
-            weaponName = getAttrByName(character.id, prefix + "_" + weaponNameField) || '', //set this here out of laziness, this gets used in outputAttack
-            inputFields = makePrefixedObject(prefix, fields.weaponFields),
-            hitBonus = parseInt(args.bonus,10) || 0,
-            unarmed = false,
-            reversed = false,
-            attackResult = null;
-
-        //If alternate, we melee with our ranged weapon and throw our melee weapon.
-        if (("reversed") in args && args.reversed == true){
-            args.type = (args.type == "melee") ? "ranged" : "melee";
-            reversed = true;
-        }
-
-        //If alternate, we melee with our ranged weapon and throw our melee weapon.
-        if (("unarmed") in args && args.unarmed == true){
-            if (args.type === "melee"){
-                unarmed = true;
-            }
-        }
-
-        //Calculate an Attack
-        try{
-            attackResult = calculateAttack(inputFields, character.id, args.type, numAttacks, baseDifficulty, hitBonus, reversed, unarmed)
-
-        } catch(e){
-            sendMessage(`The following error occurred while calculating your ${args.type} attack. Please make sure all the sheet fields are entered properly with the correct format and try again. <br/><br/>'${e}'`, sender, true, "danger");
-            log(`Error when making a ${args.type} attack by ${sender}`);
-        }
-        
-        //With the results from a calculated attack
-        if (attackResult) {
-            //Set Attrs
-            try {
-                attrLookup(character, attackResult.resourceType).setWithWorker({current: (attackResult.startingResource - attackResult.resourceUsed)});
-    
-                if (args.type == "melee"){
-                    attrLookup(character, `${meleePrefix}_${fields.weaponFields.durability}`).setWithWorker({current: (attackResult.startingDurability - attackResult.durabilityLost)});
-                }
-            } catch(e){
-                sendMessage(`The following error occurred while subtracting resources for your ${args.type} attack. The resource was ${attackResult.resourcetype}, the starting amount was ${attackResult.startingResource} and the spent amount was ${attackResult.resourceUsed}. <br/><br/>'${e}'`, sender, true, "danger");
-                log(`Error when subtracting a ${args.type} attack by ${sender}`);
-            }
-
-            //Output into the chat. 
-            outputAttack(attackResult, character.get('name'), args.type, weaponName);
-        }
     },
     /**
      * Output the results of the attack into chat.
      */
-    outputAttack = function(attack, name, type){
+    outputAttack = function(attack, name){
         
         const tableStyle = 'style="width:100%; text-align:center; margin-bottom: 10px;"',
             thStyle = 'style="text-align:center"',
@@ -409,7 +415,7 @@ var Attack = Attack || (function() {
                 fail: 'color:#791006; background:#FFCCCB',
                 hit: 'background:#FFFFBF',
             },
-            isMelee = (type == "melee"),
+            isMelee = (attack.type == "melee"),
             typeText = isMelee ? 'Melee' : 'Ranged',
             attrType = isMelee ? 'Strength' : 'Dexterity';
 
@@ -438,27 +444,33 @@ var Attack = Attack || (function() {
         
         var outputText = `\
         <h4>${typeText} Attack</h4>\
-        <div>${attack.unarmed ? `${name} makes an unarmed attack! ` : `${name} tries to attack ${attack.numAttacks} time(s) with ${attack.weaponName.length > 0 ? `their ${attack.weaponName}` : 'their weapon'}`}</div><br/>\
+        <div>${attack.unarmed ? `${name} attacks with their bare fists! ` : `${name} tries to attack ${attack.numAttacks} time(s) with ${attack.weaponName.length > 0 ? `their ${attack.weaponName}` : 'their weapon'}`}</div><br/>\
         ${attack.alternative ? (isMelee ? `<div>${name} melees with their ranged weapon!</div><br/>`: `<div>${name} throws their melee weapon!</div><br/>`) : '' }\
-        <div><strong>Difficulty</strong>: ${difficultyText}</div><br/>\
+        ${attack.snipe ? `<div>${name} uses their mad Sniper skills!` : '' }\
+        ${attack.kungfu ? `<div>${name} unleashes their Kung-Fury!` : '' }<br/>\
+        <div><strong>Weapon Damage</strong>: ${attack.damageDice}</div>\
+        <div><strong>Hit Roll</strong>: D${attack.hitRoll}${attack.critbonus > 0 ? ` + ${attack.critbonus}` : ''}</div>\
+        <div><strong>Difficulty</strong>: ${difficultyText}</div>\
         <div><strong>Crit Multiplier</strong>: <strong>${attack.critMultiplier}x</div>\
         <div><strong>${attrType} Modifier: </strong>${attack.attrHitMod}</div>\
-        <div><strong>Weapon Proficiency: </strong>${attack.weaponProfMod}</div>\
+        <div><strong>Weapon Proficiency: </strong>${outputProficiency(attack.weaponProf)} +${attack.weaponProfMod}</div>\
         ${ attack.hitbonus > 0 ? `<div><strong>Hit Bonus:</strong> ${attack.hitbonus} </div>` : ''}\
         ${ attack.critbonus > 0 ? `<div><strong>Crit Chance Bonus :</strong> ${attack.critbonus} </div>` : ''}\
-        ${ attack.damagebonus > 0 ? `<div><strong>Damage Bonus:</strong> ${attack.damagebonus} </div>` : ''}<br/><br/>`;
+        ${ attack.damagebonus > 0 ? `<div><strong>Damage Bonus:</strong> ${attack.damagebonus} </div>` : ''}<br/>`;
+        log(attack);
 
-        outputText += `<table ${tableStyle}><tr><th ${thStyle}>Hit</th><th ${thStyle}>Challenge</th><th ${thStyle}>Damage</th></tr> `;
+        outputText += `<table ${tableStyle}><tr><th ${thStyle}>Roll</th><th ${thStyle}>Challenge</th><th ${thStyle}>Damage</th></tr> `;
         for (let i = 0; i < attack.attacksMade.length; i++){
 
             let atk = attack.attacksMade[i],
-            difficulty = atk.difficulty,
-            dmgDescript = atk.damageRolls.map((x)=>{return `<span ${rollStyle}>${x}</span>`}).join('+') + (attack.bonusDamage > 0 ? '+' + attack.bonusDamage : ''),
-            difficultyDescript = `<span ${rollStyle}>${difficulty}</span> ${ allHitMods.length > 0 ? '-' + allHitMods.join('-') : ''}`;
+            dmgDescript = atk.damageRolls.map((x)=>{return `<span ${rollStyle}>${x}</span>`}).join('+') + (atk.bonusDamage > 0 ? '+' + atk.bonusDamage : ''),
+            difficultyDescript = `CR:<span ${rollStyle}>${atk.difficulty}</span> ${ allHitMods.length > 0 ? '-(' + allHitMods.join('+') + ')' : ''}`;
+
+
             
             outputText += `<tr ${trStyle}>\
             <td style="${tdStyle} ${ atkStyles[atk.status] }"><div ${divStyle}>${atk.hitRollRaw}</div> <div>${capitalizeWord(atk.status)}</div></td>\
-            <td style="${tdStyle}"><div ${divStyle}>${atk.difficulty - (attack.weaponProfMod + attack.attrHitMod + attack.hitbonus)}</div> <div style="font-size:11px;">(${difficultyDescript})</div></td>\
+            <td style="${tdStyle}"><div ${divStyle}>${atk.difficulty - (attack.weaponProfMod + attack.attrHitMod + attack.hitbonus)}</div> <div style="font-size:11px;">${difficultyDescript}</div></td>\
             <td style="${tdStyle}"><div ${divStyle}>${atk.totalDamage}</div> <div style="font-size:11px;">${dmgDescript.length ? `(${dmgDescript})` : ''}</div></td>\
             </tr>`
         }
@@ -497,6 +509,16 @@ var Attack = Attack || (function() {
     parseDamageDice = function(diceExp) {
         const expr = diceExp.trim().replace(/\s/g,''), //get rid of all whitespace for easier processing
             diceRegex = /([\d]*?)?(?:[dD])([\d]*)([\+\-]\d*)?(?:[>])?(\d*)?/;
+
+        //test if simple int
+        if (/^\d+$/.test(expr)){
+            let parsed = parseInt(expr, 10);
+            return [parsed, 1, parsed, 0, 0]; //if someone just enters a single number
+        }
+
+        if (expr === null || expr === ''){
+            return null;
+        }
 
         let match = diceRegex.exec(expr);
         
@@ -604,7 +626,16 @@ var Attack = Attack || (function() {
 
     },
     capitalizeWord = function(word){
+        if (typeof word !== 'string'){
+            return ''
+        }
         return word.charAt(0).toUpperCase() + word.slice(1);
+    },
+    outputProficiency = function(prof){
+        if (typeof prof !== 'string'){
+            return ''
+        }
+        return prof.replace("prof_", '').replace('_',' ').replace(/\b\w/g, l => l.toUpperCase());
     },
     //get attr oject
     attrLookup = function(character, name){
