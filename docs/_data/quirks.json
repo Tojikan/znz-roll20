@@ -23,12 +23,12 @@
         {
             "name" : "Cheerleader",
             "value" : "cheerleader",
-            "description" : "You spend your own Health, Energy, or Sanity to improve the rolls of other players prior to them making a roll."
+            "description" : "You can spend your own Health, Energy, or Sanity to improve the rolls of other players prior to them making a roll."
         },
         {
             "name" : "Encyclopedia",
             "value" : "encyclopedia",
-            "description" : "You can attempt any skill roll even for a skill you don't possess by passing an Intelligence check first."
+            "description" : "You can attempt any skill even for a skill you don't possess by passing an Intelligence check first."
         },
         {
             "name" : "Gotta Go Fast",
@@ -38,12 +38,12 @@
         {
             "name" : "Martial Artist",
             "value" : "Martial Artist",
-            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1. You can add your strength modifier to unarmed attack damage."
+            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1. Gain the Martial Arts Strike ability, which allows you to add your strength modifier to your unarmed damage and makes all unarmed attacks an easy difficulty."
         },
         {
             "name" : "Sniper",
             "value" : "sniper",
-            "description" : "You can spend one action to give your ranged attack action in the same turn a +4 hit bonus. Increase ranged hit roll by 2."
+            "description" : " Increase ranged hit dice by 2. Gain the Snipe ability, which takes 2 actions but increases both your ranged hit dice by 2 and your attack rolls by 2."
         },
         {
             "name" : "Battle Hardened",
