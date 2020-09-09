@@ -38,12 +38,12 @@
         {
             "name" : "Martial Artist",
             "value" : "Martial Artist",
-            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1. Gain the Martial Arts Strike ability, which allows you to add your strength modifier to your unarmed damage and makes all unarmed attacks an easy difficulty."
+            "description" : "Successful dodging gives you a free melee attack opportunity. Increase melee hit roll by 1. Gain the Martial Arts Strike ability, which is an easy difficulty unarmed attack that allows you to add your strength modifier to attack damage."
         },
         {
             "name" : "Sniper",
             "value" : "sniper",
-            "description" : " Increase ranged hit dice by 2. Gain the Snipe ability, which takes 2 actions but increases both your ranged hit dice by 2 and your attack rolls by 2."
+            "description" : " Increase ranged hit dice by 2. Gain the snipe ability which takes two actions but increases your ranged hit dice by 2 and gives +2 to your attack roll."
         },
         {
             "name" : "Battle Hardened",
