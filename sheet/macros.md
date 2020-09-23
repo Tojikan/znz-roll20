@@ -7,6 +7,9 @@
 
 !!attackranged attacks=?{Attacks to make|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15} difficulty=?{Difficulty|Medium,1|Easy,0|Hard,2|Insane,3|Impossible,4}
 
+## Attack Unarmed ##
+
+!!attackunarmed attacks=?{Attacks to make|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15} difficulty=?{Difficulty|Medium,1|Easy,0|Hard,2|Insane,3|Impossible,4}
 
 
 ## Reload ##
@@ -27,4 +30,4 @@
 
 ## Snipe ##
 
-!!attackranged attacks=?{Attacks to make|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15} difficulty=?{Difficulty|Medium,1|Easy,0|Hard,2|Insane,3|Impossible,4} --sniper
+!!attackranged attacks=?{Attacks to make|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15} difficulty=?{Difficulty|Medium,1|Easy,0|Hard,2|Insane,3|Impossible,4} --snipe
