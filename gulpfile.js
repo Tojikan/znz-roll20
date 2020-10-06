@@ -6,7 +6,6 @@ const nunjucksRender = require('gulp-nunjucks-render');
 const data = require('gulp-data');
 const fs = require('fs');
 const path = require('path');
-const tap = require('gulp-tap');
 const inject = require('gulp-inject');
 const removeEmptyLines = require('gulp-remove-empty-lines');
 const del = require('del');
@@ -16,12 +15,25 @@ const dataFolder = './data/';
 const queryFolder = './data-query/';
 const prefixPath = './data/prefixes.json';
 
+
+
+gulp.task('test', function(){
+    const dataquery = require('./dataquery');
+    console.log(dataquery.queryData("({ runFunction: 'test' })"));
+    console.log(dataquery.queryData("({ runFunction: () => { var test = require('./dataquery.js'); return test;} })"));
+
+});
+
+
+
 //compile scss into css
 gulp.task('style', function() {
     return gulp.src('src/scss/main.scss')
         .pipe(sass().on('error',sass.logError))
-        .pipe(gulp.dest('sheet'));
+        .pipe(gulp.dest('dist'));
 });
+
+
 
 
 gulp.task('data', function() {
