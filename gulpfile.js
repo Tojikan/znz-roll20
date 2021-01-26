@@ -16,46 +16,20 @@ const queryFolder = './data-query/';
 const prefixPath = './data/prefixes.json';
 
 
-
-gulp.task('test', function(){
-    const dataquery = require('./dataquery');
-    console.log(dataquery.queryData("({ runFunction: 'test' })"));
-    console.log(dataquery.queryData("({ runFunction: () => { var test = require('./dataquery.js'); return test;} })"));
-
-});
-
-
-
-//compile scss into css
-gulp.task('style', function() {
-    return gulp.src('src/scss/main.scss')
-        .pipe(sass().on('error',sass.logError))
-        .pipe(gulp.dest('dist'));
-});
-
-
-
-
-gulp.task('data', function() {
-    del(['docs/_data/**']);
-    
-    return gulp.src('data/*.json')
-        .pipe(gulp.dest('docs/_data'));
-});
-
-
-
 //build character sheet and workers.
 gulp.task('sheet', function(){
     return gulp.src('src/templates/*.njk')
+        .pipe(replace(/\(\({{(.*?)}}\)\)/gs, queryData))
         .pipe(data(getAllJsonData)) //pass all json data into Templates. should be done first since it also clears require() json cache
         .pipe(data(getAllDataQuery)) //pass all data queries into templates
         .pipe(nunjucksRender({
             path:['src/templates']
         }))
-        .pipe(inject((() => { //process data queries in sheet workers and them into template (first param is an iife)
+        //Inject workers into sheet.
+        .pipe(inject((() => { 
             return gulp.src(['src/workers/*.js'])
-            //regex searches for all cases of [[[dataquery:'{text}']]]. Any text between single quotes are captured.
+            .pipe(replace(/\(\({{(.*?)}}\)\)/gs, queryData))
+            /* deprecated - remove once v3 done */
             .pipe(replace(/\[\[{dataquery:\s*['"](.*?)['"]}\]\]/g, replaceWithFileContent))
             .pipe(replace(/\[\[{attrlookup:\s*['"](.*?)['"]}\]\]/g, replaceCanonicalWithAttrName))
             .pipe(replace(/\(\(\({runFunc:.*?{(.*?)}}\)\)\)/gs, runFunction))
@@ -77,12 +51,22 @@ gulp.task('sheet', function(){
 //build API scripts
 gulp.task('scripts', function(){
     return gulp.src('src/scripts/*.js')
+        .pipe(replace(/\(\({{(.*?)}}\)\)/gs, queryData))
+        /* deprecated - remove once v3 done */
         .pipe((replace(/\[\[{dataquery:\s*['"](.*?)['"]}\]\]/g, replaceWithFileContent)))
         .pipe((replace(/\[\[{attrlookup:\s*['"](.*?)['"]}\]\]/g, replaceCanonicalWithAttrName)))
         .pipe(replace(/\(\(\({runFunc:.*?{(.*?)}}\)\)\)/gs, runFunction))
         .pipe(replace(/\(\(\({datasrc:\s*['"](.*?)['"]}\)\)\)/g, getData))
         .pipe((replace(/\[\[{prefix:\s*['"](.*?)['"]}\]\]/g, replaceWithPrefix)))
         .pipe(gulp.dest('./sheet'));
+});
+
+
+//compile scss into css
+gulp.task('style', function() {
+    return gulp.src('src/scss/main.scss')
+        .pipe(sass().on('error',sass.logError))
+        .pipe(gulp.dest('dist'));
 });
 
 
@@ -97,7 +81,54 @@ gulp.task('watch', function(){
 });
 
 //build sheets and styles
-gulp.task('build', gulp.series(['style', 'sheet', 'scripts', 'data']));
+gulp.task('build', gulp.series(['style', 'sheet', 'scripts']));
+
+
+gulp.task('data', function() {
+    del(['docs/_data/**']);
+    
+    return gulp.src('data/*.json')
+        .pipe(gulp.dest('docs/_data'));
+});
+
+
+/**
+ * queryData
+ * 
+ * gulp-replace callback function that connects to functions in data-query.js
+ * Takes what is captured and evals() it, returning the results back to gulp-replace
+ * 
+ * @param {string} match The whole regex match, passed by gulp-replace. Unused here, but placeholder as we need the second param. 
+ * @param {*} capture Anything in the main capture group. This should be a function call to a function in data-query.js.
+ */
+function queryData(match, capture){
+    delete require.cache[require.resolve('./data-query')]; //clear cache
+    const dataquery = require('./data-query');
+
+    try {
+        const result = eval('dataquery.' + capture);
+
+        if (typeof result == "string" || typeof result == "number" || typeof result == "boolean" ){
+            return result;
+        } else {
+            log(`queryData Warning! The data query '${capture}' did not return a simple value. Replaced capture with empty string instead.`)
+        }
+
+    } catch(e) {
+        log(e);
+    }
+    return '';
+}
+
+//testing
+module.exports.query = function(arg){
+    console.log(queryData('', arg));
+}
+
+
+
+
+
 
 
 //Read all json files in data folder and save it in a data object with filename as key. Then passed in via gulp-data
@@ -133,6 +164,18 @@ function getAllDataQuery(){
 
     return { queryData };
 }
+
+
+
+
+
+
+
+
+
+
+
+/**** Deprecated - remove at end **********/
 
 /**
  * Looks at capture, converts to a function, and runs it.

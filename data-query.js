@@ -1,0 +1,100 @@
+const fs = require('fs');
+const path = require('path');
+
+module.exports = {
+    dataFolder: './data/',
+    prefixPath = './data/prefixes.json',
+
+    /**
+     * Runs a given function for anytime you need flexibility.
+     * @param {function} fn Function to be run.
+     */
+    runFunction: function(fn){
+
+        if (typeof fn !== 'function'){
+            throw("runFunction error - Invalid parameter type. The parameter must be a function.");
+        }
+        return fn();
+    },
+
+    /**
+     * Searches through all JSON files for an object with a 'canonical' property matching the parameter.
+     * If found, returns the attr_name property of the object. Used to find any given object by a canonical name since attr_name may be changed sometimes.
+     * 
+     * @param {string} canonical The value in object property 'canonical' to search for.
+     */
+    findAttrName: function(canonical){
+        let files = fs.readdirSync(this.dataFolder);
+        var result = null;
+
+        files.forEach(file => {
+            if (path.extname(file) === '.json' && file.indexOf('.schema') < 0){ //ignore schema
+                let data = JSON.parse(fs.readFileSync(this.dataFolder + file));
+                found = searchCanonical(canonical, data);
+
+                if (found){
+                    result = found;
+                } 
+            }
+        });
+
+        if (result && 'attr_name' in result){
+            return result.attr_name;
+        } else {
+            throw `Canonical property of '${canonical}' was not found in data files!`;
+        }
+    },
+
+    /**
+     * Property lookup in prefixes.json. Returns the value of property if found.
+     * 
+     * @param {string} prefix Property in the prefixes.json object.
+     */
+    getPrefix: function(prefix){
+        const prefixes = require(prefixPath);
+
+        if (prefix in prefixes){
+            return prefixes[prefix] 
+        } else {
+            throw `Prefix '${prefix}' was not found in data files!`;
+        }
+    },
+}
+
+/**
+ * Recursive function to handle the searching for canonical property in a given object.
+ * 
+ * @param {string} canon canonical string to search for in object
+ * @param {object} object the data object
+ * @returns string value of "attr_name" if the appropriate canonical has been located, or null if nothing has been found.
+ */
+function searchCanonical(canon, object){
+    // Fail case - nothing has been found
+    if (object == null){
+        return null; 
+    }
+
+    //Success case - found canonical
+    if (typeof object === "object" && "canonical" in object && "attr_name" in object && object.canonical == canon) {
+        return object;
+    }     
+    //Array - search search array
+    else if (typeof object == "array"){
+        for (let arrItem of array){
+            let val = searchCanonical(canon, arrItem);
+
+            if (val) return val;
+        }
+    } 
+    //Object - search all properties in object
+    else if (typeof object == "object"){
+        for (let key of Object.keys(object)){
+            let val = searchCanonical(canon, object[key]);
+
+            if (val) return val;
+        }
+    }
+
+    //End case - not an object or array
+    return null;
+}
