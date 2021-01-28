@@ -5,7 +5,7 @@
     queryData is an object containing the exported results of any JS file in the data-query folder
    
     Access data through file name
-        jsonData Example: accessing ./data/stat.json is accessed through jsonData.stat
+        jsonData Example: accessing ./data/status.json is accessed through jsonData.status
         queryData Example" accessing ./data-query/attackFields.js is accessed through queryData.attackFields
 #}
 
@@ -22,10 +22,10 @@
             {% endfor %}
         </div>
 
-        {#----- Stats ----- #}
-        <div class="sheet-area-stats">
+        {#----- Status ----- #}
+        <div class="sheet-area-status">
             <div class="sheet-stat-row">
-                {% for stat in jsonData.stats %}
+                {% for stat in jsonData.status %}
                     {{ statBlock.create(stat) }}
                 {% endfor %}
             </div>
@@ -33,6 +33,28 @@
     </div>
 
     <div class="sheet-body">
+        <div class="sheet-tab-select">
+            <input type='hidden' class='sheet-tab-toggle' name='attr_sheet_tab'  value='selectTabStats'  />
+            <button type="action" class="sheet-tab-button sheet-tab-button-stats" name="act_selectTabStats" >Stats</button>
+            <button type="action" class="sheet-tab-button sheet-tab-button-abilities" name="act_selectTabAbilities" >Abilities</button>
+            <button type="action" class="sheet-tab-button sheet-tab-button-equipment" name="act_selectTabEquipment" >Equipment</button>
+            <button type="action" class="sheet-tab-button sheet-tab-button-notes" name="act_selectTabNotes" >Notes</button>
+        </div>
+        <div class="sheet-tabs-content">
+            <input type='hidden' class='sheet-tab-toggle' name='attr_sheet_tab'  value='selectTabStats'  />
+            <div class="sheet-tab sheet-tab-stats">
+                Stats
+            </div>
+            <div class="sheet-tab sheet-tab-abilities">
+                Abilities
+            </div>
+            <div class="sheet-tab sheet-tab-equipment">
+                Equipment
+            </div>
+            <div class="sheet-tab sheet-tab-notes">
+                Notes
+            </div>
+        </div>
         <div class="sheet-sidebar">
         
         </div>

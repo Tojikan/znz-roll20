@@ -1,10 +1,18 @@
-@mixin toggleDisplay($elClass, $btnClass, $onValue){
+@mixin toggleDisplay($elClass, $toggleClass, $onValue){
 
-    .sheet-#{$elClass} {
+    .#{$elClass} {
         display: none;
     }
 
-    .sheet-#{$btnClass}[value="#{$onValue}"] ~ .sheet-#{$elClass}{
+    .#{$toggleClass}[value="#{$onValue}"] ~ .#{$elClass}{
         display: block;
+    }
+}
+
+@mixin tabButtonToggle($elClass, $toggleClass, $onValue){
+    .#{$toggleClass}[value="#{$onValue}"] ~ button.#{$elClass}{
+        border: solid 2px $black;
+        border-bottom: none;
+        background-color: $white;
     }
 }

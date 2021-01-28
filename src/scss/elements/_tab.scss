@@ -1,2 +1,32 @@
+@include toggleDisplay('sheet-tab-stats', 'sheet-tab-toggle', 'selectTabStats');
+@include toggleDisplay('sheet-tab-abilities', 'sheet-tab-toggle', 'selectTabAbilities');
+@include toggleDisplay('sheet-tab-equipment', 'sheet-tab-toggle', 'selectTabEquipment');
+@include toggleDisplay('sheet-tab-notes', 'sheet-tab-toggle', 'selectTabNotes');
 
 
+.sheet-tab-select {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    button {
+        flex: 25%;
+        display: block;
+        padding: 1rem 0;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        border: solid 2px $lightgray;
+        border-bottom: none;
+        transition: 0.2s;
+        
+        &:not(:last-child){
+            margin-right: 0.5rem;
+        }
+    }
+
+    @include tabButtonToggle('sheet-tab-button-stats', 'sheet-tab-toggle', 'selectTabStats');
+    @include tabButtonToggle('sheet-tab-button-abilities', 'sheet-tab-toggle', 'selectTabAbilities');
+    @include tabButtonToggle('sheet-tab-button-equipment', 'sheet-tab-toggle', 'selectTabEquipment');
+    @include tabButtonToggle('sheet-tab-button-notes', 'sheet-tab-toggle', 'selectTabNotes');
+}
