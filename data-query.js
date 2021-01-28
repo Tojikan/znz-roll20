@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
     dataFolder: './data/',
+    queryFolder = './queries',
     prefixPath = './data/prefixes.json',
 
     /**
@@ -57,6 +58,25 @@ module.exports = {
             return prefixes[prefix] 
         } else {
             throw `Prefix '${prefix}' was not found in data files!`;
+        }
+    },
+
+    /**
+     * Retrieve the contents of a file. Assumes the file either is JSON or exports JSON.
+     * 
+     * @param {string} fileName Name of a file to retrieve
+     * @param {string} folder Containing folder. The trailing slash (/) should not be added here as it is added automatically. Defaults to query folder.
+     * @param {string} extension Extension of the file. A period (.) gets prepended to the extension. Defaults to JSON.
+     */
+    getFile : function(fileName, folder = this.queryFolder, extension = 'json'){
+        let importPath = folder + '/' + fileName + '.' + extension;
+        
+        if (fs.existsSync(importPath)){
+            let importData = require(importPath);
+
+            return JSON.stringify(importData);
+        } else {
+            throw `File '${importPath}' does not exist!`;
         }
     },
 }

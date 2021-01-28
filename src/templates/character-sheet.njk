@@ -1,0 +1,51 @@
+{#  
+    In the Gulp process, certain data is pulled in and added to the templates
+    
+    jsonData is an object containing all JSON data in the data folder 
+    queryData is an object containing the exported results of any JS file in the data-query folder
+   
+    Access data through file name
+        jsonData Example: accessing ./data/stat.json is accessed through jsonData.stat
+        queryData Example" accessing ./data-query/attackFields.js is accessed through queryData.attackFields
+#}
+
+{% import 'macros/outputfield.njk' as basicField %}
+{% import 'macros/statblock.njk' as statBlock %}
+
+
+<div class="sheet-znz-character-sheet">
+    <div class="sheet-header">
+        {#----- Name Area ----- #}
+        <div class="sheet-area-name">
+            {% for fld in jsonData.misc.name %}
+                {{ basicField.outputField( field=fld)}}
+            {% endfor %}
+        </div>
+
+        {#----- Stats ----- #}
+        <div class="sheet-area-stats">
+            <div class="sheet-stat-row">
+                {% for stat in jsonData.stats %}
+                    {{ statBlock.create(stat) }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-body">
+        <div class="sheet-sidebar">
+        
+        </div>
+
+        <div class="sheet-main">
+        
+        </div>
+    </div>
+</div>
+
+
+{# Sheet workers are injected here via Gulp process #}
+<script type="text/worker">
+    /** inject:workers **/
+    /** endinject **/
+</script>

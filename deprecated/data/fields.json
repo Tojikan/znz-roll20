@@ -68,65 +68,6 @@
 
     ],
 
-    "stats": [
-        {
-            "display_name": "Health",
-            "attr_name": "health",
-            "field_type": "number",
-            "field_min": "0",
-            "field_max": "",  
-            "field_class": "",
-            "description": "",
-            "default_value": 40,
-            "has_max": true,
-            "explanation_text": "",
-            "area": "stat",
-            "canonical": "hitpoints"
-        },
-        {
-            "display_name": "Sanity",
-            "attr_name": "sanity",
-            "field_type": "number",
-            "field_min": "",
-            "field_max": "",  
-            "field_class": "",
-            "description": "",
-            "default_value": 40,
-            "has_max": true,
-            "explanation_text": "",
-            "area": "stat",
-            "canonical": "mentalhp"
-        },
-        {
-            "display_name": "Energy",
-            "attr_name": "energy",
-            "field_type": "number",
-            "field_min": "",
-            "field_max": "",  
-            "field_class": "",
-            "description": "",
-            "default_value": 40,
-            "has_max": true,
-            "explanation_text": "",
-            "area": "stat",
-            "canonical": "energy"
-        },
-        {
-            "display_name": "EXP",
-            "attr_name": "exp",
-            "field_type": "number",
-            "field_min": "",
-            "field_max": "",  
-            "field_class": "",
-            "description": "",
-            "default_value": 0,
-            "has_max": false,
-            "explanation_text": "<div>10:stat | 20: skill/hit</div><div>30: attr | 80:ability</div>",
-            "area": "stat",
-            "canonical": "exp"
-        }
-    ],
-
     "hitroll" : {
         "ranged" : {
             "display_name" : "Ranged Hit Roll",

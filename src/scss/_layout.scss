@@ -3,30 +3,19 @@
 */
 
 .sheet-znz-character-sheet {
-
-    &.sheet-znz-layout {
+    .sheet-header {
         display: flex;
     }
-    
-    &.sheet-znz-grid-layout {
+
+    .sheet-sidebar-layout {
         display: grid;
         grid-template-columns: repeat(12, minmax(50px, 1fr));
         grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
         grid-gap: $gridgap * 2;
-    }
 
-    .sheet-znz-grid-sidebar {
-        grid-column: 1;
-        grid-column-end: 6
-    }
-
-    .sheet-znz-grid-main {
-        grid-column-start: 6;
-        grid-column-end: 13;
-    }
-
-    .sheet-znz-grid-full-width {
-        grid-column-start: 1;
-        grid-column-end: 13;
+        .sheet-sidebar {
+            grid-column: 1;
+            grid-column-end: 6
+        }
     }
 }

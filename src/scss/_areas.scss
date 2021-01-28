@@ -1,0 +1,25 @@
+/**
+* Customized styling for areas
+*/
+
+.sheet-area-name {
+    flex: 35%;
+    margin-right: $gridgap;
+    
+    //due to sizable textarea
+    max-width:35%;
+
+    textarea {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    h1, h2 {
+        font-size: $medium;
+        line-height: 2rem;
+    }
+}
+
+.sheet-area-stats {
+    flex: 65%;
+}

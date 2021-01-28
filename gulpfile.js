@@ -45,7 +45,7 @@ gulp.task('sheet', function(){
             }))
         .pipe(removeEmptyLines())
         .pipe(replace('text/javascript', 'text/worker')) //roll20 doesn't like text/javascript
-        .pipe(gulp.dest('./sheet'));
+        .pipe(gulp.dest('./dist'));
 });
 
 //build API scripts
@@ -64,7 +64,7 @@ gulp.task('scripts', function(){
 
 //compile scss into css
 gulp.task('style', function() {
-    return gulp.src('src/scss/main.scss')
+    return gulp.src('src/scss/style.scss')
         .pipe(sass().on('error',sass.logError))
         .pipe(gulp.dest('dist'));
 });
@@ -73,6 +73,7 @@ gulp.task('style', function() {
 //watch sheets and styles
 gulp.task('watch', function(){
     gulp.watch('./src/scss/*.scss', gulp.series(['style']));
+    gulp.watch('./src/scss/*/*.scss', gulp.series(['style']));
     gulp.watch('./src/workers/*.js' , gulp.series(['sheet']));
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
     gulp.watch('./data/*.json' , gulp.series(['sheet','scripts', 'data']));
@@ -124,9 +125,6 @@ function queryData(match, capture){
 module.exports.query = function(arg){
     console.log(queryData('', arg));
 }
-
-
-
 
 
 

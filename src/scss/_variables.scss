@@ -3,24 +3,34 @@
 */
 
 //gaps
-$gridgap: 10px;
-$fieldBottom: 8px;
+$gridgap: 2rem;
+$fieldBottom: 1rem;
 
 
 //colors
 $gray: gray;
 $lightgray: lightgray;
+$darkgray: darkgray;
 $black: black;
 $white: white;
 $orange: darkorange;
+$lightblue: #e5fffb;
+$focus-blue: #5E9ED6;
 
 
 //font-sizing
-$small: 9px;
-$medium: 10px;
-$regular: 11px;
-$large: 13px;
-$xLarge: 16px;
+$xSmall: 1rem;
+$small: 1.2rem;
+$medium: 1.4rem;
+$large: 1.8rem;
+$xLarge: 2.2rem;
 
 
+//built-in Roll20 Fonts
+$shadows: "Shadows Into Light", cursive;
+$patrick: "Patrick Hand";
+$contrail: "Contrail One";
+$candal: "Candal";
 
+//Fonts
+$helvetica: "Helvetica Neue",Helvetica,Arial,sans-serif;

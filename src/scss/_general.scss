@@ -1,0 +1,34 @@
+/**
+* Reusable classes and styling across the sheet. 
+*/
+
+.sheet-znz-character-sheet {
+    font-size: 10px; //set 1rem = 10px;
+    font-family: $helvetica;
+}
+
+.sheet-field {
+    margin-bottom: $fieldBottom;
+    
+    input, textarea {
+        width: 100%;
+    }
+}
+
+
+.sheet-row-flex {
+    display: flex;
+}
+
+
+
+
+// Text Area Styling
+.sheet-textarea {
+
+    &-small {
+        textarea {
+            height: 5rem;
+        }
+    }
+}

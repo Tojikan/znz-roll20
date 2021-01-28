@@ -1,0 +1,156 @@
+{# Output a field - header and the input element
+    - field param - Pass in individual field. Required.
+    - header - field label tag
+    - class - optional class to append to the field
+    - options - options to pass into a select field. 
+    - prefix - attr prefix
+
+    Fields get fed into outputField which routes to field creators which create the field based on the field type.
+    This should be used for a generic field output that doesn't require special edge cases like modifiers, bonuses, or repeaters
+#}
+
+{# field router #}
+{% macro outputField(field='') %}
+    {% switch field.field_type %}
+        {% case "text" %}
+            {{ createText(field=field) }}
+        {% case "textarea" %}
+            {{ createTextarea(field=field, header=header, class=class, prefix=prefix, displayHeader=displayHeader ) }}
+        {% case "number" %}
+            {{ createNumber(field=field, header=header, class=class, prefix=prefix, displayHeader=displayHeader ) }}
+        {% case "select" %}
+            {{ createSelect(field=field, header=header, class=class, options=options, prefix=prefix, displayHeader=displayHeader ) }}
+        {% default %}
+            <p> ERROR! UNHANDLED FIELD TYPE! </p>
+    {% endswitch %}
+
+{% endmacro %}
+
+
+{#### field creators ####}
+
+{# text #}
+{% macro createText(field="") %}
+    <div class="sheet-field sheet-field-text sheet-{{field.field_class}}">
+        {% if field.has_header %} <div class="sheet-field-label"><{{ field.headerType }}>{{ field.display_name }}</{{field.headerType}}></div>{% endif %}
+        <div class="sheet-field-input"><input type="text" name="attr_{{field.attr_name}}" {{ "readonly" if field.readonly }} ></input></div>
+    </div>
+{% endmacro %}
+
+{# textarea #}
+{% macro createTextarea(field="") %}
+    <div class="sheet-field sheet-field-textarea {{field.field_class}}">
+        {% if field.has_header %} <div class="sheet-field-label"><{{ field.headerType }}>{{ field.display_name }}</{{field.headerType}}></div>{% endif %}
+        <div class="sheet-field-input"><textarea name="attr_{{field.attr_name}}" {{ "readonly" if field.readonly }} ></textarea></div>
+    </div>
+{% endmacro %}
+
+{# number #}
+{% macro createNumber(field="", header="h2", class="", prefix="", displayHeader=true) %}
+    {% if field.attr_prefixed %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+
+    <div class="sheet-znz-field sheet-znz-field-number {{field.field_class}} {{class}}">
+        {% if displayHeader %} <div class="sheet-znz-field-label"><{{ header }}>{{ field.display_name }}</{{header}}></div>{% endif %}
+
+        <div class="sheet-znz-field-input">
+            {% if field.has_max  %}
+                <div class="sheet-znz-flex">
+                    <div class="sheet-znz-number">
+                        <input type="number" name="{{ attrName | join}}"  {{ "readonly" if field.readonly }} min="{{field.field_min}}" max="{{field.field_max}}" value="{{field.default_value}}"></input>
+                    </div>
+                    <div class="sheet-divider">/</div>
+                    <div class="sheet-znz-number-max">
+                        <input type="number" name="{{ attrName | join}}_max"  {{ "readonly" if field.readonly }} value="{{field.default_value}}"></input>
+                    </div>  
+                </div>
+            {% else %}
+                <input type="number" name="{{ attrName | join}}" {{ "readonly" if field.readonly }} min="{{field.field_min}}" max="{{field.field_max}}" value="{{field.default_value}}" ></input>
+            {% endif %}
+        </div>
+
+    </div>
+{% endmacro %}
+
+{# select #}
+{% macro createSelect(field="", header="h2", class="", options="", prefix="", displayHeader=true) %}
+    {% if field.attr_prefixed %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+    
+    <div class="sheet-znz-field sheet-znz-field-select {{field.field_class}} {{class}}">
+        {% if displayHeader %} <div class="sheet-znz-field-label"><{{ header }}>{{ field.display_name }}</{{header}}></div>{% endif %}
+        <div class="sheet-znz-field-input">
+            <select name="{{ attrName | join}}" value="{{field.field_selected}}">
+                {% if field.field_options_type == "array" %}
+                {% for option in field.field_options %}
+                <option value="{{option.value}}" {{"default" if option.name == field.field_selected}}>{{option.name}}</option>
+                {% endfor %}
+
+                {# not created inside the field definition #}
+                {% elif field.field_options_type == "external" %}
+                {% for option in options %}
+                <option value="{{option.value}}" {{"default" if option.default}}>{{option.name}}</option>
+                {% endfor %}
+
+                {% endif %}
+            </select>
+        </div>
+    </div>
+{% endmacro %}
+
+{# hidden #}
+{% macro createHidden(field="", prefix="", defaultValue) %}
+    {% if field.attr_prefixed %}
+        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
+    {% else %}
+        {% set attrName = ["attr_", field.attr_name] %}
+    {% endif %}
+    
+    <div class="sheet-znz-field-hidden">
+
+
+    {# looped fields aren't supposed to output a field without a num #}
+    {% if field.looped %}
+        {% for num in range(0,field.count) %}
+        <input type="hidden" name="{{ attrName | join}}_{{num}}" />
+
+        {% if field.has_mod %}
+        <input type="hidden" name="{{ attrName | join}}_{{num}}_mod" />
+        {% endif %}
+
+        {% endfor %}
+    
+    {% else %}
+        {% if defaultValue %}
+            <input type="hidden" name="{{ attrName | join}}" value="{{defaultValue}}"/>
+        {% else %}
+            <input type="hidden" name="{{ attrName | join}}" />
+        {% endif %}
+
+
+        {% if field.has_max %}
+        <input type="hidden" name="{{ attrName | join}}_max" />
+        {% endif %}
+
+        {% if field.has_mod %}
+            <input type="hidden" name="{{ attrName | join}}_mod" />
+        {% endif %}
+        {% if field.mod_check %}
+            <input type="hidden" name="{{ attrName | join}}_mod_check" />
+        {% endif %}
+        {% if field.has_bonus %}
+            <input type="hidden" name="{{ attrName | join}}_bonus" />
+        {% endif %}
+        {% if field.has_bonus_check %}
+            <input type="hidden" name="{{ attrName | join}}_bonus_check" />
+        {% endif %}
+    {% endif %}
+    </div>
+
+{% endmacro %}

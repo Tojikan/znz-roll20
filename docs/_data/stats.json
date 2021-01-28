@@ -1,0 +1,53 @@
+[
+    {
+        "display_name": "Health",
+        "attr_name": "health",
+        "default_value": 25,
+        "has_max": true,
+        "description": "",
+        "detailed_description": "Measure of a character's physical health and wellness. Whenever a character takes physical damage or is sick, this stat decreases. If it reaches 0, the character dies.",
+        "area": "stat",
+        "canonical": "hp"
+    },
+    {
+        "display_name": "Sanity",
+        "attr_name": "sanity",
+        "field_type": "number",
+        "field_min": 0,
+        "field_max": 25,  
+        "field_class": "",
+        "default_value": 25,
+        "has_max": true,
+        "description": "",
+        "detailed_description": "Measure of a character's mental health. Actions that require thinking, perceiving, or mental actions consume Sanity. Additionally, traumatic events and sustained combat further reduce sanity. If a player is reduced to 0 sanity, they must randomize a new unique character flaw and may only make randmoized Stress Reponse Actions.",
+        "area": "stat",
+        "canonical": "mp"
+    },
+    {
+        "display_name": "Energy",
+        "attr_name": "energy",
+        "field_type": "number",
+        "field_max": 25,  
+        "default_value": 25,
+        "has_max": true,
+        "description": "",
+        "detailed_description": "Measure of the the character's physical stamina. Physical actions consume Stamina.",
+        "area": "stat",
+        "canonical": "ap"
+    },
+    {
+        "display_name": "EXP",
+        "attr_name": "exp",
+        "field_type": "number",
+        "field_min": "",
+        "field_max": "",  
+        "field_class": "",
+        "description": "",
+        "default_value": 0,
+        "has_max": false,
+        "explanation_text": "",
+        "detailed_description": "EXP is used to enable character growth. EXP can be used to enhance their character's stats and abilities.",
+        "area": "stat",
+        "canonical": "exp"
+    }
+]

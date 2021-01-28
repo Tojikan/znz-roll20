@@ -1,0 +1,10 @@
+@mixin toggleDisplay($elClass, $btnClass, $onValue){
+
+    .sheet-#{$elClass} {
+        display: none;
+    }
+
+    .sheet-#{$btnClass}[value="#{$onValue}"] ~ .sheet-#{$elClass}{
+        display: block;
+    }
+}

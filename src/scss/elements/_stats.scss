@@ -1,0 +1,61 @@
+.sheet-area-stats {
+    display: flex;
+    align-items: center;
+}
+
+.sheet-stat-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+
+    .sheet-stat-block {
+        border: double $darkgray 1px;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
+        border-radius: 1rem;
+
+        .sheet-block-body {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .sheet-block-head {
+            font-size: $small;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .sheet-block-separator {
+            font-size: $xLarge;
+            display: flex;
+            align-items: flex-end;
+            text-align: center;
+            margin: 0 0.7rem;
+            color: $lightgray;
+        }
+
+
+        .sheet-block-field {
+            span {
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            input {
+                width: 4rem;
+                border: none;
+                text-align: center;
+                transition: 0.3s;
+                font-weight: 700;
+                font-size: $large;
+
+                &:hover {
+                    background-color: $lightblue;
+                }
+            }
+        }
+    }
+}
