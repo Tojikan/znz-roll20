@@ -1,0 +1,54 @@
+/**
+* Layouts
+*/
+
+.sheet-znz-character-sheet {
+
+    /************* Header area *****************/
+    .sheet-header {
+        display: flex;
+
+        // Name
+        .sheet-area-name {
+            flex: 35%;
+            margin-right: $gridgap;
+            max-width:35%; //due to sizable textarea
+        }
+        
+        // Status
+        .sheet-area-resource {
+            flex: 65%;
+        }
+    }
+
+
+    /************* Stats Tab *******************/
+
+    .sheet-area-stats {
+        padding: 2rem 0;
+        display: grid;
+        grid-template-columns: repeat(12, minmax(50px, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+        grid-gap: $gridgap * 2;
+
+        .sheet-section-attributes {
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+
+        .sheet-section-expertise {
+            grid-column-start: 4;
+            grid-column-end: 12;
+
+            display: flex;
+
+            .sheet-section-skills {
+                margin-right: 2rem;
+            }
+
+            .sheet-section-skills, .sheet-section-proficiencies {
+                width: 39%;
+            }
+        }
+    }
+}

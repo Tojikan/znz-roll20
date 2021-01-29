@@ -3,8 +3,8 @@ const path = require('path');
 
 module.exports = {
     dataFolder: './data/',
-    queryFolder = './queries',
-    prefixPath = './data/prefixes.json',
+    queryFolder: './queries',
+    prefixPath: './data/prefixes.json',
 
     /**
      * Runs a given function for anytime you need flexibility.
@@ -16,6 +16,21 @@ module.exports = {
             throw("runFunction error - Invalid parameter type. The parameter must be a function.");
         }
         return fn();
+    },
+
+    /**
+     * Gets a file, transforms its data.
+     * @param {string} file Path to a file in the data folderto retrieve
+     * @param {function} callback Callback function to transform data with. Accepts parameter which is the data retrieved from the file. Returns what is returned by the callback.
+     */
+    transformData: function(file, callback){
+        if (typeof callback !== 'function'){
+            throw("runFunction error - Invalid parameter type. The parameter must be a function.");
+        }
+
+        const data = require(this.dataFolder + '/' + file);
+
+        return callback(data);
     },
 
     /**
@@ -82,20 +97,20 @@ module.exports = {
 }
 
 /**
- * Recursive function to handle the searching for canonical property in a given object.
+ * Recursive function to handle the searching for a attr_name property in a given object.
  * 
- * @param {string} canon canonical string to search for in object
+ * @param {string} attr string value of attr_name to search for in object
  * @param {object} object the data object
  * @returns string value of "attr_name" if the appropriate canonical has been located, or null if nothing has been found.
  */
-function searchCanonical(canon, object){
+function searchCanonical(attr, object){
     // Fail case - nothing has been found
     if (object == null){
         return null; 
     }
 
     //Success case - found canonical
-    if (typeof object === "object" && "canonical" in object && "attr_name" in object && object.canonical == canon) {
+    if (typeof object === "object" && "attr_name" in object && object.attr_name == attr) {
         return object;
     }     
     //Array - search search array

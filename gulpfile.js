@@ -28,7 +28,7 @@ gulp.task('sheet', function(){
         //Inject workers into sheet.
         .pipe(inject((() => { 
             return gulp.src(['src/workers/*.js'])
-            .pipe(replace(/\(\({{(.*?)}}\)\)/gs, queryData))
+            .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, queryData))
             /* deprecated - remove once v3 done */
             .pipe(replace(/\[\[{dataquery:\s*['"](.*?)['"]}\]\]/g, replaceWithFileContent))
             .pipe(replace(/\[\[{attrlookup:\s*['"](.*?)['"]}\]\]/g, replaceCanonicalWithAttrName))
@@ -92,6 +92,14 @@ gulp.task('data', function() {
         .pipe(gulp.dest('docs/_data'));
 });
 
+//testing
+module.exports.query = function(arg){
+    console.log(queryData('', arg));
+}
+
+
+
+
 
 /**
  * queryData
@@ -103,7 +111,10 @@ gulp.task('data', function() {
  * @param {*} capture Anything in the main capture group. This should be a function call to a function in data-query.js.
  */
 function queryData(match, capture){
-    delete require.cache[require.resolve('./data-query')]; //clear cache
+    //clear cache so file contents update
+    clearDataFileCache();
+    delete require.cache[require.resolve('./data-query')]; 
+
     const dataquery = require('./data-query');
 
     try {
@@ -111,21 +122,34 @@ function queryData(match, capture){
 
         if (typeof result == "string" || typeof result == "number" || typeof result == "boolean" ){
             return result;
+        } else if (typeof result == 'object') {
+            return JSON.stringify(result);
         } else {
-            log(`queryData Warning! The data query '${capture}' did not return a simple value. Replaced capture with empty string instead.`)
+            log(`queryData Warning! The data query '${capture}' did not return a valid value. Replaced capture with empty string instead.`)
         }
-
+        
     } catch(e) {
         log(e);
     }
     return '';
 }
 
-//testing
-module.exports.query = function(arg){
-    console.log(queryData('', arg));
-}
+function clearDataFileCache(){
+    let dataFiles = fs.readdirSync(dataFolder);
+    let queryFiles = fs.readdirSync(queryFolder);
 
+    dataFiles.forEach(file => {
+        if (path.extname(file) === '.json' || path.extname(file) === '.js'){
+            delete require.cache[require.resolve(dataFolder + file)];
+        }
+    });
+
+    queryFiles.forEach(file => {
+        if (path.extname(file) === '.json' || path.extname(file) === '.js'){
+            delete require.cache[require.resolve(queryFolder + file)];
+        }
+    });
+}
 
 
 

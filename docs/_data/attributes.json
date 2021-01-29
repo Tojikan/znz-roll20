@@ -3,91 +3,56 @@
         "display_name": "Intelligence",
         "attr_name": "intelligence",
         "reminder_note": "XP Gain, Knowledge, Clues",
-        "has_mod": true,
-        "has_bonus": true,
-        "has_bonus_check" : true,
-        "default_value": 3,
-        "mod_default": 0,
-        "description": "Intelligence is a measure of your character's mental capacity and ability to learn. Intelligence increases the amount of XP your character gains and also helps your character to recall facts or obscure pieces of knowledge that may provide clues or ideas for a way forward.",
-        "area": "attributes",
-        "canonical": "intelligence"
+        "default_value": 2,
+        "default_mod": -1,
+        "description": "Intelligence is a measure of your character's mental capacity and ability to learn. Intelligence increases the amount of XP your character gains and also helps your character to recall facts or obscure pieces of knowledge that may provide clues or ideas for a way forward."
     },
     {
         "display_name": "Perception",
         "attr_name": "perception",
         "reminder_note": "Scouting, Senses",
-        "has_mod": true,
-        "has_bonus": true,
-        "has_bonus_check" : true,
-        "default_value": 3,
-        "mod_default": 0,
-        "description": "Perception is a measure of your character's general awareness of your surroundings and the keenness of your senses. It helps you in spotting, hearing, or detecting the presence of something.",
-        "area": "attributes",
-        "canonical": "perception"
+        "default_value": 2,
+        "default_mod": -1,
+        "description": "Perception is a measure of your character's general awareness of your surroundings and the keenness of your senses. It helps you in spotting, hearing, or detecting the presence of something."
     },
     {
         "display_name": "Strength",
         "attr_name": "strength",
         "reminder_note": "Melee Hit, Grappling",
-        "has_mod": true,
-        "has_bonus": true,
-        "has_bonus_check" : true,
-        "default_value": 3,
-        "mod_default": 0,
-        "description": "Strength is a measure of your character's physical power. Higher strength makes it easier for you to land melee attacks, break free from grabs, and perform feats of raw power.",
-        "area": "attributes",
-        "canonical": "strength"
+        "default_value": 2,
+        "default_mod": -1,
+        "description": "Strength is a measure of your character's physical power. Higher strength makes it easier for you to land melee attacks, break free from grabs, and perform feats of raw power."
     },
     {
         "display_name": "Dexterity",
         "attr_name": "dexterity",
         "reminder_note": "Ranged Hit, Dodging",
-        "has_mod": true,
-        "has_bonus": true,
-        "has_bonus_check" : true,
-        "default_value": 3,
-        "mod_default": 0,
-        "description": "Dexterity is a measure of your character's coordination, reflexes, and agility. Dexterity allows your character to react faster and perform physical actions with finesse. Dexterity improves your character's ability to land ranged attacks or dodge attacks from the enemy. ",
-        "area": "attributes",
-        "canonical": "dexterity"
+        "default_value": 2,
+        "default_mod": -1,
+        "description": "Dexterity is a measure of your character's coordination, reflexes, and agility. Dexterity allows your character to react faster and perform physical actions with finesse. Dexterity improves your character's ability to land ranged attacks or dodge attacks from the enemy. "
     },
     {
         "display_name": "Tenacity",
         "attr_name": "tenacity",
         "reminder_note": "Mental Fortitude, Nerves, Endurance",
-        "has_mod": true,
-        "has_bonus": true,
-        "has_bonus_check" : true,
-        "default_value": 3,
-        "mod_default": 0,
-        "description": "Tenacity is a measure of your character's mental fortitude and determination. Tenacity allows you to persist even through trauma and shock, power through pain and injury, and steel your nerves.",
-        "area": "attributes",
-        "canonical": "tenacity"
+        "default_value": 2,
+        "default_mod": -1,
+        "description": "Tenacity is a measure of your character's mental fortitude and determination. Tenacity allows you to persist ven through trauma and shock, power through pain and injury, and steel your nerves."
     },
     {
         "display_name": "Humanity",
         "attr_name": "humanity",
         "reminder_note": "Socialability, Resting",
-        "has_mod": true,
-        "has_bonus": true,
-        "has_bonus_check" : true,
-        "default_value": 3,
-        "mod_default": 0,
-        "description": "Humanity is the unique quality of human beings to connect with other people. Humanity allows you to improve how you interact with other survivors. Humanity helps players cope with the struggles of the apocalyptic world, increasing the amount resource restored from environmental effects and certain Resting actions.",
-        "area": "attributes",
-        "canonical": "humanity"
+        "default_value": 2,
+        "default_mod": -1,
+        "description": "Humanity is the unique quality of human beings to connect with other people. Humanity allows you to improve how you interact with other survivors. Humanity helps players cope with the struggles of the apocalyptic world, increasing the amount resource restored from environmental effects and certain Resting actions."
     },
     {
         "display_name": "Luck",
         "attr_name": "luck",
         "reminder_note": "Chance, Loot, Crit",
-        "has_mod": true,
-        "has_bonus": true,
-        "has_bonus_check" : true,
-        "default_value": 3,
-        "mod_default": 0,
-        "description": "Luck is a mysterious attribute that represents your character's fortune in various scenarios. Higher luck allows you to scavenge better loot. In certain situations where your other attributes can't help, luck can be the deciding factor. Luck also increases your critical hit chance - every time you increase your luck modifier, you can add a +1 to either your melee or ranged hit roll in the character sheet, which improves your chance of landing a critical strike. ",
-        "area": "attributes",
-        "canonical": "luck"
+        "default_value": 2,
+        "default_mod": -1,
+        "description": "Luck is a mysterious attribute that represents your character's fortune in various scenarios. Higher luck allows you to scavenge better loot. In certain situations where your other attributes can't help, luck can be the deciding factor. Luck also increases your critical hit chance - every time you increase your luck modifier, you can add a +1 to either your melee or ranged hit roll in the character sheet, which improves your chance of landing a critical strike. "
     }
 ]

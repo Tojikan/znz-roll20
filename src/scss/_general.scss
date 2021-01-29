@@ -7,28 +7,32 @@
     font-family: $helvetica;
 }
 
-.sheet-field {
-    margin-bottom: $fieldBottom;
-    
-    input, textarea {
-        width: 100%;
-    }
+input, textarea {
+    width: 100%;
 }
 
-
-.sheet-row-flex {
-    display: flex;
-}
-
-
-
-
-// Text Area Styling
 .sheet-textarea {
-
     &-small {
         textarea {
-            height: 5rem;
+            height: 3rem;
         }
     }
 }
+
+.sheet-line-input {
+    border: none;
+    border-bottom: solid 1px $darkgray;
+    border-radius: 0;
+}
+
+
+input {
+    transition: 0.3s;
+
+    &:hover {
+        background-color: $lightblue;
+    }
+}
+
+
+

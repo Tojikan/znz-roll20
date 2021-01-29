@@ -1,0 +1,29 @@
+{# Create skill/prof table 
+    - data - pass in an entire array of fields (skills, proficiencies)
+    - header - header on the table#}
+
+{% macro create(data="", header="") %}
+    <div class="sheet-skill-list-container">
+        {% if header %}
+        <div class="sheet-list-header">
+            <h2>{{header}}</h2>
+        </div>
+        {% endif %}
+
+        <div class="sheet-skill-list">
+        {% for field in data %}
+            <div class="sheet-skill">
+                <div class="sheet-field">
+                    <input type="text" name="attr_{{field.attr_name}}" class="sheet-line-input">
+                </div>
+                <div class="sheet-label">
+                    {{field.display_name}}
+                    <input type="hidden" class="sheet-bonus-check" name="attr_{{field.attr_name}}_bonus_check">
+                    <span class="sheet-bonus" name="attr_{{field.attr_name}}_bonus"/>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+{% endmacro %}

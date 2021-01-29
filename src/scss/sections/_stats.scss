@@ -1,9 +1,9 @@
-.sheet-area-status {
+.sheet-area-resource {
     display: flex;
     align-items: center;
 }
 
-.sheet-stat-row {
+.sheet-res-row {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -48,13 +48,8 @@
                 width: 4rem;
                 border: none;
                 text-align: center;
-                transition: 0.3s;
                 font-weight: 700;
                 font-size: $large;
-
-                &:hover {
-                    background-color: $lightblue;
-                }
             }
 
             &.sheet-field-exp {

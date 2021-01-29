@@ -1,0 +1,33 @@
+{% import 'macros/skillList.njk' as skillList %}
+
+<div class="sheet-area-stats">
+    <div class="sheet-section-attributes">
+        {% for attr in jsonData.attributes %}
+        <div class="sheet-container-attr">
+            <div class="sheet-field-attr-mod">
+                <input class="sheet-attr-mod-number sheet-attr-mod" type="text" name="attr_{{attr.attr_name}}_mod" readonly value="{{attr.default_mod}}" />
+                <input type="hidden" class="sheet-bonus-check" name="attr_{{attr.attr_name}}_bonus_check" />
+                <span readonly class="sheet-bonus" name="attr_{{attr.attr_name}}_bonus" value="+1"></span>
+            </div>
+
+            <div class="sheet-field-attr">
+                <div class="sheet-label-attr">
+                    {{attr.display_name}}
+                </div>
+                <div class="sheet-field-attr-input">
+                    <input type="text" name="attr_{{attr.attr_name}}" value="{{attr.default_value}}">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="sheet-section-expertise">
+        <div class="sheet-section-skills">
+            {{ skillList.create(jsonData.skills, 'Skills') }}
+        </div>
+        <div class="sheet-section-proficiencies">
+            {{ skillList.create(jsonData.proficiencies, 'Proficiencies') }}
+        </div>
+    </div>
+</div>

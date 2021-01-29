@@ -10,7 +10,7 @@
 #}
 
 {% import 'macros/outputfield.njk' as basicField %}
-{% import 'macros/statblock.njk' as statBlock %}
+{% import 'macros/resourceblock.njk' as resourceBlock %}
 
 
 <div class="sheet-znz-character-sheet">
@@ -23,10 +23,10 @@
         </div>
 
         {#----- Status ----- #}
-        <div class="sheet-area-status">
-            <div class="sheet-stat-row">
-                {% for stat in jsonData.status %}
-                    {{ statBlock.create(stat) }}
+        <div class="sheet-area-resource">
+            <div class="sheet-res-row">
+                {% for res in jsonData.resource %}
+                    {{ resourceBlock.create(res) }}
                 {% endfor %}
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="sheet-tabs-content">
             <input type='hidden' class='sheet-tab-toggle' name='attr_sheet_tab'  value='selectTabStats'  />
             <div class="sheet-tab sheet-tab-stats">
-                Stats
+                {% include "partials/stats-tab.njk" %}
             </div>
             <div class="sheet-tab sheet-tab-abilities">
                 Abilities
@@ -55,13 +55,7 @@
                 Notes
             </div>
         </div>
-        <div class="sheet-sidebar">
-        
-        </div>
 
-        <div class="sheet-main">
-        
-        </div>
     </div>
 </div>
 
