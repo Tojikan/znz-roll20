@@ -1,0 +1,96 @@
+[
+    {
+    "name": "Select Ability",
+    "value": "none",
+    "description": "Select an ability to see its description."
+    },
+    {
+    "name": "Action Star",
+    "value": "action_star",
+    "description": "Gain more actions in combat.",
+    "lvl1": "No energy penalty when repeating an action.",
+    "lvl2": "Gain a third action by spending 2 energy.",
+    "lvl3": "Third action no longer costs 2 energy."
+  },
+  {
+    "name": "Analyst",
+    "value": "analyst",
+    "description": "Gain the <strong>Analyze</strong> ability - Learn the exact number you must beat for any action that requires a roll or the exact health of a target.",
+    "lvl1": "Can use Analyze 3 times a play session.",
+    "lvl2": "Analyze can be used 5 times a play session. Determining the health of enemy targets no longer count towards this limit.",
+    "lvl3": "Analyze can be used without counting to the play session limit as long as your character is the one attempting the roll."
+  },
+  {
+    "name": "Brawler",
+    "value": "brawler",
+    "description": "Hit multiple enemies with your melee attacks.",
+    "lvl1": "<strong> Cleave </strong>: when hitting an enemy with a melee attack, deal half damage to another enemy adjacent to your target that is within your range.",
+    "lvl2": "Hit an additional enemy with your cleave.",
+    "lvl3": "Deal full damage with your cleave attacks."
+  },
+  {
+    "name": "Cheerleader",
+    "value": "cheerleader",
+    "description": "Your character can spend resources to improve the rolls of other characters.",
+    "lvl1": "<strong>Go Team!</strong>:  Prior to another player making an active roll, you can spend 1 resource (matching the resource they use) to improve their roll by 1d6",
+    "lvl2": "<strong>If You Can't Do It!</strong>: You can now spend as much energy/sanity as you like to improve a roll.",
+    "lvl3": "<strong>Nobody Can!</strong>: You can now improve a player's roll retroactively after the player makes the roll."
+  },
+  {
+    "name": "Encyclopedia",
+    "value": "speedy",
+    "description": "Your character gains <strong>Knowledge</strong> ability. You can attempt any skill even for a skill you don't possess as long as you pass a passive intelligence check first.",
+    "lvl1": "Can use Knowledge twice a play session.",
+    "lvl2": "Knowledge no longer has a play session limit. ",
+    "lvl3": "No longer need to pass an intelligence check to use Knowledge."
+  },
+  {
+    "name": "Gotta Go Fast",
+    "value": "speedy",
+    "description": "Your character moves more spaces.",
+    "lvl1": "Movement speed bonus +1",
+    "lvl2": "Movement speed bonus +2",
+    "lvl3": "Movement speed bonus +3"
+  },
+  {
+    "name": "Lucky",
+    "value": "lucky",
+    "description": "Gain the <strong>Mulligan</strong> ability - Re-roll any roll. Limited uses per play session.",
+    "lvl1": "Can use Mulligan once a play session.",
+    "lvl2": "Can use Mulligan twice a play session.",
+    "lvl3": "Can use Mulligan three times a play session "
+  },
+  {
+    "name": "Martial Artist",
+    "value": "martial_artist",
+    "description": "Your character gains reaction attacks to enemy melee attacks.",
+    "lvl1": "<strong>Fast as Lightening</strong>:  Successful dodging or grab-breaking gives you a melee attack reaction, but you can only roll 1 dice for this attack.",
+    "lvl2": "<strong>A Little Bit Frightening</strong>: Successful dodging or grab-breaking gives you a full melee attack reaction, where you can roll as many dice as you like.",
+    "lvl3": "<strong>Kungfu Fighting</strong>: Making a melee attack automatically prepares you for dodging. "
+  },
+  {
+    "name": "Mutation",
+    "value": "mutation",
+    "description": "A new evolutionary path awaits.",
+    "lvl1": "Your character can no longer utilize any skills, most abilities, and most proficiencies. Any ranged attack roll made with a gun or projectile weapon is halved. Your character's Intelligence and Charisma is limited to 0, and Sanity max is limited to 25. Strength, Perception, and Dexterity can now be increased up to 8. You may add your strength modifier to any melee damage. You cannot level up this ability through regular means.",
+    "lvl2": "???",
+    "lvl3": "???",
+    "hidden": true
+  },
+  {
+    "name": "Sniper",
+    "value": "sniper",
+    "description": "Allows you to add a bonus roll to ranged attacks without spending any resource.",
+    "lvl1": "<strong>Snipe</strong>: Spend 1 action on your turn to add 1 free roll to any ranged attack without having to spend any resource.",
+    "lvl2": "Snipe now adds 2 free rolls.",
+    "lvl3": "As long as you don't move on your turn, you no longer need to spend an action to use Snipe."
+  },
+  {
+    "name": "Therapist",
+    "value": "therapist",
+    "description": "Gain the <strong>Counseling</strong> ability - Restore 1d4 + chamod sanity. Any character can only receive counseling at most once a day",
+    "lvl1": "Can use Counseling twice a day.",
+    "lvl2": "Counseling now restores 1d6 + chamod. Gain 1 additional use.",
+    "lvl3": "Counseling now restores to 1d8 + chamod. Gain 1 additional use. "
+  }
+]
