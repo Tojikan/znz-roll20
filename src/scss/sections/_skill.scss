@@ -32,6 +32,11 @@
 
         .sheet-label {
             flex: 85%;
+
+            .sheet-attr {
+                color: $gray;
+                font-size: $xSmall;
+            }
         }
     }
 }

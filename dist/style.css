@@ -6,7 +6,8 @@
 */
 .sheet-znz-character-sheet {
   /************* Header area *****************/
-  /************* Stats Tab *******************/ }
+  /************* Stats Tab *******************/
+  /*************** Ability Tab ******************/ }
   .sheet-znz-character-sheet .sheet-header {
     display: flex; }
     .sheet-znz-character-sheet .sheet-header .sheet-area-name {
@@ -16,7 +17,6 @@
     .sheet-znz-character-sheet .sheet-header .sheet-area-resource {
       flex: 65%; }
   .sheet-znz-character-sheet .sheet-area-stats {
-    padding: 2rem 0;
     display: grid;
     grid-template-columns: repeat(12, minmax(50px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
@@ -32,6 +32,12 @@
         margin-right: 2rem; }
       .sheet-znz-character-sheet .sheet-area-stats .sheet-section-expertise .sheet-section-skills, .sheet-znz-character-sheet .sheet-area-stats .sheet-section-expertise .sheet-section-proficiencies {
         width: 39%; }
+  .sheet-znz-character-sheet .sheet-area-abilities .sheet-container {
+    display: flex; }
+    .sheet-znz-character-sheet .sheet-area-abilities .sheet-container > div {
+      flex: 50%; }
+      .sheet-znz-character-sheet .sheet-area-abilities .sheet-container > div:first-child {
+        margin-right: 2rem; }
 
 /**
 * Reusable classes and styling across the sheet. 
@@ -186,6 +192,9 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     border-bottom: none;
     background-color: white; }
 
+.sheet-tabs-content {
+  padding: 2rem 0; }
+
 .sheet-bonus {
   display: none;
   font-size: 1.2rem; }
@@ -334,3 +343,6 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
         text-align: center; }
     .sheet-skill-list .sheet-skill .sheet-label {
       flex: 85%; }
+      .sheet-skill-list .sheet-skill .sheet-label .sheet-attr {
+        color: gray;
+        font-size: 1rem; }

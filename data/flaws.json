@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Select Flaw",
+        "value": "",
+        "description": "Select a flaw to see its description"
+    },
+    {
+        "name": "Alcoholic",
+        "value": "alcoholic",
+        "description": "Your character must consume 1 alchohol to take a rest. Your character now has a daily consumption requirement of 2 alcohol."
+    },
+    {
+        "name": "Asthma",
+        "value": "asthma",
+        "description": "Moving more than 5 spaces in a turn causes your character to take damage."
+    },
+    {
+        "name": "Battle-scarred",
+        "value": "Battle-scarred",
+        "description": "If you roll an initiative of 6 or lower, your first action will be a Stress Response."
+    },
+    {
+        "name": "Catastrophic Failure",
+        "value": "catastrophic",
+        "description": "Whenever you roll a natural 1, there is a chance the outcome becomes a catastrophic failure, leading to a butterfly effect chain that ends in a disaster. This can occur no more than once a play session."
+    },
+    {
+        "name": "Clumsy",
+        "value": "clumsy",
+        "description": "Your character occasionally slips up and causes an accident. This can occur no more than two times a play session."
+    },
+    {
+        "name": "Glutton",
+        "value": "glutton",
+        "description": "Your character only restores 2 energy per unit of food. Daily requirements for food go up by 2."
+    },
+    {
+        "name": "Hemophiliac",
+        "value": "hemophiliac",
+        "description": "Health regain effects are reduced by 50%."
+    },
+    {
+        "name": "Nearsighted",
+        "value": "nearsighted",
+        "description": "If your character takes damage, roll a luck check. If that check fails, your glasses break and you receive a heavy penalty to ranged attacks and perception checks."
+    },
+    {
+        "name": "Restless",
+        "value": "restless",
+        "description": "Your character does not get resource restore bonus during long rests."        
+    },
+    {
+        "name": "Sickly",
+        "value": "sickly",
+        "description": "Your character has a rare, incurable disease. Your character now has a daily consumption requirement of 2 special medicine. If starting the game with this flaw, start with 2 special medicine."
+    },
+    {
+        "name": "Stressed",
+        "value": "stressed",
+        "description": "Your character has trouble adapting to apocalyptic life and is more prone to tenacity checks to prevent random sanity loss."
+    },
+    {
+        "name": "Unlucky",
+        "value": "lucky",
+        "description": "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
+    },
+    {
+        "name": "Unwelcome",
+        "value": "unwelcome",
+        "description": "NPCs will typically start off with a bad first impression of you and generally mistrust you."
+    }
+]

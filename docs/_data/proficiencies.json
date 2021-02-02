@@ -1,143 +1,147 @@
 [
   {
-    "display_name": "Climbing",
-    "attr_name": "prof_climbing",
-    "description": "Improves any attempt to climb an object.",
-    "attribute": "Dexterity"
-  },
-  {
-    "display_name": "Cooking",
-    "attr_name": "prof_cooking",
-    "description": "Used when cooking to improve the restoration effects of a dish.",
-    "attribute": ""
+    "display_name": "Athletics",
+    "attr_name": "prof_athletics",
+    "description": "",
+    "attribute": "STR",
+    "resource": "Energy"
   },
   {
     "display_name": "Crafting",
     "attr_name": "prof_crafting",
     "description": "Used when making improvised gear or weapons.",
-    "attribute": "intelligence"
+    "attribute": "INT",
+    "resource": "Energy"
+  },
+  {
+    "display_name": "Dodging",
+    "attr_name": "prof_dodging",
+    "description": "",
+    "attribute": "DEXT",
+    "resource": "Energy"
   },
   {
     "display_name": "Driving",
     "attr_name": "prof_driving",
     "description": "Allows you to perform more difficult maneuvers and maintain control in a car.",
-    "attribute": "perception"
+    "attribute": "PER",
+    "resource": "Sanity"
   },
   {
     "display_name": "First Aid",
     "attr_name": "prof_first_aid",
     "description": "Ability to use first-aid kits or apply medicine to wounds",
-    "attribute": ""
+    "attribute": "INT",
+    "resource": "Sanity"
+  },
+  {
+    "display_name": "Insight",
+    "attr_name": "prof_insight",
+    "description": "",
+    "attribute": "CHA",
+    "resource": "Sanity"
   },
   {
     "display_name": "Intimidation",
     "attr_name": "prof_intimidation",
     "description": "Make it easier to intimidate or scare other human survivors.",
-    "attribute": "charisma"
+    "attribute": "CHA",
+    "resource": "Sanity"
   },
   {
     "display_name": "Investigation",
     "attr_name": "prof_investigation",
     "description": "Used when examining a situation and determining what happened.",
-    "attribute": "perception"
-  },
-  {
-    "display_name": "Melee - Blunt",
-    "attr_name": "prof_blunt_melee",
-    "combat": "melee",
-    "description": "Improves aim with blunt melee weapons.",
-    "attribute": "strength"
-  },
-  {
-    "display_name": "Melee - Heavy",
-    "attr_name": "prof_heavy_melee",
-    "combat": "melee",
-    "description": "Improves aim with heavy melee weapons such as chainsaws and heavy axes.",
-    "attribute": "strength"
-  },
-  {
-    "display_name": "Melee - Sharp",
-    "attr_name": "prof_sharp_melee",
-    "combat": "melee",
-    "description": "Improves aim with sharp-edged melee weapons.",
-    "attribute": "strength"
+    "attribute": "INT",
+    "resource": "Sanity"
   },
   {
     "display_name": "Melee - Unarmed",
     "attr_name": "prof_unarmed",
     "combat": "melee",
     "description": "Improves unarmed combat.",
-    "attribute": "strength"
+    "attribute": "STR",
+    "resource": "Energy"
   },
   {
-    "display_name": "Negotiation",
-    "attr_name": "prof_negotiation",
-    "description": "Make it easier to make deals and truces with other human survivors.",
-    "attribute": ""
+    "display_name": "Melee - Weapon",
+    "attr_name": "prof_melee",
+    "combat": "melee",
+    "description": "",
+    "attribute": "STR",
+    "resource": "Energy"
   },
   {
     "display_name": "Orientation",
     "attr_name": "prof_orientation",
     "description": "Ability to know where you are and what direction to go to. ",
-    "attribute": ""
+    "attribute": "PER",
+    "resource": "Sanity"
   },
   {
     "display_name": "Performance",
     "attr_name": "prof_performance",
     "description": "Ability to act or put on a show.",
-    "attribute": ""
+    "attribute": "CHA",
+    "resource": "Energy"
   },
   {
-    "display_name": "Ranged - Handguns",
-    "attr_name": "prof_handguns",
-    "description": "Improves aim with short-barreled guns like pistols and revolvers.",
-    "combat": "ranged",
-    "attribute": ""
+    "display_name": "Persuasion",
+    "attr_name": "prof_persuasion",
+    "description": "Make it easier to make deals and truces with other human survivors.",
+    "attribute": "CHA",
+    "resource": "Sanity"
   },
   {
-    "display_name": "Ranged - Long Gun",
-    "attr_name": "prof_longgun",
-    "description": "Improves aim with long-barreled guns like rifles and submachine guns.",
+    "display_name": "Ranged - Firearms",
+    "attr_name": "prof_gun",
+    "description": "",
     "combat": "ranged",
-    "attribute": ""
+    "attribute": "DEXT",
+    "resource": "Ammo"
   },
   {
     "display_name": "Ranged - Projectiles",
     "attr_name": "prof_projectile",
     "description": "Improves aims with launching weapons such as bows and slingshots.",
     "combat": "ranged",
-    "attribute": ""
-  },
-  {
-    "display_name": "Ranged - Shotguns",
-    "attr_name": "prof_shotguns",
-    "description": "Improves aim with shotguns.",
-    "combat": "ranged",
-    "attribute": ""
+    "attribute": "DEXT",
+    "resource": "Energy"
   },
   {
     "display_name": "Ranged - Throwing",
     "attr_name": "prof_throwing",
     "description": "Improves aim with throwing.",
-    "combat": "ranged",
-    "attribute": ""
+    "attribute": "STR",
+    "resource": "Energy",
+    "combat": "ranged"
+  },
+  {
+    "display_name": "Scouting",
+    "attr_name": "prof_scouting",
+    "description": "",
+    "attribute": "PER",
+    "resource": "Sanity"
   },
   {
     "display_name": "Sleight of Hand",
     "attr_name": "prof_sleighthand",
     "description": "Ability to deftly manipulate objects you are holding in order to perform tricks.",
-    "attribute": ""
+    "attribute": "DEXT",
+    "resource": "Energy"
   },
   {
     "display_name": "Stealth",
     "attr_name": "prof_stealth",
     "description": "Improves your ability to sneak and go unnoticed.",
-    "attribute": ""
+    "attribute": "PER",
+    "resource": "Energy"
   },
   {
-    "display_name": "Swimming",
-    "attr_name": "prof_swimming",
-    "description": "Improves any swim actions.",
-    "attribute": ""
+    "display_name": "Survival",
+    "attr_name": "prof_survival",
+    "description": "",
+    "attribute": "TENA",
+    "resource": "Energy"
   }
 ]

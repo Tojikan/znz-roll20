@@ -25,7 +25,6 @@
     /************* Stats Tab *******************/
 
     .sheet-area-stats {
-        padding: 2rem 0;
         display: grid;
         grid-template-columns: repeat(12, minmax(50px, 1fr));
         grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
@@ -48,6 +47,22 @@
 
             .sheet-section-skills, .sheet-section-proficiencies {
                 width: 39%;
+            }
+        }
+    }
+
+
+    /*************** Ability Tab ******************/
+    .sheet-area-abilities {
+        .sheet-container {
+            display: flex;
+
+            > div {
+                flex: 50%;
+
+                &:first-child {
+                    margin-right: $gridgap;
+                }
             }
         }
     }

@@ -1,16 +1,24 @@
 [
-    {
+  {
     "name": "Select Ability",
     "value": "none",
     "description": "Select an ability to see its description."
-    },
-    {
+  },
+  {
     "name": "Action Star",
     "value": "action_star",
     "description": "Gain more actions in combat.",
     "lvl1": "No energy penalty when repeating an action.",
     "lvl2": "Gain a third action by spending 2 energy.",
     "lvl3": "Third action no longer costs 2 energy."
+  },
+  {
+    "name": "Adept",
+    "value": "adept",
+    "description": "Your character can temporarily increase proficiency by spending resources.",
+    "lvl1": "<strong>Adept</strong>: Prior to attempting an action, you can spend 1 resource (of the same type as the proficiency) to increase the proficiency by 1. The roll cost is still the same.",
+    "lvl2": "There is now no limit to the amount of times you can use Adept for a given action.",
+    "lvl3": "Adept now costs 1 resource to increase proficiency by 2. "
   },
   {
     "name": "Analyst",
@@ -51,6 +59,14 @@
     "lvl1": "Movement speed bonus +1",
     "lvl2": "Movement speed bonus +2",
     "lvl3": "Movement speed bonus +3"
+  },
+  {
+    "name": "Hunter",
+    "value": "hunter",
+    "description": "Your character gains bonuses from stealth attacks.",
+    "lvl1": "Gain an additional free attack roll when attacking unnoticed from stealth.",
+    "lvl2": "Gain an additional 1d6 damage roll when attacking unnoticed from stealth.",
+    "lvl3": "When attacking from stealth, each damage and attack roll gains a +2 bonus."
   },
   {
     "name": "Lucky",

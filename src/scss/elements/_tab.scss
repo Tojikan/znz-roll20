@@ -30,3 +30,7 @@
     @include tabButtonToggle('sheet-tab-button-equipment', 'sheet-tab-toggle', 'selectTabEquipment');
     @include tabButtonToggle('sheet-tab-button-notes', 'sheet-tab-toggle', 'selectTabNotes');
 }
+
+.sheet-tabs-content {
+    padding: 2rem 0;
+}

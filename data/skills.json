@@ -1,117 +1,142 @@
 [
   {
-    "display_name": "Advanced Knots",
-    "attr_name": "knots",
-    "description": "Tie and untie difficult knots."
-  },
-  {
-    "display_name": "Animals",
+    "display_name": "Animal Handling",
     "attr_name": "animals",
-    "description": "Knowledge on raising and taking care of animals."
+    "description": "Knowledge on raising and taking care of animals.",
+    "attribute": "CHA",
+    "resource": "Sanity"
   },
   {
     "display_name": "Blacksmithing",
     "attr_name": "blacksmithing",
-    "description": "Knowledge on metal-working"
-  },
-  {
-    "display_name": "Biology",
-    "attr_name": "biology",
-    "description": "Knowledge in the structure and composition of life."
-  },
-  {
-    "display_name": "Boat Piloting",
-    "attr_name": "boat_piloting",
-    "description": "Ability to pilot a boat."
-  },
-  {
-    "display_name": "Botany",
-    "attr_name": "botany",
-    "description": "Knowledge and ability on plants and how to grow/take care of them."
-  },
-  {
-    "display_name": "Chemistry",
-    "attr_name": "chemistry",
-    "description": "Knowledge in the structure, composition, and creation of various substances."
+    "description": "Knowledge on metal-working",
+    "attribute": "STR",
+    "resource": "Energy"
   },
   {
     "display_name": "Construction",
     "attr_name": "construction",
-    "description": "Allows you to build more sturdier and advanced structures."
+    "description": "Allows you to build more sturdier and advanced structures.",
+    "attribute": "STR",
+    "resource": "Energy"
   },
   {
-    "display_name": "Electrical",
-    "attr_name": "electrical",
-    "description": "The ability to build, maintain, or repair electrical systems."
+    "display_name": "Cooking",
+    "attr_name": "cooking",
+    "description": "",
+    "attribute": "PER",
+    "resource": "Energy"
   },
   {
     "display_name": "Electronics",
     "attr_name": "electronics",
-    "description": "The ability to build, maintain, or repair consumer electronics and devices."
+    "description": "The ability to build, maintain, or repair consumer electronics and devices.",
+    "attribute": "INT",
+    "resource": "Sanity"
   },
   {
     "display_name": "Explosives",
     "attr_name": "explosives",
-    "description": "Knowledge in the composition, creation, and usage of explosives."
+    "description": "Knowledge in the composition, creation, and usage of explosives.",
+    "attribute": "INT",
+    "resource": "Sanity"
+  },
+  {
+    "display_name": "Farming",
+    "attr_name": "farming",
+    "description": "",
+    "attribute": "INT",
+    "resource": "energy"
   },
   {
     "display_name": "Foreign Language",
     "attr_name": "foreign_language",
-    "description": "Knowledge in a specific language. Every time you add a point to this skill, you may add a Language that your character knows."
+    "description": "Knowledge in a specific language. Every time you add a point to this skill, you may add a Language that your character knows.",
+    "attribute": "INT",
+    "resource": "Sanity"
   },
   {
     "display_name": "Gunsmithing",
     "attr_name": "gunsmmithing",
-    "description": "Allows you to craft, repair, and improve upon firearms."
+    "description": "Allows you to craft, repair, and improve upon firearms.",
+    "attribute": "DEXT",
+    "resource": "Energy"
   },
   {
     "display_name": "Hacking",
     "attr_name": "hacking",
-    "description": "Allows you to hack or gain access to computer systems."
+    "description": "Allows you to hack or gain access to computer systems.",
+    "attribute": "INT",
+    "resource": "Sanity"
   },
   {
     "display_name": "Hotwiring",
     "attr_name": "hotwiring",
-    "description": "Allows you to attempt to hotwire a vehicle."
+    "description": "Allows you to attempt to hotwire a vehicle.",
+    "attribute": "DEXT",
+    "resource": "Energy"
+  },
+  {
+    "display_name": "Knot Tying",
+    "attr_name": "knots",
+    "description": "Tie and untie difficult knots.",
+    "attribute": "DEXT",
+    "resource": "Energy"
   },
   {
     "display_name": "Lockpicking",
     "attr_name": "lockpicking",
-    "description": "Allows you to attempt to pick standard locks."
+    "description": "Allows you to attempt to pick standard locks.",
+    "attribute": "PER",
+    "resource": "Energy"
   },
   {
-    "display_name": "Machinery",
-    "attr_name": "machinery",
-    "description": "Allows you to use tools to build, maintain, or repair machinery. "
+    "display_name": "Mechanic",
+    "attr_name": "Mechanic",
+    "description": "Allows you to use tools to build, maintain, or repair machinery. ",
+    "attribute": "INT",
+    "resource": "Energy"
   },
   {
     "display_name": "Medicine",
     "attr_name": "medicine",
-    "description": "Knowledge in various medicines and the diagnosis, treatment, and prevention of disease."
+    "description": "Knowledge in various medicines and the diagnosis, treatment, and prevention of disease.",
+    "attribute": "INT",
+    "resource": "Sanity"
   },
   {
     "display_name": "Nature",
     "attr_name": "nature",
-    "description": "Generic knowledge of survival in the wilderness."
+    "description": "",
+    "attribute": "PER",
+    "resource": "Sanity"
   },
   {
-    "display_name": "Navigation",
-    "attr_name": "navigation",
-    "description": "Ability to read a map, use a compass, and navigate without a GPS."
+    "display_name": "Piloting - Boat",
+    "attr_name": "piloting",
+    "description": "",
+    "attribute": "PER",
+    "resource": "Sanity"
   },
   {
-    "display_name": "Plane Piloting",
-    "attr_name": "plane_piloting",
-    "description": "Ability to pilot a plane."
+    "display_name": "Piloting - Plane",
+    "attr_name": "piloting",
+    "description": "",
+    "attribute": "PER",
+    "resource": "Sanity"
   },
   {
-    "display_name": "Riding",
-    "attr_name": "riding",
-    "description": "Ability to ride vehicles such as motorcycles or a horse."
+    "display_name": "Science",
+    "attr_name": "science",
+    "description": "",
+    "attribute": "INT",
+    "resource": "Sanity"
   },
   {
     "display_name": "Tailoring",
     "attr_name": "tailoring",
-    "description": "Allows you to craft clothes."
+    "description": "Allows you to craft clothes.",
+    "attribute": "DEXT",
+    "resource": "Energy"
   }
 ]

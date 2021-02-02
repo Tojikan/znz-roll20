@@ -18,5 +18,13 @@
             "headerType": "h2",
             "description": ""
         }
-    ]
+    ],
+    "quirks": {
+        "ability_attr": "ability",
+        "flaw_attr": "flaw"
+    },
+    "actions": {
+        "randomizeFlaw": "randomizeFlaw",
+        "randomizeAbility": "randomizeAbility"
+    }
 }
