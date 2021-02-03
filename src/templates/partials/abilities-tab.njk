@@ -2,7 +2,7 @@
 
 <div class="sheet-area-abilities">
     <div class="sheet-container">
-        <div class="sheet-section-ability">
+        <div class="sheet-section-quirk">
             <div class="sheet-header sheet-row-flex">
                 <h2>Abilities</h2>
                 <button type="action" name="act_{{jsonData.misc.actions.randomizeAbility}}">Random Ability </button>
@@ -22,19 +22,32 @@
                                 </select>
                             </div>
                             <div class="sheet-ability-label">
-                                Ability Level
+                                Ability Lvl
                                 <input type="number" name="attr_{{jsonData.misc.quirks.ability_attr}}_lvl" value="1" min="1" max="3"/>
                             </div>
                         </div>
-                        <div class="sheet-ability-descript">
-                            <span type="text" readonly name="attr_{{jsonData.misc.quirks.ability_attr}}_description">{{jsonData.abilities[0].description}}<strong>test</strong></span>
+                        <div class="sheet-ability-descriptions">
+                            {% for ability in jsonData.abilities %}
+                                <div class="sheet-description">
+                                    <div class="sheet-description-main">
+                                        <input type="checkbox" class="sheet-toggle" name="attr_{{jsonData.misc.quirks.ability_attr}}" value="{{ability.value}}" {{"checked" if ability.default}} />
+                                        <div class="sheet-description-text sheet-toggle-content">
+                                            {{ability.description | safe}}
+                                            {% if ability.lvl1 %} <div class="sheet-ability-lvl-text"><span>Level 1</span> - {{ability.lvl1 | safe}} </div>{% endif %}
+                                            {% if ability.lvl2 %} <div class="sheet-ability-lvl-text"><span>Level 2</span> - {{ability.lvl2 | safe}} </div>{% endif %}
+                                            {% if ability.lvl3 %} <div class="sheet-ability-lvl-text"><span>Level 3</span> - {{ability.lvl3 | safe}} </div>{% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
                         </div>
                     </div>
                 </fieldset>
             </div>
         </div>
 
-        <div class="sheet-section-ability">
+        <div class="sheet-section-quirk">
             <div class="sheet-header sheet-row-flex">
                 <h2>Flaws</h2>
                 <button type="action" name="act_{{jsonData.misc.actions.randomizeFlaw}}">Random Flaw </button>
@@ -51,8 +64,17 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="sheet-ability-descript">
-                            <textarea type="text" readonly name="attr_{{jsonData.misc.quirks.flaw_attr}}_description">{{jsonData.flaws[0].description}}</textarea>
+                        <div class="sheet-ability-descriptions">
+                            {% for flaw in jsonData.flaws %}
+                                <div class="sheet-description">
+                                    <div class="sheet-description-main">
+                                        <input type="checkbox" class="sheet-toggle" name="attr_{{jsonData.misc.quirks.flaw_attr}}" value="{{flaw.value}}" {{"checked" if flaw.default}} />
+                                        <div class="sheet-description-text sheet-toggle-content">
+                                            {{flaw.description | safe}}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </fieldset>

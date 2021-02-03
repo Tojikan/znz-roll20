@@ -2,7 +2,8 @@
     {
         "name": "Select Flaw",
         "value": "",
-        "description": "Select a flaw to see its description"
+        "description": "Select a flaw to see its description",
+        "default": "true"
     },
     {
         "name": "Alcoholic",

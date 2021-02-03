@@ -54,7 +54,7 @@ input, textarea {
 
 .sheet-line-input {
   border: none;
-  border-bottom: solid 1px darkgray;
+  border-bottom: solid 1px #a0a0a0;
   border-radius: 0; }
 
 .sheet-row-flex {
@@ -112,7 +112,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     display: none; }
   .sheet-znz-expand-button.sheet-znz-expandable-section {
     margin: 5px 0;
-    border-bottom: solid 1px lightgray; }
+    border-bottom: solid 1px #f5f5f5; }
     .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label {
       text-align: center; }
       .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label:before {
@@ -174,7 +174,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     padding: 1rem 0;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    border: solid 2px lightgray;
+    border: solid 2px #d3d3d3;
     border-bottom: none;
     transition: 0.2s; }
     .sheet-tab-select button:not(:last-child) {
@@ -221,6 +221,14 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   .sheet-skill-list .sheet-bonus-check[value="neg"] ~ .sheet-bonus:after {
     content: ")"; }
 
+.sheet-toggle {
+  display: none; }
+  .sheet-toggle:checked ~ .sheet-toggle-content {
+    display: block; }
+
+.sheet-toggle-content {
+  display: none; }
+
 .sheet-area-resource {
   display: flex;
   align-items: center; }
@@ -231,7 +239,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   justify-content: space-between;
   width: 100%; }
   .sheet-res-row .sheet-stat-block {
-    border: double darkgray 1px;
+    border: double #a0a0a0 1px;
     padding: 0.5rem;
     display: flex;
     flex-direction: column-reverse;
@@ -250,7 +258,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       align-items: flex-end;
       text-align: center;
       margin: 0 0.7rem;
-      color: lightgray; }
+      color: #f5f5f5; }
     .sheet-res-row .sheet-stat-block .sheet-block-field span {
       display: block;
       margin-bottom: 0.5rem; }
@@ -289,11 +297,11 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     .sheet-container-attr .sheet-field-attr-mod .sheet-bonus {
       position: absolute;
       bottom: 0;
-      border: solid 1px darkgray;
+      border: solid 1px #a0a0a0;
       padding: 0 1rem;
       border-radius: 4rem; }
   .sheet-container-attr .sheet-field-attr {
-    border: solid 1px darkgray;
+    border: solid 1px #a0a0a0;
     border-left: none;
     padding: 0.5rem;
     font-size: 1.2rem;
@@ -308,7 +316,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       flex: 20%; }
       .sheet-container-attr .sheet-field-attr .sheet-field-attr-input input {
         border: none;
-        border-left: solid 1px darkgray;
+        border-left: solid 1px #a0a0a0;
         border-radius: 0;
         width: 100%;
         text-align: center;
@@ -333,7 +341,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
 .sheet-skill-list {
   font-size: 1.4rem;
   padding: 1rem;
-  border: solid 1px darkgray; }
+  border: solid 1px #a0a0a0; }
   .sheet-skill-list .sheet-skill {
     display: flex;
     align-items: flex-end;
@@ -348,26 +356,39 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     .sheet-skill-list .sheet-skill .sheet-label {
       flex: 85%; }
       .sheet-skill-list .sheet-skill .sheet-label .sheet-attr {
-        color: gray;
+        color: #a0a0a0;
         font-size: 1rem; }
 
-.sheet-section-ability {
+.sheet-section-quirk {
   max-width: 50%; }
-  .sheet-section-ability .sheet-header {
+  .sheet-section-quirk .sheet-header {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: solid 1px gray; }
-    .sheet-section-ability .sheet-header button {
+    border-bottom: solid 1px #d3d3d3; }
+    .sheet-section-quirk .sheet-header button {
       padding: 0 0.8rem;
       font-size: 1.2rem;
       line-height: 12px; }
-  .sheet-section-ability .sheet-ability-list .repcontainer {
+  .sheet-section-quirk .sheet-ability-list .repcontainer {
     margin-bottom: 1rem; }
-  .sheet-section-ability .sheet-ability {
-    border-bottom: solid 1px gray;
+  .sheet-section-quirk .sheet-ability {
+    border-bottom: solid 1px #d3d3d3;
     padding-top: 2rem;
     padding-bottom: 1rem; }
-    .sheet-section-ability .sheet-ability textarea {
+    .sheet-section-quirk .sheet-ability textarea {
       max-width: 98%; }
-    .sheet-section-ability .sheet-ability .sheet-ability-label {
+    .sheet-section-quirk .sheet-ability .sheet-ability-label {
       font-size: 1.2rem; }
+  .sheet-section-quirk .sheet-ability-descriptions .sheet-description-text {
+    border: solid 1px #d3d3d3;
+    background-color: #f5f5f5;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    min-height: 12rem;
+    font-size: 1.2rem; }
+    .sheet-section-quirk .sheet-ability-descriptions .sheet-description-text .sheet-ability-lvl-text {
+      margin-left: 1rem;
+      margin-top: 0.5rem; }
+      .sheet-section-quirk .sheet-ability-descriptions .sheet-description-text .sheet-ability-lvl-text span {
+        font-weight: 700;
+        text-decoration: underline; }

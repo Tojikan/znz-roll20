@@ -2,7 +2,8 @@
   {
     "name": "Select Ability",
     "value": "none",
-    "description": "Select an ability to see its description."
+    "description": "Select an ability to see its description.",
+    "default": true
   },
   {
     "name": "Action Star",

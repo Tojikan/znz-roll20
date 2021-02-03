@@ -1,4 +1,4 @@
-.sheet-section-ability {
+.sheet-section-quirk {
     max-width: 50%;
 
     .sheet-header {
@@ -31,6 +31,28 @@
 
         .sheet-ability-label {
             font-size: $small;
+        }
+    }
+
+    .sheet-ability-descriptions {
+        .sheet-description-text {
+            border: solid 1px $gray;
+            background-color: $lightgray;
+            border-radius: 0.4rem;
+            padding: 1rem;
+            min-height: 12rem;
+            font-size: $small;
+
+            .sheet-ability-lvl-text {
+                margin-left: 1rem;
+                margin-top: 0.5rem;
+
+                span {
+                    font-weight: 700;
+                    text-decoration: underline;
+                }
+
+            }
         }
     }
 }
