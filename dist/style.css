@@ -57,6 +57,10 @@ input, textarea {
   border-bottom: solid 1px darkgray;
   border-radius: 0; }
 
+.sheet-row-flex {
+  display: flex;
+  justify-content: space-between; }
+
 input {
   transition: 0.3s; }
   input:hover {
@@ -346,3 +350,24 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       .sheet-skill-list .sheet-skill .sheet-label .sheet-attr {
         color: gray;
         font-size: 1rem; }
+
+.sheet-section-ability {
+  max-width: 50%; }
+  .sheet-section-ability .sheet-header {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px gray; }
+    .sheet-section-ability .sheet-header button {
+      padding: 0 0.8rem;
+      font-size: 1.2rem;
+      line-height: 12px; }
+  .sheet-section-ability .sheet-ability-list .repcontainer {
+    margin-bottom: 1rem; }
+  .sheet-section-ability .sheet-ability {
+    border-bottom: solid 1px gray;
+    padding-top: 2rem;
+    padding-bottom: 1rem; }
+    .sheet-section-ability .sheet-ability textarea {
+      max-width: 98%; }
+    .sheet-section-ability .sheet-ability .sheet-ability-label {
+      font-size: 1.2rem; }

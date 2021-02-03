@@ -3,38 +3,44 @@
 <div class="sheet-area-abilities">
     <div class="sheet-container">
         <div class="sheet-section-ability">
-            <div class="sheet-header">
+            <div class="sheet-header sheet-row-flex">
                 <h2>Abilities</h2>
                 <button type="action" name="act_{{jsonData.misc.actions.randomizeAbility}}">Random Ability </button>
             </div>
             <div class="sheet-ability-list">
                 <fieldset class="repeating_{{jsonData.misc.quirks.ability_attr}}">
                     <div class="sheet-ability">
-                        <div class="sheet-ability-select">
-                            <select name="attr_{{jsonData.misc.quirks.ability_attr}}">
-                                {% for ability in jsonData.abilities %}
-                                    {% if not ability.hidden %}
-                                        <option value="{{ability.value}}">{{ability.name}}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                            <input type="number" name="attr_{{jsonData.misc.quirks.ability_attr}}_lvl" value="1" min="1" max="3"/>
+                        <div class="sheet-row-flex">
+                            <div class="sheet-ability-select">
+
+                                <select name="attr_{{jsonData.misc.quirks.ability_attr}}">
+                                    {% for ability in jsonData.abilities %}
+                                        {% if not ability.hidden %}
+                                            <option value="{{ability.value}}">{{ability.name}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="sheet-ability-label">
+                                Ability Level
+                                <input type="number" name="attr_{{jsonData.misc.quirks.ability_attr}}_lvl" value="1" min="1" max="3"/>
+                            </div>
                         </div>
                         <div class="sheet-ability-descript">
-                            <textarea type="text" readonly name="attr_{{jsonData.misc.quirks.ability_attr}}_description">{{jsonData.abilities[0].description}}</textarea>
+                            <span type="text" readonly name="attr_{{jsonData.misc.quirks.ability_attr}}_description">{{jsonData.abilities[0].description}}<strong>test</strong></span>
                         </div>
                     </div>
                 </fieldset>
             </div>
         </div>
 
-        <div class="sheet-section-flaws">
-            <div class="sheet-header">
+        <div class="sheet-section-ability">
+            <div class="sheet-header sheet-row-flex">
                 <h2>Flaws</h2>
                 <button type="action" name="act_{{jsonData.misc.actions.randomizeFlaw}}">Random Flaw </button>
             </div>
             <div class="sheet-ability-list">
-                <fieldset class="repeating_attr_{{jsonData.misc.quirks.flaw_attr}}">
+                <fieldset class="repeating_{{jsonData.misc.quirks.flaw_attr}}">
                     <div class="sheet-ability">
                         <div class="sheet-ability-select">
                             <select name="attr_{{jsonData.misc.quirks.flaw_attr}}">
@@ -46,7 +52,7 @@
                             </select>
                         </div>
                         <div class="sheet-ability-descript">
-                            <textarea type="text" readonly name="attr_{{jsonData.misc.quirks.flaw_attr}}_description">{{jsonData.flaw[0].description}}</textarea>
+                            <textarea type="text" readonly name="attr_{{jsonData.misc.quirks.flaw_attr}}_description">{{jsonData.flaws[0].description}}</textarea>
                         </div>
                     </div>
                 </fieldset>

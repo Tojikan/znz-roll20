@@ -64,8 +64,24 @@
     "resource": "Energy"
   },
   {
-    "display_name": "Melee - Weapon",
-    "attr_name": "prof_melee",
+    "display_name": "Melee - Blunt Weapon",
+    "attr_name": "prof_blunt_melee",
+    "combat": "melee",
+    "description": "",
+    "attribute": "STR",
+    "resource": "Energy"
+  },
+  {
+    "display_name": "Melee - Heavy Weapon",
+    "attr_name": "prof_heavy_melee",
+    "combat": "melee",
+    "description": "",
+    "attribute": "STR",
+    "resource": "Energy"
+  },
+  {
+    "display_name": "Melee - Sharp Weapon",
+    "attr_name": "prof_sharp_melee",
     "combat": "melee",
     "description": "",
     "attribute": "STR",
@@ -93,8 +109,16 @@
     "resource": "Sanity"
   },
   {
-    "display_name": "Ranged - Firearms",
-    "attr_name": "prof_gun",
+    "display_name": "Ranged - Hand Gun",
+    "attr_name": "prof_hand_gun",
+    "description": "",
+    "combat": "ranged",
+    "attribute": "DEXT",
+    "resource": "Ammo"
+  },
+  {
+    "display_name": "Ranged - Long Gun",
+    "attr_name": "prof_long_gun",
     "description": "",
     "combat": "ranged",
     "attribute": "DEXT",

@@ -25,6 +25,11 @@ input, textarea {
     border-radius: 0;
 }
 
+.sheet-row-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 input {
     transition: 0.3s;

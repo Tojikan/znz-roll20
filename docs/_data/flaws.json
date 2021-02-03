@@ -17,7 +17,7 @@
     {
         "name": "Battle-scarred",
         "value": "Battle-scarred",
-        "description": "If you roll an initiative of 6 or lower, your first action will be a Stress Response."
+        "description": "If you roll an initiative of 8 or lower, your first action will be a Stress Response."
     },
     {
         "name": "Catastrophic Failure",
@@ -32,7 +32,7 @@
     {
         "name": "Glutton",
         "value": "glutton",
-        "description": "Your character only restores 2 energy per unit of food. Daily requirements for food go up by 2."
+        "description": "Your character only restores 2 energy per unit of food. Daily requirements for food go up by 1."
     },
     {
         "name": "Hemophiliac",
@@ -45,6 +45,11 @@
         "description": "If your character takes damage, roll a luck check. If that check fails, your glasses break and you receive a heavy penalty to ranged attacks and perception checks."
     },
     {
+        "name": "Panicked",
+        "value": "panicked",
+        "description": "Your character is more prone to random sanity loss checks. If ever in combat with overwhelming odds, receive a penalty to all attacks."
+    },
+    {
         "name": "Restless",
         "value": "restless",
         "description": "Your character does not get resource restore bonus during long rests."        
@@ -53,11 +58,6 @@
         "name": "Sickly",
         "value": "sickly",
         "description": "Your character has a rare, incurable disease. Your character now has a daily consumption requirement of 2 special medicine. If starting the game with this flaw, start with 2 special medicine."
-    },
-    {
-        "name": "Stressed",
-        "value": "stressed",
-        "description": "Your character has trouble adapting to apocalyptic life and is more prone to tenacity checks to prevent random sanity loss."
     },
     {
         "name": "Unlucky",

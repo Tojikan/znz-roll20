@@ -117,19 +117,21 @@ function queryData(match, capture){
 
     const dataquery = require('./data-query');
 
-    try {
-        const result = eval('dataquery.' + capture);
-
-        if (typeof result == "string" || typeof result == "number" || typeof result == "boolean" ){
-            return result;
-        } else if (typeof result == 'object') {
-            return JSON.stringify(result);
-        } else {
-            log(`queryData Warning! The data query '${capture}' did not return a valid value. Replaced capture with empty string instead.`)
+    if (capture.length){
+        try {
+            const result = eval('dataquery.' + capture);
+    
+            if (typeof result == "string" || typeof result == "number" || typeof result == "boolean" ){
+                return result;
+            } else if (typeof result == 'object') {
+                return JSON.stringify(result);
+            } else {
+                log(`queryData Warning! The data query '${capture}' did not return a valid value. Replaced capture with empty string instead.`)
+            }
+            
+        } catch(e) {
+            log(e);
         }
-        
-    } catch(e) {
-        log(e);
     }
     return '';
 }

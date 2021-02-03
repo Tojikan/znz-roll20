@@ -37,16 +37,16 @@ module.exports = {
      * Searches through all JSON files for an object with a 'canonical' property matching the parameter.
      * If found, returns the attr_name property of the object. Used to find any given object by a canonical name since attr_name may be changed sometimes.
      * 
-     * @param {string} canonical The value in object property 'canonical' to search for.
+     * @param {string} canonical The value in object property 'attr_name' to search for.
      */
-    findAttrName: function(canonical){
+    findAttr: function(canonical){
         let files = fs.readdirSync(this.dataFolder);
         var result = null;
 
         files.forEach(file => {
             if (path.extname(file) === '.json' && file.indexOf('.schema') < 0){ //ignore schema
                 let data = JSON.parse(fs.readFileSync(this.dataFolder + file));
-                found = searchCanonical(canonical, data);
+                found = recursiveSearch(canonical, data);
 
                 if (found){
                     result = found;
@@ -83,7 +83,7 @@ module.exports = {
      * @param {string} folder Containing folder. The trailing slash (/) should not be added here as it is added automatically. Defaults to query folder.
      * @param {string} extension Extension of the file. A period (.) gets prepended to the extension. Defaults to JSON.
      */
-    getFile : function(fileName, folder = this.queryFolder, extension = 'json'){
+    getFile: function(fileName, folder = this.dataFolder, extension = 'json'){
         let importPath = folder + '/' + fileName + '.' + extension;
         
         if (fs.existsSync(importPath)){
@@ -94,6 +94,25 @@ module.exports = {
             throw `File '${importPath}' does not exist!`;
         }
     },
+
+    /**
+     * Access property using standard dot notation. All data in specified folder gets added into a struct, where each filename is a property in the struct.
+     */
+    getProperty: function(notation, folder = this.dataFolder, ext = '.json') {
+        let data = {};
+        let files = fs.readdirSync(folder);
+
+        files.forEach(file => {
+            if ((path.extname(file) === ext) && file.indexOf('schema') < 0){ //ignore schema
+                let filename = path.basename(file, ext);
+                data[filename] = JSON.parse(fs.readFileSync(folder + file));
+            }
+        });
+
+        //https://stackoverflow.com/questions/6393943/convert-javascript-string-in-dot-notation-into-an-object-reference
+        return notation.split('.').reduce((o,i)=>o[i], data);
+    }
+    
 }
 
 /**
@@ -103,20 +122,20 @@ module.exports = {
  * @param {object} object the data object
  * @returns string value of "attr_name" if the appropriate canonical has been located, or null if nothing has been found.
  */
-function searchCanonical(attr, object){
+function recursiveSearch(prop, val, object){
     // Fail case - nothing has been found
     if (object == null){
         return null; 
     }
 
     //Success case - found canonical
-    if (typeof object === "object" && "attr_name" in object && object.attr_name == attr) {
+    if (typeof object === "object" && prop in object && object[prop] == val) {
         return object;
     }     
     //Array - search search array
     else if (typeof object == "array"){
         for (let arrItem of array){
-            let val = searchCanonical(canon, arrItem);
+            let val = recursiveSearch(prop, val, arrItem);
 
             if (val) return val;
         }
@@ -124,7 +143,7 @@ function searchCanonical(attr, object){
     //Object - search all properties in object
     else if (typeof object == "object"){
         for (let key of Object.keys(object)){
-            let val = searchCanonical(canon, object[key]);
+            let val = recursiveSearch(prop, val, object[key]);
 
             if (val) return val;
         }

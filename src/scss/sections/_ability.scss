@@ -1,0 +1,36 @@
+.sheet-section-ability {
+    max-width: 50%;
+
+    .sheet-header {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: solid 1px $gray;
+
+        button {
+            padding: 0 0.8rem;
+            font-size: $small;
+            line-height: 12px;
+        }
+    }
+
+    .sheet-ability-list {
+
+        .repcontainer {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .sheet-ability {
+        border-bottom: solid 1px $gray;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+
+        textarea {
+            max-width: 98%;
+        }
+
+        .sheet-ability-label {
+            font-size: $small;
+        }
+    }
+}
