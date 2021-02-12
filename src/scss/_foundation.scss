@@ -66,4 +66,25 @@
             }
         }
     }
+
+
+    /************* Equipment Tab *******************/
+
+    .sheet-area-equipment {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(50px, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+        grid-gap: $gridgap * 2;
+
+
+        .sheet-section-equipped {
+            grid-column-start: 1;
+            grid-column-end: 9;
+        }
+
+        .sheet-section-ammo {
+            grid-column-start: 9;
+            grid-column-end: 12;
+        }
+    }
 }

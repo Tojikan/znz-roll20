@@ -11,7 +11,8 @@
         on( 'change:' + attr, function(){
             getAttrs([attr], function(values) {
                 var attrSet = {
-                    [attr + '_mod'] : (parseInt(values[attr], 10) - 3)
+                    [attr + '_mod'] : (parseInt(values[attr], 10) - 3),
+                    [attr + '_dice'] : Math.ceil((parseInt(values[attr], 10)) / 2)
                 }
                 
                 setAttrs(attrSet);

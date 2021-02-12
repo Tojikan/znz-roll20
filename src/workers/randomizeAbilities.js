@@ -8,50 +8,7 @@
         randomizeFlawBtn = "(([[getProperty('misc.actions.randomizeFlaw')]]))",
         randomizeAbilityBtn = "(([[getProperty('misc.actions.randomizeAbility')]]))";
 
-
-    /** Set descriptions on flaw/abilities **/
-
-    on(`change:${repeatingAbility}:${abilityAttr}`, function(event){
-        getAttrs([
-            repeatingAbility + "_" + abilityAttr
-        ], function(value){
-            var selectedAbility = value[repeatingAbility + "_" + abilityAttr];
-            
-
-            var ability = abilityData.find( (el) => {
-                return el.value == selectedAbility;
-            });
-            
-            if (ability){
-                attrSet = {};
-                attrSet[repeatingAbility + "_" + abilityAttr + "_description"] = ability.description;
-                setAttrs(attrSet)
-            }
-        });
-    });
-    
-
-    on(`change:${repeatingFlaw}:${flawAttr}`, function(event){
-        getAttrs([
-            repeatingFlaw + "_" + flawAttr
-        ], function(value){
-            var selectedFlaw = value[repeatingFlaw + "_" + flawAttr];
-            
-
-            var flaw = flawData.find( (el) => {
-                return el.value == selectedFlaw;
-            });
-            
-            if (flaw){
-                attrSet = {};
-                attrSet[repeatingFlaw + "_" + flawAttr + "_description"] = flaw.description;
-                setAttrs(attrSet)
-            }
-        });
-    });
-
     /** Randomize buttons **/
-
     on(`clicked:${randomizeFlawBtn}`, function(){
         var random = 0;
 

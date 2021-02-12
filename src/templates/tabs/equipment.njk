@@ -1,0 +1,28 @@
+{% import '../macros/itemCard.njk' as itemCard %}
+
+<div class="sheet-area-equipment">
+
+    <div class="sheet-container-top">
+
+        <div class="sheet-section-equipped">
+
+        </div>
+
+        <div class="sheet-section-ammo">
+        
+        </div>
+    </div>
+
+
+    <div class="sheet-container-bottom">
+        <div class="sheet-section-inventory">
+            <fieldset class="repeating_inventory">
+                {{ itemCard.create(prefix='inventory', type='inventory', itemFields=jsonData.itemFields)}}
+            </fieldset>
+        </div>
+
+        <div class="sheet-section-consumables">
+        
+        </div>
+    </div>
+</div>

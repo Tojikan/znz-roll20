@@ -19,15 +19,29 @@ input, textarea {
     }
 }
 
+textarea {
+    &.sheet-line-height {
+        height: 2rem;
+    }
+}
+
 .sheet-line-input {
     border: none;
     border-bottom: solid 1px $darkgray;
     border-radius: 0;
 }
 
+.sheet-number {
+    width: 3rem;
+}
+
 .sheet-row-flex {
     display: flex;
     justify-content: space-between;
+}
+
+.sheet-hidden {
+    display: none;
 }
 
 
@@ -39,5 +53,9 @@ input {
     }
 }
 
+
+.sheet-d6-icon {
+    font-family: "dicefontd6";
+}
 
 

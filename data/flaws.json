@@ -8,7 +8,7 @@
     {
         "name": "Alcoholic",
         "value": "alcoholic",
-        "description": "Your character must consume 1 alchohol to take a rest. Your character now has a daily consumption requirement of 2 alcohol."
+        "description": "Your character cannot restore resources unless they consume 2 alcohol in a day."
     },
     {
         "name": "Asthma",
@@ -33,7 +33,7 @@
     {
         "name": "Glutton",
         "value": "glutton",
-        "description": "Your character only restores 2 energy per unit of food. Daily requirements for food go up by 1."
+        "description": "Your character only restores 2 energy per unit of food."
     },
     {
         "name": "Hemophiliac",
@@ -43,7 +43,7 @@
     {
         "name": "Nearsighted",
         "value": "nearsighted",
-        "description": "If your character takes damage, roll a luck check. If that check fails, your glasses break and you receive a heavy penalty to ranged attacks and perception checks."
+        "description": "If your character takes damage, roll a passive luck check. If that check fails, your glasses break and you receive a heavy penalty to ranged attacks and perception checks."
     },
     {
         "name": "Panicked",
@@ -53,17 +53,17 @@
     {
         "name": "Restless",
         "value": "restless",
-        "description": "Your character does not get resource restore bonus during long rests."        
+        "description": "Your character does not get a Long Rest bonus for resource restoration."        
     },
     {
         "name": "Sickly",
         "value": "sickly",
-        "description": "Your character has a rare, incurable disease. Your character now has a daily consumption requirement of 2 special medicine. If starting the game with this flaw, start with 2 special medicine."
+        "description": "Your character has a rare, incurable disease. Your character now has a daily consumption requirement of 1 special medicine. If starting the game with this flaw, start with 2 special medicine."
     },
     {
         "name": "Unlucky",
         "value": "lucky",
-        "description": "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the first roll are refunded."
+        "description": "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the initial roll are refunded."
     },
     {
         "name": "Unwelcome",

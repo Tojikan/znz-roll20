@@ -43,13 +43,13 @@
         <div class="sheet-tabs-content">
             <input type='hidden' class='sheet-tab-toggle' name='attr_sheet_tab'  value='selectTabStats'  />
             <div class="sheet-tab sheet-tab-stats">
-                {% include "partials/stats-tab.njk" %}
+                {% include "tabs/stats.njk" %}
             </div>
             <div class="sheet-tab sheet-tab-abilities">
-                {% include "partials/abilities-tab.njk" %}
+                {% include "tabs/abilities.njk" %}
             </div>
             <div class="sheet-tab sheet-tab-equipment">
-                Equipment
+                {% include "tabs/equipment.njk" %}
             </div>
             <div class="sheet-tab sheet-tab-notes">
                 Notes

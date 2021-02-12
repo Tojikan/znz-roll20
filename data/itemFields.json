@@ -1,0 +1,144 @@
+{   
+    "name": {
+        "attr_name": "item_name",
+        "display_name": "Name",
+        "type": "text"
+    },
+    
+    "general" : [
+        {
+            "attr_name": "item_type",
+            "display_name": "Type",
+            "type" : "select",
+            "default": "misc",
+            "options" : "itemTypes"
+        },
+        {
+            "attr_name": "item_weight",
+            "display_name": "Weight",
+            "type" : "text_number"
+        },
+        {
+            "attr_name": "item_quantity",
+            "display_name": "Quantity",
+            "type" : "text_number"
+        }
+    ],
+    "melee" : [
+        {
+            "attr_name": "melee_durability",
+            "display_name": "Durability",
+            "type": "max"
+        },
+        {
+            "attr_name": "melee_damage",
+            "display_name": "Melee Damage",
+            "type": "line_text"
+        },
+        {
+            "attr_name": "melee_reach",
+            "display_name": "Weapon Reach",
+            "type": "line_number"
+        }
+    ],
+    "ranged" : [
+        {
+            "attr_name": "ranged_ammo_type",
+            "display_name": "Ammo Type",
+            "type": "select",
+            "default": "light",
+            "options": "ammoTypes"
+        },
+        {
+            "attr_name": "ranged_ammo",
+            "display_name": "Ammo",
+            "type" : "max"
+        },
+        {
+            "attr_name": "ranged_damage",
+            "display_name": "Ranged Damage",
+            "type" : "line_text"
+        },
+        {
+            "attr_name": "ranged_range",
+            "display_name": "Weapon Range",
+            "type" : "max"
+        }
+    ],
+    "equipment" : [
+        {
+            "attr_name": "equipment_armor_rating",
+            "display_name": "Armor Rating Bonus",
+            "type" : "line_number"
+        },
+        {
+            "attr_name": "equipment_stat_bonus",
+            "display_name": "Equipment Stats",
+            "type": "select_stat_repeater",
+            "count": 5
+        }
+    ],
+    "footer" : [
+        {
+            "attr_name": "item_effect",
+            "display_name": "Effects",
+            "type" : "text"
+        },
+        {
+            "attr_name": "item_notes",
+            "display_name": "Notes",
+            "type" : "textarea"
+        }
+    ],
+    "buttons" : {
+    },
+
+    "itemTypes": [
+        {
+            "name": "Misc",
+            "value": "misc"
+        },
+        {
+            "name": "Body",
+            "value": "body"
+        },
+        {
+            "name": "Head",
+            "value": "head"
+        },
+        {
+            "name": "Melee Weapon",
+            "value": "melee"
+        },
+        {
+            "name": "Ranged Weapon",
+            "value": "ranged"
+        }
+    ],
+    "ammoTypes": [
+        {
+            "name": "Light",
+            "value": "light"
+        },
+        {
+            "name": "Medium",
+            "value": "medium"
+        },
+        {
+            "name": "Heavy",
+            "value": "heavy"
+        },
+        {
+            "name": "Shotgun Shells",
+            "value": "shells"
+        },
+        {
+            "name": "Arrows",
+            "value": "arrows"
+        },
+        {
+            "name": "Bolt",
+            "value": "bolt"
+        }
+    ]
+}

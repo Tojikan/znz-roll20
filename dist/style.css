@@ -7,7 +7,8 @@
 .sheet-znz-character-sheet {
   /************* Header area *****************/
   /************* Stats Tab *******************/
-  /*************** Ability Tab ******************/ }
+  /*************** Ability Tab ******************/
+  /************* Equipment Tab *******************/ }
   .sheet-znz-character-sheet .sheet-header {
     display: flex; }
     .sheet-znz-character-sheet .sheet-header .sheet-area-name {
@@ -38,6 +39,17 @@
       flex: 50%; }
       .sheet-znz-character-sheet .sheet-area-abilities .sheet-container > div:first-child {
         margin-right: 2rem; }
+  .sheet-znz-character-sheet .sheet-area-equipment {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(50px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 4rem; }
+    .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-equipped {
+      grid-column-start: 1;
+      grid-column-end: 9; }
+    .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
+      grid-column-start: 9;
+      grid-column-end: 12; }
 
 /**
 * Reusable classes and styling across the sheet. 
@@ -52,19 +64,31 @@ input, textarea {
 .sheet-textarea-small textarea {
   height: 3rem; }
 
+textarea.sheet-line-height {
+  height: 2rem; }
+
 .sheet-line-input {
   border: none;
   border-bottom: solid 1px #a0a0a0;
   border-radius: 0; }
 
+.sheet-number {
+  width: 3rem; }
+
 .sheet-row-flex {
   display: flex;
   justify-content: space-between; }
+
+.sheet-hidden {
+  display: none; }
 
 input {
   transition: 0.3s; }
   input:hover {
     background-color: #e5fffb; }
+
+.sheet-d6-icon {
+  font-family: "dicefontd6"; }
 
 /** Show more toggle **/
 .sheet-znz-expandable {
@@ -283,8 +307,8 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     border: solid 1px black;
     border-radius: 1rem;
     padding: 0.75rem;
-    padding-bottom: 1.5rem;
-    width: 25%;
+    padding-bottom: 0;
+    width: 35%;
     position: relative; }
     .sheet-container-attr .sheet-field-attr-mod input {
       text-align: center;
@@ -296,10 +320,24 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       font-size: 1.8rem; }
     .sheet-container-attr .sheet-field-attr-mod .sheet-bonus {
       position: absolute;
-      bottom: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%); }
+    .sheet-container-attr .sheet-field-attr-mod .sheet-modifier {
+      position: relative; }
+    .sheet-container-attr .sheet-field-attr-mod .sheet-rolls {
       border: solid 1px #a0a0a0;
-      padding: 0 1rem;
-      border-radius: 4rem; }
+      border-radius: 4rem;
+      min-height: 2rem;
+      width: 100%;
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 1.4rem; }
+      .sheet-container-attr .sheet-field-attr-mod .sheet-rolls span:after {
+        content: 'L';
+        font-family: "dicefontd6";
+        font-size: 1.6rem;
+        margin-left: 0.25rem; }
   .sheet-container-attr .sheet-field-attr {
     border: solid 1px #a0a0a0;
     border-left: none;

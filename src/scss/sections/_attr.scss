@@ -16,8 +16,8 @@
         border: solid 1px $black;
         border-radius: 1rem;
         padding: 0.75rem;
-        padding-bottom: 1.5rem;
-        width: 25%;
+        padding-bottom: 0;
+        width: 35%;
         position: relative;
 
         input {
@@ -36,10 +36,32 @@
 
         .sheet-bonus {
             position: absolute;
-            bottom: 0;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sheet-modifier {
+            position: relative;
+        }
+
+        .sheet-rolls {
             border: solid 1px $darkgray;
-            padding: 0 1rem;
             border-radius: 4rem;
+            min-height: 2rem;
+            width: 100%;
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: $medium;
+
+            span {
+                &:after {
+                    content: 'L';
+                    font-family: $d6;
+                    font-size: 1.6rem;
+                    margin-left: 0.25rem;
+                }
+            }
         }
     }
 
