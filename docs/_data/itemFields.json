@@ -1,17 +1,11 @@
 {   
-    "name": {
-        "attr_name": "item_name",
-        "display_name": "Name",
-        "type": "text"
-    },
     
-    "general" : [
+    "nameRow" : [
         {
-            "attr_name": "item_type",
-            "display_name": "Type",
-            "type" : "select",
-            "default": "misc",
-            "options" : "itemTypes"
+            "attr_name": "item_name",
+            "display_name": "Name",
+            "type": "text",
+            "width": "60"
         },
         {
             "attr_name": "item_weight",
@@ -24,21 +18,44 @@
             "type" : "text_number"
         }
     ],
+    "typeRow" : [
+        {
+            "attr_name": "item_type",
+            "display_name": "Type",
+            "type" : "select",
+            "default": "misc",
+            "options" : "itemTypes",
+            "width": "50"
+        },
+        {
+            "attr_name": "item_notes",
+            "display_name": "Notes",
+            "type" : "textarea",
+            "width": "50"
+        }
+    ],
     "melee" : [
+        {
+            "attr_name": "melee_type",
+            "display_name": "Melee Type",
+            "type": "select",
+            "default": "blunt",
+            "options": "meleeTypes"
+        },
         {
             "attr_name": "melee_durability",
             "display_name": "Durability",
             "type": "max"
         },
         {
-            "attr_name": "melee_damage",
-            "display_name": "Melee Damage",
-            "type": "line_text"
-        },
-        {
             "attr_name": "melee_reach",
             "display_name": "Weapon Reach",
             "type": "line_number"
+        },
+        {
+            "attr_name": "melee_damage",
+            "display_name": "Melee Damage",
+            "type": "line_text"
         }
     ],
     "ranged" : [
@@ -50,44 +67,33 @@
             "options": "ammoTypes"
         },
         {
-            "attr_name": "ranged_ammo",
-            "display_name": "Ammo",
-            "type" : "max"
-        },
-        {
             "attr_name": "ranged_damage",
             "display_name": "Ranged Damage",
             "type" : "line_text"
         },
         {
+            "attr_name": "ranged_ammo",
+            "display_name": "Ammo",
+            "type" : "max"
+        },
+        {
             "attr_name": "ranged_range",
             "display_name": "Weapon Range",
-            "type" : "max"
+            "type" : "line_text"
         }
     ],
     "equipment" : [
         {
-            "attr_name": "equipment_armor_rating",
-            "display_name": "Armor Rating Bonus",
-            "type" : "line_number"
-        },
-        {
             "attr_name": "equipment_stat_bonus",
             "display_name": "Equipment Stats",
             "type": "select_stat_repeater",
-            "count": 5
-        }
-    ],
-    "footer" : [
-        {
-            "attr_name": "item_effect",
-            "display_name": "Effects",
-            "type" : "text"
+            "count": 3,
+            "width": 50
         },
         {
-            "attr_name": "item_notes",
-            "display_name": "Notes",
-            "type" : "textarea"
+            "attr_name": "equipment_armor_rating",
+            "display_name": "Armor Rating Bonus",
+            "type" : "line_number"
         }
     ],
     "buttons" : {
@@ -139,6 +145,24 @@
         {
             "name": "Bolt",
             "value": "bolt"
+        }
+    ],
+    "meleeTypes": [
+        {
+            "name": "Unarmed",
+            "value": "unarmed"
+        },
+        {
+            "name": "Blunt",
+            "value": "blunt"
+        },
+        {
+            "name": "Heavy",
+            "value": "heavy"
+        },
+        {
+            "name": "Sharp",
+            "value": "sharp"
         }
     ]
 }

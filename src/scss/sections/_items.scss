@@ -1,0 +1,133 @@
+.sheet-area-equipment{
+
+    // General item card styles
+    .sheet-item-card {
+        border: solid 1px $black;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+        border-radius: 2rem;
+
+        .sheet-item-header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sheet-item-field {
+            margin: 0 1rem 0.5rem 1rem;
+
+            .sheet-header {
+                font-size: $medium;
+                font-weight: 700;
+                margin-bottom: 0.2rem;
+            }
+
+            input, select {
+                width: 100%;
+            }
+
+            textarea {
+                max-width: 100%;
+                box-sizing: border-box;
+                height: 2.8rem;
+            }
+
+            .sheet-number {
+                width: 6rem;
+            }
+
+            &.sheet-width {
+                &-50 {
+                    width: 50%;
+                }
+                
+                &-60 {
+                    width: 60%;
+                }
+
+                &-100 {
+                    width: 100%;
+                }
+            }
+
+            &.sheet-line-field {
+                display: flex;
+
+                .sheet-field {
+                    
+                    input {
+                        text-align: center;
+                    }
+                }
+        
+
+                .sheet-header {
+                    margin-right: 1rem;
+                    margin-bottom: 0;
+                    align-self: flex-end;
+                }
+
+                .sheet-has-max {
+                    display: flex;
+
+                    .sheet-divider {
+                        font-size: $xLarge;
+                        margin: 0 1rem;
+                        align-self: flex-end;
+                        max-height: $xLarge;
+                    }
+                }
+            }
+
+            .sheet-stat-repeater {
+                .sheet-stat-item {
+                    display: flex;
+
+                    .sheet-stat-select {
+                        margin-right: 1rem;
+                        width: 60%;
+
+                        select {
+                            border: none;
+                            border-bottom: solid 1px $darkgray;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Show/Hide Sections
+        @include toggleDisplayCheckbox('sheet-equipment-fields', 'sheet-item-type-head');
+        @include toggleDisplayCheckbox('sheet-equipment-fields', 'sheet-item-type-body');
+        @include toggleDisplayCheckbox('sheet-melee-fields', 'sheet-item-type-melee');
+        @include toggleDisplayCheckbox('sheet-ranged-fields', 'sheet-item-type-ranged');
+
+    }
+
+    // Inventory-Specific
+    .sheet-section-inventory {
+        .sheet-equipment-fields-container {
+            display:flex;
+
+            .sheet-line-field {
+                align-self: start;
+            }
+        }
+
+        .sheet-melee-fields-container, .sheet-ranged-fields-container {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, 50%);
+            grid-row-gap: 0.5rem;
+            align-items: center;
+
+            .sheet-field {
+                width: 40%;
+            }
+        }
+
+        .sheet-ranged-fields-container {
+            .sheet-field {
+                width: 50%;
+            }
+        }
+    }
+}

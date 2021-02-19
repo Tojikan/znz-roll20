@@ -2,6 +2,26 @@
 * Variables used throughout styles
 */
 /**
+    Hide/Display when a checkbox is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+/**
+    Hide/Display when a hidden input is set to a value.
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+    $onValue - value to check
+**/
+/**
+    Style tab buttons when hidden input field is set to a value.
+
+    $elClass - class of button
+    $toggleClass - class of the option
+    $onValue - value to check for to set style
+**/
+/**
 * Layouts
 */
 .sheet-znz-character-sheet {
@@ -39,17 +59,17 @@
       flex: 50%; }
       .sheet-znz-character-sheet .sheet-area-abilities .sheet-container > div:first-child {
         margin-right: 2rem; }
-  .sheet-znz-character-sheet .sheet-area-equipment {
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-container-top, .sheet-znz-character-sheet .sheet-area-equipment .sheet-container-bottom {
     display: grid;
     grid-template-columns: repeat(12, minmax(50px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
     grid-gap: 4rem; }
-    .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-equipped {
-      grid-column-start: 1;
-      grid-column-end: 9; }
-    .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
-      grid-column-start: 9;
-      grid-column-end: 12; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-equipped, .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-inventory {
+    grid-column-start: 1;
+    grid-column-end: 8; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
+    grid-column-start: 8;
+    grid-column-end: 12; }
 
 /**
 * Reusable classes and styling across the sheet. 
@@ -430,3 +450,87 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       .sheet-section-quirk .sheet-ability-descriptions .sheet-description-text .sheet-ability-lvl-text span {
         font-weight: 700;
         text-decoration: underline; }
+
+.sheet-area-equipment .sheet-item-card {
+  border: solid 1px black;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  border-radius: 2rem; }
+  .sheet-area-equipment .sheet-item-card .sheet-item-header {
+    display: flex;
+    justify-content: space-between; }
+  .sheet-area-equipment .sheet-item-card .sheet-item-field {
+    margin: 0 1rem 0.5rem 1rem; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-header {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field input, .sheet-area-equipment .sheet-item-card .sheet-item-field select {
+      width: 100%; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field textarea {
+      max-width: 100%;
+      box-sizing: border-box;
+      height: 2.8rem; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-number {
+      width: 6rem; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-width-50 {
+      width: 50%; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-width-60 {
+      width: 60%; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-width-100 {
+      width: 100%; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field {
+      display: flex; }
+      .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-field input {
+        text-align: center; }
+      .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-header {
+        margin-right: 1rem;
+        margin-bottom: 0;
+        align-self: flex-end; }
+      .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-has-max {
+        display: flex; }
+        .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-has-max .sheet-divider {
+          font-size: 2.2rem;
+          margin: 0 1rem;
+          align-self: flex-end;
+          max-height: 2.2rem; }
+    .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-stat-repeater .sheet-stat-item {
+      display: flex; }
+      .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-stat-repeater .sheet-stat-item .sheet-stat-select {
+        margin-right: 1rem;
+        width: 60%; }
+        .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-stat-repeater .sheet-stat-item .sheet-stat-select select {
+          border: none;
+          border-bottom: solid 1px #a0a0a0; }
+  .sheet-area-equipment .sheet-item-card .sheet-equipment-fields {
+    display: none; }
+  .sheet-area-equipment .sheet-item-card .sheet-item-type-head:checked ~ .sheet-equipment-fields {
+    display: block; }
+  .sheet-area-equipment .sheet-item-card .sheet-equipment-fields {
+    display: none; }
+  .sheet-area-equipment .sheet-item-card .sheet-item-type-body:checked ~ .sheet-equipment-fields {
+    display: block; }
+  .sheet-area-equipment .sheet-item-card .sheet-melee-fields {
+    display: none; }
+  .sheet-area-equipment .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-melee-fields {
+    display: block; }
+  .sheet-area-equipment .sheet-item-card .sheet-ranged-fields {
+    display: none; }
+  .sheet-area-equipment .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-ranged-fields {
+    display: block; }
+
+.sheet-area-equipment .sheet-section-inventory .sheet-equipment-fields-container {
+  display: flex; }
+  .sheet-area-equipment .sheet-section-inventory .sheet-equipment-fields-container .sheet-line-field {
+    align-self: start; }
+
+.sheet-area-equipment .sheet-section-inventory .sheet-melee-fields-container, .sheet-area-equipment .sheet-section-inventory .sheet-ranged-fields-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 50%);
+  grid-row-gap: 0.5rem;
+  align-items: center; }
+  .sheet-area-equipment .sheet-section-inventory .sheet-melee-fields-container .sheet-field, .sheet-area-equipment .sheet-section-inventory .sheet-ranged-fields-container .sheet-field {
+    width: 40%; }
+
+.sheet-area-equipment .sheet-section-inventory .sheet-ranged-fields-container .sheet-field {
+  width: 50%; }

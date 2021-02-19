@@ -1,3 +1,29 @@
+
+/**
+    Hide/Display when a checkbox is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+@mixin toggleDisplayCheckbox($elClass, $toggleClass){
+
+    .#{$elClass} {
+        display: none;
+    }
+
+    .#{$toggleClass}:checked ~ .#{$elClass}{
+        display: block;
+    }
+}
+
+
+/**
+    Hide/Display when a hidden input is set to a value.
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+    $onValue - value to check
+**/
 @mixin toggleDisplay($elClass, $toggleClass, $onValue){
 
     .#{$elClass} {
@@ -9,6 +35,13 @@
     }
 }
 
+/**
+    Style tab buttons when hidden input field is set to a value.
+
+    $elClass - class of button
+    $toggleClass - class of the option
+    $onValue - value to check for to set style
+**/
 @mixin tabButtonToggle($elClass, $toggleClass, $onValue){
     .#{$toggleClass}[value="#{$onValue}"] ~ button.#{$elClass}{
         border: solid 2px $black;
