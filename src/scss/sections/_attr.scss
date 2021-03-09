@@ -1,7 +1,3 @@
-.sheet-section-attributes {
-
-
-}
 
 .sheet-container-attr {
     display: flex;
@@ -19,6 +15,7 @@
         padding-bottom: 0;
         width: 35%;
         position: relative;
+        box-shadow: 0.2rem 0.2rem $black;
 
         input {
             text-align: center;
@@ -46,13 +43,14 @@
         }
 
         .sheet-rolls {
-            border: solid 1px $darkgray;
+            border: solid 2px $darkgray;
             border-radius: 4rem;
             min-height: 2rem;
             width: 100%;
             margin-top: 0.5rem;
             text-align: center;
             font-size: $medium;
+            
 
             span {
                 &:after {
@@ -66,7 +64,7 @@
     }
 
     .sheet-field-attr {
-        border: solid 1px $darkgray;
+        border: solid 2px $darkgray;
         border-left: none;
         padding: 0.5rem;
         font-size: $small;

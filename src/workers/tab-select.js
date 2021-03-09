@@ -2,8 +2,9 @@
     const sheetTabButtons = [
         "selectTabStats",
         "selectTabAbilities",
-        "selectTabEquipment",
-        "selectTabNotes"
+        "selectTabInventory",
+        "selectTabNotes",
+        "selectTabEquipment"
     ];
 
     sheetTabButtons.forEach(button => {

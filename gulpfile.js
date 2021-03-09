@@ -21,7 +21,6 @@ gulp.task('sheet', function(){
     return gulp.src('src/templates/*.njk')
         .pipe(replace(/\(\({{(.*?)}}\)\)/gs, queryData))
         .pipe(data(getAllJsonData)) //pass all json data into Templates. should be done first since it also clears require() json cache
-        .pipe(data(getAllDataQuery)) //pass all data queries into templates
         .pipe(nunjucksRender({
             path:['src/templates']
         }))
@@ -138,47 +137,30 @@ function queryData(match, capture){
 
 function clearDataFileCache(){
     let dataFiles = fs.readdirSync(dataFolder);
-    let queryFiles = fs.readdirSync(queryFolder);
 
     dataFiles.forEach(file => {
         if (path.extname(file) === '.json' || path.extname(file) === '.js'){
             delete require.cache[require.resolve(dataFolder + file)];
         }
     });
-
-    queryFiles.forEach(file => {
-        if (path.extname(file) === '.json' || path.extname(file) === '.js'){
-            delete require.cache[require.resolve(queryFolder + file)];
-        }
-    });
 }
 
 
 
-//Read all json files in data folder and save it in a data object with filename as key. Then passed in via gulp-data
+//Read all files in data folder and save it in a data object with filename as key. Then passed in via gulp-data
 function getAllJsonData(){
     let jsonData = {};
     let files = fs.readdirSync(dataFolder);
 
     files.forEach(file => {
+        //If JSON, simply parse it.
         if (path.extname(file) === '.json' && file.indexOf('schema') < 0){ //ignore schema
             let filename = path.basename(file, '.json');
             delete require.cache[require.resolve(dataFolder + file)]; //clear cache for json before it gets used by dataqueries
             jsonData[filename] = JSON.parse(fs.readFileSync(dataFolder + file));
-        }
-    });
-
-    return { jsonData };
-}
-
-//Run any JS files in data-query folder and save any exports into a data object with filename as key. Then passed in via gulp-data
-//Any data query file should export a simple JS object for easy use in nunjucks
-function getAllDataQuery(){
-    let queryData = {};
-    let files = fs.readdirSync(queryFolder);
-
-    files.forEach(file => {
-        if (path.extname(file) === '.js'){
+        //If JS, save exports
+        } else if (path.extname(file) === '.js'){
+            
             let filename = path.basename(file, '.js');
 
             queryData[filename] = require(queryFolder + file);
@@ -186,16 +168,8 @@ function getAllDataQuery(){
         }
     });
 
-    return { queryData };
+    return { jsonData };
 }
-
-
-
-
-
-
-
-
 
 
 

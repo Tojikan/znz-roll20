@@ -1,8 +1,8 @@
 @include toggleDisplay('sheet-tab-stats', 'sheet-tab-toggle', 'selectTabStats');
 @include toggleDisplay('sheet-tab-abilities', 'sheet-tab-toggle', 'selectTabAbilities');
-@include toggleDisplay('sheet-tab-equipment', 'sheet-tab-toggle', 'selectTabEquipment');
+@include toggleDisplay('sheet-tab-inventory', 'sheet-tab-toggle', 'selectTabInventory');
 @include toggleDisplay('sheet-tab-notes', 'sheet-tab-toggle', 'selectTabNotes');
-
+@include toggleDisplay('sheet-tab-equipment', 'sheet-tab-toggle', 'selectTabEquipment');
 
 .sheet-tab-select {
     display: flex;
@@ -27,8 +27,9 @@
 
     @include tabButtonToggle('sheet-tab-button-stats', 'sheet-tab-toggle', 'selectTabStats');
     @include tabButtonToggle('sheet-tab-button-abilities', 'sheet-tab-toggle', 'selectTabAbilities');
-    @include tabButtonToggle('sheet-tab-button-equipment', 'sheet-tab-toggle', 'selectTabEquipment');
+    @include tabButtonToggle('sheet-tab-button-inventory', 'sheet-tab-toggle', 'selectTabInventory');
     @include tabButtonToggle('sheet-tab-button-notes', 'sheet-tab-toggle', 'selectTabNotes');
+    @include tabButtonToggle('sheet-tab-button-equipment', 'sheet-tab-toggle', 'selectTabEquipment');
 }
 
 .sheet-tabs-content {

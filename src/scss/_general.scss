@@ -14,7 +14,7 @@ input, textarea {
 .sheet-textarea {
     &-small {
         textarea {
-            height: 3rem;
+            height: 6rem;
         }
     }
 }
@@ -29,6 +29,10 @@ textarea {
     border: none;
     border-bottom: solid 1px $darkgray;
     border-radius: 0;
+}
+
+.sheet-borderless-input {
+    border: none;
 }
 
 .sheet-number {
@@ -59,3 +63,19 @@ input {
 }
 
 
+select {
+    transition: 0.3s;
+
+    &.sheet-select-borderless {
+        border: none;
+    }
+
+    &:hover, &:focus {
+        background-color: $lightblue;
+    }
+
+
+    &.sheet-line-select {
+        border: none;
+    }
+}

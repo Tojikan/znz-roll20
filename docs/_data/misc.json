@@ -26,5 +26,19 @@
     "actions": {
         "randomizeFlaw": "randomizeFlaw",
         "randomizeAbility": "randomizeAbility"
+    },
+    "inventory_weight": {
+        "display_name": "Inventory Weight",
+        "attr_name": "inventory_weight"
+    },
+    "armor": {
+        "display_name": "Armor Rating",
+        "attr_name": "armor_rating",
+        "default_value": 5
+    },
+    "flashlight": {
+        "display_name": "Flashlight Distance",
+        "attr_name": "flashlight_distance",
+        "default_value": 10
     }
 }

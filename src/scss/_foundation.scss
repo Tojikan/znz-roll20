@@ -70,23 +70,38 @@
 
     /************* Equipment Tab *******************/
 
-    .sheet-area-equipment {
+    .sheet-area-inventory {
         
-        .sheet-container-top, .sheet-container-bottom {
+        .sheet-container {
             display: grid;
             grid-template-columns: repeat(12, minmax(50px, 1fr));
             grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
             grid-gap: $gridgap * 2;
         }
 
-        .sheet-section-equipped, .sheet-section-inventory {
+        .sheet-section-inventory {
             grid-column-start: 1;
             grid-column-end: 8;
+
+            display: flex;
+            flex-direction: column;
+
+            .repcontrol {
+                order: 1;
+                margin-bottom: 1rem;
+                padding: 1rem;
+                border-bottom: solid 3px $black;
+            }
+
+            .repcontainer {
+                order: 2;
+            }
+
         }
 
-        .sheet-section-ammo {
+        .sheet-section-counters {
             grid-column-start: 8;
-            grid-column-end: 12;
+            grid-column-end: 11;
         }
     }
 }

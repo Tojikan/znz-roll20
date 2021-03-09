@@ -1,61 +1,54 @@
 {   
-    
-    "nameRow" : [
-        {
-            "attr_name": "item_name",
-            "display_name": "Name",
-            "type": "text",
-            "width": "60"
-        },
-        {
-            "attr_name": "item_weight",
-            "display_name": "Weight",
-            "type" : "text_number"
-        },
-        {
-            "attr_name": "item_quantity",
-            "display_name": "Quantity",
-            "type" : "text_number"
-        }
-    ],
-    "typeRow" : [
-        {
-            "attr_name": "item_type",
-            "display_name": "Type",
-            "type" : "select",
-            "default": "misc",
-            "options" : "itemTypes",
-            "width": "50"
-        },
-        {
-            "attr_name": "item_notes",
-            "display_name": "Notes",
-            "type" : "textarea",
-            "width": "50"
-        }
-    ],
+    "name" : {
+        "attr_name": "item_name",
+        "display_name": "Name",
+        "type": "line_text",
+        "width": "60"
+    },
+    "type": {
+        "attr_name": "item_type",
+        "display_name": "Type",
+        "type" : "select",
+        "default": "misc",
+        "options" : "itemTypes",
+        "width": "50"
+    },
+    "subtypes": {
+        "melee": "melee_type",
+        "ranged": "ranged_type",
+        "armor": "armor_type"
+    },
+    "description" : {
+        "attr_name": "item_description",
+        "display_name": "Description",
+        "type" : "textarea",
+        "width": "50"
+    },
+    "weight": {
+        "attr_name": "item_weight",
+        "display_name": "Weight",
+        "type" : "line_number"
+    },
+    "quantity": {
+        "attr_name": "item_quantity",
+        "display_name": "Quantity",
+        "type" : "line_number"
+    },
     "melee" : [
         {
-            "attr_name": "melee_type",
-            "display_name": "Melee Type",
-            "type": "select",
-            "default": "blunt",
-            "options": "meleeTypes"
+            "attr_name": "melee_damage",
+            "display_name": "Melee Damage",
+            "type": "text"
+        },
+        {
+            "attr_name": "melee_reach",
+            "display_name": "Weapon Reach",
+            "type": "number"
         },
         {
             "attr_name": "melee_durability",
             "display_name": "Durability",
             "type": "max"
-        },
-        {
-            "attr_name": "melee_reach",
-            "display_name": "Weapon Reach",
-            "type": "line_number"
-        },
-        {
-            "attr_name": "melee_damage",
-            "display_name": "Melee Damage",
-            "type": "line_text"
         }
     ],
     "ranged" : [
@@ -69,7 +62,7 @@
         {
             "attr_name": "ranged_damage",
             "display_name": "Ranged Damage",
-            "type" : "line_text"
+            "type" : "text"
         },
         {
             "attr_name": "ranged_ammo",
@@ -79,7 +72,7 @@
         {
             "attr_name": "ranged_range",
             "display_name": "Weapon Range",
-            "type" : "line_text"
+            "type" : "text"
         }
     ],
     "equipment" : [
@@ -93,7 +86,7 @@
         {
             "attr_name": "equipment_armor_rating",
             "display_name": "Armor Rating Bonus",
-            "type" : "line_number"
+            "type" : "text"
         }
     ],
     "buttons" : {
@@ -101,16 +94,12 @@
 
     "itemTypes": [
         {
-            "name": "Misc",
+            "name": "Misc Item",
             "value": "misc"
         },
         {
-            "name": "Body",
-            "value": "body"
-        },
-        {
-            "name": "Head",
-            "value": "head"
+            "name": "Armor",
+            "value": "armor"
         },
         {
             "name": "Melee Weapon",
@@ -119,6 +108,10 @@
         {
             "name": "Ranged Weapon",
             "value": "ranged"
+        },
+        {
+            "name": "Special Weapon",
+            "value": "Special"
         }
     ],
     "ammoTypes": [
@@ -163,6 +156,68 @@
         {
             "name": "Sharp",
             "value": "sharp"
+        }
+    ],
+    "rangedTypes": [
+        {
+            "name": "Handgun",
+            "value": "handgun"
+        },
+        {
+            "name": "Shotgun",
+            "value": "shotgun"
+        },
+        {
+            "name": "Rifle",
+            "value": "rifle"
+        },
+        {
+            "name": "Projectile",
+            "value": "projectile"
+        }
+    ],
+    "armorTypes": [
+        {
+            "name": "Head",
+            "value": "head"
+        },
+        {
+            "name": "Chest",
+            "value": "chest"
+        },
+        {
+            "name": "Arms",
+            "value": "arms"
+        },
+        {
+            "name": "Legs",
+            "value": "legs"
+        }
+    ],
+    "inventoryCounters" : [
+        {
+            "name": "Food",
+            "value": "food"
+        },
+        {
+            "name": "Water",
+            "value": "water"
+        },
+        {
+            "name": "Medicine",
+            "value": "medicine"
+        },
+        {
+            "name": "Alcohol",
+            "value": "alcohol"
+        },
+        {
+            "name": "Firestarter",
+            "value": "firestarter"
+        },
+        {
+            "name": "Rope",
+            "value": "rope"
         }
     ]
 }

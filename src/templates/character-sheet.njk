@@ -29,6 +29,16 @@
                     {{ resourceBlock.create(res) }}
                 {% endfor %}
             </div>
+            <div class="sheet-defenses">
+                <div class="sheet-def-block">
+                    <div class="sheet-label">{{jsonData.misc.armor.display_name}}</div>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.armor.attr_name}}" value="{{jsonData.misc.armor.default_value}}"></input>
+                </div>
+                <div class="sheet-def-block">
+                    <div class="sheet-label">{{jsonData.misc.flashlight.display_name}}</div>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.flashlight.attr_name}}" value="{{jsonData.misc.flashlight.default_value}}"></input>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -38,6 +48,7 @@
             <button type="action" class="sheet-tab-button sheet-tab-button-stats" name="act_selectTabStats" >Stats</button>
             <button type="action" class="sheet-tab-button sheet-tab-button-abilities" name="act_selectTabAbilities" >Abilities</button>
             <button type="action" class="sheet-tab-button sheet-tab-button-equipment" name="act_selectTabEquipment" >Equipment</button>
+            <button type="action" class="sheet-tab-button sheet-tab-button-inventory" name="act_selectTabInventory" >Inventory</button>
             <button type="action" class="sheet-tab-button sheet-tab-button-notes" name="act_selectTabNotes" >Notes</button>
         </div>
         <div class="sheet-tabs-content">
@@ -49,7 +60,9 @@
                 {% include "tabs/abilities.njk" %}
             </div>
             <div class="sheet-tab sheet-tab-equipment">
-                {% include "tabs/equipment.njk" %}
+            </div>
+            <div class="sheet-tab sheet-tab-inventory">
+                {% include "tabs/inventory.njk" %}
             </div>
             <div class="sheet-tab sheet-tab-notes">
                 Notes

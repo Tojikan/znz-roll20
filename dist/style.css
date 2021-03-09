@@ -59,17 +59,26 @@
       flex: 50%; }
       .sheet-znz-character-sheet .sheet-area-abilities .sheet-container > div:first-child {
         margin-right: 2rem; }
-  .sheet-znz-character-sheet .sheet-area-equipment .sheet-container-top, .sheet-znz-character-sheet .sheet-area-equipment .sheet-container-bottom {
+  .sheet-znz-character-sheet .sheet-area-inventory .sheet-container {
     display: grid;
     grid-template-columns: repeat(12, minmax(50px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
     grid-gap: 4rem; }
-  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-equipped, .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-inventory {
+  .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-inventory {
     grid-column-start: 1;
-    grid-column-end: 8; }
-  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
+    grid-column-end: 8;
+    display: flex;
+    flex-direction: column; }
+    .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-inventory .repcontrol {
+      order: 1;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-bottom: solid 3px black; }
+    .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-inventory .repcontainer {
+      order: 2; }
+  .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-counters {
     grid-column-start: 8;
-    grid-column-end: 12; }
+    grid-column-end: 11; }
 
 /**
 * Reusable classes and styling across the sheet. 
@@ -82,7 +91,7 @@ input, textarea {
   width: 100%; }
 
 .sheet-textarea-small textarea {
-  height: 3rem; }
+  height: 6rem; }
 
 textarea.sheet-line-height {
   height: 2rem; }
@@ -91,6 +100,9 @@ textarea.sheet-line-height {
   border: none;
   border-bottom: solid 1px #a0a0a0;
   border-radius: 0; }
+
+.sheet-borderless-input {
+  border: none; }
 
 .sheet-number {
   width: 3rem; }
@@ -109,6 +121,15 @@ input {
 
 .sheet-d6-icon {
   font-family: "dicefontd6"; }
+
+select {
+  transition: 0.3s; }
+  select.sheet-select-borderless {
+    border: none; }
+  select:hover, select:focus {
+    background-color: #e5fffb; }
+  select.sheet-line-select {
+    border: none; }
 
 /** Show more toggle **/
 .sheet-znz-expandable {
@@ -195,16 +216,22 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
 .sheet-tab-toggle[value="selectTabAbilities"] ~ .sheet-tab-abilities {
   display: block; }
 
-.sheet-tab-equipment {
+.sheet-tab-inventory {
   display: none; }
 
-.sheet-tab-toggle[value="selectTabEquipment"] ~ .sheet-tab-equipment {
+.sheet-tab-toggle[value="selectTabInventory"] ~ .sheet-tab-inventory {
   display: block; }
 
 .sheet-tab-notes {
   display: none; }
 
 .sheet-tab-toggle[value="selectTabNotes"] ~ .sheet-tab-notes {
+  display: block; }
+
+.sheet-tab-equipment {
+  display: none; }
+
+.sheet-tab-toggle[value="selectTabEquipment"] ~ .sheet-tab-equipment {
   display: block; }
 
 .sheet-tab-select {
@@ -231,11 +258,15 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     border: solid 2px black;
     border-bottom: none;
     background-color: white; }
-  .sheet-tab-select .sheet-tab-toggle[value="selectTabEquipment"] ~ button.sheet-tab-button-equipment {
+  .sheet-tab-select .sheet-tab-toggle[value="selectTabInventory"] ~ button.sheet-tab-button-inventory {
     border: solid 2px black;
     border-bottom: none;
     background-color: white; }
   .sheet-tab-select .sheet-tab-toggle[value="selectTabNotes"] ~ button.sheet-tab-button-notes {
+    border: solid 2px black;
+    border-bottom: none;
+    background-color: white; }
+  .sheet-tab-select .sheet-tab-toggle[value="selectTabEquipment"] ~ button.sheet-tab-button-equipment {
     border: solid 2px black;
     border-bottom: none;
     background-color: white; }
@@ -274,46 +305,59 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   display: none; }
 
 .sheet-area-resource {
-  display: flex;
-  align-items: center; }
-
-.sheet-res-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%; }
-  .sheet-res-row .sheet-stat-block {
-    border: double #a0a0a0 1px;
-    padding: 0.5rem;
+  margin-bottom: 2rem; }
+  .sheet-area-resource .sheet-res-row {
     display: flex;
-    flex-direction: column-reverse;
-    text-align: center;
-    border-radius: 1rem; }
-    .sheet-res-row .sheet-stat-block .sheet-block-body {
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem; }
+    .sheet-area-resource .sheet-res-row .sheet-stat-block {
+      border: double #a0a0a0 1px;
+      padding: 0.5rem;
       display: flex;
-      margin-bottom: 0.5rem; }
-    .sheet-res-row .sheet-stat-block .sheet-block-head {
-      font-size: 1.2rem;
-      font-weight: 700;
-      text-transform: uppercase; }
-    .sheet-res-row .sheet-stat-block .sheet-block-separator {
-      font-size: 2.2rem;
+      flex-direction: column-reverse;
+      text-align: center;
+      border-radius: 1rem;
+      box-shadow: 0.2rem 0.2rem black; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-body {
+        display: flex;
+        margin-bottom: 0.5rem; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-head {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-separator {
+        font-size: 2.2rem;
+        display: flex;
+        align-items: flex-end;
+        text-align: center;
+        margin: 0 0.7rem;
+        color: #d3d3d3; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-field span {
+        display: block;
+        margin-bottom: 0.5rem; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-field input {
+        width: 4rem;
+        border: none;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.8rem; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-field.sheet-field-exp {
+        width: 10rem; }
+  .sheet-area-resource .sheet-defenses {
+    display: flex;
+    justify-content: space-between; }
+    .sheet-area-resource .sheet-defenses .sheet-def-block {
       display: flex;
-      align-items: flex-end;
-      text-align: center;
-      margin: 0 0.7rem;
-      color: #f5f5f5; }
-    .sheet-res-row .sheet-stat-block .sheet-block-field span {
-      display: block;
-      margin-bottom: 0.5rem; }
-    .sheet-res-row .sheet-stat-block .sheet-block-field input {
-      width: 4rem;
-      border: none;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.8rem; }
-    .sheet-res-row .sheet-stat-block .sheet-block-field.sheet-field-exp {
-      width: 10rem; }
+      border: solid 1px black;
+      padding: 0.75rem;
+      min-width: 30%;
+      justify-content: space-between;
+      font-size: 1.4rem;
+      align-items: center;
+      box-shadow: 0.2rem 0.2rem black;
+      border-radius: 1rem; }
 
 .sheet-container-attr {
   display: flex;
@@ -329,7 +373,8 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     padding: 0.75rem;
     padding-bottom: 0;
     width: 35%;
-    position: relative; }
+    position: relative;
+    box-shadow: 0.2rem 0.2rem black; }
     .sheet-container-attr .sheet-field-attr-mod input {
       text-align: center;
       width: 100%; }
@@ -346,7 +391,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     .sheet-container-attr .sheet-field-attr-mod .sheet-modifier {
       position: relative; }
     .sheet-container-attr .sheet-field-attr-mod .sheet-rolls {
-      border: solid 1px #a0a0a0;
+      border: solid 2px #a0a0a0;
       border-radius: 4rem;
       min-height: 2rem;
       width: 100%;
@@ -359,7 +404,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
         font-size: 1.6rem;
         margin-left: 0.25rem; }
   .sheet-container-attr .sheet-field-attr {
-    border: solid 1px #a0a0a0;
+    border: solid 2px #a0a0a0;
     border-left: none;
     padding: 0.5rem;
     font-size: 1.2rem;
@@ -399,7 +444,8 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
 .sheet-skill-list {
   font-size: 1.4rem;
   padding: 1rem;
-  border: solid 1px #a0a0a0; }
+  border: solid 1px #a0a0a0;
+  box-shadow: 0.2rem 0.2rem black; }
   .sheet-skill-list .sheet-skill {
     display: flex;
     align-items: flex-end;
@@ -451,86 +497,178 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
         font-weight: 700;
         text-decoration: underline; }
 
-.sheet-area-equipment .sheet-item-card {
+.sheet-area-inventory .sheet-item-card {
   border: solid 1px black;
-  padding: 1rem 0;
+  padding: 1rem;
   margin-bottom: 2rem;
-  border-radius: 2rem; }
-  .sheet-area-equipment .sheet-item-card .sheet-item-header {
+  display: flex;
+  box-shadow: 0.3rem 0.3rem black; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-main {
+    width: 85%; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-main .sheet-main-top {
+      display: flex; }
+      .sheet-area-inventory .sheet-item-card .sheet-item-main .sheet-main-top .sheet-image {
+        width: 15%;
+        margin-right: 1.5rem; }
+      .sheet-area-inventory .sheet-item-card .sheet-item-main .sheet-main-top .sheet-content {
+        width: 85%; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-side {
+    margin-left: 2rem;
+    border-left: solid 1px #d3d3d3;
+    width: 15%; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-side .sheet-item-side-container {
+      width: 50%;
+      margin: auto; }
+  .sheet-area-inventory .sheet-item-card .sheet-image {
+    background: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/swap-bag.png") no-repeat top left;
+    background-size: contain; }
+  .sheet-area-inventory .sheet-item-card .sheet-name {
+    margin-bottom: 0.5rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-name input {
+      font-size: 2.2rem;
+      border-bottom: double 0.4rem black;
+      font-weight: 700;
+      color: black; }
+  .sheet-area-inventory .sheet-item-card .sheet-type {
     display: flex;
     justify-content: space-between; }
-  .sheet-area-equipment .sheet-item-card .sheet-item-field {
-    margin: 0 1rem 0.5rem 1rem; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-header {
+    .sheet-area-inventory .sheet-item-card .sheet-type select {
+      padding-left: 0;
+      font-weight: 700;
+      width: 15rem; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype-armor {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-subtype-armor {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype-melee {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-subtype-melee {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype-ranged {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-subtype-ranged {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-description textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+    height: 2.8rem; }
+  .sheet-area-inventory .sheet-item-card .sheet-amount-counter {
+    margin-bottom: 1rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-amount-counter .sheet-label {
+      margin-bottom: 0.25rem;
+      font-size: 1.4rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-amount-counter input {
+      font-size: 2.2rem;
+      text-align: center;
+      width: 100%; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-misc:checked ~ .sheet-equip {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card button.sheet-equip-button {
+    padding: 0.5rem 1rem; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/baseball-bat.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/pistol-gun.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/kevlar-vest.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-armor-fields {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-armor-fields {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-melee-fields {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-melee-fields {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-ranged-fields {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-ranged-fields {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-field {
+    margin-bottom: 0.5rem;
+    display: flex; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-field .sheet-header {
       font-size: 1.4rem;
       font-weight: 700;
-      margin-bottom: 0.2rem; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field input, .sheet-area-equipment .sheet-item-card .sheet-item-field select {
-      width: 100%; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field textarea {
-      max-width: 100%;
-      box-sizing: border-box;
-      height: 2.8rem; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-number {
-      width: 6rem; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-width-50 {
-      width: 50%; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-width-60 {
-      width: 60%; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-width-100 {
-      width: 100%; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field {
+      margin-right: 1rem;
+      align-self: flex-end;
+      margin-bottom: 0; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-field input, .sheet-area-inventory .sheet-item-card .sheet-item-field select {
+      width: 100%;
+      width: 8rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-field input {
+      text-align: center; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-field select {
+      margin-bottom: 0;
+      width: 12rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-max-field .sheet-field {
       display: flex; }
-      .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-field input {
-        text-align: center; }
-      .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-header {
-        margin-right: 1rem;
-        margin-bottom: 0;
-        align-self: flex-end; }
-      .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-has-max {
+      .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-max-field .sheet-field input {
+        width: 6rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-max-field .sheet-divider {
+      font-size: 2.2rem;
+      margin: 0 1rem;
+      align-self: flex-end;
+      max-height: 2.2rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field {
+      display: block; }
+      .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-header {
+        margin-bottom: 0.5rem; }
+      .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-stat-item {
         display: flex; }
-        .sheet-area-equipment .sheet-item-card .sheet-item-field.sheet-line-field .sheet-has-max .sheet-divider {
-          font-size: 2.2rem;
-          margin: 0 1rem;
-          align-self: flex-end;
-          max-height: 2.2rem; }
-    .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-stat-repeater .sheet-stat-item {
-      display: flex; }
-      .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-stat-repeater .sheet-stat-item .sheet-stat-select {
-        margin-right: 1rem;
-        width: 60%; }
-        .sheet-area-equipment .sheet-item-card .sheet-item-field .sheet-stat-repeater .sheet-stat-item .sheet-stat-select select {
-          border: none;
-          border-bottom: solid 1px #a0a0a0; }
-  .sheet-area-equipment .sheet-item-card .sheet-equipment-fields {
-    display: none; }
-  .sheet-area-equipment .sheet-item-card .sheet-item-type-head:checked ~ .sheet-equipment-fields {
-    display: block; }
-  .sheet-area-equipment .sheet-item-card .sheet-equipment-fields {
-    display: none; }
-  .sheet-area-equipment .sheet-item-card .sheet-item-type-body:checked ~ .sheet-equipment-fields {
-    display: block; }
-  .sheet-area-equipment .sheet-item-card .sheet-melee-fields {
-    display: none; }
-  .sheet-area-equipment .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-melee-fields {
-    display: block; }
-  .sheet-area-equipment .sheet-item-card .sheet-ranged-fields {
-    display: none; }
-  .sheet-area-equipment .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-ranged-fields {
-    display: block; }
+        .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select {
+          margin-right: 1rem;
+          width: 60%; }
+          .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select select {
+            border: none;
+            border-bottom: solid 1px #a0a0a0; }
+  .sheet-area-inventory .sheet-item-card .sheet-melee-fields-container, .sheet-area-inventory .sheet-item-card .sheet-ranged-fields-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 50%);
+    grid-row-gap: 0.5rem;
+    align-items: center; }
+    .sheet-area-inventory .sheet-item-card .sheet-melee-fields-container .sheet-field, .sheet-area-inventory .sheet-item-card .sheet-ranged-fields-container .sheet-field {
+      width: 40%; }
+  .sheet-area-inventory .sheet-item-card .sheet-armor-fields-container {
+    display: flex;
+    justify-content: space-between; }
+    .sheet-area-inventory .sheet-item-card .sheet-armor-fields-container .sheet-armor-fields-block:not(:last-child) {
+      margin-right: 1rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-armor-fields-container .sheet-armor-fields-block .sheet-item-field {
+      display: block; }
 
-.sheet-area-equipment .sheet-section-inventory .sheet-equipment-fields-container {
-  display: flex; }
-  .sheet-area-equipment .sheet-section-inventory .sheet-equipment-fields-container .sheet-line-field {
-    align-self: start; }
-
-.sheet-area-equipment .sheet-section-inventory .sheet-melee-fields-container, .sheet-area-equipment .sheet-section-inventory .sheet-ranged-fields-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 50%);
-  grid-row-gap: 0.5rem;
-  align-items: center; }
-  .sheet-area-equipment .sheet-section-inventory .sheet-melee-fields-container .sheet-field, .sheet-area-equipment .sheet-section-inventory .sheet-ranged-fields-container .sheet-field {
-    width: 40%; }
-
-.sheet-area-equipment .sheet-section-inventory .sheet-ranged-fields-container .sheet-field {
-  width: 50%; }
+.sheet-area-inventory .sheet-section-counters {
+  padding: 1rem;
+  border: solid 2px black;
+  box-shadow: 0.3rem 0.3rem black; }
+  .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight {
+    border-bottom: solid 4px black;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-weight {
+      display: flex;
+      text-align: center;
+      justify-content: center; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-separator {
+      font-size: 2.2rem;
+      display: flex;
+      align-items: flex-end;
+      margin: 0 0.7rem;
+      color: #d3d3d3; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-field span {
+      display: block;
+      margin-bottom: 0.5rem; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-field input {
+      width: 8rem;
+      border: none;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem; }
+  .sheet-area-inventory .sheet-section-counters .sheet-generic-counters .sheet-counter {
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+    font-size: 1.8rem; }
+    .sheet-area-inventory .sheet-section-counters .sheet-generic-counters .sheet-counter .sheet-input span {
+      margin-right: 2rem; }

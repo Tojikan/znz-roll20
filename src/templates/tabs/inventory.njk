@@ -1,0 +1,41 @@
+{% import '../macros/itemCard.njk' as itemCard %}
+
+<div class="sheet-area-inventory">
+    <div class="sheet-container">
+        <div class="sheet-section-inventory">
+            <fieldset class="repeating_inventory">
+                {{ itemCard.create(prefix='inventory', type='inventory', itemFields=jsonData.itemFields)}}
+            </fieldset>
+        </div>
+
+        <div class="sheet-section-counters">
+            <div class="sheet-inventory-weight">
+                <h2> {{jsonData.misc.inventory_weight.display_name }} </h2>
+                <div class="sheet-weight">
+                    <div class="sheet-field">
+                        <span>Current</span>
+                        <input type="text" name="attr_{{jsonData.misc.inventory_weight.attr_name}}" value="0">
+                    </div>
+                    <div class="sheet-separator">/</div>
+                    <div class="sheet-field">
+                        <span>Max</span>
+                        <input type="text" name="attr_{{jsonData.misc.inventory_weight.attr_name}}_max" value="10">
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-generic-counters">
+                {% for count in jsonData.itemFields.inventoryCounters %}
+                    <div class="sheet-counter">
+                        <div class="sheet-label">
+                            {{count.name}}
+                        </div>
+                        <div class="sheet-input">
+                            <span>x</span>
+                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{itemFields.name.attr_name}}" value="Item"></input>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
