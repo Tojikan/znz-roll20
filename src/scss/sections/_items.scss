@@ -266,7 +266,7 @@
     
         }
 
-        .sheet-generic-counters {
+        .sheet-inventory-counters {
             .sheet-counter {
                 display: flex;
                 margin-bottom: 2rem;
@@ -278,6 +278,24 @@
                         margin-right: 2rem;
                     }
                 }
+
+                &.sheet-counter-custom {
+                    .sheet-label {
+                        width: 50%;
+                    }
+                }
+            }
+
+            &:not(:last-child){
+                border-bottom: solid 3px $black;
+                margin-bottom: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            h2 {
+                text-align: center;
+                font-weight: 700;
+                margin-bottom: 1rem;
             }
         }
     }

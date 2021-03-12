@@ -45,7 +45,7 @@
     "display_name": "Farming",
     "attr_name": "farming",
     "description": "",
-    "attribute": "INT",
+    "attribute": "TENA",
     "resource": "energy"
   },
   {
@@ -74,6 +74,13 @@
     "attr_name": "hotwiring",
     "description": "Allows you to attempt to hotwire a vehicle.",
     "attribute": "DEXT",
+    "resource": "Energy"
+  },
+  {
+    "display_name": "Hunting",
+    "attr_name": "hunting",
+    "description": "",
+    "attribute": "LUCK",
     "resource": "Energy"
   },
   {
@@ -137,6 +144,13 @@
     "attr_name": "tailoring",
     "description": "Allows you to craft clothes.",
     "attribute": "DEXT",
+    "resource": "Energy"
+  },
+  {
+    "display_name": "Trap-making",
+    "attr_name": "trapmaking",
+    "description": "Create Traps.",
+    "attribute": "INT",
     "resource": "Energy"
   }
 ]

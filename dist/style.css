@@ -665,10 +665,20 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       text-align: center;
       font-weight: 700;
       font-size: 1.8rem; }
-  .sheet-area-inventory .sheet-section-counters .sheet-generic-counters .sheet-counter {
+  .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters .sheet-counter {
     display: flex;
     margin-bottom: 2rem;
     justify-content: space-between;
     font-size: 1.8rem; }
-    .sheet-area-inventory .sheet-section-counters .sheet-generic-counters .sheet-counter .sheet-input span {
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters .sheet-counter .sheet-input span {
       margin-right: 2rem; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters .sheet-counter.sheet-counter-custom .sheet-label {
+      width: 50%; }
+  .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters:not(:last-child) {
+    border-bottom: solid 3px black;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem; }
+  .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters h2 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 1rem; }

@@ -1,0 +1,243 @@
+{   
+    "fields": {
+        "name" : {
+            "attr_name": "item_name",
+            "display_name": "Name",
+            "type": "line_text"
+        },
+        "type": {
+            "attr_name": "item_type",
+            "display_name": "Type",
+            "type" : "select",
+            "default": "misc",
+            "options" : "itemTypes"
+        },
+        "description" : {
+            "attr_name": "item_description",
+            "display_name": "Description",
+            "type" : "textarea"
+        },
+        "weight": {
+            "attr_name": "item_weight",
+            "display_name": "Weight",
+            "type" : "line_number"
+        },
+        "quantity": {
+            "attr_name": "item_quantity",
+            "display_name": "Quantity",
+            "type" : "line_number"
+        },
+        "melee" : [
+            {
+                "attr_name": "melee_damage",
+                "display_name": "Melee Damage",
+                "type": "text"
+            },
+            {
+                "attr_name": "melee_reach",
+                "display_name": "Weapon Reach",
+                "type": "number"
+            },
+            {
+                "attr_name": "melee_durability",
+                "display_name": "Durability",
+                "type": "max"
+            }
+        ],
+        "ranged" : [
+            {
+                "attr_name": "ranged_ammo_type",
+                "display_name": "Ammo Type",
+                "type": "select",
+                "default": "light",
+                "options": "ammoTypes"
+            },
+            {
+                "attr_name": "ranged_damage",
+                "display_name": "Ranged Damage",
+                "type" : "text"
+            },
+            {
+                "attr_name": "ranged_ammo",
+                "display_name": "Ammo",
+                "type" : "max"
+            },
+            {
+                "attr_name": "ranged_range",
+                "display_name": "Weapon Range",
+                "type" : "text"
+            }
+        ],
+        "equipment" : [
+            {
+                "attr_name": "equipment_stat_bonus",
+                "display_name": "Equipment Stats",
+                "type": "select_stat_repeater",
+                "count": 3
+            },
+            {
+                "attr_name": "equipment_armor_rating",
+                "display_name": "Armor Rating Bonus",
+                "type" : "text"
+            }
+        ]
+    },
+    "itemTypes": [
+        {
+            "name": "Misc Item",
+            "value": "misc"
+        },
+        {
+            "name": "Armor",
+            "value": "armor"
+        },
+        {
+            "name": "Melee Weapon",
+            "value": "melee"
+        },
+        {
+            "name": "Ranged Weapon",
+            "value": "ranged"
+        },
+        {
+            "name": "Special Weapon",
+            "value": "Special"
+        }
+    ],
+    "meleeTypes": [
+        {
+            "name": "Unarmed",
+            "value": "unarmed"
+        },
+        {
+            "name": "Blunt",
+            "value": "blunt"
+        },
+        {
+            "name": "Heavy",
+            "value": "heavy"
+        },
+        {
+            "name": "Sharp",
+            "value": "sharp"
+        }
+    ],
+    "rangedTypes": [
+        {
+            "name": "Handgun",
+            "value": "handgun"
+        },
+        {
+            "name": "Shotgun",
+            "value": "shotgun"
+        },
+        {
+            "name": "Rifle",
+            "value": "rifle"
+        },
+        {
+            "name": "Projectile",
+            "value": "projectile"
+        }
+    ],
+    "armorTypes": [
+        {
+            "name": "Head",
+            "value": "head"
+        },
+        {
+            "name": "Chest",
+            "value": "chest"
+        },
+        {
+            "name": "Arms",
+            "value": "arms"
+        },
+        {
+            "name": "Legs",
+            "value": "legs"
+        }
+    ],
+    "subtypes": {
+        "melee": "melee_type",
+        "ranged": "ranged_type",
+        "armor": "armor_type"
+    },
+    "inventoryCounters" : [
+        {
+            "name": "Food",
+            "value": "food",
+            "attr_name": "inv_food",
+            "weight": 0.2
+        },
+        {
+            "name": "Water",
+            "value": "water",
+            "attr_name": "inv_water",
+            "weight": 0.2
+        },
+        {
+            "name": "Medicine",
+            "value": "medicine",
+            "attr_name": "inv_medicine",
+            "weight": 0.2
+        },
+        {
+            "name": "Alcohol",
+            "value": "alcohol",
+            "attr_name": "inv_alcohol",
+            "weight": 0.2
+        },
+        {
+            "name": "Lighters",
+            "value": "lighters",
+            "attr_name": "inv_lighters",
+            "weight": 0.2
+        },
+        {
+            "name": "Rope",
+            "value": "rope",
+            "attr_name": "inv_rope",
+            "weight": 0.2
+        }
+    ],
+    "ammoTypes": [
+        {
+            "name": "Light",
+            "value": "light",
+            "attr_name": "ammo_light",
+            "weight": 0.1
+        },
+        {
+            "name": "Medium",
+            "value": "medium",
+            "attr_name": "ammo_medium",
+            "weight": 0.2
+        },
+        {
+            "name": "Heavy",
+            "value": "heavy",
+            "attr_name": "ammo_heavy",
+            "weight": 0.3
+        },
+        {
+            "name": "Shotgun Shells",
+            "value": "shells",
+            "attr_name": "ammo_shells",
+            "weight": 0.2
+        },
+        {
+            "name": "Arrows",
+            "value": "arrows",
+            "attr_name": "ammo_arrows",
+            "weight": 0.3
+        }
+    ],
+    "customCounters": {
+        "count": 2,
+        "ammo_attr": "ammo_custom_amount",
+        "ammo_label": "ammo_custom_label",
+        "inv_attr": "inv_custom_amount",
+        "inv_label": "inv_custom_label"
+    }
+}

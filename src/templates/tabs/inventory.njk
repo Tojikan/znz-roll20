@@ -1,10 +1,10 @@
-{% import '../macros/itemCard.njk' as itemCard %}
+{% import '../macros/inventoryItem.njk' as inventoryItem %}
 
 <div class="sheet-area-inventory">
     <div class="sheet-container">
         <div class="sheet-section-inventory">
             <fieldset class="repeating_inventory">
-                {{ itemCard.create(prefix='inventory', type='inventory', itemFields=jsonData.itemFields)}}
+                {{ inventoryItem.create(prefix='inventory', itemsData=jsonData.items)}}
             </fieldset>
         </div>
 
@@ -23,15 +23,52 @@
                     </div>
                 </div>
             </div>
-            <div class="sheet-generic-counters">
-                {% for count in jsonData.itemFields.inventoryCounters %}
+            <div class="sheet-inventory-counters">
+                <h2>Consumables</h2>
+                {% for count in jsonData.items.inventoryCounters %}
                     <div class="sheet-counter">
                         <div class="sheet-label">
                             {{count.name}}
                         </div>
                         <div class="sheet-input">
                             <span>x</span>
-                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{itemFields.name.attr_name}}" value="Item"></input>
+                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{count.name}}"></input>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for num in range(0,jsonData.items.customCounters.count) %}
+                    <div class="sheet-counter sheet-counter-custom">
+                        <div class="sheet-label">
+                            <input class="sheet-line-input" type="text" name="attr_{{jsonData.items.customCounters.inv_label}}_{{num}}"></input>
+                        </div>
+                        <div class="sheet-input">
+                            <span>x</span>
+                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{jsonData.items.customCounters.inv_attr}}_{{num}}"></input>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="sheet-inventory-counters">
+                <h2>Ammunition</h2>
+                {% for ammo in jsonData.items.ammoTypes %}
+                    <div class="sheet-counter">
+                        <div class="sheet-label">
+                            {{ammo.name}}
+                        </div>
+                        <div class="sheet-input">
+                            <span>x</span>
+                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{ammo.name}}"></input>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for num in range(0,jsonData.items.customCounters.count) %}
+                    <div class="sheet-counter sheet-counter-custom">
+                        <div class="sheet-label">
+                            <input class="sheet-line-input" type="text" name="attr_{{jsonData.items.customCounters.ammo_label}}_{{num}}"></input>
+                        </div>
+                        <div class="sheet-input">
+                            <span>x</span>
+                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{jsonData.items.customCounters.ammo_attr}}_{{num}}"></input>
                         </div>
                     </div>
                 {% endfor %}

@@ -1,35 +1,50 @@
-{% macro create(prefix='inventory', type='basic', itemFields="") %}
+{#
+
+Macro for creating an inventory item.
+Top half is hardcoded output.
+outputFields is used for looped output of an array of fields. This is dynamically done, but a function needs to be set up for every field type.
 
 
-<div class="sheet-item-card sheet-type-{{type}}">
+- prefix - prepended to every attr
+- itemsData - pass the items.json here so we have a reference in-macro
+
+
+
+#}
+
+
+{% macro create(prefix='inventory', itemsData="") %}
+
+
+<div class="sheet-item-card sheet-type-{{prefix}}">
     <div class="sheet-item-main">
         {# Image, Head, Type #}
         <div class="sheet-main-top">
-            {% for itemType in itemFields.itemTypes %}
-                <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemFields.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemFields.type.default == itemType.value }}/>
+            {% for itemType in itemsData.itemTypes %}
+                <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemsData.fields.type.default == itemType.value }}/>
             {% endfor %}
             <div class="sheet-image"></div>
             <div class="sheet-content">
                 <div class="sheet-name">
-                    <input class="sheet-line-input" type="text" name="attr_{{prefix}}_{{itemFields.name.attr_name}}" value="Item"></input>
+                    <input class="sheet-line-input" type="text" name="attr_{{prefix}}_{{itemsData.fields.name.attr_name}}" value="Item"></input>
                 </div>
                 <div class="sheet-type">
                     {# Item Type #}
-                    <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemFields.type.attr_name}}">
-                        {% for option in itemFields.itemTypes %}
+                    <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}">
+                        {% for option in itemsData.itemTypes %}
                             <option value="{{option.value}}">{{option.name}}</option>
                         {% endfor %}
                     </select>
 
-                    {% for itemType in itemFields.itemTypes %}
-                        <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemFields.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemFields.type.default == itemType.value }}/>
+                    {% for itemType in itemsData.itemTypes %}
+                        <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemsData.fields.type.default == itemType.value }}/>
                     {% endfor %}
                     
                     {# Melee SubType #}
                     <div class="sheet-subtype sheet-subtype-melee">
                         Type: 
-                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemFields.subtypes.melee}}">
-                            {% for option in itemFields.meleeTypes %}
+                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.subtypes.melee}}">
+                            {% for option in itemsData.meleeTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
                         </select>
@@ -38,8 +53,8 @@
                     {# Ranged SubType #}
                     <div class="sheet-subtype sheet-subtype-ranged">
                         Type: 
-                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemFields.subtypes.ranged}}">
-                            {% for option in itemFields.rangedTypes %}
+                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.subtypes.ranged}}">
+                            {% for option in itemsData.rangedTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
                         </select>
@@ -48,8 +63,8 @@
                     {# armor SubType #}
                     <div class="sheet-subtype sheet-subtype-armor">
                         Type: 
-                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemFields.subtypes.armor}}">
-                            {% for option in itemFields.armorTypes %}
+                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.subtypes.armor}}">
+                            {% for option in itemsData.armorTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
                         </select>
@@ -60,36 +75,36 @@
         <div class="sheet-main-bottom">
             <div class="sheet-description">
                 <div class="sheet-label">Description</div>
-                <textarea name="attr_{{prefix}}_{{itemFields.description.attr_name}}" value="Item Description">Item Description</textarea/>
+                <textarea name="attr_{{prefix}}_{{itemsData.fields.description.attr_name}}" value="Item Description">Item Description</textarea/>
             </div>
         </div>
 
         {# Stats #}
         <div class="sheet-main-bottom">
-            {% for itemType in itemFields.itemTypes %}
-                <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemFields.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemFields.type.default == itemType.value }}/>
+            {% for itemType in itemsData.itemTypes %}
+                <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemsData.fields.type.default == itemType.value }}/>
             {% endfor %}
             <div class="sheet-melee-fields">
                 <div class="sheet-melee-fields-container">
-                    {% for fld in itemFields.melee %}
-                        {{ outputField(field=fld, prefix=prefix, itemFields=itemFields)}}
+                    {% for fld in itemsData.fields.melee %}
+                        {{ outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
                     {% endfor %}
                 </div>
             </div>
 
             <div class="sheet-ranged-fields">
                 <div class="sheet-ranged-fields-container">
-                    {% for fld in itemFields.ranged %}
-                        {{ outputField(field=fld, prefix=prefix, itemFields=itemFields)}}
+                    {% for fld in itemsData.fields.ranged %}
+                        {{ outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
                     {% endfor %}
                 </div>
             </div>
 
             <div class="sheet-armor-fields">
                 <div class="sheet-armor-fields-container">
-                    {% for fld in itemFields.equipment %}
+                    {% for fld in itemsData.fields.equipment %}
                     <div class="sheet-armor-fields-block">
-                        {{ outputField(field=fld, prefix=prefix, itemFields=itemFields)}}
+                        {{ outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
                     </div>
                     {% endfor %}
                 </div>
@@ -105,18 +120,18 @@
                 <div class="sheet-label">
                     Quantity
                 </div>
-                <input class="sheet-borderless-input" type="text" name="attr_{{prefix}}_{{itemFields.quantity.attr_name}}" value="1"></input>
+                <input class="sheet-borderless-input" type="text" name="attr_{{prefix}}_{{itemsData.fields.quantity.attr_name}}" value="1"></input>
             </div>
 
             <div class="sheet-weight sheet-amount-counter">
                 <div class="sheet-label">
                     Weight
                 </div>
-                <input class="sheet-borderless-input" type="text" name="attr_{{prefix}}_{{itemFields.quantity.attr_name}}" value="1"></input>
+                <input class="sheet-borderless-input" type="text" name="attr_{{prefix}}_{{itemsData.fields.quantity.attr_name}}" value="1"></input>
             </div>
 
 
-            <input class="sheet-hidden sheet-item-type-{{itemFields.itemTypes[0].value}}" type="checkbox" name="attr_{{prefix}}_{{itemFields.type.attr_name}}" value="{{itemFields.itemTypes[0].value}}" checked/>
+            <input class="sheet-hidden sheet-item-type-{{itemsData.itemTypes[0].value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}" value="{{itemsData.itemTypes[0].value}}" checked/>
             <div class="sheet-equip">
                 <button type="action" class="sheet-equip-button" name="act_equipItem" >Equip</button>
             </div>
@@ -139,12 +154,9 @@
 
 
 
-{% macro outputField(field='', prefix='', itemFields='') %}
+{% macro outputField(field='', prefix='', itemsData='') %}
 
     {% set class = "" %}
-    {% if field.width %}
-        {% set class = "sheet-width-" + field.width %}
-    {% endif %}
     <div class="sheet-hidden">
 
         {# looped fields aren't supposed to output a field without a num #}
@@ -169,24 +181,24 @@
 
 {% endmacro %}
 
-{% macro outputField(field='', prefix='', itemFields='') %}
+{% macro outputField(field='', prefix='', itemsData='') %}
     {% switch field.type %}
         {% case "text" %}
-            {{ createText(field=field, prefix=prefix, itemFields=itemFields) }}
+            {{ createText(field=field, prefix=prefix, itemsData=itemsData) }}
         {% case "number" %}
-            {{ createText(field=field, prefix=prefix, itemFields=itemFields) }}
+            {{ createText(field=field, prefix=prefix, itemsData=itemsData) }}
         {% case "max" %}
-            {{ createMax(field=field, prefix=prefix, itemFields=itemFields) }}
+            {{ createMax(field=field, prefix=prefix, itemsData=itemsData) }}
         {% case "select" %}
-            {{ createSelect(field=field, prefix=prefix, itemFields=itemFields) }}
+            {{ createSelect(field=field, prefix=prefix, itemsData=itemsData) }}
         {% case "select_stat_repeater" %}
-            {{ createSelectStatRepeater(field=field, prefix=prefix, itemFields=itemFields) }}
+            {{ createSelectStatRepeater(field=field, prefix=prefix, itemsData=itemsData) }}
     {% endswitch %}
 {% endmacro %}
 
 
 {# Text/Number #}
-{% macro createText(field='', prefix='', itemFields='') %}
+{% macro createText(field='', prefix='', itemsData='') %}
     {% if prefix %}
         {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
     {% else %}
@@ -205,7 +217,7 @@
 
 
 {# max #}
-{% macro createMax(field='', prefix='', itemFields='') %}
+{% macro createMax(field='', prefix='', itemsData='') %}
     {% if prefix %}
         {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
     {% else %}
@@ -226,7 +238,7 @@
 
 
 {# select #}
-{% macro createSelect(field='', prefix='', itemFields='') %}
+{% macro createSelect(field='', prefix='', itemsData='') %}
     {% if prefix %}
         {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
     {% else %}
@@ -235,11 +247,11 @@
 
     {% switch field.options %}
         {% case "itemTypes" %}
-            {% set selectOptions = itemFields.itemTypes %}
+            {% set selectOptions = itemsData.itemTypes %}
         {% case "ammoTypes" %}
-            {% set selectOptions = itemFields.ammoTypes %}
+            {% set selectOptions = itemsData.ammoTypes %}
         {% case "meleeTypes" %}
-            {% set selectOptions = itemFields.meleeTypes %}
+            {% set selectOptions = itemsData.meleeTypes %}
         {% default %}
             {% set selectOptions = [] %}
     {% endswitch %}
@@ -260,7 +272,7 @@
 {% endmacro %}
 
 {# select and stat repeater #}
-{% macro createSelectStatRepeater(field='', prefix='', itemFields='') %}
+{% macro createSelectStatRepeater(field='', prefix='', itemsData='') %}
     {% if prefix %}
         {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
     {% else %}
@@ -269,9 +281,9 @@
 
     {% switch field.options %}
         {% case "itemTypes" %}
-            {% set selectOptions = itemFields.itemTypes %}
+            {% set selectOptions = itemsData.itemTypes %}
         {% case "ammoTypes" %}
-            {% set selectOptions = itemFields.ammoTypes %}
+            {% set selectOptions = itemsData.ammoTypes %}
         {% default %}
             {% set selectOptions = [] %}
     {% endswitch %}
