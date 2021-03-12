@@ -3,7 +3,7 @@
         {
             "display_name": "Name",
             "attr_name": "char_name",
-            "field_type": "text",
+            "type": "text",
             "field_class": "",
             "has_header": true,
             "headerType": "h1",
@@ -12,7 +12,7 @@
         {
             "display_name": "Character Notes",
             "attr_name": "char_note",
-            "field_type": "textarea",
+            "type": "textarea",
             "field_class": "textarea-small",
             "has_header": true,
             "headerType": "h2",

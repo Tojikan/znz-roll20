@@ -2,8 +2,7 @@
     "fields": {
         "name" : {
             "attr_name": "item_name",
-            "display_name": "Name",
-            "type": "line_text"
+            "display_name": "Name"
         },
         "type": {
             "attr_name": "item_type",
@@ -14,34 +13,31 @@
         },
         "description" : {
             "attr_name": "item_description",
-            "display_name": "Description",
-            "type" : "textarea"
+            "display_name": "Description"
         },
         "weight": {
             "attr_name": "item_weight",
-            "display_name": "Weight",
-            "type" : "line_number"
+            "display_name": "Weight"
         },
         "quantity": {
             "attr_name": "item_quantity",
-            "display_name": "Quantity",
-            "type" : "line_number"
+            "display_name": "Quantity"
         },
         "melee" : [
             {
                 "attr_name": "melee_damage",
                 "display_name": "Melee Damage",
-                "type": "text"
+                "type": "line_text"
             },
             {
                 "attr_name": "melee_reach",
                 "display_name": "Weapon Reach",
-                "type": "number"
+                "type": "line_text"
             },
             {
                 "attr_name": "melee_durability",
                 "display_name": "Durability",
-                "type": "max"
+                "type": "line_max"
             }
         ],
         "ranged" : [
@@ -55,30 +51,30 @@
             {
                 "attr_name": "ranged_damage",
                 "display_name": "Ranged Damage",
-                "type" : "text"
+                "type" : "line_text"
             },
             {
                 "attr_name": "ranged_ammo",
                 "display_name": "Ammo",
-                "type" : "max"
+                "type" : "line_max"
             },
             {
                 "attr_name": "ranged_range",
                 "display_name": "Weapon Range",
-                "type" : "text"
+                "type" : "line_text"
             }
         ],
         "equipment" : [
             {
                 "attr_name": "equipment_stat_bonus",
                 "display_name": "Equipment Stats",
-                "type": "select_stat_repeater",
+                "type": "stat_repeater",
                 "count": 3
             },
             {
                 "attr_name": "equipment_armor_rating",
                 "display_name": "Armor Rating Bonus",
-                "type" : "text"
+                "type" : "line_text"
             }
         ]
     },
@@ -100,7 +96,7 @@
             "value": "ranged"
         },
         {
-            "name": "Special Weapon",
+            "name": "Special",
             "value": "Special"
         }
     ],

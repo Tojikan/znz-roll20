@@ -28,6 +28,7 @@
   /************* Header area *****************/
   /************* Stats Tab *******************/
   /*************** Ability Tab ******************/
+  /************* Inventory Tab *******************/
   /************* Equipment Tab *******************/ }
   .sheet-znz-character-sheet .sheet-header {
     display: flex; }
@@ -79,6 +80,17 @@
   .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-counters {
     grid-column-start: 8;
     grid-column-end: 11; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-container {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(50px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 4rem; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-equipped {
+    grid-column-start: 1;
+    grid-column-end: 8; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
+    grid-column-start: 8;
+    grid-column-end: 12; }
 
 /**
 * Reusable classes and styling across the sheet. 

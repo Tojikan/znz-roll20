@@ -1,0 +1,62 @@
+{% import './outputfield.njk' as field %}
+
+
+{% macro create(prefix, itemsData) %}
+
+<div class="sheet-equipped-item sheet-{{prefix}}">
+    <div class="sheet-header">
+        <div class="sheet-image"></div>
+        <div class="sheet-name">
+            <input class="sheet-line-input" type="text" name="attr_{{prefix}}_{{itemsData.fields.name.attr_name}}" value="Item"></input>
+        </div>
+    </div>
+
+    <div class="sheet-body">
+        <div class="sheet-melee-fields">
+            <div class="sheet-melee-fields-container">
+                {% for fld in itemsData.fields.melee %}
+                    {{ field.outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="sheet-ranged-fields">
+            <div class="sheet-ranged-fields-container">
+                {% for fld in itemsData.fields.ranged %}
+                    {{ field.outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="sheet-armor-fields">
+            <div class="sheet-armor-fields-container">
+                {% for fld in itemsData.fields.equipment %}
+                <div class="sheet-armor-fields-block">
+                    {{ field.outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-footer">
+        <div class="sheet-description">
+            <div class="sheet-label">Description</div>
+            <textarea name="attr_{{prefix}}_{{itemsData.fields.description.attr_name}}" value=""></textarea/>
+        </div>
+    </div>
+
+    {# Retain for unequipping purposes #}
+    <div class="sheet-hidden">
+        <input type="text" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}"/>
+        <input type="text" name="attr_{{prefix}}_{{itemsData.fields.weight.attr_name}}"/>
+        <input type="text" name="attr_{{prefix}}_{{itemsData.fields.quantity.attr_name}}"/>
+    </div>
+
+
+</div>
+
+
+
+
+{% endmacro %}

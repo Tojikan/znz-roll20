@@ -2,18 +2,17 @@
 
 Macro for creating an inventory item.
 Top half is hardcoded output.
-outputFields is used for looped output of an array of fields. This is dynamically done, but a function needs to be set up for every field type.
+outputFields is used for dynamically outputting type specific fields
 
 
 - prefix - prepended to every attr
 - itemsData - pass the items.json here so we have a reference in-macro
 
-
-
 #}
 
 
 {% macro create(prefix='inventory', itemsData="") %}
+{% import './outputfield.njk' as field %}
 
 
 <div class="sheet-item-card sheet-type-{{prefix}}">
@@ -75,7 +74,7 @@ outputFields is used for looped output of an array of fields. This is dynamicall
         <div class="sheet-main-bottom">
             <div class="sheet-description">
                 <div class="sheet-label">Description</div>
-                <textarea name="attr_{{prefix}}_{{itemsData.fields.description.attr_name}}" value="Item Description">Item Description</textarea/>
+                <textarea name="attr_{{prefix}}_{{itemsData.fields.description.attr_name}}" value=""></textarea/>
             </div>
         </div>
 
@@ -87,7 +86,7 @@ outputFields is used for looped output of an array of fields. This is dynamicall
             <div class="sheet-melee-fields">
                 <div class="sheet-melee-fields-container">
                     {% for fld in itemsData.fields.melee %}
-                        {{ outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
+                        {{ field.outputField(field=fld, prefix=prefix, data=itemsData)}}
                     {% endfor %}
                 </div>
             </div>
@@ -95,7 +94,7 @@ outputFields is used for looped output of an array of fields. This is dynamicall
             <div class="sheet-ranged-fields">
                 <div class="sheet-ranged-fields-container">
                     {% for fld in itemsData.fields.ranged %}
-                        {{ outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
+                        {{ field.outputField(field=fld, prefix=prefix, data=itemsData)}}
                     {% endfor %}
                 </div>
             </div>
@@ -104,7 +103,7 @@ outputFields is used for looped output of an array of fields. This is dynamicall
                 <div class="sheet-armor-fields-container">
                     {% for fld in itemsData.fields.equipment %}
                     <div class="sheet-armor-fields-block">
-                        {{ outputField(field=fld, prefix=prefix, itemsData=itemsData)}}
+                        {{ field.outputField(field=fld, prefix=prefix, data=itemsData)}}
                     </div>
                     {% endfor %}
                 </div>
@@ -140,184 +139,4 @@ outputFields is used for looped output of an array of fields. This is dynamicall
 </div>
 
 {% endmacro %}
-
-
-{%- macro getAttrName(field='', prefix='') -%}
-    {% if prefix %}
-        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
-    {% else %}
-        {% set attrName = ["attr_", field.attr_name] %}
-    {% endif %}
-
-    {{- attrName | join -}}
-{%- endmacro -%}
-
-
-
-{% macro outputField(field='', prefix='', itemsData='') %}
-
-    {% set class = "" %}
-    <div class="sheet-hidden">
-
-        {# looped fields aren't supposed to output a field without a num #}
-        {% if field.looped %}
-            {% for num in range(0,field.count) %}
-            <input type="hidden" name="{{ attrName | join}}_{{num}}" />
-
-            {% if field.has_mod %}
-            <input type="hidden" name="{{ attrName | join}}_{{num}}_mod" />
-            {% endif %}
-
-            {% endfor %}
-        
-        {% else %}
-            <input type="hidden" name="{{ attrName | join}}" />
-
-            {% if field.type == "max" %}
-                <input type="hidden" name="{{ attrName | join}}_max" />
-            {% endif %}
-        {% endif %}
-    </div>
-
-{% endmacro %}
-
-{% macro outputField(field='', prefix='', itemsData='') %}
-    {% switch field.type %}
-        {% case "text" %}
-            {{ createText(field=field, prefix=prefix, itemsData=itemsData) }}
-        {% case "number" %}
-            {{ createText(field=field, prefix=prefix, itemsData=itemsData) }}
-        {% case "max" %}
-            {{ createMax(field=field, prefix=prefix, itemsData=itemsData) }}
-        {% case "select" %}
-            {{ createSelect(field=field, prefix=prefix, itemsData=itemsData) }}
-        {% case "select_stat_repeater" %}
-            {{ createSelectStatRepeater(field=field, prefix=prefix, itemsData=itemsData) }}
-    {% endswitch %}
-{% endmacro %}
-
-
-{# Text/Number #}
-{% macro createText(field='', prefix='', itemsData='') %}
-    {% if prefix %}
-        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
-    {% else %}
-        {% set attrName = ["attr_", field.attr_name] %}
-    {% endif %}
-
-    <div class="sheet-item-field sheet-line-field">
-        <div class="sheet-header">
-            {{ field.display_name }}
-        </div>
-        <div class="sheet-field">
-            <input class="sheet-line-input" type="text" name="{{attrName | join}}"></input>
-        </div>
-    </div>
-{% endmacro %}
-
-
-{# max #}
-{% macro createMax(field='', prefix='', itemsData='') %}
-    {% if prefix %}
-        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
-    {% else %}
-        {% set attrName = ["attr_", field.attr_name] %}
-    {% endif %}
-
-    <div class="sheet-item-field sheet-max-field">
-        <div class="sheet-header">
-            {{ field.display_name }}
-        </div>
-        <div class="sheet-field">
-            <input class="sheet-line-input sheet-number" type="text" name="{{attrName | join}}"></input>
-            <div class="sheet-divider">/</div>
-            <input class="sheet-line-input sheet-number" type="text" name="{{attrName | join}}_max"></input>
-        </div>
-    </div>
-{% endmacro %}
-
-
-{# select #}
-{% macro createSelect(field='', prefix='', itemsData='') %}
-    {% if prefix %}
-        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
-    {% else %}
-        {% set attrName = ["attr_", field.attr_name] %}
-    {% endif %}
-
-    {% switch field.options %}
-        {% case "itemTypes" %}
-            {% set selectOptions = itemsData.itemTypes %}
-        {% case "ammoTypes" %}
-            {% set selectOptions = itemsData.ammoTypes %}
-        {% case "meleeTypes" %}
-            {% set selectOptions = itemsData.meleeTypes %}
-        {% default %}
-            {% set selectOptions = [] %}
-    {% endswitch %}
-
-
-    <div class="sheet-item-field sheet-select-field">
-        <div class="sheet-header">
-            {{ field.display_name }}
-        </div>
-        <div class="sheet-field">
-            <select class="sheet-line-select" name="{{attrName | join}}" value="{{field.default}}">
-                {% for option in selectOptions %}
-                <option value="{{option.value}}">{{option.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-{% endmacro %}
-
-{# select and stat repeater #}
-{% macro createSelectStatRepeater(field='', prefix='', itemsData='') %}
-    {% if prefix %}
-        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
-    {% else %}
-        {% set attrName = ["attr_", field.attr_name] %}
-    {% endif %}
-
-    {% switch field.options %}
-        {% case "itemTypes" %}
-            {% set selectOptions = itemsData.itemTypes %}
-        {% case "ammoTypes" %}
-            {% set selectOptions = itemsData.ammoTypes %}
-        {% default %}
-            {% set selectOptions = [] %}
-    {% endswitch %}
-
-
-    <div class="sheet-item-field sheet-stat-repeater-field">
-        <div class="sheet-header">
-            {{ field.display_name }}
-        </div>
-        <div class="sheet-field">
-            {% for num in range(0,field.count) %}
-                {% set toJoin = ["attr_", prefix, "_", field.attr_name, "_", num] %}
-                {% set newAttr = toJoin | join %}
-
-                <div class="sheet-stat-item">
-                    <div class="sheet-stat-select">
-                        <select name="{{newAttr}}">
-                            <option value="" default></option>
-                            {# a custom made array of options #}
-                            {% for val in options %}
-                                <option value="{{val.value}}">{{val.name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="sheet-stat-mod">
-                        {% set modJoin = [newAttr, "_mod"] %}
-                        <input class="sheet-line-input sheet-number" type="text" name="{{ modJoin | join}}"></input>
-                    </div>
-                </div>
-
-            {% endfor %}
-        </div>
-    </div>
-{% endmacro %}
-
-
 

@@ -1,0 +1,27 @@
+
+{% import '../macros/equippedItem.njk' as equipped %}
+
+
+<div class="sheet-area-inventory">
+    <div class="sheet-container">
+        <div class="sheet-section-equipped">
+            <div class="sheet-block-weapons">
+                <div class="sheet-weapon">
+                    {{equipped.create('melee', jsonData.items)}}
+                </div>
+                <div class="sheet-weapon">
+                    {{equipped.create('ranged', jsonData.items)}}
+                </div>
+            </div>
+
+            <div class="sheet-block-armor">
+            
+            </div>
+        </div>
+
+        <div class="sheet-section-ammo">
+        
+        
+        </div>
+    </div>
+</div>
