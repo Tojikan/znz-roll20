@@ -20,7 +20,7 @@ outputFields is used for dynamically outputting type specific fields
         {# Image, Head, Type #}
         <div class="sheet-main-top">
             {% for itemType in itemsData.itemTypes %}
-                <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemsData.fields.type.default == itemType.value }}/>
+                <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemsData.fields.type.default == itemType.value }}/>
             {% endfor %}
             <div class="sheet-image"></div>
             <div class="sheet-content">

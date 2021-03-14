@@ -62,9 +62,9 @@
         margin-right: 2rem; }
   .sheet-znz-character-sheet .sheet-area-inventory .sheet-container {
     display: grid;
-    grid-template-columns: repeat(12, minmax(50px, 1fr));
+    grid-template-columns: repeat(12, minmax(65px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-    grid-gap: 4rem; }
+    grid-gap: 2rem; }
   .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-inventory {
     grid-column-start: 1;
     grid-column-end: 8;
@@ -82,10 +82,10 @@
     grid-column-end: 11; }
   .sheet-znz-character-sheet .sheet-area-equipment .sheet-container {
     display: grid;
-    grid-template-columns: repeat(12, minmax(50px, 1fr));
+    grid-template-columns: repeat(12, minmax(57px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-    grid-gap: 4rem; }
-  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-equipped {
+    grid-gap: 2rem; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-weapons {
     grid-column-start: 1;
     grid-column-end: 8; }
   .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
@@ -142,6 +142,45 @@ select {
     background-color: #e5fffb; }
   select.sheet-line-select {
     border: none; }
+
+.sheet-line-field {
+  margin-bottom: 0.5rem;
+  display: flex; }
+  .sheet-line-field .sheet-header {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-right: 1rem;
+    align-self: flex-end;
+    margin-bottom: 0; }
+  .sheet-line-field input, .sheet-line-field select {
+    width: 100%;
+    width: 8rem; }
+  .sheet-line-field input {
+    text-align: center; }
+  .sheet-line-field select {
+    margin-bottom: 0;
+    width: 12rem; }
+  .sheet-line-field.sheet-max-field .sheet-field {
+    display: flex; }
+    .sheet-line-field.sheet-max-field .sheet-field input {
+      width: 6rem; }
+  .sheet-line-field.sheet-max-field .sheet-divider {
+    font-size: 2.2rem;
+    margin: 0 1rem;
+    align-self: flex-end;
+    max-height: 2.2rem; }
+  .sheet-line-field.sheet-stat-repeater-field {
+    display: block; }
+    .sheet-line-field.sheet-stat-repeater-field .sheet-header {
+      margin-bottom: 0.5rem; }
+    .sheet-line-field.sheet-stat-repeater-field .sheet-stat-item {
+      display: flex; }
+      .sheet-line-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select {
+        margin-right: 1rem;
+        width: 60%; }
+        .sheet-line-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select select {
+          border: none;
+          border-bottom: solid 1px #a0a0a0; }
 
 /** Show more toggle **/
 .sheet-znz-expandable {
@@ -315,6 +354,26 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
 
 .sheet-toggle-content {
   display: none; }
+
+.sheet-counter-box .sheet-counter {
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+  font-size: 1.8rem; }
+  .sheet-counter-box .sheet-counter .sheet-input span {
+    margin-right: 2rem; }
+  .sheet-counter-box .sheet-counter.sheet-counter-custom .sheet-label {
+    width: 50%; }
+
+.sheet-counter-box:not(:last-child) {
+  border-bottom: solid 3px black;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem; }
+
+.sheet-counter-box h2 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1rem; }
 
 .sheet-area-resource {
   margin-bottom: 2rem; }
@@ -597,44 +656,6 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     display: none; }
   .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-ranged-fields {
     display: block; }
-  .sheet-area-inventory .sheet-item-card .sheet-item-field {
-    margin-bottom: 0.5rem;
-    display: flex; }
-    .sheet-area-inventory .sheet-item-card .sheet-item-field .sheet-header {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-right: 1rem;
-      align-self: flex-end;
-      margin-bottom: 0; }
-    .sheet-area-inventory .sheet-item-card .sheet-item-field input, .sheet-area-inventory .sheet-item-card .sheet-item-field select {
-      width: 100%;
-      width: 8rem; }
-    .sheet-area-inventory .sheet-item-card .sheet-item-field input {
-      text-align: center; }
-    .sheet-area-inventory .sheet-item-card .sheet-item-field select {
-      margin-bottom: 0;
-      width: 12rem; }
-    .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-max-field .sheet-field {
-      display: flex; }
-      .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-max-field .sheet-field input {
-        width: 6rem; }
-    .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-max-field .sheet-divider {
-      font-size: 2.2rem;
-      margin: 0 1rem;
-      align-self: flex-end;
-      max-height: 2.2rem; }
-    .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field {
-      display: block; }
-      .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-header {
-        margin-bottom: 0.5rem; }
-      .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-stat-item {
-        display: flex; }
-        .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select {
-          margin-right: 1rem;
-          width: 60%; }
-          .sheet-area-inventory .sheet-item-card .sheet-item-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select select {
-            border: none;
-            border-bottom: solid 1px #a0a0a0; }
   .sheet-area-inventory .sheet-item-card .sheet-melee-fields-container, .sheet-area-inventory .sheet-item-card .sheet-ranged-fields-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 50%);
@@ -677,20 +698,79 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       text-align: center;
       font-weight: 700;
       font-size: 1.8rem; }
-  .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters .sheet-counter {
+
+.sheet-area-equipment {
+  /******** Weapon ************/
+  /******** Ammo ************/
+  /**** Item Card *******/ }
+  .sheet-area-equipment .sheet-section-weapons .sheet-block-weapons {
     display: flex;
-    margin-bottom: 2rem;
-    justify-content: space-between;
-    font-size: 1.8rem; }
-    .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters .sheet-counter .sheet-input span {
-      margin-right: 2rem; }
-    .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters .sheet-counter.sheet-counter-custom .sheet-label {
-      width: 50%; }
-  .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters:not(:last-child) {
-    border-bottom: solid 3px black;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem; }
-  .sheet-area-inventory .sheet-section-counters .sheet-inventory-counters h2 {
-    text-align: center;
-    font-weight: 700;
-    margin-bottom: 1rem; }
+    margin-bottom: 2rem; }
+    .sheet-area-equipment .sheet-section-weapons .sheet-block-weapons .sheet-weapon {
+      flex: 100%; }
+      .sheet-area-equipment .sheet-section-weapons .sheet-block-weapons .sheet-weapon:not(:last-child) {
+        margin-right: 2rem; }
+  .sheet-area-equipment .sheet-section-ammo .sheet-ammo-counters {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: solid 0.3rem black;
+    box-shadow: 0.3rem 0.3rem black; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-melee .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/baseball-bat.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-melee .sheet-body .sheet-melee-fields {
+    display: block; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-ranged .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/pistol-gun.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-ranged .sheet-body .sheet-ranged-fields {
+    display: block; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/swap-bag.png");
+    height: 8rem; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-name {
+    width: 100%; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-quantity {
+    display: block; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-armor_head .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/helmet.png"); }
+  .sheet-area-equipment .sheet-equipped-item {
+    padding: 1rem;
+    border: solid 3px black;
+    box-shadow: 0.3rem 0.3rem black;
+    height: 100%;
+    box-sizing: border-box; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-main-header {
+      display: flex; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-image {
+        width: 9rem;
+        height: 6rem;
+        margin-right: 1rem;
+        background-size: contain;
+        background-repeat: no-repeat; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name input {
+        border-bottom: double 0.4rem black;
+        font-size: 2.2rem;
+        font-weight: 700; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-quantity {
+        display: none;
+        width: 75px;
+        margin-left: 2rem;
+        text-align: center; }
+        .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-quantity input {
+          text-align: center; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-description textarea {
+      resize: vertical;
+      height: 5rem;
+      box-sizing: border-box; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-line-field {
+      justify-content: space-between;
+      margin-bottom: 1.5rem; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-melee-fields,
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-ranged-fields,
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-armor-fields {
+      display: none; }
+  .sheet-area-equipment .sheet-section-armor {
+    display: flex;
+    margin-top: 2rem; }
+    .sheet-area-equipment .sheet-section-armor .sheet-equipped-item:not(:last-child) {
+      margin-right: 1rem; }

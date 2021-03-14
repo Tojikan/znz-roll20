@@ -74,9 +74,9 @@
         
         .sheet-container {
             display: grid;
-            grid-template-columns: repeat(12, minmax(50px, 1fr));
+            grid-template-columns: repeat(12, minmax(65px, 1fr));
             grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-            grid-gap: $gridgap * 2;
+            grid-gap: $gridgap;
         }
 
         .sheet-section-inventory {
@@ -109,12 +109,12 @@
     .sheet-area-equipment {
         .sheet-container {
             display: grid;
-            grid-template-columns: repeat(12, minmax(50px, 1fr));
+            grid-template-columns: repeat(12, minmax(57px, 1fr));
             grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-            grid-gap: $gridgap * 2;
+            grid-gap: $gridgap;
         }
 
-        .sheet-section-equipped {
+        .sheet-section-weapons {
             grid-column-start: 1;
             grid-column-end: 8;
         }

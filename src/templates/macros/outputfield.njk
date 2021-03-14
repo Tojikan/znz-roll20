@@ -56,7 +56,7 @@
         {% set attrName = ["attr_", field.attr_name] %}
     {% endif %}
 
-    <div class="sheet-item-field sheet-line-field">
+    <div class="sheet-line-field sheet-line-field">
         <div class="sheet-header">
             {{ field.display_name }}
         </div>
@@ -74,7 +74,7 @@
         {% set attrName = ["attr_", field.attr_name] %}
     {% endif %}
 
-    <div class="sheet-item-field sheet-max-field">
+    <div class="sheet-line-field sheet-max-field">
         <div class="sheet-header">
             {{ field.display_name }}
         </div>
@@ -100,6 +100,9 @@
             {% set selectOptions = data.itemTypes %}
         {% case "ammoTypes" %}
             {% set selectOptions = data.ammoTypes %}
+        {% case "ammoTypesFull" %}
+            {% set selectOptions = data.ammoTypes %}
+            {% set addCustomAmmo = true %}
         {% case "meleeTypes" %}
             {% set selectOptions = data.meleeTypes %}
         {% default %}
@@ -107,7 +110,7 @@
     {% endswitch %}
 
 
-    <div class="sheet-item-field sheet-select-field">
+    <div class="sheet-line-field sheet-select-field">
         <div class="sheet-header">
             {{ field.display_name }}
         </div>
@@ -116,6 +119,12 @@
                 {% for option in selectOptions %}
                 <option value="{{option.value}}">{{option.name}}</option>
                 {% endfor %}
+
+                {% if addCustomAmmo == true %}
+                    {% for num in range(1,data.customCounters.ammo_custom_count + 1) %}
+                        <option value="{{data.customCounters.ammo_attr}}_{{num}}">Custom Ammo {{ num }}</option>
+                    {% endfor %}
+                {% endif %}
             </select>
         </div>
     </div>
@@ -139,7 +148,7 @@
     {% endswitch %}
 
 
-    <div class="sheet-item-field sheet-stat-repeater-field">
+    <div class="sheet-line-field sheet-stat-repeater-field">
         <div class="sheet-header">
             {{ field.display_name }}
         </div>

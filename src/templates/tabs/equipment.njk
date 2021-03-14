@@ -1,27 +1,32 @@
 
 {% import '../macros/equippedItem.njk' as equipped %}
+{% import '../macros/counterBox.njk' as counterBox %}
 
-
-<div class="sheet-area-inventory">
+<div class="sheet-area-equipment">
     <div class="sheet-container">
-        <div class="sheet-section-equipped">
+        <div class="sheet-section-weapons">
             <div class="sheet-block-weapons">
                 <div class="sheet-weapon">
-                    {{equipped.create('melee', jsonData.items)}}
+                    {{equipped.create('melee', jsonData.items, 'Equipped Melee Weapon')}}
                 </div>
                 <div class="sheet-weapon">
-                    {{equipped.create('ranged', jsonData.items)}}
+                    {{equipped.create('ranged', jsonData.items, 'Equipped Ranged Weapon')}}
                 </div>
             </div>
-
-            <div class="sheet-block-armor">
-            
+            <div class="sheet-block-special">
+                {{equipped.create('special', jsonData.items, 'Special Item')}}
             </div>
         </div>
-
         <div class="sheet-section-ammo">
-        
-        
+            <div class="sheet-ammo-counters">
+                {{ counterBox.create('Ammunition', jsonData.items.ammoTypes, jsonData.items.customCounters.ammo_custom_count, jsonData.items.customCounters.ammo_label, jsonData.items.customCounters.ammo_attr)}}
+            </div>
         </div>
+    </div>
+    <div class="sheet-section-armor">
+        {{equipped.create('armor_head', jsonData.items, 'Equipped Head Armor')}}
+        {{equipped.create('armor_chest', jsonData.items, 'Equipped Chest Armor')}}
+        {{equipped.create('armor_arms', jsonData.items, 'Equipped Arm Armor')}}
+        {{equipped.create('armor_leg', jsonData.items, 'Equipped Leg Armor')}}
     </div>
 </div>

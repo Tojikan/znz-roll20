@@ -1,0 +1,190 @@
+.sheet-area-equipment {
+
+    /******** Weapon ************/
+    .sheet-section-weapons {
+        .sheet-block-weapons {
+            display: flex;
+            margin-bottom: $gridgap;
+
+            .sheet-weapon {
+                flex: 100%;
+                
+                &:not(:last-child){
+                    margin-right: 2rem;
+                }
+            }
+        }
+    }
+
+    /******** Ammo ************/
+    .sheet-section-ammo {
+        
+        .sheet-ammo-counters {
+            height: 100%;
+            box-sizing: border-box;
+            padding: 1rem;
+            border: solid 0.3rem $black;
+            box-shadow: 0.3rem 0.3rem $black;
+        }
+    }
+
+    /**** Item Card *******/
+   
+    // Show images/content based on type
+    .sheet-equipped-item {
+        &.sheet-melee {
+            .sheet-main-header {
+                .sheet-image {
+                    background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/baseball-bat.png');
+                }
+            }
+
+            .sheet-body {
+                .sheet-melee-fields {
+                    display: block;
+                }
+            }
+        }
+
+        &.sheet-ranged {
+            .sheet-main-header {
+                .sheet-image {
+                    background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/pistol-gun.png');
+                }
+            }
+
+            .sheet-body {
+                .sheet-ranged-fields {
+                    display: block;
+                }
+            }
+        }
+
+        &.sheet-special {
+            .sheet-main-header {
+                .sheet-image {
+                    background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/swap-bag.png');
+                    height: 8rem;
+                }
+
+                .sheet-name {
+                    width: 100%;
+                }
+                
+                .sheet-quantity {
+                    display: block;
+                }
+            }
+        }
+
+        &.sheet-armor_head {
+            .sheet-main-header {
+                .sheet-image {
+                    background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/helmet.png');
+                }
+            }
+        }
+        &.sheet-armor_head {
+            .sheet-main-header {
+                .sheet-image {
+
+                }
+            }
+        }
+        &.sheet-armor_head {
+            .sheet-main-header {
+                .sheet-image {
+
+                }
+            }
+        }
+        &.sheet-armor_head {
+            .sheet-main-header {
+                .sheet-image {
+
+                }
+            }
+        }
+    }
+
+    .sheet-equipped-item {
+        padding: 1rem;
+        border: solid 3px $black;
+        box-shadow: 0.3rem 0.3rem $black;
+        height: 100%;
+        box-sizing: border-box;
+
+        // Header section
+        .sheet-main-header {
+            display: flex;
+
+            .sheet-image {
+                width: 9rem;
+                height: 6rem;
+                margin-right: 1rem;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .sheet-name {
+                input {
+                    border-bottom: double 0.4rem $black;
+                    font-size: $xLarge;
+                    font-weight: 700;
+                }
+            }
+
+            .sheet-quantity {
+                display: none; //Only show if special
+
+                width: 75px;
+                margin-left: $gridgap;
+                text-align: center;
+
+                input {
+                    text-align: center;
+                }
+            }
+        }
+
+
+
+        // Description
+        .sheet-description {
+            textarea {
+                resize: vertical;
+                height: 5rem;
+                box-sizing: border-box;
+            }
+        }
+
+
+        // Body Section
+        .sheet-body {
+
+            .sheet-line-field {
+                justify-content: space-between;
+                margin-bottom: 1.5rem;
+            }
+
+            .sheet-melee-fields,
+            .sheet-ranged-fields,
+            .sheet-armor-fields {
+                display: none;
+            }
+        }
+    }
+
+    
+    //Armor section
+    .sheet-section-armor {
+        display: flex;
+        margin-top: $gridgap;
+
+        .sheet-equipped-item {
+            &:not(:last-child){
+                margin-right: 1rem;
+            }
+        }
+    }
+}

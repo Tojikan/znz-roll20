@@ -1,16 +1,26 @@
 {% import './outputfield.njk' as field %}
 
 
-{% macro create(prefix, itemsData) %}
+{% macro create(prefix, itemsData, typeText) %}
 
 <div class="sheet-equipped-item sheet-{{prefix}}">
-    <div class="sheet-header">
+    <div class="sheet-main-header">
         <div class="sheet-image"></div>
         <div class="sheet-name">
             <input class="sheet-line-input" type="text" name="attr_{{prefix}}_{{itemsData.fields.name.attr_name}}" value="Item"></input>
+            <div class="sheet-typetext">{{typeText}}</div>
+        </div>
+        <div class="sheet-quantity">
+            <div class="sheet-label">
+                Quantity
+            </div>
+            <input class="sheet-borderless-input" type="text" name="attr_{{prefix}}_{{itemsData.fields.quantity.attr_name}}" value="1"></input>
         </div>
     </div>
-
+    <div class="sheet-description">
+        <div class="sheet-label">Description</div>
+        <textarea name="attr_{{prefix}}_{{itemsData.fields.description.attr_name}}" value=""></textarea/>
+    </div>
     <div class="sheet-body">
         <div class="sheet-melee-fields">
             <div class="sheet-melee-fields-container">
@@ -40,17 +50,13 @@
     </div>
 
     <div class="sheet-footer">
-        <div class="sheet-description">
-            <div class="sheet-label">Description</div>
-            <textarea name="attr_{{prefix}}_{{itemsData.fields.description.attr_name}}" value=""></textarea/>
-        </div>
+
     </div>
 
     {# Retain for unequipping purposes #}
     <div class="sheet-hidden">
         <input type="text" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}"/>
         <input type="text" name="attr_{{prefix}}_{{itemsData.fields.weight.attr_name}}"/>
-        <input type="text" name="attr_{{prefix}}_{{itemsData.fields.quantity.attr_name}}"/>
     </div>
 
 

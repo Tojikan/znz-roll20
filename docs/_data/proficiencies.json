@@ -65,8 +65,8 @@
     "resource": "Energy"
   },
   {
-    "display_name": "Melee - Heavy Weapon",
-    "attr_name": "prof_heavy_melee",
+    "display_name": "Melee - Piercing Weapon",
+    "attr_name": "prof_pierce_melee",
     "combat": "melee",
     "description": "",
     "attribute": "STR",

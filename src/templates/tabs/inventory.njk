@@ -1,4 +1,5 @@
 {% import '../macros/inventoryItem.njk' as inventoryItem %}
+{% import '../macros/counterBox.njk' as counterBox %}
 
 <div class="sheet-area-inventory">
     <div class="sheet-container">
@@ -24,54 +25,10 @@
                 </div>
             </div>
             <div class="sheet-inventory-counters">
-                <h2>Consumables</h2>
-                {% for count in jsonData.items.inventoryCounters %}
-                    <div class="sheet-counter">
-                        <div class="sheet-label">
-                            {{count.name}}
-                        </div>
-                        <div class="sheet-input">
-                            <span>x</span>
-                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{count.name}}"></input>
-                        </div>
-                    </div>
-                {% endfor %}
-                {% for num in range(0,jsonData.items.customCounters.count) %}
-                    <div class="sheet-counter sheet-counter-custom">
-                        <div class="sheet-label">
-                            <input class="sheet-line-input" type="text" name="attr_{{jsonData.items.customCounters.inv_label}}_{{num}}"></input>
-                        </div>
-                        <div class="sheet-input">
-                            <span>x</span>
-                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{jsonData.items.customCounters.inv_attr}}_{{num}}"></input>
-                        </div>
-                    </div>
-                {% endfor %}
+                {{ counterBox.create('Consumables', jsonData.items.inventoryCounters, jsonData.items.customCounters.inv_custom_count, jsonData.items.customCounters.inv_label, jsonData.items.customCounters.inv_attr)}}
             </div>
             <div class="sheet-inventory-counters">
-                <h2>Ammunition</h2>
-                {% for ammo in jsonData.items.ammoTypes %}
-                    <div class="sheet-counter">
-                        <div class="sheet-label">
-                            {{ammo.name}}
-                        </div>
-                        <div class="sheet-input">
-                            <span>x</span>
-                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{ammo.name}}"></input>
-                        </div>
-                    </div>
-                {% endfor %}
-                {% for num in range(0,jsonData.items.customCounters.count) %}
-                    <div class="sheet-counter sheet-counter-custom">
-                        <div class="sheet-label">
-                            <input class="sheet-line-input" type="text" name="attr_{{jsonData.items.customCounters.ammo_label}}_{{num}}"></input>
-                        </div>
-                        <div class="sheet-input">
-                            <span>x</span>
-                            <input class="sheet-line-input sheet-number" type="number" name="attr_{{jsonData.items.customCounters.ammo_attr}}_{{num}}"></input>
-                        </div>
-                    </div>
-                {% endfor %}
+                {{ counterBox.create('Ammunition', jsonData.items.ammoTypes, jsonData.items.customCounters.ammo_custom_count, jsonData.items.customCounters.ammo_label, jsonData.items.customCounters.ammo_attr)}}
             </div>
         </div>
     </div>

@@ -46,7 +46,7 @@
                 "display_name": "Ammo Type",
                 "type": "select",
                 "default": "light",
-                "options": "ammoTypes"
+                "options": "ammoTypesFull"
             },
             {
                 "attr_name": "ranged_damage",
@@ -110,8 +110,8 @@
             "value": "blunt"
         },
         {
-            "name": "Heavy",
-            "value": "heavy"
+            "name": "Piercing",
+            "value": "Piercing"
         },
         {
             "name": "Sharp",
@@ -230,10 +230,11 @@
         }
     ],
     "customCounters": {
-        "count": 2,
-        "ammo_attr": "ammo_custom_amount",
+        "ammo_attr": "ammo_custom",
         "ammo_label": "ammo_custom_label",
-        "inv_attr": "inv_custom_amount",
-        "inv_label": "inv_custom_label"
+        "ammo_custom_count": 2,
+        "inv_attr": "inv_custom",
+        "inv_label": "inv_custom_label",
+        "inv_custom_count": 2
     }
 }

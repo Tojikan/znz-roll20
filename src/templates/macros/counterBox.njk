@@ -1,0 +1,43 @@
+{% macro create(header, data, customCount, customCountLabel, customCountAttr) %}
+
+{#
+Creates the box for counting various items.
+
+header - h2 on top of listing
+data - array of counts. name, value, attr_name
+customCount - add X rows of counters wher players can input the label.
+customCountLabel - the attr value for the custom counter label text field.
+customCountAttr - The attr value for the custom counter count field.
+
+#}
+
+<div class="sheet-counter-box">
+    <h2>{{header}}</h2>
+
+    {% for itm in data %}
+        <div class="sheet-counter">
+            <div class="sheet-label">
+                {{itm.name}}
+            </div>
+            <div class="sheet-input">
+                <span>x</span>
+                <input class="sheet-line-input sheet-number" type="number" name="attr_{{itm.attr_name}}"></input>
+            </div>
+        </div>
+    {% endfor %}
+    {% for num in range(0,customCount) %}
+        <div class="sheet-counter sheet-counter-custom">
+            <div class="sheet-label">
+                <input class="sheet-line-input" type="text" name="attr_{{customCountLabel}}_{{num}}"></input>
+            </div>
+            <div class="sheet-input">
+                <span>x</span>
+                <input class="sheet-line-input sheet-number" type="number" name="attr_{customCountAttr}}_{{num}}"></input>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+{% endmacro %}
