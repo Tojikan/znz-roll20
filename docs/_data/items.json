@@ -236,5 +236,14 @@
         "inv_attr": "inv_custom",
         "inv_label": "inv_custom_label",
         "inv_custom_count": 2
+    },
+    "equipTypes": {
+        "melee": "melee",
+        "ranged": "ranged",
+        "special": "special",
+        "head": "head",
+        "body": "body",
+        "arm": "arm",
+        "leg": "leg"
     }
 }

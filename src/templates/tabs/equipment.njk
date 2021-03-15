@@ -7,14 +7,14 @@
         <div class="sheet-section-weapons">
             <div class="sheet-block-weapons">
                 <div class="sheet-weapon">
-                    {{equipped.create('melee', jsonData.items, 'Equipped Melee Weapon')}}
+                    {{equipped.create(jsonData.items.equipTypes.melee, 'equipped_melee', jsonData.items, 'Equipped Melee Weapon')}}
                 </div>
                 <div class="sheet-weapon">
-                    {{equipped.create('ranged', jsonData.items, 'Equipped Ranged Weapon')}}
+                    {{equipped.create(jsonData.items.equipTypes.ranged, 'equipped_ranged', jsonData.items, 'Equipped Ranged Weapon')}}
                 </div>
             </div>
             <div class="sheet-block-special">
-                {{equipped.create('special', jsonData.items, 'Special Item')}}
+                {{equipped.create(jsonData.items.equipTypes.special, 'equipped_special', jsonData.items, 'Special Item')}}
             </div>
         </div>
         <div class="sheet-section-ammo">
@@ -24,9 +24,13 @@
         </div>
     </div>
     <div class="sheet-section-armor">
-        {{equipped.create('armor_head', jsonData.items, 'Equipped Head Armor')}}
-        {{equipped.create('armor_chest', jsonData.items, 'Equipped Chest Armor')}}
-        {{equipped.create('armor_arms', jsonData.items, 'Equipped Arm Armor')}}
-        {{equipped.create('armor_leg', jsonData.items, 'Equipped Leg Armor')}}
+        <div class="sheet-row">
+            {{equipped.create(jsonData.items.equipTypes.head,'equipped_armor_head', jsonData.items, 'Equipped Head Armor')}}
+            {{equipped.create(jsonData.items.equipTypes.body,'equipped_armor_body', jsonData.items, 'Equipped Body Armor')}}
+        </div>
+        <div class="sheet-row">
+            {{equipped.create(jsonData.items.equipTypes.arm,'equipped_armor_arms', jsonData.items, 'Equipped Arm Armor')}}
+            {{equipped.create(jsonData.items.equipTypes.leg,'equipped_armor_leg', jsonData.items, 'Equipped Leg Armor')}}
+        </div>
     </div>
 </div>

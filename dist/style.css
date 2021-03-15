@@ -725,14 +725,19 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   .sheet-area-equipment .sheet-equipped-item.sheet-ranged .sheet-body .sheet-ranged-fields {
     display: block; }
   .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-image {
-    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/swap-bag.png");
-    height: 8rem; }
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/swap-bag.png"); }
   .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-name {
     width: 100%; }
   .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-quantity {
     display: block; }
-  .sheet-area-equipment .sheet-equipped-item.sheet-armor_head .sheet-main-header .sheet-image {
-    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/helmet.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-head .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/american-football-helmet.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-body .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/kevlar-vest.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-arm .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/gloves.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-leg .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/boots.png"); }
   .sheet-area-equipment .sheet-equipped-item {
     padding: 1rem;
     border: solid 3px black;
@@ -740,17 +745,25 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     height: 100%;
     box-sizing: border-box; }
     .sheet-area-equipment .sheet-equipped-item .sheet-main-header {
-      display: flex; }
-      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-image {
-        width: 9rem;
-        height: 6rem;
-        margin-right: 1rem;
-        background-size: contain;
-        background-repeat: no-repeat; }
+      display: flex;
+      margin-bottom: 1rem; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-header-image {
+        margin-right: 1rem; }
+        .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-header-image .sheet-unequip button {
+          padding: 0.5rem;
+          background-color: black;
+          color: white; }
+        .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-header-image .sheet-image {
+          width: 100%;
+          height: 6rem;
+          background-size: cover;
+          background-repeat: no-repeat; }
       .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name input {
         border-bottom: double 0.4rem black;
         font-size: 2.2rem;
         font-weight: 700; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name .sheet-typetext {
+        font-size: 1.2rem; }
       .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-quantity {
         display: none;
         width: 75px;
@@ -760,7 +773,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
           text-align: center; }
     .sheet-area-equipment .sheet-equipped-item .sheet-description textarea {
       resize: vertical;
-      height: 5rem;
+      height: 3rem;
       box-sizing: border-box; }
     .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-line-field {
       justify-content: space-between;
@@ -770,7 +783,19 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-armor-fields {
       display: none; }
   .sheet-area-equipment .sheet-section-armor {
-    display: flex;
     margin-top: 2rem; }
+    .sheet-area-equipment .sheet-section-armor .sheet-row {
+      display: flex; }
     .sheet-area-equipment .sheet-section-armor .sheet-equipped-item:not(:last-child) {
-      margin-right: 1rem; }
+      margin-right: 2rem; }
+    .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields {
+      display: block; }
+    .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container {
+      display: flex;
+      justify-content: space-between; }
+      .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container .sheet-armor-fields-block:not(:last-child) {
+        margin-right: 1rem; }
+      .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container .sheet-armor-fields-block .sheet-item-field {
+        display: block; }
+      .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container .sheet-armor-fields-block .sheet-line-field {
+        display: block; }
