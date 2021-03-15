@@ -67,12 +67,16 @@
             display: flex;
             border: solid 1px $black;
             padding: 0.75rem;
-            min-width: 30%;
+            min-width: 25%;
             justify-content: space-between;
             font-size: $medium;
             align-items: center;
             box-shadow: 0.2rem 0.2rem $black;
             border-radius: 1rem;
+
+            &:not(:last-child){
+                margin-right: 1rem;
+            }
         }
     }
 }

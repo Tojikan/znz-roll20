@@ -29,7 +29,8 @@
   /************* Stats Tab *******************/
   /*************** Ability Tab ******************/
   /************* Inventory Tab *******************/
-  /************* Equipment Tab *******************/ }
+  /************* Equipment Tab *******************/
+  /************** Notes Tab ********************/ }
   .sheet-znz-character-sheet .sheet-header {
     display: flex; }
     .sheet-znz-character-sheet .sheet-header .sheet-area-name {
@@ -91,6 +92,8 @@
   .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
     grid-column-start: 8;
     grid-column-end: 12; }
+  .sheet-znz-character-sheet .sheet-area-notes .sheet-note {
+    margin-bottom: 2rem; }
 
 /**
 * Reusable classes and styling across the sheet. 
@@ -423,12 +426,14 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       display: flex;
       border: solid 1px black;
       padding: 0.75rem;
-      min-width: 30%;
+      min-width: 25%;
       justify-content: space-between;
       font-size: 1.4rem;
       align-items: center;
       box-shadow: 0.2rem 0.2rem black;
       border-radius: 1rem; }
+      .sheet-area-resource .sheet-defenses .sheet-def-block:not(:last-child) {
+        margin-right: 1rem; }
 
 .sheet-container-attr {
   display: flex;

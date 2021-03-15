@@ -40,5 +40,10 @@
         "display_name": "Flashlight Distance",
         "attr_name": "flashlight_distance",
         "default_value": 10
+    },
+    "hygiene": {
+        "display_name": "Hygiene",
+        "attr_name": "hygiene",
+        "default_value": 10
     }
 }

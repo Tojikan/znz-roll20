@@ -124,4 +124,13 @@
             grid-column-end: 12;
         }
     }
+
+
+    /************** Notes Tab ********************/
+
+    .sheet-area-notes {
+        .sheet-note {
+            margin-bottom: $gridgap;
+        }
+    }
 }

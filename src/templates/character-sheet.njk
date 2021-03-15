@@ -35,6 +35,10 @@
                     <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.armor.attr_name}}" value="{{jsonData.misc.armor.default_value}}"></input>
                 </div>
                 <div class="sheet-def-block">
+                    <div class="sheet-label">{{jsonData.misc.hygiene.display_name}}</div>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.hygiene.attr_name}}" value="{{jsonData.misc.hygiene.default_value}}"></input>
+                </div>
+                <div class="sheet-def-block">
                     <div class="sheet-label">{{jsonData.misc.flashlight.display_name}}</div>
                     <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.flashlight.attr_name}}" value="{{jsonData.misc.flashlight.default_value}}"></input>
                 </div>
@@ -66,7 +70,7 @@
                 {% include "tabs/inventory.njk" %}
             </div>
             <div class="sheet-tab sheet-tab-notes">
-                Notes
+                {% include "tabs/notes.njk" %}
             </div>
         </div>
 
