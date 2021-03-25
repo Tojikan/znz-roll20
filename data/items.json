@@ -244,7 +244,7 @@
         "special": "special",
         "head": "head",
         "body": "body",
-        "arm": "arm",
-        "leg": "leg"
+        "arm": "arms",
+        "leg": "legs"
     }
 }

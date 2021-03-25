@@ -2,10 +2,17 @@
 * Variables used throughout styles
 */
 /**
-    Hide/Display when a checkbox is checked
+    Hide/Display an element when a sibling checkbox is checked
 
     $elClass - class of content to show/hide
     $toggleClass - class of hidden input
+**/
+/**
+    Hide/Display an element when two sibling checkboxes are checked.
+
+    $elClass - class of content to show/hide
+    $toggleClass1 - class of hidden input 1
+    $toggleClass2 - class of hidden input 2
 **/
 /**
     Hide/Display when a hidden input is set to a value.
@@ -646,22 +653,6 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   .sheet-area-inventory .sheet-item-card button.sheet-equip-button {
     padding: 0.5rem;
     display: none; }
-  .sheet-area-inventory .sheet-item-card .sheet-equip-head {
-    display: none; }
-  .sheet-area-inventory .sheet-item-card .sheet-item-type-head:checked ~ .sheet-equip-head {
-    display: block; }
-  .sheet-area-inventory .sheet-item-card .sheet-equip-body {
-    display: none; }
-  .sheet-area-inventory .sheet-item-card .sheet-item-type-body:checked ~ .sheet-equip-body {
-    display: block; }
-  .sheet-area-inventory .sheet-item-card .sheet-equip-arm {
-    display: none; }
-  .sheet-area-inventory .sheet-item-card .sheet-item-type-arm:checked ~ .sheet-equip-arm {
-    display: block; }
-  .sheet-area-inventory .sheet-item-card .sheet-equip-leg {
-    display: none; }
-  .sheet-area-inventory .sheet-item-card .sheet-item-type-leg:checked ~ .sheet-equip-leg {
-    display: block; }
   .sheet-area-inventory .sheet-item-card .sheet-equip-melee {
     display: none; }
   .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-equip-melee {
@@ -674,12 +665,30 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     display: none; }
   .sheet-area-inventory .sheet-item-card .sheet-item-type-special:checked ~ .sheet-equip-special {
     display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-head {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-head:checked ~ .sheet-equip-head {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-body {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-chest:checked ~ .sheet-equip-body {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-arms {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-arms:checked ~ .sheet-equip-arms {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-legs {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-legs:checked ~ .sheet-equip-legs {
+    display: block; }
   .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-image {
     background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/baseball-bat.png"); }
   .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-image {
     background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/pistol-gun.png"); }
   .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-image {
     background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/kevlar-vest.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-special:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/grenade.png"); }
   .sheet-area-inventory .sheet-item-card .sheet-armor-fields {
     display: none; }
   .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-armor-fields {

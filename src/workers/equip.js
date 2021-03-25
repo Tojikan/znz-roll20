@@ -2,13 +2,30 @@
     const prefixes = (([[getFile('prefixes')]]));
     const itemFields = (([[transformData('items', (data)=>{
         const fields = data.fields;
-        const categories = ['melee', 'ranged', 'equipment'];
+        const categories = ['melee', 'ranged'];
         var result = [];
         
         for (const key in fields){
             if (categories.includes(key)){
                 for (const fld of fields[key]){
                     result.push(fld.attr_name);
+
+                    if (fld.type == "line_max"){
+                        result.push(fld.attr_name + "_max");
+                    }
+                }
+            } else if (key == 'equipment'){
+
+                for (const fld of fields[key]){
+                    if (fld.attr_name == "equipment_stat_bonus"){
+                        for (let i = 0; i < fld.count; i++){
+                            result.push(fld.attr_name + "_" + i);
+                            result.push(fld.attr_name + "_" + i + "_mod");
+                        }
+                    } else {
+                        result.push(fld.attr_name);
+                    }
+
                 }
             } else if (key == 'subtypes'){
                 for (const fld in fields[key]){
@@ -53,7 +70,7 @@
 
     const fieldsIsEmpty = function(fields, data){
         for (const fld of fields){
-            if (!fld.endsWith(itemTypeAttr) && data[fld].length > 0) { //dont check item type
+            if (!ignoreEmpty.includes(fld) && typeof data[fld] !== 'undefined' && data[fld].length > 0) { //dont check item type
                 return false;
             }
         }
@@ -63,7 +80,7 @@
     
     const equipItem = function(rowId, type){
         const equippedFields = prefixFields(prefixes[type], itemFields),
-            inventoryFields = prefixFields(prefixes.inventory, itemFields),
+            inventoryFields = prefixFields("repeating_inventory_" + prefixes.inventory, itemFields),
             bothFields = inventoryFields.concat(equippedFields);
 
         getAttrs(bothFields, function(values){
@@ -76,7 +93,7 @@
 
             // transpose inventory into equipped fields
             for (const fld of itemFields){
-                attrSet[prefixes[type] + "_" + fld] = values[rowId + "_" + prefixes.inventory + "_" + fld];
+                attrSet[prefixes[type] + "_" + fld] = values[ "repeating_inventory_" + prefixes.inventory + "_" + fld];
             }
 
             // transpose equipped into a new inventory row if its not empty
@@ -86,7 +103,9 @@
                 }
             }
 
-            removeRepeatingRow(rowId); //remove current
+            // removeRepeatingRow(rowId); //remove current
+            console.log(values);
+            console.log(attrSet);
             setAttrs(attrSet);
         });
     };
@@ -116,13 +135,11 @@
 
     equipTypes.forEach(type => {
         on(`clicked:unequip${type}`, function(){
-            console.log(type);
             unequipItem(type);
         });
 
         on(`clicked:repeating_inventory:equip${type}`, function(evInfo){
             const rowId = getButtonRowId(evInfo);
-            console.log(type);
             equipItem(rowId, type);
         });
     });

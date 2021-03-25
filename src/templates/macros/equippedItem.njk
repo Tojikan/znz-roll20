@@ -61,6 +61,9 @@
     <div class="sheet-hidden">
         <input type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.type.attr_name}}"/>
         <input type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.weight.attr_name}}"/>
+        {% for fld, value in itemsData.fields.subtypes %}
+            <input type="text" name="attr_{{attrPrefix}}_{{value}}"/>
+        {% endfor %}
     </div>
 
 

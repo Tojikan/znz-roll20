@@ -117,13 +117,14 @@
             padding: 0.5rem;
             display: none;
         }
-        @include toggleDisplayCheckbox('sheet-equip-head', 'sheet-item-type-head');
-        @include toggleDisplayCheckbox('sheet-equip-body', 'sheet-item-type-body');
-        @include toggleDisplayCheckbox('sheet-equip-arm', 'sheet-item-type-arm');
-        @include toggleDisplayCheckbox('sheet-equip-leg', 'sheet-item-type-leg');
         @include toggleDisplayCheckbox('sheet-equip-melee', 'sheet-item-type-melee');
         @include toggleDisplayCheckbox('sheet-equip-ranged', 'sheet-item-type-ranged');
         @include toggleDisplayCheckbox('sheet-equip-special', 'sheet-item-type-special');
+
+        @include toggleDisplayCheckboxDouble('sheet-equip-head', 'sheet-item-type-armor', 'sheet-item-type-head');
+        @include toggleDisplayCheckboxDouble('sheet-equip-body', 'sheet-item-type-armor', 'sheet-item-type-chest');
+        @include toggleDisplayCheckboxDouble('sheet-equip-arms', 'sheet-item-type-armor', 'sheet-item-type-arms');
+        @include toggleDisplayCheckboxDouble('sheet-equip-legs', 'sheet-item-type-armor', 'sheet-item-type-legs');
 
 
 
@@ -131,6 +132,7 @@
         .sheet-item-type-melee:checked ~ .sheet-image { background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/baseball-bat.png'); }
         .sheet-item-type-ranged:checked ~ .sheet-image { background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/pistol-gun.png'); }
         .sheet-item-type-armor:checked ~ .sheet-image { background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/kevlar-vest.png'); }
+        .sheet-item-type-special:checked ~ .sheet-image { background-image:url('https://tojikan.github.io/ZnZ-Roll20/assets/images/grenade.png'); }
 
         // Show/Hide Stats Containers
         @include toggleDisplayCheckbox('sheet-armor-fields', 'sheet-item-type-armor');
