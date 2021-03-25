@@ -42,7 +42,7 @@ outputFields is used for dynamically outputting type specific fields
                     {# Melee SubType #}
                     <div class="sheet-subtype sheet-subtype-melee">
                         Type: 
-                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.subtypes.melee}}">
+                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.fields.subtypes.melee}}">
                             {% for option in itemsData.meleeTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
@@ -52,7 +52,7 @@ outputFields is used for dynamically outputting type specific fields
                     {# Ranged SubType #}
                     <div class="sheet-subtype sheet-subtype-ranged">
                         Type: 
-                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.subtypes.ranged}}">
+                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.fields.subtypes.ranged}}">
                             {% for option in itemsData.rangedTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
@@ -62,7 +62,7 @@ outputFields is used for dynamically outputting type specific fields
                     {# armor SubType #}
                     <div class="sheet-subtype sheet-subtype-armor">
                         Type: 
-                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.subtypes.armor}}">
+                        <select class="sheet-select-borderless" name="attr_{{prefix}}_{{itemsData.fields.subtypes.armor}}">
                             {% for option in itemsData.armorTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
@@ -129,10 +129,14 @@ outputFields is used for dynamically outputting type specific fields
                 <input class="sheet-borderless-input" type="text" name="attr_{{prefix}}_{{itemsData.fields.quantity.attr_name}}" value="1"></input>
             </div>
 
-
             <input class="sheet-hidden sheet-item-type-{{itemsData.itemTypes[0].value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}" value="{{itemsData.itemTypes[0].value}}" checked/>
             <div class="sheet-equip">
-                <button type="action" class="sheet-equip-button" name="act_equipItem" >Equip</button>
+                {% for itemType in itemsData.itemTypes %}
+                    <input class="sheet-hidden sheet-item-type-{{itemType.value}}" type="checkbox" name="attr_{{prefix}}_{{itemsData.fields.type.attr_name}}" value="{{itemType.value}}" {{"checked" if itemsData.fields.type.default == itemType.value }}/>
+                {% endfor %}
+                {% for name, type in itemsData.equipTypes %}
+                    <button type="action" class="sheet-equip-button sheet-equip-{{type}}" name="act_equip{{type}}" >Equip {{type | capitalize}}</button>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -46,7 +46,8 @@
                 "display_name": "Ammo Type",
                 "type": "select",
                 "default": "light",
-                "options": "ammoTypesFull"
+                "options": "ammoTypesFull",
+                "canonical": "rangedAmmoType"
             },
             {
                 "attr_name": "ranged_damage",
@@ -76,7 +77,12 @@
                 "display_name": "Armor Rating Bonus",
                 "type" : "line_text"
             }
-        ]
+        ],
+        "subtypes": {
+            "melee": "melee_type",
+            "ranged": "ranged_type",
+            "armor": "armor_type"
+        }
     },
     "itemTypes": [
         {
@@ -97,7 +103,7 @@
         },
         {
             "name": "Special",
-            "value": "Special"
+            "value": "special"
         }
     ],
     "meleeTypes": [
@@ -154,11 +160,6 @@
             "value": "legs"
         }
     ],
-    "subtypes": {
-        "melee": "melee_type",
-        "ranged": "ranged_type",
-        "armor": "armor_type"
-    },
     "inventoryCounters" : [
         {
             "name": "Food",

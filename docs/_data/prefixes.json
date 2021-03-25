@@ -1,0 +1,9 @@
+{
+    "melee": "equipped_melee",
+    "ranged": "equipped_ranged",
+    "head": "equipped_head",
+    "body": "equipped_body",
+    "arm": "equipped_arm",
+    "leg": "equipped_leg",
+    "inventory": "inventory"
+}

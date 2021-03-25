@@ -34,19 +34,26 @@ module.exports = {
     },
 
     /**
-     * Searches through all JSON files for an object with a 'canonical' property matching the parameter.
-     * If found, returns the attr_name property of the object. Used to find any given object by a canonical name since attr_name may be changed sometimes.
+     * Searches through all JSON files for an object with a given property that has a given value.
+     * For doing a lookup for a specific object in all files
      * 
-     * @param {string} canonical The value in object property 'attr_name' to search for.
+     * @param {string} prop Object property to search in.
+     * @param {string} val Value of the property to search for.
+     * @param {string} location Search in a specific file only. Give the string name of file without extension.
      */
-    findAttr: function(canonical){
+    searchProperty: function(prop, val, location = null){
         let files = fs.readdirSync(this.dataFolder);
         var result = null;
 
         files.forEach(file => {
             if (path.extname(file) === '.json' && file.indexOf('.schema') < 0){ //ignore schema
+                
+                if (location !== null && path.basename(file, '.json') !== location){
+                    return;
+                }
+                
                 let data = JSON.parse(fs.readFileSync(this.dataFolder + file));
-                found = recursiveSearch(canonical, data);
+                found = recursiveSearch(prop, val, data);
 
                 if (found){
                     result = found;
@@ -54,10 +61,10 @@ module.exports = {
             }
         });
 
-        if (result && 'attr_name' in result){
-            return result.attr_name;
+        if (result){
+            return result;
         } else {
-            throw `Canonical property of '${canonical}' was not found in data files!`;
+            throw `Did not locate an object with Property '${prop}' that had value '${val}'`;
         }
     },
 
@@ -116,11 +123,12 @@ module.exports = {
 }
 
 /**
- * Recursive function to handle the searching for a attr_name property in a given object.
+ * Recursive function to handle the searching for any property in a given object.\
  * 
- * @param {string} attr string value of attr_name to search for in object
+ * @param {string} prop Object property to search in.
+ * @param {string} val Value of the property to search for.
  * @param {object} object the data object
- * @returns string value of "attr_name" if the appropriate canonical has been located, or null if nothing has been found.
+ * @returns the object if found else null if not found.
  */
 function recursiveSearch(prop, val, object){
     // Fail case - nothing has been found
@@ -128,24 +136,24 @@ function recursiveSearch(prop, val, object){
         return null; 
     }
 
-    //Success case - found canonical
+    //Success case - find property
     if (typeof object === "object" && prop in object && object[prop] == val) {
         return object;
     }     
     //Array - search search array
     else if (typeof object == "array"){
         for (let arrItem of array){
-            let val = recursiveSearch(prop, val, arrItem);
+            let found = recursiveSearch(prop, val, arrItem);
 
-            if (val) return val;
+            if (found) return found;
         }
     } 
     //Object - search all properties in object
     else if (typeof object == "object"){
         for (let key of Object.keys(object)){
-            let val = recursiveSearch(prop, val, object[key]);
+            let found = recursiveSearch(prop, val, object[key]);
 
-            if (val) return val;
+            if (found) return found;
         }
     }
 

@@ -4,6 +4,7 @@
     .sheet-item-card {
         border: solid 1px $black;
         padding: 1rem;
+        padding-right: 0;
         margin-bottom: 2rem;
         display: flex;
         box-shadow: 0.3rem 0.3rem $black;
@@ -34,8 +35,9 @@
             width: 15%;
 
             .sheet-item-side-container {
-                width: 50%;
+                width: 80%;
                 margin: auto;
+                text-align: center;
             }
         }
 
@@ -112,8 +114,17 @@
         }
 
         button.sheet-equip-button {
-            padding: 0.5rem 1rem;
+            padding: 0.5rem;
+            display: none;
         }
+        @include toggleDisplayCheckbox('sheet-equip-head', 'sheet-item-type-head');
+        @include toggleDisplayCheckbox('sheet-equip-body', 'sheet-item-type-body');
+        @include toggleDisplayCheckbox('sheet-equip-arm', 'sheet-item-type-arm');
+        @include toggleDisplayCheckbox('sheet-equip-leg', 'sheet-item-type-leg');
+        @include toggleDisplayCheckbox('sheet-equip-melee', 'sheet-item-type-melee');
+        @include toggleDisplayCheckbox('sheet-equip-ranged', 'sheet-item-type-ranged');
+        @include toggleDisplayCheckbox('sheet-equip-special', 'sheet-item-type-special');
+
 
 
         // Change image based on item type
