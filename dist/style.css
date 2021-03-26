@@ -671,7 +671,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     display: block; }
   .sheet-area-inventory .sheet-item-card .sheet-equip-body {
     display: none; }
-  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-chest:checked ~ .sheet-equip-body {
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-body:checked ~ .sheet-equip-body {
     display: block; }
   .sheet-area-inventory .sheet-item-card .sheet-equip-arms {
     display: none; }
@@ -770,7 +770,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   .sheet-area-equipment .sheet-equipped-item.sheet-ranged .sheet-body .sheet-ranged-fields {
     display: block; }
   .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-image {
-    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/swap-bag.png"); }
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/grenade.png"); }
   .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-name {
     width: 100%; }
   .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-quantity {
@@ -779,9 +779,9 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/american-football-helmet.png"); }
   .sheet-area-equipment .sheet-equipped-item.sheet-body .sheet-main-header .sheet-image {
     background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/kevlar-vest.png"); }
-  .sheet-area-equipment .sheet-equipped-item.sheet-arm .sheet-main-header .sheet-image {
+  .sheet-area-equipment .sheet-equipped-item.sheet-arms .sheet-main-header .sheet-image {
     background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/gloves.png"); }
-  .sheet-area-equipment .sheet-equipped-item.sheet-leg .sheet-main-header .sheet-image {
+  .sheet-area-equipment .sheet-equipped-item.sheet-legs .sheet-main-header .sheet-image {
     background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/boots.png"); }
   .sheet-area-equipment .sheet-equipped-item {
     padding: 1rem;
@@ -806,7 +806,10 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name input {
         border-bottom: double 0.4rem black;
         font-size: 2.2rem;
-        font-weight: 700; }
+        font-weight: 700;
+        color: black; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name select {
+        width: 100%; }
       .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name .sheet-typetext {
         font-size: 1.2rem; }
       .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-quantity {

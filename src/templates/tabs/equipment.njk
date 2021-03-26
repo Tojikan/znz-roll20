@@ -7,14 +7,14 @@
         <div class="sheet-section-weapons">
             <div class="sheet-block-weapons">
                 <div class="sheet-weapon">
-                    {{equipped.create(jsonData.items.equipTypes.melee, 'equipped_melee', jsonData.items, 'Equipped Melee Weapon')}}
+                    {{equipped.create(jsonData.items.equipTypes.melee, jsonData.prefixes.melee, jsonData.items, 'Equipped Melee Weapon', jsonData.items.fields.subtypes.melee)}}
                 </div>
                 <div class="sheet-weapon">
-                    {{equipped.create(jsonData.items.equipTypes.ranged, 'equipped_ranged', jsonData.items, 'Equipped Ranged Weapon')}}
+                    {{equipped.create(jsonData.items.equipTypes.ranged, jsonData.prefixes.ranged, jsonData.items, 'Equipped Ranged Weapon', jsonData.items.fields.subtypes.ranged)}}
                 </div>
             </div>
             <div class="sheet-block-special">
-                {{equipped.create(jsonData.items.equipTypes.special, 'equipped_special', jsonData.items, 'Special Item')}}
+                {{equipped.create(jsonData.items.equipTypes.special, jsonData.prefixes.special, jsonData.items, 'Special Item')}}
             </div>
         </div>
         <div class="sheet-section-ammo">
@@ -25,12 +25,12 @@
     </div>
     <div class="sheet-section-armor">
         <div class="sheet-row">
-            {{equipped.create(jsonData.items.equipTypes.head,'equipped_armor_head', jsonData.items, 'Equipped Head Armor')}}
-            {{equipped.create(jsonData.items.equipTypes.body,'equipped_armor_body', jsonData.items, 'Equipped Body Armor')}}
+            {{equipped.create(jsonData.items.equipTypes.head,jsonData.prefixes.head, jsonData.items, 'Equipped Head Armor')}}
+            {{equipped.create(jsonData.items.equipTypes.body,jsonData.prefixes.body, jsonData.items, 'Equipped Body Armor')}}
         </div>
         <div class="sheet-row">
-            {{equipped.create(jsonData.items.equipTypes.arm,'equipped_armor_arms', jsonData.items, 'Equipped Arm Armor')}}
-            {{equipped.create(jsonData.items.equipTypes.leg,'equipped_armor_leg', jsonData.items, 'Equipped Leg Armor')}}
+            {{equipped.create(jsonData.items.equipTypes.arms,jsonData.prefixes.arms, jsonData.items, 'Equipped Arm Armor')}}
+            {{equipped.create(jsonData.items.equipTypes.legs,jsonData.prefixes.legs, jsonData.items, 'Equipped Leg Armor')}}
         </div>
     </div>
 </div>

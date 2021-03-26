@@ -122,7 +122,7 @@
         @include toggleDisplayCheckbox('sheet-equip-special', 'sheet-item-type-special');
 
         @include toggleDisplayCheckboxDouble('sheet-equip-head', 'sheet-item-type-armor', 'sheet-item-type-head');
-        @include toggleDisplayCheckboxDouble('sheet-equip-body', 'sheet-item-type-armor', 'sheet-item-type-chest');
+        @include toggleDisplayCheckboxDouble('sheet-equip-body', 'sheet-item-type-armor', 'sheet-item-type-body');
         @include toggleDisplayCheckboxDouble('sheet-equip-arms', 'sheet-item-type-armor', 'sheet-item-type-arms');
         @include toggleDisplayCheckboxDouble('sheet-equip-legs', 'sheet-item-type-armor', 'sheet-item-type-legs');
 

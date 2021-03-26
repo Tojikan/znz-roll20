@@ -148,8 +148,8 @@
             "value": "head"
         },
         {
-            "name": "Chest",
-            "value": "chest"
+            "name": "Body",
+            "value": "body"
         },
         {
             "name": "Arms",
@@ -244,7 +244,7 @@
         "special": "special",
         "head": "head",
         "body": "body",
-        "arm": "arms",
-        "leg": "legs"
+        "arms": "arms",
+        "legs": "legs"
     }
 }

@@ -1,7 +1,8 @@
 {% import './outputfield.njk' as field %}
 
 
-{% macro create(type, attrPrefix, itemsData, typeText) %}
+{% macro create(type, attrPrefix, itemsData, typeText, subtype='') %}
+
 
 <div class="sheet-equipped-item sheet-{{type}}">
     <div class="sheet-main-header">
@@ -12,10 +13,27 @@
             </div>
         </div>
         <div class="sheet-name">
-            <input class="sheet-line-input" type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.name.attr_name}}" value="Item"></input>
+            <input class="sheet-line-input" type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.name.attr_name}}" placeholder="Item Name"></input>
 
             <div class="sheet-under-name">
                 <div class="sheet-typetext">{{typeText}}</div>
+            </div>
+            <div class="sheet-subtype">
+                {% if subtype %}
+                Type: 
+                    <select class="sheet-select-borderless" name="attr_{{attrPrefix}}_{{subtype}}">
+                        {% if type == itemsData.equipTypes.melee %}
+                            {% for option in itemsData.meleeTypes %}
+                                <option value="{{option.value}}">{{option.name}}</option>
+                            {% endfor %}
+                        {% endif %}
+                        {% if type == itemsData.equipTypes.ranged %}
+                            {% for option in itemsData.rangedTypes %}
+                                <option value="{{option.value}}">{{option.name}}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                {% endif %}
             </div>
         </div>
         <div class="sheet-quantity">
@@ -33,7 +51,7 @@
         <div class="sheet-melee-fields">
             <div class="sheet-melee-fields-container">
                 {% for fld in itemsData.fields.melee %}
-                    {{ field.outputField(field=fld, prefix=attrPrefix, itemsData=itemsData)}}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=itemsData)}}
                 {% endfor %}
             </div>
         </div>
@@ -41,7 +59,7 @@
         <div class="sheet-ranged-fields">
             <div class="sheet-ranged-fields-container">
                 {% for fld in itemsData.fields.ranged %}
-                    {{ field.outputField(field=fld, prefix=attrPrefix, itemsData=itemsData)}}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=itemsData)}}
                 {% endfor %}
             </div>
         </div>
@@ -50,7 +68,7 @@
             <div class="sheet-armor-fields-container">
                 {% for fld in itemsData.fields.equipment %}
                 <div class="sheet-armor-fields-block">
-                    {{ field.outputField(field=fld, prefix=attrPrefix, itemsData=itemsData)}}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=itemsData)}}
                 </div>
                 {% endfor %}
             </div>

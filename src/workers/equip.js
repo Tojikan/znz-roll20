@@ -39,6 +39,8 @@
     })]]));
     const ignoreEmpty = [
         "(([[getProperty('items.fields.type.attr_name')]]))",
+        "(([[getProperty('items.fields.weight.attr_name')]]))",
+        "(([[getProperty('items.fields.quantity.attr_name')]]))",
         "(([[getProperty('items.fields.subtypes.melee')]]))",
         "(([[getProperty('items.fields.subtypes.ranged')]]))",
         "(([[getProperty('items.fields.subtypes.armor')]]))",
@@ -68,9 +70,15 @@
         });
     };
 
-    const fieldsIsEmpty = function(fields, data){
+    const fieldsIsEmpty = function(fields, data, prefix=''){
+        if (prefix.length){
+            var checkFields = prefixFields(prefix, ignoreEmpty);
+        } else {
+            var checkFields = ignoreEmpty;
+        }
+
         for (const fld of fields){
-            if (!ignoreEmpty.includes(fld) && typeof data[fld] !== 'undefined' && data[fld].length > 0) { //dont check item type
+            if (!checkFields.includes(fld) && typeof data[fld] !== 'undefined' && data[fld].length > 0) { //dont check item type
                 return false;
             }
         }
@@ -84,8 +92,8 @@
             bothFields = inventoryFields.concat(equippedFields);
 
         getAttrs(bothFields, function(values){
-            const invEmpty = fieldsIsEmpty(inventoryFields, values);
-            const eqEmpty = fieldsIsEmpty(equippedFields, values);
+            const invEmpty = fieldsIsEmpty(inventoryFields, values, prefixes.inventory);
+            const eqEmpty = fieldsIsEmpty(equippedFields, values, prefixes[type]);
 
             if (invEmpty){ return;} //Do nothing if item to be equipped is empty
             
@@ -93,19 +101,29 @@
 
             // transpose inventory into equipped fields
             for (const fld of itemFields){
-                attrSet[prefixes[type] + "_" + fld] = values[ "repeating_inventory_" + prefixes.inventory + "_" + fld];
+                const key = `repeating_inventory_${prefixes.inventory}_${fld}`;
+
+                if (key in values && typeof values[key] != 'undefined'){
+                    attrSet[prefixes[type] + "_" + fld] = values[key];
+                } else {
+                    attrSet[prefixes[type] + "_" + fld] = '';
+                }
+
             }
 
             // transpose equipped into a new inventory row if its not empty
             if (!eqEmpty){
                 for (const fld of itemFields){
-                    attrSet[rowId + "_" + prefixes.inventory + "_" + fld] = values[prefixes[type] + "_" + fld];
+                    const key = prefixes[type] + "_" + fld;
+                    
+                    if (key in values && typeof values[key] !='undefined'){
+                        attrSet["repeating_inventory_" + prefixes.inventory + "_" + fld] = values[key];
+                    } else {
+                        attrSet["repeating_inventory_" + prefixes.inventory + "_" + fld] = '';
+                    }
                 }
             }
-
-            // removeRepeatingRow(rowId); //remove current
-            console.log(values);
-            console.log(attrSet);
+            removeRepeatingRow(rowId); //remove current
             setAttrs(attrSet);
         });
     };
@@ -114,7 +132,7 @@
         const equippedFields = prefixFields(prefixes[type], itemFields);
 
         getAttrs(equippedFields, function(values){
-            const eqEmpty = fieldsIsEmpty(equippedFields, values);
+            const eqEmpty = fieldsIsEmpty(equippedFields, values, prefixes[type]);
 
             if (eqEmpty){ return; }
 
@@ -123,12 +141,14 @@
 
             for (const prop in values){
                 //Transpose equipped to a new inventory row
-                var newProp = prop.replace(type, "repeating_inventory_" + newInvRowId + "_" + prefixes.inventory);
+                var newProp = prop.replace(prefixes[type], "repeating_inventory_" + newInvRowId + "_" + prefixes.inventory);
                 attrSet[newProp] = values[prop];
 
                 attrSet[prop] = ""; //clear current
 
             }
+            console.log(values);
+            console.log(attrSet);
             setAttrs(attrSet);
         });
     }

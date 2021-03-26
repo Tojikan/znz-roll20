@@ -1,9 +1,10 @@
 {
     "melee": "equipped_melee",
     "ranged": "equipped_ranged",
-    "head": "equipped_head",
-    "body": "equipped_body",
-    "arm": "equipped_arm",
-    "leg": "equipped_leg",
+    "special": "equipped_special",
+    "head": "equipped_armor_head",
+    "body": "equipped_armor_body",
+    "arms": "equipped_armor_arms",
+    "legs": "equipped_armor_legs",
     "inventory": "inventory"
 }
