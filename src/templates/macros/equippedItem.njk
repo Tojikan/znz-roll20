@@ -1,7 +1,7 @@
 {% import './outputfield.njk' as field %}
 
 
-{% macro create(type, attrPrefix, itemsData, typeText, subtype='') %}
+{% macro create(type, attrPrefix, sheetData, typeText, subtype='') %}
 
 
 <div class="sheet-equipped-item sheet-{{type}}">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="sheet-name">
-            <input class="sheet-line-input" type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.name.attr_name}}" placeholder="Item Name"></input>
+            <input class="sheet-line-input" type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.name.attr_name}}" placeholder="Item Name"></input>
 
             <div class="sheet-under-name">
                 <div class="sheet-typetext">{{typeText}}</div>
@@ -22,13 +22,13 @@
                 {% if subtype %}
                 Type: 
                     <select class="sheet-select-borderless" name="attr_{{attrPrefix}}_{{subtype}}">
-                        {% if type == itemsData.equipTypes.melee %}
-                            {% for option in itemsData.meleeTypes %}
+                        {% if type == sheetData.items.equipTypes.melee %}
+                            {% for option in sheetData.items.meleeTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
                         {% endif %}
-                        {% if type == itemsData.equipTypes.ranged %}
-                            {% for option in itemsData.rangedTypes %}
+                        {% if type == sheetData.items.equipTypes.ranged %}
+                            {% for option in sheetData.items.rangedTypes %}
                                 <option value="{{option.value}}">{{option.name}}</option>
                             {% endfor %}
                         {% endif %}
@@ -40,35 +40,35 @@
             <div class="sheet-label">
                 Quantity
             </div>
-            <input class="sheet-borderless-input" type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.quantity.attr_name}}" value="1"></input>
+            <input class="sheet-borderless-input" type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.quantity.attr_name}}" value="1"></input>
         </div>
     </div>
     <div class="sheet-description">
         <div class="sheet-label">Description</div>
-        <textarea name="attr_{{attrPrefix}}_{{itemsData.fields.description.attr_name}}" value=""></textarea/>
+        <textarea name="attr_{{attrPrefix}}_{{sheetData.items.fields.description.attr_name}}" value=""></textarea/>
     </div>
     <div class="sheet-body">
         <div class="sheet-melee-fields">
             <div class="sheet-melee-fields-container">
-                {% for fld in itemsData.fields.melee %}
-                    {{ field.outputField(field=fld, prefix=attrPrefix, data=itemsData)}}
+                {% for fld in sheetData.items.fields.melee %}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=sheetData)}}
                 {% endfor %}
             </div>
         </div>
 
         <div class="sheet-ranged-fields">
             <div class="sheet-ranged-fields-container">
-                {% for fld in itemsData.fields.ranged %}
-                    {{ field.outputField(field=fld, prefix=attrPrefix, data=itemsData)}}
+                {% for fld in sheetData.items.fields.ranged %}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=sheetData)}}
                 {% endfor %}
             </div>
         </div>
 
         <div class="sheet-armor-fields">
             <div class="sheet-armor-fields-container">
-                {% for fld in itemsData.fields.equipment %}
+                {% for fld in sheetData.items.fields.equipment %}
                 <div class="sheet-armor-fields-block">
-                    {{ field.outputField(field=fld, prefix=attrPrefix, data=itemsData)}}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=sheetData)}}
                 </div>
                 {% endfor %}
             </div>
@@ -77,9 +77,9 @@
 
     {# Retain for unequipping purposes #}
     <div class="sheet-hidden">
-        <input type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.type.attr_name}}"/>
-        <input type="text" name="attr_{{attrPrefix}}_{{itemsData.fields.weight.attr_name}}"/>
-        {% for fld, value in itemsData.fields.subtypes %}
+        <input type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.type.attr_name}}"/>
+        <input type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.weight.attr_name}}"/>
+        {% for fld, value in sheetData.items.fields.subtypes %}
             <input type="text" name="attr_{{attrPrefix}}_{{value}}"/>
         {% endfor %}
     </div>

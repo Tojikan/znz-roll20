@@ -2,7 +2,7 @@
 
 <div class="sheet-area-stats">
     <div class="sheet-section-attributes">
-        {% for attr in jsonData.attributes %}
+        {% for attr in sheetData.attributes %}
         <div class="sheet-container-attr">
             <div class="sheet-field-attr-mod">
                 Mod
@@ -30,10 +30,10 @@
 
     <div class="sheet-section-expertise">
         <div class="sheet-section-skills">
-            {{ skillList.create(jsonData.skills, 'Skills') }}
+            {{ skillList.create(sheetData.skills, 'Skills') }}
         </div>
         <div class="sheet-section-proficiencies">
-            {{ skillList.create(jsonData.proficiencies, 'Proficiencies', '1') }}
+            {{ skillList.create(sheetData.proficiencies, 'Proficiencies', '1') }}
         </div>
     </div>
 </div>

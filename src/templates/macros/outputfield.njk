@@ -10,6 +10,7 @@
 
 {# field router #}
 {% macro outputField(field='', prefix='', data='') %}
+
     {% switch field.type %}
         {% case "text" %}
             {{ createText(field=field) }} {# TODO if necessary - prefix/data/etc #}
@@ -97,14 +98,14 @@
 
     {% switch field.options %}
         {% case "itemTypes" %}
-            {% set selectOptions = data.itemTypes %}
+            {% set selectOptions = data.items.itemTypes %}
         {% case "ammoTypes" %}
-            {% set selectOptions = data.ammoTypes %}
+            {% set selectOptions = data.items.ammoTypes %}
         {% case "ammoTypesFull" %}
-            {% set selectOptions = data.ammoTypes %}
+            {% set selectOptions = data.items.ammoTypes %}
             {% set addCustomAmmo = true %}
         {% case "meleeTypes" %}
-            {% set selectOptions = data.meleeTypes %}
+            {% set selectOptions = data.items.meleeTypes %}
         {% default %}
             {% set selectOptions = [] %}
     {% endswitch %}
@@ -120,8 +121,8 @@
                 {% endfor %}
 
                 {% if addCustomAmmo == true %}
-                    {% for num in range(1,data.customCounters.ammo_custom_count + 1) %}
-                        <option value="{{data.customCounters.ammo_attr}}_{{num}}">Custom Ammo {{ num }}</option>
+                    {% for num in range(1,data.items.customCounters.ammo_custom_count + 1) %}
+                        <option value="{{data.items.customCounters.ammo_attr}}_{{num}}">Custom Ammo {{ num }}</option>
                     {% endfor %}
                 {% endif %}
             </select>
@@ -137,14 +138,7 @@
         {% set attrName = ["attr_", field.attr_name] %}
     {% endif %}
 
-    {% switch field.options %}
-        {% case "itemTypes" %}
-            {% set selectOptions = data.itemTypes %}
-        {% case "ammoTypes" %}
-            {% set selectOptions = data.ammoTypes %}
-        {% default %}
-            {% set selectOptions = [] %}
-    {% endswitch %}
+    {% set selectOptions = data.statModOptions %}
 
 
     <div class="sheet-line-field sheet-stat-repeater-field">
@@ -159,9 +153,8 @@
                 <div class="sheet-stat-item">
                     <div class="sheet-stat-select">
                         <select name="{{newAttr}}">
-                            <option value="" default></option>
-                            {# a custom made array of options #}
-                            {% for val in options %}
+                            <option value="" default>Select</option>
+                            {% for val in selectOptions %}
                                 <option value="{{val.value}}">{{val.name}}</option>
                             {% endfor %}
                         </select>

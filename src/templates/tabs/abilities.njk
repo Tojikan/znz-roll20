@@ -5,16 +5,16 @@
         <div class="sheet-section-quirk">
             <div class="sheet-header sheet-row-flex">
                 <h2>Abilities</h2>
-                <button type="action" name="act_{{jsonData.misc.actions.randomizeAbility}}">Random Ability </button>
+                <button type="action" name="act_{{sheetData.misc.actions.randomizeAbility}}">Random Ability </button>
             </div>
             <div class="sheet-ability-list">
-                <fieldset class="repeating_{{jsonData.misc.quirks.ability_attr}}">
+                <fieldset class="repeating_{{sheetData.misc.quirks.ability_attr}}">
                     <div class="sheet-ability">
                         <div class="sheet-row-flex">
                             <div class="sheet-ability-select">
 
-                                <select name="attr_{{jsonData.misc.quirks.ability_attr}}">
-                                    {% for ability in jsonData.abilities %}
+                                <select name="attr_{{sheetData.misc.quirks.ability_attr}}">
+                                    {% for ability in sheetData.abilities %}
                                         {% if not ability.hidden %}
                                             <option value="{{ability.value}}">{{ability.name}}</option>
                                         {% endif %}
@@ -23,14 +23,14 @@
                             </div>
                             <div class="sheet-ability-label">
                                 Ability Lvl
-                                <input type="number" name="attr_{{jsonData.misc.quirks.ability_attr}}_lvl" value="1" min="1" max="3"/>
+                                <input type="number" name="attr_{{sheetData.misc.quirks.ability_attr}}_lvl" value="1" min="1" max="3"/>
                             </div>
                         </div>
                         <div class="sheet-ability-descriptions">
-                            {% for ability in jsonData.abilities %}
+                            {% for ability in sheetData.abilities %}
                                 <div class="sheet-description">
                                     <div class="sheet-description-main">
-                                        <input type="checkbox" class="sheet-toggle" name="attr_{{jsonData.misc.quirks.ability_attr}}" value="{{ability.value}}" {{"checked" if ability.default}} />
+                                        <input type="checkbox" class="sheet-toggle" name="attr_{{sheetData.misc.quirks.ability_attr}}" value="{{ability.value}}" {{"checked" if ability.default}} />
                                         <div class="sheet-description-text sheet-toggle-content">
                                             {{ability.description | safe}}
                                             {% if ability.lvl1 %} <div class="sheet-ability-lvl-text"><span>Level 1</span> - {{ability.lvl1 | safe}} </div>{% endif %}
@@ -50,14 +50,14 @@
         <div class="sheet-section-quirk">
             <div class="sheet-header sheet-row-flex">
                 <h2>Flaws</h2>
-                <button type="action" name="act_{{jsonData.misc.actions.randomizeFlaw}}">Random Flaw </button>
+                <button type="action" name="act_{{sheetData.misc.actions.randomizeFlaw}}">Random Flaw </button>
             </div>
             <div class="sheet-ability-list">
-                <fieldset class="repeating_{{jsonData.misc.quirks.flaw_attr}}">
+                <fieldset class="repeating_{{sheetData.misc.quirks.flaw_attr}}">
                     <div class="sheet-ability">
                         <div class="sheet-ability-select">
-                            <select name="attr_{{jsonData.misc.quirks.flaw_attr}}">
-                                {% for flaw in jsonData.flaws %}
+                            <select name="attr_{{sheetData.misc.quirks.flaw_attr}}">
+                                {% for flaw in sheetData.flaws %}
                                     {% if not flaw.hidden %}
                                         <option value="{{flaw.value}}">{{flaw.name}}</option>
                                     {% endif %}
@@ -65,10 +65,10 @@
                             </select>
                         </div>
                         <div class="sheet-ability-descriptions">
-                            {% for flaw in jsonData.flaws %}
+                            {% for flaw in sheetData.flaws %}
                                 <div class="sheet-description">
                                     <div class="sheet-description-main">
-                                        <input type="checkbox" class="sheet-toggle" name="attr_{{jsonData.misc.quirks.flaw_attr}}" value="{{flaw.value}}" {{"checked" if flaw.default}} />
+                                        <input type="checkbox" class="sheet-toggle" name="attr_{{sheetData.misc.quirks.flaw_attr}}" value="{{flaw.value}}" {{"checked" if flaw.default}} />
                                         <div class="sheet-description-text sheet-toggle-content">
                                             {{flaw.description | safe}}
                                         </div>

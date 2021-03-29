@@ -1,23 +1,21 @@
 {#  
     In the Gulp process, certain data is pulled in and added to the templates
     
-    jsonData is an object containing all JSON data in the data folder 
+    sheetData is an object containing all JSON data in the data folder 
     queryData is an object containing the exported results of any JS file in the data-query folder
    
     Access data through file name
-        jsonData Example: accessing ./data/status.json is accessed through jsonData.status
-        queryData Example" accessing ./data-query/attackFields.js is accessed through queryData.attackFields
+        sheetData Example: accessing ./data/status.json is accessed through sheetData.status
 #}
 
 {% import 'macros/outputfield.njk' as basicField %}
 {% import 'macros/resourceblock.njk' as resourceBlock %}
 
-
 <div class="sheet-znz-character-sheet">
     <div class="sheet-header">
         {#----- Name Area ----- #}
         <div class="sheet-area-name">
-            {% for fld in jsonData.misc.name %}
+            {% for fld in sheetData.misc.name %}
                 {{ basicField.outputField( field=fld)}}
             {% endfor %}
         </div>
@@ -25,22 +23,22 @@
         {#----- Status ----- #}
         <div class="sheet-area-resource">
             <div class="sheet-res-row">
-                {% for res in jsonData.resource %}
+                {% for res in sheetData.resource %}
                     {{ resourceBlock.create(res) }}
                 {% endfor %}
             </div>
             <div class="sheet-defenses">
                 <div class="sheet-def-block">
-                    <div class="sheet-label">{{jsonData.misc.armor.display_name}}</div>
-                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.armor.attr_name}}" value="{{jsonData.misc.armor.default_value}}"></input>
+                    <div class="sheet-label">{{sheetData.misc.armor.display_name}}</div>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{sheetData.misc.armor.attr_name}}" value="{{sheetData.misc.armor.default_value}}"></input>
                 </div>
                 <div class="sheet-def-block">
-                    <div class="sheet-label">{{jsonData.misc.hygiene.display_name}}</div>
-                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.hygiene.attr_name}}" value="{{jsonData.misc.hygiene.default_value}}"></input>
+                    <div class="sheet-label">{{sheetData.misc.hygiene.display_name}}</div>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{sheetData.misc.hygiene.attr_name}}" value="{{sheetData.misc.hygiene.default_value}}"></input>
                 </div>
                 <div class="sheet-def-block">
-                    <div class="sheet-label">{{jsonData.misc.flashlight.display_name}}</div>
-                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{jsonData.misc.flashlight.attr_name}}" value="{{jsonData.misc.flashlight.default_value}}"></input>
+                    <div class="sheet-label">{{sheetData.misc.flashlight.display_name}}</div>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{sheetData.misc.flashlight.attr_name}}" value="{{sheetData.misc.flashlight.default_value}}"></input>
                 </div>
             </div>
         </div>
@@ -76,7 +74,6 @@
 
     </div>
 </div>
-
 
 {# Sheet workers are injected here via Gulp process #}
 <script type="text/worker">

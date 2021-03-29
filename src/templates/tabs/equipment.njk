@@ -7,30 +7,30 @@
         <div class="sheet-section-weapons">
             <div class="sheet-block-weapons">
                 <div class="sheet-weapon">
-                    {{equipped.create(jsonData.items.equipTypes.melee, jsonData.prefixes.melee, jsonData.items, 'Equipped Melee Weapon', jsonData.items.fields.subtypes.melee)}}
+                    {{equipped.create(sheetData.items.equipTypes.melee, sheetData.prefixes.melee, sheetData, 'Equipped Melee Weapon', sheetData.items.fields.subtypes.melee)}}
                 </div>
                 <div class="sheet-weapon">
-                    {{equipped.create(jsonData.items.equipTypes.ranged, jsonData.prefixes.ranged, jsonData.items, 'Equipped Ranged Weapon', jsonData.items.fields.subtypes.ranged)}}
+                    {{equipped.create(sheetData.items.equipTypes.ranged, sheetData.prefixes.ranged, sheetData, 'Equipped Ranged Weapon', sheetData.items.fields.subtypes.ranged)}}
                 </div>
             </div>
             <div class="sheet-block-special">
-                {{equipped.create(jsonData.items.equipTypes.special, jsonData.prefixes.special, jsonData.items, 'Special Item')}}
+                {{equipped.create(sheetData.items.equipTypes.special, sheetData.prefixes.special, sheetData, 'Special Item')}}
             </div>
         </div>
         <div class="sheet-section-ammo">
             <div class="sheet-ammo-counters">
-                {{ counterBox.create('Ammunition', jsonData.items.ammoTypes, jsonData.items.customCounters.ammo_custom_count, jsonData.items.customCounters.ammo_label, jsonData.items.customCounters.ammo_attr)}}
+                {{ counterBox.create('Ammunition', sheetData.items.ammoTypes, sheetData.items.customCounters.ammo_custom_count, sheetData.items.customCounters.ammo_label, sheetData.items.customCounters.ammo_attr)}}
             </div>
         </div>
     </div>
     <div class="sheet-section-armor">
         <div class="sheet-row">
-            {{equipped.create(jsonData.items.equipTypes.head,jsonData.prefixes.head, jsonData.items, 'Equipped Head Armor')}}
-            {{equipped.create(jsonData.items.equipTypes.body,jsonData.prefixes.body, jsonData.items, 'Equipped Body Armor')}}
+            {{equipped.create(sheetData.items.equipTypes.head,sheetData.prefixes.head, sheetData, 'Equipped Head Armor')}}
+            {{equipped.create(sheetData.items.equipTypes.body,sheetData.prefixes.body, sheetData, 'Equipped Body Armor')}}
         </div>
         <div class="sheet-row">
-            {{equipped.create(jsonData.items.equipTypes.arms,jsonData.prefixes.arms, jsonData.items, 'Equipped Arm Armor')}}
-            {{equipped.create(jsonData.items.equipTypes.legs,jsonData.prefixes.legs, jsonData.items, 'Equipped Leg Armor')}}
+            {{equipped.create(sheetData.items.equipTypes.arms,sheetData.prefixes.arms, sheetData, 'Equipped Arm Armor')}}
+            {{equipped.create(sheetData.items.equipTypes.legs,sheetData.prefixes.legs, sheetData, 'Equipped Leg Armor')}}
         </div>
     </div>
 </div>
