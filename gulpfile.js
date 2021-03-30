@@ -63,7 +63,6 @@ gulp.task('watch', function(){
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
     gulp.watch('./data/*.json' , gulp.series(['sheet','scripts', 'data']));
     gulp.watch('./data/*.js' , gulp.series(['sheet','scripts', 'data']));
-    gulp.watch('./data-query/*.js' , gulp.series(['sheet','scripts']));
     gulp.watch('./src/scripts/*.js' , gulp.series(['scripts']));
 });
 

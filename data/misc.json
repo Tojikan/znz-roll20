@@ -45,5 +45,11 @@
         "display_name": "Hygiene",
         "attr_name": "hygiene",
         "default_value": 10
+    },
+    "stat_effects": {
+        "display_name": "Status Effects",
+        "attr_name": "status_effect",
+        "type": "stat_repeater",
+        "count": 3
     }
 }

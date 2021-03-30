@@ -8,6 +8,8 @@ module.exports = {
 
     /**
      * Runs a given function for anytime you need flexibility.
+     * The function gets passed a parameter which represents all data in the data folder, with filenames as a key.
+     * 
      * @param {function} fn Function to be run.
      */
     runFunction: function(fn){
@@ -15,7 +17,7 @@ module.exports = {
         if (typeof fn !== 'function'){
             throw("runFunction error - Invalid parameter type. The parameter must be a function.");
         }
-        return fn();
+        return fn(getAllData());
     },
 
     /**
@@ -69,21 +71,6 @@ module.exports = {
     },
 
     /**
-     * Property lookup in prefixes.json. Returns the value of property if found.
-     * 
-     * @param {string} prefix Property in the prefixes.json object.
-     */
-    getPrefix: function(prefix){
-        const prefixes = require(prefixPath);
-
-        if (prefix in prefixes){
-            return prefixes[prefix] 
-        } else {
-            throw `Prefix '${prefix}' was not found in data files!`;
-        }
-    },
-
-    /**
      * Retrieve the contents of a file. Assumes the file either is JSON or exports JSON.
      * 
      * @param {string} fileName Name of a file to retrieve
@@ -118,12 +105,11 @@ module.exports = {
 
         //https://stackoverflow.com/questions/6393943/convert-javascript-string-in-dot-notation-into-an-object-reference
         return notation.split('.').reduce((o,i)=>o[i], data);
-    }
-    
+    },
 }
 
 /**
- * Recursive function to handle the searching for any property in a given object.\
+ * Recursive function to handle the searching for any property in a given object.
  * 
  * @param {string} prop Object property to search in.
  * @param {string} val Value of the property to search for.
@@ -159,4 +145,29 @@ function recursiveSearch(prop, val, object){
 
     //End case - not an object or array
     return null;
+}
+
+//Read all files in data folder and save it in a data object with filename as key
+function getAllData(){
+    let data = {};
+    let dataFolder = './data/';
+    let files = fs.readdirSync(dataFolder);
+
+    files.forEach(file => {
+        //If JSON, simply parse it.
+        if (path.extname(file) === '.json' && file.indexOf('schema') < 0){ //ignore schema
+            let filename = path.basename(file, '.json');
+            delete require.cache[require.resolve(dataFolder + file)]; //clear cache for json before it gets used by dataqueries
+            data[filename] = JSON.parse(fs.readFileSync(dataFolder + file));
+        //If JS, save exports
+        } else if (path.extname(file) === '.js'){
+            
+            let filename = path.basename(file, '.js');
+
+            data[filename] = require(dataFolder + file);
+            delete require.cache[require.resolve(dataFolder + file)]; //clear cache
+        }
+    });
+
+    return data;
 }

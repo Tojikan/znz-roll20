@@ -147,8 +147,6 @@
                 attrSet[prop] = ""; //clear current
 
             }
-            console.log(values);
-            console.log(attrSet);
             setAttrs(attrSet);
         });
     }

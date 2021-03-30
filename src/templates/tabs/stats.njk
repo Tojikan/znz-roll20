@@ -1,4 +1,5 @@
 {% import 'macros/skillList.njk' as skillList %}
+{% import 'macros/outputField.njk' as field %}
 
 <div class="sheet-area-stats">
     <div class="sheet-section-attributes">
@@ -26,6 +27,11 @@
             </div>
         </div>
         {% endfor %}
+        <div class="sheet-section-effects">
+            <div class="sheet-status-repeater">
+                {{ field.outputField(sheetData.misc.stat_effects, '', sheetData)}}
+            </div>
+        </div>
     </div>
 
     <div class="sheet-section-expertise">

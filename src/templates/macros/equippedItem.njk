@@ -77,10 +77,24 @@
 
     {# Retain for unequipping purposes #}
     <div class="sheet-hidden">
-        <input type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.type.attr_name}}"/>
+        {% set itemType = type %}
+        {% set armorSubType = "" %}
+
+        {% for at in sheetData.items.armorTypes %}
+            {% if at.value == type %}
+                {% set itemType = 'armor' %}
+                {% set armorSubType = at.value %}
+            {% endif %}
+        {% endfor %}
+
+        <input type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.type.attr_name}}" value="{{itemType}}"/>
         <input type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.weight.attr_name}}"/>
         {% for fld, value in sheetData.items.fields.subtypes %}
-            <input type="text" name="attr_{{attrPrefix}}_{{value}}"/>
+            {% if fld == "armor" and armorSubType %}
+                <input type="text" name="attr_{{attrPrefix}}_{{value}}" value="{{armorSubType}}"/>
+            {% else %}
+                <input type="text" name="attr_{{attrPrefix}}_{{value}}"/>
+            {% endif %}
         {% endfor %}
     </div>
 

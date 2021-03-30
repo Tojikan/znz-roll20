@@ -442,6 +442,12 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       .sheet-area-resource .sheet-defenses .sheet-def-block:not(:last-child) {
         margin-right: 1rem; }
 
+.sheet-section-effects {
+  margin-top: 4rem;
+  padding: 1rem;
+  border: solid 1px black;
+  box-shadow: 0.2rem 0.2rem black; }
+
 .sheet-container-attr {
   display: flex;
   margin-bottom: 1rem;
