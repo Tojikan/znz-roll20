@@ -7,6 +7,7 @@
             const armorTypes = data.items.armorTypes;
             const prefixes = data.prefixes;
 
+
             for (let i = 0; i < status.count; i++){
                 results.push(`${status.attr_name}_${i}`);
             }
@@ -36,7 +37,29 @@
             });
         })
     ]]));
+    const statBonusOptions = (([[
+        transformData('statModOptions', (data)=>{
+            return data.map((val)=>{
+                return {
+                    name: val.name,
+                    value: val.value + "_bonus"
+                };
+            });
+        })
+    ]]));
+    const statModTracker = "(([[getProperty('misc.stat_mod_tracker.attr_name')]]))";
 
+    
+    const getStatNameFromBonusFld = function(bonusFld){
+        for (fld of statBonusOptions){
+            if (fld.value == bonusFld){
+                return fld.name;
+            }
+        }
+
+        return "";
+    }
+    
     const filterInt = function(value){
         if (/^[-+]?(\d+)$/.test(value)) {
             return Number(value)
@@ -45,142 +68,74 @@
         }
     };
 
-    const handleStatModChange = function(mod){
-        var attrs = [
-            mod + "_mod",
-            mod
-        ]
+    /**
+     * Note: We do a total recalculation of all fields on change. Previously tried the 1 by 1 (adding a single change to a bonus field) but having a single desync between
+     * bonus fields and the true calculation caused the entire thing to break AND be unfixable without manually going into sheet attributes.
+     * 
+     */
+    const handleStatModChange = function(){
+        var attrs = statModifiers.concat(statModifiers.map((val) => { return val + "_mod"; })); 
 
-        attrs.concat(statBonusFields);
-        console.log(attrs);
+        attrs = attrs.concat(statBonusFields);
 
         getAttrs(attrs, function(values){
-            console.log(values);
-        });
-    }
 
-    const handleAttrChange = function(statModFld, prevAttr, newAttr){
-        
-        var statModAmountFld = statModFld + "_mod",
-            attrs = [
-                statModFld, 
-                statModAmountFld
-            ];
+            var setAttr = {};
 
-        // Case 1 - Change the stat modifier select to another stat.
-        if (prevAttr.length && newAttr.length){
-            let prevBonusFld = prevAttr + "_bonus";
-            let newBonusFld = newAttr + "_bonus";
+            // loop over stat modifier select fields
+            for (let mod of statModifiers){
+                // only include ones with option selected
+                if (mod in values && values[mod].length){
 
-            attrs.push(prevBonusFld);
-            attrs.push(newBonusFld);
-
-            getAttrs(attrs, function(values){
-                let prevBonus = filterInt(values[prevBonusFld]),
-                    newBonus = filterInt(values[newBonusFld]),
-                    statModAmount = filterInt(values[statModAmountFld]),
-                    statMod = values[statModFld],
-                    setAttr = {};
-
-                if (statMod != newAttr){
-                    // not sure how we got here
-                    console.error("Stat Bonus Worker: attribute mis-match!");
-                    alert('An error has occurred.');
-                    return;
-                }
-
-                if (Number.isInteger(statModAmount)){
-
-                    if (statModAmount !== 0){
-                        prevBonus = Number.isInteger(prevBonus) ? prevBonus : 0;
-                        newBonus = Number.isInteger(newBonus) ? newBonus : 0;
-    
-                        prevBonus -= statModAmount;
-                        newBonus += statModAmount;
-
-                        let prevBonusCheckFld = prevBonusFld + "_check";
-                        let newBonusCheckFld = newBonusFld + "_check";
-
-                        let prevBonusCheck = (prevBonus > 0) ? "pos" : (prevBonus < 0 ? "neg" : "");
-                        let newBonusCheck = (newBonus > 0) ? "pos" : (newBonus < 0 ? "neg" : "");
-    
-                        setAttr[prevBonusFld] = prevBonus;
-                        setAttr[prevBonusCheckFld] = prevBonusCheck;
-                        setAttr[newBonusFld] = newBonus;
-                        setAttr[newBonusCheckFld] = newBonusCheck;
+                    let selectedAttr = values[mod] + "_bonus";
+                    
+                    if (!setAttr.hasOwnProperty(selectedAttr)){
+                        setAttr[selectedAttr] = 0;
                     }
 
-                } else {
-                    setAttr[statModAmountFld] = 0; //Reset Mod Amount to 0 if not a valid integer
+                    let modValue = mod + "_mod";
+
+                    // Add up mod values
+                    if (modValue in values){
+                        modValue = filterInt(values[modValue]);
+                        
+                        if (Number.isInteger(modValue)){
+                            setAttr[selectedAttr] += modValue;
+
+                            var setValue = setAttr[selectedAttr];
+
+                            setAttr[selectedAttr + "_check"] = ( setValue > 0 ? "pos" : (setValue < 0 ? "neg" : "") );
+                        }
+                    }
                 }
+            }
 
-                setAttrs(setAttr);
-            });
-        } 
-        // Case 2 - Set stat modifier select to blank
-        else if (prevAttr.length && !newAttr.length){
-            let prevBonusFld = prevAttr + "_bonus";
-            attrs.push(prevBonusFld);
+            
+            //set statmodtracker text
+            var trackText = "";
+            for (let key in setAttr){
+                var displayName = getStatNameFromBonusFld(key);
 
-            getAttrs(attrs, function(values){
-                let prevBonus = filterInt(values[prevBonusFld]),
-                statModAmount = filterInt(values[statModAmountFld]),
-                setAttr = {};
-
-                if (Number.isInteger(statModAmount)){
-                    prevBonus = Number.isInteger(prevBonus) ? prevBonus : 0;
-                    prevBonus -= statModAmount;
-
-                    let prevBonusCheckFld = prevBonusFld + "_check";
-                    let prevBonusCheck = (prevBonus > 0) ? "pos" : (prevBonus < 0 ? "neg" : "");
-                    
-                    setAttr[prevBonusFld] = prevBonus;
-                    setAttr[prevBonusCheckFld] = prevBonusCheck;
-                } else {
-                    setAttr[statModAmountFld] = 0; //Reset Mod Amount to 0 if not a valid integer
+                if (displayName.length){
+                    trackText += `${displayName}: ${setAttr[key]} \n`;
                 }
+            }
+            setAttr[statModTracker] = trackText;
 
-                setAttrs(setAttr);
-            });
-        }
-        // Case 3 - Set stat modifier select from blank to an attr
-        else if (!prevAttr.length && newAttr.length){
-            let newBonusFld = newAttr + "_bonus";
-            attrs.push(newBonusFld);
 
-            getAttrs(attrs, function(values){
-                let newBonus = filterInt(values[newBonusFld]),
-                statModAmount = filterInt(values[statModAmountFld]),
-                setAttr = {};
+            setAttrs(setAttr);
 
-                if (Number.isInteger(statModAmount)){
-                    newBonus = Number.isInteger(newBonus) ? newBonus : 0;
-                    newBonus += statModAmount;
-
-                    let newBonusCheckFld = newBonusFld + "_check";
-                    let newBonusCheck = (newBonus > 0) ? "pos" : (newBonus < 0 ? "neg" : "");
-                    
-                    setAttr[newBonusFld] = newBonus;
-                    setAttr[newBonusCheckFld] = newBonusCheck;
-                } else {
-                    setAttr[statModAmountFld] = 0; //Reset Mod Amount to 0 if not a valid integer
-                }
-
-                setAttrs(setAttr);
-            });
-        }
+        });
     }
 
     for (let mod of statModifiers){
         on( `change:${mod}`, function(evInfo){
-            handleStatModChange(mod);
+            handleStatModChange();
         });
         on( `change:${mod}_mod`, function(evInfo){
-            handleStatModChange(mod);
+            handleStatModChange();
         });
     }
-
-
 
 
 })();

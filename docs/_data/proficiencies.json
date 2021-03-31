@@ -57,7 +57,7 @@
     "resource": "Energy"
   },
   {
-    "display_name": "Melee - Blunt Weapon",
+    "display_name": "Melee - Blunt",
     "attr_name": "prof_blunt_melee",
     "combat": "melee",
     "description": "",
@@ -65,7 +65,7 @@
     "resource": "Energy"
   },
   {
-    "display_name": "Melee - Piercing Weapon",
+    "display_name": "Melee - Piercing",
     "attr_name": "prof_pierce_melee",
     "combat": "melee",
     "description": "",
@@ -73,7 +73,7 @@
     "resource": "Energy"
   },
   {
-    "display_name": "Melee - Sharp Weapon",
+    "display_name": "Melee - Sharp",
     "attr_name": "prof_sharp_melee",
     "combat": "melee",
     "description": "",

@@ -32,6 +32,12 @@
                 {{ field.outputField(sheetData.misc.stat_effects, '', sheetData)}}
             </div>
         </div>
+        <div class="sheet-section-statmod-track">
+            <div class="sheet-field">
+                <div class="sheet-header">{{sheetData.misc.stat_mod_tracker.display_name}}</div>
+                <textarea class="sheet-stat-mod-track" name="attr_{{sheetData.misc.stat_mod_tracker.attr_name}}" readonly></textarea>
+            </div>
+        </div>
     </div>
 
     <div class="sheet-section-expertise">

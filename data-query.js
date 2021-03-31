@@ -77,7 +77,7 @@ module.exports = {
      * @param {string} folder Containing folder. The trailing slash (/) should not be added here as it is added automatically. Defaults to query folder.
      * @param {string} extension Extension of the file. A period (.) gets prepended to the extension. Defaults to JSON.
      */
-    getFile: function(fileName, folder = this.dataFolder, extension = 'json'){
+    getFile: function(fileName,  extension = 'json', folder = this.dataFolder,){
         let importPath = folder + '/' + fileName + '.' + extension;
         
         if (fs.existsSync(importPath)){

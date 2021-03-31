@@ -132,11 +132,6 @@
 
 {# stat repeater - select with a number input, creates multiple of #}
 {% macro createStatRepeater(field='', prefix='', data='') %}
-    {% if prefix %}
-        {% set attrName = ["attr_", prefix, "_", field.attr_name] %}
-    {% else %}
-        {% set attrName = ["attr_", field.attr_name] %}
-    {% endif %}
 
     {% set selectOptions = data.statModOptions %}
 
@@ -147,7 +142,11 @@
         </div>
         <div class="sheet-field">
             {% for num in range(0,field.count) %}
-                {% set toJoin = ["attr_", prefix, "_", field.attr_name, "_", num] %}
+                {% if prefix %}
+                    {% set toJoin = ["attr_", prefix, "_", field.attr_name, "_", num] %}
+                {% else %}
+                    {% set toJoin = ["attr_", field.attr_name, "_", num] %}
+                {% endif %}
                 {% set newAttr = toJoin | join %}
 
                 <div class="sheet-stat-item">
