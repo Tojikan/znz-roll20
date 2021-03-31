@@ -80,7 +80,6 @@ select {
     }
 }
 
-
 .sheet-line-field {
     margin-bottom: 0.5rem;
     display: flex;
@@ -143,6 +142,17 @@ select {
                     border: none;
                     border-bottom: solid 1px $darkgray;
                 }
+            }
+        }
+    }
+}
+
+//override
+.charsheet {
+    .sheet-line-field {
+        input {
+            &[type="number"]{
+                width: 7rem;
             }
         }
     }

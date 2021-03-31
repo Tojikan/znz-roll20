@@ -192,6 +192,9 @@ select {
           border: none;
           border-bottom: solid 1px #a0a0a0; }
 
+.charsheet .sheet-line-field input[type="number"] {
+  width: 7rem; }
+
 /** Show more toggle **/
 .sheet-znz-expandable {
   display: none;
