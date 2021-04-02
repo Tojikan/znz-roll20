@@ -196,7 +196,57 @@
             "value": "rope",
             "attr_name": "inv_rope",
             "weight": 0.2
+        },
+        {
+            "name": "Adhesive",
+            "value": "adhesive",
+            "attr_name": "inv_adhesive",
+            "weight": 0.2
+        },
+        {
+            "name": "Metal",
+            "value": "metal",
+            "attr_name": "inv_metal",
+            "weight": 0.2
+        },
+        {
+            "name": "Plastic",
+            "value": "plastic",
+            "attr_name": "inv_plastic",
+            "weight": 0.2
+        },
+        {
+            "name": "Glass",
+            "value": "glass",
+            "attr_name": "inv_glass",
+            "weight": 0.2
+        },
+        {
+            "name": "Wood",
+            "value": "wood",
+            "attr_name": "inv_wood",
+            "weight": 0.2
+        },
+        {
+            "name": "Glass",
+            "value": "glass",
+            "attr_name": "inv_glass",
+            "weight": 0.2
+        },
+        {
+            "name": "Paper",
+            "value": "paper",
+            "attr_name": "inv_paper",
+            "weight": 0.2
+        },
+        {
+            "name": "Gun Powder",
+            "value": "gunpowder",
+            "attr_name": "inv_gunpowder",
+            "weight": 0.2
         }
+        
+        
     ],
     "ammoTypes": [
         {
@@ -236,7 +286,7 @@
         "ammo_custom_count": 2,
         "inv_attr": "inv_custom",
         "inv_label": "inv_custom_label",
-        "inv_custom_count": 2
+        "inv_custom_count": 3
     },
     "equipTypes": {
         "melee": "melee",

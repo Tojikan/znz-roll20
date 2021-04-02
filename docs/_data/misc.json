@@ -34,7 +34,7 @@
     "armor": {
         "display_name": "Armor Rating",
         "attr_name": "armor_rating",
-        "default_value": 5
+        "default_value": 4
     },
     "flashlight": {
         "display_name": "Flashlight Distance",

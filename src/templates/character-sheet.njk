@@ -30,15 +30,15 @@
             <div class="sheet-defenses">
                 <div class="sheet-def-block">
                     <div class="sheet-label">{{sheetData.misc.armor.display_name}}</div>
-                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{sheetData.misc.armor.attr_name}}" value="{{sheetData.misc.armor.default_value}}"></input>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{sheetData.misc.armor.attr_name}}" value="{{sheetData.misc.armor.default_value}}" min="{{sheetData.misc.armor.default_value}}"></input>
                 </div>
                 <div class="sheet-def-block">
                     <div class="sheet-label">{{sheetData.misc.hygiene.display_name}}</div>
-                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{sheetData.misc.hygiene.attr_name}}" value="{{sheetData.misc.hygiene.default_value}}"></input>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{sheetData.misc.hygiene.attr_name}}" value="{{sheetData.misc.hygiene.default_value}}"></input>
                 </div>
                 <div class="sheet-def-block">
                     <div class="sheet-label">{{sheetData.misc.flashlight.display_name}}</div>
-                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{prefix}}_{{sheetData.misc.flashlight.attr_name}}" value="{{sheetData.misc.flashlight.default_value}}"></input>
+                    <input class="sheet-line-input sheet-number" type="number" name="attr_{{sheetData.misc.flashlight.attr_name}}" value="{{sheetData.misc.flashlight.default_value}}"></input>
                 </div>
             </div>
         </div>
