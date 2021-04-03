@@ -59,14 +59,6 @@
 
         return "";
     }
-    
-    const filterInt = function(value){
-        if (/^[-+]?(\d+)$/.test(value)) {
-            return Number(value)
-        } else {
-            return NaN
-        }
-    };
 
     /**
      * Note: We do a total recalculation of all fields on change. Previously tried the 1 by 1 (adding a single change to a bonus field) but having a single desync between

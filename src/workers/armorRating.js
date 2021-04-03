@@ -10,13 +10,6 @@
         })
     ]]));
 
-    const filterInt = function(value){
-        if (/^[-+]?(\d+)$/.test(value)) {
-            return Number(value)
-        } else {
-            return NaN
-        }
-    };
 
     const armorRating = "(([[getProperty('misc.armor.attr_name') ]]))";
     const defaultArmorVal = "(([[getProperty('misc.armor.default_value') ]]))";

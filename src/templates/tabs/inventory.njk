@@ -15,12 +15,16 @@
                 <div class="sheet-weight">
                     <div class="sheet-field">
                         <span>Current</span>
-                        <input type="text" name="attr_{{sheetData.misc.inventory_weight.attr_name}}" value="0">
+                        <input type="text" name="attr_{{sheetData.misc.total_weight.attr_name}}" value="0">
                     </div>
                     <div class="sheet-separator">/</div>
                     <div class="sheet-field">
                         <span>Max</span>
-                        <input type="text" name="attr_{{sheetData.misc.inventory_weight.attr_name}}_max" value="10">
+                        <input type="text" name="attr_{{sheetData.misc.total_weight.attr_name}}_max" value="10">
+                    </div>
+                    <div class="sheet-hidden">
+                        <input type="text" name="attr_{{sheetData.misc.inventory_weight.attr_name}}" value="0">
+                        <input type="text" name="attr_{{sheetData.misc.counter_weight.attr_name}}" value="0">
                     </div>
                 </div>
             </div>

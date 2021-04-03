@@ -245,8 +245,6 @@
             "attr_name": "inv_gunpowder",
             "weight": 0.2
         }
-        
-        
     ],
     "ammoTypes": [
         {
@@ -296,5 +294,6 @@
         "body": "body",
         "arms": "arms",
         "legs": "legs"
-    }
+    },
+    "inventoryCounterWeight" : 0.2
 }
