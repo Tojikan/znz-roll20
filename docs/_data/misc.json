@@ -27,9 +27,20 @@
         "randomizeFlaw": "randomizeFlaw",
         "randomizeAbility": "randomizeAbility"
     },
+    "total_weight": {
+        "display_name": "Total Weight",
+        "attr_name": "total_weight",
+        "note": "Combined Weight"
+    },
     "inventory_weight": {
         "display_name": "Inventory Weight",
-        "attr_name": "inventory_weight"
+        "attr_name": "inventory_weight",
+        "note": "Weight inside repeater"
+    },
+    "counter_weight": {
+        "display_name": "Counter Weight",
+        "attr_name": "counter_weight",
+        "note": "Weight inside inventory counters"
     },
     "armor": {
         "display_name": "Armor Rating",

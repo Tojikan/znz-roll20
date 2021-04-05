@@ -121,8 +121,8 @@
                 {% endfor %}
 
                 {% if addCustomAmmo == true %}
-                    {% for num in range(1,data.items.customCounters.ammo_custom_count + 1) %}
-                        <option value="{{data.items.customCounters.ammo_attr}}_{{num}}">Custom Ammo {{ num }}</option>
+                    {% for num in range(0,data.items.customCounters.ammo_custom_count) %}
+                        <option value="{{data.items.customCounters.ammo_attr}}_{{num}}">Custom {{ num + 1 }}</option>
                     {% endfor %}
                 {% endif %}
             </select>

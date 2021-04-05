@@ -58,7 +58,7 @@
   },
   {
     "display_name": "Melee - Blunt",
-    "attr_name": "prof_blunt_melee",
+    "attr_name": "prof_blunt",
     "combat": "melee",
     "description": "",
     "attribute": "STR",
@@ -66,7 +66,7 @@
   },
   {
     "display_name": "Melee - Piercing",
-    "attr_name": "prof_pierce_melee",
+    "attr_name": "prof_pierce",
     "combat": "melee",
     "description": "",
     "attribute": "STR",
@@ -74,7 +74,7 @@
   },
   {
     "display_name": "Melee - Sharp",
-    "attr_name": "prof_sharp_melee",
+    "attr_name": "prof_sharp",
     "combat": "melee",
     "description": "",
     "attribute": "STR",
@@ -103,7 +103,7 @@
   },
   {
     "display_name": "Ranged - Hand Gun",
-    "attr_name": "prof_hand_gun",
+    "attr_name": "prof_handgun",
     "description": "",
     "combat": "ranged",
     "attribute": "DEXT",
@@ -111,7 +111,7 @@
   },
   {
     "display_name": "Ranged - Long Gun",
-    "attr_name": "prof_long_gun",
+    "attr_name": "prof_longgun",
     "description": "",
     "combat": "ranged",
     "attribute": "DEXT",

@@ -57,7 +57,8 @@
             {
                 "attr_name": "ranged_ammo",
                 "display_name": "Ammo",
-                "type" : "line_max"
+                "type" : "line_max",
+                "canonical": "rangedAmmo"
             },
             {
                 "attr_name": "ranged_range",
@@ -117,7 +118,7 @@
         },
         {
             "name": "Piercing",
-            "value": "Piercing"
+            "value": "pierce"
         },
         {
             "name": "Sharp",
@@ -245,37 +246,35 @@
             "attr_name": "inv_gunpowder",
             "weight": 0.2
         }
-        
-        
     ],
     "ammoTypes": [
         {
             "name": "Light",
-            "value": "light",
+            "value": "ammo_light",
             "attr_name": "ammo_light",
             "weight": 0.1
         },
         {
             "name": "Medium",
-            "value": "medium",
+            "value": "ammo_medium",
             "attr_name": "ammo_medium",
             "weight": 0.2
         },
         {
             "name": "Heavy",
-            "value": "heavy",
+            "value": "ammo_heavy",
             "attr_name": "ammo_heavy",
             "weight": 0.3
         },
         {
             "name": "Shotgun Shells",
-            "value": "shells",
+            "value": "ammo_shells",
             "attr_name": "ammo_shells",
             "weight": 0.2
         },
         {
             "name": "Arrows",
-            "value": "arrows",
+            "value": "ammo_arrows",
             "attr_name": "ammo_arrows",
             "weight": 0.3
         }
@@ -296,5 +295,6 @@
         "body": "body",
         "arms": "arms",
         "legs": "legs"
-    }
+    },
+    "inventoryCounterWeight" : 0.2
 }
