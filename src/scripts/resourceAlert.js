@@ -27,7 +27,10 @@ on("change:attribute", function(obj, prev){
         diff,
         character = getObj('character', obj.get('_characterid'));
 
-    diff = Math.abs(curVal - prevVal);
+    if (prevVal == curVal){
+        return;
+    }
+
 
     sendChat(
         'ZnZ Resource Change',
