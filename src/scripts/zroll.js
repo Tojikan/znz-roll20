@@ -20,10 +20,23 @@ var Zroll = Zroll || (function() {
         
         // Help flag.
         if ("help" in args && args['help'] == true){
-            sendMessage('***Z-Roll Help *** <br/>' + 
+            let attributeArray = (([[transformData('attributes', (data) => {
+                return data.map((x)=>{return x.attr_name});
+            })]]));
+
+            let message = '***Z-Roll Help *** <br/>' + 
             '**How to Roll** <br/> Specify a number of dice to roll. <div>!!zroll 3 - roll 3d10</div> <div>!!zroll 5 - roll 5 times</div>' +
-            '**Roll and spend energy**'
-            , sender, true);
+            '**Flags**<br/> Adding the following flags to the roll command to add an effect for each dice that is rolled. <br/>Example: *!!zroll 3 --energy --durability <br/> <br/>' +
+            '*--energy*: Spend energy. <br/>' +
+            '*--sanity*: Spend sanity. <br/>' +
+            '*--health*: Spend health. <br/>' +
+            '*--ammo*: Spend ranged weapon ammo. <br/>' +
+            '*--durability*: Spend melee weapon durability. <br/>';
+            for (let attr of attributeArray){
+                message += `*--${attr}*: Add ${attr} modifier and bonus. <br/>`;
+            }
+            
+            sendMessage(message, sender, true);
             return;
         }
 
@@ -48,83 +61,134 @@ var Zroll = Zroll || (function() {
     },
     /**
      * Closure to handle processing a roll.
+     * - Roll is done at the closure start.
+     * - Then there are actions that affect the roll or character based on args passed into the roll.
      */
     RollHandler = function(args, char, sender){
-        var args = args,
-            char = char,
-            sender = sender,
-            diceAmount = parseInt(args[1], 10),
-            rollArray = doRoll(diceAmount),
-            rollMessage = `Z-Rolling ${diceAmount}d10!`,
-            hasError = false;
+        // Roll Scoped variables - accessible by all functions in the handler.
+        // Uses _CamelCase to differentiate and prevent accidental changes.
+        var _Args = args,
+            _Char = char,
+            _Sender = sender,
+            _NumberOfDice = parseInt(_Args[1], 10),
+            _RollArray = doRoll(_NumberOfDice), 
+            _RollMessage = `Z-Rolling ${_NumberOfDice}d10!`,
+            _HasError = false;
 
 
-        // Resource Spending
-        let resourceTypes = (([[transformData('resource', (data) => {
-            return data.filter((x)=>{return (x.attr_name !== 'exp')})
-            .map((x)=>{ return x.attr_name});
-        })]]));
-        
-        if ("resource" in args && resourceTypes.includes(args['resource'])){
-            spendResource(args['resource']);
-        } else {
-            for (let res of resourceTypes){
-                if (res in args && args[res] == true){
-                    spendResource(res);
-                }
-            }
-        }
-
-        function spendResource(res){
-
-            if (char == null){
-                sendMessage('You must select a token in order to spend a resource!', 'sender', true, "danger");
-                hasError = true;
+        /**
+         * Handler for resource spending
+         */
+        function handleResource(){
+            if (_Char == null){
+                sendMessage(`You must select a token in order to spend ${resourceText}!`, 'sender', true, "danger");
+                _HasError = true;
                 return;
             }
 
-            let currentResource = (parseInt(getAttrByName(char.id, res)) || 0);
+            // Energy, Sanity, Health
+            const resourceTypes = (([[transformData('resource', (data) => {
+                return data.filter((x)=>{return (x.attr_name !== 'exp')})
+                .map((x)=>{ return x.attr_name});
+            })]]));
+            const ammoAttr = "(([[getProperty('prefixes.ranged')]]))_(([[searchProperty('canonical', 'rangedAmmo', 'items').attr_name]]))";
+            const durabilityAttr = "(([[getProperty('prefixes.melee')]]))_(([[searchProperty('canonical', 'meleeDurability', 'items').attr_name]]))";
+    
+            //If resource is input as either resource={res} or --res
+            for (let res of resourceTypes){
+                if (("resource" in _Args && _Args['resource'] == res )||(res in _Args && _Args[res] == true)){
+                    spendResource(res);
+                }
+            }
+            
+            // Ammo
+            if (("resource" in _Args && _Args['resource'] == 'ammo' )||('ammo' in _Args && _Args['ammo'] == true)){
+                spendResource(ammoAttr, "Ammo");
+            }
+            // Durability
+            if (("durability" in _Args && _Args['resource'] == 'durability' )||('durability' in _Args && _Args['durability'] == true)){
+                spendResource(durabilityAttr, "Weapon Durability");
+            }
+        }
 
-            if (currentResource == 0){
-                rollMessage += `<div style="color:red">${char.get('name')} has 0 ${capitalizeWord(res)}!</div>`
-                diceAmount = 0;
-                rollArray = [];
-            } else if (currentResource < diceAmount){
-                log('original:' + rollArray.length);
-                rollMessage += `<div style="color:red">${char.get('name')} ran out of ${capitalizeWord(res)} and could only roll ${currentResource} times!</div>`
-                rollArray = rollArray.slice(0, currentResource);
-                diceAmount = currentResource;
-                log('new:' + rollArray.length);
-            } else if (currentResource == diceAmount){
-                rollMessage += `<div style="color:red">${char.get('name')} has spent all of their ${capitalizeWord(res)}!</div>`
-            } else {
-                rollMessage += `<div>${char.get('name')} spends ${diceAmount} ${capitalizeWord(res)}!</div>`
+        /**
+         * Action for resource spending
+         */
+        function spendResource(resourceAttr, resourceText = ''){
+            if (!resourceText.length){
+                resourceText = capitalizeWord(resourceAttr);
             }
 
-            let newResource = (currentResource - diceAmount > 0 ? (currentResource - diceAmount) : 0);
+            let currentResource = (parseInt(getAttrByName(_Char.id, resourceAttr)) || 0);
 
-            let attr = attrLookup(res, char.id);
+            if (currentResource == 0){
+                _RollMessage += `<div style="color:red">${_Char.get('name')} has 0 ${resourceText}!</div>`
+
+                //Clear roll if no resource
+                _NumberOfDice = 0;
+                _RollArray = [];
+            } else if (currentResource < _NumberOfDice){
+                _RollMessage += `<div style="color:red">${_Char.get('name')} ran out of ${resourceText} and could only roll ${currentResource} times!</div>`
+
+                //Remove rolls if ran out of resource
+                _RollArray = _RollArray.slice(0, currentResource);
+                _NumberOfDice = currentResource;
+            } else if (currentResource == _NumberOfDice){
+                //Nothing changes, just add text if uses all remaining. 
+                _RollMessage += `<div style="color:red">${_Char.get('name')} has used all of their remaining ${resourceText}!</div>`
+            } else {
+                _RollMessage += `<div>${_Char.get('name')} uses ${_NumberOfDice} ${resourceText}!</div>`
+            }
+
+            let newResource = (currentResource - _NumberOfDice > 0 ? (currentResource - _NumberOfDice) : 0);
+
+            let attr = attrLookup(resourceAttr, _Char.id);
 
             if (attr){
                 attr.setWithWorker({current: newResource});
             }
         }
 
-        function addAttrBonus(){
+        /**
+         * Handler for adding attribute bonus
+         */
+        function handleAttribute(){
+            if (_Char == null){
+                sendMessage(`You must select a token in order to spend ${resourceText}!`, 'sender', true, "danger");
+                _HasError = true;
+                return;
+            }
 
+            const attributes = (([[transformData('attributes', (data) => {
+                return data.map((x)=>{return x.attr_name});
+            })]]));
+    
+            for (let attr of attributes){
+                if (("attribute" in _Args && _Args['attribute'] == attr) || (attr in _Args && _Args[attr] == true)){
+                    addAttributeBonus(attr);
+                }
+            }
         }
 
-        function useAmmo(){
+        /**
+         * Action for adding attribute bonus
+         */
+        function addAttributeBonus(attr){
+            var attrMod = parseInt(getAttrByName(_Char.id, attr + "_mod"), 10) || 0,
+                attrBonus = parseInt(getAttrByName(_Char.id, attr + "_bonus"), 10) || 0;
 
-        }
+            for (let roll of _RollArray){
+                roll.roll += (attrMod + attrBonus);
+            }
 
-        function useDurability(){
-
+            _RollMessage += `<div>${_Char.get('name')} adds their ${capitalizeWord(attr)} (${attrMod + attrBonus}) to each roll!</div>`;
         }
             
         function handleRoll(){
-            if (!hasError){
-                sendMessage(`<span style="font-weight: 900; font-size: 14px;">${rollMessage}</span> <br/><br/> ${displayRoll(rollArray)}`, sender, false);
+            handleResource();
+            handleAttribute();
+            if (!_HasError){
+                sendMessage(`<span style="font-weight: 900; font-size: 14px;">${_RollMessage}</span> <br/><br/> ${displayRoll(_RollArray)}`, _Sender, false);
             }
         }
 
@@ -195,7 +259,7 @@ var Zroll = Zroll || (function() {
             } else if (roll.fail){
                 text += `<span style='${rollStyle} ${failStyle}'>(${roll.bonus})</span>`
             } else {
-                text += `<span style='${rollStyle}'>${roll.roll}</span>`;
+                text += `<span style='${rollStyle} ${(roll.roll < 0) ? failStyle : ''}'>${roll.roll}</span>`;
             }
 
             rollText += text;
@@ -299,8 +363,18 @@ var Zroll = Zroll || (function() {
         }
         return word.charAt(0).toUpperCase() + word.slice(1);
     },
+    //Get roll20 attr
     attrLookup = function(name, id){
         return findObjs({type: 'attribute', characterid: id, name: name})[0];
+    },
+    //Get roll20 attr and any added on bonuses.
+    getAttrModAndBonus = function(attr, id){
+        var attrMod = attr + "_mod";
+        var attrBonus = attr + '_bonus';
+        
+        return (parseInt(getAttrByName(id, attrMod), 10) || 0) 
+                + (parseInt(getAttrByName(id, attrBonus), 10) || 0);
+
     },
     validatePlayerControl = function(character, playerId){
         return playerIsGM(playerId) ||  

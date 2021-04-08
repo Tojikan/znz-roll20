@@ -37,7 +37,8 @@
             {
                 "attr_name": "melee_durability",
                 "display_name": "Durability",
-                "type": "line_max"
+                "type": "line_max",
+                "canonical": "meleeDurability"
             }
         ],
         "ranged" : [
