@@ -4,7 +4,8 @@
         "attr_name": "strength",
         "default_value": 2,
         "default_mod": -1,
-        "description": "Strength is a measure of your character's physical power. Higher strength makes it easier for you to land melee attacks, break free from grabs, and perform feats of raw power."
+        "description": "Strength is a measure of your character's physical power. Higher strength makes it easier for you to land melee attacks, break free from grabs, and perform feats of raw power.",
+        "canonical": "str"
     },
     {
         "display_name": "Dexterity",

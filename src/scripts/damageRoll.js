@@ -1,28 +1,29 @@
 /**
- * Z Roll - handles rolling for all attacks, skill checks, etc.
+ * Handles rolls for damage
  */
-
-var Zroll = Zroll || (function() {
+var DamageRoll = DamageRoll || (function() {
     'use strict';
 
-    const RANGED_AMMO_ATTR = "(([[getProperty('prefixes.ranged')]]))_(([[searchProperty('canonical', 'rangedAmmo', 'items').attr_name]]))";
-    const MELEE_DURABILITY_ATTR = "(([[getProperty('prefixes.melee')]]))_(([[searchProperty('canonical', 'meleeDurability', 'items').attr_name]]))";
-
+    const RANGED_DAMAGE_ATTR = "(([[getProperty('prefixes.ranged')]]))_(([[searchProperty('canonical', 'rangedDamage', 'items').attr_name]]))";
+    const MELEE_DAMAGE_ATTR = "(([[getProperty('prefixes.melee')]]))_(([[searchProperty('canonical', 'meleeDamage', 'items').attr_name]]))";
+    const STRENGTH_ATTR = "(([[searchProperty('canonical', 'str', 'attributes').attr_name]]))";
+    
+    // Aren't character attributes but will be used to denote special damage characteristics.
+    const UNARMED_DAMAGE = "unarmed_damage";
 
     const HandleInput = function(msg) {
         if (msg.type !== "api") {
 			return;
         }
 
-        if (!msg.content.startsWith("!!zroll")){
+        if (!msg.content.startsWith("!!damage")){
             return;
         }
 
         let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
-            character = getCharacter(sender, msg), //Selected character only required for attribute/resource rolls
+            character = getCharacter(sender, msg),
             args = splitArgs(msg.content);
 
-            
             
         // Help flag.
         if ("help" in args && args['help'] == true){
@@ -30,8 +31,8 @@ var Zroll = Zroll || (function() {
                 return data.map((x)=>{return x.attr_name});
             })]]));
             
-            let message = '***Z-Roll Help *** <br/>' + 
-            '**How to Roll** <br/> Specify a number of dice to roll. <div>!!zroll 3 - roll 3d10</div> <div>!!zroll 5 - roll 5 times</div>' +
+            let message = '***D-Roll Help *** <br/> Handles damage rolls. Requires an equipped melee/ranged weapon.' + 
+            '**How to Roll** <br/> Specify a number of dice to roll. <div>!!damage 3 - roll damage 3 times.</div> <div>!!damage 5 - roll damaage 5 times</div>' +
             '**Flags**<br/> Adding the following flags to the roll command to add an effect for each dice that is rolled. <br/>Example: *!!zroll 3 --energy --durability <br/> <br/>' +
             '*--energy*: Spend energy. <br/>' +
             '*--sanity*: Spend sanity. <br/>' +
@@ -46,132 +47,91 @@ var Zroll = Zroll || (function() {
             return;
         }
             
+            
         /////////// Validations
+        
+        if (character == null){
+            sendMessage(`You must select a token in order to roll damage!`, 'sender', true, "danger");
+            return;
+        }
+
+        var type = "";
+
+        if ("melee" in args || "m" in args){
+            type = MELEE_DAMAGE_ATTR;
+        } else if ("ranged" in args || "r" in args){
+            type = RANGED_DAMAGE_ATTR;
+        } else if ("unarmed" in args || "u" in args){
+            type = UNARMED_DAMAGE;
+        }
+
+        if (!type.length){
+            sendMessage(`You must specify either melee or ranged damage with '--melee' or '--ranged' flags!`, 'sender', true, "danger");
+            return;
+        }
 
         //Check we have number of dice to roll.
         if (!("1" in args)){
-            sendMessage('You must specify a number of dice to roll (example: !!zroll 5)', sender, true, 'danger');
+            sendMessage('You must specify a number of times to roll damage (example: !!damage 5)', sender, true, 'danger');
             return;
         } 
 
         //Validate number of dice.
         let diceRoll = parseInt(args[1], 10);
         if (isNaN(diceRoll)){
-            sendMessage('Error! You have specified a non-number for number of dice to roll.', sender, true, 'danger');
+            sendMessage('Error! You have specified a non-number for number of times to roll damage.', sender, true, 'danger');
             return;
         } else if (diceRoll < 0){
-            sendMessage('Error! You have specified a negative number of dice to roll', sender, true, 'danger');
+            sendMessage('Error! You have specified a negative number of times to roll damage.', sender, true, 'danger');
             return;
         }
-        
-        RollHandler(args, character, sender).handleRoll();
+
+        DamageHandler(type, diceRoll, args, character, sender).handleDamage();
 
     },
     /**
-     * Closure to handle processing a roll.
-     * - Roll is done at the closure start.
-     * - Then handleResource/handleAttribute is called for spending resource/adding attribute bonuses if certain args are passed in.
+     * Closure to handle processing damage.
+     * - Type is the damage type character attr, determined at validation. 
      */
-    RollHandler = function(args, char, sender){
+    DamageHandler = function(type, dice, args, char, sender){
         // Roll Scoped variables - accessible by all functions in the handler.
         // Uses _CamelCase to differentiate and prevent accidental changes.
-        var _Args = args,
+        var _Type = type,
+            _Args = args,
             _Char = char,
             _Sender = sender,
-            _NumberOfDice = parseInt(_Args[1], 10),
-            _RollArray = doRoll(_NumberOfDice), 
-            _RollMessage = `Z-Rolling ${_NumberOfDice}d10!`,
+            _WeaponDamage = setDamage(),
+            _NumOfAttacks = dice,
+            _RollMessage = `${_Char.get('name')} attacks ${_NumOfAttacks}`,
             _HasError = false;
-
-
-        /**
-         * Handler for resource spending
+        
+        /***
+         * Get weapon damage.
          */
-        function handleResource(){
-            if (_Char == null){
-                sendMessage(`You must select a token in order to spend ${resourceText}!`, 'sender', true, "danger");
-                _HasError = true;
-                return;
-            }
+        function setDamage(){
 
-            // Energy, Sanity, Health
-            const resourceTypes = (([[transformData('resource', (data) => {
-                return data.filter((x)=>{return (x.attr_name !== 'exp')})
-                .map((x)=>{ return x.attr_name});
-            })]]));
+            switch (_Type){
+                case RANGED_DAMAGE_ATTR:
+                case MELEE_DAMAGE_ATTR:
+                    return getAttrByName(_Char.id, _Type);
+                case UNARMED_DAMAGE:
+                    return 1;
+            };
 
-    
-            //If resource is input as either resource={res} or --res
-            for (let res of resourceTypes){
-                if (("resource" in _Args && _Args['resource'] == res )||(res in _Args && _Args[res] == true)){
-                    spendResource(res);
-                }
-            }
-            
-            // Ammo
-            if (("resource" in _Args && _Args['resource'] == 'ammo' )||('ammo' in _Args && _Args['ammo'] == true)){
-                spendResource(RANGED_AMMO_ATTR, "Ammo");
-            }
-            // Durability
-            if (("durability" in _Args && _Args['resource'] == 'durability' )||('durability' in _Args && _Args['durability'] == true)){
-                spendResource(MELEE_DURABILITY_ATTR, "Weapon Durability");
-            }
-        }
-
-        /**
-         * Action for resource spending
-         */
-        function spendResource(resourceAttr, resourceText = ''){
-            if (!resourceText.length){
-                resourceText = capitalizeWord(resourceAttr);
-            }
-
-            let currentResource = (parseInt(getAttrByName(_Char.id, resourceAttr)) || 0);
-
-            if (currentResource == 0){
-                _RollMessage += `<div style="color:red">${_Char.get('name')} has 0 ${resourceText}!</div>`
-
-                //Clear roll if no resource
-                _NumberOfDice = 0;
-                _RollArray = [];
-            } else if (currentResource < _NumberOfDice){
-                _RollMessage += `<div style="color:red">${_Char.get('name')} ran out of ${resourceText} and could only roll ${currentResource} times!</div>`
-
-                //Remove rolls if ran out of resource
-                _RollArray = _RollArray.slice(0, currentResource);
-                _NumberOfDice = currentResource;
-            } else if (currentResource == _NumberOfDice){
-                //Nothing changes, just add text if uses all remaining. 
-                _RollMessage += `<div style="color:red">${_Char.get('name')} has used all of their remaining ${resourceText}!</div>`
-            } else {
-                _RollMessage += `<div>${_Char.get('name')} uses ${_NumberOfDice} ${resourceText}!</div>`
-            }
-
-            let newResource = (currentResource - _NumberOfDice > 0 ? (currentResource - _NumberOfDice) : 0);
-
-            let attr = attrLookup(resourceAttr, _Char.id);
-
-            if (attr){
-                attr.setWithWorker({current: newResource});
-            }
+            sendMessage(`Unknown type error`, 'sender', true, "danger");
+            _HasError = true;
         }
 
         /**
          * Handler for adding attribute bonus
          */
         function handleAttribute(){
-            if (_Char == null){
-                sendMessage(`You must select a token in order to spend ${resourceText}!`, 'sender', true, "danger");
-                _HasError = true;
-                return;
-            }
-
             const attributes = (([[transformData('attributes', (data) => {
                 return data.map((x)=>{return x.attr_name});
             })]]));
     
             for (let attr of attributes){
-                if (("attribute" in _Args && _Args['attribute'] == attr) || (attr in _Args && _Args[attr] == true)){
+                if (("bonus" in _Args && _Args['bonus'] == attr) || (attr in _Args && _Args[attr] == true)){
                     addAttributeBonus(attr);
                 }
             }
@@ -191,8 +151,7 @@ var Zroll = Zroll || (function() {
             _RollMessage += `<div>${_Char.get('name')} adds their ${capitalizeWord(attr)} (${attrMod + attrBonus}) to each roll!</div>`;
         }
             
-        function handleRoll(){
-            handleResource();
+        function handleDamage(){
             handleAttribute();
             if (!_HasError){
                 sendMessage(`<span style="font-weight: 900; font-size: 14px;">${_RollMessage}</span> <br/><br/> ${displayRoll(_RollArray)}`, _Sender, false);
@@ -200,7 +159,7 @@ var Zroll = Zroll || (function() {
         }
 
         return {
-            handleRoll: handleRoll
+            handleDamage: handleDamage
         }
     },
     /**
@@ -317,7 +276,7 @@ var Zroll = Zroll || (function() {
             `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
 		);
     },
-    RegisterEventHandlers = function() {
+    RegisterEventHandlers = function(){
 		on('chat:message', HandleInput);
     };
     
@@ -328,5 +287,5 @@ var Zroll = Zroll || (function() {
 
 on("ready",function(){
 	'use strict';
-	Zroll.RegisterEventHandlers();
+	DamageRoll.RegisterEventHandlers();
 });

@@ -5,6 +5,7 @@ module.exports = {
     dataFolder: './data/',
     queryFolder: './queries',
     prefixPath: './data/prefixes.json',
+    scriptFunctions: './_script-functions.js',
 
     /**
      * Runs a given function for anytime you need flexibility.
@@ -106,6 +107,14 @@ module.exports = {
         //https://stackoverflow.com/questions/6393943/convert-javascript-string-in-dot-notation-into-an-object-reference
         return notation.split('.').reduce((o,i)=>o[i], data);
     },
+    /**
+     * Get the code of a function in the specified function file as a string
+     */
+    getFunction: function(funcName){
+        delete require.cache[require.resolve(this.scriptFunctions)]; //clear cache 
+        let funcData = require(this.scriptFunctions);
+        return funcData[funcName].toString();
+    }
 }
 
 /**

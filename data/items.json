@@ -27,7 +27,8 @@
             {
                 "attr_name": "melee_damage",
                 "display_name": "Melee Damage",
-                "type": "line_text"
+                "type": "line_text",
+                "canonical": "meleeDamage"
             },
             {
                 "attr_name": "melee_reach",
@@ -53,7 +54,8 @@
             {
                 "attr_name": "ranged_damage",
                 "display_name": "Ranged Damage",
-                "type" : "line_text"
+                "type" : "line_text",
+                "canonical": "rangedDamage"
             },
             {
                 "attr_name": "ranged_ammo",
