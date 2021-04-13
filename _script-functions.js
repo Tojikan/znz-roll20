@@ -92,5 +92,12 @@ module.exports = {
             return ''
         }
         return word.charAt(0).toUpperCase() + word.slice(1);
+    },
+    filterInt: function(value){
+        if (/^[-+]?(\d+)$/.test(value)) {
+            return Number(value)
+        } else {
+            return NaN
+        }
     }
 }

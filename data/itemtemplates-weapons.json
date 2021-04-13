@@ -1,0 +1,82 @@
+{
+    "blunt1": {
+        "item_type" : "melee",
+        "item_name" : "Blunt 1",
+        "item_weight" : 2,
+        "item_quantity" : 1,
+        "melee_damage": "2-4",
+        "melee_reach": 1,
+        "melee_durability": 15,
+        "melee_type": "blunt"
+    },
+    "blunt2": {
+        "item_type" : "melee",
+        "item_name" : "Blunt 2",
+        "item_weight" : 3,
+        "item_quantity" : 1,
+        "melee_damage": "4-6",
+        "melee_reach": 1,
+        "melee_durability": 30,
+        "melee_type": "blunt"
+    },
+    "blunt3": {
+        "item_type" : "melee",
+        "item_name" : "Blunt 3",
+        "item_weight" : 4,
+        "item_quantity" : 1,
+        "melee_damage": "6-8",
+        "melee_reach": 1,
+        "melee_durability": 45,
+        "melee_type": "blunt"
+    },
+    "blunt4": {
+        "item_type" : "melee",
+        "item_name" : "Blunt 4",
+        "item_weight" : 6,
+        "item_quantity" : 1,
+        "melee_damage": "8-10",
+        "melee_reach": 1,
+        "melee_durability": 75,
+        "melee_type": "blunt"
+    },
+    "sharp1": {
+        "item_type" : "sharp",
+        "item_name" : "Sharp 1",
+        "item_weight" : 1,
+        "item_quantity" : 1,
+        "melee_damage": "3-6",
+        "melee_reach": 1,
+        "melee_durability": 10,
+        "melee_type": "sharp"
+    },
+    "sharp2": {
+        "item_type" : "sharp",
+        "item_name" : "Sharp 2",
+        "item_weight" : 3,
+        "item_quantity" : 1,
+        "melee_damage": "5-8",
+        "melee_reach": 1,
+        "melee_durability": 20,
+        "melee_type": "sharp"
+    },
+    "sharp3": {
+        "item_type" : "sharp",
+        "item_name" : "Sharp 1",
+        "item_weight" : 4,
+        "item_quantity" : 1,
+        "melee_damage": "7-10",
+        "melee_reach": 1,
+        "melee_durability": 30,
+        "melee_type": "sharp"
+    },
+    "sharp4": {
+        "item_type" : "sharp",
+        "item_name" : "Sharp 4",
+        "item_weight" : 5,
+        "item_quantity" : 1,
+        "melee_damage": "9-13",
+        "melee_reach": 1,
+        "melee_durability": 40,
+        "melee_type": "sharp"
+    }
+}

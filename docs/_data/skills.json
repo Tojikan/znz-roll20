@@ -3,154 +3,184 @@
     "display_name": "Animal Handling",
     "attr_name": "animals",
     "description": "Knowledge on raising and taking care of animals.",
-    "attribute": "CHA",
+    "attribute": "charisma",
+    "attr_shorthand": "CHA",
     "resource": "Sanity"
   },
   {
     "display_name": "Blacksmithing",
     "attr_name": "blacksmithing",
     "description": "Knowledge on metal-working",
-    "attribute": "STR",
+    "attribute": "strength",
+    "attr_shorthand": "STR",
+    "resource": "Energy"
+  },
+  {
+    "display_name": "Chemistry",
+    "attr_name": "chemistry",
+    "description": "Knowledge of chemicals",
+    "attribute": "intelligence",
+    "attr_shorthand": "INT",
     "resource": "Energy"
   },
   {
     "display_name": "Construction",
     "attr_name": "construction",
     "description": "Allows you to build more sturdier and advanced structures.",
-    "attribute": "STR",
+    "attribute": "strength",
+    "attr_shorthand": "STR",
     "resource": "Energy"
   },
   {
     "display_name": "Cooking",
     "attr_name": "cooking",
     "description": "",
-    "attribute": "PER",
+    "attribute": "perception",
+    "attr_shorthand": "PER",
     "resource": "Energy"
   },
   {
-    "display_name": "Electronics",
-    "attr_name": "electronics",
-    "description": "The ability to build, maintain, or repair consumer electronics and devices.",
-    "attribute": "INT",
+    "display_name": "Electrician",
+    "attr_name": "electrician",
+    "description": "The ability to build, maintain, or repair electrical networks",
+    "attribute": "intelligence",
+    "attr_shorthand": "INT",
     "resource": "Sanity"
   },
   {
     "display_name": "Explosives",
     "attr_name": "explosives",
     "description": "Knowledge in the composition, creation, and usage of explosives.",
-    "attribute": "INT",
+    "attribute": "intelligence",
+    "attr_shorthand": "INT",
     "resource": "Sanity"
   },
   {
     "display_name": "Farming",
     "attr_name": "farming",
     "description": "",
-    "attribute": "TENA",
+    "attribute": "constitution",
+    "attr_shorthand": "CONST",
     "resource": "energy"
   },
   {
-    "display_name": "Foreign Language",
-    "attr_name": "foreign_language",
-    "description": "Knowledge in a specific language. Every time you add a point to this skill, you may add a Language that your character knows.",
-    "attribute": "INT",
-    "resource": "Sanity"
+    "display_name": "Foraging",
+    "attr_name": "foraging",
+    "description": "Gather food and materials from nature.",
+    "attribute": "perception",
+    "attr_shorthand": "PER",
+    "resource": "Energy"
   },
   {
     "display_name": "Gunsmithing",
     "attr_name": "gunsmmithing",
     "description": "Allows you to craft, repair, and improve upon firearms.",
-    "attribute": "DEXT",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
     "resource": "Energy"
   },
   {
     "display_name": "Hacking",
     "attr_name": "hacking",
     "description": "Allows you to hack or gain access to computer systems.",
-    "attribute": "INT",
+    "attribute": "intelligence",
+    "attr_shorthand": "INT",
     "resource": "Sanity"
   },
   {
     "display_name": "Hotwiring",
     "attr_name": "hotwiring",
     "description": "Allows you to attempt to hotwire a vehicle.",
-    "attribute": "DEXT",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
     "resource": "Energy"
   },
   {
     "display_name": "Hunting",
     "attr_name": "hunting",
     "description": "",
-    "attribute": "LUCK",
+    "attribute": "perception",
+    "attr_shorthand": "PER",
     "resource": "Energy"
   },
   {
     "display_name": "Knot Tying",
     "attr_name": "knots",
     "description": "Tie and untie difficult knots.",
-    "attribute": "DEXT",
+    "attribute": "tenacity",
+    "attr_shorthand": "TENA",
     "resource": "Energy"
   },
   {
     "display_name": "Lockpicking",
     "attr_name": "lockpicking",
     "description": "Allows you to attempt to pick standard locks.",
-    "attribute": "PER",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
     "resource": "Energy"
   },
   {
     "display_name": "Mechanic",
     "attr_name": "Mechanic",
     "description": "Allows you to use tools to build, maintain, or repair machinery. ",
-    "attribute": "INT",
+    "attribute": "intelligence",
+    "attr_shorthand": "INT",
     "resource": "Energy"
   },
   {
     "display_name": "Medicine",
     "attr_name": "medicine",
     "description": "Knowledge in various medicines and the diagnosis, treatment, and prevention of disease.",
-    "attribute": "INT",
+    "attribute": "intelligence",
+    "attr_shorthand": "INT",
     "resource": "Sanity"
   },
   {
     "display_name": "Nature",
     "attr_name": "nature",
     "description": "",
-    "attribute": "PER",
+    "attribute": "perception",
+    "attr_shorthand": "PER",
     "resource": "Sanity"
   },
   {
     "display_name": "Piloting - Boat",
     "attr_name": "piloting",
     "description": "",
-    "attribute": "PER",
+    "attribute": "perception",
+    "attr_shorthand": "PER",
     "resource": "Sanity"
   },
   {
     "display_name": "Piloting - Plane",
     "attr_name": "piloting",
     "description": "",
-    "attribute": "PER",
+    "attribute": "perception",
+    "attr_shorthand": "PER",
     "resource": "Sanity"
   },
   {
     "display_name": "Science",
     "attr_name": "science",
     "description": "",
-    "attribute": "INT",
+    "attribute": "intelligence",
+    "attr_shorthand": "INT",
     "resource": "Sanity"
   },
   {
     "display_name": "Tailoring",
     "attr_name": "tailoring",
     "description": "Allows you to craft clothes.",
-    "attribute": "DEXT",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
     "resource": "Energy"
   },
   {
     "display_name": "Trap-making",
     "attr_name": "trapmaking",
     "description": "Create Traps.",
-    "attribute": "INT",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
     "resource": "Energy"
   }
 ]

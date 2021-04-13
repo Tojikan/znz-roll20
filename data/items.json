@@ -33,7 +33,8 @@
             {
                 "attr_name": "melee_reach",
                 "display_name": "Weapon Reach",
-                "type": "line_text"
+                "type": "line_text",
+                "canonical": "meleeRange"
             },
             {
                 "attr_name": "melee_durability",
@@ -66,7 +67,8 @@
             {
                 "attr_name": "ranged_range",
                 "display_name": "Weapon Range",
-                "type" : "line_text"
+                "type" : "line_text",
+                "canonical": "rangedRange"
             }
         ],
         "equipment" : [

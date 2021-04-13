@@ -6,7 +6,6 @@ var DamageRoll = DamageRoll || (function() {
 
     const RANGED_DAMAGE_ATTR = "equipped_ranged_ranged_damage";
     const MELEE_DAMAGE_ATTR = "equipped_melee_melee_damage";
-    const STRENGTH_ATTR = "strength";
     
     // Aren't character attributes but will be used to denote special damage characteristics.
     const UNARMED_DAMAGE = "unarmed_damage";
@@ -27,20 +26,20 @@ var DamageRoll = DamageRoll || (function() {
             
         // Help flag.
         if ("help" in args && args['help'] == true){
-            let attributeArray = ["strength","dexterity","intelligence","perception","tenacity","charisma","luck"];
+            let attributeArray = ["strength","dexterity","constitution","athletics","intelligence","tenacity","perception","charisma"];
             
-            let message = '***D-Roll Help *** <br/> Handles damage rolls. Requires an equipped melee/ranged weapon.' + 
-            '**How to Roll** <br/> Specify a number of dice to roll. <div>!!damage 3 - roll damage 3 times.</div> <div>!!damage 5 - roll damaage 5 times</div>' +
-            '**Flags**<br/> Adding the following flags to the roll command to add an effect for each dice that is rolled. <br/>Example: *!!zroll 3 --energy --durability <br/> <br/>' +
-            '*--energy*: Spend energy. <br/>' +
-            '*--sanity*: Spend sanity. <br/>' +
-            '*--health*: Spend health. <br/>' +
-            '*--ammo*: Spend ranged weapon ammo. <br/>' +
-            '*--durability*: Spend melee weapon durability. <br/>';
+            let message = '***D-Roll Help *** <br/> This script rolls weapon damage for you. Requires an equipped melee/ranged weapon. <br/><br/>' + 
+            '**How to Roll** <br/> Specify a number of dice to roll. <br/><br/> *<div>!!damage 3 - roll damage 3 times.</div> <div>!!damage 5 - roll damage 5 times</div>*<br />' +
+            'Then specify whether its a melee, ranged, or unarmed attack by adding flags. <br /><br /> *<div>!!damage 3 --melee</div><div>!!damage 3 --unarmed</div><div>!!damage 3 --ranged</div>*<div>You can also use --m, --r, --u as a shorthand</div><br/><br/>' +
+            '**Additional Flags**<br/> Adding the following flags to the roll command to add an effect. <br/><br/>' +
+            'Attribute Adding - Adds attribute modifier and bonus once to the sum of the roll.<br/><br/>';
             for (let attr of attributeArray){
-                message += `*--${attr}*: Add ${attr} modifier and bonus. <br/>`;
+                message += `    *--${attr}* <br/>`;
             }
-            
+            message += 'Powered Strike: Adds attribute modifier and bonus to each damage rolled.';
+            for (let attr of attributeArray){
+                message += `    *power=${attr}* <br/>`;
+            }
             sendMessage(message, sender, true);
             return;
         }
@@ -49,7 +48,7 @@ var DamageRoll = DamageRoll || (function() {
         /////////// Validations
         
         if (character == null){
-            sendMessage(`You must select a token in order to roll damage!`, 'sender', true, "danger");
+            sendMessage(`You must select a token in order to roll damage!`, sender, true, "danger");
             return;
         }
 
@@ -62,17 +61,17 @@ var DamageRoll = DamageRoll || (function() {
         } else if ("unarmed" in args || "u" in args){
             type = UNARMED_DAMAGE;
         }
-
-        if (!type.length){
-            sendMessage(`You must specify either melee or ranged damage with '--melee' or '--ranged' flags!`, 'sender', true, "danger");
-            return;
-        }
-
+        
         //Check we have number of dice to roll.
         if (!("1" in args)){
             sendMessage('You must specify a number of times to roll damage (example: !!damage 5)', sender, true, 'danger');
             return;
         } 
+
+        if (!type.length){
+            sendMessage(`You must specify either melee or ranged damage or unarmed with '--melee' or '--ranged' or '--unarmed' flags! (or --m, --r, --u)`, sender, true, "danger");
+            return;
+        }
 
         //Validate number of dice.
         let diceRoll = parseInt(args[1], 10);
@@ -95,14 +94,27 @@ var DamageRoll = DamageRoll || (function() {
         // Roll Scoped variables - accessible by all functions in the handler.
         // Uses _CamelCase to differentiate and prevent accidental changes.
         var _Type = type,
+            _TypeText = '',
             _Args = args,
             _Char = char,
             _Sender = sender,
             _WeaponDamage = setDamage(),
+            _DamageParsed = {min: 0, max: 0},
             _NumOfAttacks = dice,
-            _RollMessage = `${_Char.get('name')} attacks ${_NumOfAttacks}`,
+            _DmgMessage = `${_Char.get('name')} rolls damage ${_NumOfAttacks} times${_TypeText}!<br/><br/>`,
+            _DmgArray = [],
+            _Bonus = 0,
             _HasError = false;
+
+        const _Attributes = ["strength","dexterity","constitution","athletics","intelligence","tenacity","perception","charisma"];
         
+        try {
+            _DamageParsed = parseDamageExpr(_WeaponDamage);
+        } catch (e){
+            sendMessage(`Error occured while parsing weapon damage! - ${e}`, sender, true, "danger");
+            _HasError = true;
+        }
+
         /***
          * Get weapon damage.
          */
@@ -110,47 +122,127 @@ var DamageRoll = DamageRoll || (function() {
 
             switch (_Type){
                 case RANGED_DAMAGE_ATTR:
+                    _TypeText = ' using their Ranged Weapon damage!';
+                    return getAttrByName(_Char.id, _Type);
                 case MELEE_DAMAGE_ATTR:
+                    _TypeText = ' using their Melee Weapon damage!';
                     return getAttrByName(_Char.id, _Type);
                 case UNARMED_DAMAGE:
-                    return 1;
+                    _TypeText = ' using Unarmed damage!';
+                    return '1'; //needs to be string for parsing later
             };
 
-            sendMessage(`Unknown type error`, 'sender', true, "danger");
+            sendMessage(`Unknown type error`, _Sender, true, "danger");
             _HasError = true;
+        }
+
+        /**
+         * Returns an array of numbers to represent a damage roll.
+         */
+        function rollDamage(){
+            let min = _DamageParsed.min,
+                max = _DamageParsed.max;
+
+            if (max < min){ 
+                sendMessage(`The Damage Expression '${_WeaponDamage}' has a max damage lower than min damage! Min damage cannot be higher than max damage!`, _Sender, true, "danger");
+                _HasError = true;
+            }
+
+            let diff = max - min,
+                result = [];
+
+            if (diff > 0){
+                for (let i = 0; i < _NumOfAttacks; i++){
+                    // +/- 1 so we can pseudo-roll 0.
+                    let random = randomInteger(diff + 1); 
+                    result.push(min + (random - 1));
+                }
+            } else {
+                for (let i = 0; i < _NumOfAttacks; i++){
+                    result.push(min);
+                }
+            }
+
+            _DmgArray = result;
+
+        }
+        
+        /**
+         * Formats damage array into a chat message for display.
+         */
+        function displayDamage(){
+            var rollText = '<div style="line-height: 1.6; background: white; padding: 2px;">',
+            finalStyle = 'font-weight: 900; font-size: 16px; padding: 3px; border:solid 1px black; background: yellow',
+            rollStyle = 'font-size: 12px; border: solid 1px gray; padding:1px 2px;',
+            result = (_DmgArray.reduce((a,b) => a + b, 0)) + _Bonus;
+            
+            log("DmgArray: " + _DmgArray.toString());
+            for (let i = 0; i < _DmgArray.length; i++){
+                let text = ''
+                
+                if (i != 0){
+                    text += ' + ';
+                }
+
+                text += `<span style='${rollStyle}'>${_DmgArray[i]}</span>`;
+
+                // log(i + ":" + text);
+                rollText += text;
+            }
+
+            if (_Bonus != 0){
+                rollText += ` + (${_Bonus})`
+            }
+
+
+            rollText += ` = <span style='${finalStyle}'>${result}</span></div>`
+
+            return rollText;
         }
 
         /**
          * Handler for adding attribute bonus
          */
         function handleAttribute(){
-            const attributes = ["strength","dexterity","intelligence","perception","tenacity","charisma","luck"];
     
-            for (let attr of attributes){
+            for (let attr of _Attributes){
                 if (("bonus" in _Args && _Args['bonus'] == attr) || (attr in _Args && _Args[attr] == true)){
-                    addAttributeBonus(attr);
+                    let attrMod = parseInt(getAttrByName(_Char.id, attr + "_mod"), 10) || 0,
+                        attrBonus = parseInt(getAttrByName(_Char.id, attr + "_bonus"), 10) || 0;
+                        
+                    _Bonus = attrMod + attrBonus;
+                    _DmgMessage += `<div>${_Char.get('name')} adds their ${capitalizeWord(attr)} (${attrMod + attrBonus}) to the final damage amount!</div><br/>`;
                 }
             }
         }
 
         /**
-         * Action for adding attribute bonus
+         * Handler for adding attribute bonus to each damage roll.
          */
-        function addAttributeBonus(attr){
-            var attrMod = parseInt(getAttrByName(_Char.id, attr + "_mod"), 10) || 0,
-                attrBonus = parseInt(getAttrByName(_Char.id, attr + "_bonus"), 10) || 0;
+        function handlePoweredStrike(){
+            for (let attr of _Attributes){
+                if (("power" in _Args && _Args['power'] == attr)){
+                    let attrMod = parseInt(getAttrByName(_Char.id, attr + "_mod"), 10) || 0,
+                        attrBonus = parseInt(getAttrByName(_Char.id, attr + "_bonus"), 10) || 0,
+                        power = attrMod + attrBonus;
 
-            for (let roll of _RollArray){
-                roll.roll += (attrMod + attrBonus);
+                    _DmgArray = _DmgArray.map((x)=>{
+                        return x += power;
+                    });
+
+                    log (_DmgArray);
+
+                    _DmgMessage += `<div>${_Char.get('name')} uses a ${capitalizeWord(attr)}-powered strike and adds (${power}) to each damage roll!</div><br/>`;
+                }
             }
-
-            _RollMessage += `<div>${_Char.get('name')} adds their ${capitalizeWord(attr)} (${attrMod + attrBonus}) to each roll!</div>`;
         }
-            
+
         function handleDamage(){
+            rollDamage();
             handleAttribute();
+            handlePoweredStrike();
             if (!_HasError){
-                sendMessage(`<span style="font-weight: 900; font-size: 14px;">${_RollMessage}</span> <br/><br/> ${displayRoll(_RollArray)}`, _Sender, false);
+                sendMessage(`<span style="font-weight: 900; font-size: 14px;">${_DmgMessage}</span> <br/> ${displayDamage()}`, _Sender, false);
             }
         }
 
@@ -159,93 +251,35 @@ var DamageRoll = DamageRoll || (function() {
         }
     },
     /**
-     * Returns an array of objects which represent an individual roll.
-     * Each object contains:
-     * - Roll - random number 1-10
-     * - Crit - true if rolled 10
-     * - Fail - true if rolled 1
-     * - Bonus - Positive number if crit to be added to roll. Negative number if fail.
+     * Parse a Damage Expression into an Min-Max object that can be programmatically handled.
      */
-    doRoll = function(num, bonus){
-        var result = [];
+    parseDamageExpr = function(dmgExpr){
+        const expr = dmgExpr.trim().replace(/\s/g,''), //get rid of all whitespace for easier processing
+            dmgRegex = /(^[0-9]+)\-([0-9]+)/;
+        
+        var result = {
+            min: 0,
+            max: 0
+        };
 
-        for (let i = 0; i < num; i++){
-            let rollData = {},
-                roll = randomInteger(10),
-                crit = (roll == 10),
-                fail = (roll == 1);
-            
-            rollData.roll = roll;
-            rollData.crit = crit;
-            rollData.fail = fail;
-
-            if (crit){
-                //Crit - adds up to 10
-                let additional = randomInteger(10);
-                rollData.bonus = additional;
-            } else if (fail){
-                //Fail - minuses minimum of 4.
-                let additional = randomInteger(7) + 3;
-                rollData.bonus = -(additional);
-            } else {
-                rollData.bonus = 0;
-            }
-
-            result.push(rollData);
-
+        //If basic integer
+        if (Number.isInteger(filterInt(dmgExpr,10))){
+            result.min = result.max = filterInt(dmgExpr,10);
+            return result;
         }
+
+        if (!dmgRegex.test(dmgExpr)){
+            throw(`The Damage Expression '${dmgExpr}' is not a valid format! Format must either be an integer or a hypen-separated number range(1-5)`);
+        }
+
+        //1 - matching group 1 - min
+        //2 - matching group 2 - max
+        let match = dmgRegex.exec(expr);
+
+        result.min = Number(match[1]);
+        result.max = Number(match[2]);
+
         return result;
-    },
-    /**
-     * Turns a roll array into a chat message for display.
-     */
-    displayRoll = function(rollArray, result){
-            var rollText = '<div style="line-height: 1.6; background: white; padding: 2px;">',
-            finalStyle = 'font-weight: 900; font-size: 16px; padding: 3px; border:solid 1px black; background: yellow',
-            critStyle = 'color: green;',
-            failStyle = 'color: red;',
-            rollStyle = 'font-size: 12px; border: solid 1px gray; padding:1px 2px;',
-            result = calculateRoll(rollArray);
-
-
-        for (let i = 0; i < rollArray.length; i++){
-            let text = '',
-                roll = rollArray[i];
-
-            if (i != 0){
-                text += ' + ';
-            }
-            
-            if (roll.crit){
-                text += `<span style='${rollStyle} ${critStyle}'>(${roll.roll} + ${roll.bonus})</span>`;
-            } else if (roll.fail){
-                text += `<span style='${rollStyle} ${failStyle}'>(${roll.bonus})</span>`
-            } else {
-                text += `<span style='${rollStyle} ${(roll.roll < 0) ? failStyle : ''}'>${roll.roll}</span>`;
-            }
-
-            rollText += text;
-        }
-        rollText += ` = <span style='${finalStyle}'>${result}</span></div>`
-
-        return rollText;
-    },
-    /**
-     * Calculates the result of a roll array
-     */
-    calculateRoll = function(rollArray){
-        var final = 0;
-
-        for (let roll of rollArray){
-           if (roll.fail){
-                final += roll.bonus;
-            } else {
-                //Bonus on regular rolls is 0
-                final += roll.roll + roll.bonus; 
-            }
-        }
-
-        return final;
     },
     splitArgs = function(input) {
         /**
@@ -341,9 +375,16 @@ var DamageRoll = DamageRoll || (function() {
                 + (parseInt(getAttrByName(id, attrBonus), 10) || 0);
 
     },
+    filterInt = function(value){
+        if (/^[-+]?(\d+)$/.test(value)) {
+            return Number(value)
+        } else {
+            return NaN
+        }
+    },
     sendMessage = function(message, who, whisper, type="info" ) {
         var textColor = "#000000",
-            bgColor = "#d3d3d3";
+            bgColor = "#ffdfbf";
         
         switch (type) {
             case "danger":
@@ -358,7 +399,7 @@ var DamageRoll = DamageRoll || (function() {
 
 		sendChat(
             'Z-Roll',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
+            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Damage Roll</strong></div>${message}</div>`
 		);
     },
     RegisterEventHandlers = function(){

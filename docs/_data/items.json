@@ -27,17 +27,20 @@
             {
                 "attr_name": "melee_damage",
                 "display_name": "Melee Damage",
-                "type": "line_text"
+                "type": "line_text",
+                "canonical": "meleeDamage"
             },
             {
                 "attr_name": "melee_reach",
                 "display_name": "Weapon Reach",
-                "type": "line_text"
+                "type": "line_text",
+                "canonical": "meleeRange"
             },
             {
                 "attr_name": "melee_durability",
                 "display_name": "Durability",
-                "type": "line_max"
+                "type": "line_max",
+                "canonical": "meleeDurability"
             }
         ],
         "ranged" : [
@@ -52,7 +55,8 @@
             {
                 "attr_name": "ranged_damage",
                 "display_name": "Ranged Damage",
-                "type" : "line_text"
+                "type" : "line_text",
+                "canonical": "rangedDamage"
             },
             {
                 "attr_name": "ranged_ammo",
@@ -63,7 +67,8 @@
             {
                 "attr_name": "ranged_range",
                 "display_name": "Weapon Range",
-                "type" : "line_text"
+                "type" : "line_text",
+                "canonical": "rangedRange"
             }
         ],
         "equipment" : [

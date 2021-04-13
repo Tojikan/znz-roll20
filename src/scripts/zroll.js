@@ -80,7 +80,7 @@ var Zroll = Zroll || (function() {
             _Sender = sender,
             _NumberOfDice = parseInt(_Args[1], 10),
             _RollArray = doRoll(_NumberOfDice), 
-            _RollMessage = `Z-Rolling ${_NumberOfDice}d10!`,
+            _RollMessage = `Z-Rolling ${_NumberOfDice}d10!<br/><br/>`,
             _HasError = false;
 
 
@@ -88,12 +88,6 @@ var Zroll = Zroll || (function() {
          * Handler for resource spending
          */
         function handleResource(){
-            if (_Char == null){
-                sendMessage(`You must select a token in order to spend ${resourceText}!`, 'sender', true, "danger");
-                _HasError = true;
-                return;
-            }
-
             // Energy, Sanity, Health
             const resourceTypes = (([[transformData('resource', (data) => {
                 return data.filter((x)=>{return (x.attr_name !== 'exp')})
@@ -122,6 +116,12 @@ var Zroll = Zroll || (function() {
          * Action for resource spending
          */
         function spendResource(resourceAttr, resourceText = ''){
+            if (_Char == null){
+                sendMessage(`You must select a token in order to spend ${resourceText}!`, sender, true, "danger");
+                _HasError = true;
+                return;
+            }
+
             if (!resourceText.length){
                 resourceText = capitalizeWord(resourceAttr);
             }
@@ -129,22 +129,22 @@ var Zroll = Zroll || (function() {
             let currentResource = (parseInt(getAttrByName(_Char.id, resourceAttr)) || 0);
 
             if (currentResource == 0){
-                _RollMessage += `<div style="color:red">${_Char.get('name')} has 0 ${resourceText}!</div>`
+                _RollMessage += `<div style="color:red">${_Char.get('name')} has 0 ${resourceText}!</div><br/>`
 
                 //Clear roll if no resource
                 _NumberOfDice = 0;
                 _RollArray = [];
             } else if (currentResource < _NumberOfDice){
-                _RollMessage += `<div style="color:red">${_Char.get('name')} ran out of ${resourceText} and could only roll ${currentResource} times!</div>`
+                _RollMessage += `<div style="color:red">${_Char.get('name')} ran out of ${resourceText} and could only roll ${currentResource} times!</div><br/>`
 
                 //Remove rolls if ran out of resource
                 _RollArray = _RollArray.slice(0, currentResource);
                 _NumberOfDice = currentResource;
             } else if (currentResource == _NumberOfDice){
                 //Nothing changes, just add text if uses all remaining. 
-                _RollMessage += `<div style="color:red">${_Char.get('name')} has used all of their remaining ${resourceText}!</div>`
+                _RollMessage += `<div style="color:red">${_Char.get('name')} has used all of their remaining ${resourceText}!</div><br/>`
             } else {
-                _RollMessage += `<div>${_Char.get('name')} uses ${_NumberOfDice} ${resourceText}!</div>`
+                _RollMessage += `<div>${_Char.get('name')} uses ${_NumberOfDice} ${resourceText}!</div><br/>`
             }
 
             let newResource = (currentResource - _NumberOfDice > 0 ? (currentResource - _NumberOfDice) : 0);
@@ -160,27 +160,27 @@ var Zroll = Zroll || (function() {
          * Handler for adding attribute bonus
          */
         function handleAttribute(){
-            if (_Char == null){
-                sendMessage(`You must select a token in order to spend ${resourceText}!`, 'sender', true, "danger");
-                _HasError = true;
-                return;
-            }
-
             const attributes = (([[transformData('attributes', (data) => {
                 return data.map((x)=>{return x.attr_name});
             })]]));
-    
+            
             for (let attr of attributes){
                 if (("attribute" in _Args && _Args['attribute'] == attr) || (attr in _Args && _Args[attr] == true)){
                     addAttributeBonus(attr);
                 }
             }
         }
-
+        
         /**
          * Action for adding attribute bonus
          */
         function addAttributeBonus(attr){
+            if (_Char == null){
+                sendMessage(`You must select a token in order to add an attribute to your roll!`, sender, true, "danger");
+                _HasError = true;
+                return;
+            }
+
             var attrMod = parseInt(getAttrByName(_Char.id, attr + "_mod"), 10) || 0,
                 attrBonus = parseInt(getAttrByName(_Char.id, attr + "_bonus"), 10) || 0;
 
@@ -188,14 +188,14 @@ var Zroll = Zroll || (function() {
                 roll.roll += (attrMod + attrBonus);
             }
 
-            _RollMessage += `<div>${_Char.get('name')} adds their ${capitalizeWord(attr)} (${attrMod + attrBonus}) to each roll!</div>`;
+            _RollMessage += `<div>${_Char.get('name')} adds their ${capitalizeWord(attr)} (${attrMod + attrBonus}) to each roll!</div><br/>`;
         }
             
         function handleRoll(){
             handleResource();
             handleAttribute();
             if (!_HasError){
-                sendMessage(`<span style="font-weight: 900; font-size: 14px;">${_RollMessage}</span> <br/><br/> ${displayRoll(_RollArray)}`, _Sender, false);
+                sendMessage(`<span style="font-weight: 900; font-size: 14px;">${_RollMessage}</span> <br/> ${displayRoll(_RollArray)}`, _Sender, false);
             }
         }
 
@@ -296,7 +296,6 @@ var Zroll = Zroll || (function() {
     getCharacter = (([[getFunction('getCharacter')]])),
     capitalizeWord = (([[getFunction('capitalizeWord')]])),
     attrLookup = (([[getFunction('attrLookup')]])),
-    getAttrModAndBonus = (([[getFunction('getAttrModAndBonus')]])),
     sendMessage = function(message, who, whisper, type="info" ) {
         var textColor = "#000000",
             bgColor = "#d3d3d3";
@@ -314,7 +313,7 @@ var Zroll = Zroll || (function() {
 
 		sendChat(
             'Z-Roll',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
+            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Z-Roll</strong></div>${message}</div>`
 		);
     },
     RegisterEventHandlers = function() {
