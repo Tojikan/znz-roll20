@@ -6,14 +6,9 @@
         "default": "true"
     },
     {
-        "name": "Alcoholic",
-        "value": "alcoholic",
-        "description": "Your character cannot restore resources unless they consume 2 alcohol in a day."
-    },
-    {
         "name": "Asthma",
         "value": "asthma",
-        "description": "Moving more than 5 spaces in a turn causes your character to take damage."
+        "description": "If your character moves more than 5 spaces in a turn, you must pass a Constitution check or else take 1d10 damage."
     },
     {
         "name": "Battle-scarred",
@@ -23,12 +18,12 @@
     {
         "name": "Catastrophic Failure",
         "value": "catastrophic",
-        "description": "Whenever you roll a natural 1, there is a chance the outcome becomes a catastrophic failure, leading to a butterfly effect chain that ends in a disaster. This can occur no more than once a play session."
+        "description": "Whenever you roll and 1/2 or more of the rolls are critical fails, there is a chance the outcome becomes a catastrophic failure, leading to a butterfly effect chain that ends in a disaster. This can occur no more than once a play session."
     },
     {
         "name": "Clumsy",
         "value": "clumsy",
-        "description": "Your character occasionally slips up and causes an accident. This can occur no more than two times a play session."
+        "description": "Your character occasionally slips. Your character must pass a Dexterity or Athletics active roll or else causes an accident. "
     },
     {
         "name": "Glutton",
@@ -43,12 +38,7 @@
     {
         "name": "Nearsighted",
         "value": "nearsighted",
-        "description": "If your character takes damage, roll a passive luck check. If that check fails, your glasses break and you receive a heavy penalty to ranged attacks and perception checks."
-    },
-    {
-        "name": "Panicked",
-        "value": "panicked",
-        "description": "Your character is more prone to random sanity loss checks. If ever in combat with overwhelming odds, receive a penalty to all attacks."
+        "description": "If your character takes damage, roll a D20. If the roll is 10 or under, your character's glasses break, giving you a -5 penalty to ranged attacks and Perception."
     },
     {
         "name": "Restless",
@@ -58,16 +48,11 @@
     {
         "name": "Sickly",
         "value": "sickly",
-        "description": "Your character has a rare, incurable disease. Your character now has a daily consumption requirement of 1 special medicine. If starting the game with this flaw, start with 2 special medicine."
+        "description": "Your character has a rare, incurable disease. Your character now has a daily consumption requirement of 1 special medicine. If starting the game with this flaw, start with 3 special medicine."
     },
     {
         "name": "Unlucky",
         "value": "lucky",
         "description": "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the initial roll are refunded."
-    },
-    {
-        "name": "Unwelcome",
-        "value": "unwelcome",
-        "description": "NPCs will typically start off with a bad first impression of you and generally mistrust you."
     }
 ]

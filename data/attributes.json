@@ -31,10 +31,11 @@
         "display_name": "Athletics",
         "attr_name": "athletics",
         "abbr": "ATH",
-        "reminder_note": "Energy, Speed",
+        "reminder_note": "Energy, Speed, Initiative",
         "default_value": 3,
         "default_mod": 0,
-        "description": "Athletics is a measure of your character's fitness, flexibility, and agility. Athletics increases your energy and movement speed."
+        "description": "Athletics is a measure of your character's fitness, flexibility, and agility. Athletics increases your energy and movement speed.",
+        "canonical": "speedAttr"
     },
     {
         "display_name": "Intelligence",

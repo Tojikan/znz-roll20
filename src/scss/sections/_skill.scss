@@ -20,6 +20,12 @@
         align-items: flex-end;
         margin-bottom: 0.3rem;
 
+        &.sheet-custom {
+            input {
+                margin-bottom: 0!important;
+            }
+        }
+
         .sheet-field {
             flex: 15%;
             margin-right: 0.4rem;
@@ -37,6 +43,7 @@
             .sheet-attr {
                 color: $darkgray;
                 font-size: $xSmall;
+                margin-left: 0.5rem;
             }
         }
     }

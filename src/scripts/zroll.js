@@ -19,10 +19,8 @@ var Zroll = Zroll || (function() {
         }
 
         let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
-            character = getCharacter(sender, msg), //Selected character only required for attribute/resource rolls
-            args = splitArgs(msg.content);
-
-            
+            args = splitArgs(msg.content),
+            character = getCharacter(sender, msg, args); //Selected character only required for attribute/resource rolls
             
         // Help flag.
         if ("help" in args && args['help'] == true){

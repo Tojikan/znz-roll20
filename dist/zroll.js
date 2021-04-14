@@ -19,10 +19,8 @@ var Zroll = Zroll || (function() {
         }
 
         let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
-            character = getCharacter(sender, msg), //Selected character only required for attribute/resource rolls
-            args = splitArgs(msg.content);
-
-            
+            args = splitArgs(msg.content),
+            character = getCharacter(sender, msg, args); //Selected character only required for attribute/resource rolls
             
         // Help flag.
         if ("help" in args && args['help'] == true){
@@ -329,7 +327,7 @@ var Zroll = Zroll || (function() {
         }
         return result;
     },
-    getCharacter = function(sender, msg){
+    getCharacter = function(sender, msg, args){
         /**
          * Returns character of selected token if it is controlled by selector.
          */
@@ -342,6 +340,8 @@ var Zroll = Zroll || (function() {
             if (token){
                 character = getObj('character', token.get('represents'));
             }
+        } else if ('characterid' in args){
+            character = getObj('character', args['characterid']);
         }
 
         //Validate player controls token or is GM

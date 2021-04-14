@@ -192,6 +192,24 @@ select {
           border: none;
           border-bottom: solid 1px #a0a0a0; }
 
+button.sheet-hidden-roll {
+  background-color: transparent;
+  border: none;
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+  text-align: left;
+  transition: 0.3s;
+  font-size: inherit !important; }
+  button.sheet-hidden-roll:before {
+    content: none !important; }
+  button.sheet-hidden-roll:hover {
+    background-color: #e5fffb; }
+
 .charsheet .sheet-line-field input[type="number"] {
   width: 7rem; }
 
@@ -436,12 +454,13 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       display: flex;
       border: solid 1px black;
       padding: 0.75rem;
-      min-width: 25%;
       justify-content: space-between;
       font-size: 1.4rem;
       align-items: center;
       box-shadow: 0.2rem 0.2rem black;
       border-radius: 1rem; }
+      .sheet-area-resource .sheet-defenses .sheet-def-block input {
+        text-align: center; }
       .sheet-area-resource .sheet-defenses .sheet-def-block:not(:last-child) {
         margin-right: 1rem; }
 
@@ -551,6 +570,8 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     display: flex;
     align-items: flex-end;
     margin-bottom: 0.3rem; }
+    .sheet-skill-list .sheet-skill.sheet-custom input {
+      margin-bottom: 0 !important; }
     .sheet-skill-list .sheet-skill .sheet-field {
       flex: 15%;
       margin-right: 0.4rem; }
@@ -562,7 +583,29 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       flex: 85%; }
       .sheet-skill-list .sheet-skill .sheet-label .sheet-attr {
         color: #a0a0a0;
-        font-size: 1rem; }
+        font-size: 1rem;
+        margin-left: 0.5rem; }
+
+.sheet-area-abilities .sheet-description-text {
+  border: solid 1px #d3d3d3;
+  background-color: #f5f5f5;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  min-height: 12rem;
+  font-size: 1.2rem; }
+  .sheet-area-abilities .sheet-description-text .sheet-lvl-txt {
+    margin-left: 1rem;
+    margin-top: 0.5rem; }
+    .sheet-area-abilities .sheet-description-text .sheet-lvl-txt span {
+      font-weight: 700;
+      text-decoration: underline; }
+
+.sheet-section-mutation {
+  font-size: 1.2rem;
+  margin-bottom: 3rem; }
+  .sheet-section-mutation .sheet-header {
+    display: flex;
+    justify-content: space-between; }
 
 .sheet-section-quirk {
   max-width: 50%; }
@@ -584,19 +627,6 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
       max-width: 98%; }
     .sheet-section-quirk .sheet-ability .sheet-ability-label {
       font-size: 1.2rem; }
-  .sheet-section-quirk .sheet-ability-descriptions .sheet-description-text {
-    border: solid 1px #d3d3d3;
-    background-color: #f5f5f5;
-    border-radius: 0.4rem;
-    padding: 1rem;
-    min-height: 12rem;
-    font-size: 1.2rem; }
-    .sheet-section-quirk .sheet-ability-descriptions .sheet-description-text .sheet-ability-lvl-text {
-      margin-left: 1rem;
-      margin-top: 0.5rem; }
-      .sheet-section-quirk .sheet-ability-descriptions .sheet-description-text .sheet-ability-lvl-text span {
-        font-weight: 700;
-        text-decoration: underline; }
 
 .sheet-area-inventory .sheet-item-card {
   border: solid 1px black;

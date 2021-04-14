@@ -325,7 +325,7 @@ var DamageRoll = DamageRoll || (function() {
         }
         return result;
     },
-    getCharacter = function(sender, msg){
+    getCharacter = function(sender, msg, args){
         /**
          * Returns character of selected token if it is controlled by selector.
          */
@@ -338,6 +338,8 @@ var DamageRoll = DamageRoll || (function() {
             if (token){
                 character = getObj('character', token.get('represents'));
             }
+        } else if ('characterid' in args){
+            character = getObj('character', args['characterid']);
         }
 
         //Validate player controls token or is GM

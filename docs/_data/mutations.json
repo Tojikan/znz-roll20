@@ -1,0 +1,17 @@
+{
+    "general": {
+        "description": "The Infection has caused your character to mutate, bringing you to a new evolutionary path. Although you retain some sense of humanity, you are no longer a Homo Sapien but...something else.",
+        "level": "This ability cannot be improved by regular means.",
+        "attr_name": "mutation"
+    },
+    "list": [
+        {
+            "name": "Powerhouse",
+            "value": "powerhouse",
+            "description": "The mutation has increased your physical strength and speed greatly. Your character's attribute limit on Strength, Dexterity, Constitution, Perception, or Athletics is now capped at 10. You are immune to most mental traumas. <br/><br/><div>However, increasing any other skill, proficiency, or attribute (other than the ones mentioned previously) requires 3x the EXP cost. The only exceptions for this is the Melee-Unarmed proficiency.</div><br/>",
+            "lvl1": "Your Unarmed Melee attacks are <strong>empowered</strong> and you may add your Strength modifier to each Unarmed Melee damage rolls.",
+            "lvl2": "???",
+            "lvl3": "???"
+        }
+    ]
+}

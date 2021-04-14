@@ -20,7 +20,10 @@ gulp.task('sheet', function(){
         .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, queryData))
         .pipe(data(getAllData)) //pass all json data into Templates. should be done first since it also clears require() json cache
         .pipe(nunjucksRender({
-            path:['src/templates']
+            path:'src/templates',
+            manageEnv: function(env){
+                env.addGlobal('globalData', getAllData().sheetData);
+            }
         }))
         //Inject workers into sheet.
         .pipe(inject((() => { 

@@ -122,30 +122,22 @@
             "value": "blunt"
         },
         {
-            "name": "Piercing",
-            "value": "pierce"
-        },
-        {
             "name": "Sharp",
             "value": "sharp"
         }
     ],
     "rangedTypes": [
         {
-            "name": "Handgun",
-            "value": "handgun"
-        },
-        {
-            "name": "Shotgun",
-            "value": "shotgun"
-        },
-        {
-            "name": "Rifle",
-            "value": "rifle"
+            "name": "Firearm",
+            "value": "firearm"
         },
         {
             "name": "Projectile",
             "value": "projectile"
+        },
+        {
+            "name": "Throwing",
+            "value": "throwing"
         }
     ],
     "armorTypes": [
@@ -192,21 +184,51 @@
             "weight": 0.2
         },
         {
+            "name": "Adhesive",
+            "weight": 0.2,
+            "value": "adhesive",
+            "attr_name": "inv_adhesive"
+        },
+        {
+            "name": "Batteries",
+            "value": "batteries",
+            "attr_name": "inv_batteries",
+            "weight": 0.2
+        },
+        {
+            "name": "Cloth",
+            "value": "cloth",
+            "attr_name": "inv_cloth",
+            "weight": 0.2
+        },
+        {
+            "name": "Circuits",
+            "value": "Circuits",
+            "attr_name": "inv_circuits",
+            "weight": 0.2
+        },
+        {
+            "name": "Glass",
+            "value": "glass",
+            "attr_name": "inv_glass",
+            "weight": 0.2
+        },
+        {
+            "name": "Glass",
+            "value": "glass",
+            "attr_name": "inv_glass",
+            "weight": 0.2
+        },
+        {
+            "name": "Gun Powder",
+            "value": "gunpowder",
+            "attr_name": "inv_gunpowder",
+            "weight": 0.2
+        },
+        {
             "name": "Lighters",
             "value": "lighters",
             "attr_name": "inv_lighters",
-            "weight": 0.2
-        },
-        {
-            "name": "Rope",
-            "value": "rope",
-            "attr_name": "inv_rope",
-            "weight": 0.2
-        },
-        {
-            "name": "Adhesive",
-            "value": "adhesive",
-            "attr_name": "inv_adhesive",
             "weight": 0.2
         },
         {
@@ -216,27 +238,9 @@
             "weight": 0.2
         },
         {
-            "name": "Plastic",
-            "value": "plastic",
-            "attr_name": "inv_plastic",
-            "weight": 0.2
-        },
-        {
-            "name": "Glass",
-            "value": "glass",
-            "attr_name": "inv_glass",
-            "weight": 0.2
-        },
-        {
-            "name": "Wood",
-            "value": "wood",
-            "attr_name": "inv_wood",
-            "weight": 0.2
-        },
-        {
-            "name": "Glass",
-            "value": "glass",
-            "attr_name": "inv_glass",
+            "name": "Nuts & Bolts",
+            "value": "nuts",
+            "attr_name": "inv_nuts",
             "weight": 0.2
         },
         {
@@ -246,9 +250,27 @@
             "weight": 0.2
         },
         {
-            "name": "Gun Powder",
-            "value": "gunpowder",
-            "attr_name": "inv_gunpowder",
+            "name": "Plastic",
+            "value": "plastic",
+            "attr_name": "inv_plastic",
+            "weight": 0.2
+        },
+        {
+            "name": "Rope",
+            "value": "rope",
+            "attr_name": "inv_rope",
+            "weight": 0.2
+        },
+        {
+            "name": "Wires",
+            "value": "wires",
+            "attr_name": "inv_wires",
+            "weight": 0.2
+        },
+        {
+            "name": "Wood",
+            "value": "wood",
+            "attr_name": "inv_wood",
             "weight": 0.2
         }
     ],

@@ -1,3 +1,37 @@
+.sheet-area-abilities {
+    .sheet-description-text {
+        border: solid 1px $gray;
+        background-color: $lightgray;
+        border-radius: 0.4rem;
+        padding: 1rem;
+        min-height: 12rem;
+        font-size: $small;
+
+        .sheet-lvl-txt {
+            margin-left: 1rem;
+            margin-top: 0.5rem;
+
+            span {
+                font-weight: 700;
+                text-decoration: underline;
+            }
+
+        }
+    }
+}
+
+
+.sheet-section-mutation {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+
+    .sheet-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
+
 .sheet-section-quirk {
     max-width: 50%;
 
@@ -31,28 +65,6 @@
 
         .sheet-ability-label {
             font-size: $small;
-        }
-    }
-
-    .sheet-ability-descriptions {
-        .sheet-description-text {
-            border: solid 1px $gray;
-            background-color: $lightgray;
-            border-radius: 0.4rem;
-            padding: 1rem;
-            min-height: 12rem;
-            font-size: $small;
-
-            .sheet-ability-lvl-text {
-                margin-left: 1rem;
-                margin-top: 0.5rem;
-
-                span {
-                    font-weight: 700;
-                    text-decoration: underline;
-                }
-
-            }
         }
     }
 }

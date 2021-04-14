@@ -1,6 +1,27 @@
 
 
 <div class="sheet-area-abilities">
+    <div class="sheet-section-mutation">
+        {% for mutation in sheetData.mutations.list %}
+        <input type="checkbox" class="sheet-toggle" name="attr_{{sheetData.mutations.general.attr_name}}" value="{{mutation.value}}" />
+        <div class="sheet-mutation-info  sheet-toggle-content">
+            <div class="sheet-header">
+                <h2>Mutation - {{mutation.name}}</h2>
+                <div class="sheet-ability-label">
+                    Mutation Level
+                    <input type="number" name="attr_{{sheetData.misc.quirks.ability_attr}}_level" value="1" min="1" max="3"/>
+                </div>
+            </div>
+            <div class="sheet-description-text">
+                {{sheetData.mutations.general.description | safe}} <br/><br/>
+                {{mutation.description | safe}}
+                {% if mutation.lvl1 %} <div class="sheet-lvl-txt"><span>Level 1</span> - {{mutation.lvl1 | safe}} </div>{% endif %}
+                {% if mutation.lvl2 %} <div class="sheet-lvl-txt"><span>Level 2</span> - {{mutation.lvl2 | safe}} </div>{% endif %}
+                {% if mutation.lvl3 %} <div class="sheet-lvl-txt"><span>Level 3</span> - {{mutation.lvl3 | safe}} </div>{% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     <div class="sheet-container">
         <div class="sheet-section-quirk">
             <div class="sheet-header sheet-row-flex">
@@ -32,10 +53,10 @@
                                     <div class="sheet-description-main">
                                         <input type="checkbox" class="sheet-toggle" name="attr_{{sheetData.misc.quirks.ability_attr}}" value="{{ability.value}}" {{"checked" if ability.default}} />
                                         <div class="sheet-description-text sheet-toggle-content">
-                                            {{ability.description | safe}}
-                                            {% if ability.lvl1 %} <div class="sheet-ability-lvl-text"><span>Level 1</span> - {{ability.lvl1 | safe}} </div>{% endif %}
-                                            {% if ability.lvl2 %} <div class="sheet-ability-lvl-text"><span>Level 2</span> - {{ability.lvl2 | safe}} </div>{% endif %}
-                                            {% if ability.lvl3 %} <div class="sheet-ability-lvl-text"><span>Level 3</span> - {{ability.lvl3 | safe}} </div>{% endif %}
+                                            {{ability.description | safe}} <br/>
+                                            {% if ability.lvl1 %} <div class="sheet-lvl-txt"><span>Level 1</span> - {{ability.lvl1 | safe}} </div>{% endif %}
+                                            {% if ability.lvl2 %} <div class="sheet-lvl-txt"><span>Level 2</span> - {{ability.lvl2 | safe}} </div>{% endif %}
+                                            {% if ability.lvl3 %} <div class="sheet-lvl-txt"><span>Level 3</span> - {{ability.lvl3 | safe}} </div>{% endif %}
                                         </div>
                                     </div>
                                 </div>

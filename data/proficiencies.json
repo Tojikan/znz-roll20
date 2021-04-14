@@ -1,24 +1,24 @@
 [
   {
+    "display_name": "Basic Repair",
+    "attr_name": "prof_throwing",
+    "description": "Ability to make simple and basic repairs to objects.",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
+    "resource": "Energy"
+  },
+  {
     "display_name": "Climbing",
     "attr_name": "prof_climbing",
-    "description": "",
+    "description": "Ability to climb terrain.",
     "attribute": "athletics",
     "attr_shorthand": "ATH",
     "resource": "Energy"
   },
   {
-    "display_name": "Crafting",
-    "attr_name": "prof_crafting",
-    "description": "Used when making improvised gear or weapons.",
-    "attribute": "intelligence",
-    "attr_shorthand": "INT",
-    "resource": "Energy"
-  },
-  {
     "display_name": "Driving",
     "attr_name": "prof_driving",
-    "description": "Allows you to perform more difficult maneuvers and maintain control in a car.",
+    "description": "Allows you to drive automobiles. At higher levels, you can drive other vehicles such as large trucks or motorcycles.",
     "attribute": "perception",
     "attr_shorthand": "PER",
     "resource": "Sanity"
@@ -26,7 +26,7 @@
   {
     "display_name": "First Aid",
     "attr_name": "prof_first_aid",
-    "description": "Ability to use first-aid kits or apply medicine to wounds",
+    "description": "Ability to apply first-aid to wounds",
     "attribute": "intelligence",
     "attr_shorthand": "INT",
     "resource": "Sanity"
@@ -42,7 +42,7 @@
   {
     "display_name": "Intimidation",
     "attr_name": "prof_intimidation",
-    "description": "Make it easier to intimidate or scare other human survivors.",
+    "description": "Ability to intimidate or scare other human survivors.",
     "attribute": "charisma",
     "attr_shorthand": "CHA",
     "resource": "Sanity"
@@ -50,54 +50,37 @@
   {
     "display_name": "Investigation",
     "attr_name": "prof_investigation",
-    "description": "Used when examining a situation and determining what happened.",
+    "description": "Ability to examine a situation and deduce a conclusion. ",
     "attribute": "intelligence",
-    "attr_shorthand": "",
+    "attr_shorthand": "INT",
     "resource": "Sanity"
-  },
-  {
-    "display_name": "Melee - Unarmed",
-    "attr_name": "prof_unarmed",
-    "combat": "melee",
-    "description": "Improves unarmed combat.",
-    "attribute": "strength",
-    "attr_shorthand": "STR",
-    "resource": "Energy"
   },
   {
     "display_name": "Melee - Blunt",
     "attr_name": "prof_blunt",
-    "combat": "melee",
-    "description": "",
+    "description": "Improves combat with blunt melee weapons.",
     "attribute": "strength",
     "attr_shorthand": "STR",
-    "resource": "Energy"
-  },
-  {
-    "display_name": "Melee - Piercing",
-    "attr_name": "prof_pierce",
-    "combat": "melee",
-    "description": "",
-    "attribute": "strength",
-    "attr_shorthand": "STR",
-    "resource": "Energy"
+    "resource": "Energy",
+    "combat": "melee"
   },
   {
     "display_name": "Melee - Sharp",
     "attr_name": "prof_sharp",
-    "combat": "melee",
-    "description": "",
+    "description": "Improves combat with sharp melee weaopns.",
     "attribute": "strength",
     "attr_shorthand": "STR",
-    "resource": "Energy"
+    "resource": "Energy",
+    "combat": "melee"
   },
   {
-    "display_name": "Orientation",
-    "attr_name": "prof_orientation",
-    "description": "Ability to know where you are and what direction to go to. ",
-    "attribute": "intelligence",
-    "attr_shorthand": "INT",
-    "resource": "Sanity"
+    "display_name": "Melee - Unarmed",
+    "attr_name": "prof_unarmed",
+    "description": "Improves unarmed combat.",
+    "attribute": "strength",
+    "attr_shorthand": "STR",
+    "resource": "Energy",
+    "combat": "melee"
   },
   {
     "display_name": "Performance",
@@ -116,56 +99,38 @@
     "resource": "Sanity"
   },
   {
-    "display_name": "Ranged - Hand Gun",
+    "display_name": "Ranged - Firearms",
     "attr_name": "prof_handgun",
-    "description": "",
-    "combat": "ranged",
+    "description": "Ability to handle and use firearms.",
     "attribute": "dexterity",
     "attr_shorthand": "DEXT",
-    "resource": "Ammo"
-  },
-  {
-    "display_name": "Ranged - Long Gun",
-    "attr_name": "prof_longgun",
-    "description": "",
-    "combat": "ranged",
-    "attribute": "dexterity",
-    "attr_shorthand": "DEXT",
-    "resource": "Ammo"
+    "resource": "Ammo",
+    "combat": "ranged"
   },
   {
     "display_name": "Ranged - Projectiles",
     "attr_name": "prof_projectile",
-    "description": "Improves aims with launching weapons such as bows and slingshots.",
-    "combat": "ranged",
-    "attribute": "dexterity",
-    "attr_shorthand": "DEXT",
-    "resource": "Energy"
-  },
-  {
-    "display_name": "Ranged - Throwing",
-    "attr_name": "prof_throwing",
-    "description": "Improves aim with throwing.",
+    "description": "Ability to handle and use launching weapons such as bows and slingshots.",
     "attribute": "dexterity",
     "attr_shorthand": "DEXT",
     "resource": "Energy",
     "combat": "ranged"
   },
   {
-    "display_name": "Repair",
-    "attr_name": "prof_throwing",
-    "description": "Repair equipment.",
-    "attribute": "intelligence",
-    "attr_shorthand": "INT",
-    "resource": "Energy"
-  },
-  {
     "display_name": "Scavenging",
     "attr_name": "prof_scavenging",
-    "description": "Improves the loot and resources you find.",
+    "description": "Ability to find loot and other goods.",
     "attribute": "perception",
     "attr_shorthand": "PER",
     "resource": "Energy"
+  },
+  {
+    "display_name": "Scouting",
+    "attr_name": "prof_scouting",
+    "description": "Ability to gather information about your surroundings.",
+    "attribute": "perception",
+    "attr_shorthand": "PER",
+    "resource": "sanity"
   },
   {
     "display_name": "Sleight of Hand",
@@ -192,11 +157,12 @@
     "resource": "Energy"
   },
   {
-    "display_name": "Survival",
-    "attr_name": "prof_survival",
-    "description": "",
-    "attribute": "tenacity",
-    "attr_shorthand": "TENA",
-    "resource": "energy"
+    "display_name": "Throwing",
+    "attr_name": "prof_throwing",
+    "description": "Ability to throw.",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
+    "resource": "Energy",
+    "combat": "ranged"
   }
 ]

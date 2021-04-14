@@ -43,19 +43,25 @@
         "note": "Weight inside inventory counters"
     },
     "armor": {
-        "display_name": "Armor Rating",
+        "display_name": "Armor",
         "attr_name": "armor_rating",
-        "default_value": 4
+        "default_value": 3
     },
     "flashlight": {
-        "display_name": "Flashlight Distance",
+        "display_name": "Flashlight",
         "attr_name": "flashlight_distance",
         "default_value": 10
+    },
+    "speed": {
+        "display_name": "Speed",
+        "attr_name": "movement_speed",
+        "default_value": 5,
+        "max": 9
     },
     "hygiene": {
         "display_name": "Hygiene",
         "attr_name": "hygiene",
-        "default_value": 10
+        "default_value": 20
     },
     "stat_effects": {
         "display_name": "Status Effects",
@@ -67,5 +73,10 @@
         "display_name": "Status Modifiers from Equipment/Status Effects",
         "attr_name": "stat_mod_track",
         "type": "textarea"
+    },
+    "customskills": {
+        "attr": "custom",
+        "label": "custom_label",
+        "count": 3
     }
 }
