@@ -20,23 +20,24 @@ var DamageRoll = DamageRoll || (function() {
         }
 
         let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
-            character = getCharacter(sender, msg),
-            args = splitArgs(msg.content);
+            args = splitArgs(msg.content),
+            character = getCharacter(sender, msg, args);
 
+        log(args);
             
         // Help flag.
-        if ("help" in args && args['help'] == true){
+        if (("help" in args) || Object.keys(args).length == 1 || ("1" in args && args["1"] == "help")){
             let attributeArray = ["strength","dexterity","constitution","athletics","intelligence","tenacity","perception","charisma"];
             
             let message = '***D-Roll Help *** <br/> This script rolls weapon damage for you. Requires an equipped melee/ranged weapon. <br/><br/>' + 
             '**How to Roll** <br/> Specify a number of dice to roll. <br/><br/> *<div>!!damage 3 - roll damage 3 times.</div> <div>!!damage 5 - roll damage 5 times</div>*<br />' +
             'Then specify whether its a melee, ranged, or unarmed attack by adding flags. <br /><br /> *<div>!!damage 3 --melee</div><div>!!damage 3 --unarmed</div><div>!!damage 3 --ranged</div>*<div>You can also use --m, --r, --u as a shorthand</div><br/><br/>' +
             '**Additional Flags**<br/> Adding the following flags to the roll command to add an effect. <br/><br/>' +
-            'Attribute Adding - Adds attribute modifier and bonus once to the sum of the roll.<br/><br/>';
+            'Attribute Adding - Adds attribute modifier and bonus once to the sum of the roll. Requires a character to be selected. <br/><br/>';
             for (let attr of attributeArray){
                 message += `    *--${attr}* <br/>`;
             }
-            message += 'Powered Strike: Adds attribute modifier and bonus to each damage rolled.';
+            message += '<br/>Powered Strike: Adds attribute modifier and bonus to each damage rolled. Requires a character to be selected. <br/><br/>';
             for (let attr of attributeArray){
                 message += `    *power=${attr}* <br/>`;
             }
@@ -400,8 +401,8 @@ var DamageRoll = DamageRoll || (function() {
         }
 
 		sendChat(
-            'Z-Roll',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Damage Roll</strong></div>${message}</div>`
+            'Damage Roll',
+            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Damage Roll</strong></div>${message}</div>`
 		);
     },
     RegisterEventHandlers = function(){

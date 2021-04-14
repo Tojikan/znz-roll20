@@ -1,3 +1,16 @@
 {
-    
+    "medkit": {
+        "item_type" : "misc",
+        "item_name" : "Medkit",
+        "item_weight" : 3,
+        "item_quantity" : 1,
+        "item_description" : "Heals for 10 health."
+    },
+    "meal": {
+        "item_type" : "misc",
+        "item_name" : "Cooked Meal",
+        "item_weight" : 1,
+        "item_quantity" : 1,
+        "item_description" : "This nicely cooked meal restores 10 health."
+    }
 }

@@ -32,7 +32,6 @@ const repeatingSum = (destinations, section, fields) => {
             destinations.forEach((destination, index) => {
                 output[destination] = idArray.reduce((total, id) => total + getValue(section, id, fields[index]) * commonMultipliers.reduce((subtotal, mult) => subtotal * getValue(section, id, mult), 1), 0);
             });
-            console.log(output);
             setAttrs(output);
         }); 
     }); 

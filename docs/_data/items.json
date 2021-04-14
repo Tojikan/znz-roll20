@@ -81,7 +81,8 @@
             {
                 "attr_name": "equipment_armor_rating",
                 "display_name": "Armor Rating Bonus",
-                "type" : "line_text"
+                "type" : "line_text",
+                "canonical": "armorRating"
             }
         ],
         "subtypes": {

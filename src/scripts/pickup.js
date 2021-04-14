@@ -13,23 +13,39 @@ var Pickup = Pickup || (function() {
     const AMMO_FIELD = "(([[searchProperty('canonical', 'rangedAmmo', 'items').attr_name]]))";
     const REACH_FIELD = "(([[searchProperty('canonical', 'meleeRange', 'items').attr_name]]))";
     const RANGE_FIELD = "(([[searchProperty('canonical', 'rangedRange', 'items').attr_name]]))";
+    
     const HAS_MAX = [DURABILITY_FIELD, AMMO_FIELD];
+
     const INVENTORY_PREFIX = "(([[getProperty('prefixes.inventory')]]))";
     const INVENTORY_ATTR = "repeating_inventory";
 
+    const ITEM_QUANTITY = "(([[getProperty('items.fields.quantity').attr_name]]))";
+    const ITEM_NAME = "(([[getProperty('items.fields.name').attr_name]]))";
+
     const ARG_SHORTHAND = {
-        name: "(([[getProperty('items.fields.name')]]))",
-        type: "(([[getProperty('items.fields.type')]]))",
-        weight: "(([[getProperty('items.fields.weight')]]))",
-        quantity: "(([[getProperty('items.fields.quantity')]]))",
-        note: "(([[getProperty('items.fields.description')]]))",
+        name: ITEM_NAME,
+        type: "(([[getProperty('items.fields.type').attr_name]]))",
+        weight: "(([[getProperty('items.fields.weight').attr_name]]))",
+        quantity: ITEM_QUANTITY,
+        note: "(([[getProperty('items.fields.description').attr_name]]))",
+        armor: "(([[searchProperty('canonical', 'armorRating', 'items').attr_name]]))",
+        //Set individually based on item type.
         damage: "damage",
         range: "",
         uses: "",
-        max: ""
+        max: "",
+        ammo: "(([[searchProperty('canonical', 'rangedAmmoType', 'items').attr_name]]))",
+    };
+
+    //Equipment stat mods
+    const STAT_MOD = (([[searchProperty('canonical', 'armorStatRepeater', 'items')]]));
+    for (let i = 0; i < STAT_MOD.count; i++){
+        ARG_SHORTHAND['stat' + i] = STAT_MOD.attr_name + "_" + i;
+        ARG_SHORTHAND['stat' + i + "mod"] = STAT_MOD.attr_name + "_" + i + "_mod";
     }
 
-    HandleInput = function(msg) {
+
+    const HandleInput = function(msg) {
         if (msg.type !== "api") {
 			return;
         }
@@ -39,8 +55,8 @@ var Pickup = Pickup || (function() {
         }
 
         var sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
-            character = getCharacter(sender, msg),
-            args = splitArgs(msg.content);
+            args = splitArgs(msg.content),
+            character = getCharacter(sender, msg, args);
 
         if (!character){
             sendMessage("You must select your character's token to pick up an item!", sender, true, "danger");
@@ -48,9 +64,13 @@ var Pickup = Pickup || (function() {
         }
 
         let itemValues = convertToInventoryItem(args);
-        createNewItemRow(itemValues, character);
-        sendMessage(`${character.get('name')} picked up ${itemValues.item_quantity || 1} ${itemValues.item_name}(s)`, sender, false, "info");
 
+        if (itemValues){
+            createNewItemRow(itemValues, character);
+            sendMessage(`${character.get('name')} picked up ${itemValues[ITEM_QUANTITY]} ${itemValues[ITEM_NAME]}(s)`, sender, false, "info");
+        } else {
+            sendMessage("Warning: Invalid item or no arguments provided.", sender, true, "danger");
+        }
     },
     /**
      * Takes the args that were entered into the chat and then tries to determine what values to set the new item's fields to.
@@ -61,12 +81,19 @@ var Pickup = Pickup || (function() {
      */
     convertToInventoryItem = function(args){
         var retVal = {};
+
+        var itemTemplate = "";
         
-        //Get fields and values from templates based on item arg
-        if ("item" in args && args["item"] in ITEM_TEMPLATES) {
-            let name = args["item"];
-            var template = ITEM_TEMPLATES[name];
-            
+        // Pull item template
+        if ("item" in args && args["item"] in ITEM_TEMPLATES){
+            itemTemplate = args["item"];
+        } else if ("1" in args && args["1"] in ITEM_TEMPLATES){
+            itemTemplate = args["1"];
+        }
+
+        if (itemTemplate.length){
+            let template = ITEM_TEMPLATES[itemTemplate];
+    
             for (let prop in template) {
                 retVal[prop] = template[prop];
                 
@@ -74,52 +101,81 @@ var Pickup = Pickup || (function() {
                     retVal[prop + "_max"] = template[prop];
                 }
             }
-            
-            //Get fields and values from args.
-            const argKeys = Object.keys(args);
-            for (let key of argKeys){
-                //apply shorthand to args.
-                if (key in ARG_SHORTHAND){
+        }
+        
+        
+        //Set manual type early, since that may affect other args.
+        if ("type" in args){
+            retVal[ARG_SHORTHAND["type"]] = args.type;
+        } 
+        
+        //Manually set fields from args
+        const argKeys = Object.keys(args);
 
-                    let type = ("item_type" in retVal) ? retVal.item_type : "";
+        for (let key of argKeys){
+            //apply shorthand to args.
+            if (key in ARG_SHORTHAND){
 
-                    switch (key){
-                        case "damage":
-                            if (type == 'melee' || 'ranged'){
-                                retVal[type + "_" + damage] = args[key];
-                            }
-                            break;
-                        case "uses":
-                            if (type == 'melee'){
-                                retVal[DURABILITY_FIELD] = args[key];
-                                retVal[DURABILITY_FIELD + "_MAX"] = args[key];
-                            } else if (type == 'ranged'){
-                                retVal[AMMO_FIELD] = args[key];
-                                retVal[AMMO_FIELD + "_MAX"] = args[key];
-                            }
-                            break;
-                        case "max":
-                            if (type == 'melee'){
-                                retVal[DURABILITY_FIELD + "_MAX"] = args[key];
-                            } else if (type == 'ranged'){
-                                retVal[AMMO_FIELD + "_MAX"] = args[key];
-                            }
-                        case "range":
-                            if (type == 'melee'){
-                                retVal[REACH_FIELD] = args[key];
-                            } else if (type == 'ranged'){
-                                retVal[RANGE_FIELD] = args[key];
-                            }
-                        default:
-                            // shared fields across items.
-                            retVal[ARG_SHORTHAND[key]] = args[key];
-                    }
+                let type = ("item_type" in retVal) ? retVal.item_type : "";
 
+                switch (key){
+                    case "damage":
+                        if (type == 'melee' || 'ranged'){
+                            retVal[type + "_damage"] = args[key];
+                        }
+                        break;
+                    case "uses":
+                        if (type == 'melee'){
+                            retVal[DURABILITY_FIELD] = args[key];
+                            if (!args.hasOwnProperty("max")){
+                                retVal[DURABILITY_FIELD + "_max"] = args[key];
+                            }
+                        } else if (type == 'ranged'){
+                            retVal[AMMO_FIELD] = args[key];
+                            if (!args.hasOwnProperty("max")){
+                                retVal[AMMO_FIELD + "_max"] = args[key];
+                            }
+                        }
+                        break;
+                    case "max":
+                        if (type == 'melee'){
+                            retVal[DURABILITY_FIELD + "_max"] = args[key];
+                        } else if (type == 'ranged'){
+                            retVal[AMMO_FIELD + "_max"] = args[key];
+                        }
+                        break;
+                    case "range":
+                        if (type == 'melee'){
+                            retVal[REACH_FIELD] = args[key];
+                        } else if (type == 'ranged'){
+                            retVal[RANGE_FIELD] = args[key];
+                        }
+                        break;
+                    default:
+                        // shared fields across items.
+                        retVal[ARG_SHORTHAND[key]] = args[key];
                 }
+
             }
+        }
+
+        if (Object.keys(retVal).length === 0){
+            return null;
+
+        } else {
+            //Needed for message
+            if (!(ITEM_QUANTITY in retVal)){
+                retVal[ITEM_QUANTITY] = 1; 
+            }
+    
+            if (!(ITEM_NAME in retVal)){
+                retVal[ITEM_NAME] = 'items'; 
+            }
+    
+    
             return retVal;
         }
-    }
+    },
     /**
      * Constructs a new attribute object from itemValues, and then creates it. This assumes it is creating for a repeating field section and so it'll generate a row ID.
      * 
@@ -129,22 +185,30 @@ var Pickup = Pickup || (function() {
     createNewItemRow = function(itemValues, character) {
         var newRowId = generateRowID();
 
+        log(itemValues);
+
         for (let field in itemValues) {
-            if (itemValues.hasOwnProperty(field)) {
-
-                //Don't individually handle max fields since max can be set as property when creating a new attribute.
-                //It won't work if you individually create an Obj for a max
-                if(field.endsWith("_max")){
-                    continue;
-                }
-
-                var attr = {};
-                attr.name = INVENTORY_ATTR + "_" + newRowId + "_" + INVENTORY_PREFIX + "_" + field;
-                attr.current = itemValues[field];
-                attr.characterid = character.id;
-
-                createObj("attribute", attr);
+            //Don't individually handle max fields since max can be set as property when creating a new attribute.
+            //It won't work if you individually create an Obj for a max
+            if(field.endsWith("_max")){
+                continue;
             }
+
+            var attr = {};
+            attr.name = INVENTORY_ATTR + "_" + newRowId + "_" + INVENTORY_PREFIX + "_" + field;
+            attr.current = itemValues[field] || '';
+            attr.characterid = character.id;
+
+            if (HAS_MAX.includes(field)){
+                
+                if (itemValues.hasOwnProperty(field + "_max")){
+                    attr.max = itemValues[field+"_max"] || '';
+                } else {
+                    attr.max = attr.current;
+                }
+            }
+
+            createObj("attribute", attr);
         }
     },
     /**
@@ -204,8 +268,8 @@ var Pickup = Pickup || (function() {
         }
 
 		sendChat(
-            'ZnZ Script - Pickup',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;"><div style="font-size:20px; margin-bottom:10px"><strong>PickUp Item Script</strong></div>${message}</div>`
+            'Pickup Script',
+            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom:10px"><strong>PickUp Item Script</strong></div>${message}</div>`
 		);
 	},
     RegisterEventHandlers = function() {

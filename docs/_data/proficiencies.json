@@ -117,6 +117,15 @@
     "combat": "ranged"
   },
   {
+    "display_name": "Ranged - Throwing",
+    "attr_name": "prof_throwing",
+    "description": "Ability to throw.",
+    "attribute": "dexterity",
+    "attr_shorthand": "DEXT",
+    "resource": "Energy",
+    "combat": "ranged"
+  },
+  {
     "display_name": "Scavenging",
     "attr_name": "prof_scavenging",
     "description": "Ability to find loot and other goods.",
@@ -155,14 +164,5 @@
     "attribute": "athletics",
     "attr_shorthand": "ATH",
     "resource": "Energy"
-  },
-  {
-    "display_name": "Throwing",
-    "attr_name": "prof_throwing",
-    "description": "Ability to throw.",
-    "attribute": "dexterity",
-    "attr_shorthand": "DEXT",
-    "resource": "Energy",
-    "combat": "ranged"
   }
 ]

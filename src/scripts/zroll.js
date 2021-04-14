@@ -23,21 +23,21 @@ var Zroll = Zroll || (function() {
             character = getCharacter(sender, msg, args); //Selected character only required for attribute/resource rolls
             
         // Help flag.
-        if ("help" in args && args['help'] == true){
+        if (("help" in args) || Object.keys(args).length == 1 || ("1" in args && args["1"] == "help")){
             let attributeArray = (([[transformData('attributes', (data) => {
                 return data.map((x)=>{return x.attr_name});
             })]]));
             
             let message = '***Z-Roll Help *** <br/>' + 
-            '**How to Roll** <br/> Specify a number of dice to roll. <div>!!zroll 3 - roll 3d10</div> <div>!!zroll 5 - roll 5 times</div>' +
-            '**Flags**<br/> Adding the following flags to the roll command to add an effect for each dice that is rolled. <br/>Example: *!!zroll 3 --energy --durability <br/> <br/>' +
-            '*--energy*: Spend energy. <br/>' +
-            '*--sanity*: Spend sanity. <br/>' +
-            '*--health*: Spend health. <br/>' +
-            '*--ammo*: Spend ranged weapon ammo. <br/>' +
-            '*--durability*: Spend melee weapon durability. <br/>';
+            '**How to Roll** <br/> Specify a number of dice to roll. <div>*!!zroll 3 - roll 3d10*</div> <div>*!!zroll 5 - roll 5d10*</div><br/>Every Crit adds an additional roll and every Fail adds a negative roll.<br/><br/>' +
+            '**Flags**<br/> Adding the following flags to the roll command to add an effect for each dice that is rolled. <br/>Example: *!!zroll 3 --energy --durability* <br/> <br/>' +
+            '*--energy*: Spend energy equal to number of rolls. <br/>' +
+            '*--sanity*: Spend sanity equal to number of rolls. <br/>' +
+            '*--health*: Spend health equal to number of rolls. <br/>' +
+            '*--ammo*: Spend ranged weapon ammo equal to number of rolls. <br/>' +
+            '*--durability*: Spend melee weapon durability equal to number of rolls. <br/><br/>';
             for (let attr of attributeArray){
-                message += `*--${attr}*: Add ${attr} modifier and bonus. <br/>`;
+                message += `*--${attr}*: Add ${attr} modifier and bonus to each roll. <br/>`;
             }
             
             sendMessage(message, sender, true);
@@ -311,7 +311,7 @@ var Zroll = Zroll || (function() {
 
 		sendChat(
             'Z-Roll',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Z-Roll</strong></div>${message}</div>`
+            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Z-Roll</strong></div>${message}</div>`
 		);
     },
     RegisterEventHandlers = function() {
