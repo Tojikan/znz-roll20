@@ -94,7 +94,7 @@
         
         //Quantity/Weight
         .sheet-amount-counter {
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             
             .sheet-label {
                 margin-bottom: 0.25rem;
@@ -114,9 +114,11 @@
         }
 
         button.sheet-equip-button {
-            padding: 0.5rem;
+            padding: 0.2rem 0.5rem;
+            margin-bottom: 0.5rem;
             display: none;
         }
+
         @include toggleDisplayCheckbox('sheet-equip-melee', 'sheet-item-type-melee');
         @include toggleDisplayCheckbox('sheet-equip-ranged', 'sheet-item-type-ranged');
         @include toggleDisplayCheckbox('sheet-equip-special', 'sheet-item-type-special');

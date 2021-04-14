@@ -688,7 +688,7 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
     box-sizing: border-box;
     height: 2.8rem; }
   .sheet-area-inventory .sheet-item-card .sheet-amount-counter {
-    margin-bottom: 1rem; }
+    margin-bottom: 0.5rem; }
     .sheet-area-inventory .sheet-item-card .sheet-amount-counter .sheet-label {
       margin-bottom: 0.25rem;
       font-size: 1.4rem; }
@@ -699,7 +699,8 @@ input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
   .sheet-area-inventory .sheet-item-card .sheet-item-type-misc:checked ~ .sheet-equip {
     display: none; }
   .sheet-area-inventory .sheet-item-card button.sheet-equip-button {
-    padding: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    margin-bottom: 0.5rem;
     display: none; }
   .sheet-area-inventory .sheet-item-card .sheet-equip-melee {
     display: none; }
