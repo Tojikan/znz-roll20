@@ -1,0 +1,106 @@
+.sheet-area-resource {
+    margin-bottom: 2rem;
+    
+    .sheet-res-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 2rem;
+    
+        .sheet-stat-block {
+            border: double $darkgray 1px;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column-reverse;
+            text-align: center;
+            border-radius: 1rem;
+            box-shadow: 0.2rem 0.2rem $black;
+    
+            .sheet-block-body {
+                display: flex;
+                margin-bottom: 0.5rem;
+            }
+    
+            .sheet-block-head {
+                font-size: $small;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+    
+            .sheet-block-separator {
+                font-size: $xLarge;
+                display: flex;
+                align-items: flex-end;
+                text-align: center;
+                margin: 0 0.7rem;
+                color: $gray;
+            }
+    
+    
+            .sheet-block-field {
+                span {
+                    display: block;
+                    margin-bottom: 0.5rem;
+                }
+    
+                input {
+                    width: 4rem;
+                    border: none;
+                    text-align: center;
+                    font-weight: 700;
+                    font-size: $large;
+                }
+    
+                &.sheet-field-exp {
+                    width: 10rem;
+                }
+            }
+        }
+    }
+    
+    .sheet-defenses {
+        display: flex;
+        justify-content: space-between;
+
+        .sheet-def-block {
+            display: flex;
+            border: solid 1px $black;
+            padding: 0.75rem;
+            justify-content: space-between;
+            font-size: $medium;
+            align-items: center;
+            box-shadow: 0.2rem 0.2rem $black;
+            border-radius: 1rem;
+
+            input {
+                text-align: center;
+            }
+
+            &:not(:last-child){
+                margin-right: 1rem;
+            }
+        }
+    }
+}
+
+.sheet-section-effects {
+    margin-top: 4rem;
+    padding: 1rem;
+    border: solid 1px $black;
+    box-shadow: 0.2rem 0.2rem $black;
+}
+
+.sheet-section-statmod-track {
+    margin-top: 4rem;
+
+    .sheet-header {
+        font-weight: 700;
+        font-size: 1.8rem;
+    }
+
+    textarea {
+        resize: none;
+        height: 20rem;
+    }
+}

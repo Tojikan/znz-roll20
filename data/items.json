@@ -1,0 +1,329 @@
+{   
+    "fields": {
+        "name" : {
+            "attr_name": "item_name",
+            "display_name": "Name"
+        },
+        "type": {
+            "attr_name": "item_type",
+            "display_name": "Type",
+            "type" : "select",
+            "default": "misc",
+            "options" : "itemTypes"
+        },
+        "description" : {
+            "attr_name": "item_description",
+            "display_name": "Description"
+        },
+        "weight": {
+            "attr_name": "item_weight",
+            "display_name": "Weight"
+        },
+        "quantity": {
+            "attr_name": "item_quantity",
+            "display_name": "Quantity"
+        },
+        "melee" : [
+            {
+                "attr_name": "melee_damage",
+                "display_name": "Melee Damage",
+                "type": "line_text",
+                "canonical": "meleeDamage"
+            },
+            {
+                "attr_name": "melee_reach",
+                "display_name": "Weapon Reach",
+                "type": "line_text",
+                "canonical": "meleeRange"
+            },
+            {
+                "attr_name": "melee_durability",
+                "display_name": "Durability",
+                "type": "line_max",
+                "canonical": "meleeDurability"
+            }
+        ],
+        "ranged" : [
+            {
+                "attr_name": "ranged_ammo_type",
+                "display_name": "Ammo Type",
+                "type": "select",
+                "default": "light",
+                "options": "ammoTypesFull",
+                "canonical": "rangedAmmoType"
+            },
+            {
+                "attr_name": "ranged_damage",
+                "display_name": "Ranged Damage",
+                "type" : "line_text",
+                "canonical": "rangedDamage"
+            },
+            {
+                "attr_name": "ranged_ammo",
+                "display_name": "Ammo",
+                "type" : "line_max",
+                "canonical": "rangedAmmo"
+            },
+            {
+                "attr_name": "ranged_range",
+                "display_name": "Weapon Range",
+                "type" : "line_text",
+                "canonical": "rangedRange"
+            }
+        ],
+        "equipment" : [
+            {
+                "attr_name": "equipment_stat_bonus",
+                "display_name": "Equipment Stats",
+                "type": "stat_repeater",
+                "count": 3,
+                "canonical": "armorStatRepeater"
+            },
+            {
+                "attr_name": "equipment_armor_rating",
+                "display_name": "Armor Rating Bonus",
+                "type" : "line_text",
+                "canonical": "armorRating"
+            }
+        ],
+        "subtypes": {
+            "melee": "melee_type",
+            "ranged": "ranged_type",
+            "armor": "armor_type"
+        }
+    },
+    "itemTypes": [
+        {
+            "name": "Misc Item",
+            "value": "misc"
+        },
+        {
+            "name": "Armor",
+            "value": "armor"
+        },
+        {
+            "name": "Melee Weapon",
+            "value": "melee"
+        },
+        {
+            "name": "Ranged Weapon",
+            "value": "ranged"
+        },
+        {
+            "name": "Special",
+            "value": "special"
+        }
+    ],
+    "meleeTypes": [
+        {
+            "name": "Unarmed",
+            "value": "unarmed"
+        },
+        {
+            "name": "Blunt",
+            "value": "blunt"
+        },
+        {
+            "name": "Sharp",
+            "value": "sharp"
+        }
+    ],
+    "rangedTypes": [
+        {
+            "name": "Firearm",
+            "value": "firearm"
+        },
+        {
+            "name": "Projectile",
+            "value": "projectile"
+        },
+        {
+            "name": "Throwing",
+            "value": "throwing"
+        }
+    ],
+    "armorTypes": [
+        {
+            "name": "Head",
+            "value": "head"
+        },
+        {
+            "name": "Body",
+            "value": "body"
+        },
+        {
+            "name": "Arms",
+            "value": "arms"
+        },
+        {
+            "name": "Legs",
+            "value": "legs"
+        }
+    ],
+    "inventoryCounters" : [
+        {
+            "name": "Food",
+            "value": "food",
+            "attr_name": "inv_food",
+            "weight": 0.2
+        },
+        {
+            "name": "Water",
+            "value": "water",
+            "attr_name": "inv_water",
+            "weight": 0.2
+        },
+        {
+            "name": "Medicine",
+            "value": "medicine",
+            "attr_name": "inv_medicine",
+            "weight": 0.2
+        },
+        {
+            "name": "Alcohol",
+            "value": "alcohol",
+            "attr_name": "inv_alcohol",
+            "weight": 0.2
+        },
+        {
+            "name": "Adhesive",
+            "weight": 0.2,
+            "value": "adhesive",
+            "attr_name": "inv_adhesive"
+        },
+        {
+            "name": "Batteries",
+            "value": "batteries",
+            "attr_name": "inv_batteries",
+            "weight": 0.2
+        },
+        {
+            "name": "Cloth",
+            "value": "cloth",
+            "attr_name": "inv_cloth",
+            "weight": 0.2
+        },
+        {
+            "name": "Circuits",
+            "value": "Circuits",
+            "attr_name": "inv_circuits",
+            "weight": 0.2
+        },
+        {
+            "name": "Glass",
+            "value": "glass",
+            "attr_name": "inv_glass",
+            "weight": 0.2
+        },
+        {
+            "name": "Glass",
+            "value": "glass",
+            "attr_name": "inv_glass",
+            "weight": 0.2
+        },
+        {
+            "name": "Gun Powder",
+            "value": "gunpowder",
+            "attr_name": "inv_gunpowder",
+            "weight": 0.2
+        },
+        {
+            "name": "Lighters",
+            "value": "lighters",
+            "attr_name": "inv_lighters",
+            "weight": 0.2
+        },
+        {
+            "name": "Metal",
+            "value": "metal",
+            "attr_name": "inv_metal",
+            "weight": 0.2
+        },
+        {
+            "name": "Nuts & Bolts",
+            "value": "nuts",
+            "attr_name": "inv_nuts",
+            "weight": 0.2
+        },
+        {
+            "name": "Paper",
+            "value": "paper",
+            "attr_name": "inv_paper",
+            "weight": 0.2
+        },
+        {
+            "name": "Plastic",
+            "value": "plastic",
+            "attr_name": "inv_plastic",
+            "weight": 0.2
+        },
+        {
+            "name": "Rope",
+            "value": "rope",
+            "attr_name": "inv_rope",
+            "weight": 0.2
+        },
+        {
+            "name": "Wires",
+            "value": "wires",
+            "attr_name": "inv_wires",
+            "weight": 0.2
+        },
+        {
+            "name": "Wood",
+            "value": "wood",
+            "attr_name": "inv_wood",
+            "weight": 0.2
+        }
+    ],
+    "ammoTypes": [
+        {
+            "name": "Light",
+            "value": "ammo_light",
+            "attr_name": "ammo_light",
+            "weight": 0.1
+        },
+        {
+            "name": "Medium",
+            "value": "ammo_medium",
+            "attr_name": "ammo_medium",
+            "weight": 0.2
+        },
+        {
+            "name": "Heavy",
+            "value": "ammo_heavy",
+            "attr_name": "ammo_heavy",
+            "weight": 0.3
+        },
+        {
+            "name": "Shotgun Shells",
+            "value": "ammo_shells",
+            "attr_name": "ammo_shells",
+            "weight": 0.2
+        },
+        {
+            "name": "Arrows",
+            "value": "ammo_arrows",
+            "attr_name": "ammo_arrows",
+            "weight": 0.3
+        }
+    ],
+    "customCounters": {
+        "ammo_attr": "ammo_custom",
+        "ammo_label": "ammo_custom_label",
+        "ammo_custom_count": 2,
+        "inv_attr": "inv_custom",
+        "inv_label": "inv_custom_label",
+        "inv_custom_count": 3
+    },
+    "equipTypes": {
+        "melee": "melee",
+        "ranged": "ranged",
+        "special": "special",
+        "head": "head",
+        "body": "body",
+        "arms": "arms",
+        "legs": "legs"
+    },
+    "inventoryCounterWeight" : 0.2
+}

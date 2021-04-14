@@ -1,0 +1,36 @@
+{% import '../macros/inventoryItem.njk' as inventoryItem %}
+{% import '../macros/counterBox.njk' as counterBox %}
+
+<div class="sheet-area-inventory">
+    <div class="sheet-container">
+        <div class="sheet-section-inventory">
+            <fieldset class="repeating_inventory">
+                {{ inventoryItem.create(prefix='inventory', sheetData=sheetData)}}
+            </fieldset>
+        </div>
+
+        <div class="sheet-section-counters">
+            <div class="sheet-inventory-weight">
+                <h2>{{ sheetData.misc.inventory_weight.display_name }} </h2>
+                <div class="sheet-weight">
+                    <div class="sheet-field">
+                        <span>Current</span>
+                        <input type="text" name="attr_{{sheetData.misc.total_weight.attr_name}}" value="0">
+                    </div>
+                    <div class="sheet-separator">/</div>
+                    <div class="sheet-field">
+                        <span>Max</span>
+                        <input type="text" name="attr_{{sheetData.misc.total_weight.attr_name}}_max" value="10">
+                    </div>
+                    <div class="sheet-hidden">
+                        <input type="text" name="attr_{{sheetData.misc.inventory_weight.attr_name}}" value="0">
+                        <input type="text" name="attr_{{sheetData.misc.counter_weight.attr_name}}" value="0">
+                    </div>
+                </div>
+            </div>
+            <div class="sheet-inventory-counters">
+                {{ counterBox.create('', sheetData.items.inventoryCounters, sheetData.items.customCounters.inv_custom_count, sheetData.items.customCounters.inv_label, sheetData.items.customCounters.inv_attr)}}
+            </div>
+        </div>
+    </div>
+</div>

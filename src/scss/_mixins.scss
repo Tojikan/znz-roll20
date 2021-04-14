@@ -1,0 +1,69 @@
+
+/**
+    Hide/Display an element when a sibling checkbox is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+@mixin toggleDisplayCheckbox($elClass, $toggleClass){
+
+    .#{$elClass} {
+        display: none;
+    }
+
+    .#{$toggleClass}:checked ~ .#{$elClass}{
+        display: block;
+    }
+}
+
+/**
+    Hide/Display an element when two sibling checkboxes are checked.
+
+    $elClass - class of content to show/hide
+    $toggleClass1 - class of hidden input 1
+    $toggleClass2 - class of hidden input 2
+**/
+@mixin toggleDisplayCheckboxDouble($elClass, $toggleClass1, $toggleClass2){
+
+    .#{$elClass} {
+        display: none;
+    }
+
+    .#{$toggleClass1}:checked ~ .#{$toggleClass2}:checked ~ .#{$elClass}{
+        display: block;
+    }
+}
+
+
+/**
+    Hide/Display when a hidden input is set to a value.
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+    $onValue - value to check
+**/
+@mixin toggleDisplay($elClass, $toggleClass, $onValue){
+
+    .#{$elClass} {
+        display: none;
+    }
+
+    .#{$toggleClass}[value="#{$onValue}"] ~ .#{$elClass}{
+        display: block;
+    }
+}
+
+/**
+    Style tab buttons when hidden input field is set to a value.
+
+    $elClass - class of button
+    $toggleClass - class of the option
+    $onValue - value to check for to set style
+**/
+@mixin tabButtonToggle($elClass, $toggleClass, $onValue){
+    .#{$toggleClass}[value="#{$onValue}"] ~ button.#{$elClass}{
+        border: solid 2px $black;
+        border-bottom: none;
+        background-color: $white;
+    }
+}

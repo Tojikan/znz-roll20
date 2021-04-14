@@ -1,0 +1,900 @@
+/**
+* Variables used throughout styles
+*/
+/**
+    Hide/Display an element when a sibling checkbox is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+/**
+    Hide/Display an element when two sibling checkboxes are checked.
+
+    $elClass - class of content to show/hide
+    $toggleClass1 - class of hidden input 1
+    $toggleClass2 - class of hidden input 2
+**/
+/**
+    Hide/Display when a hidden input is set to a value.
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+    $onValue - value to check
+**/
+/**
+    Style tab buttons when hidden input field is set to a value.
+
+    $elClass - class of button
+    $toggleClass - class of the option
+    $onValue - value to check for to set style
+**/
+/**
+* Layouts
+*/
+.sheet-znz-character-sheet {
+  /************* Header area *****************/
+  /************* Stats Tab *******************/
+  /*************** Ability Tab ******************/
+  /************* Inventory Tab *******************/
+  /************* Equipment Tab *******************/
+  /************** Notes Tab ********************/ }
+  .sheet-znz-character-sheet .sheet-header {
+    display: flex; }
+    .sheet-znz-character-sheet .sheet-header .sheet-area-name {
+      flex: 35%;
+      margin-right: 2rem;
+      max-width: 35%; }
+    .sheet-znz-character-sheet .sheet-header .sheet-area-resource {
+      flex: 65%; }
+  .sheet-znz-character-sheet .sheet-area-stats {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(50px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 4rem; }
+    .sheet-znz-character-sheet .sheet-area-stats .sheet-section-attributes {
+      grid-column-start: 1;
+      grid-column-end: 4; }
+    .sheet-znz-character-sheet .sheet-area-stats .sheet-section-expertise {
+      grid-column-start: 4;
+      grid-column-end: 12;
+      display: flex; }
+      .sheet-znz-character-sheet .sheet-area-stats .sheet-section-expertise .sheet-section-skills {
+        margin-right: 2rem; }
+      .sheet-znz-character-sheet .sheet-area-stats .sheet-section-expertise .sheet-section-skills, .sheet-znz-character-sheet .sheet-area-stats .sheet-section-expertise .sheet-section-proficiencies {
+        width: 39%; }
+  .sheet-znz-character-sheet .sheet-area-abilities .sheet-container {
+    display: flex; }
+    .sheet-znz-character-sheet .sheet-area-abilities .sheet-container > div {
+      flex: 50%; }
+      .sheet-znz-character-sheet .sheet-area-abilities .sheet-container > div:first-child {
+        margin-right: 2rem; }
+  .sheet-znz-character-sheet .sheet-area-inventory .sheet-container {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(65px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 2rem; }
+  .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-inventory {
+    grid-column-start: 1;
+    grid-column-end: 8;
+    display: flex;
+    flex-direction: column; }
+    .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-inventory .repcontrol {
+      order: 1;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-bottom: solid 3px black; }
+    .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-inventory .repcontainer {
+      order: 2; }
+  .sheet-znz-character-sheet .sheet-area-inventory .sheet-section-counters {
+    grid-column-start: 8;
+    grid-column-end: 11; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-container {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(57px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 2rem; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-weapons {
+    grid-column-start: 1;
+    grid-column-end: 8; }
+  .sheet-znz-character-sheet .sheet-area-equipment .sheet-section-ammo {
+    grid-column-start: 8;
+    grid-column-end: 12; }
+  .sheet-znz-character-sheet .sheet-area-notes .sheet-note {
+    margin-bottom: 2rem; }
+
+/**
+* Reusable classes and styling across the sheet. 
+*/
+.sheet-znz-character-sheet {
+  font-size: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+input, textarea {
+  width: 100%; }
+
+.sheet-textarea-small textarea {
+  height: 6rem; }
+
+textarea.sheet-line-height {
+  height: 2rem; }
+
+.sheet-line-input {
+  border: none;
+  border-bottom: solid 1px #a0a0a0;
+  border-radius: 0; }
+
+.sheet-borderless-input {
+  border: none; }
+
+.sheet-number {
+  width: 3rem; }
+
+.sheet-row-flex {
+  display: flex;
+  justify-content: space-between; }
+
+.sheet-hidden {
+  display: none; }
+
+input {
+  transition: 0.3s; }
+  input:hover {
+    background-color: #e5fffb; }
+
+.sheet-d6-icon {
+  font-family: "dicefontd6"; }
+
+select {
+  transition: 0.3s; }
+  select.sheet-select-borderless {
+    border: none; }
+  select:hover, select:focus {
+    background-color: #e5fffb; }
+  select.sheet-line-select {
+    border: none; }
+
+.sheet-line-field {
+  margin-bottom: 0.5rem;
+  display: flex; }
+  .sheet-line-field .sheet-header {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-right: 1rem;
+    align-self: flex-end;
+    margin-bottom: 0; }
+  .sheet-line-field input, .sheet-line-field select {
+    width: 100%;
+    width: 8rem; }
+  .sheet-line-field input {
+    text-align: center; }
+  .sheet-line-field select {
+    margin-bottom: 0;
+    width: 12rem; }
+  .sheet-line-field.sheet-max-field .sheet-field {
+    display: flex; }
+    .sheet-line-field.sheet-max-field .sheet-field input {
+      width: 6rem; }
+  .sheet-line-field.sheet-max-field .sheet-divider {
+    font-size: 2.2rem;
+    margin: 0 1rem;
+    align-self: flex-end;
+    max-height: 2.2rem; }
+  .sheet-line-field.sheet-stat-repeater-field {
+    display: block; }
+    .sheet-line-field.sheet-stat-repeater-field .sheet-header {
+      margin-bottom: 0.5rem; }
+    .sheet-line-field.sheet-stat-repeater-field .sheet-stat-item {
+      display: flex; }
+      .sheet-line-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select {
+        margin-right: 1rem;
+        width: 60%; }
+        .sheet-line-field.sheet-stat-repeater-field .sheet-stat-item .sheet-stat-select select {
+          border: none;
+          border-bottom: solid 1px #a0a0a0; }
+
+button.sheet-hidden-roll {
+  background-color: transparent;
+  border: none;
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+  text-align: left;
+  transition: 0.3s;
+  font-size: inherit !important; }
+  button.sheet-hidden-roll:before {
+    content: none !important; }
+  button.sheet-hidden-roll:hover {
+    background-color: #e5fffb; }
+
+.charsheet .sheet-line-field input[type="number"] {
+  width: 7rem; }
+
+/** Show more toggle **/
+.sheet-znz-expandable {
+  display: none;
+  margin: 20px 0; }
+
+input.sheet-znz-expand:checked ~ .sheet-znz-expandable {
+  display: block; }
+
+.sheet-znz-expand-button {
+  position: relative; }
+  .sheet-znz-expand-button input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    margin: 0; }
+  .sheet-znz-expand-button .sheet-label {
+    color: #666;
+    font-size: 12px;
+    margin: auto; }
+    .sheet-znz-expand-button .sheet-label:after {
+      content: '';
+      border: solid #666;
+      border-width: 0 3px 3px 0;
+      padding: 3px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      position: absolute;
+      top: 3px;
+      margin-left: 10px;
+      transition: transform 0.3s; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-label:after, .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-label:before {
+    transform: rotate(225deg) rotateY(360deg);
+    top: 5px; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-znz-expand-text {
+    display: none; }
+  .sheet-znz-expand-button input[type=checkbox]:checked ~ .sheet-znz-collapse-text {
+    display: block; }
+  .sheet-znz-expand-button input[type=checkbox]:not(:checked) ~ .sheet-znz-expand-text {
+    display: block; }
+  .sheet-znz-expand-button input[type=checkbox]:not(:checked) ~ .sheet-znz-collapse-text {
+    display: none; }
+  .sheet-znz-expand-button.sheet-znz-expandable-section {
+    margin: 5px 0;
+    border-bottom: solid 1px #f5f5f5; }
+    .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label {
+      text-align: center; }
+      .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label:before {
+        content: '';
+        border: solid #666;
+        border-width: 0 3px 3px 0;
+        padding: 3px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        position: absolute;
+        top: 3px;
+        margin-left: -20px;
+        transition: transform 0.3s; }
+
+.sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label {
+  color: darkgray; }
+  .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label:before, .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label:after {
+    border-color: darkgray;
+    border-style: dashed; }
+  .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label span:before, .sheet-znz-expandable .sheet-znz-expand-button.sheet-znz-expandable-section .sheet-label span:after {
+    border-style: dashed;
+    border-color: darkgray; }
+
+.sheet-znz-expandable .sheet-znz-expandable {
+  border-bottom: dashed 1px darkgray; }
+
+.sheet-tab-stats {
+  display: none; }
+
+.sheet-tab-toggle[value="selectTabStats"] ~ .sheet-tab-stats {
+  display: block; }
+
+.sheet-tab-abilities {
+  display: none; }
+
+.sheet-tab-toggle[value="selectTabAbilities"] ~ .sheet-tab-abilities {
+  display: block; }
+
+.sheet-tab-inventory {
+  display: none; }
+
+.sheet-tab-toggle[value="selectTabInventory"] ~ .sheet-tab-inventory {
+  display: block; }
+
+.sheet-tab-notes {
+  display: none; }
+
+.sheet-tab-toggle[value="selectTabNotes"] ~ .sheet-tab-notes {
+  display: block; }
+
+.sheet-tab-equipment {
+  display: none; }
+
+.sheet-tab-toggle[value="selectTabEquipment"] ~ .sheet-tab-equipment {
+  display: block; }
+
+.sheet-tab-select {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 1rem; }
+  .sheet-tab-select button {
+    flex: 25%;
+    display: block;
+    padding: 1rem 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border: solid 2px #d3d3d3;
+    border-bottom: none;
+    transition: 0.2s; }
+    .sheet-tab-select button:not(:last-child) {
+      margin-right: 0.5rem; }
+  .sheet-tab-select .sheet-tab-toggle[value="selectTabStats"] ~ button.sheet-tab-button-stats {
+    border: solid 2px black;
+    border-bottom: none;
+    background-color: white; }
+  .sheet-tab-select .sheet-tab-toggle[value="selectTabAbilities"] ~ button.sheet-tab-button-abilities {
+    border: solid 2px black;
+    border-bottom: none;
+    background-color: white; }
+  .sheet-tab-select .sheet-tab-toggle[value="selectTabInventory"] ~ button.sheet-tab-button-inventory {
+    border: solid 2px black;
+    border-bottom: none;
+    background-color: white; }
+  .sheet-tab-select .sheet-tab-toggle[value="selectTabNotes"] ~ button.sheet-tab-button-notes {
+    border: solid 2px black;
+    border-bottom: none;
+    background-color: white; }
+  .sheet-tab-select .sheet-tab-toggle[value="selectTabEquipment"] ~ button.sheet-tab-button-equipment {
+    border: solid 2px black;
+    border-bottom: none;
+    background-color: white; }
+
+.sheet-tabs-content {
+  padding: 2rem 0; }
+
+.sheet-bonus {
+  display: none;
+  font-size: 1.2rem; }
+
+.sheet-bonus-check[value="pos"] ~ .sheet-bonus {
+  display: inline-block;
+  color: darkgreen; }
+  .sheet-bonus-check[value="pos"] ~ .sheet-bonus:before {
+    content: "+"; }
+  .sheet-skill-list .sheet-bonus-check[value="pos"] ~ .sheet-bonus:before {
+    content: "(+"; }
+  .sheet-skill-list .sheet-bonus-check[value="pos"] ~ .sheet-bonus:after {
+    content: ")"; }
+
+.sheet-bonus-check[value="neg"] ~ .sheet-bonus {
+  display: inline-block;
+  color: red; }
+  .sheet-skill-list .sheet-bonus-check[value="neg"] ~ .sheet-bonus:before {
+    content: "("; }
+  .sheet-skill-list .sheet-bonus-check[value="neg"] ~ .sheet-bonus:after {
+    content: ")"; }
+
+.sheet-toggle {
+  display: none; }
+  .sheet-toggle:checked ~ .sheet-toggle-content {
+    display: block; }
+
+.sheet-toggle-content {
+  display: none; }
+
+.sheet-counter-box .sheet-counter {
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+  font-size: 1.8rem; }
+  .sheet-counter-box .sheet-counter .sheet-input span {
+    margin-right: 2rem; }
+  .sheet-counter-box .sheet-counter.sheet-counter-custom .sheet-label {
+    width: 50%; }
+
+.sheet-counter-box:not(:last-child) {
+  border-bottom: solid 3px black;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem; }
+
+.sheet-counter-box h2 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1rem; }
+
+.sheet-area-resource {
+  margin-bottom: 2rem; }
+  .sheet-area-resource .sheet-res-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem; }
+    .sheet-area-resource .sheet-res-row .sheet-stat-block {
+      border: double #a0a0a0 1px;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column-reverse;
+      text-align: center;
+      border-radius: 1rem;
+      box-shadow: 0.2rem 0.2rem black; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-body {
+        display: flex;
+        margin-bottom: 0.5rem; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-head {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-separator {
+        font-size: 2.2rem;
+        display: flex;
+        align-items: flex-end;
+        text-align: center;
+        margin: 0 0.7rem;
+        color: #d3d3d3; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-field span {
+        display: block;
+        margin-bottom: 0.5rem; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-field input {
+        width: 4rem;
+        border: none;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.8rem; }
+      .sheet-area-resource .sheet-res-row .sheet-stat-block .sheet-block-field.sheet-field-exp {
+        width: 10rem; }
+  .sheet-area-resource .sheet-defenses {
+    display: flex;
+    justify-content: space-between; }
+    .sheet-area-resource .sheet-defenses .sheet-def-block {
+      display: flex;
+      border: solid 1px black;
+      padding: 0.75rem;
+      justify-content: space-between;
+      font-size: 1.4rem;
+      align-items: center;
+      box-shadow: 0.2rem 0.2rem black;
+      border-radius: 1rem; }
+      .sheet-area-resource .sheet-defenses .sheet-def-block input {
+        text-align: center; }
+      .sheet-area-resource .sheet-defenses .sheet-def-block:not(:last-child) {
+        margin-right: 1rem; }
+
+.sheet-section-effects {
+  margin-top: 4rem;
+  padding: 1rem;
+  border: solid 1px black;
+  box-shadow: 0.2rem 0.2rem black; }
+
+.sheet-section-statmod-track {
+  margin-top: 4rem; }
+  .sheet-section-statmod-track .sheet-header {
+    font-weight: 700;
+    font-size: 1.8rem; }
+  .sheet-section-statmod-track textarea {
+    resize: none;
+    height: 20rem; }
+
+.sheet-container-attr {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center; }
+  .sheet-container-attr .sheet-field-attr-mod {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border: solid 1px black;
+    border-radius: 1rem;
+    padding: 0.75rem;
+    padding-bottom: 0;
+    width: 35%;
+    position: relative;
+    box-shadow: 0.2rem 0.2rem black; }
+    .sheet-container-attr .sheet-field-attr-mod input {
+      text-align: center;
+      width: 100%; }
+    .sheet-container-attr .sheet-field-attr-mod .sheet-attr-mod-number {
+      border: none;
+      background-color: transparent; }
+    .sheet-container-attr .sheet-field-attr-mod .sheet-attr-mod {
+      font-size: 1.8rem; }
+    .sheet-container-attr .sheet-field-attr-mod .sheet-bonus {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%); }
+    .sheet-container-attr .sheet-field-attr-mod .sheet-modifier {
+      position: relative; }
+    .sheet-container-attr .sheet-field-attr-mod .sheet-rolls {
+      border: solid 2px #a0a0a0;
+      border-radius: 4rem;
+      min-height: 2rem;
+      width: 100%;
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 1.4rem; }
+      .sheet-container-attr .sheet-field-attr-mod .sheet-rolls button {
+        text-align: center; }
+      .sheet-container-attr .sheet-field-attr-mod .sheet-rolls span:after {
+        content: 'L';
+        font-family: "dicefontd6";
+        font-size: 1.6rem;
+        margin-left: 0.25rem; }
+  .sheet-container-attr .sheet-field-attr {
+    border: solid 2px #a0a0a0;
+    border-left: none;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center; }
+    .sheet-container-attr .sheet-field-attr .sheet-label-attr {
+      font-weight: 700;
+      flex: 80%; }
+    .sheet-container-attr .sheet-field-attr .sheet-field-attr-input {
+      flex: 20%; }
+      .sheet-container-attr .sheet-field-attr .sheet-field-attr-input input {
+        border: none;
+        border-left: solid 1px #a0a0a0;
+        border-radius: 0;
+        width: 100%;
+        text-align: center;
+        height: 100%; }
+
+.sheet-area-name input {
+  margin-bottom: 1rem; }
+
+.sheet-area-name textarea {
+  max-width: 100%;
+  box-sizing: border-box; }
+
+.sheet-area-name h1, .sheet-area-name h2 {
+  font-size: 1.4rem;
+  line-height: 2rem; }
+
+.sheet-list-header h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  text-transform: uppercase; }
+
+.sheet-skill-list {
+  font-size: 1.4rem;
+  padding: 1rem;
+  border: solid 1px #a0a0a0;
+  box-shadow: 0.2rem 0.2rem black; }
+  .sheet-skill-list .sheet-skill {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0.3rem; }
+    .sheet-skill-list .sheet-skill.sheet-custom input {
+      margin-bottom: 0 !important; }
+    .sheet-skill-list .sheet-skill .sheet-field {
+      flex: 15%;
+      margin-right: 0.4rem; }
+      .sheet-skill-list .sheet-skill .sheet-field input {
+        padding: 0;
+        margin-bottom: 0.4rem;
+        text-align: center; }
+    .sheet-skill-list .sheet-skill .sheet-label {
+      flex: 85%; }
+      .sheet-skill-list .sheet-skill .sheet-label .sheet-attr {
+        color: #a0a0a0;
+        font-size: 1rem;
+        margin-left: 0.5rem; }
+
+.sheet-area-abilities .sheet-description-text {
+  border: solid 1px #d3d3d3;
+  background-color: #f5f5f5;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  min-height: 12rem;
+  font-size: 1.2rem; }
+  .sheet-area-abilities .sheet-description-text .sheet-lvl-txt {
+    margin-left: 1rem;
+    margin-top: 0.5rem; }
+    .sheet-area-abilities .sheet-description-text .sheet-lvl-txt span {
+      font-weight: 700;
+      text-decoration: underline; }
+
+.sheet-section-mutation {
+  font-size: 1.2rem;
+  margin-bottom: 3rem; }
+  .sheet-section-mutation .sheet-header {
+    display: flex;
+    justify-content: space-between; }
+
+.sheet-section-quirk {
+  max-width: 50%; }
+  .sheet-section-quirk .sheet-header {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px #d3d3d3; }
+    .sheet-section-quirk .sheet-header button {
+      padding: 0 0.8rem;
+      font-size: 1.2rem;
+      line-height: 12px; }
+  .sheet-section-quirk .sheet-ability-list .repcontainer {
+    margin-bottom: 1rem; }
+  .sheet-section-quirk .sheet-ability {
+    border-bottom: solid 1px #d3d3d3;
+    padding-top: 2rem;
+    padding-bottom: 1rem; }
+    .sheet-section-quirk .sheet-ability textarea {
+      max-width: 98%; }
+    .sheet-section-quirk .sheet-ability .sheet-ability-label {
+      font-size: 1.2rem; }
+
+.sheet-area-inventory .sheet-item-card {
+  border: solid 1px black;
+  padding: 1rem;
+  padding-right: 0;
+  margin-bottom: 2rem;
+  display: flex;
+  box-shadow: 0.3rem 0.3rem black; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-main {
+    width: 85%; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-main .sheet-main-top {
+      display: flex; }
+      .sheet-area-inventory .sheet-item-card .sheet-item-main .sheet-main-top .sheet-image {
+        width: 15%;
+        margin-right: 1.5rem; }
+      .sheet-area-inventory .sheet-item-card .sheet-item-main .sheet-main-top .sheet-content {
+        width: 85%; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-side {
+    margin-left: 2rem;
+    border-left: solid 1px #d3d3d3;
+    width: 15%; }
+    .sheet-area-inventory .sheet-item-card .sheet-item-side .sheet-item-side-container {
+      width: 80%;
+      margin: auto;
+      text-align: center; }
+  .sheet-area-inventory .sheet-item-card .sheet-image {
+    background: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/swap-bag.png") no-repeat top left;
+    background-size: contain; }
+  .sheet-area-inventory .sheet-item-card .sheet-name {
+    margin-bottom: 0.5rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-name input {
+      font-size: 2.2rem;
+      border-bottom: double 0.4rem black;
+      font-weight: 700;
+      color: black; }
+  .sheet-area-inventory .sheet-item-card .sheet-type {
+    display: flex;
+    justify-content: space-between; }
+    .sheet-area-inventory .sheet-item-card .sheet-type select {
+      padding-left: 0;
+      font-weight: 700;
+      width: 15rem; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype-armor {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-subtype-armor {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype-melee {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-subtype-melee {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-subtype-ranged {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-subtype-ranged {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-description textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+    height: 2.8rem; }
+  .sheet-area-inventory .sheet-item-card .sheet-amount-counter {
+    margin-bottom: 0.5rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-amount-counter .sheet-label {
+      margin-bottom: 0.25rem;
+      font-size: 1.4rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-amount-counter input {
+      font-size: 2.2rem;
+      text-align: center;
+      width: 100%; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-misc:checked ~ .sheet-equip {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card button.sheet-equip-button {
+    padding: 0.2rem 0.5rem;
+    margin-bottom: 0.5rem;
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-melee {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-equip-melee {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-ranged {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-equip-ranged {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-special {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-special:checked ~ .sheet-equip-special {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-head {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-head:checked ~ .sheet-equip-head {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-body {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-body:checked ~ .sheet-equip-body {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-arms {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-arms:checked ~ .sheet-equip-arms {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-equip-legs {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-item-type-legs:checked ~ .sheet-equip-legs {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/baseball-bat.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/pistol-gun.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/kevlar-vest.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-special:checked ~ .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/grenade.png"); }
+  .sheet-area-inventory .sheet-item-card .sheet-armor-fields {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-armor:checked ~ .sheet-armor-fields {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-melee-fields {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-melee:checked ~ .sheet-melee-fields {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-ranged-fields {
+    display: none; }
+  .sheet-area-inventory .sheet-item-card .sheet-item-type-ranged:checked ~ .sheet-ranged-fields {
+    display: block; }
+  .sheet-area-inventory .sheet-item-card .sheet-melee-fields-container, .sheet-area-inventory .sheet-item-card .sheet-ranged-fields-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 50%);
+    grid-row-gap: 0.5rem;
+    align-items: center; }
+    .sheet-area-inventory .sheet-item-card .sheet-melee-fields-container .sheet-field, .sheet-area-inventory .sheet-item-card .sheet-ranged-fields-container .sheet-field {
+      width: 40%; }
+  .sheet-area-inventory .sheet-item-card .sheet-armor-fields-container {
+    display: flex;
+    justify-content: space-between; }
+    .sheet-area-inventory .sheet-item-card .sheet-armor-fields-container .sheet-armor-fields-block:not(:last-child) {
+      margin-right: 1rem; }
+    .sheet-area-inventory .sheet-item-card .sheet-armor-fields-container .sheet-armor-fields-block .sheet-item-field {
+      display: block; }
+
+.sheet-area-inventory .sheet-section-counters {
+  padding: 1rem;
+  border: solid 2px black;
+  box-shadow: 0.3rem 0.3rem black; }
+  .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight {
+    border-bottom: solid 4px black;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-weight {
+      display: flex;
+      text-align: center;
+      justify-content: center; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-separator {
+      font-size: 2.2rem;
+      display: flex;
+      align-items: flex-end;
+      margin: 0 0.7rem;
+      color: #d3d3d3; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-field span {
+      display: block;
+      margin-bottom: 0.5rem; }
+    .sheet-area-inventory .sheet-section-counters .sheet-inventory-weight .sheet-field input {
+      width: 8rem;
+      border: none;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem; }
+
+.sheet-area-equipment {
+  /******** Weapon ************/
+  /******** Ammo ************/
+  /**** Item Card *******/ }
+  .sheet-area-equipment .sheet-section-weapons .sheet-block-weapons {
+    display: flex;
+    margin-bottom: 2rem; }
+    .sheet-area-equipment .sheet-section-weapons .sheet-block-weapons .sheet-weapon {
+      flex: 100%; }
+      .sheet-area-equipment .sheet-section-weapons .sheet-block-weapons .sheet-weapon:not(:last-child) {
+        margin-right: 2rem; }
+  .sheet-area-equipment .sheet-section-ammo .sheet-ammo-counters {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: solid 0.3rem black;
+    box-shadow: 0.3rem 0.3rem black; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-melee .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/baseball-bat.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-melee .sheet-body .sheet-melee-fields {
+    display: block; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-ranged .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/pistol-gun.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-ranged .sheet-body .sheet-ranged-fields {
+    display: block; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/grenade.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-name {
+    width: 100%; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-special .sheet-main-header .sheet-quantity {
+    display: block; }
+  .sheet-area-equipment .sheet-equipped-item.sheet-head .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/american-football-helmet.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-body .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/kevlar-vest.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-arms .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/gloves.png"); }
+  .sheet-area-equipment .sheet-equipped-item.sheet-legs .sheet-main-header .sheet-image {
+    background-image: url("https://tojikan.github.io/ZnZ-Roll20/assets/images/boots.png"); }
+  .sheet-area-equipment .sheet-equipped-item {
+    padding: 1rem;
+    border: solid 3px black;
+    box-shadow: 0.3rem 0.3rem black;
+    height: 100%;
+    box-sizing: border-box; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-main-header {
+      display: flex;
+      margin-bottom: 1rem; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-header-image {
+        margin-right: 1rem; }
+        .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-header-image .sheet-unequip button {
+          padding: 0.5rem;
+          background-color: black;
+          color: white; }
+        .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-header-image .sheet-image {
+          width: 100%;
+          height: 6rem;
+          background-size: cover;
+          background-repeat: no-repeat; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name input {
+        border-bottom: double 0.4rem black;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: black; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name select {
+        width: 100%; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-name .sheet-typetext {
+        font-size: 1.2rem; }
+      .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-quantity {
+        display: none;
+        width: 75px;
+        margin-left: 2rem;
+        text-align: center; }
+        .sheet-area-equipment .sheet-equipped-item .sheet-main-header .sheet-quantity input {
+          text-align: center; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-description textarea {
+      resize: vertical;
+      height: 3rem;
+      box-sizing: border-box; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-line-field {
+      justify-content: space-between;
+      margin-bottom: 1.5rem; }
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-melee-fields,
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-ranged-fields,
+    .sheet-area-equipment .sheet-equipped-item .sheet-body .sheet-armor-fields {
+      display: none; }
+  .sheet-area-equipment .sheet-section-armor {
+    margin-top: 2rem; }
+    .sheet-area-equipment .sheet-section-armor .sheet-row {
+      display: flex; }
+    .sheet-area-equipment .sheet-section-armor .sheet-equipped-item:not(:last-child) {
+      margin-right: 2rem; }
+    .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields {
+      display: block; }
+    .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container {
+      display: flex;
+      justify-content: space-between; }
+      .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container .sheet-armor-fields-block:not(:last-child) {
+        margin-right: 1rem; }
+      .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container .sheet-armor-fields-block .sheet-item-field {
+        display: block; }
+      .sheet-area-equipment .sheet-section-armor .sheet-equipped-item .sheet-armor-fields-container .sheet-armor-fields-block .sheet-line-field {
+        display: block; }

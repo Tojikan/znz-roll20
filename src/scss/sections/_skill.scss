@@ -1,0 +1,50 @@
+.sheet-list-header{
+    h2 {
+        text-align: center;
+        font-size: $large;
+        text-transform: uppercase;
+        
+    }
+}
+
+.sheet-skill-list {
+    font-size: $medium;
+    padding: 1rem;
+    border: solid 1px $darkgray;
+    box-shadow: 0.2rem 0.2rem $black;
+    
+
+
+    .sheet-skill {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 0.3rem;
+
+        &.sheet-custom {
+            input {
+                margin-bottom: 0!important;
+            }
+        }
+
+        .sheet-field {
+            flex: 15%;
+            margin-right: 0.4rem;
+
+            input {
+                padding: 0;
+                margin-bottom: 0.4rem;
+                text-align: center;
+            }
+        }
+
+        .sheet-label {
+            flex: 85%;
+
+            .sheet-attr {
+                color: $darkgray;
+                font-size: $xSmall;
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}

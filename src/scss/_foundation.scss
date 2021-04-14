@@ -1,0 +1,136 @@
+/**
+* Layouts
+*/
+
+.sheet-znz-character-sheet {
+
+    /************* Header area *****************/
+    .sheet-header {
+        display: flex;
+
+        // Name
+        .sheet-area-name {
+            flex: 35%;
+            margin-right: $gridgap;
+            max-width:35%; //due to sizable textarea
+        }
+        
+        // Status
+        .sheet-area-resource {
+            flex: 65%;
+        }
+    }
+
+
+    /************* Stats Tab *******************/
+
+    .sheet-area-stats {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(50px, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+        grid-gap: $gridgap * 2;
+
+        .sheet-section-attributes {
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+
+        .sheet-section-expertise {
+            grid-column-start: 4;
+            grid-column-end: 12;
+
+            display: flex;
+
+            .sheet-section-skills {
+                margin-right: 2rem;
+            }
+
+            .sheet-section-skills, .sheet-section-proficiencies {
+                width: 39%;
+            }
+        }
+    }
+
+
+    /*************** Ability Tab ******************/
+    .sheet-area-abilities {
+        .sheet-container {
+            display: flex;
+
+            > div {
+                flex: 50%;
+
+                &:first-child {
+                    margin-right: $gridgap;
+                }
+            }
+        }
+    }
+
+
+    /************* Inventory Tab *******************/
+
+    .sheet-area-inventory {
+        
+        .sheet-container {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(65px, 1fr));
+            grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+            grid-gap: $gridgap;
+        }
+
+        .sheet-section-inventory {
+            grid-column-start: 1;
+            grid-column-end: 8;
+
+            display: flex;
+            flex-direction: column;
+
+            .repcontrol {
+                order: 1;
+                margin-bottom: 1rem;
+                padding: 1rem;
+                border-bottom: solid 3px $black;
+            }
+
+            .repcontainer {
+                order: 2;
+            }
+
+        }
+
+        .sheet-section-counters {
+            grid-column-start: 8;
+            grid-column-end: 11;
+        }
+    }
+
+    /************* Equipment Tab *******************/
+    .sheet-area-equipment {
+        .sheet-container {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(57px, 1fr));
+            grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+            grid-gap: $gridgap;
+        }
+
+        .sheet-section-weapons {
+            grid-column-start: 1;
+            grid-column-end: 8;
+        }
+
+        .sheet-section-ammo {
+            grid-column-start: 8;
+            grid-column-end: 12;
+        }
+    }
+
+
+    /************** Notes Tab ********************/
+
+    .sheet-area-notes {
+        .sheet-note {
+            margin-bottom: $gridgap;
+        }
+    }
+}

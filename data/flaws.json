@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Select Flaw",
+        "value": "",
+        "description": "Select a flaw to see its description",
+        "default": "true"
+    },
+    {
+        "name": "Asthma",
+        "value": "asthma",
+        "description": "If your character moves more than 5 spaces in a turn, you must pass a Constitution check or else take 1d10 damage."
+    },
+    {
+        "name": "Battle-scarred",
+        "value": "Battle-scarred",
+        "description": "If you roll an initiative of 8 or lower, your first action will be a Stress Response."
+    },
+    {
+        "name": "Catastrophic Failure",
+        "value": "catastrophic",
+        "description": "Whenever you roll and 1/2 or more of the rolls are critical fails, there is a chance the outcome becomes a catastrophic failure, leading to a butterfly effect chain that ends in a disaster. This can occur no more than once a play session."
+    },
+    {
+        "name": "Clumsy",
+        "value": "clumsy",
+        "description": "Your character occasionally slips. Your character must pass a Dexterity or Athletics active roll or else causes an accident. "
+    },
+    {
+        "name": "Glutton",
+        "value": "glutton",
+        "description": "Your character only restores 2 energy per unit of food."
+    },
+    {
+        "name": "Hemophiliac",
+        "value": "hemophiliac",
+        "description": "Health regain effects are reduced by 50%."
+    },
+    {
+        "name": "Nearsighted",
+        "value": "nearsighted",
+        "description": "If your character takes damage, roll a D20. If the roll is 10 or under, your character's glasses break, giving you a -5 penalty to ranged attacks and Perception."
+    },
+    {
+        "name": "Restless",
+        "value": "restless",
+        "description": "Your character does not get a Long Rest bonus for resource restoration."        
+    },
+    {
+        "name": "Sickly",
+        "value": "sickly",
+        "description": "Your character has a rare, incurable disease. Your character now has a daily consumption requirement of 1 special medicine. If starting the game with this flaw, start with 3 special medicine."
+    },
+    {
+        "name": "Unlucky",
+        "value": "lucky",
+        "description": "Two times a play session, the ZM can force you to re-roll any roll. Any resources spent on the initial roll are refunded."
+    }
+]

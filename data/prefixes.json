@@ -1,7 +1,10 @@
 {
-    "eq_ranged": "equipped_ranged_weapon",
-    "eq_melee": "equipped_melee_weapon",
-    "eq_head": "equipped_head",
-    "eq_body": "equipped_body",
-    "inventory": "inv"
+    "melee": "equipped_melee",
+    "ranged": "equipped_ranged",
+    "special": "equipped_special",
+    "head": "equipped_armor_head",
+    "body": "equipped_armor_body",
+    "arms": "equipped_armor_arms",
+    "legs": "equipped_armor_legs",
+    "inventory": "inventory"
 }

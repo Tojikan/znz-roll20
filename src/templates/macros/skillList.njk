@@ -1,0 +1,47 @@
+{# Create skill/prof table 
+    - data - pass in an entire array of fields (skills, proficiencies)
+    - header - header on the table#}
+
+{% macro create(data="", header="", defaultVal="", type="") %}
+    <div class="sheet-skill-list-container">
+        {% if header %}
+        <div class="sheet-list-header">
+            <h2>{{header}}</h2>
+        </div>
+        {% endif %}
+
+        <div class="sheet-skill-list">
+        {% for field in data %}
+            <div class="sheet-skill">
+                <div class="sheet-field">
+                    <input type="text" name="attr_{{field.attr_name}}" class="sheet-line-input" value="{{defaultVal}}" >
+                </div>
+                <div class="sheet-label">
+                    <button type="roll" class="sheet-hidden-roll" value="!!zroll ?{Number of Rolls? | {{'@{'}}{{field.attr_name}}_max_rolls}}} characterid=@{character_id} --{{field.attribute}} --?{Spend Resource? |None|energy|sanity|health|ammo|durability}">
+                        {{field.display_name}}
+                        <input type="hidden" class="sheet-bonus-check" name="attr_{{field.attr_name}}_bonus_check">
+                        <span class="sheet-bonus" name="attr_{{field.attr_name}}_bonus" value="0"></span>
+                        <span class="sheet-attr">[{{field.attr_shorthand}}]</span>
+                        <input type="hidden" class="sheet-hidden" name="attr_{{field.attr_name}}_max_rolls" value="0">
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for num in range(0, globalData.misc.customskills.count) %}
+            <div class="sheet-skill sheet-custom">
+                <div class="sheet-field">
+                    <input type="text" name="attr_{{type}}_{{globalData.misc.customskills.attr}}_{{num}}" class="sheet-line-input" value="" >
+                </div>
+                <div class="sheet-label">
+                    <input type="text" name="attr_{{type}}_{{globalData.misc.customskills.label}}_{{num}}" class="sheet-line-input" value="" >
+                </div>
+                </button>
+            </div>
+        {% endfor %}
+
+        </div>
+
+    </div>
+
+{% endmacro %}

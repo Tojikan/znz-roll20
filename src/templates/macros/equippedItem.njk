@@ -1,0 +1,107 @@
+{% import './outputfield.njk' as field %}
+
+
+{% macro create(type, attrPrefix, sheetData, typeText, subtype='') %}
+
+
+<div class="sheet-equipped-item sheet-{{type}}">
+    <div class="sheet-main-header">
+        <div class="sheet-header-image">
+            <div class="sheet-image"></div>
+            <div class="sheet-unequip">
+                <button type="action" class="sheet-equip-button" name="act_unequip{{type}}" >Unequip</button>
+            </div>
+        </div>
+        <div class="sheet-name">
+            <input class="sheet-line-input" type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.name.attr_name}}" placeholder="Item Name"></input>
+
+            <div class="sheet-under-name">
+                <div class="sheet-typetext">{{typeText}}</div>
+            </div>
+            <div class="sheet-subtype">
+                {% if subtype %}
+                Type: 
+                    <select class="sheet-select-borderless" name="attr_{{attrPrefix}}_{{subtype}}">
+                        {% if type == sheetData.items.equipTypes.melee %}
+                            {% for option in sheetData.items.meleeTypes %}
+                                <option value="{{option.value}}">{{option.name}}</option>
+                            {% endfor %}
+                        {% endif %}
+                        {% if type == sheetData.items.equipTypes.ranged %}
+                            {% for option in sheetData.items.rangedTypes %}
+                                <option value="{{option.value}}">{{option.name}}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                {% endif %}
+            </div>
+        </div>
+        <div class="sheet-quantity">
+            <div class="sheet-label">
+                Quantity
+            </div>
+            <input class="sheet-borderless-input" type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.quantity.attr_name}}" value="1"></input>
+        </div>
+    </div>
+    <div class="sheet-description">
+        <div class="sheet-label">Description</div>
+        <textarea name="attr_{{attrPrefix}}_{{sheetData.items.fields.description.attr_name}}" value=""></textarea/>
+    </div>
+    <div class="sheet-body">
+        <div class="sheet-melee-fields">
+            <div class="sheet-melee-fields-container">
+                {% for fld in sheetData.items.fields.melee %}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=sheetData)}}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="sheet-ranged-fields">
+            <div class="sheet-ranged-fields-container">
+                {% for fld in sheetData.items.fields.ranged %}
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=sheetData)}}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="sheet-armor-fields">
+            <div class="sheet-armor-fields-container">
+                {% for fld in sheetData.items.fields.equipment %}
+                <div class="sheet-armor-fields-block">
+                    {{ field.outputField(field=fld, prefix=attrPrefix, data=sheetData)}}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# Retain for unequipping purposes #}
+    <div class="sheet-hidden">
+        {% set itemType = type %}
+        {% set armorSubType = "" %}
+
+        {% for at in sheetData.items.armorTypes %}
+            {% if at.value == type %}
+                {% set itemType = 'armor' %}
+                {% set armorSubType = at.value %}
+            {% endif %}
+        {% endfor %}
+
+        <input type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.type.attr_name}}" value="{{itemType}}"/>
+        <input type="text" name="attr_{{attrPrefix}}_{{sheetData.items.fields.weight.attr_name}}"/>
+        {% for fld, value in sheetData.items.fields.subtypes %}
+            {% if fld == "armor" and armorSubType %}
+                <input type="text" name="attr_{{attrPrefix}}_{{value}}" value="{{armorSubType}}"/>
+            {% else %}
+                <input type="text" name="attr_{{attrPrefix}}_{{value}}"/>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+
+
+{% endmacro %}

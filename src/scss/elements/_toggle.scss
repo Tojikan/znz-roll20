@@ -1,0 +1,15 @@
+.sheet-toggle {
+    display: none;
+
+    &:checked{
+
+        & ~ .sheet-toggle-content {
+            display: block;
+        }
+
+    }
+}
+
+.sheet-toggle-content {
+    display: none;
+}

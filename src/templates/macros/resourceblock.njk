@@ -1,0 +1,21 @@
+{# Generate Statblock 
+    - Macro to generate a Stat Display #}
+
+{% macro create(data='') %}
+    <div class="sheet-field sheet-stat-block">
+        <div class="sheet-block-head">{{ data.display_name }}</div>
+        <div class="sheet-block-body">
+            <div class="sheet-block-field sheet-field-{{data.attr_name}}">
+                <span>Current</span>
+                <input type="text" name="attr_{{ data.attr_name }}" value="{{ data.default_value }}"/>
+            </div>
+            {% if not data.no_max %}
+            <div class="sheet-block-separator">/</div>
+            <div class="sheet-block-field">
+                <span>Maximum</span>
+                <input type="text" name="attr_{{ data.attr_name }}_max" value="{{ data.default_value }}" />
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}

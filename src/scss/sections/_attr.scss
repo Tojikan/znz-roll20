@@ -1,0 +1,97 @@
+
+.sheet-container-attr {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+
+    .sheet-field-attr-mod {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        border: solid 1px $black;
+        border-radius: 1rem;
+        padding: 0.75rem;
+        padding-bottom: 0;
+        width: 35%;
+        position: relative;
+        box-shadow: 0.2rem 0.2rem $black;
+
+        input {
+            text-align: center;
+            width: 100%;
+        }
+
+        .sheet-attr-mod-number {
+            border: none;
+            background-color: transparent;
+        }
+
+        .sheet-attr-mod {
+            font-size: $large;
+        }
+
+        .sheet-bonus {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sheet-modifier {
+            position: relative;
+        }
+
+        .sheet-rolls {
+            border: solid 2px $darkgray;
+            border-radius: 4rem;
+            min-height: 2rem;
+            width: 100%;
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: $medium;
+            
+            button {
+                text-align: center;
+            }
+
+            span {
+                &:after {
+                    content: 'L';
+                    font-family: $d6;
+                    font-size: 1.6rem;
+                    margin-left: 0.25rem;
+                }
+            }
+        }
+    }
+
+    .sheet-field-attr {
+        border: solid 2px $darkgray;
+        border-left: none;
+        padding: 0.5rem;
+        font-size: $small;
+        text-align: center;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+
+        .sheet-label-attr {
+            font-weight: 700;
+            flex: 80%
+        }
+
+        .sheet-field-attr-input {
+            flex: 20%;
+
+            input {
+                border: none;
+                border-left: solid 1px $darkgray;
+                border-radius: 0;
+                width: 100%;
+                text-align: center;
+                height: 100%;
+            }
+        }
+    }
+}
