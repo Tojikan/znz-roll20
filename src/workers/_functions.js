@@ -36,3 +36,23 @@ const repeatingSum = (destinations, section, fields) => {
         }); 
     }); 
 };
+
+/**
+ * Given a number, spread it out and list all numbers preceding it.
+ */
+const sequenceNumber = (num, delim='') => {
+    var result = '';
+
+    if (!Number.isInteger(num)){
+        return '';
+    }
+
+    for (let i = 0; i <= num; i++){
+        result += i.toString();
+
+        if (i < num && delim.length){
+            result += delim;
+        }
+    }
+    return result;
+}
