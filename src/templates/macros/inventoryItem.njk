@@ -140,8 +140,9 @@ outputFields is used for dynamically outputting type specific fields
                 {% endfor %}
                 {% for name, type in sheetData.items.equipTypes %}
                     <button type="action" class="sheet-equip-button sheet-equip-{{type}}" name="act_equip{{type}}" >Equip {{type | capitalize}}</button>
-                    <button type="roll" class="sheet-export-button sheet-equip-{{type}}" value='{{exportButton(type=type) | trim}}' >Export</button>
+                    <button type="roll" class="sheet-export-button sheet-equip-{{type}}" value="{{exportButton(type=type) | trim}}" >Export</button>
                 {% endfor %}
+                    <button type="roll" class="sheet-export-button sheet-equip-misc" value="{{exportButton(type=misc) | trim}}" >Export</button>
             </div>
         </div>
     </div>
@@ -152,14 +153,14 @@ outputFields is used for dynamically outputting type specific fields
 
 {# This is hardcoded for now #}
 {%- macro exportButton(type='') %}
-    {% set header = '<div>**Export Item "@{inventory_item_name}":**</div> \\n !!pickup name="@{inventory_item_name}" quantity="@{inventory_item_quantity}" type="@{inventory_item_type}" note="@{inventory_item_description}" weight="@{inventory_item_weight}" ' %}
+    {% set header = "**Export Item:** \\n !!pickup name='@{inventory_item_name}' quantity='@{inventory_item_quantity}' type='@{inventory_item_type}' note='@{inventory_item_description}' weight='@{inventory_item_weight}' " %}
 
     {% if type == 'melee' %}
-        {% set body = 'damage="@{inventory_melee_damage}" range="@{inventory_melee_reach}" uses="@{inventory_melee_durability}" max="@{inventory_melee_durability_max}"'%}
+        {% set body = "damage='@{inventory_melee_damage}' range='@{inventory_melee_reach}' uses='@{inventory_melee_durability}' max='@{inventory_melee_durability_max}'"%}
     {% elif type == 'ranged' %}
-        {% set body = 'damage="@{inventory_ranged_damage}" range="@{inventory_ranged_range}" uses="@{inventory_ranged_ammo}" max="@{inventory_ranged_ammo_max}" ammo="@{inventory_ranged_ammo_type}"'%}
+        {% set body = "damage='@{inventory_ranged_damage}' range='@{inventory_ranged_range}' uses='@{inventory_ranged_ammo}' max='@{inventory_ranged_ammo_max}' ammo='@{inventory_ranged_ammo_type}'"%}
     {% elif type == 'head' or type == 'body' or type == 'arms' or type=='legs' %}
-        {% set body = 'stat0="@{inventory_equipment_stat_bonus_0}" stat1="@{inventory_equipment_stat_bonus_1}" stat2="@{inventory_equipment_stat_bonus_2}" stat0mod="@{inventory_equipment_stat_bonus_0_mod}" stat1mod="@{inventory_equipment_stat_bonus_1_mod}" stat2mod="@{inventory_equipment_stat_bonus_2_mod}" armor="@{inventory_equipment_armor_rating}"'%}            
+        {% set body = "stat0='@{inventory_equipment_stat_bonus_0}' stat1='@{inventory_equipment_stat_bonus_1}' stat2='@{inventory_equipment_stat_bonus_2}' stat0mod='@{inventory_equipment_stat_bonus_0_mod}' stat1mod='@{inventory_equipment_stat_bonus_1_mod}' stat2mod='@{inventory_equipment_stat_bonus_2_mod}' armor='@{inventory_equipment_armor_rating}'"%}            
     {% endif %}
     
     {% set items = [header, body]%}

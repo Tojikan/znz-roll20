@@ -10,6 +10,8 @@ const inject = require('gulp-inject');
 const removeEmptyLines = require('gulp-remove-empty-lines');
 const del = require('del');
 const log = require('fancy-log'); //for testing
+const cleancss = require('gulp-clean-css');
+const htmlmin = require('gulp-htmlmin');
 
 const dataFolder = './data/';
 
@@ -69,16 +71,32 @@ gulp.task('watch', function(){
     gulp.watch('./src/scripts/*.js' , gulp.series(['scripts']));
 });
 
-//build sheets and styles
-gulp.task('build', gulp.series(['style', 'sheet', 'scripts']));
+
+// Minify in place
+gulp.task('minifyHtml', function(){
+    return gulp.src('dist/character-sheet.html')
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('minifyCss', function(){
+    return gulp.src('dist/style.css')
+    .pipe(cleancss({compatibility: 'ie8'}))
+        .pipe(gulp.dest('dist'));
+});
 
 
 gulp.task('data', function() {
     del(['docs/_data/**']);
     
     return gulp.src('data/*.json')
-        .pipe(gulp.dest('docs/_data'));
+    .pipe(gulp.dest('docs/_data'));
 });
+
+//build sheets and styles
+gulp.task('build', gulp.series(['data', 'style', 'sheet', 'scripts']));
+//Minify in place
+gulp.task('minify', gulp.series(['minifyHtml', 'minifyCss']));
 
 
 /**

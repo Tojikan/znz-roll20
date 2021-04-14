@@ -16,8 +16,13 @@ var Reload = Reload || (function() {
             character = getCharacter(sender, msg);
 
 
-        //Handle Reload
+        if (!character){
+            sendMessage("You must select your character's token to pick up an item!", sender, true, "danger");
+            return;
+        }
 
+
+        //Handle Reload
         let attrAmmo = attrLookup(character, AMMO_ATTR),
             attrAmmoType = attrLookup(character, AMMO_TYPE_ATTR),
             attrAmmoTypeAmount = attrLookup(character, attrAmmoType.get("current")),
@@ -121,7 +126,9 @@ var Reload = Reload || (function() {
 
 		sendChat(
             'ZnZ Action - Reload',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
+            //broken on prod
+            //`${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
+            `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
 		);
 	},
     RegisterEventHandlers = function() {

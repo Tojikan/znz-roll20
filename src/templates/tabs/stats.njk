@@ -13,7 +13,7 @@
                     <span class="sheet-bonus" readonly name="attr_{{attr.attr_name}}_bonus" value="0"></span>
                 </div>
                 <div class="sheet-rolls">
-                   <button type="roll" class="sheet-hidden-roll" value="!!zroll ?{Number of Rolls? | {{'@{'}}{{attr.attr_name}}_max_rolls}} characterid=@{character_id} --{{attr.attr_name}} --?{Spend Resource? |None|energy|sanity|health|ammo|durability}"><span readonly name="attr_{{attr.attr_name}}_dice" value="1"></span></button>
+                   <button type="roll" class="sheet-hidden-roll" value="!!zroll ?{Number of Rolls? | {{'@{'}}{{attr.attr_name}}_max_rolls}} characterid=@{character_id} --{{attr.attr_name}} --?{Spend Resource? |None|energy|sanity|health|ammo|durability}"><span readonly name="attr_{{attr.attr_name}}_dice" value="2"></span></button>
                    <input type="hidden" name="attr_{{attr.attr_name}}_max_rolls" value="1" />
                 </div>
             </div>

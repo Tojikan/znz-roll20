@@ -76,7 +76,8 @@
                 "attr_name": "equipment_stat_bonus",
                 "display_name": "Equipment Stats",
                 "type": "stat_repeater",
-                "count": 3
+                "count": 3,
+                "canonical": "armorStatRepeater"
             },
             {
                 "attr_name": "equipment_armor_rating",

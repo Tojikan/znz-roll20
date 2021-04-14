@@ -316,10 +316,6 @@ var Pickup = Pickup || (function() {
 
         return character;
     },
-    attrLookup = function(name, id){
-        /**Get Roll20 Attr */
-        return findObjs({type: 'attribute', characterid: id, name: name})[0];
-    },
     //generic message
     sendMessage = function(message, who, whisper, type="info" ) {
         let textColor = '#135314',
@@ -339,7 +335,9 @@ var Pickup = Pickup || (function() {
 
 		sendChat(
             'Pickup Script',
-            `${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom:10px"><strong>PickUp Item Script</strong></div>${message}</div>`
+            //broken on prod
+            //`${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom:10px"><strong>PickUp Item Script</strong></div>${message}</div>`
+            `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom:10px"><strong>PickUp Item Script</strong></div>${message}</div>`
 		);
 	},
     RegisterEventHandlers = function() {

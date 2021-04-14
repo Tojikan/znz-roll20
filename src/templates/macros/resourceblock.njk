@@ -9,13 +9,11 @@
                 <span>Current</span>
                 <input type="text" name="attr_{{ data.attr_name }}" value="{{ data.default_value }}"/>
             </div>
-            {% if not data.no_max %}
             <div class="sheet-block-separator">/</div>
             <div class="sheet-block-field">
                 <span>Maximum</span>
                 <input type="text" name="attr_{{ data.attr_name }}_max" value="{{ data.default_value }}" />
             </div>
-            {% endif %}
         </div>
     </div>
 {% endmacro %}
