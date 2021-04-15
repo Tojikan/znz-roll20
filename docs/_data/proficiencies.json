@@ -1,7 +1,7 @@
 [
   {
     "display_name": "Basic Repair",
-    "attr_name": "prof_throwing",
+    "attr_name": "prof_repair",
     "description": "Ability to make simple and basic repairs to objects.",
     "attribute": "dexterity",
     "attr_shorthand": "DEXT",

@@ -399,7 +399,7 @@ var DamageRoll = DamageRoll || (function() {
         }
 
 		sendChat(
-            'Damage Roll',
+            `${who}`,
             //broken on prod
             //`${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Damage Roll</strong></div>${message}</div>`
             `<div style="padding:6px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 14px;"><div style="font-size:20px; margin-bottom: 10px;"><strong>Damage Roll</strong></div>${message}</div>`

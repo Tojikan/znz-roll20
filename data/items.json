@@ -48,7 +48,7 @@
                 "attr_name": "ranged_ammo_type",
                 "display_name": "Ammo Type",
                 "type": "select",
-                "default": "light",
+                "default": "ammo_light",
                 "options": "ammoTypesFull",
                 "canonical": "rangedAmmoType"
             },

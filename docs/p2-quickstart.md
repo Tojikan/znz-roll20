@@ -26,4 +26,4 @@ title: Quickstart
 - Increase Proficiency/Skill by 1: 10XP
 - Increase HP/Sanity/Energy Max by 5: 20XP
 - Increase Attribute Score by 1: 40XP for every point over 3.
-- Learn a Skill or Improve existing Skill: 50XP for every level.
+- Learn a Ability or improve existing ability: 50XP for every level.

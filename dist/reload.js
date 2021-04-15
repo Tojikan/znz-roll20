@@ -24,8 +24,14 @@ var Reload = Reload || (function() {
 
         //Handle Reload
         let attrAmmo = attrLookup(character, AMMO_ATTR),
-            attrAmmoType = attrLookup(character, AMMO_TYPE_ATTR),
-            attrAmmoTypeAmount = attrLookup(character, attrAmmoType.get("current")),
+            attrAmmoType = attrLookup(character, AMMO_TYPE_ATTR);
+
+        if (!attrAmmoType || !attrAmmo ){
+            sendMessage("Could not find attribute. Please verify this character has an initialized character sheet.", sender, true, "danger");
+            return;
+        }
+
+        let attrAmmoTypeAmount = attrLookup(character, attrAmmoType.get("current")),
             ammoType = capitalize(attrAmmoType.get("current").replace('ammo_', ''));
 
         if (!attrAmmoType || !attrAmmo ){
@@ -125,7 +131,7 @@ var Reload = Reload || (function() {
 
 
 		sendChat(
-            'ZnZ Action - Reload',
+            `${who}`,
             //broken on prod
             //`${(whisper||'gm'===who)?`/w ${who} `:''}<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
             `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${message}</div>`
