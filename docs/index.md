@@ -8,7 +8,7 @@ title: Introduction
 ZnZ is a Virtual Tabletop RPG designed to be played on Roll20. In this game, most of humanity has been infected by a virus, turning them into flesh-eating monsters. The players play a group of survivors attempting to make their way to safety. As society has collapsed and the infected outnumber the living, you and your friends must use your wits and dice rolls to survive this ordeal.
 
 
-The game is directed by a ZM (Zombie Master) who sets up the scenes.  The ZM sets the story and creates the obstacles that players may face. This game is designed to be rules-light - loose interpretations may be necessary at some points and rules are open to interpretation. Players are encouraged to make their case on how things might go but the ZM ultimately makes the final call and decision in any part of the game.
+The game is directed by a ZM (Zombie Master) who sets up the scenes.  The ZM sets the story and creates the obstacles that players may face. This game is designed to be rules-light - loose interpretations may be necessary at some points and rules are open to interpretation. 
 
 **Death in this game is permanent.** If a player dies, their character is gone forever. Of course that doesn't mean they won't rise again...
 
@@ -22,28 +22,42 @@ Will you survive or join the ever-growing Infected?
 
 ### Gameplay Overview ###
 
-
-Each player controls a character and each character comes with various Stats, Attributes, Skills, Abilities, and Equipment. Players state their action on their turn and then roll dice to determine the outcome of the action. This game is based off of Dice Pools - characters roll X amount of dice for an action, depending on their character's expertise. Players can add an attribute modifier to the roll, based on inherent characteristics of the player such as Strength or Intelligence. Finally, the roll results are added up and compared to a challenge number to determine the success of their action.
-
-Unlike other Dice Pool games, players have *limited* dice rolls based on a pool of Resources - Energy and Sanity and Ammo. Each dice roll will typically consume 1 of the resource (unless specified). Therefore players must carefully plan when to make rolls and how many to make. Players can restore their resources through consumption of food, alcohol, or other restoratives.
-
-Players can improve their character by spending XP points to buy upgrades. These upgrades can increase your Resource Pool maximums, increase proficiencies, learn skills, increase attribute scores, or learn powerful Abilities. 
-
-Other Notes:
+This game is set in a post-apocalyptic Zombie scenario. In this world, human society has collapsed and most survivors have been left to fend for themselves. Players must find a way to survive in this harsh world, by scavenging for supplies and weapons to survive. Scarcity is a key focus in this game. Players must scrounge for food, water, and other necessities of life while also fending for themselves.
 
 
-- Each character has a Health pool. If this health pool is ever reduced to 0, the player dies.
-- The standard dice roll is a D10.
-- Combat is turn based. Players have 2 actions. Repeating an action twice in the same turn consumes 2 energy. Available actions are:
-- - Attack
-- - Move 5 spaces
-- - Prepare to dodge - allows you to dodge one attack if you are attacked.
-- - Interact with the environment
-- - Reload
-- - Change equipment
-- At the end of player rounds, Infected will attack. If players do not dodge their attack, they will take damage and be grabbed. If they are grabbed, players can try to break free on their turn. If they remain grabbed by the next Infected round, they will be bit.
-- Players can equip one melee and one ranged weapon.
-- Players can wear one Head, one Body, one Arm, or one Leg gear.
+- Each player controls a character that has various Attributes (inherent physical traits), Skills/Proficiencies (learned or trained knowledge), and Abilities (special powers and actions). During the game, players state their character's intended actions. Actions with indeterminate results will require a dice roll. The sum of the dice roll determines how successful your character is at completing the action.
+
+- This game uses a *Dice Pool* system. Every action the character declares utilizes either a Skill/Proficiency or a Physical attribute. The character's level in this Skill or Attribute determines *how many* dice they are able to roll for this action. Note that this only determines the *max* number of dice they are able to roll. However, players may want to choose to roll less dice than that because...
+
+- All characters have a limited pool of *Resources* and each roll consumes a resource. Players have Health, Energy (Physical Stamina), and Sanity (Mental Stamina). Their Ranged and Melee weapons have Ammo and Durability, respectively. Every Dice Roll for an action consumes one of these 5 resources. Players must carefully decide when to spend resources or when to conserve.
+
+- If a Character has their health reduce to 0, they will die. If their Energy is reduced to 0, all physical actions fail, speed is reduced, and they begin losing HP. If their Sanity is reduced to 0, all mental actions fail, character actions are determined at random, and their character gains a new Character Flaw occasionally.
+
+- The standard dice roll is a 10-sided dice (D10).
+
+- Players gain experience points (EXP) by defeating enemies and completing tasks. EXP can be used to buy upgrades, such as learning new proficiencies/skills, increasing their resource pool maximums, improving their physical attributes, or learning powerful abilities.
+
+- Combat is turn based. Players determine turn order by rolling initiative (with a D20) at the start of combat.
+    - Players have up to 2 actions on their turn.
+    - Common Infected will attack at the end of player rounds.
+    - If attacked by Infected, players can use an action to dodge their attack. If they do not dodge or fail to dodge, they will be grabbed. Players can only try to break the grab on their next turn but *remaining* grabbed by the start of the next Infected round will cause them to be bit.
+
+- Players can equip 1 melee and 1 ranged weapon. Players can also wear equipment on their Head, Body, Arms, and Legs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
