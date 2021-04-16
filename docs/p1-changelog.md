@@ -4,11 +4,11 @@ title: Changelog
 ---
 
 
-### Change Log ###
+## Change Log ##
 
 
 
-## V3.0 Release ##
+# V3.0 Release #
 
 Official release of ZnZ3.0, switching from ZnZ2.0
 
