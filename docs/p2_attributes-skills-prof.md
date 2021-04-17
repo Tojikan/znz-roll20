@@ -24,7 +24,7 @@ Attributes are the physical and mental characteristics of the player that measur
 | {{attr.display_name}} | {{attr.description}} |
 {%- endfor %}
 
-
+<br/><br/><br/>
 
 ## Proficiencies ##
 
@@ -36,6 +36,7 @@ Proficiencies are actions that your character can have expertise in, such as swi
 | {{prof.display_name}} | {{prof.description}} |
 {%- endfor %}
 
+<br/><br/><br/>
 
 ## Skills ##
 
