@@ -34,7 +34,7 @@
         "reminder_note": "Energy, Speed, Initiative",
         "default_value": 3,
         "default_mod": 0,
-        "description": "Athletics is a measure of your character's fitness, flexibility, and agility. Athletics increases your energy and movement speed.",
+        "description": "Athletics is a measure of your character's fitness, flexibility, and agility. Athletics increases your energy and movement speed. It is also added onto your initiative roll.",
         "canonical": "speedAttr"
     },
     {
@@ -44,7 +44,7 @@
         "reminder_note": "XP Gain, Knowledge",
         "default_value": 3,
         "default_mod": 0,
-        "description": "Intelligence is a measure of your character's mental capacity and ability to learn. Intelligence increases the amount of XP your character gains or helps you perform tasks requiring mental acumen."
+        "description": "Intelligence is a measure of your character's mental capacity and ability to learn. Intelligence increases the amount of EXP your character gains or helps you perform tasks requiring mental acumen."
     },
     {
         "display_name": "Tenacity",

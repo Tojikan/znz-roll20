@@ -119,7 +119,7 @@
   {
     "display_name": "Ranged - Throwing",
     "attr_name": "prof_throwing",
-    "description": "Ability to throw.",
+    "description": "Ability to throw objects.",
     "attribute": "dexterity",
     "attr_shorthand": "DEXT",
     "resource": "Energy",

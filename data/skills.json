@@ -26,7 +26,7 @@
   {
     "display_name": "Cooking",
     "attr_name": "cooking",
-    "description": "Cooking allows you to make food with more beneficial effects.",
+    "description": "Cooking allows you to make food with more beneficial and restorative effects.",
     "attribute": "perception",
     "attr_shorthand": "PER",
     "resource": "energy"
