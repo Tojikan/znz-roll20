@@ -50,7 +50,7 @@ If a player's sanity ever hits 0, they are traumatized and may randomize a new f
 
 | Flaw | Description |
 | ---- | ----------- |
-{% for flaw in site.data.flaws -%}
+{%- for flaw in site.data.flaws -%}
 {% if flaw.value != "" %}| {{flaw.name}} | {{flaw.description}} |{% endif %}
 {% endfor %}
 <br /><br />

@@ -38,6 +38,13 @@ For both Critical Hits and Fails, the additional dice roll only happens once and
 `Player rolls a 1 and rolls a 1 for the Critical Hit Bonus (10 + 10). They do not roll a third time.`
 
 
+
+### General Roll Rules ###
+
+- **Meets it, Beats it** - If a roll meets a particular number, then it is said to beat that number.
+- **Round Down** - Fractions are rounded down to the whole number.
+
+
 ### Active vs Passive roll ###
 
 The reason a player may choose not to roll the full maximum number of dice is that each dice roll may have a cost. This depends on the nature of the roll:
@@ -74,7 +81,7 @@ Energy can be restored by consuming food.
 
 #### Sanity ####
 
-Sanity is a measure of a character's mental state. This is used for any mental activities, such as hacking a computer, attempting to listen at a door, or trying to persuade a strange. If a character reaches 0 sanity, all of their mental actions will fail, their actions will be randomized into a [Stress Response]({{site.baseurl}}/p4-combat.html), and they may gain a new character flaw.
+Sanity is a measure of a character's mental state. This is used for any mental activities, such as hacking a computer, attempting to listen at a door, or trying to persuade a strange. If a character reaches 0 sanity, all of their mental actions will fail, their actions will be randomized into a [Stress Response]({{site.baseurl}}/p5-combat.html), and they may gain a new character flaw.
 
 Sanity can be restored by consuming alcohol, through environmental means, or through an ability.
 
@@ -85,6 +92,7 @@ Health is a measure of the character's state and how much damage they've taken. 
 
 Health can be restored via medicine, healthkits, or other medical items.
 
+<br/><br/>
 
 ### Equipment Resources ###
 
