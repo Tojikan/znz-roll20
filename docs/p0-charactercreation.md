@@ -37,7 +37,7 @@ This page contains steps on creating a character. If you want to understand more
 Players can enhance their character by spending EXP to improve their stats and learn abilities.
 
 - **Increase Proficiency/Skill**: 10 EXP to improve any proficiency or skill by 1.
-- **Increase Resource Max**: 20 EXP to increase Health, Sanity, or Energy Max value by 5.
+- **Increase Resource Max**: 15 EXP to increase Health, Sanity, or Energy Max value by 5.
 - **Increase Attribute Score**: Increase any of your attributes by 1. 
     - Increasing your score up to 4: 40 EXP
     - Increasing your score from 4 to 5: 80 EXP
