@@ -5,7 +5,7 @@ title: Attributes, Skills & Proficiencies
 
 # Attributes, Skills & Proficies #
 
-Characters are measured by physical attributes, their knowledge in trained skills, and their expertise with proficiencies.
+Characters are measured by physical attributes, their knowledge in trained skills, and their expertise with certain actions.
 
 
 ## Attributes ##
@@ -28,7 +28,7 @@ Attributes are the physical and mental characteristics of the player that measur
 
 ## Proficiencies ##
 
-Proficiencies are actions that your character can have expertise in, such as swimming, throwing, or shooting a gun. In general, any person can attempt or do these actions. Therefore, all proficiencies begin at 1 and players can further increase their expertise.
+Proficiencies are actions that your character can have expertise in, such as swimming, throwing, or shooting a gun. In general, any person can attempt or do these actions. Therefore, all proficiencies begin at and have a minimum of 1 and players can further increase their expertise with these to be better at them.
 
 | Proficiency | Description |
 | ----------- | ----------- | 

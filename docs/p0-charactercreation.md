@@ -15,10 +15,11 @@ This page contains steps on creating a character. If you want to understand more
     - This means you can have at most 24 attribute points distributed.
     - The character sheet should auto-calculate a modifier based on how many points you add to a attribute. The modifier is a bonus/penalty that is added to rolls.
 2. Then distribute 5 points to your proficiencies.
-    - Proficiencies already start at 1. 
-    - You can spread these points around multiple proficiencies or add them all to one.
+    - Proficiencies already start at 1 and cannot be lower than 1.
+    - You can spread the 5 points around multiple proficiencies or add them all to one.
 3. Then distribute 5 points to any skills.
-    - Skills start at 0.
+    - Skills start at 0 and cannot go below 0.
+    - Skills actions can only be attempted if you have at least 1 in the skill.
 4. Set Health, Energy, and Sanity Maximums
     - These are located at the top of the sheet.
         - For every +1 Modifier in Constitution, add +5 points to your Health and Max Health. For every -1, subtract 5 points.
@@ -35,13 +36,13 @@ This page contains steps on creating a character. If you want to understand more
 
 Players can enhance their character by spending EXP to improve their stats and learn abilities.
 
-- **Increase Proficiency/Skill**: 10EXP to improve any proficiency or skill by 1.
-- **Increase Resource Max**: 20EXP to increase Health, Sanity, or Energy Max value by 5.
+- **Increase Proficiency/Skill**: 10 EXP to improve any proficiency or skill by 1.
+- **Increase Resource Max**: 20 EXP to increase Health, Sanity, or Energy Max value by 5.
 - **Increase Attribute Score**: Increase any of your attributes by 1. 
-    - Increasing your score up to 4: 40EXP
-    - Increasing your score from 4 to 5: 80EXP
-    - Increasing your score from 5 to 6: 120EXP
-- **Learn an Ability**: 50EXP
+    - Increasing your score up to 4: 40 EXP
+    - Increasing your score from 4 to 5: 80 EXP
+    - Increasing your score from 5 and above: 120 EXP
+- **Learn an Ability**: 50 EXP
 - **Level up an Ability**: 
-    - 100EXP to go to Level 2 
-    - 150EXP to go to Level 3
+    - 100 EXP to go to Level 2 
+    - 150 EXP to go to Level 3

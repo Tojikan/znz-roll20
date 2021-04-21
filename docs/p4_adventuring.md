@@ -7,7 +7,7 @@ title: Adventuring Rules
 
 The below is a set of generic rules and guidelines around non-combat gameplay.
 
-
+<br/>
 
 ## Resting ##
 
@@ -33,7 +33,7 @@ The long rest confers several benefits over a short rest.
 - Players can spend EXP to improve their characters.
 
 
-<br/><br/>
+<br/>
 
 
 ## Travelling and Maintenance ##
@@ -41,7 +41,7 @@ The long rest confers several benefits over a short rest.
 As your character moves around the apocalypse, the ZM may see it fit to charge resources. For example, going on a 8 hour trek to a destination may cost you some energy to do so. Additionally, the ZM may also check to make sure you are drinking water and eating food everyday, particularly in cases when the party is avoiding any actions that may require rolls. If your character forgoes drinking water or eating through an entire day or more, this will incur a penalty.
 
 
-<br/><br/>
+<br/>
 
 ## Hygiene ##
 
@@ -55,7 +55,7 @@ Sanitary conditions in the apocalypse have notably deteriorated. To prevent your
 Characters have a Hygiene counter. As characters do actions that might threaten their hygiene, the counter begins ticking down. Once it gets low enough or drops to 0, the player may get sick, which results in negative status effects.
 
 
-<br/><br/>
+<br/>
 
 ## Items ##
 
@@ -65,17 +65,18 @@ Players can utilize and equip items in the game in order to improve chances of s
 - Melee Weapon
 - Ranged Weapon
 - Armor
+- Special: a usable item or weapon such as a grenade.
 
 ### Equipping ###
 
-Players can equip 1 melee and 1 ranged weapon at a time. They can also equip 1 special item (such as a grenade) for quick use. They can also equip armor on their Head, Body, Arms, and legs.
+Players can equip 1 melee and 1 ranged weapon at a time. They can also equip 1 special item for quick use. They can also equip armor on their Head, Body, Arms, and legs.
 
-Armor can affect character attributes or proficiencies and improve their armor rating to reduce damage taken. See [Combat]({{site.baseurl}}/p5-combat.html) for more details on how armor is used.
+Armor can affect character attributes or proficiencies and improve their armor rating to reduce damage taken. See [Combat]({{site.baseurl}}/p5_combat.html) for more details on how armor rating is used.
 
 
 ### Inventory ###
 
-Characters can store items they are not using in their Inventory, which is represented in game as a backpack. Each item has weight and the inventory stores a maximum amount of weight (It may be easier to picture weight as inventory slots).  Players can improve the max weight of their inventory by finding bags and other equipment.
+Characters can store items they are not using in their Inventory, which is represented in game as a backpack. Each item has weight and the inventory stores a maximum amount of weight (It may be useful to picture item weight as inventory slots and space an item takes up rather than a hard weight).  Players can improve the max weight of their inventory by finding bags and other equipment.
 
 If the player's inventory weight exceeds the inventory max weight, they will have reduced speed and suffer a penalty to all rolls until the inventory weight is reduced.
 
@@ -91,9 +92,9 @@ This section also contains counters for tracking Food, Water, Alcohol and Medici
 
 ### Consumables ###
 
-Any non-specific food, water, alcohol and medicine without any special effects are stored in the abovementioned counter section.
+Any non-specific food, water, alcohol and medicine without any special effects are stored in the abovementioned counter section. When consuming consumables, players can just subtract from those counters. Specialty food, medicine, or alcohol should still be stored as individual inventory items.
 
-Food and medi
+Food, medicine, and alcohol restore 3 energy, health, or sanity respectively by default.
 
 
 

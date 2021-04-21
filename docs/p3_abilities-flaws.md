@@ -37,16 +37,16 @@ Abilities are unique actions or traits that a character can have. For example, A
 {% endfor %}
     </tbody>
 </table>
-<br /><br /><br>
+<br /><br/>
 
 
 ### Flaws ###
 
-Flaws are characteristics with a negative affect on your character. These flaws may cause issues, lead the character into trouble, or force them to look for specific resources. Flaws are randomized using a random roll (Randomize Flaw button in the character sheet). Players all start with 1 flaw.
+Flaws are characteristics with a negative affect on your character. These flaws may cause issues, lead the character into trouble, or force them to look for specific items. Flaws are randomized using a random roll (Randomize Flaw button in the character sheet). Players all start with 1 flaw.
 
 If a player's sanity ever hits 0, they are traumatized and may randomize a new flaw. 
 
-<br/><br/>
+<br/>
 
 | Flaw | Description |
 | ---- | ----------- |
