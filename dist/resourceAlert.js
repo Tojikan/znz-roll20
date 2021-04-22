@@ -1,6 +1,6 @@
 on("change:attribute", function(obj, prev){
     //Key is the attribute name, value is the display name.
-    const attrData = {"health":"Health","sanity":"Sanity","energy":"Energy","exp":"EXP"};
+    const attrData = {"health":"Health","sanity":"Sanity","energy":"Energy","exp":"EXP","hygiene":"Hygiene"};
     var attr;
 
 

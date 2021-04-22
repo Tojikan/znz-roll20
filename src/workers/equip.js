@@ -41,6 +41,7 @@
         "(([[getProperty('items.fields.type.attr_name')]]))",
         "(([[getProperty('items.fields.weight.attr_name')]]))",
         "(([[getProperty('items.fields.quantity.attr_name')]]))",
+        "(([[getProperty('items.fields.description.attr_name')]]))",
         "(([[getProperty('items.fields.subtypes.melee')]]))",
         "(([[getProperty('items.fields.subtypes.ranged')]]))",
         "(([[getProperty('items.fields.subtypes.armor')]]))",
@@ -78,11 +79,10 @@
         }
 
         for (const fld of fields){
-            if (!checkFields.includes(fld) && typeof data[fld] !== 'undefined' && data[fld].length > 0) { //dont check item type
+            if (!checkFields.includes(fld) && typeof data[fld] !== 'undefined' && data[fld].trim().length > 0) { //dont check item type
                 return false;
             }
         }
-
         return true;
     };
     

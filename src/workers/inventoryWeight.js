@@ -13,7 +13,7 @@
         }
 
         for (let i = 0; i < data.customCounters.inv_custom_count; i++){
-            result.push(data.customCounters.inv_label + "_" + i);
+            result.push(data.customCounters.inv_attr + "_" + i);
         }
 
         return result;
@@ -60,8 +60,8 @@
             var setAttr = {};
             var combined = 0;
 
-            combined += filterInt(values[repeaterWeight]);
-            combined += filterInt(values[counterWeight]);
+            combined += parseInt(values[repeaterWeight]);
+            combined += parseInt(values[counterWeight]);
 
             setAttr[totalWeight] = combined;
 

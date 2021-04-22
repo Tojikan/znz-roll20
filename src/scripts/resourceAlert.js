@@ -1,11 +1,13 @@
 on("change:attribute", function(obj, prev){
     //Key is the attribute name, value is the display name.
-    const attrData = (([[transformData('resource', (data) => {
+    const attrData = (([[runFunction((data) => {
         var result = {};
 
-        for (attr of data){
+        for (attr of data.resource){
             result[attr.attr_name] = attr.display_name;
         }
+
+        result[data.misc.hygiene.attr_name] = data.misc.hygiene.display_name;
 
         return result;
     })]]));
