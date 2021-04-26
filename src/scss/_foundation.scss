@@ -76,7 +76,7 @@
             display: grid;
             grid-template-columns: repeat(12, minmax(65px, 1fr));
             grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-            grid-gap: $gridgap;
+            grid-gap: 1.4rem;
         }
 
         .sheet-section-inventory {
@@ -101,7 +101,7 @@
 
         .sheet-section-counters {
             grid-column-start: 8;
-            grid-column-end: 11;
+            grid-column-end: 12;
         }
     }
 

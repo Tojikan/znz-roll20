@@ -184,96 +184,6 @@
             "value": "alcohol",
             "attr_name": "inv_alcohol",
             "weight": 0.2
-        },
-        {
-            "name": "Adhesive",
-            "weight": 0.2,
-            "value": "adhesive",
-            "attr_name": "inv_adhesive"
-        },
-        {
-            "name": "Batteries",
-            "value": "batteries",
-            "attr_name": "inv_batteries",
-            "weight": 0.2
-        },
-        {
-            "name": "Cloth",
-            "value": "cloth",
-            "attr_name": "inv_cloth",
-            "weight": 0.2
-        },
-        {
-            "name": "Circuits",
-            "value": "Circuits",
-            "attr_name": "inv_circuits",
-            "weight": 0.2
-        },
-        {
-            "name": "Glass",
-            "value": "glass",
-            "attr_name": "inv_glass",
-            "weight": 0.2
-        },
-        {
-            "name": "Glass",
-            "value": "glass",
-            "attr_name": "inv_glass",
-            "weight": 0.2
-        },
-        {
-            "name": "Gun Powder",
-            "value": "gunpowder",
-            "attr_name": "inv_gunpowder",
-            "weight": 0.2
-        },
-        {
-            "name": "Lighters",
-            "value": "lighters",
-            "attr_name": "inv_lighters",
-            "weight": 0.2
-        },
-        {
-            "name": "Metal",
-            "value": "metal",
-            "attr_name": "inv_metal",
-            "weight": 0.2
-        },
-        {
-            "name": "Nuts & Bolts",
-            "value": "nuts",
-            "attr_name": "inv_nuts",
-            "weight": 0.2
-        },
-        {
-            "name": "Paper",
-            "value": "paper",
-            "attr_name": "inv_paper",
-            "weight": 0.2
-        },
-        {
-            "name": "Plastic",
-            "value": "plastic",
-            "attr_name": "inv_plastic",
-            "weight": 0.2
-        },
-        {
-            "name": "Rope",
-            "value": "rope",
-            "attr_name": "inv_rope",
-            "weight": 0.2
-        },
-        {
-            "name": "Wires",
-            "value": "wires",
-            "attr_name": "inv_wires",
-            "weight": 0.2
-        },
-        {
-            "name": "Wood",
-            "value": "wood",
-            "attr_name": "inv_wood",
-            "weight": 0.2
         }
     ],
     "ammoTypes": [
@@ -311,10 +221,10 @@
     "customCounters": {
         "ammo_attr": "ammo_custom",
         "ammo_label": "ammo_custom_label",
-        "ammo_custom_count": 2,
+        "ammo_custom_count": 4,
         "inv_attr": "inv_custom",
         "inv_label": "inv_custom_label",
-        "inv_custom_count": 3
+        "inv_custom_count": 20
     },
     "equipTypes": {
         "melee": "melee",

@@ -1,4 +1,4 @@
-{% macro create(header, data, customCount, customCountLabel, customCountAttr) %}
+{% macro create(header, data, customCount, customCountLabel, customCountAttr, customWeight=false) %}
 
 {#
 Creates the box for counting various items.
@@ -31,6 +31,12 @@ customCountAttr - The attr value for the custom counter count field.
                 <input class="sheet-line-input" type="text" name="attr_{{customCountLabel}}_{{num}}"></input>
             </div>
             <div class="sheet-input">
+                {% if customWeight %}
+                <div class="sheet-weight">
+                    <input class="sheet-line-input sheet-number sheet-weight" type="text" name="attr_{{customCountAttr}}_{{num}}_weight"></input>
+                    <input class="sheet-hidden" type="number" name="attr_{{customCountAttr}}_{{num}}_total_weight"></input>
+                </div>
+                {% endif %}
                 <span>x</span>
                 <input class="sheet-line-input sheet-number" type="number" name="attr_{{customCountAttr}}_{{num}}"></input>
             </div>

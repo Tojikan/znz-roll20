@@ -176,6 +176,10 @@
             border-bottom: solid 4px $black;
             margin-bottom: 2rem;
             padding-bottom: 2rem;
+
+            h2 {
+                text-align: center;
+            }
             
             .sheet-weight {
                 display: flex;

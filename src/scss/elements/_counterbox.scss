@@ -6,14 +6,34 @@
         font-size: $large;
 
         .sheet-input {
+            display: flex;
+
             span {
-                margin-right: 2rem;
+                margin: 0 1rem;
             }
         }
-
+        
         &.sheet-counter-custom {
             .sheet-label {
                 width: 50%;
+            }
+
+            .sheet-weight {
+                font-size: $small;
+                display: flex;
+
+                input {
+                    padding: 0;
+                    align-self: flex-end;
+                    height: 15px;
+                    text-align: center;
+                }
+
+                &:after {
+                    content: 'lbs';
+                    align-self: flex-end;
+                    margin-left: 0.1rem;
+                }
             }
         }
     }
