@@ -1,11 +1,10 @@
 {#  
-    In the Gulp process, certain data is pulled in and added to the templates
-    
-    sheetData is an object containing all JSON data in the data folder 
-    queryData is an object containing the exported results of any JS file in the data-query folder
-   
-    Access data through file name
-        sheetData Example: accessing ./data/status.json is accessed through sheetData.status
+    All character sheet data is pulled from the data folder into the Nunjucks templater.
+
+    You can access character sheet data with:
+    sheetData - an object where each key in the object is a file in the datafolder. For example, you can access /data/attributes.json with sheetData.attributes
+    globalData - an alternative way of accessing sheetData. This is added as a global environment variable to Nunjucks. Useful if you need to access from a macro which might not have
+    access to sheetData.
 #}
 
 {% import 'macros/outputfield.njk' as basicField %}

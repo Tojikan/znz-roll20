@@ -1,0 +1,110 @@
+{
+  "armor": {
+    "display_name": "Armor",
+    "attr_name": "armor_rating",
+    "default_value": 3
+  },
+  "customskills": {
+    "attr": "custom",
+    "label": "custom_label",
+    "count": 3,
+    "hint": "Number of custom entries in prof/skills"
+  },
+  "flashlight": {
+    "display_name": "Flashlight",
+    "attr_name": "flashlight_distance",
+    "default_value": 10
+  },
+  "hygiene": {
+    "display_name": "Hygiene",
+    "attr_name": "hygiene",
+    "default_value": 20
+  },
+  "inv_counter": {
+    "standard": [
+      {
+        "name": "Food",
+        "value": "food",
+        "attr_name": "inv_food",
+        "weight": 0.2
+      },
+      {
+        "name": "Water",
+        "value": "water",
+        "attr_name": "inv_water",
+        "weight": 0.2
+      },
+      {
+        "name": "Medicine",
+        "value": "medicine",
+        "attr_name": "inv_medicine",
+        "weight": 0.2
+      },
+      {
+        "name": "Alcohol",
+        "value": "alcohol",
+        "attr_name": "inv_alcohol",
+        "weight": 0.2
+      }
+    ],
+    "standardWeight": 0.2,
+    "custom": {
+      "attr": "inv_custom",
+      "label": "inv_custom_label",
+      "count": 20,
+      "hint": "Number of custom inventory counters"
+    }
+  },
+  "inv_counter_weight": {
+    "display_name": "Counter Weight",
+    "attr_name": "counter_weight",
+    "hint": "Combined weight of all inventory counters"
+  },
+  "inv_repeater_weight": {
+    "display_name": "Inventory Weight",
+    "attr_name": "inventory_weight",
+    "hint": "Combined weight of all repeating_inventory items"
+  },
+  "inventory_weight": {
+    "display_name": "Total Weight",
+    "attr_name": "total_weight",
+    "hint": "Combined total inventory weight - counter + repeater"
+  },
+  "name": {
+    "display_name": "Name",
+    "attr_name": "char_name",
+    "type": "text",
+    "field_class": "",
+    "has_header": true,
+    "headerType": "h1",
+    "description": ""
+  },
+  "notes": {
+    "display_name": "Character Notes",
+    "attr_name": "char_note",
+    "type": "textarea",
+    "field_class": "textarea-small",
+    "has_header": true,
+    "headerType": "h2",
+    "description": ""
+  },
+  "speed": {
+    "display_name": "Speed",
+    "attr_name": "movement_speed",
+    "default_value": 5,
+    "max": 9
+  },
+  "stat_effects": {
+    "display_name": "Status Effects",
+    "attr_name": "status_effect",
+    "type": "stat_repeater",
+    "count": 3,
+    "hint": "Add status modifier (bonus/penalty for a attribute/skill/proficiency) outside of an equipment piece"
+  },
+  "stat_mod_tracker": {
+    "display_name": "Status Modifiers from Equipment/Status Effects",
+    "attr_name": "stat_mod_track",
+    "type": "textarea",
+    "hint": "Tracks all Status Modifiers"
+  }
+}
