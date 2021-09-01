@@ -12,6 +12,14 @@
             "lvl1": "Your Unarmed Melee attacks are <strong>empowered</strong> and you may add your Strength modifier to each Unarmed Melee damage rolls.",
             "lvl2": "???",
             "lvl3": "???"
+        },
+        {
+            "name": "Bile",
+            "value": "bile",
+            "description": "The mutation has allowed you to vomit Bile, a strange phlegm substance which can manipulate common infected. When contained within its membrane, Bile causes nearby common infected to cease hostility. However, once the membrane bursts, a foul liquid causes nearby Infected to go into frenzy, increasing their attacks, speed, and aggressiveness. <br/>",
+            "lvl1": "Vomit Bile up to 3 times a day. ",
+            "lvl2": "???",
+            "lvl3": "???"
         }
     ]
 }
