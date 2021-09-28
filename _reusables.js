@@ -1,3 +1,12 @@
+/**
+ * This file consists of functions that we want to use in multiple API Scripts and Sheet workers. As API scripts are uploaded one at a time, we can't reference a shared library
+ * of functions. 
+ * 
+ * However, we can use a Funk in order to directly inject our function as a pure string into a file so you can just pull in functions wherever you need to. 
+ * 
+ */
+
+
 module.exports = {
     splitArgs: function(input) {
         /**

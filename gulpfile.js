@@ -18,7 +18,6 @@ const dataFolder = './data/';
 
 /**
  * This task will build your character sheet's final HTML file from your Nunjucks templates and data functions.
- * 
  */
 gulp.task('sheet', function(){
     return gulp.src('src/templates/*.njk')
@@ -83,7 +82,7 @@ gulp.task('watch', function(){
  * Minifies your HTML for smaller filesizes but harder to read files. Use it for Prod
  */
 gulp.task('minifyHtml', function(){
-    return gulp.src('dist/character-sheet.html')
+    return gulp.src('dist/*.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('dist'));
 });
@@ -101,7 +100,7 @@ gulp.task('minifyCss', function(){
 /**
  * Takes your JSON data and copies it over to the docs folder so we can use it in our system documentation site!
  */
-gulp.task('docsdata', function() {
+gulp.task('docs', function() {
     del(['docs/_data/**']); 
     return gulp.src('data/*.json')
     .pipe(gulp.dest('docs/_data'));
@@ -136,7 +135,7 @@ function DoFunks(match, capture){
     //clear cache so we get the most latest file contents prior to importing them.
     clearDataFileCache();
 
-    const importedFuncs = require('./_funcs'); //Import our funcs from our funcs file! Don't worry if you get a 'declared but never read warning'.
+    const importedFuncs = require('./_funks'); //Import our funcs from our funcs file! Don't worry if you get a 'declared but never read warning'.
 
     if (capture.length){
         try {

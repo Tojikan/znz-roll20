@@ -1,0 +1,8 @@
+{
+    "foo": "bar",
+    "bar": "foo",
+    "foobar": [
+        "bar",
+        "foo"
+    ]
+}
