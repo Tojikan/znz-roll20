@@ -116,4 +116,4 @@ class FunkContext{
     }
 }
 
-module.exports = Funks;
+module.exports = FunkContext;
