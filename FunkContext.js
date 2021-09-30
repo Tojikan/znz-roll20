@@ -19,7 +19,7 @@ class FunkContext{
             throw `${this.dataFolder} is not a valid path!`;
         }
 
-        this.funcs = {
+        this.context = {
             ...funcs,
             data: this.getData(), //so we can reference properties directly through "data."
             getReusable: function(funcName){ //Retrieve a reusable variable or function
@@ -85,7 +85,7 @@ class FunkContext{
      * 
      * 
      * @param {string} match The whole regex match, passed into here by gulp-replace. Unused, but gulp-replace will alway pass it. 
-     * @param {*} capture Anything in the main capture group. This should be a function or variable call to this.funcs
+     * @param {*} capture Anything in the main capture group. This should be a function or variable call to this.context
      * 
      * @returns the text to be output into the built file.
      */
@@ -94,7 +94,7 @@ class FunkContext{
 
         if (capture.length){
             try {
-                const result = eval('this.funcs.' + capture); //Scope our eval to this.funcs, thus limiting our eval to only using our predetermined functions.
+                const result = eval('this.context.' + capture); //Scope our eval to this.context, thus limiting our eval to only using our predetermined functions.
         
                 if (typeof result == "string" || typeof result == "number" || typeof result == "boolean" ){
                     return result;

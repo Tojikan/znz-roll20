@@ -11,7 +11,7 @@ const cleancss = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
 
 
-const funkContext = require('./default_funkContext').defaultContext;
+const funkContext = require('./defaultContext').defaultContext;
 
 const allData = funkContext.getData();
 

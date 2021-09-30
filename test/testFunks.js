@@ -13,17 +13,17 @@ describe('The FunkContext', function(){
         var test2 = new FunkContext('./test/testdata/'); //test with backslash included
         var testjson = require('./testdata/test.json'); //needs to be relative from here
 
-        assert.deepEqual(test.funcs.data.test, testjson);
-        assert.deepEqual(test2.funcs.data.test, testjson);
+        assert.deepEqual(test.context.data.test, testjson);
+        assert.deepEqual(test2.context.data.test, testjson);
 
         testjson = require('./testdata/test2.json');
 
-        assert.deepEqual(test.funcs.data.test2.nested.nested, testjson.nested.nested);
-        assert.deepEqual(test2.funcs.data.test2.nested.nested, testjson.nested.nested);
+        assert.deepEqual(test.context.data.test2.nested.nested, testjson.nested.nested);
+        assert.deepEqual(test2.context.data.test2.nested.nested, testjson.nested.nested);
 
         testjson = require('./testdata/file with space.json');
-        assert.deepEqual(test.funcs.data['file with space'], testjson);
-        assert.deepEqual(test2.funcs.data['file with space'], testjson);
+        assert.deepEqual(test.context.data['file with space'], testjson);
+        assert.deepEqual(test2.context.data['file with space'], testjson);
 
 
     });
@@ -37,20 +37,20 @@ describe('The FunkContext', function(){
             var2: []
         });
         
-        assert.ok("func1" in test.funcs);
-        assert.ok(typeof(test.funcs.func1) === 'function');
+        assert.ok("func1" in test.context);
+        assert.ok(typeof(test.context.func1) === 'function');
 
-        assert.ok("func2" in test.funcs);
-        assert.ok(typeof(test.funcs.func2) === 'function');
+        assert.ok("func2" in test.context);
+        assert.ok(typeof(test.context.func2) === 'function');
 
-        assert.ok("func3" in test.funcs);
-        assert.ok(typeof(test.funcs.func2) === 'function');
+        assert.ok("func3" in test.context);
+        assert.ok(typeof(test.context.func2) === 'function');
 
-        assert.ok("var1" in test.funcs);
-        assert.equal('test', test.funcs.var1);
+        assert.ok("var1" in test.context);
+        assert.equal('test', test.context.var1);
 
-        assert.ok("var2" in test.funcs);
-        assert.deepEqual([], test.funcs.var2);
+        assert.ok("var2" in test.context);
+        assert.deepEqual([], test.context.var2);
     });
 
     it("evals a func", function(){
@@ -75,7 +75,7 @@ describe('The FunkContext', function(){
         assert.equal(test.doFunk("", "data.test.foobar"), JSON.stringify(testjson.foobar));
         assert.equal(test.doFunk("", "data.test"), JSON.stringify(testjson));
 
-        assert.equal(test.doFunk("", "func3()"), JSON.stringify(test.funcs.data));
+        assert.equal(test.doFunk("", "func3()"), JSON.stringify(test.context.data));
     });
 
     it("has reusables", function(){

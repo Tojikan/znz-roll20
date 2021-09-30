@@ -13,7 +13,7 @@ This may be difficult if you do not come from a developer background as you will
 
 If you want a detailed explanation, continue reading through the rest of the readme. If you want to get started right away, here's an outline of what the process does.
 
-- Reads all JSON files in the `data` folder, and custom user-defined functions in `_funcs.js` and `_reusables.js` and feeds it into the build pipeline.
+- Reads all JSON files in the `data` folder, and custom user-defined functions in `_context.js` and `_reusables.js` and feeds it into the build pipeline.
 - Builds HTML from Nunjucks templates
     - Feeds JSON data into the Nunjucks engine so your template can use it.
     - Evals any JS statement between `(([[  ]]))` and replaces the whole statement and wrapper with its return value.
