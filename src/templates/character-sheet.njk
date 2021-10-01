@@ -1,0 +1,18 @@
+<div class="sheet-character">
+    {% include "parts/header.njk" %} 
+
+
+    {% import 'macros/slot.njk' as slot %}
+
+    <div class="sheet-weapons">
+        {{ slot.create('Weapons', 'Unused Weapon Slot', data.character.weaponslot)}}
+    </div>
+
+    <div class="sheet-equipment">
+        {{ slot.create('Equipment', 'Unused Equipment Slot', data.character.equipslot)}}
+    </div>
+
+    <div class="sheet-inventory">
+        {{ slot.create('Inventory', 'Unused Inventory Slot', data.character.cardslot)}}
+    </div>
+</div>

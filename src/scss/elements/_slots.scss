@@ -1,0 +1,48 @@
+.sheet-slot-toggle {
+    //Show Hide Available Weapon Slots!
+    @for $i from 1 through 11 {
+        // If weapon slot i is checked...
+        .sheet-slot-toggle-#{$i}:checked{
+
+            //then show all weapons i and under! (There must be a set of checkboxes next to EACH weapon as CSS only has general sibling combinator
+            @for $j from 1 through $i{
+                ~ .sheet-slot-#{$j}{
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.sheet-slot-section {
+    margin-top: 2 * $gap;
+    
+    .sheet-wrap {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: flex-start;
+        overflow: auto;
+    }
+
+    .sheet-slot {
+        width: 25%;
+        display: none;
+        border: solid 4px $black;
+        min-height: 5rem;
+        padding: 1rem;
+
+        .sheet-empty-text {
+            height: 100%;
+            font-size: $medium;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .sheet-content {
+            width: 100%;
+        }
+        margin-right: 1rem;
+    }
+}

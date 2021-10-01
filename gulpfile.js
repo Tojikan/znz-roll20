@@ -13,7 +13,39 @@ const htmlmin = require('gulp-htmlmin');
 
 const funkContext = require('./defaultContext').defaultContext;
 
-const allData = funkContext.getData();
+const functions = {
+    getId: function(object){
+        let retVal = '';
+        if (typeof object == 'string'){
+            retVal = object
+        } else if(typeof object == 'object') {
+            if ('id' in object){
+                return object['id'];
+            }
+        }
+
+        
+        if (retVal == ''){
+            console.error('Nunjucks getId - Empty Id found!');
+            console.error(object);
+        } 
+        return retVal
+    },
+
+    getLabel: function(object){
+        if(typeof object == 'object') {
+            if ('label' in object){
+                return object['label'];
+            }
+        }
+        
+        return object;
+    },
+
+    getData: function(){
+        return funkContext.getData();
+    }
+}
 
 /**
  * This task will build your character sheet's final HTML file from your Nunjucks templates and data functions.
@@ -21,11 +53,13 @@ const allData = funkContext.getData();
 gulp.task('sheet', function(){
     return gulp.src('src/templates/*.njk')
         .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, funkContext.doFunk))      // Run all data functions inside the template file.
-        .pipe(data(allData))     // Passes all JSON data into the njk templates.
         .pipe(nunjucksRender({      // Render our Nunjucks into HTML!
             path:'src/templates',
             manageEnv: function(env){
-                env.addGlobal('globalData', allData);    // This adds all of our data into a convenient global variables so it's easier to reference throughout the templates
+                env.addGlobal('data', functions.getData());    // This adds all of our data into a convenient global variables so it's easier to reference throughout the templates
+
+                env.addFilter('getLabel', functions.getLabel);
+                env.addFilter('getAttr', functions.getId);
             }
         }))
         .pipe(inject((() => {      // Now we take our sheet worker for injecting into our templates
@@ -71,8 +105,8 @@ gulp.task('watch', function(){
     gulp.watch('./src/scss/*/*.scss', gulp.series(['style']));
     gulp.watch('./src/workers/*.js' , gulp.series(['sheet']));
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
-    gulp.watch('./data/*.json' , gulp.series(['sheet','scripts', 'data']));
-    gulp.watch('./data/*.js' , gulp.series(['sheet','scripts', 'data']));
+    gulp.watch('./data/*.json' , gulp.series(['sheet','scripts']));
+    gulp.watch('./data/*.js' , gulp.series(['sheet','scripts']));
     gulp.watch('./src/scripts/*.js' , gulp.series(['scripts']));
 });
 
@@ -108,10 +142,10 @@ gulp.task('docs', function() {
 /**
  * Builds all of your files and minifies it
  */
-gulp.task('build', gulp.series(['data', 'style', 'sheet', 'scripts', 'minifyHtml', 'minifyCss']));
+gulp.task('build', gulp.series(['style', 'sheet', 'scripts', 'minifyHtml', 'minifyCss']));
 
 
 /**
  * Build your files without minification.
  */
-gulp.task('develop', gulp.series(['data', 'style', 'sheet', 'scripts']));
+gulp.task('develop', gulp.series(['style', 'sheet', 'scripts']));

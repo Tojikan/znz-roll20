@@ -1,0 +1,85 @@
+
+// Layout
+.sheet-character {
+    .sheet-header {
+        display: flex;
+        
+        .sheet-ammo-counter {
+            flex-basis: 15%;
+        }
+        
+        .sheet-area {
+            flex-basis: 85%;
+            
+            .sheet-name {
+                flex-basis: 55%;
+            }
+
+            .sheet-stat-blocks{
+                flex-basis: 45%;
+            }
+
+            .sheet-row-flex {
+                &:first-child{
+                    margin-bottom: $gap;
+                }
+            }
+
+            .sheet-defense {
+                flex-basis: 30%;
+            }
+
+            .sheet-slots {
+                flex-basis: 70%;
+            }
+        }
+
+        .sheet-name,
+        .sheet-area,
+        .sheet-defense {
+            margin-right: $gap;
+        }
+    }
+}
+
+// Stat Block
+.sheet-stat-blocks {
+    display: flex;
+    justify-content: space-around;
+
+
+    .sheet-stat {
+        width: 12rem;
+        border-radius: 2rem;
+
+        label {
+            text-align: center;
+        }
+
+        .sheet-stage {
+            padding: 1.5rem 1rem 0 1rem;
+            padding-top: 1.5rem;
+        }
+        
+        .sheet-fields {
+            padding: 1rem;
+
+        }
+    }
+}
+
+// Slots
+
+.sheet-slots {
+    text-align: center;
+
+    .sheet-stage {
+        padding-bottom: 1rem;
+    }
+    
+    .sheet-slot {
+        flex-basis: 33%;
+        font-size: $medium;
+    }
+}
+

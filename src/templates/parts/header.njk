@@ -1,0 +1,88 @@
+    <div class="sheet-header">
+        <div class="sheet-area">
+            {# Name, Health Energy #}
+            <div class="sheet-row-flex">
+                <div class="sheet-name">
+                    <div class="sheet-stage">
+                        <label>{{data.character.name | capitalize}}</label>
+                        <input type="text" class="sheet-line" name="attr_{{data.character.name | getAttr}}"/>
+                    </div>
+                </div>
+                <div class="sheet-stat-blocks">
+                    {% for key, item in data.character.stats%}
+                        <div class="sheet-stat">
+                            <div class="sheet-stage">
+                                <label>{{key | capitalize}}</label>
+                                <div class="sheet-fields {{ 'sheet-max' if item.max}}">
+                                    <div>
+                                        <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.name | getAttr}}" value="{{item.default}}" step="1"/>
+                                    </div>
+                                    {% if item.max %}
+                                    <div class="sheet-divider">/</div>
+                                    <div>
+                                        <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.name | getAttr}}" value="{{item.default}}" step="1"/>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Defense, Slots #}
+            <div class="sheet-row-flex">
+                <div class="sheet-defense">
+                    <div class="sheet-stage">
+                        <label>Defense</label>
+                        <div class="sheet-dice-input">
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy sheet-amount" name="attr_{{data.character.defense | getAttr}}" value="{{data.character.defense.default}}"/><span>d</span><input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.defense | getAttr}}" value="{{data.character.defense.default}}"/>
+                            </div>
+                            <div class="sheet-divider">
+                                +
+                            </div>
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.defense.bonus | getAttr}}" value="{{data.character.defense.bonus.default}}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sheet-slots">
+                    <div class="sheet-stage">
+                        <label>Slots</label>
+                        <div class="sheet-row-flex sheet-space-around">
+                            <div class="sheet-slot">
+                                <div>{{data.character.weaponslot | getLabel}}</div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.weaponslot | getAttr}}" value="{{data.character.weaponslot.default}}"/>
+                            </div>
+                            <div class="sheet-slot">
+                                <div>{{data.character.equipslot | getLabel}}</div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.equipslot | getAttr}}" value="{{data.character.equipslot.default}}"/>
+                            </div>
+                            <div class="sheet-slot">
+                                <div>{{data.character.cardslot | getLabel}}</div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.cardslot | getAttr}}" value="{{data.character.cardslot.default}}"/>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Ammo #}
+        <div class="sheet-ammo-counter">
+            <div class="sheet-stage">
+                <label>{{data.character.ammo | getAttr | capitalize}}</label>
+                <div class="sheet-ammos">
+                    {% for item in data.character.ammo.types%}
+                        <div class="sheet-line">
+                            <div class="sheet-label">{{item}}</div>
+                            <input type="text" class="sheet-number" name="attr_{{data.character.ammo | getAttr}}_{{item}}"/>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>

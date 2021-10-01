@@ -1,0 +1,113 @@
+.sheet-character{
+    label {
+        font-size: $large;
+    }   
+}
+
+input, textarea {
+    width: 100%;
+}
+
+input {
+    transition: 0.3s;
+    font-size: 1.6rem;
+
+    &.sheet-number {
+        width: 4rem;
+        text-align: center;
+    }
+
+    
+    &.sheet-shy {
+        border: none;
+    }
+
+    &:hover {
+        background-color: $lightblue;
+    }
+
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button{
+        -webkit-appearance: none; /* Chrome */
+        margin: 0; /* Apparently some margin are still there even though it's hidden */
+    }
+    &[type=number]{
+        -moz-appearance:textfield; /* Firefox */
+    }
+}
+
+.sheet-line {
+    display: flex;
+    justify-content: space-around;
+
+    .sheet-label {
+        font-size: $medium;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        font-weight: 500;
+    }
+
+    input {
+        border: none;
+        border-bottom: solid 1px $darkgray;
+        border-radius: 0;
+    }
+}
+
+
+.sheet-stage {
+    padding: 2rem;
+    border: solid 3px $black;
+    border-radius: 2rem;
+    font-size: $medium;
+
+    label {
+        text-align: center;
+    }
+}
+
+.sheet-row-flex {
+    display: flex;
+
+    &.sheet-space-around {
+        justify-content: space-around;
+    }
+}
+
+.sheet-max {
+    display: flex;
+    justify-content: center;
+}
+
+.sheet-divider {
+    margin: 0 0.5rem;
+    font-size: $xLarge;
+    font-weight: 900;
+}
+
+.sheet-dice-input {
+    font-size: $large;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+        font-size: $large;
+        width: 3.5rem;
+        text-align: left;
+
+        &.sheet-amount {
+            text-align: right;
+        }
+    }
+
+
+}
+
+.sheet-hidden {
+    display: none;
+}

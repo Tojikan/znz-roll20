@@ -1,0 +1,20 @@
+.sheet-inventory{
+
+    .sheet-wrap {
+        flex-wrap: wrap;
+
+        .sheet-slot {
+            flex-basis: 20%;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+
+.sheet-equipment {
+    .sheet-wrap {
+        .sheet-slot {
+            flex-basis: 18%;
+        }
+    }
+}

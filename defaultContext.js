@@ -12,6 +12,14 @@ const FunkContext = require('./FunkContext');
  */
 var funcs = {
     /**
+     * Generates a form-field safe name from dot notation. Note this only works on dot notation and not with brackets.
+     * 
+     * @param {string} prop - Dot notation to access any property in data
+     */
+    getFieldName: function(prop, capitalize = false){
+        return prop.replace('.', '_');
+    },
+    /**
      * This allows you to run a callback function when you just need pure flexibility. The callback is passed all the json data as an object
      * 
      * @param {function} fn Callback Function to be run.

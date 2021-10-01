@@ -1,0 +1,266 @@
+{
+    "setting": {
+
+    },
+    "default": {
+        "label": "Knife",
+        "type": "melee",
+        "damage": "1d4",
+        "durability": 999,
+        "description": "Old Faithful."
+    },
+    "cards": {
+        "snack": {
+            "label": "Snack",
+            "type": "misc",
+            "description": "Restore 5 energy.",
+            "amount": 7
+
+        },
+        "energydrink": {
+            "label": "Energy Drink",
+            "type": "misc",
+            "description": "Restore 10 energy.",
+            "amount": 5
+        },
+        "adrenaline": {
+            "label": "Adrenaline",
+            "type": "misc",
+            "description": "Restore 20 energy.",
+            "amount": 3
+        },
+        "bandage": {
+            "label": "Bandage",
+            "type": "misc",
+            "description": "Restore 5 health.",
+            "amount": 7
+        },
+        "firstaidkit": {
+            "label": "First Aid Kit",
+            "type": "misc",
+            "description": "Restore 10 health.",
+            "amount": 5
+        },
+        "medkit": {
+            "label": "Med kit",
+            "type": "misc",
+            "description": "Restore 20 health.",
+            "amount": 3
+        },
+        "ammo": {
+            "label": "Ammo",
+            "type": "misc",
+            "description": "Gain ammo up to the max amount for your current ranged weapon.",
+            "amount": 25
+        },
+        "grenade": {
+            "label": "Grenade",
+            "type": "throw",
+            "range": 8, 
+            "description": "Throw this up to its range at a target square. It will deal 20 damage to that square and all touching squares.",
+            "amount": "5"
+        },
+        "molotov": {
+            "label": "Molotov",
+            "type": "throw",
+            "range": 10, 
+            "description": "Throw this up to its range at a target square. It will deal 10 damage to that square and all touching squares. The square will be left on fire for 1 turn, dealing additional 10 damage to anything that walks through or ends their turn there.",
+            "amount": 5
+        },
+        "remotebomb": {
+            "label": "Remote Bomb",
+            "type": "throw",
+            "range": 1, 
+            "description": "Leave this at any square. You may decide to detonate this object at any point on your turn, dealing 30 damage to that square and all touching squares.",
+            "amount": 3
+        },
+        "baseballbat": {
+            "label": "Baseball Bat",
+            "type": "melee",
+            "damage": "1d6+1",
+            "durability": 8,
+            "description": "It is now past the time... for America's favorite pastime.",
+            "amount": 5
+        },
+        "crowbar": {
+            "label": "Crowbar",
+            "type": "melee",
+            "damage": "1d6<1",
+            "durability": 10,
+            "description": "Great for prying off crabs.",
+            "amount": 5
+        },
+        "combatknife": {
+            "label": "Combat Knife",
+            "type": "melee",
+            "damage": "1d8+2",
+            "durability": 6,
+            "description": "Now its edgy AND useful.",
+            "amount": 4
+        },
+        "sledgehammer": {
+            "label": "Sledgehammer",
+            "type": "melee",
+            "damage": "1d8<2",
+            "durability": 12,
+            "description": "Hammertime.",
+            "amount": 4
+        },
+        "machete": {
+            "label": "Machete",
+            "type": "melee",
+            "damage": "1d10+2",
+            "durability": 10,
+            "description": "Classic old-fasioned zombie killer, on-sale now everywhere.",
+            "amount": 3
+        },
+        "spear": {
+            "label": "Spear",
+            "type": "melee",
+            "damage": "1d10<4",
+            "durability": 8,
+            "description": "Stick'em with the pointy end.",
+            "amount": 3
+        },
+        "sword": {
+            "label": "Sword",
+            "type": "melee",
+            "damage": "1d12+4",
+            "durability": 14,
+            "description": "I bet you can't pull this from a stone.",
+            "amount": 2
+        },
+        "katana": {
+            "label": "Sword",
+            "type": "melee",
+            "damage": "1d12<5",
+            "durability": 10,
+            "description": "Superior Nippon steal, folded a thousand times.",
+            "amount": 2
+        },
+        "chainsaw": {
+            "label": "Chainsaw",
+            "type": "melee",
+            "damage": "1d20<10",
+            "durability": 20,
+            "description": "Can't have an apocalypse without one.",
+            "amount": 1
+        },
+        "lawnmower": {
+            "label": "Lawnmower",
+            "type": "melee",
+            "damage": "15",
+            "durability": 1,
+            "description": "Party's over! The turn you use this, you attack as you move.",
+            "amount": 1
+        },
+        "pistol": {
+            "label": "Pistol",
+            "type": "ranged",
+            "damage": "1d6+1",
+            "ammo": 10,
+            "range": 8,
+            "description": "9mm pew pew pew action.",
+            "amount": 4
+        },
+        "revolver": {
+            "label": "Revolver",
+            "type": "ranged",
+            "damage": "1d8<2",
+            "ammo": 6,
+            "range": 5,
+            "description": "Do you feel lucky?",
+            "amount": 4
+        },
+        "shotgun": {
+            "label": "Shotgun",
+            "type": "ranged",
+            "damage": "4d4",
+            "ammo": 5,
+            "range": 5,
+            "description": "Hail to the King, baby.",
+            "amount": 2
+        },
+        "autoshotgun": {
+            "label": "Auto Shotgun",
+            "type": "ranged",
+            "damage": "3d4",
+            "ammo": 8,
+            "range": 5,
+            "description": "The N00bCann0n.",
+            "amount": 2
+        },
+        "uzi": {
+            "label": "Uzi",
+            "type": "ranged",
+            "damage": "1d4+1",
+            "ammo": 20,
+            "range": 6,
+            "description": "Point in general direction and shoot.",
+            "amount": 2
+        },
+        "bow": {
+            "label": "Bow",
+            "type": "ranged",
+            "damage": "1d10+2",
+            "ammo": 5,
+            "range": 10,
+            "description": "Try sliding down a staircase with this. If you reach the target before the end of the turn, you can retrieve your arrows.",
+            "amount": 2
+        },
+        "crossbow": {
+            "label": "Crossbow",
+            "type": "ranged",
+            "damage": "1d8<3",
+            "ammo": 8,
+            "range": 7,
+            "description": "Some say using this makes you the most popular character.",
+            "amount": 2
+        },
+        "magnum": {
+            "label": "Desert Eagle",
+            "type": "ranged",
+            "damage": "1d10<4",
+            "ammo": 7,
+            "range": 7,
+            "description": "High Caliber Kick-ass",
+            "amount": 2
+        },
+        "assaultrifle": {
+            "label": "Assault Rifle",
+            "type": "ranged",
+            "damage": "1d8+2",
+            "ammo": 12,
+            "range": 10,
+            "description": "Standard issue undead-killing weapon.",
+            "amount": 2
+        },
+        "sniperrifle": {
+            "label": "Sniper Rifle",
+            "type": "ranged",
+            "damage": "1d12+4",
+            "ammo": 5,
+            "range": 15,
+            "description": "BOOM! Headshot!.",
+            "amount": 2
+        },
+        "machinegun": {
+            "label": "Machine Gun",
+            "type": "ranged",
+            "damage": "1d10",
+            "ammo": 50,
+            "range": 8,
+            "description": "Spray and Pray. This can't be reloaded.",
+            "amount": 1
+        },
+        "flamethrower": {
+            "label": "Flamethrower",
+            "type": "ranged",
+            "damage": "40",
+            "ammo": 5,
+            "range": 4,
+            "description": "Light the world on fire. This can't be reloaded. This fires in a cone.",
+            "amount": 1
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{% macro create(label, emptytext, slotdata) %}
+
+    <div class="sheet-slot-section">
+        <label>{{label}}</label>
+
+        
+        <div class="sheet-wrap sheet-slot-toggle">
+            {# Show Slots based on slot field#}
+            {% for num in range(0, slotdata.max) %} {# 1-indexed #}
+                
+                {# Create a checkbox to match the slots current value. We need a set for EACH slot as CSS only has general or adjacent sibling selectors, but does not go around #}
+                {% for num in range(0, slotdata.max)%}
+                    <input type="checkbox" class="sheet-hidden sheet-slot-toggle-{{num}}" name="attr_{{slotdata | getAttr}}" value="{{num}}" {{"checked" if num <= slotdata.default}}/>
+                {% endfor %}
+                <div class="sheet-slot sheet-toggle sheet-slot-{{num}}">
+                    <div class="sheet-empty-text">Unused Inventory Slot</div>
+                    {# If the equipment is equipped, then display it#}
+                    <input type="checkbox" class="sheet-control" name="attr_{{slotdata.slot_used}}" class="sheet-hidden sheet-toggle sheet-control" />
+                    <div class="sheet-content">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+{% endmacro %}

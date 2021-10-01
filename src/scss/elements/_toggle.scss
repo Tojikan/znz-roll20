@@ -1,0 +1,18 @@
+.sheet-inner-toggle, .sheet-toggle {
+    .sheet-control {
+        display: none;
+        
+        &:checked{
+        
+            & ~ .sheet-content{
+                display: block;
+            }
+        
+        }
+    }
+
+    .sheet-content {
+        display: none;
+    }
+}
+

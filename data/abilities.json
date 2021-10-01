@@ -1,0 +1,49 @@
+{
+    "perks": [
+        {
+            "name": "cheerleader",
+            "label": "Cheerleader",
+            "description": "Give up one of your actions to give all players within 5 squares 1 bonus dice to any 1 action."
+        },
+        {
+            "name": "brawler",
+            "label": "Brawler",
+            "description": "Add two free bonus dice to any melee attack."
+        },
+        {
+            "name": "builder",
+            "label": "Builder",
+            "description": "Barricades you build have 3d6 bonus health."
+        },
+        {
+            "name": "doctor",
+            "label": "Doctor",
+            "description": "Healthkits you use restore an additional 2d6 health"
+        },
+        {
+            "name": "martial",
+            "label": "Martial Artist",
+            "description": "Add +1 to each defense dice you roll. Successful dodges allows you to automatically make a melee attack."
+        },
+        {
+            "name": "scavenger",
+            "label": "Scavenger",
+            "description": "Scavenging draws 2 cards instead."
+        },
+        {
+            "name": "scout",
+            "label": "Scout",
+            "description": "Gain 1 additional action."
+        },
+        {
+            "name": "sniper",
+            "label": "Sniper",
+            "description": "Add two free bonus dice to any ranged attacks."
+        },
+        {
+            "name": "speedy",
+            "label": "speedy",
+            "description": "Move additional 2 spaces during a move action."
+        }
+    ]
+}

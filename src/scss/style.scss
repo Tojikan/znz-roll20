@@ -1,0 +1,18 @@
+@import "variables";
+
+@import "mixins";
+@import "layout";
+@import "general";
+
+@import "elements/toggle";
+@import "elements/slots";
+
+@import "sections/header";
+@import "sections/card";
+@import "sections/equipped";
+
+// sets 1rem = 10px
+.sheet-character {
+    font-size: 10px;
+    font-family: $helvetica;
+}
