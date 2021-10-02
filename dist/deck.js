@@ -1,10 +1,6 @@
+'use strict';
 
-
-
-
-
-
-module.exports = {
+const character = {
     name: "name",
     ammo: {
         id: "ammo",
@@ -13,7 +9,7 @@ module.exports = {
             "d6",
             "d8",
             "d10",
-            "d12"
+            "d12",
         ]
     },
     stats: {
@@ -37,23 +33,28 @@ module.exports = {
     },
     weaponslot: {
         id: "weaponslot",
-        label: "Weapons",
         max: 4,
-        default: 2,
+        default: 1,
         slot_used: "weapon_equipped"
     },
     equipslot: {
         id: "equipslot",
-        label: "Equipment",
         max: 6,
         default: 2,
         slot_used: "equip_equipped"
     },
-    cardslot: {
-        id: "cardslot",
-        label: "Inventory",
+    inventoryslot: {
+        id: "inventoryslot",
         max: 10,
-        default: 7,
+        default: 4,
         slot_used: "card_equipped"
     }
-}
+};
+
+
+var _character = {
+    fields: character,
+    obj: character
+};
+
+console.log(_character.character);

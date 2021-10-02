@@ -1,9 +1,16 @@
 {
-    "perks": [
+    "id": "ability",
+    "list": [
+        {
+            "name": "",
+            "label": "",
+            "description": "",
+            "default": true
+        },
         {
             "name": "cheerleader",
             "label": "Cheerleader",
-            "description": "Give up one of your actions to give all players within 5 squares 1 bonus dice to any 1 action."
+            "description": "<strong>Action:</strong> Give all players within 5 spaces 1 bonus roll this turn."
         },
         {
             "name": "brawler",
@@ -13,7 +20,7 @@
         {
             "name": "builder",
             "label": "Builder",
-            "description": "Barricades you build have 3d6 bonus health."
+            "description": "Barricades you build have 2d6 bonus health."
         },
         {
             "name": "doctor",
@@ -21,19 +28,24 @@
             "description": "Healthkits you use restore an additional 2d6 health"
         },
         {
+            "name": "gearhead",
+            "label": "Gearhead",
+            "description": "Start the game with 1 additional weapon, equipment, and inventory slot."
+        },
+        {
             "name": "martial",
             "label": "Martial Artist",
-            "description": "Add +1 to each defense dice you roll. Successful dodges allows you to automatically make a melee attack."
+            "description": " Start the game with 6 defense."
         },
         {
             "name": "scavenger",
             "label": "Scavenger",
-            "description": "Scavenging draws 2 cards instead."
+            "description": "Draw 2 cards instead when you scavenge."
         },
         {
             "name": "scout",
             "label": "Scout",
-            "description": "Gain 1 additional action."
+            "description": "<strong>Action</strong> Determine amount of enemies on other side of door."
         },
         {
             "name": "sniper",
@@ -44,6 +56,11 @@
             "name": "speedy",
             "label": "speedy",
             "description": "Move additional 2 spaces during a move action."
+        },
+        {
+            "name": "sturdy",
+            "label": "sturdy",
+            "description": "Increase your starting health by 20."
         }
     ]
 }

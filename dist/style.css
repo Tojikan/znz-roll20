@@ -79,13 +79,28 @@ input {
 .sheet-hidden {
   display: none; }
 
-.sheet-inner-toggle .sheet-control, .sheet-toggle .sheet-control {
-  display: none; }
-  .sheet-inner-toggle .sheet-control:checked ~ .sheet-content, .sheet-toggle .sheet-control:checked ~ .sheet-content {
-    display: block; }
+select {
+  width: 100%;
+  border: none;
+  transition: 0.3s; }
+  select:hover, select:focus {
+    background-color: #e5fffb; }
 
-.sheet-inner-toggle .sheet-content, .sheet-toggle .sheet-content {
+.sheet-inner-toggle .sheet-control,
+.sheet-toggle .sheet-control,
+.sheet-toggle-adj .sheet-control {
   display: none; }
+
+.sheet-inner-toggle .sheet-content,
+.sheet-toggle .sheet-content,
+.sheet-toggle-adj .sheet-content {
+  display: none; }
+
+.sheet-inner-toggle .sheet-control:checked ~ .sheet-content, .sheet-toggle .sheet-control:checked ~ .sheet-content {
+  display: block; }
+
+.sheet-toggle-adj .sheet-control:checked + .sheet-content {
+  display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-1:checked ~ .sheet-slot-1 {
   display: block; }
@@ -292,10 +307,22 @@ input {
     display: flex;
     flex-direction: flex-start;
     overflow: auto; }
+  .sheet-slot-section .sheet-label-row {
+    justify-content: start; }
+    .sheet-slot-section .sheet-label-row label {
+      display: inline-block;
+      width: auto;
+      margin-right: 2rem; }
+  .sheet-slot-section .sheet-subtext {
+    font-size: 1.2rem; }
+    .sheet-slot-section .sheet-subtext input {
+      font-size: 1.2rem; }
+      .sheet-slot-section .sheet-subtext input.sheet-shy {
+        width: 2.5rem; }
   .sheet-slot-section .sheet-slot {
     width: 25%;
     display: none;
-    border: solid 4px black;
+    border: solid 2px #d3d3d3;
     min-height: 5rem;
     padding: 1rem;
     margin-right: 1rem; }
@@ -323,7 +350,7 @@ input {
       margin-bottom: 2rem; }
     .sheet-character .sheet-header .sheet-area .sheet-defense {
       flex-basis: 30%; }
-    .sheet-character .sheet-header .sheet-area .sheet-slots {
+    .sheet-character .sheet-header .sheet-area .sheet-ability {
       flex-basis: 70%; }
   .sheet-character .sheet-header .sheet-name,
   .sheet-character .sheet-header .sheet-area,
@@ -344,13 +371,12 @@ input {
     .sheet-stat-blocks .sheet-stat .sheet-fields {
       padding: 1rem; }
 
-.sheet-slots {
-  text-align: center; }
-  .sheet-slots .sheet-stage {
-    padding-bottom: 1rem; }
-  .sheet-slots .sheet-slot {
-    flex-basis: 33%;
-    font-size: 1.4rem; }
+.sheet-ability .sheet-ability-select {
+  width: 40%;
+  margin-right: 1rem; }
+
+.sheet-ability .sheet-ability-text {
+  width: 55%; }
 
 .sheet-inventory .sheet-wrap {
   flex-wrap: wrap; }
