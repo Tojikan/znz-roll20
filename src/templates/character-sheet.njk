@@ -1,7 +1,6 @@
 <div class="sheet-character">
     {% include "parts/header.njk" %} 
 
-
     {% import 'macros/slot.njk' as slot %}
 
     <div class="sheet-weapons">
@@ -13,6 +12,12 @@
     </div>
 
     <div class="sheet-inventory">
-        {{ slot.create('Inventory', 'Unused Inventory Slot', data.character.cardslot)}}
+        {{ slot.create('Inventory', 'Unused Inventory Slot', data.character.inventoryslot)}}
     </div>
 </div>
+
+{# Sheet workers are injected here via Gulp process #}
+<script type="text/worker">
+    /** inject:workers **/
+    /** endinject **/
+</script>

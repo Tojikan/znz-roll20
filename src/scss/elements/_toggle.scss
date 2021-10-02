@@ -1,6 +1,20 @@
-.sheet-inner-toggle, .sheet-toggle {
+
+.sheet-inner-toggle,
+.sheet-toggle,
+.sheet-toggle-adj 
+{
     .sheet-control {
         display: none;
+    }
+    .sheet-content {
+        display: none;
+    }
+    
+}
+
+//toggle general
+.sheet-inner-toggle, .sheet-toggle {
+    .sheet-control {
         
         &:checked{
         
@@ -10,9 +24,20 @@
         
         }
     }
+}
 
-    .sheet-content {
-        display: none;
+//toggle adjacent only
+.sheet-toggle-adj {
+    .sheet-control {
+        
+        &:checked{
+        
+            & + .sheet-content{
+                display: block;
+            }
+        
+        }
     }
+
 }
 

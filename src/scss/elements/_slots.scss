@@ -24,10 +24,32 @@
         overflow: auto;
     }
 
+    .sheet-label-row {
+        justify-content: start;
+
+        label {
+            display: inline-block;
+            width: auto;
+            margin-right: 2rem;
+        }
+    }
+
+    .sheet-subtext {
+        font-size: $small;
+
+        input {
+            font-size: $small;
+
+            &.sheet-shy {
+                width: 2.5rem;
+            }
+        }
+    }
+
     .sheet-slot {
         width: 25%;
         display: none;
-        border: solid 4px $black;
+        border: solid 2px $gray;
         min-height: 5rem;
         padding: 1rem;
 

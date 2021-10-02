@@ -48,23 +48,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="sheet-slots">
+                <div class="sheet-ability">
                     <div class="sheet-stage">
-                        <label>Slots</label>
-                        <div class="sheet-row-flex sheet-space-around">
-                            <div class="sheet-slot">
-                                <div>{{data.character.weaponslot | getLabel}}</div>
-                                <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.weaponslot | getAttr}}" value="{{data.character.weaponslot.default}}"/>
+                        <label>Ability</label>
+                        <div class="sheet-row-flex">
+                            <div class="sheet-ability-select">
+                                <select name="attr_{{data.abilities | getAttr}}">
+                                    {% for opt in data.abilities.list %}
+                                        <option value="{{opt.name}}">{{opt.label}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="sheet-slot">
-                                <div>{{data.character.equipslot | getLabel}}</div>
-                                <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.equipslot | getAttr}}" value="{{data.character.equipslot.default}}"/>
+
+                            <div class="sheet-ability-text sheet-toggle-adj">
+                                {% for ability in data.abilities.list %}
+                                    <input type="checkbox" class="sheet-control" name="attr_{{data.abilities.id}}" value="{{ability.name}}" {{"checked" if ability.default}} />
+                                    <div class="sheet-description-text sheet-content">
+                                        {{ability.description | safe}}
+                                    </div>
+                                {% endfor %}
                             </div>
-                            <div class="sheet-slot">
-                                <div>{{data.character.cardslot | getLabel}}</div>
-                                <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.cardslot | getAttr}}" value="{{data.character.cardslot.default}}"/>
-                            </div>
-                        
                         </div>
                     </div>
                 </div>

@@ -111,3 +111,13 @@ input {
 .sheet-hidden {
     display: none;
 }
+
+select {
+    width: 100%;
+    border: none;
+    transition: 0.3s;
+
+    &:hover, &:focus {
+        background-color: $lightblue;
+    }
+}
