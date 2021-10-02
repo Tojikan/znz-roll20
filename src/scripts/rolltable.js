@@ -1,7 +1,7 @@
 
 import * as generator from './itemgenerator';
 
-export function rollTable(roll){
+function rollResults(roll){
     let result = {};
     let table = {
         generateFood: 20,
@@ -27,3 +27,18 @@ export function rollTable(roll){
     
     return generator[key](roll);
 }
+
+
+function rollTable(){
+    sendChat('', `/roll 1d100`, function(ops) {
+        // ops will be an ARRAY of command results.
+        var rollresult = ops[0];
+        var result = JSON.parse(rollresult.content);
+
+        log(result.total);
+
+        log(rollResults(result));
+    });
+}
+
+export default rollTable;

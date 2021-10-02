@@ -8,9 +8,9 @@ const   gulp = require('gulp'),
         del = require('del'),
         cleancss = require('gulp-clean-css'),
         htmlmin = require('gulp-htmlmin'),
-        rollup = require('rollup-stream'),
-        source = require('vinyl-source-stream'),
-        {commonjs} = require('@rollup/plugin-commonjs'),
+        {rollup} = require('gulp-rollup-2'),
+        // source = require('vinyl-source-stream'),
+        commonjs = require('@rollup/plugin-commonjs'),
         {BuildContext} = require('./BuildContext');
 
 
@@ -43,6 +43,7 @@ function sheet(){
                 return rollup({
                     input: './src/workers/main.js',
                     format: 'iife',
+                    plugins: [commonjs()]
                 })})()
             ,{ 
                 // Inject your workers as a pure string between the appropriate tag pattern
@@ -60,10 +61,17 @@ function sheet(){
 
 /** Compile Scripts with Rollup **/
 function scripts(){
-    return rollup('rollup.config.js')
-    .pipe(source('scripts.js'))
-    .pipe(gulp.dest('./dist'));
-}
+    return gulp.src('src/scripts/main.js')
+        .pipe(rollup({
+            input:'src/scripts/main.js',
+            plugins:[commonjs()],
+            output: {
+                file: 'scripts.js',
+                format: 'iife'
+            }
+        }))
+        .pipe(gulp.dest('./dist'));
+    }
 
 /** Compile SASS into Styles **/
 function styles(){
