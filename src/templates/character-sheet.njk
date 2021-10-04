@@ -1,19 +1,14 @@
 <div class="sheet-character">
-    {% include "parts/header.njk" %} 
+    {% include "./header/header.njk" %} 
 
-    {% import 'macros/slot.njk' as slot %}
+    {% import 'items/slot.njk' as slot %}
 
-    <div class="sheet-weapons">
-        {{ slot.create('Weapons', 'Unused Weapon Slot', data.character.weaponslot)}}
+
+    {% for key, item in data.character.slots %}
+    <div class="sheet-{{key}}">
+        {{ slot.create(item.label, 'Unused Slot', item, item.prefix) }}
     </div>
-
-    <div class="sheet-equipment">
-        {{ slot.create('Equipment', 'Unused Equipment Slot', data.character.equipslot)}}
-    </div>
-
-    <div class="sheet-inventory">
-        {{ slot.create('Inventory', 'Unused Inventory Slot', data.character.inventoryslot)}}
-    </div>
+    {% endfor %}
 </div>
 
 {# Sheet workers are injected here via Gulp process #}

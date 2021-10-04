@@ -65,6 +65,10 @@ const filters = {
             return obj['label'];
         }
         return typeof obj == 'string' ? obj : '';
+    },
+
+    removeAmmo: function(obj){
+        return obj.replace('Ammo_')
     }
 }
 

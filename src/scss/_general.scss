@@ -58,7 +58,7 @@ input {
 }
 
 
-.sheet-stage {
+.sheet-bubble {
     padding: 2rem;
     border: solid 3px $black;
     border-radius: 2rem;
@@ -80,6 +80,7 @@ input {
 .sheet-max {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .sheet-divider {
@@ -94,6 +95,11 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    span {
+        display: inline-block;
+        vertical-align: middle;
+    }
 
     input {
         font-size: $large;
@@ -116,8 +122,14 @@ select {
     width: 100%;
     border: none;
     transition: 0.3s;
+    border-bottom: solid 1px $gray;
+    border-radius: none;
 
     &:hover, &:focus {
         background-color: $lightblue;
     }
+}
+
+.sheet-subtext {
+    font-size: $small;
 }

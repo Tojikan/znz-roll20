@@ -1,11 +1,11 @@
 .sheet-slot-toggle {
     //Show Hide Available Weapon Slots!
-    @for $i from 1 through 11 {
+    @for $i from 0 through 11 {
         // If weapon slot i is checked...
         .sheet-slot-toggle-#{$i}:checked{
 
-            //then show all weapons i and under! (There must be a set of checkboxes next to EACH weapon as CSS only has general sibling combinator
-            @for $j from 1 through $i{
+            //then show all weapons i and under!
+            @for $j from 0 through $i{
                 ~ .sheet-slot-#{$j}{
                     display: block;
                 }
@@ -14,16 +14,39 @@
     }
 }
 
-.sheet-slot-section {
-    margin-top: 2 * $gap;
-    
-    .sheet-wrap {
-        margin-top: 1rem;
-        display: flex;
-        flex-direction: flex-start;
-        overflow: auto;
+
+
+.sheet-slot {
+    .sheet-content {
+        // display: none;
+        display: block;
     }
 
+    .sheet-empty-text {
+        display: none!important;
+    }
+
+    .sheet-active {
+        // display: none;
+        &:checked {
+            ~ .sheet-content {
+                display: block;
+            }
+
+            ~ .sheet-empty-text {
+                display: none;
+            }
+
+        }
+    }
+}
+
+
+.sheet-slot-section {
+    margin-top: 2 * $gap;
+
+
+    // Slots label text
     .sheet-label-row {
         justify-content: start;
 
@@ -32,22 +55,28 @@
             width: auto;
             margin-right: 2rem;
         }
-    }
-
-    .sheet-subtext {
-        font-size: $small;
-
-        input {
+        
+        .sheet-subtext {
             font-size: $small;
-
-            &.sheet-shy {
-                width: 2.5rem;
+    
+            input {
+                font-size: $small;
+    
+                &.sheet-shy {
+                    width: 2.5rem;
+                }
             }
         }
     }
 
+    .sheet-wrap {
+        margin-top: 1rem;
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .sheet-slot {
-        width: 25%;
         display: none;
         border: solid 2px $gray;
         min-height: 5rem;

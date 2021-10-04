@@ -26,7 +26,8 @@ function sheet(){
             path:'src/templates',
             manageEnv: function(env){
                 //Adds our data to global variable so we can reference anywhere in njk templates
-                env.addGlobal('data', context.getFields());    
+                env.addGlobal('data', context.getFields());
+                
         
                 //Takes all functions in exported filters and adds them as filters to NJKS
                 const filters = require('./BuildContext').filters; //use require so we can dynamically include new filters as they are added
@@ -37,24 +38,26 @@ function sheet(){
                 }
             }
         }))
-        //Inject sheet workers into the script
-        .pipe(inject((() => {      
-                // Use Rollup to bundle up our workers
-                return rollup({
-                    input: './src/workers/main.js',
-                    format: 'iife',
-                    plugins: [commonjs()]
-                })})()
-            ,{ 
-                // Inject your workers as a pure string between the appropriate tag pattern
-                starttag: '/** inject:workers **/',     
-                endtag: '/** endinject **/',
-                transform: function(filePath, file){
-                    return file.contents.toString('utf-8')
-                }
-            }))                                   
-        //Just in case you forget
-        .pipe(replace('text/javascript', 'text/worker'))
+        // //Inject sheet workers into the script
+        // .pipe(inject((() => {      
+        //         // Use Rollup to bundle up our workers
+        //         return rollup({
+        //             input: './src/workers/main.js',
+        //             output: {
+        //                 file:'workers',
+        //                 format: 'iife'
+        //             }
+        //         })})()
+        //     ,{ 
+        //         // Inject your workers as a pure string between the appropriate tag pattern
+        //         starttag: '/** inject:workers **/',     
+        //         endtag: '/** endinject **/',
+        //         transform: function(filePath, file){
+        //             return file.contents.toString('utf-8')
+        //         }
+        //     }))                                   
+        // //Just in case you forget
+        // .pipe(replace('text/javascript', 'text/worker'))
         //Pump it to Dist
         .pipe(gulp.dest('./dist'));
 }

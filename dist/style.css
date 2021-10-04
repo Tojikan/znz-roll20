@@ -1,6 +1,7 @@
 /**
 * Variables used throughout styles
 */
+/*** For hiding fields based on type in item cards **/
 .sheet-character label {
   font-size: 1.8rem; }
 
@@ -41,12 +42,12 @@ input {
     border-bottom: solid 1px #a0a0a0;
     border-radius: 0; }
 
-.sheet-stage {
+.sheet-bubble {
   padding: 2rem;
   border: solid 3px black;
   border-radius: 2rem;
   font-size: 1.4rem; }
-  .sheet-stage label {
+  .sheet-bubble label {
     text-align: center; }
 
 .sheet-row-flex {
@@ -56,7 +57,8 @@ input {
 
 .sheet-max {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  align-items: center; }
 
 .sheet-divider {
   margin: 0 0.5rem;
@@ -69,6 +71,9 @@ input {
   display: flex;
   align-items: center;
   justify-content: center; }
+  .sheet-dice-input span {
+    display: inline-block;
+    vertical-align: middle; }
   .sheet-dice-input input {
     font-size: 1.8rem;
     width: 3.5rem;
@@ -82,9 +87,14 @@ input {
 select {
   width: 100%;
   border: none;
-  transition: 0.3s; }
+  transition: 0.3s;
+  border-bottom: solid 1px #d3d3d3;
+  border-radius: none; }
   select:hover, select:focus {
     background-color: #e5fffb; }
+
+.sheet-subtext {
+  font-size: 1.2rem; }
 
 .sheet-inner-toggle .sheet-control,
 .sheet-toggle .sheet-control,
@@ -102,13 +112,25 @@ select {
 .sheet-toggle-adj .sheet-control:checked + .sheet-content {
   display: block; }
 
+.sheet-slot-toggle .sheet-slot-toggle-0:checked ~ .sheet-slot-0 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-1:checked ~ .sheet-slot-0 {
+  display: block; }
+
 .sheet-slot-toggle .sheet-slot-toggle-1:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-1 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-1 {
@@ -118,6 +140,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-1 {
@@ -130,6 +155,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-1 {
@@ -145,6 +173,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-1 {
@@ -163,6 +194,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-6 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-1 {
@@ -184,6 +218,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-7 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-1 {
@@ -208,6 +245,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-8 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-1 {
@@ -235,6 +275,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-9 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-1 {
@@ -265,6 +308,9 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-10 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-1 {
@@ -300,27 +346,38 @@ select {
 .sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-11 {
   display: block; }
 
+.sheet-slot .sheet-content {
+  display: block; }
+
+.sheet-slot .sheet-empty-text {
+  display: none !important; }
+
+.sheet-slot .sheet-active:checked ~ .sheet-content {
+  display: block; }
+
+.sheet-slot .sheet-active:checked ~ .sheet-empty-text {
+  display: none; }
+
 .sheet-slot-section {
   margin-top: 4rem; }
-  .sheet-slot-section .sheet-wrap {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: flex-start;
-    overflow: auto; }
   .sheet-slot-section .sheet-label-row {
     justify-content: start; }
     .sheet-slot-section .sheet-label-row label {
       display: inline-block;
       width: auto;
       margin-right: 2rem; }
-  .sheet-slot-section .sheet-subtext {
-    font-size: 1.2rem; }
-    .sheet-slot-section .sheet-subtext input {
+    .sheet-slot-section .sheet-label-row .sheet-subtext {
       font-size: 1.2rem; }
-      .sheet-slot-section .sheet-subtext input.sheet-shy {
-        width: 2.5rem; }
+      .sheet-slot-section .sheet-label-row .sheet-subtext input {
+        font-size: 1.2rem; }
+        .sheet-slot-section .sheet-label-row .sheet-subtext input.sheet-shy {
+          width: 2.5rem; }
+  .sheet-slot-section .sheet-wrap {
+    margin-top: 1rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr); }
   .sheet-slot-section .sheet-slot {
-    width: 25%;
     display: none;
     border: solid 2px #d3d3d3;
     min-height: 5rem;
@@ -349,9 +406,9 @@ select {
     .sheet-character .sheet-header .sheet-area .sheet-row-flex:first-child {
       margin-bottom: 2rem; }
     .sheet-character .sheet-header .sheet-area .sheet-defense {
-      flex-basis: 30%; }
+      flex-basis: 40%; }
     .sheet-character .sheet-header .sheet-area .sheet-ability {
-      flex-basis: 70%; }
+      flex-basis: 60%; }
   .sheet-character .sheet-header .sheet-name,
   .sheet-character .sheet-header .sheet-area,
   .sheet-character .sheet-header .sheet-defense {
@@ -377,6 +434,36 @@ select {
 
 .sheet-ability .sheet-ability-text {
   width: 55%; }
+
+.sheet-card-line {
+  display: flex;
+  justify-content: space-between; }
+  .sheet-card-line .sheet-label {
+    font-weight: 700;
+    flex-basis: 30%;
+    font-size: 1.4rem; }
+  .sheet-card-line .sheet-field {
+    flex-basis: 50%; }
+  .sheet-card-line .sheet-hide-weapon:checked ~ .sheet-only-weapon {
+    display: block; }
+  .sheet-card-line .sheet-only-weapon {
+    display: none; }
+  .sheet-card-line .sheet-hide-consumable:checked ~ .sheet-only-consumable {
+    display: block; }
+  .sheet-card-line .sheet-only-consumable {
+    display: none; }
+  .sheet-card-line .sheet-hide-equipment:checked ~ .sheet-only-equipment {
+    display: block; }
+  .sheet-card-line .sheet-only-equipment {
+    display: none; }
+  .sheet-card-line .sheet-hide-melee:checked ~ .sheet-only-melee {
+    display: block; }
+  .sheet-card-line .sheet-only-melee {
+    display: none; }
+  .sheet-card-line .sheet-hide-ranged:checked ~ .sheet-only-ranged {
+    display: block; }
+  .sheet-card-line .sheet-only-ranged {
+    display: none; }
 
 .sheet-inventory .sheet-wrap {
   flex-wrap: wrap; }

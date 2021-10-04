@@ -1,0 +1,49 @@
+{% macro card(num, prefix='item') %}
+    {%- for key, field in data.card -%}
+        {%- if 'input' in field -%}
+        <div class="sheet-card-line {% if field.only -%}
+                sheet-only-{{field.only}}
+            {%- endif %} {% if field.only2 -%}
+                sheet-only-{{field.only2}}
+            {%- endif -%} sheet-type-{{field.input}}}">
+            <div class="sheet-label">{{field.label}}</div>
+            <div class="sheet-field">
+
+            {% for type in data.card.type.options %}
+                <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{prefix}}_{{data.card.type.id}}_{{num}}" value="{{type}}" {{ "checked" if loop.first }}/>
+            {% endfor %}
+            {% for type in data.card.weapontype.options %}
+                <input type="checkbox" class="sheet-hidden sheet-show-{{type.id}}" name="attr_{{prefix}}_{{data.card.weapontype.id}}_{{num}}" value="{{type}}" {{"checked" if loop.first }}/>
+            {% endfor %}
+
+
+            {% switch field.input %}
+                {% case "select" %}
+                    <select name="attr_{{prefix}}_{{field.id}}_{{num}}">
+                        {% for opt in field.options %}
+                            <option value="{{opt}}">{{opt | capitalize | removeAmmo}}</option>
+                        {% endfor %}
+                    </select>
+                {% case "max" %}
+                    <div class="sheet-max">
+                        <div>
+                            <input type="text" class="sheet-number sheet-shy" name="attr_{{prefix}}_{{field | getAttr}}" value="0" step="1"/>
+                        </div>
+                        <div class="sheet-divider">/</div>
+                        <div>
+                            <input type="text" class="sheet-number sheet-shy" name="attr_{{prefix}}_{{field | getAttr}}_max" value="0" step="1"/>
+                        </div>
+                    </div>
+                {% case "textarea" %}
+                    <textarea name="attr_{{prefix}}_{{field | getAttr}}" ></textarea>
+
+                {% case "dice" %}
+                    <input type="text" class="sheet-number sheet-shy" name="attr_{{prefix}}_{{field | getAttr}}" value="0" step="1"/>
+                {% default %}
+                    <input type="text" name="attr_{{prefix}}_{{field.id}}_{{num}}">
+            {% endswitch %}
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}

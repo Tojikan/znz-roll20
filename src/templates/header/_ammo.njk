@@ -1,0 +1,11 @@
+    <div class="sheet-stage">
+        <label>{{data.character.ammo | getAttr | capitalize}}</label>
+        <div class="sheet-ammos">
+            {% for item in data.character.ammo.types%}
+                <div class="sheet-line">
+                    <div class="sheet-label">{{item}}</div>
+                    <input type="text" class="sheet-number" name="attr_{{data.character.ammo | getAttr}}_{{item}}"/>
+                </div>
+            {% endfor %}
+        </div>
+    </div>

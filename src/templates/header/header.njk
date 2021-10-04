@@ -1,0 +1,18 @@
+<div class="sheet-header">
+    <div class="sheet-area">
+        {# Name, Health Energy #}
+        <div class="sheet-row-flex">
+            <div class="sheet-name sheet-bubble">{% include "./_name.njk" %}</div>
+            <div class="sheet-stat-blocks sheet-bubble">{% include "./_stats.njk" %}</div>
+        </div>
+
+        {# Defense, Slots #}
+        <div class="sheet-row-flex">
+            <div class="sheet-defense sheet-bubble">{% include "./_defense.njk" %}</div>
+            <div class="sheet-ability sheet-bubble">{% include "./_ability.njk" %}</div>
+        </div>
+    </div>
+
+    {# Ammo #}
+    <div class="sheet-bubble sheet-ammo-counter">{% include "./_ammo.njk"%}</div>
+</div>
