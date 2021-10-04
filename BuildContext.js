@@ -68,7 +68,7 @@ const filters = {
     },
 
     removeAmmo: function(obj){
-        return obj.replace('Ammo_')
+        return obj.replace('ammo_', "");
     }
 }
 

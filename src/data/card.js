@@ -35,7 +35,7 @@ class Card extends SheetObject{
             }, 'Uses'),
             new Field(`ammo_type`, {
                 only:'weapon',
-                only2: 'ranged',
+                onselect: 'ranged',
                 input: 'select',
                 options:  ammotypes
             }, 'Ammo Type'),
@@ -49,11 +49,10 @@ class Card extends SheetObject{
                 }
             },
             new Field('actions', {
-                all: ['drop'],
+                all: ['drop', 'delete'],
                 weapon: ['attack', 'reload', 'equip', 'unequip'],
                 equip: ['equip', 'unequip'],
-                ranged: ['reload'],
-                consumable: ['use'],
+                ranged: ['reload']
             }),
             {prefix: this.itemPrefix}
         ]

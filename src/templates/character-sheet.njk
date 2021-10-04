@@ -6,7 +6,7 @@
 
     {% for key, item in data.character.slots %}
     <div class="sheet-{{key}}">
-        {{ slot.create(item.label, 'Unused Slot', item, item.prefix) }}
+        {{ slot.create(item.label, 'Unused Slot', item) }}
     </div>
     {% endfor %}
 </div>

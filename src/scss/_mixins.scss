@@ -1,19 +1,20 @@
 
 
 /*** For hiding fields based on type in item cards **/
-@mixin hideType($type){
-    .sheet-hide-#{$type}{
+@mixin hideFieldForType($type){
+    .sheet-slot-section-#{$type}{
 
-        &:checked {
-            ~ .sheet-only-#{$type}{
-                display: block;
-            }
+        .sheet-only-#{$type}{
+            display: block;
+        }
+
+        [class*='sheet-only-']{
+            display: none;
+
         }
     }
 
-    .sheet-only-#{$type}{
-        display: none;
-    }
+
 }
 
 @mixin hideSubType($type, $subtype){

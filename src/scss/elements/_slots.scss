@@ -1,11 +1,11 @@
 .sheet-slot-toggle {
     //Show Hide Available Weapon Slots!
-    @for $i from 0 through 11 {
+    @for $i from 1 through 12 { // 1 indexed
         // If weapon slot i is checked...
         .sheet-slot-toggle-#{$i}:checked{
 
             //then show all weapons i and under!
-            @for $j from 0 through $i{
+            @for $j from 1 through $i{
                 ~ .sheet-slot-#{$j}{
                     display: block;
                 }
@@ -71,9 +71,8 @@
 
     .sheet-wrap {
         margin-top: 1rem;
-        display: grid;
-        grid-gap: 1rem;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .sheet-slot {
@@ -81,6 +80,7 @@
         border: solid 2px $gray;
         min-height: 5rem;
         padding: 1rem;
+        margin-right: $gap;
 
         .sheet-empty-text {
             height: 100%;

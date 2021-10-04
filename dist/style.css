@@ -112,25 +112,13 @@ select {
 .sheet-toggle-adj .sheet-control:checked + .sheet-content {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-0:checked ~ .sheet-slot-0 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-1:checked ~ .sheet-slot-0 {
-  display: block; }
-
 .sheet-slot-toggle .sheet-slot-toggle-1:checked ~ .sheet-slot-1 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-1 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-2 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-1 {
@@ -140,9 +128,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-3 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-1 {
@@ -155,9 +140,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-4 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-1 {
@@ -173,9 +155,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-5 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-1 {
@@ -194,9 +173,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-1 {
@@ -218,9 +194,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-7 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-1 {
@@ -245,9 +218,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-8 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-1 {
@@ -275,9 +245,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-9 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-1 {
@@ -308,9 +275,6 @@ select {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-10 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-0 {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-1 {
@@ -346,6 +310,42 @@ select {
 .sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-11 {
   display: block; }
 
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-6 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-7 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-8 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-9 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-10 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-11 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-12 {
+  display: block; }
+
 .sheet-slot .sheet-content {
   display: block; }
 
@@ -374,14 +374,14 @@ select {
           width: 2.5rem; }
   .sheet-slot-section .sheet-wrap {
     margin-top: 1rem;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(3, 1fr); }
+    display: flex;
+    flex-wrap: wrap; }
   .sheet-slot-section .sheet-slot {
     display: none;
     border: solid 2px #d3d3d3;
     min-height: 5rem;
     padding: 1rem;
+    margin-right: 2rem;
     margin-right: 1rem; }
     .sheet-slot-section .sheet-slot .sheet-empty-text {
       height: 100%;
@@ -444,26 +444,21 @@ select {
     font-size: 1.4rem; }
   .sheet-card-line .sheet-field {
     flex-basis: 50%; }
-  .sheet-card-line .sheet-hide-weapon:checked ~ .sheet-only-weapon {
-    display: block; }
-  .sheet-card-line .sheet-only-weapon {
-    display: none; }
-  .sheet-card-line .sheet-hide-consumable:checked ~ .sheet-only-consumable {
-    display: block; }
-  .sheet-card-line .sheet-only-consumable {
-    display: none; }
-  .sheet-card-line .sheet-hide-equipment:checked ~ .sheet-only-equipment {
-    display: block; }
-  .sheet-card-line .sheet-only-equipment {
-    display: none; }
-  .sheet-card-line .sheet-hide-melee:checked ~ .sheet-only-melee {
-    display: block; }
-  .sheet-card-line .sheet-only-melee {
-    display: none; }
-  .sheet-card-line .sheet-hide-ranged:checked ~ .sheet-only-ranged {
-    display: block; }
-  .sheet-card-line .sheet-only-ranged {
-    display: none; }
+
+.sheet-slot-section-equipment .sheet-only-weapon {
+  display: none; }
+
+.sheet-slot-section-weapon .sheet-only-weapon {
+  display: block; }
+
+.sheet-slot-section-weapon [class*='sheet-only-'] {
+  display: none; }
+
+.sheet-slot-section-equipment .sheet-only-equipment {
+  display: block; }
+
+.sheet-slot-section-equipment [class*='sheet-only-'] {
+  display: none; }
 
 .sheet-inventory .sheet-wrap {
   flex-wrap: wrap; }

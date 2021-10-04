@@ -3,9 +3,9 @@
         {%- if 'input' in field -%}
         <div class="sheet-card-line {% if field.only -%}
                 sheet-only-{{field.only}}
-            {%- endif %} {% if field.only2 -%}
-                sheet-only-{{field.only2}}
-            {%- endif -%} sheet-type-{{field.input}}}">
+            {%- endif %} {% if field.onselect -%}
+                sheet-select-{{field.onselect}}
+            {%- endif -%} sheet-type-{{field.input}}">
             <div class="sheet-label">{{field.label}}</div>
             <div class="sheet-field">
 
@@ -21,7 +21,7 @@
                 {% case "select" %}
                     <select name="attr_{{prefix}}_{{field.id}}_{{num}}">
                         {% for opt in field.options %}
-                            <option value="{{opt}}">{{opt | capitalize | removeAmmo}}</option>
+                            <option value="{{opt}}">{{opt | removeAmmo}}</option>
                         {% endfor %}
                     </select>
                 {% case "max" %}

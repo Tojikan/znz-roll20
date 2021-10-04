@@ -15,11 +15,17 @@
         flex-basis: 50%;
     }
 
-    @include hideType('weapon');
-    @include hideType('consumable');
-    @include hideType('equipment');
-    @include hideType('melee');
-    @include hideType('ranged');
-
+    // @include hideType('melee');
+    // @include hideType('ranged');
+    
 }
 
+.sheet-slot-section-equipment {
+    .sheet-only-weapon {
+        display: none;
+    }
+}
+
+
+@include hideFieldForType('weapon');
+@include hideFieldForType('equipment');

@@ -35,7 +35,7 @@ class Character extends SheetObject{
             new FieldGroup('slots',[
                 new Field("weaponslots", {default: 1, max: 4, prefix:"weapon"}, 'Weapons'),
                 new Field("equipmentslots", {default: 2, max: 4, prefix:"equipment"}, 'Equipment'),
-                new Field("inventoryslots", {default: 5, max: 10, prefix:"card"}, 'Inventory')
+                new Field("inventoryslots", {default: 5, max: 10, prefix:"inventory"}, 'Inventory')
             ])
         ]
     );
