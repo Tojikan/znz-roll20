@@ -10,7 +10,7 @@
 
         <div class="sheet-ability-text sheet-toggle-adj">
             {% for ability in data.abilities.list %}
-                <input type="checkbox" class="sheet-control" name="attr_{{data.abilities.id}}" value="{{ability.name}}" {{"checked" if ability.default}} />
+                <input type="checkbox" class="sheet-control" name="attr_{{data.abilities | getAttr}}" value="{{ability.name}}" {{"checked" if ability.default}} />
                 <div class="sheet-description-text sheet-content">
                     {{ability.description | safe}}
                 </div>

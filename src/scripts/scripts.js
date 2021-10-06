@@ -1,6 +1,6 @@
 import { attrAlert } from "./attrAlert";
 import { handleReload } from "./reload";
-import { splitArgs } from "./_helpers";
+import { splitArgs, getCharacter } from "./_helpers";
 
 
 var Main = Main || (function(){
@@ -10,24 +10,24 @@ var Main = Main || (function(){
             return;
         }
 
-        const sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
-            character = getCharacter(sender, msg);
+        const args = splitArgs(msg.content),
+            sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
+            character = getCharacter(sender, msg, args);
 
         if (!character){
-            sendMessage("You must select a valid character that you control!", sender, true, "error");
+            sendMessage("You must select a valid character that you control!", sender, 'error');
+            return;
         }
 
-        const args = splitArgs(msg.content);
-
-
         if (msg.content.startsWith("!!reload")){
-            if (!"weapon" in args){
+            if (!("weapon" in args)){
                 sendMessage('You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', sender, 'error');
+                return
             }
 
             const response = handleReload(character, args.weapon);
 
-            sendMessage(response.msg, "Reload Script", msg.type);
+            sendMessage(response.msg, "Reload Script", response.type);
             return;
         }
     };
@@ -50,8 +50,8 @@ var Main = Main || (function(){
                 textColor = '#8B702D';
                 break;
             case "success":
-                bgColor = '#EBC8C4';
-                textColor = '#465A3D';
+                bgColor = '#baedc3';
+                textColor = '#135314';
                 break;
         }
 

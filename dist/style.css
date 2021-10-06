@@ -295,75 +295,6 @@ textarea.sheet-shy {
 .sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-10 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-1 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-2 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-3 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-4 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-5 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-7 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-8 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-9 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-10 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-11:checked ~ .sheet-slot-11 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-1 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-2 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-3 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-4 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-5 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-7 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-8 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-9 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-10 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-11 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-12:checked ~ .sheet-slot-12 {
-  display: block; }
-
 .sheet-slot .sheet-content {
   display: block; }
 
@@ -427,9 +358,9 @@ textarea.sheet-shy {
     .sheet-character .sheet-header .sheet-area .sheet-row-flex:first-child {
       margin-bottom: 2rem; }
     .sheet-character .sheet-header .sheet-area .sheet-defense {
-      flex-basis: 40%; }
+      flex-basis: 35%; }
     .sheet-character .sheet-header .sheet-area .sheet-ability {
-      flex-basis: 60%; }
+      flex-basis: 65%; }
   .sheet-character .sheet-header .sheet-name,
   .sheet-character .sheet-header .sheet-area,
   .sheet-character .sheet-header .sheet-defense {
@@ -492,6 +423,9 @@ textarea.sheet-shy {
   display: none; }
   .sheet-card .sheet-card-type select {
     font-size: 1rem; }
+  .sheet-card .sheet-card-type .sheet-weapon-only {
+    display: none;
+    text-align: right; }
 
 .sheet-card .sheet-card-weapon-fields .sheet-ranged-only,
 .sheet-card .sheet-card-weapon-fields .sheet-melee-only {
@@ -535,6 +469,12 @@ textarea.sheet-shy {
       background-color: red;
       color: white; }
 
+.sheet-card .sheet-inventory-only {
+  display: none !important; }
+
+.sheet-card .sheet-toggle-inventory:checked ~ .sheet-card-actions .sheet-inventory-only {
+  display: block !important; }
+
 .sheet-card .sheet-equipment-only {
   display: none !important; }
 
@@ -545,6 +485,12 @@ textarea.sheet-shy {
   display: none !important; }
 
 .sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-actions .sheet-weapon-only {
+  display: block !important; }
+
+.sheet-card .sheet-weapon-only {
+  display: none !important; }
+
+.sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-type .sheet-weapon-only {
   display: block !important; }
 
 .sheet-card .sheet-consumable-only {
@@ -560,7 +506,7 @@ textarea.sheet-shy {
   display: block !important; }
 
 .sheet-slot-section-inventory .sheet-card-type {
-  display: block; }
+  display: flex; }
 
 .sheet-inventory .sheet-wrap {
   flex-wrap: wrap; }

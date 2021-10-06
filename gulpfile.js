@@ -5,6 +5,7 @@ const   gulp = require('gulp'),
         sass = require('gulp-sass'),
         replace = require('gulp-replace'),
         nunjucksRender = require('gulp-nunjucks-render'),
+        header = require('gulp-header');
         inject = require('gulp-inject'),
         removeEmptyLines = require('gulp-remove-empty-lines'),
         del = require('del'),
@@ -45,12 +46,12 @@ function sheet(){
         //Inject sheet workers into the script
         .pipe(inject((() => {      
                 // Use Rollup to bundle up our workers
-                return gulp.src('src/workers/main.js')
+                return gulp.src('src/workers/workers.js')
                     .pipe(rollup({
-                        input: './src/workers/main.js',
+                        input: './src/workers/workers.js',
                         plugins:[commonjs(), json()],
                         output: {
-                            file:'workers',
+                            file:'workers.out',
                             format: 'iife'
                         }
                     }))
@@ -76,7 +77,7 @@ function scripts(){
             input:'src/scripts/scripts.js',
             plugins:[commonjs(), json()],
             output: {
-                file: 'scripts.js',
+                file: 'scripts.out.js',
                 format: 'iife'
             }
         }))
@@ -87,8 +88,8 @@ function scripts(){
 /** Compile SASS into Styles **/
 function styles(){
     return gulp.src('src/scss/style.scss')
+    .pipe(header(require('./BuildContext').sassHeaders))//use require so we can dynamically include new headers as they are added
     .pipe(sass().on('error',sass.logError))
-    .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, evalReplace))
     .pipe(gulp.dest('dist'));
 }
 
@@ -140,5 +141,5 @@ function evalReplace(match, capture){
 exports.sheet = sheet;
 exports.scripts = scripts;
 exports.styles = styles;
-exports.build = (done) => { gulp.series([sheet, styles, scripts]); done();};
 exports.watch = watch;
+exports.build = gulp.series(sheet, scripts, styles);

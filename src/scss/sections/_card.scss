@@ -50,7 +50,12 @@
     
         select {
             font-size: $xSmall;
-        }    
+        }
+        
+        .sheet-weapon-only {
+            display: none;
+            text-align: right;
+        }
     }
     
     
@@ -131,8 +136,10 @@
         }
     }
 
+    @include checkboxToggleChild('sheet-inventory-only', 'sheet-toggle-inventory', 'sheet-card-actions');
     @include checkboxToggleChild('sheet-equipment-only', 'sheet-toggle-equipment', 'sheet-card-actions');
     @include checkboxToggleChild('sheet-weapon-only', 'sheet-toggle-weapon', 'sheet-card-actions');
+    @include checkboxToggleChild('sheet-weapon-only', 'sheet-toggle-weapon', 'sheet-card-type');
     @include checkboxToggleChild('sheet-consumable-only', 'sheet-toggle-consumable', 'sheet-card-actions');
 
     @include checkboxToggle('sheet-card-weapon-fields', 'sheet-toggle-weapon');
@@ -143,7 +150,7 @@
 // Only show type dropdown in inventory
 .sheet-slot-section-inventory {
     .sheet-card-type {
-        display: block;
+        display: flex;
     }
 }
 

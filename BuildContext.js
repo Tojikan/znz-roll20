@@ -2,6 +2,8 @@ require("@babel/register");
 const fs = require('fs');
 const path = require('path');
 
+import {fields as char} from './src/model/character';
+
 
 class BuildContext{
     constructor(dataFolder, fieldsKey = 'fields'){
@@ -106,9 +108,14 @@ const filters = {
 
         return result;
     }
-}
+};
+
+const sassHeaders = `
+$inventorymax: ${char.slots.inventoryslots.max};
+`
 
 module.exports = {
     BuildContext: BuildContext,
-    filters:  filters
+    filters:  filters,
+    sassHeaders: sassHeaders
 };

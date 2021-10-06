@@ -1,0 +1,61 @@
+{
+    "snack": {
+        "itemname": "Snack",
+        "itemtype": "inventory",
+        "description": "Restore 5 energy."
+    },
+    "energydrink": {
+        "itemname": "Energy Drink",
+        "itemtype": "inventory",
+        "description": "Restore 10 energy.",
+        "flavor": "Its got Electrolytes."
+    },
+    "adrenaline": {
+        "itemname": "Adrenaline",
+        "itemtype": "inventory",
+        "description": "Restore 20 energy.",
+        "flavor": "When you need a rush."
+
+    },
+    "bandage": {
+        "itemname": "Bandage",
+        "itemtype": "inventory",
+        "description": "Restore 5 health.",
+        "flavor": "A band-aid a day keeps the undead away."
+    },
+    "firstaidkit": {
+        "itemname": "First Aid Kit",
+        "itemtype": "inventory",
+        "description": "Restore 10 health."
+    },
+    "medkit": {
+        "itemname": "Med Kit",
+        "itemtype": "inventory",
+        "description": "Restore 20 health.",
+        "flavor": "For if it's merely a flesh wound."
+    },
+    "knife": {
+        "itemname": "Knife",
+        "itemtype": "weapon",
+        "weapontype": "melee",
+        "damage": "1d4",
+        "durability": 10,
+        "flavor": "Great for cutting vegetables, fruit, and brains."
+    },
+    "baseballbat": {
+        "itemname": "Baseball Bat",
+        "itemtype": "weapon",
+        "weapontype": "melee",
+        "damage": "1d6+1",
+        "durability": 15,
+        "flavor": "It is now past the time... for America's favorite pastime."
+    },
+    "crowbar": {
+        "itemname": "Crowbar",
+        "itemtype": "weapon",
+        "weapontype": "melee",
+        "damage": "1d8+2",
+        "durability": 25,
+        "description": "Great for prying off crabs."
+    }
+}

@@ -60,7 +60,7 @@
  * @param {*} args 
  * @returns 
  */
-export function getCharacter(sender, msg, args){
+export function getCharacter(sender, msg, args = {}){
     let token,
         character = null;
     
