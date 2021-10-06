@@ -1,6 +1,6 @@
 .sheet-slot-toggle {
     //Show Hide Available Weapon Slots!
-    @for $i from 1 through $inventorymax { // 1 indexed. This var injected via Gulp
+    @for $i from 1 through $maxslots { // 1 indexed. This var injected via Gulp
         // If weapon slot i is checked...
         .sheet-slot-toggle-#{$i}:checked{
 
@@ -18,15 +18,10 @@
 
 .sheet-slot {
     .sheet-content {
-        // display: none; //uncomment after dev
-        display: block;
+        display: none; 
     }
     
 
-    // remove after dev
-    .sheet-empty-text {
-        display: none!important;
-    }
 
     .sheet-active {
         display: none;
@@ -63,8 +58,9 @@
     
             input {
                 font-size: $small;
-    
+                
                 &.sheet-shy {
+                    padding: 0;
                     width: 2.5rem;
                 }
             }

@@ -6,8 +6,7 @@ export function attrAlert(obj, prev){
         "(([[data.character.stats.health.id]]))",
         "(([[data.character.stats.energy.id]]))",
         "(([[data.character.slots.weaponslots.id]]))",
-        "(([[data.character.slots.equipmentslots.id]]))",
-        "(([[data.character.slots.inventoryslots.id]]))"
+        "(([[data.character.slots.equipmentslots.id]]))"
     ];
     const ammoId = "(([[data.character.ammo.id]]))";
     const ammoTypes = (([[data.character.ammo.types]]));

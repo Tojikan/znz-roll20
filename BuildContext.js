@@ -111,7 +111,7 @@ const filters = {
 };
 
 const sassHeaders = `
-$inventorymax: ${char.slots.inventoryslots.max};
+$maxslots: ${char.slots.equipmentslots.max};
 `
 
 module.exports = {

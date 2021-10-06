@@ -6,8 +6,7 @@
             "health",
             "energy",
             "weaponslots",
-            "equipmentslots",
-            "inventoryslots"
+            "equipmentslots"
         ];
         const ammoId = "ammo";
         const ammoTypes = ["d4","d6","d8","d10","d12","d20"];
@@ -18,7 +17,7 @@
         }
 
         if (watchedAttr.includes(obj.get("name"))){
-            attr = obj.get("name");
+            attr = obj.get("name").replace('ammo_', '');
         } else {
             return;
         }

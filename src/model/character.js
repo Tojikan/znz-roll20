@@ -48,13 +48,13 @@ export const fields = {
             max: 5,
             prefix: "equipment",
             label: "Equipment"
-        },
-        inventoryslots: {
-            id: "inventoryslots",
-            default: 5,
-            max: 10,
-            prefix: "inventory",
-            label: "Inventory"
         }
+    },
+    inventory: {
+        id: "inventoryslots",
+        default: 5,
+        max: 9,
+        prefix: "inventory",
+        label: "Inventory"
     }
 }

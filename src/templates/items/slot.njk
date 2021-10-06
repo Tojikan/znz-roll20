@@ -27,7 +27,7 @@
                     <input type="checkbox" class="sheet-active" name="attr_{{slotdata.prefix | attach('', num)}}" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">{{emptytext}}</div>
                     <div class="sheet-content">
-                        {{ card.card(num, slotdata.prefix)}}
+                        {{ card.create(num, slotdata.prefix)}}
                     </div>
                 </div>
             {% endfor %}

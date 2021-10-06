@@ -1,0 +1,28 @@
+.sheet-inventory {
+    margin-top: 1rem;
+    
+    .sheet-slot-section {
+        .sheet-slot {
+            display: block;
+        }
+    }
+    
+    .repcontainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sheet-card {
+        .sheet-card-type {
+            display: flex;
+        }
+
+        .sheet-show-ranged {
+            &:checked {
+                ~ .sheet-ranged-only {
+                    display: flex;
+                }
+            }
+        }
+    }
+}

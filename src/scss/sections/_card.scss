@@ -61,8 +61,7 @@
     
     // Weapon Fields
     .sheet-card-weapon-fields {
-        .sheet-ranged-only,
-        .sheet-melee-only{
+        .sheet-ranged-label{
             display: none;
         }
 
@@ -70,13 +69,9 @@
         .sheet-show-ranged {
             &:checked {
                 ~ .sheet-card-uses {
-                    .sheet-ranged-only {
+                    .sheet-ranged-label {
                         display: block;
                     }
-                }
-        
-                ~ .sheet-ranged-only {
-                    display: block;
                 }
             }
         }
@@ -84,19 +79,14 @@
         .sheet-show-melee {
             &:checked {
                 ~ .sheet-card-uses {
-                    .sheet-melee-only {
+                    .sheet-melee-label {
                         display: block;
                     }
-                }
-        
-                ~ .sheet-melee-only {
-                    display: block;
                 }
             }
         }
     }
 
-    
     
     //Textarea fields
     .sheet-card-textarea{
@@ -125,33 +115,57 @@
         margin: 1rem auto;
 
         button {
-            display: inline-block;
+            display: none;
             flex-basis: 15%;
-            margin: 0 1rem 1rem 0;
-
-            &.sheet-delete {
-                background-color: red;
-                color: $white;
-            }
+            margin: 0 0.5rem;
         }
     }
 
-    @include checkboxToggleChild('sheet-inventory-only', 'sheet-toggle-inventory', 'sheet-card-actions');
-    @include checkboxToggleChild('sheet-equipment-only', 'sheet-toggle-equipment', 'sheet-card-actions');
-    @include checkboxToggleChild('sheet-weapon-only', 'sheet-toggle-weapon', 'sheet-card-actions');
-    @include checkboxToggleChild('sheet-weapon-only', 'sheet-toggle-weapon', 'sheet-card-type');
-    @include checkboxToggleChild('sheet-consumable-only', 'sheet-toggle-consumable', 'sheet-card-actions');
-
+    @include checkboxToggleChild('sheet-weapon-only', 'sheet-toggle-weapon', 'sheet-card-type');    
     @include checkboxToggle('sheet-card-weapon-fields', 'sheet-toggle-weapon');
 }
 
 
-
-// Only show type dropdown in inventory
-.sheet-slot-section-inventory {
-    .sheet-card-type {
-        display: flex;
+.sheet-weaponslots {
+    .sheet-card {
+        .sheet-card-actions {
+            button.sheet-attack-button,
+            button.sheet-reload-button 
+            {
+                display: inline-block;
+            }
+        }
     }
 }
+
+.sheet-weaponslots,
+.sheet-equipmentslots{
+    .sheet-card {
+        .sheet-card-actions {
+            button.sheet-unequip-button {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.sheet-inventory {
+    .sheet-card {
+
+        .sheet-toggle-weapon,
+        .sheet-toggle-equipment{
+            &:checked {
+                ~ .sheet-card-actions {
+                    button.sheet-equip-button {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
 
 

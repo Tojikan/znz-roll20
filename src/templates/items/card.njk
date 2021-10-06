@@ -1,4 +1,4 @@
-{% macro card(num, prefix='inventory') %}
+{% macro create(num, prefix='inventory') %}
 
     <div class="sheet-card">
         {# Checkboxes for show and hide #}
@@ -40,8 +40,8 @@
 
             {# Uses #}
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-only">Ammo:</div>
-                <div class="sheet-label sheet-melee-only">Durability:</div>
+                <div class="sheet-label sheet-ranged-label">Ammo:</div>
+                <div class="sheet-label sheet-melee-label">Durability:</div>
                 <div class="sheet-max">
                     <div>
                         <input type="text" class="sheet-number sheet-shy" name="attr_{{data.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
@@ -54,9 +54,9 @@
             </div>
 
             {# Ammo Type #}
-            <div class="sheet-card-ammo-type sheet-card-line">
+            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
                 <div class="sheet-label">
-                    Ammo:
+                    Ammo Type:
                 </div>
                 <select class="sheet-shy" name="attr_{{data.card.ammotype | getAttr | attach(prefix, num)}}">
                 {% for type in data.card.ammotype.options %}
@@ -73,12 +73,10 @@
             <span readonly name="attr_{{data.card.flavor | getAttr | attach(prefix, num)}}"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="action" class="sheet-weapon-only" name="attr_{{data.card.action.attack | attach(prefix, num)}}">Attack</button>
-            <button type="roll" class="sheet-weapon-only" name="attr_{{data.card.action.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button>
-            <button type="action" class="sheet-weapon-only sheet-equipment-only" name="attr_{{data.card.action.equip | attach(prefix, num)}}">Equip</button>
-            <button type="action" class="sheet-weapon-only sheet-equipment-only" name="attr_{{data.card.action.unequip | attach(prefix, num)}}">Unequip</button>
-            <button type="action" class="sheet-inventory-only" name="attr_{{data.card.action.drop | attach(prefix, num)}}">Drop</button>
-            <button type="action" class="sheet-inventory-only sheet-delete" name="attr_{{data.card.action.delete | attach(prefix, num)}}">Delete</button>
+            <button type="action" class="sheet-attack-button btn" name="act_{{data.card.actions.attack | attach(prefix, num)}}">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_{{data.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_{{data.card.actions.equip | attach(prefix, num)}}">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_{{data.card.actions.unequip | attach(prefix, num)}}">Unequip</button>
         </div>
     </div>
 {% endmacro %}

@@ -25,7 +25,8 @@ export var fields = {
             'melee',
             'ranged'
         ],
-        label: 'Weapon Type'
+        label: 'Weapon Type',
+        default: 'melee'
     },
     uses: {
         id: 'uses',
@@ -33,12 +34,15 @@ export var fields = {
         labels: {
             melee: 'Durability',
             ranged: 'Ammo'
-        }
+        },
+        default: 0
+        
     },
     ammotype: {
         id: 'ammotype',
         options: ammotypes,
-        label: 'Ammo Type'
+        label: 'Ammo Type',
+        default: ammotypes[0]
     },
     description: {
         id: 'description'
@@ -47,11 +51,11 @@ export var fields = {
         id: 'flavor'
     },
     actions: {
-        drop:'dropItem', 
-        delete:'deleteItem',
-        attack:'attackWeapon',
-        reload: 'reloadWeapon',
-        equip: 'equipItem',
-        unequip: 'unequipItem'
+        drop:'dropitem', 
+        delete:'deleteitem',
+        attack:'attackweapon',
+        reload: 'reloadweapon',
+        equip: 'equipoitem',
+        unequip: 'unequipitem'
     }
 }
