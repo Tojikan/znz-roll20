@@ -1,3 +1,7 @@
+/**
+ *  Library of usefull Roll20 API Functions
+ */
+
 
 
 /**
@@ -11,6 +15,8 @@
  * Return the struct
  * 
  * There should not be spaces between '=' and the arg/value
+ * @param {string} input - text input
+ * @returns an object where each key is the param name and the value is its tokenized param value.
  */
  export function splitArgs (input) {
     var result = {},
@@ -47,7 +53,12 @@
 
 
 /**
- * Returns character of selected token if it is controlled by selector.
+ * Gets a player's selected character. Only returns the character if the player controls the Character or is a GM
+ * 
+ * @param {*} sender 
+ * @param {*} msg 
+ * @param {*} args 
+ * @returns 
  */
 export function getCharacter(sender, msg, args){
     let token,
@@ -77,6 +88,16 @@ export function getCharacter(sender, msg, args){
     }
 
     return character;
+}
+
+/**
+ * Retrieve an attribute for a given character
+ * @param {*} character 
+ * @param {*} attribute 
+ * @returns The Attribute value
+ */
+export var getAttrVal = function(character, attr){
+    return findObjs({type: 'attribute', characterid: character.id, name: attr})[0];
 }
 
 

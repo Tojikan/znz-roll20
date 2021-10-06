@@ -1,7 +1,18 @@
 /**
 * Variables used throughout styles
 */
-/*** For hiding fields based on type in item cards **/
+/**
+    Hide/Display an element when a sibling checkbox is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+/**
+    Hide/Display an element within a parent element when a sibling checkbox of parent is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
 .sheet-character label {
   font-size: 1.8rem; }
 
@@ -92,9 +103,16 @@ select {
   border-radius: none; }
   select:hover, select:focus {
     background-color: #e5fffb; }
+  select.sheet-shy {
+    border: none;
+    appearance: none; }
 
 .sheet-subtext {
   font-size: 1.2rem; }
+
+textarea.sheet-shy {
+  resize: none;
+  border: none; }
 
 .sheet-inner-toggle .sheet-control,
 .sheet-toggle .sheet-control,
@@ -352,11 +370,12 @@ select {
 .sheet-slot .sheet-empty-text {
   display: none !important; }
 
-.sheet-slot .sheet-active:checked ~ .sheet-content {
-  display: block; }
-
-.sheet-slot .sheet-active:checked ~ .sheet-empty-text {
+.sheet-slot .sheet-active {
   display: none; }
+  .sheet-slot .sheet-active:checked ~ .sheet-content {
+    display: block; }
+  .sheet-slot .sheet-active:checked ~ .sheet-empty-text {
+    display: none; }
 
 .sheet-slot-section {
   margin-top: 4rem; }
@@ -377,12 +396,14 @@ select {
     display: flex;
     flex-wrap: wrap; }
   .sheet-slot-section .sheet-slot {
+    width: 225px;
     display: none;
-    border: solid 2px #d3d3d3;
+    border: solid 4px #d3d3d3;
+    border-radius: 1rem;
     min-height: 5rem;
     padding: 1rem;
     margin-right: 2rem;
-    margin-right: 1rem; }
+    margin-bottom: 2rem; }
     .sheet-slot-section .sheet-slot .sheet-empty-text {
       height: 100%;
       font-size: 1.4rem;
@@ -435,30 +456,111 @@ select {
 .sheet-ability .sheet-ability-text {
   width: 55%; }
 
-.sheet-card-line {
+.sheet-card select {
+  height: 2rem;
+  padding: 0;
+  margin: 0;
+  width: 50%; }
+
+.sheet-card .sheet-card-line {
   display: flex;
-  justify-content: space-between; }
-  .sheet-card-line .sheet-label {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  margin-bottom: 1rem; }
+  .sheet-card .sheet-card-line .sheet-label {
+    flex-basis: 50%;
     font-weight: 700;
-    flex-basis: 30%;
     font-size: 1.4rem; }
-  .sheet-card-line .sheet-field {
-    flex-basis: 50%; }
+  .sheet-card .sheet-card-line select,
+  .sheet-card .sheet-card-line input {
+    font-size: 1.4rem;
+    padding: 0;
+    text-align: center; }
 
-.sheet-slot-section-equipment .sheet-only-weapon {
+.sheet-card .sheet-card-name {
+  margin-bottom: 1.5rem; }
+  .sheet-card .sheet-card-name input[type=text] {
+    font-weight: 700;
+    color: black; }
+    .sheet-card .sheet-card-name input[type=text]::placeholder {
+      color: #d3d3d3;
+      font-weight: 300; }
+
+.sheet-card .sheet-card-type {
+  display: none; }
+  .sheet-card .sheet-card-type select {
+    font-size: 1rem; }
+
+.sheet-card .sheet-card-weapon-fields .sheet-ranged-only,
+.sheet-card .sheet-card-weapon-fields .sheet-melee-only {
   display: none; }
 
-.sheet-slot-section-weapon .sheet-only-weapon {
+.sheet-card .sheet-card-weapon-fields .sheet-show-ranged:checked ~ .sheet-card-uses .sheet-ranged-only {
   display: block; }
 
-.sheet-slot-section-weapon [class*='sheet-only-'] {
-  display: none; }
-
-.sheet-slot-section-equipment .sheet-only-equipment {
+.sheet-card .sheet-card-weapon-fields .sheet-show-ranged:checked ~ .sheet-ranged-only {
   display: block; }
 
-.sheet-slot-section-equipment [class*='sheet-only-'] {
-  display: none; }
+.sheet-card .sheet-card-weapon-fields .sheet-show-melee:checked ~ .sheet-card-uses .sheet-melee-only {
+  display: block; }
+
+.sheet-card .sheet-card-weapon-fields .sheet-show-melee:checked ~ .sheet-melee-only {
+  display: block; }
+
+.sheet-card .sheet-card-textarea {
+  width: 90%;
+  margin: auto;
+  margin-top: 2rem;
+  border: solid 2px #d3d3d3;
+  border-radius: 1rem;
+  padding: 1rem; }
+  .sheet-card .sheet-card-textarea textarea {
+    height: 4rem;
+    box-sizing: border-box; }
+  .sheet-card .sheet-card-textarea span {
+    font-style: italic;
+    font-size: 1.4rem; }
+
+.sheet-card .sheet-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem auto; }
+  .sheet-card .sheet-card-actions button {
+    display: inline-block;
+    flex-basis: 15%;
+    margin: 0 1rem 1rem 0; }
+    .sheet-card .sheet-card-actions button.sheet-delete {
+      background-color: red;
+      color: white; }
+
+.sheet-card .sheet-equipment-only {
+  display: none !important; }
+
+.sheet-card .sheet-toggle-equipment:checked ~ .sheet-card-actions .sheet-equipment-only {
+  display: block !important; }
+
+.sheet-card .sheet-weapon-only {
+  display: none !important; }
+
+.sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-actions .sheet-weapon-only {
+  display: block !important; }
+
+.sheet-card .sheet-consumable-only {
+  display: none !important; }
+
+.sheet-card .sheet-toggle-consumable:checked ~ .sheet-card-actions .sheet-consumable-only {
+  display: block !important; }
+
+.sheet-card .sheet-card-weapon-fields {
+  display: none !important; }
+
+.sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-weapon-fields {
+  display: block !important; }
+
+.sheet-slot-section-inventory .sheet-card-type {
+  display: block; }
 
 .sheet-inventory .sheet-wrap {
   flex-wrap: wrap; }

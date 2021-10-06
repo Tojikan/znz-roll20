@@ -20,12 +20,12 @@
         {
             "name": "builder",
             "label": "Builder",
-            "description": "Barricades you build have 2d6 bonus health."
+            "description": "Roll a D10 on barricade rolls. Add 1 additional bonus dice."
         },
         {
             "name": "doctor",
             "label": "Doctor",
-            "description": "Healthkits you use restore an additional 2d6 health"
+            "description": "Roll a D10 on first aid rolls. Add 1 additional bonus dice"
         },
         {
             "name": "gearhead",
@@ -35,7 +35,7 @@
         {
             "name": "martial",
             "label": "Martial Artist",
-            "description": " Start the game with 6 defense."
+            "description": " Start the game with bonus 3 defense."
         },
         {
             "name": "scavenger",
@@ -60,7 +60,7 @@
         {
             "name": "sturdy",
             "label": "sturdy",
-            "description": "Increase your starting health by 20."
+            "description": "Increase your starting health or your starting energy by 20."
         }
     ]
 }

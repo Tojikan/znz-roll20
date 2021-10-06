@@ -1,49 +1,79 @@
 {% macro card(num, prefix='item') %}
-    {%- for key, field in data.card -%}
-        {%- if 'input' in field -%}
-        <div class="sheet-card-line {% if field.only -%}
-                sheet-only-{{field.only}}
-            {%- endif %} {% if field.onselect -%}
-                sheet-select-{{field.onselect}}
-            {%- endif -%} sheet-type-{{field.input}}">
-            <div class="sheet-label">{{field.label}}</div>
-            <div class="sheet-field">
 
-            {% for type in data.card.type.options %}
-                <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{prefix}}_{{data.card.type.id}}_{{num}}" value="{{type}}" {{ "checked" if loop.first }}/>
-            {% endfor %}
-            {% for type in data.card.weapontype.options %}
-                <input type="checkbox" class="sheet-hidden sheet-show-{{type.id}}" name="attr_{{prefix}}_{{data.card.weapontype.id}}_{{num}}" value="{{type}}" {{"checked" if loop.first }}/>
-            {% endfor %}
+    <div class="sheet-card">
+        {# Checkboxes for show and hide #}
+        {% for type in data.card.type.options %}
+            <input type="checkbox" class="sheet-hidden sheet-toggle-{{type}}" name="attr_{{data.card.type.id | attach(prefix, num)}}" value="{{type}}" {{ "checked" if prefix == type }}/>
+        {% endfor %}
 
-
-            {% switch field.input %}
-                {% case "select" %}
-                    <select name="attr_{{prefix}}_{{field.id}}_{{num}}">
-                        {% for opt in field.options %}
-                            <option value="{{opt}}">{{opt | removeAmmo}}</option>
-                        {% endfor %}
-                    </select>
-                {% case "max" %}
-                    <div class="sheet-max">
-                        <div>
-                            <input type="text" class="sheet-number sheet-shy" name="attr_{{prefix}}_{{field | getAttr}}" value="0" step="1"/>
-                        </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="text" class="sheet-number sheet-shy" name="attr_{{prefix}}_{{field | getAttr}}_max" value="0" step="1"/>
-                        </div>
-                    </div>
-                {% case "textarea" %}
-                    <textarea name="attr_{{prefix}}_{{field | getAttr}}" ></textarea>
-
-                {% case "dice" %}
-                    <input type="text" class="sheet-number sheet-shy" name="attr_{{prefix}}_{{field | getAttr}}" value="0" step="1"/>
-                {% default %}
-                    <input type="text" name="attr_{{prefix}}_{{field.id}}_{{num}}">
-            {% endswitch %}
-            </div>
+        {# Type indicator #}
+        <div class="sheet-card-type">
+            <select class="sheet-shy" name="attr_{{data.card.type.id | attach(prefix, num)}}">
+                {% for type in data.card.type.options %}
+                    <option value="{{type}}">{{type | capitalize}}</option>
+                {% endfor %}
+            </select>
         </div>
-        {% endif %}
-    {% endfor %}
+
+        {# Name #}
+        <div class="sheet-card-name">
+            <input type="text" name="attr_{{data.card.name.id | attach(prefix, num)}}" placeholder="Item Name">
+        </div>
+
+        {# Weapon Only #}
+        <div class="sheet-card-weapon-fields">        
+            {# Checkboxes for show and hide #}
+            {% for type in data.card.weapontype.options %}
+                <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{data.card.weapontype.id | attach(prefix, num)}}" value="{{type}}" {{ "checked" if loop.first }}/>
+            {% endfor %}
+            
+            {# Damage #}
+            <div class="sheet-card-damage  sheet-card-line">
+                <div class="sheet-label">Damage:</div>
+                <input class="sheet-shy" type="text" name="attr_{{data.card.damage.id | attach(prefix, num)}}" />
+            </div>
+
+            {# Uses #}
+            <div class="sheet-card-uses sheet-card-line">
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
+                <div class="sheet-max">
+                    <div>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_{{data.card.uses.id | attach(prefix, num)}}" value="0"/>
+                    </div>
+                    <div class="sheet-divider">/</div>
+                    <div>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_{{data.card.uses.id | attach(prefix, num)}}_max" value="0"/>
+                    </div>
+                </div>
+            </div>
+
+            {# Ammo Type #}
+            <div class="sheet-card-ammo-type sheet-card-line">
+                <div class="sheet-label">
+                    Ammo:
+                </div>
+                <select class="sheet-shy" name="attr_{{data.card.ammotype.id | attach(prefix, num)}}">
+                {% for type in data.card.ammotype.options %}
+                    <option value="{{type}}">{{type | removeAmmo}}</option>
+                {% endfor %}
+            </select>
+            </div>
+
+        </div>
+
+        <div class="sheet-card-textarea">
+            <textarea class="sheet-shy" name="attr_{{data.card.description.id | attach(prefix, num)}}"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_{{data.card.effect.id | attach(prefix, num)}}"/>
+            <span readonly name="attr_{{data.card.effect.id | attach(prefix, num)}}"></span>
+        </div>
+        <div class="sheet-card-actions">
+            <button type="action" class="sheet-weapon-only" name="attr_{{data.card.action.attack | attach(prefix, num)}}">Attack</button>
+            <button type="action" class="sheet-weapon-only" name="attr_{{data.card.action.reload | attach(prefix, num)}}">Reload</button>
+            <button type="action" class="sheet-weapon-only sheet-equipment-only" name="attr_{{data.card.action.equip | attach(prefix, num)}}">Equip</button>
+            <button type="action" class="sheet-weapon-only sheet-equipment-only" name="attr_{{data.card.action.unequip | attach(prefix, num)}}">Unequip</button>
+            <button type="action" name="attr_{{data.card.action.drop | attach(prefix, num)}}">Drop</button>
+            <button type="action" class="sheet-delete" name="attr_{{data.card.action.delete | attach(prefix, num)}}">Delete</button>
+        </div>
+    </div>
 {% endmacro %}

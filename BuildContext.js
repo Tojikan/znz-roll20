@@ -1,3 +1,4 @@
+require("@babel/register");
 const fs = require('fs');
 const path = require('path');
 
@@ -48,6 +49,27 @@ class BuildContext{
 
         return data;
     }
+
+    /**
+     * Clear require cache contents of folder
+     */
+    clearDataCache(){
+        let dataFiles = fs.readdirSync(this.dataFolder);
+
+        dataFiles.forEach(file => {
+            if (path.extname(file) === '.json' || path.extname(file) === '.js'){
+                delete require.cache[require.resolve(this.dataFolder + file)];
+            }
+        });
+    }
+
+
+    getContext(){
+        this.clearDataCache();
+        return {
+            data: this.getFields()
+        };
+    }
 }
 
 // Nunjucks Filters
@@ -69,6 +91,20 @@ const filters = {
 
     removeAmmo: function(obj){
         return obj.replace('ammo_', "");
+    },
+
+    attach: function(obj, prefix, suffix){
+        let result = obj;
+
+        if (prefix){
+            result = `${prefix}_${result}`;
+        }
+
+        if (suffix){
+            result = `${result}_${suffix}`;
+        }
+
+        return result;
     }
 }
 

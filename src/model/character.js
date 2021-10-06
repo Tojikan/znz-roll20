@@ -1,10 +1,10 @@
 
-const Field = require("./_field");
-const FieldGroup = require("./_fieldGroup");
-const SheetObject = require("./_sheetObject");
-const abilities = require('./abilities.json');
+import Field from "./_field";
+import FieldGroup from "./_fieldGroup";
+import SheetObject from "./_sheetObject";
+import abilities from './abilities.json';
 
-class Character extends SheetObject{
+export class Character extends SheetObject{
 
     constructor(character){
         this.character;
@@ -19,6 +19,7 @@ class Character extends SheetObject{
                     "d8",
                     "d10",
                     "d12",
+                    "d20"
                 ]}),
             new FieldGroup('stats', [
                 new Field("health", {default: 30}),
@@ -34,7 +35,7 @@ class Character extends SheetObject{
             }),
             new FieldGroup('slots',[
                 new Field("weaponslots", {default: 1, max: 4, prefix:"weapon"}, 'Weapons'),
-                new Field("equipmentslots", {default: 2, max: 4, prefix:"equipment"}, 'Equipment'),
+                new Field("equipmentslots", {default: 2, max: 5, prefix:"equipment"}, 'Equipment'),
                 new Field("inventoryslots", {default: 5, max: 10, prefix:"inventory"}, 'Inventory')
             ])
         ]
@@ -42,8 +43,7 @@ class Character extends SheetObject{
 }
 
 
-module.exports = {
-    fields: Character.sheetObj.getFields(),
-    actor: Character
-}
+const flds = Character.sheetObj.getFields();
+
+export const fields = flds;
 

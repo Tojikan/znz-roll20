@@ -1,31 +1,150 @@
-
-
-.sheet-card-line {
-
-    display: flex;
-    justify-content: space-between;
-
-    .sheet-label{
-        font-weight: 700;
-        flex-basis: 30%;
-        font-size: $medium;
-    }
-
-    .sheet-field {
-        flex-basis: 50%;
-    }
-
-    // @include hideType('melee');
-    // @include hideType('ranged');
+// General Card
+.sheet-card {
     
+    select {
+        height: 2rem;
+        padding: 0;
+        margin: 0;
+        width: 50%;
+    }
+    // Individual flex row
+    .sheet-card-line {
+        display: flex;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+        margin-bottom: 1rem;
+        
+        .sheet-label {
+            flex-basis: 50%;
+            font-weight: 700;
+            font-size: $medium;
+        }
+    
+        select,
+        input {
+            font-size: $medium;
+            padding: 0;
+            text-align: center;
+        }
+    }
+    
+    //Name
+    .sheet-card-name {
+        margin-bottom: 1.5rem;
+        input[type=text]{
+            font-weight:700;
+            color: $black;
+    
+            &::placeholder {
+                color: $gray;
+                font-weight: 300;
+            }
+        }
+    }
+    
+    // Type Select
+    .sheet-card-type {
+        display: none; //Hide by default; only shows in inventory
+    
+        select {
+            font-size: $xSmall;
+        }    
+    }
+    
+    
+    // Weapon Fields
+    .sheet-card-weapon-fields {
+        .sheet-ranged-only,
+        .sheet-melee-only{
+            display: none;
+        }
+
+        // Show different label or field if melee/ranged
+        .sheet-show-ranged {
+            &:checked {
+                ~ .sheet-card-uses {
+                    .sheet-ranged-only {
+                        display: block;
+                    }
+                }
+        
+                ~ .sheet-ranged-only {
+                    display: block;
+                }
+            }
+        }
+        
+        .sheet-show-melee {
+            &:checked {
+                ~ .sheet-card-uses {
+                    .sheet-melee-only {
+                        display: block;
+                    }
+                }
+        
+                ~ .sheet-melee-only {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    
+    
+    //Textarea fields
+    .sheet-card-textarea{
+        width: 90%;
+        margin: auto;
+        margin-top: 2rem;
+        border: solid 2px $gray;
+        border-radius: 1rem;
+        padding: 1rem;
+        
+        textarea {
+            height: 4rem;
+            box-sizing: border-box;
+        }
+
+        span {
+            font-style: italic;
+            font-size: $medium;
+        }
+    }
+
+    //Actions
+    .sheet-card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 1rem auto;
+
+        button {
+            display: inline-block;
+            flex-basis: 15%;
+            margin: 0 1rem 1rem 0;
+
+            &.sheet-delete {
+                background-color: red;
+                color: $white;
+            }
+        }
+    }
+
+    @include checkboxToggleChild('sheet-equipment-only', 'sheet-toggle-equipment', 'sheet-card-actions');
+    @include checkboxToggleChild('sheet-weapon-only', 'sheet-toggle-weapon', 'sheet-card-actions');
+    @include checkboxToggleChild('sheet-consumable-only', 'sheet-toggle-consumable', 'sheet-card-actions');
+
+    @include checkboxToggle('sheet-card-weapon-fields', 'sheet-toggle-weapon');
 }
 
-.sheet-slot-section-equipment {
-    .sheet-only-weapon {
-        display: none;
+
+
+// Only show type dropdown in inventory
+.sheet-slot-section-inventory {
+    .sheet-card-type {
+        display: block;
     }
 }
 
 
-@include hideFieldForType('weapon');
-@include hideFieldForType('equipment');

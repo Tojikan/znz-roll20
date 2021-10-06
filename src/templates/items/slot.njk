@@ -24,7 +24,7 @@
                 
                 <div class="sheet-slot sheet-toggle sheet-slot-{{num}}">
                     {# If the equipment is equipped, then display it#}
-                    <input type="checkbox" class="sheet-active" name="attr_{{slotdata.item}}_{{num}}" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_{{slotdata.prefix | attach('', num)}}" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">{{emptytext}}</div>
                     <div class="sheet-content">
                         {{ card.card(num, slotdata.prefix)}}

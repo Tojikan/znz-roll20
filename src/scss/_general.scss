@@ -128,8 +128,20 @@ select {
     &:hover, &:focus {
         background-color: $lightblue;
     }
+
+    &.sheet-shy {
+        border: none;
+        appearance: none;
+    }
 }
 
 .sheet-subtext {
     font-size: $small;
+}
+
+textarea {
+    &.sheet-shy {
+        resize: none;
+        border: none;
+    }
 }

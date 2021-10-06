@@ -1,3 +1,5 @@
+require("@babel/register");
+
 
 const   gulp = require('gulp'),
         sass = require('gulp-sass'),
@@ -9,24 +11,26 @@ const   gulp = require('gulp'),
         cleancss = require('gulp-clean-css'),
         htmlmin = require('gulp-htmlmin'),
         {rollup} = require('gulp-rollup-2'),
-        // source = require('vinyl-source-stream'),
         commonjs = require('@rollup/plugin-commonjs'),
+        json = require('@rollup/plugin-json'),
+        babel = require('gulp-babel'),
         {BuildContext} = require('./BuildContext');
 
 
 
 
-const context = new BuildContext('./src/data')
+const buildContext = new BuildContext('./src/model')
 
 /** Build HTML Templates from NJKS **/
 function sheet(){
     return gulp.src('src/templates/*.njk')
+        .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, evalReplace))
         // Render our HTML from NJKS
         .pipe(nunjucksRender({     
             path:'src/templates',
             manageEnv: function(env){
                 //Adds our data to global variable so we can reference anywhere in njk templates
-                env.addGlobal('data', context.getFields());
+                env.addGlobal('data', buildContext.getFields());
                 
         
                 //Takes all functions in exported filters and adds them as filters to NJKS
@@ -38,41 +42,45 @@ function sheet(){
                 }
             }
         }))
-        // //Inject sheet workers into the script
-        // .pipe(inject((() => {      
-        //         // Use Rollup to bundle up our workers
-        //         return rollup({
-        //             input: './src/workers/main.js',
-        //             output: {
-        //                 file:'workers',
-        //                 format: 'iife'
-        //             }
-        //         })})()
-        //     ,{ 
-        //         // Inject your workers as a pure string between the appropriate tag pattern
-        //         starttag: '/** inject:workers **/',     
-        //         endtag: '/** endinject **/',
-        //         transform: function(filePath, file){
-        //             return file.contents.toString('utf-8')
-        //         }
-        //     }))                                   
-        // //Just in case you forget
-        // .pipe(replace('text/javascript', 'text/worker'))
-        //Pump it to Dist
+        //Inject sheet workers into the script
+        .pipe(inject((() => {      
+                // Use Rollup to bundle up our workers
+                return gulp.src('src/workers/main.js')
+                    .pipe(rollup({
+                        input: './src/workers/main.js',
+                        plugins:[commonjs(), json()],
+                        output: {
+                            file:'workers',
+                            format: 'iife'
+                        }
+                    }))
+                    .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, evalReplace))
+                })()
+            ,{ 
+                // Inject your workers as a pure string between the appropriate tag pattern
+                starttag: '/** inject:workers **/',     
+                endtag: '/** endinject **/',
+                transform: function(filePath, file){
+                    return file.contents.toString('utf-8')
+                }
+            }))                                   
+        //Just in case you forget
+        .pipe(replace('text/javascript', 'text/worker'))
         .pipe(gulp.dest('./dist'));
 }
 
 /** Compile Scripts with Rollup **/
 function scripts(){
-    return gulp.src('src/scripts/main.js')
+    return gulp.src('src/scripts/scripts.js')
         .pipe(rollup({
-            input:'src/scripts/main.js',
-            plugins:[commonjs()],
+            input:'src/scripts/scripts.js',
+            plugins:[commonjs(), json()],
             output: {
                 file: 'scripts.js',
                 format: 'iife'
             }
         }))
+        .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, evalReplace))
         .pipe(gulp.dest('./dist'));
     }
 
@@ -80,6 +88,7 @@ function scripts(){
 function styles(){
     return gulp.src('src/scss/style.scss')
     .pipe(sass().on('error',sass.logError))
+    .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, evalReplace))
     .pipe(gulp.dest('dist'));
 }
 
@@ -91,15 +100,45 @@ function watch(){
     gulp.watch('./src/workers/*/*.js' , gulp.series(['sheet']));
     gulp.watch('./src/templates/*.njk' , gulp.series(['sheet']));
     gulp.watch('./src/templates/**/*.njk' , gulp.series(['sheet']));
-    gulp.watch('./src/data/*.js' , gulp.series(['sheet','scripts']));
-    gulp.watch('./src/data/*.json' , gulp.series(['sheet','scripts']));
+    gulp.watch('./src/model/*.js' , gulp.series(['sheet','scripts']));
+    gulp.watch('./src/model/*.json' , gulp.series(['sheet','scripts']));
     gulp.watch('./src/scripts/*.js' , gulp.series(['scripts']));
     gulp.watch('./src/scripts/*/*.js' , gulp.series(['scripts']));
+}
+
+/**
+ * Takes a capture, evals it within a given context, and then returns what to replace the capture with.
+ * 
+ * @param {*} match - Not used but needed since gulp replace passes us this
+ * @param {*} capture - The capture
+ * @returns text to replace the capture with.
+ */
+function evalReplace(match, capture){
+    const context = buildContext.getContext();
+
+    if (capture.length){
+        try {
+            const result = eval('context.' + capture);
+
+            if (typeof result == 'object' || Array.isArray(result)){
+                return JSON.stringify(result);
+            } else if (typeof result == "string" || typeof result == "number" || typeof result == "boolean" ){
+                return result;
+            }
+
+            console.error('evalReplace - Could not evaluate a valid value! Replaced capture with empty string instead ');
+        } catch(e){
+            console.error(e)
+        }
+    }
+
+    return '';
+
 }
 
 
 exports.sheet = sheet;
 exports.scripts = scripts;
 exports.styles = styles;
-exports.build = gulp.series(sheet, styles, scripts);
+exports.build = (done) => { gulp.series([sheet, styles, scripts]); done();};
 exports.watch = watch;

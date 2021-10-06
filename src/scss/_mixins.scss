@@ -1,35 +1,33 @@
+/**
+    Hide/Display an element when a sibling checkbox is checked
 
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+@mixin checkboxToggle($elClass, $toggleClass){
 
-/*** For hiding fields based on type in item cards **/
-@mixin hideFieldForType($type){
-    .sheet-slot-section-#{$type}{
-
-        .sheet-only-#{$type}{
-            display: block;
-        }
-
-        [class*='sheet-only-']{
-            display: none;
-
-        }
+    .#{$elClass} {
+        display: none!important;
     }
 
-
+    .#{$toggleClass}:checked ~ .#{$elClass}{
+        display: block!important;
+    }
 }
 
-@mixin hideSubType($type, $subtype){
-    .sheet-hide-#{$type}{
-        &:checked {
-            ~ .sheet-hide-subtype-#{$subtype}{
-                .sheet-only-#{$type}.sheet-only-#{$subtype}{
-                    display: block;
-                }
-            }
-        }
+/**
+    Hide/Display an element within a parent element when a sibling checkbox of parent is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+@mixin checkboxToggleChild($elClass, $toggleClass, $parent){
+
+    .#{$elClass} {
+        display: none!important;
     }
 
-
-    .sheet-only-#{$type}.sheet-only-#{$subtype}{
-        display: none;
+    .#{$toggleClass}:checked ~ .#{$parent} .#{$elClass}{
+        display: block!important;
     }
 }

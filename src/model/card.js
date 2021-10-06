@@ -6,8 +6,6 @@ const char = require('./character');
 const ammotypes = char.fields.ammo.types.map(x=> char.fields.ammo.id + '_' + x);
 
 class Card extends SheetObject{
-    static itemPrefix = 'item';
-    
     static sheetObj = new SheetObject(
         [
             new Field(`name`, {input: 'text'}, 'Name'),
@@ -28,12 +26,13 @@ class Card extends SheetObject{
             new Field(`uses`, {
                 only:'weapon',
                 input: 'max',
+                max: 'uses_max',
                 text: {
                     melee: 'Durability',
                     ranged: 'Ammo'
                 }
             }, 'Uses'),
-            new Field(`ammo_type`, {
+            new Field(`ammotype`, {
                 only:'weapon',
                 onselect: 'ranged',
                 input: 'select',
@@ -49,12 +48,15 @@ class Card extends SheetObject{
                 }
             },
             new Field('actions', {
-                all: ['drop', 'delete'],
-                weapon: ['attack', 'reload', 'equip', 'unequip'],
-                equip: ['equip', 'unequip'],
-                ranged: ['reload']
+                drop:'dropItem', 
+                delete:'deleteItem',
+                attack:'attackWeapon',
+                reload: 'reloadWeapon',
+                equip: 'equipItem',
+                consume: 'consumeItem',
+                unequip: 'unequipItem'
             }),
-            {prefix: this.itemPrefix}
+            {prefix: 'item'}
         ]
     )
 }
