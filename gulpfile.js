@@ -31,7 +31,8 @@ function sheet(){
             path:'src/templates',
             manageEnv: function(env){
                 //Adds our data to global variable so we can reference anywhere in njk templates
-                env.addGlobal('data', buildContext.getFields());
+                env.addGlobal('fields', buildContext.getFields().fields);
+                env.addGlobal('options', buildContext.getFields().options);
                 
         
                 //Takes all functions in exported filters and adds them as filters to NJKS

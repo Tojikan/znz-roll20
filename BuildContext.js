@@ -2,11 +2,8 @@ require("@babel/register");
 const fs = require('fs');
 const path = require('path');
 
-import {fields as char} from './src/model/character';
-
-
 class BuildContext{
-    constructor(dataFolder, fieldsKey = 'fields'){
+    constructor(dataFolder){
         //make sure data folder ends with backslash
         var lastChar = dataFolder.substr(-1);
         if (lastChar !== '/'){
@@ -14,7 +11,6 @@ class BuildContext{
         }
 
         this.dataFolder = dataFolder;
-        this.fieldsKey = fieldsKey;
     }
 
     /**
@@ -24,7 +20,10 @@ class BuildContext{
      * @returns Object where each key is the filename and the value is the JSON or JS Export.
      */
     getFields(){
-        let data = {};
+        let data = {
+            fields: {},
+            options: {}
+        };
         let files = fs.readdirSync(this.dataFolder);
 
         files.forEach(file => {
@@ -43,8 +42,12 @@ class BuildContext{
                 let filename = path.basename(file, '.js');
                 let exported = require(this.dataFolder + file);
 
-                if (this.fieldsKey in exported){
-                    data[filename] = exported[this.fieldsKey];
+                if ('fields' in exported){
+                    data.fields[filename] = exported['fields'];
+                }
+
+                if ('options' in exported){
+                    data.options[filename] = exported['options']
                 }
             }
         });

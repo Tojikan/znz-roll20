@@ -1,6 +1,5 @@
 import * as abilities from './abilities.json';
 
-
 export const fields = {
     notes: {
         id: "notes",

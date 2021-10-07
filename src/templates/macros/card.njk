@@ -2,19 +2,19 @@
 
     <div class="sheet-card">
         {# Checkboxes for show and hide #}
-        {% for type in data.card.type.options %}
-            <input type="checkbox" class="sheet-hidden sheet-toggle-{{type}}" name="attr_{{data.card.type | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if prefix == type }}/>
+        {% for type in fields.card.type.options %}
+            <input type="checkbox" class="sheet-hidden sheet-toggle-{{type}}" name="attr_{{fields.card.type | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if prefix == type }}/>
         {% endfor %}
 
         {# Type indicator #}
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_{{data.card.type | getAttr | attach(prefix, num)}}">
-                {% for type in data.card.type.options %}
+            <select class="sheet-shy" name="attr_{{fields.card.type | getAttr | attach(prefix, num)}}">
+                {% for type in fields.card.type.options %}
                     <option value="{{type}}" {% if prefix == type%} selected="selected" {%endif%}>{% if type == 'inventory' %}Consumable {% else %}{{type | capitalize}}{% endif %}</option>
                 {% endfor %}
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_{{data.card.weapontype | getAttr | attach(prefix, num)}}">
-                {% for type in data.card.weapontype.options %}
+            <select class="sheet-shy sheet-weapon-only" name="attr_{{fields.card.weapontype | getAttr | attach(prefix, num)}}">
+                {% for type in fields.card.weapontype.options %}
                     <option value="{{type}}" {% if loop.first%} selected="selected" {%endif%}>{{type | capitalize}}</option>
                 {% endfor %}
             </select>
@@ -22,20 +22,20 @@
 
         {# Name #}
         <div class="sheet-card-name">
-            <input type="text" name="attr_{{data.card.name | getAttr | attach(prefix, num)}}" placeholder="Item Name">
+            <input type="text" name="attr_{{fields.card.name | getAttr | attach(prefix, num)}}" placeholder="Item Name">
         </div>
 
         {# Weapon Only #}
         <div class="sheet-card-weapon-fields">        
             {# Checkboxes for show and hide #}
-            {% for type in data.card.weapontype.options %}
-                <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{data.card.weapontype | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if loop.first }}/>
+            {% for type in fields.card.weapontype.options %}
+                <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{fields.card.weapontype | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if loop.first }}/>
             {% endfor %}
             
             {# Damage #}
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_{{data.card.damage | getAttr | attach(prefix, num)}}" value="0" />
+                <input class="sheet-shy" type="text" name="attr_{{fields.card.damage | getAttr | attach(prefix, num)}}" value="0" />
             </div>
 
             {# Uses #}
@@ -44,11 +44,11 @@
                 <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_{{data.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_{{fields.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_{{data.card.uses | getAttr | attach(prefix, num)}}_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_{{fields.card.uses | getAttr | attach(prefix, num)}}_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -58,8 +58,8 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_{{data.card.ammotype | getAttr | attach(prefix, num)}}">
-                {% for key, type in data.character.ammo.options %}
+                <select class="sheet-shy" name="attr_{{fields.card.ammotype | getAttr | attach(prefix, num)}}">
+                {% for key, type in fields.character.ammo.options %}
                     <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
                 {% endfor %}
             </select>
@@ -68,17 +68,17 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_{{data.card.description | getAttr | attach(prefix, num)}}"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_{{data.card.flavor | getAttr | attach(prefix, num)}}"/>
-            <span readonly name="attr_{{data.card.flavor | getAttr | attach(prefix, num)}}"></span>
+            <textarea class="sheet-shy" name="attr_{{fields.card.description | getAttr | attach(prefix, num)}}"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_{{fields.card.flavor | getAttr | attach(prefix, num)}}"/>
+            <span readonly name="attr_{{fields.card.flavor | getAttr | attach(prefix, num)}}"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='{{'@{'}}{{data.card.damage.id | attach(prefix, num)}}{{'}'}}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_{{data.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_{{data.card.actions.equip | attach(prefix, num)}}">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_{{data.card.actions.unequip | attach(prefix, num)}}">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_{{data.card.actions.export}}" value="{{exportButton(type=type) | trim}}" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_{{data.card.actions.delete | attach(prefix, num)}}">Delete</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_{{options.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_{{options.card.actions.equip | attach(prefix, num)}}">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_{{options.card.actions.unequip | attach(prefix, num)}}">Unequip</button>
+            <button type="roll" class="sheet-export-button" name="act_{{options.card.actions.export}}" value="{{exportButton(type=type) | trim}}" >Export</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_{{options.card.actions.delete | attach(prefix, num)}}">Delete</button>
         </div>
     </div>
 {% endmacro %}

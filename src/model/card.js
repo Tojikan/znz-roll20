@@ -1,4 +1,4 @@
-export var fields = {
+export const fields = {
     name: {
         id: 'itemname'
     },
@@ -41,12 +41,14 @@ export var fields = {
     flavor: {
         id: 'flavor'
     },
-    actions: {
-        export:'exportitem', 
-        delete:'deleteitem',
-        attack:'attackweapon',
-        reload: 'reloadweapon',
-        equip: 'equipitem',
-        unequip: 'unequipitem',
-    }
+}
+
+
+export const actions = {
+    export:'exportitem', 
+    delete:'deleteitem',
+    attack:'attackweapon',
+    reload: 'reloadweapon',
+    equip: 'equipitem',
+    unequip: 'unequipitem'
 }
