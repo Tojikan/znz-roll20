@@ -1,0 +1,10 @@
+
+{% import '../macros/slot.njk' as slot %}
+
+<div class="sheet-weapon-slots">
+    {{ slot.create(data.character.weaponslots.label, 'Unused Slot', data.character.weaponslots) }}
+</div>
+
+<div class="sheet-equipment-slots">
+    {{ slot.create(data.character.equipmentslots.label, 'Unused Slot', data.character.equipmentslots) }}
+</div>

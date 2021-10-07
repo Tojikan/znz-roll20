@@ -2,7 +2,7 @@
 
 {% macro create(label, emptytext, slotdata) %}
 
-    <div class="sheet-slot-section sheet-slot-section-{{slotdata.prefix}}">
+    <div class="sheet-slot-section sheet-slot-section-{{slotdata.type}}">
         <div class="sheet-row-flex sheet-label-row">
             <label>{{label}}</label>
             <div class="sheet-subtext">
@@ -15,27 +15,23 @@
         
         <div class="sheet-wrap sheet-slot-toggle">
             {# Checkbox for determining current number of slots #}
-            {% for num in range(1, slotdata.max + 1)%} {# 1 index since player editable #}
+            {% for num in range(1, slotdata.max + 1)%} {# 1 index since player can edit slots #}
                 <input type="checkbox" class="sheet-hidden sheet-slot-toggle-{{num}}" name="attr_{{slotdata | getAttr}}" value="{{num}}" {{"checked" if num <= slotdata.default}}/>
             {% endfor %}
 
-            {# Slots. CSS to show/hide based on slot number#}
+            {# Slots. CSS shows/hides based on slot number #}
             {% for num in range(1, slotdata.max + 1) %} 
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-{{num}}">
-                    {# If the equipment is equipped, then display it#}
-                    <input type="checkbox" class="sheet-active" name="attr_{{slotdata.prefix | attach('', num)}}" class="sheet-hidden sheet-toggle sheet-control" />
+                    {# Checkbox to determine if we show the empty text or the content #}
+                    <input type="checkbox" class="sheet-active" name="attr_{{slotdata.type | attach('', num)}}" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">{{emptytext}}</div>
                     <div class="sheet-content">
-                        {{ card.create(num, slotdata.prefix)}}
+                        {{ card.create(num, slotdata.type)}}
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
-
-
-
 
 {% endmacro %}
 

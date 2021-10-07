@@ -3,14 +3,14 @@
 @import "mixins";
 @import "layout";
 @import "general";
+@import "input";
 
 @import "elements/toggle";
 @import "elements/slots";
+@import "elements/card";
 
 @import "sections/header";
-@import "sections/card";
-@import "sections/equipped";
-@import "sections/inventory";
+@import "sections/items";
 
 // sets 1rem = 10px
 .sheet-character {

@@ -1,66 +1,57 @@
-{
-    "id": "ability",
-    "list": [
-        {
-            "name": "",
-            "label": "",
-            "description": "",
-            "default": true
-        },
-        {
-            "name": "cheerleader",
-            "label": "Cheerleader",
-            "description": "<strong>Action:</strong> Give all players within 5 spaces 1 bonus roll this turn."
-        },
-        {
-            "name": "brawler",
-            "label": "Brawler",
-            "description": "Add two free bonus dice to any melee attack."
-        },
-        {
-            "name": "builder",
-            "label": "Builder",
-            "description": "Use a D10 on rolls when building barricades. Add 1 additional bonus dice."
-        },
-        {
-            "name": "doctor",
-            "label": "Doctor",
-            "description": "Use a D10 on rolls when restoring health.. Add 1 additional bonus dice"
-        },
-        {
-            "name": "gearhead",
-            "label": "Gearhead",
-            "description": "Start the game with 1 additional weapon, equipment, and inventory slot."
-        },
-        {
-            "name": "martial",
-            "label": "Martial Artist",
-            "description": "Use a D10 on dodge rolls. Start the game with 2 additional dodge."
-        },
-        {
-            "name": "scavenger",
-            "label": "Scavenger",
-            "description": "Draw 2 cards instead when you scavenge."
-        },
-        {
-            "name": "scout",
-            "label": "Scout",
-            "description": "<strong>Action</strong> Determine amount of enemies on other side of door."
-        },
-        {
-            "name": "sniper",
-            "label": "Sniper",
-            "description": "Add two free bonus dice to any ranged attacks."
-        },
-        {
-            "name": "speedy",
-            "label": "speedy",
-            "description": "Move additional 2 spaces during a move action."
-        },
-        {
-            "name": "sturdy",
-            "label": "sturdy",
-            "description": "Increase your starting health or your starting energy by 20."
-        }
-    ]
-}
+[
+    {
+        "id": "",
+        "label": "",
+        "description": ""
+    },
+    {
+        "id": "actionstar",
+        "label": "Action Star",
+        "description": "Increase your max action points by 2"
+    },
+    {
+        "id": "cheerleader",
+        "label": "Cheerleader",
+        "description": "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
+    },
+    {
+        "id": "brawler",
+        "label": "Brawler",
+        "description": "Adds 2 bonus rolls to any melee attack."
+    },
+    {
+        "id": "builder",
+        "label": "Builder",
+        "description": "Use a D10 when building barricades and add 1 bonus dice roll."
+    },
+    {
+        "id": "doctor",
+        "label": "Doctor",
+        "description": "Use a D10 when restoring health and add 1 bonus dice roll."
+    },
+    {
+        "id": "Reflexes",
+        "label": "Reflexes",
+        "description": "Use a D10 when doing defense rolls."
+    },
+    {
+        "id": "scavenger",
+        "label": "Scavenger",
+        "description": "Whenever you scavenge, scavenge 1 additional item."
+    },
+    {
+        "id": "scout",
+        "label": "Scout",
+        "description": "Gain better vision in the dark. Sense approaching enemies."
+    },
+    {
+        "id": "sniper",
+        "label": "Sniper",
+        "description": "Add +2 on every attack roll you make."
+    },
+    {
+        "id": "tanky",
+        "label": "Tanky",
+        "description": "Increase your starting health by 20."
+    }
+]

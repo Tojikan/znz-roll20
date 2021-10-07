@@ -3,13 +3,13 @@
 
     function attrAlert(obj, prev){
         const watchedAttr = [
-            "health",
-            "energy",
-            "weaponslots",
-            "equipmentslots"
+            "",
+            "",
+            "",
+            ""
         ];
         const ammoId = "ammo";
-        const ammoTypes = ["d4","d6","d8","d10","d12","d20","Bolt","Arrow"];
+        const ammoTypes = ;
         let attr = '';
 
         for (let ammo of ammoTypes){
@@ -238,72 +238,7 @@
         })();
     };
 
-    const fields$1 = {
-        notes: {
-            id: "notes"
-        },
-        ammo: {
-            id: "ammo",
-            types: [
-                "d4",
-                "d6",
-                "d8",
-                "d10",
-                "d12",
-                "d20",
-                "Bolt",
-                "Arrow"
-            ]
-        },
-        stats: {
-            health: {
-                id: "health",
-                default: 30,
-            },
-            energy: {
-                id: "energy",
-                default: 40,
-            },
-        },
-        dodge: {
-            id: "dodge",
-            default: 2,
-        },
-        armor: {
-            id: "armor",
-            default: 0
-        },
-        ability: {
-            id: "ability"
-        },
-        slots: {
-            weaponslots: {
-                id: "weaponslots",
-                default: 1,
-                max: 4,
-                prefix: "weapon",
-                label: "Weapons"
-            },
-            equipmentslots: {
-                id: "equipmentslots",
-                default: 2,
-                max: 5,
-                prefix: "equipment",
-                label: "Equipment"
-            }
-        },
-        inventory: {
-            id: "inventoryslots",
-            default: 5,
-            max: 9,
-            prefix: "inventory",
-            label: "Inventory"
-        }
-    };
-
-    const ammotypes = fields$1.ammo.types.map(x=> fields$1.ammo.id + '_' + x);
-
-    var fields = {
+    var fields$1 = {
         name: {
             id: 'itemname'
         },
@@ -338,9 +273,7 @@
         },
         ammotype: {
             id: 'ammotype',
-            options: ammotypes,
-            label: 'Ammo Type',
-            default: ammotypes[0]
+            label: 'Ammo Type'
         },
         description: {
             id: 'description'
@@ -358,16 +291,182 @@
         }
     };
 
+    var abilities = [
+    	{
+    		id: "",
+    		label: "",
+    		description: ""
+    	},
+    	{
+    		id: "actionstar",
+    		label: "Action Star",
+    		description: "Increase your max action points by 2"
+    	},
+    	{
+    		id: "cheerleader",
+    		label: "Cheerleader",
+    		description: "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
+    	},
+    	{
+    		id: "brawler",
+    		label: "Brawler",
+    		description: "Adds 2 bonus rolls to any melee attack."
+    	},
+    	{
+    		id: "builder",
+    		label: "Builder",
+    		description: "Use a D10 when building barricades and add 1 bonus dice roll."
+    	},
+    	{
+    		id: "doctor",
+    		label: "Doctor",
+    		description: "Use a D10 when restoring health and add 1 bonus dice roll."
+    	},
+    	{
+    		id: "Reflexes",
+    		label: "Reflexes",
+    		description: "Use a D10 when doing defense rolls."
+    	},
+    	{
+    		id: "scavenger",
+    		label: "Scavenger",
+    		description: "Whenever you scavenge, scavenge 1 additional item."
+    	},
+    	{
+    		id: "scout",
+    		label: "Scout",
+    		description: "Gain better vision in the dark. Sense approaching enemies."
+    	},
+    	{
+    		id: "sniper",
+    		label: "Sniper",
+    		description: "Add +2 on every attack roll you make."
+    	},
+    	{
+    		id: "tanky",
+    		label: "Tanky",
+    		description: "Increase your starting health by 20."
+    	}
+    ];
+
+    var abilities$1 = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        'default': abilities
+    });
+
+    const fields = {
+        notes: {
+            id: "notes",
+            type: "textarea"
+        },
+        ammo: {
+            id: "ammo",
+            type: "list",
+            options: {
+                d4: {
+                    id: "ammo_d4",
+                    default: 0,
+                    label: "d4"
+                },
+                d6: {
+                    id: "ammo_d6",
+                    default: 0,
+                    label: "d6"
+                },
+                d8: {
+                    id: "ammo_d8",
+                    default: 0,
+                    label: "d8"
+                },
+                d10: {
+                    id: "ammo_d10",
+                    default: 0,
+                    label: "d10"
+                },
+                d12: {
+                    id: "ammo_d12",
+                    default: 0,
+                    label: "d12"
+                },
+                d20: {
+                    id: "ammo_d20",
+                    default: 0,
+                    label: "d20"
+                },
+                bolt: {
+                    id: "ammo_bolt",
+                    default: 0,
+                    label: "Bolts"
+                },
+                arrow: {
+                    id: "ammo_arrow",
+                    default: 0,
+                    label: "Arrows"
+                }
+            }
+        },
+        stats: {
+            hp: {
+                id: "hp",
+                default: 30,
+                type: "max",
+                label: "HP"
+            },
+            ap: {
+                id: "ap",
+                default: 5,
+                type: "max",
+                label: "AP"
+            },
+        },
+        defense: {
+            id: "defense",
+            default: 4,
+            type: "dice",
+            bonus: {
+                id: 'defense_bonus',
+                default: 0
+            }
+        },
+        ability: {
+            id: "ability",
+            type: "toggleselect",
+            options: abilities$1
+        },
+        weaponslots: {
+            id: "weaponslots",
+            label: "Weapons",
+            default: 1,
+            max: 3,
+            type: "weapon",
+            type: "variableslots"
+        },
+        equipmentslots: {
+            id: "equipmentslots",
+            default: 3,
+            max: 5,
+            type: "equipment",
+            label: "Equipment",
+            type: "slots"
+        },
+        inventory: {
+            id: "inventory",
+            default: 5,
+            max: 9,
+            label: "Inventory"
+        }
+    };
+
     function handleReload(character, weaponId){
         const getAttrName = function(id, num){
-            return `${fields$1.slots.weaponslots.prefix}_${id}_${num}`;
+            return `${fields.slots.weaponslots.prefix}_${id}_${num}`;
         };    
 
-        const itemType = getAttr(character, getAttrName(fields.type.id, weaponId)),
-            weaponType = getAttr(character, getAttrName(fields.weapontype.id, weaponId)),
-            ammoType = getAttr(character, getAttrName(fields.ammotype.id, weaponId)),
-            ammo = getAttr(character, getAttrName(fields.uses.id, weaponId)),
-            active = getAttr(character, fields$1.slots.weaponslots.prefix + '_' + weaponId);
+        const itemType = getAttr(character, getAttrName(fields$1.type.id, weaponId)),
+            weaponType = getAttr(character, getAttrName(fields$1.weapontype.id, weaponId)),
+            ammoType = getAttr(character, getAttrName(fields$1.ammotype.id, weaponId)),
+            ammo = getAttr(character, getAttrName(fields$1.uses.id, weaponId)),
+            active = getAttr(character, fields.slots.weaponslots.prefix + '_' + weaponId);
 
             log(active);
             
@@ -824,12 +923,12 @@
     const templates = itemtemplates;
     const acceptedFields = (()=>{ //get acceptable params - the key of the field in card. Note we use the field key NOT the field ID!
         let result = [];
-        for (let key in fields){
+        for (let key in fields$1){
             if (key == 'actions') continue; //ignore actions
 
             result.push(key);
 
-            if ('max' in fields[key] && fields[key].max == true) result.push(key + '_max'); //add max fields 
+            if ('max' in fields$1[key] && fields$1[key].max == true) result.push(key + '_max'); //add max fields 
         }
         return result;
     })();
@@ -856,7 +955,7 @@
 
         if (Object.keys(item).length){
 
-            let inventorySlots = getAttrVal(character, fields$1.inventory.id);
+            let inventorySlots = getAttrVal(character, fields.inventory.id);
             let inventoryIds = getRepeaterIds('inventory', character.id);
 
             if (inventoryIds.length >= inventorySlots){
@@ -881,7 +980,7 @@
                 continue;
             }
 
-            let fld = fields[key]; //get original field
+            let fld = fields$1[key]; //get original field
             let attr = {};
 
             attr.name = `repeating_inventory_${rowId}_${fld.id}`;

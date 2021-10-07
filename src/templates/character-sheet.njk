@@ -1,33 +1,15 @@
+
+{% import 'macros/card.njk' as card %}
+
+
 <div class="sheet-character">
-    {% include "./header/header.njk" %} 
-
-    {% import 'items/slot.njk' as slot %}
-    {% import 'items/card.njk' as card %}
+    {% include "./sections/header.njk" %} 
 
 
-    {% for key, item in data.character.slots %}
-    <div class="sheet-{{key}}">
-        {{ slot.create(item.label, 'Unused Slot', item) }}
-    </div>
-    {% endfor %}
+    {% include "./sections/slots.njk" %}
+    
 
-    {# Inventory #}
-    <div class="sheet-inventory">
-        <div class="sheet-slot-section">
-            <div class="sheet-row-flex sheet-label-row">
-                <label>{{data.character.inventory | getLabel}}</label>
-                <div class="sheet-subtext">
-                    Slots:
-                    <input type="text" class="sheet-number sheet-shy" name="attr_{{data.character.inventory | getAttr}}" value="{{data.character.inventory.default}}"/>
-                </div>
-            </div>
-            <fieldset class="repeating_inventory">
-                <div class="sheet-slot">
-                    {{ card.create("", "")}}
-                </div>
-            </fieldset>
-        </div>
-    </div>
+    {% include "./sections/inventory.njk" %}
 
 
 </div>

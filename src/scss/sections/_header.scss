@@ -1,81 +1,40 @@
-
-// Layout
 .sheet-character {
     .sheet-header {
         display: flex;
         
-        .sheet-ammo-counter {
-            flex-basis: 15%;
-        }
-        
-        .sheet-area {
-            flex-basis: 85%;
-            
-            .sheet-name {
-                flex-basis: 55%;
-            }
-
-            .sheet-stat-blocks{
-                flex-basis: 45%;
-            }
-
-            .sheet-row-flex {
-                &:first-child{
-                    margin-bottom: $gap;
-                }
-            }
-
-            .sheet-ability {
-                flex-basis: 65%;
-            }
+        .sheet-main {
+            flex-basis: 80%;
         }
 
-        .sheet-name,
-        .sheet-area,
-        .sheet-dodge,
-        .sheet-armor {
-            margin-right: $gap;
+        .sheet-sidebar {
+            flex-basis: 20%
+        }
+
+        .sheet-top-1 {
+            flex-basis: 40%;
+        }
+
+        .sheet-top-2 {
+            flex-basis: 60%;
+        }
+
+        .sheet-bottom-1 {
+            flex-basis: 30%;
+        }
+
+        .sheet-bottom-2 {
+            flex-basis: 70%;
         }
     }
 }
 
-// Stat Block
-.sheet-stat-blocks {
-    display: flex;
-    justify-content: space-around;
+.sheet-toggle-select {
+    .sheet-toggler {
+        margin-right: 2rem;
+        flex-basis: 35%;
+    }
 
-
-    .sheet-stat {
-        width: 12rem;
-        border-radius: 2rem;
-
-        label {
-            text-align: center;
-        }
-
-        .sheet-stage {
-            padding: 1.5rem 1rem 0 1rem;
-            padding-top: 1.5rem;
-        }
-        
-        .sheet-fields {
-            padding: 1rem;
-
-        }
+    .sheet-text {
+        flex-basis:65%;
     }
 }
-
-// Slots
-
-.sheet-ability {
-
-    .sheet-ability-select {
-        width: 40%;
-        margin-right: 1rem;
-    }
-
-    .sheet-ability-text {
-        width: 55%;
-    }
-}
-

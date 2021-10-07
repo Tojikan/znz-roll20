@@ -4,70 +4,6 @@
     }   
 }
 
-input, textarea {
-    width: 100%;
-}
-
-input {
-    transition: 0.3s;
-    font-size: 1.6rem;
-
-    &.sheet-number {
-        width: 4rem;
-        text-align: center;
-    }
-
-    
-    &.sheet-shy {
-        border: none;
-    }
-
-    &:hover {
-        background-color: $lightblue;
-    }
-
-    
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button{
-        -webkit-appearance: none; /* Chrome */
-        margin: 0; /* Apparently some margin are still there even though it's hidden */
-    }
-    &[type=number]{
-        -moz-appearance:textfield; /* Firefox */
-    }
-}
-
-.sheet-line {
-    display: flex;
-    justify-content: space-around;
-
-    .sheet-label {
-        font-size: $medium;
-        text-align: right;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-        font-weight: 500;
-    }
-
-    input {
-        border: none;
-        border-bottom: solid 1px $darkgray;
-        border-radius: 0;
-    }
-}
-
-
-.sheet-bubble {
-    padding: 2rem;
-    border: solid 3px $black;
-    border-radius: 2rem;
-    font-size: $medium;
-
-    label {
-        text-align: center;
-    }
-}
 
 .sheet-row-flex {
     display: flex;
@@ -77,11 +13,6 @@ input {
     }
 }
 
-.sheet-max {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .sheet-divider {
     margin: 0 0.5rem;
@@ -89,28 +20,6 @@ input {
     font-weight: 900;
 }
 
-.sheet-dice-input {
-    font-size: $large;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    span {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    input {
-        font-size: $large;
-        width: 3.5rem;
-        text-align: left;
-
-        &.sheet-amount {
-            text-align: right;
-        }
-    }
-}
 
 .sheet-input {
     text-align: center;
@@ -120,38 +29,26 @@ input {
     display: none;
 }
 
-select {
-    width: 100%;
-    border: none;
-    transition: 0.3s;
-    border-bottom: solid 1px $gray;
-    border-radius: none;
-
-    &:hover, &:focus {
-        background-color: $lightblue;
-    }
-
-    &.sheet-shy {
-        border: none;
-        appearance: none;
-    }
-}
-
 .sheet-subtext {
     font-size: $small;
 }
 
-textarea {
-    &.sheet-shy {
-        resize: none;
-        border: none;
+.sheet-bubble {
+    padding: 2rem;
+    border: solid 3px $black;
+    border-radius: 2rem;
+    font-size: $medium;
+    margin-right: $gap;
+    margin-bottom: $gap;
+
+    display: flex;
+    align-items: center;
+
+    label {
+        text-align: center;
     }
 
-    &.sheet-small {
-        height: 3rem;
-    }
-
-    &.sheet-vertical {
-        resize: vertical;
+    .sheet-content {
+        width: 100%;
     }
 }

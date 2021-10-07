@@ -1,8 +1,3 @@
-import { fields as char} from "./character";
-
-
-const ammotypes = char.ammo.types.map(x=> char.ammo.id + '_' + x);
-
 export var fields = {
     name: {
         id: 'itemname'
@@ -38,9 +33,7 @@ export var fields = {
     },
     ammotype: {
         id: 'ammotype',
-        options: ammotypes,
-        label: 'Ammo Type',
-        default: ammotypes[0]
+        label: 'Ammo Type'
     },
     description: {
         id: 'description'

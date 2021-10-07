@@ -1,0 +1,102 @@
+{% macro create(field, class='') %}
+
+    <div class="sheet-bubble {{class}}">
+        <div class="sheet-content">
+            <label>{{ field | getLabel }}</label>
+
+            {% switch field.type %}
+                {% case "list" %}
+                    {{ createList(field=field) }}
+                {% case "dice" %}
+                    {{ createDice(field=field) }}
+                {% case "toggleselect" %}
+                    {{ createToggleSelect(field=field) }}
+                {% case "textarea" %}
+                    {{ createTextarea(field=field) }}
+
+                {% default %}
+                    <p> ERROR! UNHANDLED FIELD TYPE! </p>
+            {% endswitch %}
+        </div>
+    </div>
+{% endmacro %}
+
+
+
+{% macro createStats(field, class='') %}
+    <div class="sheet-bubble  {{class}}">
+        <div class="sheet-content">
+            <div class="sheet-row-flex sheet-space-around">
+                {% for key, item in field %}
+                    <div class="sheet-stat">
+                        <label>{{item | getLabel}} </label>
+                        <div class="sheet-max">
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_{{item | getAttr}}" value="{{item.default}}"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_{{item| getAttr}}_max" value="{{item.default}}"/>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro createTextarea(field) %}
+    <textarea class="sheet-small sheet-vertical" name="attr_{{field | getAttr}}"></textarea>
+{% endmacro %}
+
+
+
+{% macro createList(field) %}
+    <div class="sheet-list">
+        {% for key, item in field.options%}
+            <div class="sheet-line">
+                <div class="sheet-label">{{item | getLabel}}</div>
+                <input type="text" class="sheet-number" name="attr_{{item | getAttr}}" value="{{item.default}}"/>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+
+{% macro createDice(field) %}
+    <div class="sheet-dice-input">
+        <div class="sheet-input">
+            <span>d</span><input type="text" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
+        </div>
+        <div class="sheet-divider">
+            +
+        </div>
+        <div class="sheet-input">
+            <input type="text" class="sheet-number sheet-shy" name="attr_{{field.bonus | getAttr}}" value="{{field.bonus.default}}"/>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro createToggleSelect(field) %}
+    <div class="sheet-row-flex sheet-toggle-select">
+        <div class="sheet-toggler">
+            <select name="attr_{{field | getAttr}}">
+                {% for num, item in field.options %}
+                    <option value="{{item | getAttr}}" {{"selected" if loop.first}}>{{item | getLabel}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="sheet-text sheet-toggle-adj">
+            {% for opt, item in field.options %}
+                <input type="checkbox" class="sheet-control" name="attr_{{field | getAttr}}" value="{{item | getAttr}}" {{"checked" if loop.first}} />
+                <div class="sheet-description-text sheet-content">
+                    {{item.description | safe}}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

@@ -1,217 +1,273 @@
-<div class="sheet-character">
-    <div class="sheet-header">
-    <div class="sheet-area">
-        
-        <div class="sheet-row-flex">
-            <div class="sheet-name sheet-bubble">    <label>Notes</label>
-    <textarea class="sheet-small sheet-vertical" name="attr_notes"></textarea></div>
-            <div class="sheet-stat-blocks sheet-bubble"><div class="sheet-stat-blocks">
-    
-        <div class="sheet-stat">
-            <div class="sheet-stage">
-                <label>Health</label>
-                <div class="sheet-fields sheet-max">
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_health" value="30" step="1"/>
-                    </div>
-                    <div class="sheet-divider">/</div>
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_health_max" value="30" step="1"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <div class="sheet-stat">
-            <div class="sheet-stage">
-                <label>Energy</label>
-                <div class="sheet-fields sheet-max">
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_energy" value="40" step="1"/>
-                    </div>
-                    <div class="sheet-divider">/</div>
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_energy_max" value="40" step="1"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-</div></div>
-        </div>
 
+
+
+
+<div class="sheet-character">
+    
+
+
+<div class="sheet-header">
+    <div class="sheet-main">
         
         <div class="sheet-row-flex">
-            <div class="sheet-dodge sheet-bubble">    <label>Dodge</label>
-    <div class="sheet-dice-input">
-        <div>
-            <input type="text" class="sheet-number sheet-shy sheet-amount" name="attr_dodge" value="2"/><span>d6</span>
-            <div class="sheet-subtext">
-                (roll costs 1 energy)
+            
+    <div class="sheet-bubble  sheet-top-1">
+        <div class="sheet-content">
+            <div class="sheet-row-flex sheet-space-around">
+                
+                    <div class="sheet-stat">
+                        <label>HP </label>
+                        <div class="sheet-max">
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_hp" value="30"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_hp_max" value="30"/>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="sheet-stat">
+                        <label>AP </label>
+                        <div class="sheet-max">
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_ap" value="5"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="text" class="sheet-number sheet-shy" name="attr_ap_max" value="5"/>
+                            </div>
+                        </div>
+                    </div>
+                
             </div>
         </div>
-    </div></div>
-            <div class="sheet-armor sheet-bubble">    <label>Armor</label>
-    <div class="sheet-input">
-        <input type="text" class="sheet-number sheet-shy sheet-amount" name="attr_armor" value="0"/>
-    </div></div>
-            <div class="sheet-ability sheet-bubble">    <label>Ability</label>
-    <div class="sheet-row-flex">
-        <div class="sheet-ability-select">
+    </div>
+
+            
+
+    <div class="sheet-bubble sheet-top-2">
+        <div class="sheet-content">
+            <label>Ability</label>
+
+            
+                    
+    <div class="sheet-row-flex sheet-toggle-select">
+        <div class="sheet-toggler">
             <select name="attr_ability">
                 
-                    <option value=""></option>
+                    <option value="" selected></option>
                 
-                    <option value="cheerleader">Cheerleader</option>
+                    <option value="actionstar" >Action Star</option>
                 
-                    <option value="brawler">Brawler</option>
+                    <option value="cheerleader" >Cheerleader</option>
                 
-                    <option value="builder">Builder</option>
+                    <option value="brawler" >Brawler</option>
                 
-                    <option value="doctor">Doctor</option>
+                    <option value="builder" >Builder</option>
                 
-                    <option value="gearhead">Gearhead</option>
+                    <option value="doctor" >Doctor</option>
                 
-                    <option value="martial">Martial Artist</option>
+                    <option value="Reflexes" >Reflexes</option>
                 
-                    <option value="scavenger">Scavenger</option>
+                    <option value="scavenger" >Scavenger</option>
                 
-                    <option value="scout">Scout</option>
+                    <option value="scout" >Scout</option>
                 
-                    <option value="sniper">Sniper</option>
+                    <option value="sniper" >Sniper</option>
                 
-                    <option value="speedy">speedy</option>
+                    <option value="tanky" >Tanky</option>
                 
-                    <option value="sturdy">sturdy</option>
+                    <option value="" ></option>
                 
             </select>
         </div>
 
-        <div class="sheet-ability-text sheet-toggle-adj">
+        <div class="sheet-text sheet-toggle-adj">
             
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="" checked />
                 <div class="sheet-description-text sheet-content">
                     
                 </div>
             
+                <input type="checkbox" class="sheet-control" name="attr_ability" value="actionstar"  />
+                <div class="sheet-description-text sheet-content">
+                    Increase your max action points by 2
+                </div>
+            
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="cheerleader"  />
                 <div class="sheet-description-text sheet-content">
-                    <strong>Action:</strong> Give all players within 5 spaces 1 bonus roll this turn.
+                    <strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn.
                 </div>
             
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="brawler"  />
                 <div class="sheet-description-text sheet-content">
-                    Add two free bonus dice to any melee attack.
+                    Adds 2 bonus rolls to any melee attack.
                 </div>
             
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="builder"  />
                 <div class="sheet-description-text sheet-content">
-                    Use a D10 on rolls when building barricades. Add 1 additional bonus dice.
+                    Use a D10 when building barricades and add 1 bonus dice roll.
                 </div>
             
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="doctor"  />
                 <div class="sheet-description-text sheet-content">
-                    Use a D10 on rolls when restoring health.. Add 1 additional bonus dice
+                    Use a D10 when restoring health and add 1 bonus dice roll.
                 </div>
             
-                <input type="checkbox" class="sheet-control" name="attr_ability" value="gearhead"  />
+                <input type="checkbox" class="sheet-control" name="attr_ability" value="Reflexes"  />
                 <div class="sheet-description-text sheet-content">
-                    Start the game with 1 additional weapon, equipment, and inventory slot.
-                </div>
-            
-                <input type="checkbox" class="sheet-control" name="attr_ability" value="martial"  />
-                <div class="sheet-description-text sheet-content">
-                    Use a D10 on dodge rolls. Start the game with 2 additional dodge.
+                    Use a D10 when doing defense rolls.
                 </div>
             
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="scavenger"  />
                 <div class="sheet-description-text sheet-content">
-                    Draw 2 cards instead when you scavenge.
+                    Whenever you scavenge, scavenge 1 additional item.
                 </div>
             
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="scout"  />
                 <div class="sheet-description-text sheet-content">
-                    <strong>Action</strong> Determine amount of enemies on other side of door.
+                    Gain better vision in the dark. Sense approaching enemies.
                 </div>
             
                 <input type="checkbox" class="sheet-control" name="attr_ability" value="sniper"  />
                 <div class="sheet-description-text sheet-content">
-                    Add two free bonus dice to any ranged attacks.
+                    Add +2 on every attack roll you make.
                 </div>
             
-                <input type="checkbox" class="sheet-control" name="attr_ability" value="speedy"  />
+                <input type="checkbox" class="sheet-control" name="attr_ability" value="tanky"  />
                 <div class="sheet-description-text sheet-content">
-                    Move additional 2 spaces during a move action.
+                    Increase your starting health by 20.
                 </div>
             
-                <input type="checkbox" class="sheet-control" name="attr_ability" value="sturdy"  />
+                <input type="checkbox" class="sheet-control" name="attr_ability" value=""  />
                 <div class="sheet-description-text sheet-content">
-                    Increase your starting health or your starting energy by 20.
+                    
                 </div>
             
         </div>
-    </div></div>
+    </div>
+
+                
+        </div>
+    </div>
+
+        </div>
+
+        
+        <div class="sheet-row-flex">
+            
+
+    <div class="sheet-bubble sheet-bottom-1">
+        <div class="sheet-content">
+            <label>Defense</label>
+
+            
+                    
+    <div class="sheet-dice-input">
+        <div class="sheet-input">
+            <span>d</span><input type="text" class="sheet-number sheet-shy" name="attr_defense" value="4"/>
+        </div>
+        <div class="sheet-divider">
+            +
+        </div>
+        <div class="sheet-input">
+            <input type="text" class="sheet-number sheet-shy" name="attr_defense_bonus" value="0"/>
+        </div>
+    </div>
+
+                
+        </div>
+    </div>
+
+            
+
+    <div class="sheet-bubble sheet-bottom-2">
+        <div class="sheet-content">
+            <label>Notes</label>
+
+            
+                    
+    <textarea class="sheet-small sheet-vertical" name="attr_notes"></textarea>
+
+
+                
+        </div>
+    </div>
+
         </div>
     </div>
 
     
-    <div class="sheet-bubble sheet-ammo-counter">    <div class="sheet-stage">
-        <label>Ammo</label>
-        <div class="sheet-ammos">
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">d4</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_d4" value="0"/>
-                </div>
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">d6</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_d6" value="0"/>
-                </div>
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">d8</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_d8" value="0"/>
-                </div>
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">d10</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_d10" value="0"/>
-                </div>
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">d12</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_d12" value="0"/>
-                </div>
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">d20</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_d20" value="0"/>
-                </div>
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">Bolt</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_Bolt" value="0"/>
-                </div>
-            
-                <div class="sheet-line">
-                    <div class="sheet-label">Arrow</div>
-                    <input type="text" class="sheet-number" name="attr_ammo_Arrow" value="0"/>
-                </div>
-            
-        </div>
-    </div></div>
-</div> 
-
-    
-    
-
-
-    
-    <div class="sheet-weaponslots">
+    <div class="sheet-sidebar">
         
 
-    <div class="sheet-slot-section sheet-slot-section-weapon">
+    <div class="sheet-bubble ">
+        <div class="sheet-content">
+            <label>Ammo</label>
+
+            
+                    
+    <div class="sheet-list">
+        
+            <div class="sheet-line">
+                <div class="sheet-label">d4</div>
+                <input type="text" class="sheet-number" name="attr_ammo_d4" value="0"/>
+            </div>
+        
+            <div class="sheet-line">
+                <div class="sheet-label">d6</div>
+                <input type="text" class="sheet-number" name="attr_ammo_d6" value="0"/>
+            </div>
+        
+            <div class="sheet-line">
+                <div class="sheet-label">d8</div>
+                <input type="text" class="sheet-number" name="attr_ammo_d8" value="0"/>
+            </div>
+        
+            <div class="sheet-line">
+                <div class="sheet-label">d10</div>
+                <input type="text" class="sheet-number" name="attr_ammo_d10" value="0"/>
+            </div>
+        
+            <div class="sheet-line">
+                <div class="sheet-label">d12</div>
+                <input type="text" class="sheet-number" name="attr_ammo_d12" value="0"/>
+            </div>
+        
+            <div class="sheet-line">
+                <div class="sheet-label">d20</div>
+                <input type="text" class="sheet-number" name="attr_ammo_d20" value="0"/>
+            </div>
+        
+            <div class="sheet-line">
+                <div class="sheet-label">Bolts</div>
+                <input type="text" class="sheet-number" name="attr_ammo_bolt" value="0"/>
+            </div>
+        
+            <div class="sheet-line">
+                <div class="sheet-label">Arrows</div>
+                <input type="text" class="sheet-number" name="attr_ammo_arrow" value="0"/>
+            </div>
+        
+    </div>
+
+                
+        </div>
+    </div>
+
+    </div>
+</div> 
+
+
+    
+
+
+<div class="sheet-weapon-slots">
+    
+
+    <div class="sheet-slot-section sheet-slot-section-variableslots">
         <div class="sheet-row-flex sheet-label-row">
             <label>Weapons</label>
             <div class="sheet-subtext">
@@ -230,16 +286,13 @@
                 <input type="checkbox" class="sheet-hidden sheet-slot-toggle-2" name="attr_weaponslots" value="2" />
              
                 <input type="checkbox" class="sheet-hidden sheet-slot-toggle-3" name="attr_weaponslots" value="3" />
-             
-                <input type="checkbox" class="sheet-hidden sheet-slot-toggle-4" name="attr_weaponslots" value="4" />
             
 
             
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-1">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_weapon_1" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_variableslots_1" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -247,25 +300,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_itemtype_1" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_variableslots_itemtype_1" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_itemtype_1" value="weapon" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_variableslots_itemtype_1" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_itemtype_1" value="equipment" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_variableslots_itemtype_1" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_weapon_itemtype_1">
+            <select class="sheet-shy" name="attr_variableslots_itemtype_1">
                 
                     <option value="inventory" >Consumable </option>
                 
-                    <option value="weapon"  selected="selected" >Weapon</option>
+                    <option value="weapon" >Weapon</option>
                 
                     <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_weapon_weapontype_1">
+            <select class="sheet-shy sheet-weapon-only" name="attr_variableslots_weapontype_1">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -276,35 +329,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_weapon_itemname_1" placeholder="Item Name">
+            <input type="text" name="attr_variableslots_itemname_1" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_weapon_weapontype_1" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_variableslots_weapontype_1" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_weapon_weapontype_1" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_variableslots_weapontype_1" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_weapon_itemdamage_1" value="0" />
+                <input class="sheet-shy" type="text" name="attr_variableslots_itemdamage_1" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_1" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_variableslots_uses_1" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_1_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_variableslots_uses_1_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -314,7 +367,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_weapon_ammotype_1">
+                <select class="sheet-shy" name="attr_variableslots_ammotype_1">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -328,9 +381,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -338,27 +391,26 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_weapon_description_1"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_weapon_flavor_1"/>
-            <span readonly name="attr_weapon_flavor_1"></span>
+            <textarea class="sheet-shy" name="attr_variableslots_description_1"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_variableslots_flavor_1"/>
+            <span readonly name="attr_variableslots_flavor_1"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{weapon_itemdamage_1}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_weapon_reloadweapon_1" value="!!reload weapon=1">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_1">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_1">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{variableslots_itemdamage_1}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_variableslots_reloadweapon_1" value="!!reload weapon=1">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_variableslots_equipitem_1">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_variableslots_unequipitem_1">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_weapon_deleteitem_1">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_variableslots_deleteitem_1">Delete</button>
         </div>
     </div>
 
                     </div>
                 </div>
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-2">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_weapon_2" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_variableslots_2" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -366,25 +418,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_itemtype_2" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_variableslots_itemtype_2" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_itemtype_2" value="weapon" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_variableslots_itemtype_2" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_itemtype_2" value="equipment" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_variableslots_itemtype_2" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_weapon_itemtype_2">
+            <select class="sheet-shy" name="attr_variableslots_itemtype_2">
                 
                     <option value="inventory" >Consumable </option>
                 
-                    <option value="weapon"  selected="selected" >Weapon</option>
+                    <option value="weapon" >Weapon</option>
                 
                     <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_weapon_weapontype_2">
+            <select class="sheet-shy sheet-weapon-only" name="attr_variableslots_weapontype_2">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -395,35 +447,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_weapon_itemname_2" placeholder="Item Name">
+            <input type="text" name="attr_variableslots_itemname_2" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_weapon_weapontype_2" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_variableslots_weapontype_2" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_weapon_weapontype_2" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_variableslots_weapontype_2" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_weapon_itemdamage_2" value="0" />
+                <input class="sheet-shy" type="text" name="attr_variableslots_itemdamage_2" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_2" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_variableslots_uses_2" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_2_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_variableslots_uses_2_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -433,7 +485,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_weapon_ammotype_2">
+                <select class="sheet-shy" name="attr_variableslots_ammotype_2">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -447,9 +499,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -457,27 +509,26 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_weapon_description_2"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_weapon_flavor_2"/>
-            <span readonly name="attr_weapon_flavor_2"></span>
+            <textarea class="sheet-shy" name="attr_variableslots_description_2"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_variableslots_flavor_2"/>
+            <span readonly name="attr_variableslots_flavor_2"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{weapon_itemdamage_2}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_weapon_reloadweapon_2" value="!!reload weapon=2">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_2">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_2">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{variableslots_itemdamage_2}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_variableslots_reloadweapon_2" value="!!reload weapon=2">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_variableslots_equipitem_2">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_variableslots_unequipitem_2">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_weapon_deleteitem_2">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_variableslots_deleteitem_2">Delete</button>
         </div>
     </div>
 
                     </div>
                 </div>
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-3">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_weapon_3" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_variableslots_3" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -485,25 +536,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_itemtype_3" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_variableslots_itemtype_3" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_itemtype_3" value="weapon" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_variableslots_itemtype_3" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_itemtype_3" value="equipment" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_variableslots_itemtype_3" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_weapon_itemtype_3">
+            <select class="sheet-shy" name="attr_variableslots_itemtype_3">
                 
                     <option value="inventory" >Consumable </option>
                 
-                    <option value="weapon"  selected="selected" >Weapon</option>
+                    <option value="weapon" >Weapon</option>
                 
                     <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_weapon_weapontype_3">
+            <select class="sheet-shy sheet-weapon-only" name="attr_variableslots_weapontype_3">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -514,35 +565,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_weapon_itemname_3" placeholder="Item Name">
+            <input type="text" name="attr_variableslots_itemname_3" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_weapon_weapontype_3" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_variableslots_weapontype_3" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_weapon_weapontype_3" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_variableslots_weapontype_3" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_weapon_itemdamage_3" value="0" />
+                <input class="sheet-shy" type="text" name="attr_variableslots_itemdamage_3" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_3" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_variableslots_uses_3" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_3_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_variableslots_uses_3_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -552,7 +603,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_weapon_ammotype_3">
+                <select class="sheet-shy" name="attr_variableslots_ammotype_3">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -566,128 +617,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
-                
-            </select>
-            </div>
-
-        </div>
-
-        <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_weapon_description_3"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_weapon_flavor_3"/>
-            <span readonly name="attr_weapon_flavor_3"></span>
-        </div>
-        <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{weapon_itemdamage_3}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_weapon_reloadweapon_3" value="!!reload weapon=3">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_3">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_3">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_weapon_deleteitem_3">Delete</button>
-        </div>
-    </div>
-
-                    </div>
-                </div>
-             
-                
-                <div class="sheet-slot sheet-toggle sheet-slot-4">
-                    
-                    <input type="checkbox" class="sheet-active" name="attr_weapon_4" class="sheet-hidden sheet-toggle sheet-control" />
-                    <div class="sheet-empty-text">Unused Slot</div>
-                    <div class="sheet-content">
-                        
-
-    <div class="sheet-card">
-        
-        
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_itemtype_4" value="inventory" />
-        
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_itemtype_4" value="weapon" checked/>
-        
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_itemtype_4" value="equipment" />
-        
-
-        
-        <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_weapon_itemtype_4">
-                
-                    <option value="inventory" >Consumable </option>
-                
-                    <option value="weapon"  selected="selected" >Weapon</option>
-                
-                    <option value="equipment" >Equipment</option>
-                
-            </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_weapon_weapontype_4">
-                
-                    <option value="melee"  selected="selected" >Melee</option>
-                
-                    <option value="ranged" >Ranged</option>
-                
-            </select>
-        </div>
-
-        
-        <div class="sheet-card-name">
-            <input type="text" name="attr_weapon_itemname_4" placeholder="Item Name">
-        </div>
-
-        
-        <div class="sheet-card-weapon-fields">        
-            
-            
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_weapon_weapontype_4" value="melee" checked/>
-            
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_weapon_weapontype_4" value="ranged" />
-            
-            
-            
-            <div class="sheet-card-damage  sheet-card-line">
-                <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_weapon_itemdamage_4" value="0" />
-            </div>
-
-            
-            <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
-                <div class="sheet-max">
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_4" value="0"/>
-                    </div>
-                    <div class="sheet-divider">/</div>
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_weapon_uses_4_max" value="0"/>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_weapon_ammotype_4">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_Bolt" >Bolt</option>
-                
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -695,17 +627,17 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_weapon_description_4"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_weapon_flavor_4"/>
-            <span readonly name="attr_weapon_flavor_4"></span>
+            <textarea class="sheet-shy" name="attr_variableslots_description_3"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_variableslots_flavor_3"/>
+            <span readonly name="attr_variableslots_flavor_3"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{weapon_itemdamage_4}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_weapon_reloadweapon_4" value="!!reload weapon=4">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_4">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_4">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{variableslots_itemdamage_3}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_variableslots_reloadweapon_3" value="!!reload weapon=3">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_variableslots_equipitem_3">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_variableslots_unequipitem_3">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_weapon_deleteitem_4">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_variableslots_deleteitem_3">Delete</button>
         </div>
     </div>
 
@@ -716,20 +648,17 @@
     </div>
 
 
+</div>
 
-
-
-    </div>
+<div class="sheet-equipment-slots">
     
-    <div class="sheet-equipmentslots">
-        
 
-    <div class="sheet-slot-section sheet-slot-section-equipment">
+    <div class="sheet-slot-section sheet-slot-section-slots">
         <div class="sheet-row-flex sheet-label-row">
             <label>Equipment</label>
             <div class="sheet-subtext">
                 Slots:
-                <input type="text" class="sheet-number sheet-shy" name="attr_equipmentslots" value="2"/>
+                <input type="text" class="sheet-number sheet-shy" name="attr_equipmentslots" value="3"/>
             </div>
         
         </div>
@@ -742,7 +671,7 @@
              
                 <input type="checkbox" class="sheet-hidden sheet-slot-toggle-2" name="attr_equipmentslots" value="2" checked/>
              
-                <input type="checkbox" class="sheet-hidden sheet-slot-toggle-3" name="attr_equipmentslots" value="3" />
+                <input type="checkbox" class="sheet-hidden sheet-slot-toggle-3" name="attr_equipmentslots" value="3" checked/>
              
                 <input type="checkbox" class="sheet-hidden sheet-slot-toggle-4" name="attr_equipmentslots" value="4" />
              
@@ -751,10 +680,9 @@
 
             
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-1">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_equipment_1" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_slots_1" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -762,25 +690,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_1" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_slots_itemtype_1" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_1" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_slots_itemtype_1" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_1" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_slots_itemtype_1" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_1">
+            <select class="sheet-shy" name="attr_slots_itemtype_1">
                 
                     <option value="inventory" >Consumable </option>
                 
                     <option value="weapon" >Weapon</option>
                 
-                    <option value="equipment"  selected="selected" >Equipment</option>
+                    <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_equipment_weapontype_1">
+            <select class="sheet-shy sheet-weapon-only" name="attr_slots_weapontype_1">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -791,35 +719,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_1" placeholder="Item Name">
+            <input type="text" name="attr_slots_itemname_1" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_equipment_weapontype_1" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_slots_weapontype_1" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_equipment_weapontype_1" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_slots_weapontype_1" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_1" value="0" />
+                <input class="sheet-shy" type="text" name="attr_slots_itemdamage_1" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_1" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_1" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_1_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_1_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -829,7 +757,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_1">
+                <select class="sheet-shy" name="attr_slots_ammotype_1">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -843,9 +771,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -853,27 +781,26 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_equipment_description_1"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_equipment_flavor_1"/>
-            <span readonly name="attr_equipment_flavor_1"></span>
+            <textarea class="sheet-shy" name="attr_slots_description_1"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_slots_flavor_1"/>
+            <span readonly name="attr_slots_flavor_1"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_1}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_1" value="!!reload weapon=1">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_1">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_1">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{slots_itemdamage_1}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_slots_reloadweapon_1" value="!!reload weapon=1">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_slots_equipitem_1">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_slots_unequipitem_1">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_1">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_slots_deleteitem_1">Delete</button>
         </div>
     </div>
 
                     </div>
                 </div>
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-2">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_equipment_2" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_slots_2" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -881,25 +808,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_2" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_slots_itemtype_2" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_2" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_slots_itemtype_2" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_2" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_slots_itemtype_2" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_2">
+            <select class="sheet-shy" name="attr_slots_itemtype_2">
                 
                     <option value="inventory" >Consumable </option>
                 
                     <option value="weapon" >Weapon</option>
                 
-                    <option value="equipment"  selected="selected" >Equipment</option>
+                    <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_equipment_weapontype_2">
+            <select class="sheet-shy sheet-weapon-only" name="attr_slots_weapontype_2">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -910,35 +837,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_2" placeholder="Item Name">
+            <input type="text" name="attr_slots_itemname_2" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_equipment_weapontype_2" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_slots_weapontype_2" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_equipment_weapontype_2" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_slots_weapontype_2" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_2" value="0" />
+                <input class="sheet-shy" type="text" name="attr_slots_itemdamage_2" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_2" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_2" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_2_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_2_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -948,7 +875,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_2">
+                <select class="sheet-shy" name="attr_slots_ammotype_2">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -962,9 +889,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -972,27 +899,26 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_equipment_description_2"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_equipment_flavor_2"/>
-            <span readonly name="attr_equipment_flavor_2"></span>
+            <textarea class="sheet-shy" name="attr_slots_description_2"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_slots_flavor_2"/>
+            <span readonly name="attr_slots_flavor_2"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_2}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_2" value="!!reload weapon=2">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_2">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_2">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{slots_itemdamage_2}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_slots_reloadweapon_2" value="!!reload weapon=2">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_slots_equipitem_2">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_slots_unequipitem_2">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_2">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_slots_deleteitem_2">Delete</button>
         </div>
     </div>
 
                     </div>
                 </div>
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-3">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_equipment_3" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_slots_3" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -1000,25 +926,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_3" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_slots_itemtype_3" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_3" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_slots_itemtype_3" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_3" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_slots_itemtype_3" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_3">
+            <select class="sheet-shy" name="attr_slots_itemtype_3">
                 
                     <option value="inventory" >Consumable </option>
                 
                     <option value="weapon" >Weapon</option>
                 
-                    <option value="equipment"  selected="selected" >Equipment</option>
+                    <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_equipment_weapontype_3">
+            <select class="sheet-shy sheet-weapon-only" name="attr_slots_weapontype_3">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -1029,35 +955,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_3" placeholder="Item Name">
+            <input type="text" name="attr_slots_itemname_3" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_equipment_weapontype_3" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_slots_weapontype_3" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_equipment_weapontype_3" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_slots_weapontype_3" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_3" value="0" />
+                <input class="sheet-shy" type="text" name="attr_slots_itemdamage_3" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_3" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_3" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_3_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_3_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -1067,7 +993,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_3">
+                <select class="sheet-shy" name="attr_slots_ammotype_3">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -1081,9 +1007,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -1091,27 +1017,26 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_equipment_description_3"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_equipment_flavor_3"/>
-            <span readonly name="attr_equipment_flavor_3"></span>
+            <textarea class="sheet-shy" name="attr_slots_description_3"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_slots_flavor_3"/>
+            <span readonly name="attr_slots_flavor_3"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_3}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_3" value="!!reload weapon=3">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_3">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_3">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{slots_itemdamage_3}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_slots_reloadweapon_3" value="!!reload weapon=3">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_slots_equipitem_3">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_slots_unequipitem_3">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_3">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_slots_deleteitem_3">Delete</button>
         </div>
     </div>
 
                     </div>
                 </div>
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-4">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_equipment_4" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_slots_4" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -1119,25 +1044,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_4" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_slots_itemtype_4" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_4" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_slots_itemtype_4" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_4" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_slots_itemtype_4" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_4">
+            <select class="sheet-shy" name="attr_slots_itemtype_4">
                 
                     <option value="inventory" >Consumable </option>
                 
                     <option value="weapon" >Weapon</option>
                 
-                    <option value="equipment"  selected="selected" >Equipment</option>
+                    <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_equipment_weapontype_4">
+            <select class="sheet-shy sheet-weapon-only" name="attr_slots_weapontype_4">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -1148,35 +1073,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_4" placeholder="Item Name">
+            <input type="text" name="attr_slots_itemname_4" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_equipment_weapontype_4" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_slots_weapontype_4" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_equipment_weapontype_4" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_slots_weapontype_4" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_4" value="0" />
+                <input class="sheet-shy" type="text" name="attr_slots_itemdamage_4" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_4" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_4" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_4_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_4_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -1186,7 +1111,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_4">
+                <select class="sheet-shy" name="attr_slots_ammotype_4">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -1200,9 +1125,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -1210,27 +1135,26 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_equipment_description_4"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_equipment_flavor_4"/>
-            <span readonly name="attr_equipment_flavor_4"></span>
+            <textarea class="sheet-shy" name="attr_slots_description_4"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_slots_flavor_4"/>
+            <span readonly name="attr_slots_flavor_4"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_4}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_4" value="!!reload weapon=4">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_4">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_4">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{slots_itemdamage_4}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_slots_reloadweapon_4" value="!!reload weapon=4">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_slots_equipitem_4">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_slots_unequipitem_4">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_4">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_slots_deleteitem_4">Delete</button>
         </div>
     </div>
 
                     </div>
                 </div>
              
-                
                 <div class="sheet-slot sheet-toggle sheet-slot-5">
                     
-                    <input type="checkbox" class="sheet-active" name="attr_equipment_5" class="sheet-hidden sheet-toggle sheet-control" />
+                    <input type="checkbox" class="sheet-active" name="attr_slots_5" class="sheet-hidden sheet-toggle sheet-control" />
                     <div class="sheet-empty-text">Unused Slot</div>
                     <div class="sheet-content">
                         
@@ -1238,25 +1162,25 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_5" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_slots_itemtype_5" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_5" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_slots_itemtype_5" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_5" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_slots_itemtype_5" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_5">
+            <select class="sheet-shy" name="attr_slots_itemtype_5">
                 
                     <option value="inventory" >Consumable </option>
                 
                     <option value="weapon" >Weapon</option>
                 
-                    <option value="equipment"  selected="selected" >Equipment</option>
+                    <option value="equipment" >Equipment</option>
                 
             </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_equipment_weapontype_5">
+            <select class="sheet-shy sheet-weapon-only" name="attr_slots_weapontype_5">
                 
                     <option value="melee"  selected="selected" >Melee</option>
                 
@@ -1267,35 +1191,35 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_5" placeholder="Item Name">
+            <input type="text" name="attr_slots_itemname_5" placeholder="Item Name">
         </div>
 
         
         <div class="sheet-card-weapon-fields">        
             
             
-                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_equipment_weapontype_5" value="melee" checked/>
+                <input type="checkbox" class="sheet-hidden sheet-show-melee" name="attr_slots_weapontype_5" value="melee" checked/>
             
-                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_equipment_weapontype_5" value="ranged" />
+                <input type="checkbox" class="sheet-hidden sheet-show-ranged" name="attr_slots_weapontype_5" value="ranged" />
             
             
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_5" value="0" />
+                <input class="sheet-shy" type="text" name="attr_slots_itemdamage_5" value="0" />
             </div>
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_5" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_5" value="0"/>
                     </div>
                     <div class="sheet-divider">/</div>
                     <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_equipment_uses_5_max" value="0"/>
+                        <input type="text" class="sheet-number sheet-shy" name="attr_slots_uses_5_max" value="0"/>
                     </div>
                 </div>
             </div>
@@ -1305,7 +1229,7 @@
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_5">
+                <select class="sheet-shy" name="attr_slots_ammotype_5">
                 
                     <option value="ammo_d4"  selected="selected" >d4</option>
                 
@@ -1319,9 +1243,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -1329,17 +1253,17 @@
         </div>
 
         <div class="sheet-card-textarea">
-            <textarea class="sheet-shy" name="attr_equipment_description_5"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_equipment_flavor_5"/>
-            <span readonly name="attr_equipment_flavor_5"></span>
+            <textarea class="sheet-shy" name="attr_slots_description_5"></textarea>
+            <input type="text" class="sheet-hidden" name="attr_slots_flavor_5"/>
+            <span readonly name="attr_slots_flavor_5"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_5}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_5" value="!!reload weapon=5">Reload</button>
-            <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_5">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_5">Unequip</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{slots_itemdamage_5}'">Attack</button>
+            <button type="roll" class="sheet-reload-button btn" name="act_slots_reloadweapon_5" value="!!reload weapon=5">Reload</button>
+            <button type="action" class="sheet-equip-button btn" name="act_slots_equipitem_5">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_slots_unequipitem_5">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_5">Delete</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_slots_deleteitem_5">Delete</button>
         </div>
     </div>
 
@@ -1350,20 +1274,16 @@
     </div>
 
 
-
-
-
-    </div>
+</div>
     
 
-    
-    <div class="sheet-inventory">
+        <div class="sheet-inventory">
         <div class="sheet-slot-section">
             <div class="sheet-row-flex sheet-label-row">
                 <label>Inventory</label>
                 <div class="sheet-subtext">
                     Slots:
-                    <input type="text" class="sheet-number sheet-shy" name="attr_inventoryslots" value="5"/>
+                    <input type="text" class="sheet-number sheet-shy" name="attr_inventory" value="5"/>
                 </div>
             </div>
             <fieldset class="repeating_inventory">
@@ -1422,8 +1342,8 @@
 
             
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
                         <input type="text" class="sheet-number sheet-shy" name="attr_uses" value="0"/>
@@ -1454,9 +1374,9 @@
                 
                     <option value="ammo_d20" >d20</option>
                 
-                    <option value="ammo_Bolt" >Bolt</option>
+                    <option value="ammo_bolt" >Bolts</option>
                 
-                    <option value="ammo_Arrow" >Arrow</option>
+                    <option value="ammo_arrow" >Arrows</option>
                 
             </select>
             </div>
@@ -1481,7 +1401,7 @@
                 </div>
             </fieldset>
         </div>
-    </div>
+    </div> 
 
 
 </div>
@@ -1489,341 +1409,5 @@
 
 <script type="text/worker">
     /** inject:workers **/
-    (function () {
-    'use strict';
-
-    const fields$1 = {
-        notes: {
-            id: "notes"
-        },
-        ammo: {
-            id: "ammo",
-            types: [
-                "d4",
-                "d6",
-                "d8",
-                "d10",
-                "d12",
-                "d20",
-                "Bolt",
-                "Arrow"
-            ]
-        },
-        stats: {
-            health: {
-                id: "health",
-                default: 30,
-            },
-            energy: {
-                id: "energy",
-                default: 40,
-            },
-        },
-        dodge: {
-            id: "dodge",
-            default: 2,
-        },
-        armor: {
-            id: "armor",
-            default: 0
-        },
-        ability: {
-            id: "ability"
-        },
-        slots: {
-            weaponslots: {
-                id: "weaponslots",
-                default: 1,
-                max: 4,
-                prefix: "weapon",
-                label: "Weapons"
-            },
-            equipmentslots: {
-                id: "equipmentslots",
-                default: 2,
-                max: 5,
-                prefix: "equipment",
-                label: "Equipment"
-            }
-        },
-        inventory: {
-            id: "inventoryslots",
-            default: 5,
-            max: 9,
-            prefix: "inventory",
-            label: "Inventory"
-        }
-    };
-
-    const ammotypes = fields$1.ammo.types.map(x=> fields$1.ammo.id + '_' + x);
-
-    var fields = {
-        name: {
-            id: 'itemname'
-        },
-        type: {
-            id: 'itemtype',
-            label: "Item Type",
-            options: [
-                'inventory',
-                'weapon',
-                'equipment'
-            ]
-        },
-        damage: {
-            id: 'itemdamage'
-        },
-        weapontype: {
-            id: 'weapontype',
-            options: [
-                'melee',
-                'ranged'
-            ],
-            label: 'Weapon Type',
-            default: 'melee'
-        },
-        uses: {
-            id: 'uses',
-            max: true,
-            labels: {
-                melee: 'Durability',
-                ranged: 'Ammo'
-            }
-        },
-        ammotype: {
-            id: 'ammotype',
-            options: ammotypes,
-            label: 'Ammo Type',
-            default: ammotypes[0]
-        },
-        description: {
-            id: 'description'
-        }, 
-        flavor: {
-            id: 'flavor'
-        },
-        actions: {
-            export:'exportitem', 
-            delete:'deleteitem',
-            attack:'attackweapon',
-            reload: 'reloadweapon',
-            equip: 'equipitem',
-            unequip: 'unequipitem',
-        }
-    };
-
-    const getButtonRowId = function(eventInfo){
-        var underscoreIndex = eventInfo.sourceAttribute.lastIndexOf("_");
-        return eventInfo.sourceAttribute.substr(0, underscoreIndex);
-    };
-
-    function equip(){
-        const itemFields = {...fields};
-        delete itemFields.actions; //remove action key
-
-        //This gets all available equipment/weapon slots.
-        const slotFields = (function(){
-            let result = [
-                fields$1.slots.equipmentslots.id,
-                fields$1.slots.weaponslots.id
-            ];
-
-            for (let i = 1; i <= fields$1.slots.equipmentslots.max; i++){
-                result.push(fields$1.slots.equipmentslots.prefix + '_' + i);
-            }
-
-            for (let i = 1; i <= fields$1.slots.weaponslots.max; i++){
-                result.push(fields$1.slots.weaponslots.prefix + '_' + i);
-            }
-
-            return result;
-        })();
-
-        //Finds the next available slot for a given type. Pass it values so it can parse through the values - values should contain the retrieved values for all available slots.
-        const findAvailableSlot = function(type, values){
-            let max = (type == fields$1.slots.weaponslots.prefix) ? values[fields$1.slots.weaponslots.id] : values[fields$1.slots.equipmentslots.id];
-
-            for (let i = 1; i <= max; i++){
-                if (values[type + '_' + i] == 0){
-                    return i;
-                }
-            }
-
-            return null;
-        };
-
-        //get appropriate ID for an attribute in a slot.
-        const getSlotId = function(type, attrId, slot){
-            return `${type}_${attrId}_${slot}`
-        };
-
-        // Create an array of appropriate field Ids.
-        // Give it a prefix to just append a simple prefix to the Id as in the case of repeating inventory
-        // Give it a type and slot to call getSlotId as in the case of slots.
-        const createFieldIdArray = function(prefix, type, slot){
-            let result = [];
-
-            for (let key in itemFields){
-                let fld = itemFields[key];
-                let name;
-                if (prefix.length){
-                    name = prefix + '_' + fld.id;
-                } else if (type && slot){
-                    name = getSlotId(type, fld.id, slot);
-                } else {
-                    name = fld.id;
-                }
-                result.push(name);
-
-                if ('max' in fld && fld.max == true){
-                    result.push(name + '_max');
-                }
-            }
-            return result;
-        };
-
-
-        const unequipItem = function(type, slot){
-            let unequipFields = createFieldIdArray('', type, slot);
-            
-            getAttrs(unequipFields, function(values){
-                const rowId = generateRowID();
-                var attrSet = {};
-
-                for (const key in itemFields){
-                    const fld = itemFields[key]; //the original field
-                    
-                    //unequiping is basically swapping objects
-                    const unequipkey = getSlotId(type, fld.id, slot);
-                    const invkey = `repeating_inventory_${rowId}_${fld.id}`;
-
-                    attrSet[invkey] = values[unequipkey];
-
-                    if ('max' in fld && fld.max == true){
-                        attrSet[invkey + '_max'] = values[unequipkey + '_max'];
-                    }
-
-
-                    //clear out equipped fields
-                    if ('default' in fld){
-                        attrSet[unequipkey] = fld.default;
-                    } else {
-                        attrSet[unequipkey] = '';
-
-                        if ('max' in fld && fld.max == true){
-                            attrSet[unequipkey + '_max'] = '';
-                        }
-                    }
-                }
-
-                attrSet[type + '_' + slot] = 0; //make the slot available again.
-                setAttrs(attrSet);
-            });
-        };
-
-
-        const equipItem = function(rowId){
-            // Get both slots and inventory fields
-            const invFields = createFieldIdArray('repeating_inventory');
-
-            const bothFields = invFields.concat(slotFields);
-
-            getAttrs(bothFields, function(values){
-                //retrieve given card type.
-                let type = values[`repeating_inventory_${fields.type.id}`];
-                if (type == fields$1.inventory.prefix){ return;} //only equip weapons and equipment
-                
-                let slot = findAvailableSlot(type, values); //now find an available slot for its type.
-
-                //Slot is available!
-                if (slot){
-                    var attrSet = {};
-
-                    //Loop to transpose repeating inventory field to the appropriate slot
-                    //basically swapping objects
-                    for (const key in itemFields) {
-                        const fld = itemFields[key];
-                        const invkey = `repeating_inventory_${fld.id}`;
-                        const equipkey = getSlotId(type, fld.id, slot);
-
-                        if (invkey in values && typeof values[invkey] != 'undefined'){
-                            attrSet[equipkey] = values[invkey];
-                            
-                            // don't forget max
-                            if ('max' in fld && fld.max == true){
-                                attrSet[equipkey + '_max'] = values[invkey + '_max'];
-                            }
-                        } else {
-                            attrSet[equipkey] = ''; //default value
-                        }
-                    }
-
-                    attrSet[type + '_' + slot] = 'on';
-                    removeRepeatingRow(rowId); //remove current row
-                    setAttrs(attrSet);
-                }
-            });
-        };
-
-
-        // Hooks for buttons
-        on(`clicked:repeating_inventory:${fields.actions.equip}`, function(evInfo){
-            const rowId = getButtonRowId(evInfo);
-            equipItem(rowId);
-        });
-
-        on(`clicked:repeating_inventory:${fields.actions.delete}`, function(evInfo){
-            const rowId = getButtonRowId(evInfo);
-            removeRepeatingRow(rowId);
-        });
-
-
-        for (let i = 1; i <= fields$1.slots.weaponslots.max; i++){
-            on(`clicked:${fields$1.slots.weaponslots.prefix}_${fields.actions.unequip}_${i}`, function(){
-                unequipItem(fields$1.slots.weaponslots.prefix, i);
-            });
-        }
-
-        for (let i = 1; i <= fields$1.slots.equipmentslots.max; i++){
-            on(`clicked:${fields$1.slots.equipmentslots.prefix}_${fields.actions.unequip}_${i}`, function(){
-                unequipItem(fields$1.slots.equipmentslots.prefix, i);
-            });
-        }
-    }
-
-    function limit(){
-        on('change:repeating_inventory', function(evInfo){
-            console.log(evInfo);
-
-            //So we don't interfere with unequip script
-            if (evInfo.sourceType == 'sheetworker'){
-                return;
-            }
-
-
-            getAttrs([fields$1.inventory.id], function(values){
-                let slots = parseInt(values[fields$1.inventory.id], 10);
-
-                if (isNaN(slots)){
-                    console.error('Error when parsing slots');
-                    return;
-                }
-
-                getSectionIDs("inventory", function(arr){
-
-                    if (arr.length > slots){
-                        let lastRow = arr[arr.length - 1]; //only remove the latest one, so we don't interfere with unequip
-                        removeRepeatingRow("repeating_inventory_" + lastRow);
-                    }
-                });
-            });
-        });
-    }
-
-    equip();
-    limit();
-
-})();
-
     /** endinject **/
 </script>

@@ -1,0 +1,106 @@
+.sheet-inventory {
+    margin-top: 1rem;
+    
+    .sheet-slot-section {
+        .sheet-slot {
+            display: block;
+        }
+    }
+    
+    .repcontainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sheet-card {
+        .sheet-card-type {
+            display: flex;
+        }
+
+        .sheet-show-ranged {
+            &:checked {
+                ~ .sheet-ranged-only {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    .repcontrol {
+        .repcontrol_edit {
+            float: none;
+            margin-right: 2rem;
+        }
+    }
+
+    .sheet-wrap {
+        flex-wrap: wrap;
+    
+        .sheet-slot {
+            flex-basis: 20%;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+
+
+.sheet-equipment {
+    .sheet-wrap {
+        .sheet-slot {
+            flex-basis: 18%;
+        }
+    }
+}
+
+
+
+// Show Buttons
+.sheet-weaponslots {
+    .sheet-card {
+        .sheet-card-actions {
+            button.sheet-attack-button,
+            button.sheet-reload-button 
+            {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.sheet-weaponslots,
+.sheet-equipmentslots{
+    .sheet-card {
+        .sheet-card-actions {
+            button.sheet-unequip-button {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.sheet-inventory {
+    .sheet-card {
+
+        .sheet-toggle-weapon,
+        .sheet-toggle-equipment{
+            &:checked {
+                ~ .sheet-card-actions {
+                    button.sheet-equip-button {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+        .sheet-card-actions {
+            button.sheet-export-button {
+                display: inline-block;
+            }
+
+            button.sheet-delete-button {
+                display: inline-block;
+            }
+        }
+    }
+}

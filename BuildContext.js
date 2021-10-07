@@ -85,10 +85,19 @@ const filters = {
 
     // Return 
     getLabel: function(obj){
+        if (typeof obj == 'string'){
+            return obj;
+        }
+
         if(obj['label'] !== undefined){
             return obj['label'];
         }
-        return typeof obj == 'string' ? obj : '';
+
+        if(obj['id'] !== undefined){
+            return obj['id'].charAt(0).toUpperCase() + obj['id'].slice(1);
+        }
+
+        return '';
     },
 
     removeAmmo: function(obj){
@@ -111,7 +120,6 @@ const filters = {
 };
 
 const sassHeaders = `
-$maxslots: ${char.slots.equipmentslots.max};
 `
 
 module.exports = {

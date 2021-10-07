@@ -40,8 +40,8 @@
 
             {# Uses #}
             <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-label">Ammo:</div>
-                <div class="sheet-label sheet-melee-label">Durability:</div>
+                <div class="sheet-label sheet-ranged-only">Ammo:</div>
+                <div class="sheet-label sheet-melee-only">Durability:</div>
                 <div class="sheet-max">
                     <div>
                         <input type="text" class="sheet-number sheet-shy" name="attr_{{data.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
@@ -59,8 +59,8 @@
                     Ammo Type:
                 </div>
                 <select class="sheet-shy" name="attr_{{data.card.ammotype | getAttr | attach(prefix, num)}}">
-                {% for type in data.card.ammotype.options %}
-                    <option value="{{type}}" {% if loop.first%} selected="selected" {%endif%}>{{type | removeAmmo}}</option>
+                {% for key, type in data.character.ammo.options %}
+                    <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
                 {% endfor %}
             </select>
             </div>
