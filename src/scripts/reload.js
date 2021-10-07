@@ -1,15 +1,17 @@
-import { getAttrVal } from "./_helpers"; 
+import { getAttr } from "./_helpers"; 
+import { fields as card} from '../model/card';
+import { fields as charFields} from '../model/character';
 
 export function handleReload(character, weaponId){
     const getAttrName = function(id, num){
-        return `weapon_${id}_${num}`;
+        return `${charFields.slots.weaponslots.prefix}_${id}_${num}`;
     }    
 
-    const itemType = getAttrVal(character, getAttrName("(([[data.card.type.id]]))", weaponId)),
-        weaponType = getAttrVal(character, getAttrName("(([[data.card.weapontype.id]]))", weaponId)),
-        ammoType = getAttrVal(character, getAttrName("(([[data.card.ammotype.id]]))", weaponId)),
-        ammo = getAttrVal(character, getAttrName("(([[data.card.uses.id]]))", weaponId)),
-        active = getAttrVal(character, '(([[data.character.slots.weaponslots.prefix]]))' + '_' + weaponId);
+    const itemType = getAttr(character, getAttrName(card.type.id, weaponId)),
+        weaponType = getAttr(character, getAttrName(card.weapontype.id, weaponId)),
+        ammoType = getAttr(character, getAttrName(card.ammotype.id, weaponId)),
+        ammo = getAttr(character, getAttrName(card.uses.id, weaponId)),
+        active = getAttr(character, charFields.slots.weaponslots.prefix + '_' + weaponId);
 
         log(active);
         
@@ -30,7 +32,7 @@ export function handleReload(character, weaponId){
         }
         
         const ammoMax = ammo.get("max"),
-            ammoStore = getAttrVal(character, ammoType.get('current')), //ammoType dropdown values are the attribute for the appropriate ammo store.
+            ammoStore = getAttr(character, ammoType.get('current')), //ammoType dropdown values are the attribute for the appropriate ammo store.
             isActive = active.get('current');
     
     if (!isActive){

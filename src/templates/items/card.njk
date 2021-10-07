@@ -73,10 +73,18 @@
             <span readonly name="attr_{{data.card.flavor | getAttr | attach(prefix, num)}}"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="action" class="sheet-attack-button btn" name="act_{{data.card.actions.attack | attach(prefix, num)}}">Attack</button>
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='{{'@{'}}{{data.card.damage.id | attach(prefix, num)}}{{'}'}}'">Attack</button>
             <button type="roll" class="sheet-reload-button btn" name="act_{{data.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button>
             <button type="action" class="sheet-equip-button btn" name="act_{{data.card.actions.equip | attach(prefix, num)}}">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_{{data.card.actions.unequip | attach(prefix, num)}}">Unequip</button>
+            <button type="roll" class="sheet-export-button" name="act_{{data.card.actions.export}}" value="{{exportButton(type=type) | trim}}" >Export</button>
+            <button type="action" class="sheet-delete-button btn-danger" name="act_{{data.card.actions.delete | attach(prefix, num)}}">Delete</button>
         </div>
     </div>
 {% endmacro %}
+
+
+{# This is hardcoded for now #}
+{%- macro exportButton(type='') %}
+    **Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'
+{%- endmacro %}

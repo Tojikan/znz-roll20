@@ -62,7 +62,7 @@
     // Weapon Fields
     .sheet-card-weapon-fields {
         .sheet-ranged-label{
-            display: none;
+            display: none; //melee is default selection
         }
 
         // Show different label or field if melee/ranged
@@ -71,6 +71,10 @@
                 ~ .sheet-card-uses {
                     .sheet-ranged-label {
                         display: block;
+                    }
+
+                    .sheet-melee-label {
+                        display: none;
                     }
                 }
             }
@@ -81,6 +85,10 @@
                 ~ .sheet-card-uses {
                     .sheet-melee-label {
                         display: block;
+                    }
+
+                    .sheet-ranged-label {
+                        display: none;
                     }
                 }
             }
@@ -118,6 +126,10 @@
             display: none;
             flex-basis: 15%;
             margin: 0 0.5rem;
+
+            &.sheet-delete-button {
+                margin-left: auto;
+            }
         }
     }
 
@@ -160,6 +172,16 @@
                         display: inline-block;
                     }
                 }
+            }
+        }
+
+        .sheet-card-actions {
+            button.sheet-export-button {
+                display: inline-block;
+            }
+
+            button.sheet-delete-button {
+                display: inline-block;
             }
         }
     }

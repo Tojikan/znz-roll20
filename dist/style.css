@@ -92,6 +92,9 @@ input {
     .sheet-dice-input input.sheet-amount {
       text-align: right; }
 
+.sheet-input {
+  text-align: center; }
+
 .sheet-hidden {
   display: none; }
 
@@ -113,6 +116,12 @@ select {
 textarea.sheet-shy {
   resize: none;
   border: none; }
+
+textarea.sheet-small {
+  height: 3rem; }
+
+textarea.sheet-vertical {
+  resize: vertical; }
 
 .sheet-inner-toggle .sheet-control,
 .sheet-toggle .sheet-control,
@@ -235,13 +244,12 @@ textarea.sheet-shy {
       flex-basis: 45%; }
     .sheet-character .sheet-header .sheet-area .sheet-row-flex:first-child {
       margin-bottom: 2rem; }
-    .sheet-character .sheet-header .sheet-area .sheet-defense {
-      flex-basis: 35%; }
     .sheet-character .sheet-header .sheet-area .sheet-ability {
       flex-basis: 65%; }
   .sheet-character .sheet-header .sheet-name,
   .sheet-character .sheet-header .sheet-area,
-  .sheet-character .sheet-header .sheet-defense {
+  .sheet-character .sheet-header .sheet-dodge,
+  .sheet-character .sheet-header .sheet-armor {
     margin-right: 2rem; }
 
 .sheet-stat-blocks {
@@ -311,8 +319,14 @@ textarea.sheet-shy {
 .sheet-card .sheet-card-weapon-fields .sheet-show-ranged:checked ~ .sheet-card-uses .sheet-ranged-label {
   display: block; }
 
+.sheet-card .sheet-card-weapon-fields .sheet-show-ranged:checked ~ .sheet-card-uses .sheet-melee-label {
+  display: none; }
+
 .sheet-card .sheet-card-weapon-fields .sheet-show-melee:checked ~ .sheet-card-uses .sheet-melee-label {
   display: block; }
+
+.sheet-card .sheet-card-weapon-fields .sheet-show-melee:checked ~ .sheet-card-uses .sheet-ranged-label {
+  display: none; }
 
 .sheet-card .sheet-card-textarea {
   width: 90%;
@@ -336,6 +350,8 @@ textarea.sheet-shy {
     display: none;
     flex-basis: 15%;
     margin: 0 0.5rem; }
+    .sheet-card .sheet-card-actions button.sheet-delete-button {
+      margin-left: auto; }
 
 .sheet-card .sheet-weapon-only {
   display: none !important; }
@@ -361,6 +377,12 @@ textarea.sheet-shy {
 .sheet-inventory .sheet-card .sheet-toggle-equipment:checked ~ .sheet-card-actions button.sheet-equip-button {
   display: inline-block; }
 
+.sheet-inventory .sheet-card .sheet-card-actions button.sheet-export-button {
+  display: inline-block; }
+
+.sheet-inventory .sheet-card .sheet-card-actions button.sheet-delete-button {
+  display: inline-block; }
+
 .sheet-inventory .sheet-wrap {
   flex-wrap: wrap; }
   .sheet-inventory .sheet-wrap .sheet-slot {
@@ -381,6 +403,9 @@ textarea.sheet-shy {
     display: flex; }
   .sheet-inventory .sheet-card .sheet-show-ranged:checked ~ .sheet-ranged-only {
     display: flex; }
+  .sheet-inventory .repcontrol .repcontrol_edit {
+    float: none;
+    margin-right: 2rem; }
 
 .sheet-character {
   font-size: 10px;

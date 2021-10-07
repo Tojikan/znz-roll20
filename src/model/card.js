@@ -34,9 +34,7 @@ export var fields = {
         labels: {
             melee: 'Durability',
             ranged: 'Ammo'
-        },
-        default: 0
-        
+        }
     },
     ammotype: {
         id: 'ammotype',
@@ -51,11 +49,11 @@ export var fields = {
         id: 'flavor'
     },
     actions: {
-        drop:'dropitem', 
+        export:'exportitem', 
         delete:'deleteitem',
         attack:'attackweapon',
         reload: 'reloadweapon',
-        equip: 'equipoitem',
-        unequip: 'unequipitem'
+        equip: 'equipitem',
+        unequip: 'unequipitem',
     }
 }

@@ -1,9 +1,6 @@
-
-import abilities from './abilities.json';
-
 export const fields = {
-    name: {
-        id: "name"
+    notes: {
+        id: "notes"
     },
     ammo: {
         id: "ammo",
@@ -13,7 +10,9 @@ export const fields = {
             "d8",
             "d10",
             "d12",
-            "d20"
+            "d20",
+            "Bolt",
+            "Arrow"
         ]
     },
     stats: {
@@ -26,13 +25,16 @@ export const fields = {
             default: 40,
         },
     },
-    defense: {
-        id: "defense",
-        default: 5,
-        bonus: "defense_bonus"
+    dodge: {
+        id: "dodge",
+        default: 2,
+    },
+    armor: {
+        id: "armor",
+        default: 0
     },
     ability: {
-        options: abilities
+        id: "ability"
     },
     slots: {
         weaponslots: {

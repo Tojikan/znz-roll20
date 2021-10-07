@@ -25,10 +25,6 @@
                 }
             }
 
-            .sheet-defense {
-                flex-basis: 35%;
-            }
-
             .sheet-ability {
                 flex-basis: 65%;
             }
@@ -36,7 +32,8 @@
 
         .sheet-name,
         .sheet-area,
-        .sheet-defense {
+        .sheet-dodge,
+        .sheet-armor {
             margin-right: $gap;
         }
     }

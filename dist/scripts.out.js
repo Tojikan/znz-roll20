@@ -9,7 +9,7 @@
             "equipmentslots"
         ];
         const ammoId = "ammo";
-        const ammoTypes = ["d4","d6","d8","d10","d12","d20"];
+        const ammoTypes = ["d4","d6","d8","d10","d12","d20","Bolt","Arrow"];
         let attr = '';
 
         for (let ammo of ammoTypes){
@@ -147,20 +147,227 @@
      * @param {*} attribute 
      * @returns The Attribute value
      */
-    var getAttrVal = function(character, attr){
+    const getAttr = function(character, attr){
         return findObjs({type: 'attribute', characterid: character.id, name: attr})[0];
+    };
+
+    /**
+     * Get Attribute Value, and use default value if not present.
+     * @param {*} character 
+     * @param {*} attr 
+     * @returns 
+     */
+    const getAttrVal = function(character, attr){
+        return getAttrByName(character.id, attr);
+    };
+
+
+    /**
+     * Extract Row ID from attribute Name
+     * @param {*} str 
+     */
+    const regexGetRowId = function(str){
+        return str.match(/(?<=_)-(.*?)(?=_)/);
+    };
+
+
+    /**
+     * Extract array of repeater IDs from character attributes
+     * @param {*} repeaterId 
+     * @returns 
+     */
+    const getRepeaterIds = function(repeaterId, characterId){
+        let result = [];
+
+        let attributes = findObjs({type:'attribute', characterid:characterId});
+
+        attributes.map((attr)=>{
+            if (attr.get('name').startsWith(`repeating_${repeaterId}_`)){
+                let row = regexGetRowId(attr.get('name'));
+
+                if (row){
+                    if (!result.includes(row[0])){
+                        result.push(row[0]);
+                    }
+                }
+            }
+        });
+
+        return result;
+    };
+
+
+    /**
+     * 
+     * @returns a new row ID for a repeater row.
+     */
+    const generateRowID = function () {
+        return generateUUID().replace(/_/g, "Z");
+    };
+
+
+    /**
+     * Generates a UUID for a repeater section, just how Roll20 does it in the character sheet.
+     * https://app.roll20.net/forum/post/3025111/api-and-repeating-sections-on-character-sheets/?pageforid=3037403#post-3037403
+    */
+    const generateUUID = function() { 
+
+        var a = 0, b = [];
+        return (function() {
+            var c = (new Date()).getTime() + 0, d = c === a;
+            a = c;
+            for (var e = new Array(8), f = 7; 0 <= f; f--) {
+                e[f] = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(c % 64);
+                c = Math.floor(c / 64);
+            }
+            c = e.join("");
+            if (d) {
+                for (f = 11; 0 <= f && 63 === b[f]; f--) {
+                    b[f] = 0;
+                }
+                b[f]++;
+            } else {
+                for (f = 0; 12 > f; f++) {
+                    b[f] = Math.floor(64 * Math.random());
+                }
+            }
+            for (f = 0; 12 > f; f++){
+                c += "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(b[f]);
+            }
+            return c;
+        })();
+    };
+
+    const fields$1 = {
+        notes: {
+            id: "notes"
+        },
+        ammo: {
+            id: "ammo",
+            types: [
+                "d4",
+                "d6",
+                "d8",
+                "d10",
+                "d12",
+                "d20",
+                "Bolt",
+                "Arrow"
+            ]
+        },
+        stats: {
+            health: {
+                id: "health",
+                default: 30,
+            },
+            energy: {
+                id: "energy",
+                default: 40,
+            },
+        },
+        dodge: {
+            id: "dodge",
+            default: 2,
+        },
+        armor: {
+            id: "armor",
+            default: 0
+        },
+        ability: {
+            id: "ability"
+        },
+        slots: {
+            weaponslots: {
+                id: "weaponslots",
+                default: 1,
+                max: 4,
+                prefix: "weapon",
+                label: "Weapons"
+            },
+            equipmentslots: {
+                id: "equipmentslots",
+                default: 2,
+                max: 5,
+                prefix: "equipment",
+                label: "Equipment"
+            }
+        },
+        inventory: {
+            id: "inventoryslots",
+            default: 5,
+            max: 9,
+            prefix: "inventory",
+            label: "Inventory"
+        }
+    };
+
+    const ammotypes = fields$1.ammo.types.map(x=> fields$1.ammo.id + '_' + x);
+
+    var fields = {
+        name: {
+            id: 'itemname'
+        },
+        type: {
+            id: 'itemtype',
+            label: "Item Type",
+            options: [
+                'inventory',
+                'weapon',
+                'equipment'
+            ]
+        },
+        damage: {
+            id: 'itemdamage'
+        },
+        weapontype: {
+            id: 'weapontype',
+            options: [
+                'melee',
+                'ranged'
+            ],
+            label: 'Weapon Type',
+            default: 'melee'
+        },
+        uses: {
+            id: 'uses',
+            max: true,
+            labels: {
+                melee: 'Durability',
+                ranged: 'Ammo'
+            }
+        },
+        ammotype: {
+            id: 'ammotype',
+            options: ammotypes,
+            label: 'Ammo Type',
+            default: ammotypes[0]
+        },
+        description: {
+            id: 'description'
+        }, 
+        flavor: {
+            id: 'flavor'
+        },
+        actions: {
+            export:'exportitem', 
+            delete:'deleteitem',
+            attack:'attackweapon',
+            reload: 'reloadweapon',
+            equip: 'equipitem',
+            unequip: 'unequipitem',
+        }
     };
 
     function handleReload(character, weaponId){
         const getAttrName = function(id, num){
-            return `weapon_${id}_${num}`;
+            return `${fields$1.slots.weaponslots.prefix}_${id}_${num}`;
         };    
 
-        const itemType = getAttrVal(character, getAttrName("itemtype", weaponId)),
-            weaponType = getAttrVal(character, getAttrName("weapontype", weaponId)),
-            ammoType = getAttrVal(character, getAttrName("ammotype", weaponId)),
-            ammo = getAttrVal(character, getAttrName("uses", weaponId)),
-            active = getAttrVal(character, 'weapon' + '_' + weaponId);
+        const itemType = getAttr(character, getAttrName(fields.type.id, weaponId)),
+            weaponType = getAttr(character, getAttrName(fields.weapontype.id, weaponId)),
+            ammoType = getAttr(character, getAttrName(fields.ammotype.id, weaponId)),
+            ammo = getAttr(character, getAttrName(fields.uses.id, weaponId)),
+            active = getAttr(character, fields$1.slots.weaponslots.prefix + '_' + weaponId);
 
             log(active);
             
@@ -181,7 +388,7 @@
             }
             
             const ammoMax = ammo.get("max"),
-                ammoStore = getAttrVal(character, ammoType.get('current')), //ammoType dropdown values are the attribute for the appropriate ammo store.
+                ammoStore = getAttr(character, ammoType.get('current')), //ammoType dropdown values are the attribute for the appropriate ammo store.
                 isActive = active.get('current');
         
         if (!isActive){
@@ -218,6 +425,562 @@
         }
     }
 
+    var snack = {
+    	name: "Snack",
+    	type: "inventory",
+    	description: "Restore 5 energy."
+    };
+    var energydrink = {
+    	name: "Energy Drink",
+    	type: "inventory",
+    	description: "Restore 10 energy.",
+    	flavor: "Its got Electrolytes."
+    };
+    var adrenaline = {
+    	name: "Adrenaline",
+    	type: "inventory",
+    	description: "Restore 20 energy.",
+    	flavor: "When you need a rush."
+    };
+    var bandage = {
+    	name: "Bandage",
+    	type: "inventory",
+    	description: "Restore 1d6 health.",
+    	flavor: "A band-aid a day keeps the undead away."
+    };
+    var firstaidkit = {
+    	name: "First Aid Kit",
+    	type: "inventory",
+    	description: "Restore 2d6 health."
+    };
+    var medkit = {
+    	name: "Med Kit",
+    	type: "inventory",
+    	description: "Restore 4d6 health.",
+    	flavor: "For if it's merely a flesh wound."
+    };
+    var backpack = {
+    	name: "Fanny Pack",
+    	type: "equipment",
+    	description: "When this is equipped, increase your available inventory slots by 1. (Up to a maximum of 9 inventory slots)",
+    	flavor: "Stylish and functional."
+    };
+    var holster = {
+    	name: "Weapon Holster",
+    	type: "equipment",
+    	description: "When this is equipped, increase your available weapon slots by 1 (Up to a maximum of 4 weapon slots)",
+    	flavor: "Your standard handgun/rifle/sword/rocket launcher/etc holder."
+    };
+    var belt = {
+    	name: "More Pockets!",
+    	type: "inventory",
+    	description: "Delete this item. Increase your available equipment slots by 1 (Up to a maximum of 5 equipment slots)",
+    	flavor: "So much room for activites."
+    };
+    var barricade1 = {
+    	name: "Sandbags!",
+    	type: "inventory",
+    	description: "Delete this item. Build a barricade anywhere with 2d6 health.",
+    	flavor: "So much room for activites."
+    };
+    var barricade2 = {
+    	name: "Boards and Nails",
+    	type: "inventory",
+    	description: "Delete this item. Build a barricade with 4d6 health at the entrance of any room.",
+    	flavor: "Who needs a hammer?"
+    };
+    var armor1 = {
+    	name: "Duct Tape Armor",
+    	type: "equipment",
+    	description: "Increase your Armor by 1.",
+    	flavor: "Enough Duct Tape can do just about anything."
+    };
+    var armor2 = {
+    	name: "Sporting Pads",
+    	type: "equipment",
+    	description: "Increase your Armor by 3.",
+    	flavor: "Hit them with the sporting ball while in your sporting protection while doing the sport."
+    };
+    var armor3 = {
+    	name: "Tactical Gear",
+    	type: "equipment",
+    	description: "Increase your Armor by 5.",
+    	flavor: "Looking pretty tacticool."
+    };
+    var armor4 = {
+    	name: "Plate Armor",
+    	type: "equipment",
+    	description: "Increase your Armor by 10. Reduce dodge by 2.",
+    	flavor: "Time to get medieval on their ass."
+    };
+    var dodge1 = {
+    	name: "Exercise Tape",
+    	type: "equipment",
+    	description: "Increase dodge by 1.",
+    	flavor: "It's probably just a mental thing, but you feel limber."
+    };
+    var dodge2 = {
+    	name: "Nice Shoes",
+    	type: "equipment",
+    	description: "Increase dodge by 2. Only 1 can be equipped at a time.",
+    	flavor: "Literally just shoes that are nice. But like, super nice though."
+    };
+    var dodge3 = {
+    	name: "Exercise Clothes",
+    	type: "equipment",
+    	description: "Increase dodge by 6. Has no effect when your armor is 5 or more.",
+    	flavor: "So light and breezy"
+    };
+    var knife = {
+    	name: "Knife",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d4",
+    	uses: 25,
+    	flavor: "Great for cutting vegetables, fruit, and brains."
+    };
+    var baton = {
+    	name: "Baton",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d6",
+    	uses: 35,
+    	flavor: "Beat them to death... again."
+    };
+    var baseballbat = {
+    	name: "Baseball Bat",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d6+1",
+    	uses: 25,
+    	flavor: "It is now past the time... for America's favorite pastime."
+    };
+    var crowbar = {
+    	name: "Crowbar",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d8<2",
+    	uses: 45,
+    	flavor: "Great for prying off crabs."
+    };
+    var machete = {
+    	name: "Machete",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d8+2",
+    	uses: 30,
+    	flavor: "Classic undead re-deading equipment."
+    };
+    var sword = {
+    	name: "Sword",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d10+3",
+    	uses: 40,
+    	flavor: "Yes, it's an actual sword."
+    };
+    var combatknife = {
+    	name: "Ka-Bar Knife",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d10<2",
+    	uses: 55,
+    	flavor: "Hoo-rah."
+    };
+    var katana = {
+    	name: "Katana",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d12+4",
+    	uses: 40,
+    	flavor: "Forgive me sensei, I must go all out. Just this once."
+    };
+    var axe = {
+    	name: "Axe",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d12<3",
+    	uses: 55,
+    	flavor: "Time to chop up some firewood."
+    };
+    var chainsaw = {
+    	name: "Chainsaw",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "1d20+10",
+    	uses: 12,
+    	flavor: "It's about to be a massacre."
+    };
+    var lawnmower = {
+    	name: "Lawnmower",
+    	type: "weapon",
+    	weapontype: "melee",
+    	damage: "100",
+    	uses: 1,
+    	description: "The turn you use this, you attack as you move, dealing damage to each square you move through",
+    	flavor: "Party's over."
+    };
+    var handgun = {
+    	name: "Handgun",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d6+2",
+    	uses: 12,
+    	ammotype: "ammo_1d6",
+    	flavor: "Pew pew pew."
+    };
+    var uzi = {
+    	name: "Uzi",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d6",
+    	uses: 30,
+    	ammotype: "ammo_1d6",
+    	flavor: "Spray and Pray"
+    };
+    var revolver = {
+    	name: "revolver",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d8+4",
+    	uses: 6,
+    	ammotype: "ammo_d8",
+    	flavor: "Do you feel lucky?"
+    };
+    var crossbow = {
+    	name: "Crossbow",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d8<4",
+    	uses: 5,
+    	ammotype: "ammo_Bolt",
+    	description: "If you kill your target, leave a marker at the target. You can regain 1 Bolt by picking up the marker.",
+    	flavor: "Automatically makes you the most popular character."
+    };
+    var shotgun = {
+    	name: "Shotgun",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "4d4",
+    	uses: 5,
+    	ammotype: "ammo_d4",
+    	flavor: "Hail to the King, baby."
+    };
+    var autoshotgun = {
+    	name: "Auto Shotgun",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "3d4",
+    	uses: 8,
+    	ammotype: "ammo_d4",
+    	flavor: "The N00bCann0n."
+    };
+    var magnum = {
+    	name: "Desert Eagle",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d10+6",
+    	uses: 7,
+    	ammotype: "ammo_d10",
+    	flavor: "High caliber kick-ass"
+    };
+    var assaultrifle = {
+    	name: "Assault Rifle",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d10<3",
+    	uses: 20,
+    	ammotype: "ammo_d10",
+    	flavor: "Now we're talking."
+    };
+    var snipperrifle = {
+    	name: "Sniper Rifle",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d12+8",
+    	uses: 5,
+    	ammotype: "ammo_d12",
+    	flavor: "BOOM! Headshot!"
+    };
+    var bow = {
+    	name: "Compound Bow",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d12<6",
+    	uses: 5,
+    	ammotype: "ammo_Arrow",
+    	description: "If you kill your target, leave a marker at the target. You can regain 1 Ammo by picking up the marker.",
+    	flavor: "FWSH! Headshot!"
+    };
+    var machinegun = {
+    	name: "Machine Gun",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d20",
+    	uses: 100,
+    	ammotype: "ammo_d20",
+    	flavor: "Our bullets will blot out the sun."
+    };
+    var flamethrower = {
+    	name: "Flamethrower",
+    	type: "weapon",
+    	weapontype: "ranged",
+    	damage: "1d20+20",
+    	uses: 5,
+    	ammotype: "ammo_d20",
+    	description: "This weapon fires in a line of 5 spaces, dealing damage to all targets within the line.",
+    	flavor: "Turns out the zombies have a weakness to being lit on freakin' fire."
+    };
+    var items = {
+    	snack: snack,
+    	energydrink: energydrink,
+    	adrenaline: adrenaline,
+    	bandage: bandage,
+    	firstaidkit: firstaidkit,
+    	medkit: medkit,
+    	backpack: backpack,
+    	holster: holster,
+    	belt: belt,
+    	barricade1: barricade1,
+    	barricade2: barricade2,
+    	armor1: armor1,
+    	armor2: armor2,
+    	armor3: armor3,
+    	armor4: armor4,
+    	dodge1: dodge1,
+    	dodge2: dodge2,
+    	dodge3: dodge3,
+    	knife: knife,
+    	baton: baton,
+    	baseballbat: baseballbat,
+    	crowbar: crowbar,
+    	machete: machete,
+    	sword: sword,
+    	combatknife: combatknife,
+    	katana: katana,
+    	axe: axe,
+    	chainsaw: chainsaw,
+    	lawnmower: lawnmower,
+    	handgun: handgun,
+    	uzi: uzi,
+    	revolver: revolver,
+    	crossbow: crossbow,
+    	shotgun: shotgun,
+    	autoshotgun: autoshotgun,
+    	magnum: magnum,
+    	assaultrifle: assaultrifle,
+    	snipperrifle: snipperrifle,
+    	bow: bow,
+    	machinegun: machinegun,
+    	flamethrower: flamethrower
+    };
+
+    var itemtemplates = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        snack: snack,
+        energydrink: energydrink,
+        adrenaline: adrenaline,
+        bandage: bandage,
+        firstaidkit: firstaidkit,
+        medkit: medkit,
+        backpack: backpack,
+        holster: holster,
+        belt: belt,
+        barricade1: barricade1,
+        barricade2: barricade2,
+        armor1: armor1,
+        armor2: armor2,
+        armor3: armor3,
+        armor4: armor4,
+        dodge1: dodge1,
+        dodge2: dodge2,
+        dodge3: dodge3,
+        knife: knife,
+        baton: baton,
+        baseballbat: baseballbat,
+        crowbar: crowbar,
+        machete: machete,
+        sword: sword,
+        combatknife: combatknife,
+        katana: katana,
+        axe: axe,
+        chainsaw: chainsaw,
+        lawnmower: lawnmower,
+        handgun: handgun,
+        uzi: uzi,
+        revolver: revolver,
+        crossbow: crossbow,
+        shotgun: shotgun,
+        autoshotgun: autoshotgun,
+        magnum: magnum,
+        assaultrifle: assaultrifle,
+        snipperrifle: snipperrifle,
+        bow: bow,
+        machinegun: machinegun,
+        flamethrower: flamethrower,
+        'default': items
+    });
+
+    const templates = itemtemplates;
+    const acceptedFields = (()=>{ //get acceptable params - the key of the field in card. Note we use the field key NOT the field ID!
+        let result = [];
+        for (let key in fields){
+            if (key == 'actions') continue; //ignore actions
+
+            result.push(key);
+
+            if ('max' in fields[key] && fields[key].max == true) result.push(key + '_max'); //add max fields 
+        }
+        return result;
+    })();
+    delete acceptedFields.actions; //don't consider actions key
+
+
+    function handlePickup(character, args){
+        
+        let item = {};
+
+        // pull from existing template
+        if ("item" in args && args.item in templates){
+            item = templates[args.item];
+        }
+
+        //add any new props
+        for (let key in args){
+            if (acceptedFields.includes(key)){
+                item[key] = args[key];
+            }
+        }
+
+
+
+        if (Object.keys(item).length){
+
+            let inventorySlots = getAttrVal(character, fields$1.inventory.id);
+            let inventoryIds = getRepeaterIds('inventory', character.id);
+
+            if (inventoryIds.length >= inventorySlots){
+                return {msg: "Error: Character has no more available inventory slots!", type: "error"};
+            }
+
+            createInventoryItem(character, item);
+            return {msg: `${character.get('name')} picked up a(n) ${item["name"] || 'Item'}`, type:"success"};
+        } else {
+            return {msg: "Error: Invalid item or no arguments provided.", type: "error"}
+        }
+    }
+
+
+    function createInventoryItem(character, item){
+        var rowId = generateRowID();
+
+        for (let key in item){
+
+            //Don't handle max fields - max needs to be set as a property of an attribute
+            if (key.endsWith('_max')){
+                continue;
+            }
+
+            let fld = fields[key]; //get original field
+            let attr = {};
+
+            attr.name = `repeating_inventory_${rowId}_${fld.id}`;
+            attr.current = item[key];
+            attr.characterid = character.id;
+
+            if ('max' in fld && fld.max == true){
+                attr.max = item[key];
+
+                if (item.hasOwnProperty(key + '_max')){
+                    attr.max = item[key + '_max'] || '';
+                } else {
+                    attr.max = attr.current;
+                }
+            }
+
+            createObj("attribute", attr);
+        }
+    }
+
+    function handleAttack(character, args){
+
+        if (!("rolls" in args)){
+            return {msg: "You must specify the number of rolls!", type:"error"};
+        }
+
+        if (!("dice" in args)){
+            return {msg: "You must specify the dice roll!", type:"error"};
+        }
+
+        
+        let amount = args['rolls'];
+        let msgText = '';
+        let type='success';
+
+        if ("resource" in args){
+            let resources = spendResource(args['rolls'], args['resource'], character);
+            
+            if (!resources){
+                return {msg: "Could not spend resource!", type:"error"};
+            }
+
+            amount = resources.spent;
+            msgText = `${character.get('name')} spent ${amount} ${args['resource']}!`;
+
+            if (resources.exhausted){
+                msgText += `${character.get('name')} has run out of ${args['resource']}`;
+                type = 'warning';
+            } else {
+                msgText += `${character.get('name')} has ${resources.remaining} ${args['resource']} remaining!`;
+            }
+
+        }
+
+        let rollText = generateRollText(amount, args['dice']);
+
+        return {msg: msgText, roll: rollText, type:type};
+    }
+
+
+    function generateRollText(amount, dice){
+
+        let rollText = '';
+
+        //generate rolltext in the form of {{dice,dice,dice}}
+        for (let i = 0; i < amount; i++){
+            rollText += dice;
+
+            if (i < amount - 1){
+                rollText += ',';
+            }
+        }
+
+        return `{{${rollText}}}`;
+    }
+
+
+    function spendResource(amount, resource, character){
+        let attr = getAttr(character, resource);
+
+        if (!attr || !Number.isInteger(amount)){
+            log(resource);
+            log(attr);
+            return null;
+        }
+
+        let current = attr.get('current'),
+            newVal = Math.floor( current - amount, 0);
+
+        
+        attr.setWithWorker({current: newVal});
+
+        return {
+            spent: current - newVal,
+            exhausted: (newVal == 0),
+            remaining: newVal
+        }
+    }
+
     var Main = Main || (function(){
         const HandleInput = function(msg) {
 
@@ -225,6 +988,7 @@
                 return;
             }
 
+            //Initial Validation
             const args = splitArgs(msg.content),
                 sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
                 character = getCharacter(sender, msg, args);
@@ -234,6 +998,7 @@
                 return;
             }
 
+            // Reload
             if (msg.content.startsWith("!!reload")){
                 if (!("weapon" in args)){
                     sendMessage('You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', sender, 'error');
@@ -244,6 +1009,31 @@
 
                 sendMessage(response.msg, "Reload Script", response.type);
                 return;
+            }
+
+
+            //Pickup
+            if (msg.content.startsWith("!!pickup")){
+                const response = handlePickup(character, args);
+
+                sendMessage(response.msg, "Pickup Script", response.type);
+                return;
+            }
+
+
+            //attack
+            if (msg.content.startsWith("!!attack")){
+                const response = handleAttack(character, args);
+
+                if ('roll' in response){
+                    sendChat('Attack Script', `${character.get('name')} makes an attack!`);
+                    sendChat('Attack Script', `/roll ${response.roll}`);
+                }
+
+                if (response.msg){
+                    sendMessage(response.msg, 'Attack Script', response.type);
+                }
+
             }
         };
         
@@ -270,15 +1060,11 @@
                     break;
             }
 
-
             sendChat(
                 `${who}`,
                 `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${msg}</div>`
     		);
         };
-        
-
-        
         
         const RegisterEventHandlers = function() {
     		on('chat:message', HandleInput);

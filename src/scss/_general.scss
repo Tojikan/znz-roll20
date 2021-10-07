@@ -110,8 +110,10 @@ input {
             text-align: right;
         }
     }
+}
 
-
+.sheet-input {
+    text-align: center;
 }
 
 .sheet-hidden {
@@ -143,5 +145,13 @@ textarea {
     &.sheet-shy {
         resize: none;
         border: none;
+    }
+
+    &.sheet-small {
+        height: 3rem;
+    }
+
+    &.sheet-vertical {
+        resize: vertical;
     }
 }

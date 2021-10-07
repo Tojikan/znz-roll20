@@ -1,6 +1,8 @@
 import { attrAlert } from "./attrAlert";
 import { handleReload } from "./reload";
-import { splitArgs, getCharacter } from "./_helpers";
+import { handlePickup } from "./pickup";
+import { handleAttack } from "./attack";
+import { splitArgs, getCharacter, regexGetRowId } from "./_helpers";
 
 
 var Main = Main || (function(){
@@ -10,6 +12,7 @@ var Main = Main || (function(){
             return;
         }
 
+        //Initial Validation
         const args = splitArgs(msg.content),
             sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
             character = getCharacter(sender, msg, args);
@@ -19,6 +22,7 @@ var Main = Main || (function(){
             return;
         }
 
+        // Reload
         if (msg.content.startsWith("!!reload")){
             if (!("weapon" in args)){
                 sendMessage('You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', sender, 'error');
@@ -29,6 +33,31 @@ var Main = Main || (function(){
 
             sendMessage(response.msg, "Reload Script", response.type);
             return;
+        }
+
+
+        //Pickup
+        if (msg.content.startsWith("!!pickup")){
+            const response = handlePickup(character, args);
+
+            sendMessage(response.msg, "Pickup Script", response.type);
+            return;
+        }
+
+
+        //attack
+        if (msg.content.startsWith("!!attack")){
+            const response = handleAttack(character, args);
+
+            if ('roll' in response){
+                sendChat('Attack Script', `${character.get('name')} makes an attack!`);
+                sendChat('Attack Script', `/roll ${response.roll}`);
+            }
+
+            if (response.msg){
+                sendMessage(response.msg, 'Attack Script', response.type);
+            }
+
         }
     };
     
@@ -55,15 +84,11 @@ var Main = Main || (function(){
                 break;
         }
 
-
         sendChat(
             `${who}`,
             `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${msg}</div>`
 		);
     }
-    
-
-    
     
     const RegisterEventHandlers = function() {
 		on('chat:message', HandleInput);

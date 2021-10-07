@@ -96,9 +96,95 @@ export function getCharacter(sender, msg, args = {}){
  * @param {*} attribute 
  * @returns The Attribute value
  */
-export var getAttrVal = function(character, attr){
+export const getAttr = function(character, attr){
     return findObjs({type: 'attribute', characterid: character.id, name: attr})[0];
 }
 
+/**
+ * Get Attribute Value, and use default value if not present.
+ * @param {*} character 
+ * @param {*} attr 
+ * @returns 
+ */
+export const getAttrVal = function(character, attr){
+    return getAttrByName(character.id, attr);
+}
 
 
+/**
+ * Extract Row ID from attribute Name
+ * @param {*} str 
+ */
+export const regexGetRowId = function(str){
+    return str.match(/(?<=_)-(.*?)(?=_)/);
+}
+
+
+/**
+ * Extract array of repeater IDs from character attributes
+ * @param {*} repeaterId 
+ * @returns 
+ */
+export const getRepeaterIds = function(repeaterId, characterId){
+    let result = [];
+
+    let attributes = findObjs({type:'attribute', characterid:characterId});
+
+    attributes.map((attr)=>{
+        if (attr.get('name').startsWith(`repeating_${repeaterId}_`)){
+            let row = regexGetRowId(attr.get('name'));
+
+            if (row){
+                if (!result.includes(row[0])){
+                    result.push(row[0]);
+                }
+            }
+        }
+    });
+
+    return result;
+}
+
+
+/**
+ * 
+ * @returns a new row ID for a repeater row.
+ */
+export const generateRowID = function () {
+    "use strict";
+    return generateUUID().replace(/_/g, "Z");
+};
+
+
+/**
+ * Generates a UUID for a repeater section, just how Roll20 does it in the character sheet.
+ * https://app.roll20.net/forum/post/3025111/api-and-repeating-sections-on-character-sheets/?pageforid=3037403#post-3037403
+*/
+const generateUUID = function() { 
+    "use strict";
+
+    var a = 0, b = [];
+    return (function() {
+        var c = (new Date()).getTime() + 0, d = c === a;
+        a = c;
+        for (var e = new Array(8), f = 7; 0 <= f; f--) {
+            e[f] = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(c % 64);
+            c = Math.floor(c / 64);
+        }
+        c = e.join("");
+        if (d) {
+            for (f = 11; 0 <= f && 63 === b[f]; f--) {
+                b[f] = 0;
+            }
+            b[f]++;
+        } else {
+            for (f = 0; 12 > f; f++) {
+                b[f] = Math.floor(64 * Math.random());
+            }
+        }
+        for (f = 0; 12 > f; f++){
+            c += "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(b[f]);
+        }
+        return c;
+    })();
+}

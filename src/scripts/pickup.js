@@ -1,20 +1,33 @@
-import { getAttrVal } from "./_helpers";
-import { fields } from '../model/card';
-import * as templates from '../model/items.json';
+import { fields as card } from '../model/card';
+import { fields as charFields } from '../model/character';
+import * as itemtemplates from '../model/items.json';
+import { generateRowID, getAttrVal, getRepeaterIds } from "./_helpers";
 
-const invPrefix = "(([[data.character.slots.inventoryslots.prefix]]))";
-const templates = (([[data.items]]));
-const acceptedFields = Object.keys(fields).filter(x => x != 'actions');
+const templates = itemtemplates;
+const acceptedFields = (()=>{ //get acceptable params - the key of the field in card. Note we use the field key NOT the field ID!
+    let result = [];
+    for (let key in card){
+        if (key == 'actions') continue; //ignore actions
 
-export function pickup(char, args){
+        result.push(key);
+
+        if ('max' in card[key] && card[key].max == true) result.push(key + '_max'); //add max fields 
+    }
+    return result;
+})();
+delete acceptedFields.actions; //don't consider actions key
+
+
+export function handlePickup(character, args){
     
-    let slot = findOpenInventorySlot(char);
     let item = {};
 
+    // pull from existing template
     if ("item" in args && args.item in templates){
         item = templates[args.item];
     }
 
+    //add any new props
     for (let key in args){
         if (acceptedFields.includes(key)){
             item[key] = args[key];
@@ -22,30 +35,51 @@ export function pickup(char, args){
     }
 
 
-    for (let key in item){
-        
 
+    if (Object.keys(item).length){
+
+        let inventorySlots = getAttrVal(character, charFields.inventory.id);
+        let inventoryIds = getRepeaterIds('inventory', character.id);
+
+        if (inventoryIds.length >= inventorySlots){
+            return {msg: "Error: Character has no more available inventory slots!", type: "error"};
+        }
+
+        createInventoryItem(character, item);
+        return {msg: `${character.get('name')} picked up a(n) ${item["name"] || 'Item'}`, type:"success"};
+    } else {
+        return {msg: "Error: Invalid item or no arguments provided.", type: "error"}
     }
-
-    
-
-
 }
 
 
-function findOpenInventorySlot(char){
-    const maxSlots = (([[data.character.slots.inventoryslots.max]]));
-    for (let i = 1; i <= maxSlots; i++){
-        let attr = getAttrVal(char, invPrefix + "_" + i);
+function createInventoryItem(character, item){
+    var rowId = generateRowID();
 
-        if (!attr){ //If undefined - means it hasn't been used yet so it's open
-            return i;
+    for (let key in item){
+
+        //Don't handle max fields - max needs to be set as a property of an attribute
+        if (key.endsWith('_max')){
+            continue;
         }
 
-        if (attr.get('current') === 0){ //0 means off - unchecked
-            return i
+        let fld = card[key]; //get original field
+        let attr = {};
+
+        attr.name = `repeating_inventory_${rowId}_${fld.id}`;
+        attr.current = item[key];
+        attr.characterid = character.id;
+
+        if ('max' in fld && fld.max == true){
+            attr.max = item[key];
+
+            if (item.hasOwnProperty(key + '_max')){
+                attr.max = item[key + '_max'] || '';
+            } else {
+                attr.max = attr.current;
+            }
         }
+
+        createObj("attribute", attr);
     }
-
-    return null;
 }

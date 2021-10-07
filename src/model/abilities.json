@@ -20,12 +20,12 @@
         {
             "name": "builder",
             "label": "Builder",
-            "description": "Roll a D10 on barricade rolls. Add 1 additional bonus dice."
+            "description": "Use a D10 on rolls when building barricades. Add 1 additional bonus dice."
         },
         {
             "name": "doctor",
             "label": "Doctor",
-            "description": "Roll a D10 on first aid rolls. Add 1 additional bonus dice"
+            "description": "Use a D10 on rolls when restoring health.. Add 1 additional bonus dice"
         },
         {
             "name": "gearhead",
@@ -35,7 +35,7 @@
         {
             "name": "martial",
             "label": "Martial Artist",
-            "description": " Start the game with bonus 3 defense."
+            "description": "Use a D10 on dodge rolls. Start the game with 2 additional dodge."
         },
         {
             "name": "scavenger",
