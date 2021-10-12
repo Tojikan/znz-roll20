@@ -1,5 +1,5 @@
-// import {equip} from './equip';
-// import {limit} from'./limitinventory';
+import { equip } from './equip';
+import { limit } from'./limitinventory';
 
-// equip();
-// limit();
+equip();
+limit();

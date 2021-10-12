@@ -1,19 +1,18 @@
-
+import {fields as character} from '../model/character';
 
 
 export function attrAlert(obj, prev){
     const watchedAttr = [
-        "(([[data.character.stats.health.id]]))",
-        "(([[data.character.stats.energy.id]]))",
-        "(([[data.character.slots.weaponslots.id]]))",
-        "(([[data.character.slots.equipmentslots.id]]))"
+        character.stats.hp.id,
+        character.stats.ap.id,
+        character.weaponslots.id,
+        character.equipmentslots.id
     ];
-    const ammoId = "(([[data.character.ammo.id]]))";
-    const ammoTypes = (([[data.character.ammo.types]]));
+    const ammoTypes = character.ammo.options;
     let attr = '';
 
-    for (let ammo of ammoTypes){
-        watchedAttr.push(`${ammoId}_${ammo}`);
+    for (let type of ammoTypes){
+        watchedAttr.push(type.id);
     }
 
     if (watchedAttr.includes(obj.get("name"))){

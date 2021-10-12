@@ -44,28 +44,28 @@ function sheet(){
                 }
             }
         }))
-        //Inject sheet workers into the script
-        // .pipe(inject((() => {      
-        //         // Use Rollup to bundle up our workers
-        //         return gulp.src('src/workers/workers.js')
-        //             .pipe(rollup({
-        //                 input: './src/workers/workers.js',
-        //                 plugins:[commonjs(), json()],
-        //                 output: {
-        //                     file:'workers.out',
-        //                     format: 'iife'
-        //                 }
-        //             }))
-        //             .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, evalReplace))
-        //         })()
-        //     ,{ 
-        //         // Inject your workers as a pure string between the appropriate tag pattern
-        //         starttag: '/** inject:workers **/',     
-        //         endtag: '/** endinject **/',
-        //         transform: function(filePath, file){
-        //             return file.contents.toString('utf-8')
-        //         }
-        //     }))                                   
+        //  Inject sheet workers into the script
+        .pipe(inject((() => {      
+                // Use Rollup to bundle up our workers
+                return gulp.src('src/workers/workers.js')
+                    .pipe(rollup({
+                        input: './src/workers/workers.js',
+                        plugins:[commonjs(), json()],
+                        output: {
+                            file:'workers.out',
+                            format: 'iife'
+                        }
+                    }))
+                    .pipe(replace(/\(\(\[\[(.*?)\]\]\)\)/gs, evalReplace))
+                })()
+            ,{ 
+                // Inject your workers as a pure string between the appropriate tag pattern
+                starttag: '/** inject:workers **/',     
+                endtag: '/** endinject **/',
+                transform: function(filePath, file){
+                    return file.contents.toString('utf-8')
+                }
+            }))                                   
         //Just in case you forget
         .pipe(replace('text/javascript', 'text/worker'))
         .pipe(gulp.dest('./dist'));

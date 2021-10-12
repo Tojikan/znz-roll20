@@ -44,11 +44,13 @@ export const fields = {
 }
 
 
-export const actions = {
-    export:'exportitem', 
-    delete:'deleteitem',
-    attack:'attackweapon',
-    reload: 'reloadweapon',
-    equip: 'equipitem',
-    unequip: 'unequipitem'
+export const options = {
+    actions: {
+        export:'exportitem', 
+        delete:'deleteitem',
+        attack:'attackweapon',
+        reload: 'reloadweapon',
+        equip: 'equipitem',
+        unequip: 'unequipitem'
+    }
 }

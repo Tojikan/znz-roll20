@@ -4,14 +4,14 @@ import { fields as charFields} from '../model/character';
 
 export function handleReload(character, weaponId){
     const getAttrName = function(id, num){
-        return `${charFields.slots.weaponslots.prefix}_${id}_${num}`;
+        return `${charFields.weaponslots.type}_${id}_${num}`;
     }    
 
     const itemType = getAttr(character, getAttrName(card.type.id, weaponId)),
         weaponType = getAttr(character, getAttrName(card.weapontype.id, weaponId)),
         ammoType = getAttr(character, getAttrName(card.ammotype.id, weaponId)),
         ammo = getAttr(character, getAttrName(card.uses.id, weaponId)),
-        active = getAttr(character, charFields.slots.weaponslots.prefix + '_' + weaponId);
+        active = getAttr(character, charFields.weaponslots.type + '_' + weaponId);
 
         log(active);
         

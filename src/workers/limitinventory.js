@@ -2,8 +2,7 @@ import {fields as character} from '../model/character';
 
 
 export function limit(){
-    on('change:repeating_inventory', function(evInfo){
-        console.log(evInfo);
+    on(`change:repeating_${character.inventory.id}`, function(evInfo){
 
         //So we don't interfere with unequip script
         if (evInfo.sourceType == 'sheetworker'){
@@ -19,11 +18,11 @@ export function limit(){
                 return;
             }
 
-            getSectionIDs("inventory", function(arr){
+            getSectionIDs(character.inventory.id, function(arr){
 
                 if (arr.length > slots){
                     let lastRow = arr[arr.length - 1]; //only remove the latest one, so we don't interfere with unequip
-                    removeRepeatingRow("repeating_inventory_" + lastRow);
+                    removeRepeatingRow(`repeating_${character.inventory.id}_` + lastRow);
                 }
             });
         });

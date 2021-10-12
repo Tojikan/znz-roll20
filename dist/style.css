@@ -363,12 +363,12 @@ textarea.sheet-vertical {
 .sheet-equipment .sheet-wrap .sheet-slot {
   flex-basis: 18%; }
 
-.sheet-weaponslots .sheet-card .sheet-card-actions button.sheet-attack-button,
-.sheet-weaponslots .sheet-card .sheet-card-actions button.sheet-reload-button {
+.sheet-weapon-slots .sheet-card .sheet-card-actions button.sheet-attack-button,
+.sheet-weapon-slots .sheet-card .sheet-card-actions button.sheet-reload-button {
   display: inline-block; }
 
-.sheet-weaponslots .sheet-card .sheet-card-actions button.sheet-unequip-button,
-.sheet-equipmentslots .sheet-card .sheet-card-actions button.sheet-unequip-button {
+.sheet-weapon-slots .sheet-card .sheet-card-actions button.sheet-unequip-button,
+.sheet-equipment-slots .sheet-card .sheet-card-actions button.sheet-unequip-button {
   display: inline-block; }
 
 .sheet-inventory .sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-actions button.sheet-equip-button,

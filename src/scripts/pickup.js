@@ -15,7 +15,6 @@ const acceptedFields = (()=>{ //get acceptable params - the key of the field in 
     }
     return result;
 })();
-delete acceptedFields.actions; //don't consider actions key
 
 
 export function handlePickup(character, args){
@@ -39,7 +38,7 @@ export function handlePickup(character, args){
     if (Object.keys(item).length){
 
         let inventorySlots = getAttrVal(character, charFields.inventory.id);
-        let inventoryIds = getRepeaterIds('inventory', character.id);
+        let inventoryIds = getRepeaterIds(charFields.inventory.id, character.id);
 
         if (inventoryIds.length >= inventorySlots){
             return {msg: "Error: Character has no more available inventory slots!", type: "error"};
@@ -66,7 +65,7 @@ function createInventoryItem(character, item){
         let fld = card[key]; //get original field
         let attr = {};
 
-        attr.name = `repeating_inventory_${rowId}_${fld.id}`;
+        attr.name = `repeating_${charFields.inventory.id}_${rowId}_${fld.id}`;
         attr.current = item[key];
         attr.characterid = character.id;
 

@@ -2,7 +2,7 @@ import { attrAlert } from "./attrAlert";
 import { handleReload } from "./reload";
 import { handlePickup } from "./pickup";
 import { handleAttack } from "./attack";
-import { splitArgs, getCharacter, regexGetRowId } from "./_helpers";
+import { splitArgs, getCharacter } from "./_helpers";
 
 
 var Main = Main || (function(){

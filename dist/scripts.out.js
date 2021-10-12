@@ -1,19 +1,182 @@
 (function () {
     'use strict';
 
+    var abilities = [
+    	{
+    		id: "",
+    		label: "",
+    		description: ""
+    	},
+    	{
+    		id: "actionstar",
+    		label: "Action Star",
+    		description: "Increase your max action points by 2"
+    	},
+    	{
+    		id: "cheerleader",
+    		label: "Cheerleader",
+    		description: "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
+    	},
+    	{
+    		id: "brawler",
+    		label: "Brawler",
+    		description: "Adds 2 bonus rolls to any melee attack."
+    	},
+    	{
+    		id: "builder",
+    		label: "Builder",
+    		description: "Use a D10 when building barricades and add 1 bonus dice roll."
+    	},
+    	{
+    		id: "doctor",
+    		label: "Doctor",
+    		description: "Use a D10 when restoring health and add 1 bonus dice roll."
+    	},
+    	{
+    		id: "Reflexes",
+    		label: "Reflexes",
+    		description: "Use a D10 when doing defense rolls."
+    	},
+    	{
+    		id: "scavenger",
+    		label: "Scavenger",
+    		description: "Whenever you scavenge, scavenge 1 additional item."
+    	},
+    	{
+    		id: "scout",
+    		label: "Scout",
+    		description: "Gain better vision in the dark. Sense approaching enemies."
+    	},
+    	{
+    		id: "sniper",
+    		label: "Sniper",
+    		description: "Add +2 on every attack roll you make."
+    	},
+    	{
+    		id: "tanky",
+    		label: "Tanky",
+    		description: "Increase your starting health by 20."
+    	}
+    ];
+
+    var abilities$1 = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        'default': abilities
+    });
+
+    const fields$1 = {
+        notes: {
+            id: "notes",
+            type: "textarea"
+        },
+        ammo: {
+            id: "ammo",
+            type: "list",
+            options: {
+                d4: {
+                    id: "ammo_d4",
+                    default: 0,
+                    label: "d4"
+                },
+                d6: {
+                    id: "ammo_d6",
+                    default: 0,
+                    label: "d6"
+                },
+                d8: {
+                    id: "ammo_d8",
+                    default: 0,
+                    label: "d8"
+                },
+                d10: {
+                    id: "ammo_d10",
+                    default: 0,
+                    label: "d10"
+                },
+                d12: {
+                    id: "ammo_d12",
+                    default: 0,
+                    label: "d12"
+                },
+                d20: {
+                    id: "ammo_d20",
+                    default: 0,
+                    label: "d20"
+                },
+                bolt: {
+                    id: "ammo_bolt",
+                    default: 0,
+                    label: "Bolts"
+                },
+                arrow: {
+                    id: "ammo_arrow",
+                    default: 0,
+                    label: "Arrows"
+                }
+            }
+        },
+        stats: {
+            hp: {
+                id: "hp",
+                default: 30,
+                type: "max",
+                label: "HP"
+            },
+            ap: {
+                id: "ap",
+                default: 5,
+                type: "max",
+                label: "AP"
+            },
+        },
+        defense: {
+            id: "defense",
+            default: 4,
+            type: "dice",
+            bonus: {
+                id: 'defense_bonus',
+                default: 0
+            }
+        },
+        ability: {
+            id: "ability",
+            type: "toggleselect",
+            options: abilities$1
+        },
+        weaponslots: {
+            id: "weaponslots",
+            label: "Weapons",
+            default: 1,
+            max: 3,
+            type: "weapon"
+        },
+        equipmentslots: {
+            id: "equipmentslots",
+            default: 3,
+            max: 5,
+            type: "equipment",
+            label: "Equipment"
+        },
+        inventory: {
+            id: "inventory",
+            default: 5,
+            max: 9,
+            label: "Inventory"
+        }
+    };
+
     function attrAlert(obj, prev){
         const watchedAttr = [
-            "",
-            "",
-            "",
-            ""
+            character.stats.hp.id,
+            character.stats.ap.id,
+            character.weaponslots.id,
+            character.equipmentslots.id
         ];
-        const ammoId = "ammo";
-        const ammoTypes = ;
+        const ammoTypes = character.ammo.options;
         let attr = '';
 
-        for (let ammo of ammoTypes){
-            watchedAttr.push(`${ammoId}_${ammo}`);
+        for (let type of ammoTypes){
+            watchedAttr.push(type.id);
         }
 
         if (watchedAttr.includes(obj.get("name"))){
@@ -238,7 +401,7 @@
         })();
     };
 
-    var fields$1 = {
+    const fields = {
         name: {
             id: 'itemname'
         },
@@ -281,192 +444,18 @@
         flavor: {
             id: 'flavor'
         },
-        actions: {
-            export:'exportitem', 
-            delete:'deleteitem',
-            attack:'attackweapon',
-            reload: 'reloadweapon',
-            equip: 'equipitem',
-            unequip: 'unequipitem',
-        }
-    };
-
-    var abilities = [
-    	{
-    		id: "",
-    		label: "",
-    		description: ""
-    	},
-    	{
-    		id: "actionstar",
-    		label: "Action Star",
-    		description: "Increase your max action points by 2"
-    	},
-    	{
-    		id: "cheerleader",
-    		label: "Cheerleader",
-    		description: "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
-    	},
-    	{
-    		id: "brawler",
-    		label: "Brawler",
-    		description: "Adds 2 bonus rolls to any melee attack."
-    	},
-    	{
-    		id: "builder",
-    		label: "Builder",
-    		description: "Use a D10 when building barricades and add 1 bonus dice roll."
-    	},
-    	{
-    		id: "doctor",
-    		label: "Doctor",
-    		description: "Use a D10 when restoring health and add 1 bonus dice roll."
-    	},
-    	{
-    		id: "Reflexes",
-    		label: "Reflexes",
-    		description: "Use a D10 when doing defense rolls."
-    	},
-    	{
-    		id: "scavenger",
-    		label: "Scavenger",
-    		description: "Whenever you scavenge, scavenge 1 additional item."
-    	},
-    	{
-    		id: "scout",
-    		label: "Scout",
-    		description: "Gain better vision in the dark. Sense approaching enemies."
-    	},
-    	{
-    		id: "sniper",
-    		label: "Sniper",
-    		description: "Add +2 on every attack roll you make."
-    	},
-    	{
-    		id: "tanky",
-    		label: "Tanky",
-    		description: "Increase your starting health by 20."
-    	}
-    ];
-
-    var abilities$1 = /*#__PURE__*/Object.freeze({
-        __proto__: null,
-        'default': abilities
-    });
-
-    const fields = {
-        notes: {
-            id: "notes",
-            type: "textarea"
-        },
-        ammo: {
-            id: "ammo",
-            type: "list",
-            options: {
-                d4: {
-                    id: "ammo_d4",
-                    default: 0,
-                    label: "d4"
-                },
-                d6: {
-                    id: "ammo_d6",
-                    default: 0,
-                    label: "d6"
-                },
-                d8: {
-                    id: "ammo_d8",
-                    default: 0,
-                    label: "d8"
-                },
-                d10: {
-                    id: "ammo_d10",
-                    default: 0,
-                    label: "d10"
-                },
-                d12: {
-                    id: "ammo_d12",
-                    default: 0,
-                    label: "d12"
-                },
-                d20: {
-                    id: "ammo_d20",
-                    default: 0,
-                    label: "d20"
-                },
-                bolt: {
-                    id: "ammo_bolt",
-                    default: 0,
-                    label: "Bolts"
-                },
-                arrow: {
-                    id: "ammo_arrow",
-                    default: 0,
-                    label: "Arrows"
-                }
-            }
-        },
-        stats: {
-            hp: {
-                id: "hp",
-                default: 30,
-                type: "max",
-                label: "HP"
-            },
-            ap: {
-                id: "ap",
-                default: 5,
-                type: "max",
-                label: "AP"
-            },
-        },
-        defense: {
-            id: "defense",
-            default: 4,
-            type: "dice",
-            bonus: {
-                id: 'defense_bonus',
-                default: 0
-            }
-        },
-        ability: {
-            id: "ability",
-            type: "toggleselect",
-            options: abilities$1
-        },
-        weaponslots: {
-            id: "weaponslots",
-            label: "Weapons",
-            default: 1,
-            max: 3,
-            type: "weapon",
-            type: "variableslots"
-        },
-        equipmentslots: {
-            id: "equipmentslots",
-            default: 3,
-            max: 5,
-            type: "equipment",
-            label: "Equipment",
-            type: "slots"
-        },
-        inventory: {
-            id: "inventory",
-            default: 5,
-            max: 9,
-            label: "Inventory"
-        }
     };
 
     function handleReload(character, weaponId){
         const getAttrName = function(id, num){
-            return `${fields.slots.weaponslots.prefix}_${id}_${num}`;
+            return `${fields$1.weaponslots.type}_${id}_${num}`;
         };    
 
-        const itemType = getAttr(character, getAttrName(fields$1.type.id, weaponId)),
-            weaponType = getAttr(character, getAttrName(fields$1.weapontype.id, weaponId)),
-            ammoType = getAttr(character, getAttrName(fields$1.ammotype.id, weaponId)),
-            ammo = getAttr(character, getAttrName(fields$1.uses.id, weaponId)),
-            active = getAttr(character, fields.slots.weaponslots.prefix + '_' + weaponId);
+        const itemType = getAttr(character, getAttrName(fields.type.id, weaponId)),
+            weaponType = getAttr(character, getAttrName(fields.weapontype.id, weaponId)),
+            ammoType = getAttr(character, getAttrName(fields.ammotype.id, weaponId)),
+            ammo = getAttr(character, getAttrName(fields.uses.id, weaponId)),
+            active = getAttr(character, fields$1.weaponslots.type + '_' + weaponId);
 
             log(active);
             
@@ -923,16 +912,15 @@
     const templates = itemtemplates;
     const acceptedFields = (()=>{ //get acceptable params - the key of the field in card. Note we use the field key NOT the field ID!
         let result = [];
-        for (let key in fields$1){
+        for (let key in fields){
             if (key == 'actions') continue; //ignore actions
 
             result.push(key);
 
-            if ('max' in fields$1[key] && fields$1[key].max == true) result.push(key + '_max'); //add max fields 
+            if ('max' in fields[key] && fields[key].max == true) result.push(key + '_max'); //add max fields 
         }
         return result;
     })();
-    delete acceptedFields.actions; //don't consider actions key
 
 
     function handlePickup(character, args){
@@ -955,8 +943,8 @@
 
         if (Object.keys(item).length){
 
-            let inventorySlots = getAttrVal(character, fields.inventory.id);
-            let inventoryIds = getRepeaterIds('inventory', character.id);
+            let inventorySlots = getAttrVal(character, fields$1.inventory.id);
+            let inventoryIds = getRepeaterIds(fields$1.inventory.id, character.id);
 
             if (inventoryIds.length >= inventorySlots){
                 return {msg: "Error: Character has no more available inventory slots!", type: "error"};
@@ -980,10 +968,10 @@
                 continue;
             }
 
-            let fld = fields$1[key]; //get original field
+            let fld = fields[key]; //get original field
             let attr = {};
 
-            attr.name = `repeating_inventory_${rowId}_${fld.id}`;
+            attr.name = `repeating_${fields$1.inventory.id}_${rowId}_${fld.id}`;
             attr.current = item[key];
             attr.characterid = character.id;
 

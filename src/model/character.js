@@ -84,16 +84,14 @@ export const fields = {
         label: "Weapons",
         default: 1,
         max: 3,
-        type: "weapon",
-        type: "variableslots"
+        type: "weapon"
     },
     equipmentslots: {
         id: "equipmentslots",
         default: 3,
         max: 5,
         type: "equipment",
-        label: "Equipment",
-        type: "slots"
+        label: "Equipment"
     },
     inventory: {
         id: "inventory",
