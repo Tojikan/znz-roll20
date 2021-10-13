@@ -25,6 +25,8 @@
                             <div>
                                 <input type="text" class="sheet-number sheet-shy" name="attr_hp_max" value="30"/>
                             </div>
+
+                            
                         </div>
                     </div>
                 
@@ -38,6 +40,11 @@
                             <div>
                                 <input type="text" class="sheet-number sheet-shy" name="attr_ap_max" value="5"/>
                             </div>
+
+                            
+                            
+                            <input type="text" class="sheet-hidden" name="attr_ap_rolls" value="5"/>
+                            
                         </div>
                     </div>
                 
@@ -205,50 +212,20 @@
 
     <div class="sheet-bubble ">
         <div class="sheet-content">
-            <label>Ammo</label>
+            <label>Skills</label>
 
             
                     
     <div class="sheet-list">
         
             <div class="sheet-line">
-                <div class="sheet-label">d4</div>
-                <input type="text" class="sheet-number" name="attr_ammo_d4" value="0"/>
+                <div class="sheet-label">Melee</div>
+                <input type="text" class="sheet-number" name="attr_melee_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
-                <div class="sheet-label">d6</div>
-                <input type="text" class="sheet-number" name="attr_ammo_d6" value="0"/>
-            </div>
-        
-            <div class="sheet-line">
-                <div class="sheet-label">d8</div>
-                <input type="text" class="sheet-number" name="attr_ammo_d8" value="0"/>
-            </div>
-        
-            <div class="sheet-line">
-                <div class="sheet-label">d10</div>
-                <input type="text" class="sheet-number" name="attr_ammo_d10" value="0"/>
-            </div>
-        
-            <div class="sheet-line">
-                <div class="sheet-label">d12</div>
-                <input type="text" class="sheet-number" name="attr_ammo_d12" value="0"/>
-            </div>
-        
-            <div class="sheet-line">
-                <div class="sheet-label">d20</div>
-                <input type="text" class="sheet-number" name="attr_ammo_d20" value="0"/>
-            </div>
-        
-            <div class="sheet-line">
-                <div class="sheet-label">Bolts</div>
-                <input type="text" class="sheet-number" name="attr_ammo_bolt" value="0"/>
-            </div>
-        
-            <div class="sheet-line">
-                <div class="sheet-label">Arrows</div>
-                <input type="text" class="sheet-number" name="attr_ammo_arrow" value="0"/>
+                <div class="sheet-label">Ranged</div>
+                <input type="text" class="sheet-number" name="attr_ranged_skill" value="0"/>
             </div>
         
     </div>
@@ -363,30 +340,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_weapon_ammotype_1">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -396,8 +350,10 @@
             <span readonly name="attr_weapon_flavor_1"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{weapon_itemdamage_1}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_weapon_reloadweapon_1" value="!!reload weapon=1">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_itemdamage_1}' weaponname='@{weapon_itemname_1}' type='@{weapon_weapontype_1}' resource='weapon_uses_1' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_1">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_1">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -481,30 +437,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_weapon_ammotype_2">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -514,8 +447,10 @@
             <span readonly name="attr_weapon_flavor_2"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{weapon_itemdamage_2}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_weapon_reloadweapon_2" value="!!reload weapon=2">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_itemdamage_2}' weaponname='@{weapon_itemname_2}' type='@{weapon_weapontype_2}' resource='weapon_uses_2' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_2">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_2">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -599,30 +534,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_weapon_ammotype_3">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -632,8 +544,10 @@
             <span readonly name="attr_weapon_flavor_3"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{weapon_itemdamage_3}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_weapon_reloadweapon_3" value="!!reload weapon=3">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_itemdamage_3}' weaponname='@{weapon_itemname_3}' type='@{weapon_weapontype_3}' resource='weapon_uses_3' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_3">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_3">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -753,30 +667,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_1">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -786,8 +677,10 @@
             <span readonly name="attr_equipment_flavor_1"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_1}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_1" value="!!reload weapon=1">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_1}' weaponname='@{equipment_itemname_1}' type='@{equipment_weapontype_1}' resource='equipment_uses_1' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_1">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_1">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -871,30 +764,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_2">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -904,8 +774,10 @@
             <span readonly name="attr_equipment_flavor_2"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_2}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_2" value="!!reload weapon=2">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_2}' weaponname='@{equipment_itemname_2}' type='@{equipment_weapontype_2}' resource='equipment_uses_2' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_2">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_2">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -989,30 +861,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_3">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -1022,8 +871,10 @@
             <span readonly name="attr_equipment_flavor_3"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_3}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_3" value="!!reload weapon=3">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_3}' weaponname='@{equipment_itemname_3}' type='@{equipment_weapontype_3}' resource='equipment_uses_3' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_3">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_3">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -1107,30 +958,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_4">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -1140,8 +968,10 @@
             <span readonly name="attr_equipment_flavor_4"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_4}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_4" value="!!reload weapon=4">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_4}' weaponname='@{equipment_itemname_4}' type='@{equipment_weapontype_4}' resource='equipment_uses_4' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_4">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_4">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -1225,30 +1055,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_equipment_ammotype_5">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -1258,8 +1065,10 @@
             <span readonly name="attr_equipment_flavor_5"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{equipment_itemdamage_5}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_equipment_reloadweapon_5" value="!!reload weapon=5">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_5}' weaponname='@{equipment_itemname_5}' type='@{equipment_weapontype_5}' resource='equipment_uses_5' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_5">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_5">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -1356,30 +1165,7 @@
             </div>
 
             
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_ammotype">
-                
-                    <option value="ammo_d4"  selected="selected" >d4</option>
-                
-                    <option value="ammo_d6" >d6</option>
-                
-                    <option value="ammo_d8" >d8</option>
-                
-                    <option value="ammo_d10" >d10</option>
-                
-                    <option value="ammo_d12" >d12</option>
-                
-                    <option value="ammo_d20" >d20</option>
-                
-                    <option value="ammo_bolt" >Bolts</option>
-                
-                    <option value="ammo_arrow" >Arrows</option>
-                
-            </select>
-            </div>
+            
 
         </div>
 
@@ -1389,8 +1175,10 @@
             <span readonly name="attr_flavor"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='@{itemdamage}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_reloadweapon" value="!!reload weapon=">Reload</button>
+            
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{itemdamage}' weaponname='@{itemname}' type='@{weapontype}' resource='uses' characterid='@{character_id}'" >Attack/Defend</button>
+            
             <button type="action" class="sheet-equip-button btn" name="act_equipitem">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_unequipitem">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
@@ -1537,8 +1325,25 @@
                 id: "ap",
                 default: 5,
                 type: "max",
-                label: "AP"
+                label: "AP",
+                rollable: true
             },
+        },
+        skills: {
+            id: "skills",
+            type: "list",
+            options: {
+                melee: {
+                    id: "melee_skill",
+                    default: "0",
+                    label: "Melee"
+                },
+                ranged: {
+                    id: "ranged_skill",
+                    default: "0",
+                    label: "Ranged"
+                }
+            }
         },
         defense: {
             id: "defense",
@@ -1636,6 +1441,38 @@
     const getButtonRowId = function(eventInfo){
         var underscoreIndex = eventInfo.sourceAttribute.lastIndexOf("_");
         return eventInfo.sourceAttribute.substr(0, underscoreIndex);
+    };
+
+    /**
+     * Given a number, spread it out and list all numbers preceding it.
+     */
+     const sequenceNumber = (num, delim='', flip=false) => {
+        var result = '';
+
+        if (!Number.isInteger(num)){
+            return '';
+        }
+
+        if (flip){
+            for (let i = num; i >= 0; i--){
+                result += i.toString();
+        
+                if (i > 0 && delim.length){
+                    result += delim;
+                }
+            }
+        } else {
+            
+            for (let i = 0; i <= num; i++){
+                result += i.toString();
+        
+                if (i < num && delim.length){
+                    result += delim;
+                }
+            }
+        }
+
+        return result;
     };
 
     function equip(){
@@ -1842,8 +1679,38 @@
         });
     }
 
+    //If a Stat is rollable, set a _rolls field to be a sequence of numbers
+    //ie if stat is 5, set _rolls field to be 1|2|3|4|5
+    //That way, we can use dropdowns for roll buttons based on the stats value
+    function rollOptions(){
+        for (let stat in fields$1.stats){
+            let curStat = fields$1.stats[stat];
+
+            if (curStat.rollable){
+                let attr = curStat.id;
+        
+                on( 'change:' + attr, function(){
+                    getAttrs([attr], function(values){
+                        let numOfDice = parseInt(values[attr], 10);
+
+                        var attrSet = {
+                            [attr + '_rolls'] : sequenceNumber(numOfDice, '|', true) //start at value
+                        };
+
+                        console.log(attrSet);
+        
+                        setAttrs(attrSet);
+
+                    });
+                });
+            }
+        }
+
+    }
+
     equip();
     limit();
+    rollOptions();
 
 })();
 

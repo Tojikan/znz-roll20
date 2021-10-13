@@ -38,6 +38,11 @@
                             <div>
                                 <input type="text" class="sheet-number sheet-shy" name="attr_{{item| getAttr}}_max" value="{{item.default}}"/>
                             </div>
+
+                            {% if item.rollable %}
+                            {# Use a sheet worker to iterate over this field so we can create |1|2|3 dropdowns for roll buttons #}
+                            <input type="text" class="sheet-hidden" name="attr_{{item | getAttr}}_rolls" value="{{item.default}}"/>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}

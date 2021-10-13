@@ -62,8 +62,25 @@ export const fields = {
             id: "ap",
             default: 5,
             type: "max",
-            label: "AP"
+            label: "AP",
+            rollable: true
         },
+    },
+    skills: {
+        id: "skills",
+        type: "list",
+        options: {
+            melee: {
+                id: "melee_skill",
+                default: "0",
+                label: "Melee"
+            },
+            ranged: {
+                id: "ranged_skill",
+                default: "0",
+                label: "Ranged"
+            }
+        }
     },
     defense: {
         id: "defense",

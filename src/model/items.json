@@ -2,113 +2,169 @@
     "snack": {
         "name": "Snack",
         "type": "inventory",
-        "description": "Restore 5 energy."
+        "description": "Restore 1 AP (cannot exceed max)",
+        "flavor": "Organic, locally-sourced zombie-killing fuel in eco-friendly packaging.",
+        "quantity": 10
     },
     "energydrink": {
         "name": "Energy Drink",
         "type": "inventory",
-        "description": "Restore 10 energy.",
-        "flavor": "Its got Electrolytes."
+        "description": "Gain 2 AP (cannot exceed max).",
+        "flavor": "It's got Electrolytes. It's what plants crave.",
+        "quantity": 8
     },
     "adrenaline": {
         "name": "Adrenaline",
         "type": "inventory",
-        "description": "Restore 20 energy.",
-        "flavor": "When you need a rush."
-
+        "description": "Gain 5 AP. Can exceed your max.",
+        "flavor": "When you need a rush.",
+        "quantity": 2
     },
+
+
     "bandage": {
         "name": "Bandage",
         "type": "inventory",
         "description": "Restore 1d6 health.",
-        "flavor": "A band-aid a day keeps the undead away."
+        "flavor": "It's even got a dinosaur on it!",
+        "quantity": 6
     },
     "firstaidkit": {
         "name": "First Aid Kit",
         "type": "inventory",
-        "description": "Restore 2d6 health."
+        "description": "Restore 2d6 health.",
+        "flavor": "It's basically just two bandages in a box.",
+        "quantity": 4
     },
     "medkit": {
         "name": "Med Kit",
         "type": "inventory",
         "description": "Restore 4d6 health.",
-        "flavor": "For if it's merely a flesh wound."
+        "flavor": "It's merely a flesh wound.",
+        "quantity": 2
     },
 
+
+    "ammo": {
+        "name": "Ammo",
+        "type": "inventory",
+        "description": "Fill 1 Ranged weapon to its max ammo.",
+        "flavor": "All-purpose, one size fits all ammunition.",
+        "quantity": 20
+    },
 
     "backpack": {
         "name": "Fanny Pack",
         "type": "equipment",
-        "description": "When this is equipped, increase your available inventory slots by 1. (Up to a maximum of 9 inventory slots)",
-        "flavor": "Stylish and functional."
+        "description": "When this is equipped, increase your available inventory slots by 1.",
+        "flavor": "Stylish AND functional.",
+        "quantity": 4
     },
     "holster": {
         "name": "Weapon Holster",
         "type": "equipment",
         "description": "When this is equipped, increase your available weapon slots by 1 (Up to a maximum of 4 weapon slots)",
-        "flavor": "Your standard handgun/rifle/sword/rocket launcher/etc holder."
+        "flavor": "Your standard handgun/rifle/sword/rocket launcher holder.",
+        "quantity": 4
     },
     "belt": {
-        "name": "More Pockets!",
+        "name": "Utiliy Belt",
         "type": "inventory",
         "description": "Delete this item. Increase your available equipment slots by 1 (Up to a maximum of 5 equipment slots)",
-        "flavor": "So much room for activites."
+        "flavor": "Batman would be jealous.",
+        "quantity": 4
     },
+
+
     "barricade1": {
         "name": "Sandbags!",
         "type": "inventory",
         "description": "Delete this item. Build a barricade anywhere with 2d6 health.",
-        "flavor": "So much room for activites."
+        "flavor": "Made with really, really lightweight sand.",
+        "quantity": 8
     },
     "barricade2": {
         "name": "Boards and Nails",
         "type": "inventory",
-        "description": "Delete this item. Build a barricade with 4d6 health at the entrance of any room.",
-        "flavor": "Who needs a hammer?"
+        "description": "Delete this item. Build a barricade with 4d6 health",
+        "flavor": "No hammer required.",
+        "quantity": 6
     },
 
 
     "armor1": {
-        "name": "Duct Tape Armor",
+        "name": "Improvised Armor",
         "type": "equipment",
         "description": "Increase your Armor by 1.",
-        "flavor": "Enough Duct Tape can do just about anything."
+        "flavor": "Enough Duct Tape can do just about anything.",
+        "quantity": 4
     },
     "armor2": {
         "name": "Sporting Pads",
         "type": "equipment",
-        "description": "Increase your Armor by 3.",
-        "flavor": "Hit them with the sporting ball while in your sporting protection while doing the sport."
+        "description": "Increase your Armor by 2.",
+        "flavor": "Perfect for doing that sport with the sporting ball.",
+        "quantity": 3
     },
     "armor3": {
         "name": "Tactical Gear",
         "type": "equipment",
-        "description": "Increase your Armor by 5.",
-        "flavor": "Looking pretty tacticool."
+        "description": "Increase your Armor by 4.",
+        "flavor": "Looking pretty tacticool.",
+        "quantity": 2
     },
     "armor4": {
         "name": "Plate Armor",
         "type": "equipment",
-        "description": "Increase your Armor by 10. Reduce dodge by 2.",
-        "flavor": "Time to get medieval on their ass."
+        "description": "Increase your Armor by 8. Reduce your dodge by 2.",
+        "flavor": "Time to get medieval on their ass.",
+        "quantity": 1
     },
+
+
     "dodge1": {
-        "name": "Exercise Tape",
-        "type": "equipment",
-        "description": "Increase dodge by 1.",
-        "flavor": "It's probably just a mental thing, but you feel limber."
-    },
-    "dodge2": {
-        "name": "Nice Shoes",
-        "type": "equipment",
-        "description": "Increase dodge by 2. Only 1 can be equipped at a time.",
-        "flavor": "Literally just shoes that are nice. But like, super nice though."
-    },
-    "dodge3": {
         "name": "Exercise Clothes",
         "type": "equipment",
-        "description": "Increase dodge by 6. Has no effect when your armor is 5 or more.",
-        "flavor": "So light and breezy"
+        "description": "Increase your dodge roll by 1.",
+        "flavor": "You feel just a tad bit more limber.",
+        "quantity": 4
+    },
+    "dodge2": {
+        "name": "Arm Guards",
+        "type": "equipment",
+        "description": "Increase your dodge roll by 2.",
+        "flavor": "Good luck biting into these.",
+        "quantity": 3
+    },
+    "dodge3": {
+        "name": "Shield",
+        "type": "equipment",
+        "description": "Increase your dodge roll by 3.",
+        "flavor": "It's not made of vibranium, but it's a decent shield.",
+        "quantity": 2
+    },
+    "dodge4": {
+        "name": "Really nice sneakers.",
+        "type": "equipment",
+        "description": "Increase your dodge roll by 6. Has no effect if you have any bonus armor at all. Only one can be equipped at a time.",
+        "flavor": "So light and breezy",
+        "quantity": 1
+    },
+
+
+    "grenade": {
+        "name": "Grenade",
+        "type": "equipment",
+        "description": "Deal 40 damage to a square within 7 squares and all its adjacent squares.",
+        "flavor": "Just a casual fragmentation grenade lying around.",
+        "quantity": 3
+    },
+    "molotov": {
+        "name": "Molotov",
+        "type": "equipment",
+        "description": "Light a square and its adjacent squares on fire within 7 squares for 3 rounds. Deals 10 damage and 5 ongoing damage to anyone who walks through.",
+        "flavor": "Liquor? I barely even lit her on fire!",
+        "quantity": 3
     },
 
 
@@ -118,56 +174,54 @@
         "type": "weapon",
         "weapontype": "melee",
         "damage": "1d4",
-        "uses": 25,
-        "flavor": "Great for cutting vegetables, fruit, and brains."
-    },
-    "baton": {
-        "name": "Baton",
-        "type": "weapon",
-        "weapontype": "melee",
-        "damage": "1d6",
-        "uses": 35,
-        "flavor": "Beat them to death... again."
+        "uses": 20,
+        "flavor": "Great for cutting vegetables, fruit, and brains.",
+        "quantity": 0
     },
     "baseballbat": {
         "name": "Baseball Bat",
         "type": "weapon",
         "weapontype": "melee",
-        "damage": "1d6+1",
-        "uses": 25,
-        "flavor": "It is now past the time... for America's favorite pastime."
+        "damage": "1d6",
+        "uses": 30,
+        "flavor": "It is now past the time... for America's favorite pastime.",
+        "quantity": 3
     },
-    "crowbar": {
-        "name": "Crowbar",
-        "type": "weapon",
-        "weapontype": "melee",
-        "damage": "1d8<2",
-        "uses": 45,
-        "flavor": "Great for prying off crabs."
-    },
-    "machete": {
-        "name": "Machete",
+    "nailbat": {
+        "name": "Nailbat",
         "type": "weapon",
         "weapontype": "melee",
         "damage": "1d8+2",
-        "uses": 30,
-        "flavor": "Classic undead re-deading equipment."
-    },
-    "sword": {
-        "name": "Sword",
-        "type": "weapon",
-        "weapontype": "melee",
-        "damage": "1d10+3",
-        "uses": 40,
-        "flavor": "Yes, it's an actual sword."
+        "uses": 20,
+        "flavor": "Peanut Butter and Jelly. Burger and Fries. Ham and Cheese. Nails and a Bat. ",
+        "quantity": 3
     },
     "combatknife": {
         "name": "Ka-Bar Knife",
         "type": "weapon",
         "weapontype": "melee",
-        "damage": "1d10<2",
-        "uses": 55,
-        "flavor": "Hoo-rah."
+        "damage": "1d8",
+        "uses": 40,
+        "flavor": "Hoo-rah.",
+        "quantity": 3
+    },
+    "machete": {
+        "name": "Machete",
+        "type": "weapon",
+        "weapontype": "melee",
+        "damage": "1d10",
+        "uses": 40,
+        "flavor": "Great tool for re-deading the undead.",
+        "quantity": 3
+    },
+    "axe": {
+        "name": "Axe",
+        "type": "weapon",
+        "weapontype": "melee",
+        "damage": "1d12",
+        "uses": 50,
+        "flavor": "Stumped?",
+        "quantity": 2
     },
     "katana": {
         "name": "Katana",
@@ -175,72 +229,79 @@
         "weapontype": "melee",
         "damage": "1d12+4",
         "uses": 40,
-        "flavor": "Forgive me sensei, I must go all out. Just this once."
+        "flavor": "Forgive me sensei, I must go all out. Just this once.",
+        "quantity": 2
     },
-    "axe": {
-        "name": "Axe",
+    "sword": {
+        "name": "Sword",
         "type": "weapon",
         "weapontype": "melee",
-        "damage": "1d12<3",
-        "uses": 55,
-        "flavor": "Time to chop up some firewood."
+        "damage": "1d16",
+        "uses": 60,
+        "flavor": "Why socialize when you could study the way of the sword?",
+        "quantity": 2
     },
     "chainsaw": {
         "name": "Chainsaw",
         "type": "weapon",
         "weapontype": "melee",
         "damage": "1d20+10",
-        "uses": 12,
-        "flavor": "It's about to be a massacre."
+        "uses": 10,
+        "flavor": "It's about to be a massacre.",
+        "quantity": 1
     },
     "lawnmower": {
         "name": "Lawnmower",
         "type": "weapon",
         "weapontype": "melee",
-        "damage": "100",
+        "damage": "25",
         "uses": 1,
         "description": "The turn you use this, you attack as you move, dealing damage to each square you move through",
-        "flavor": "Party's over."
+        "flavor": "Party's over.",
+        "quantity": 1
     },
-
 
 
     "handgun": {
         "name": "Handgun",
         "type": "weapon",
         "weapontype": "ranged",
-        "damage": "1d6+2",
-        "uses": 12,
+        "damage": "1d8",
+        "uses": 10,
         "ammotype": "ammo_1d6",
-        "flavor": "Pew pew pew."
+        "flavor": "Pew pew pew.",
+        "quantity": 3
+    },
+    "revolver": {
+        "name": "revolver",
+        "type": "weapon",
+        "weapontype": "ranged",
+        "damage": "1d12r<4",
+        "uses": 6,
+        "ammotype": "ammo_d8",
+        "flavor": "Do you feel lucky?",
+        "quantity": 3
     },
     "uzi": {
         "name": "Uzi",
         "type": "weapon",
         "weapontype": "ranged",
         "damage": "1d6",
-        "uses": 30,
+        "uses": 20,
         "ammotype": "ammo_1d6",
-        "flavor": "Spray and Pray"
+        "flavor": "Spray and Pray",
+        "quantity": 2
     },
-    "revolver": {
-        "name": "revolver",
+    "bow": {
+        "name": "Bow",
         "type": "weapon",
         "weapontype": "ranged",
-        "damage": "1d8+4",
-        "uses": 6,
-        "ammotype": "ammo_d8",
-        "flavor": "Do you feel lucky?"
-    },
-    "crossbow": {
-        "name": "Crossbow",
-        "type": "weapon",
-        "weapontype": "ranged",
-        "damage": "1d8<4",
-        "uses": 5,
-        "ammotype": "ammo_Bolt",
-        "description": "If you kill your target, leave a marker at the target. You can regain 1 Bolt by picking up the marker.",
-        "flavor": "Automatically makes you the most popular character."
+        "damage": "1d10r<5",
+        "uses": 3,
+        "ammotype": "ammo_arrow",
+        "description": "If you kill your target, leave a marker at the target. You can regain all spent Arrows used this turn if you pick up the marker",
+        "flavor": "Silent but deadly.",
+        "quantity": 2
     },
     "shotgun": {
         "name": "Shotgun",
@@ -249,71 +310,60 @@
         "damage": "4d4",
         "uses": 5,
         "ammotype": "ammo_d4",
-        "flavor": "Hail to the King, baby."
-    },
-    "autoshotgun": {
-        "name": "Auto Shotgun",
-        "type": "weapon",
-        "weapontype": "ranged",
-        "damage": "3d4",
-        "uses": 8,
-        "ammotype": "ammo_d4",
-        "flavor": "The N00bCann0n."
-    },
-    "magnum": {
-        "name": "Desert Eagle",
-        "type": "weapon",
-        "weapontype": "ranged",
-        "damage": "1d10+6",
-        "uses": 7,
-        "ammotype": "ammo_d10",
-        "flavor": "High caliber kick-ass"
+        "flavor": "Hail to the King, baby.",
+        "quantity": 3
     },
     "assaultrifle": {
         "name": "Assault Rifle",
         "type": "weapon",
         "weapontype": "ranged",
-        "damage": "1d10<3",
-        "uses": 20,
+        "damage": "1d8+1",
+        "uses": 25,
         "ammotype": "ammo_d10",
-        "flavor": "Now we're talking."
+        "flavor": "Now we're talking.",
+        "quantity": 2
     },
     "snipperrifle": {
         "name": "Sniper Rifle",
         "type": "weapon",
         "weapontype": "ranged",
-        "damage": "1d12+8",
+        "damage": "1d20r<8",
         "uses": 5,
         "ammotype": "ammo_d12",
-        "flavor": "BOOM! Headshot!"
-    },
-    "bow": {
-        "name": "Compound Bow",
-        "type": "weapon",
-        "weapontype": "ranged",
-        "damage": "1d12<6",
-        "uses": 5,
-        "ammotype": "ammo_Arrow",
-        "description": "If you kill your target, leave a marker at the target. You can regain 1 Ammo by picking up the marker.",
-        "flavor": "FWSH! Headshot!"
+        "flavor": "BOOM! Headshot!",
+        "quantity": 2
     },
     "machinegun": {
         "name": "Machine Gun",
         "type": "weapon",
         "weapontype": "ranged",
-        "damage": "1d20",
-        "uses": 100,
+        "damage": "1d10+2",
+        "uses": 30,
         "ammotype": "ammo_d20",
-        "flavor": "Our bullets will blot out the sun."
+        "description": "",
+        "flavor": "Our bullets will blot out the sun.",
+        "quantity": 1
+    },
+    "grenadelauncher": {
+        "name": "Grenade Launcher",
+        "type": "weapon",
+        "weapontype": "ranged",
+        "damage": "1d30r<10",
+        "uses": 5,
+        "ammotype": "ammo_d20",
+        "description": "This cannot be reloaded. If hitting single targets, it will damage adjacent squares to the target.",
+        "flavor": "Our bullets will blot out the sun.",
+        "quantity": 1
     },
     "flamethrower": {
         "name": "Flamethrower",
         "type": "weapon",
         "weapontype": "ranged",
-        "damage": "1d20+20",
+        "damage": "20",
         "uses": 5,
         "ammotype": "ammo_d20",
-        "description": "This weapon fires in a line of 5 spaces, dealing damage to all targets within the line.",
-        "flavor": "Turns out the zombies have a weakness to being lit on freakin' fire."
+        "description": "This cannot be reloaded. This weapon fires in a line of 5 spaces, dealing damage to all targets within the line.",
+        "flavor": "Turns out the zombies have a weakness to being lit on freakin' fire.",
+        "quantity": 1
     }     
 }

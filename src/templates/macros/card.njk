@@ -54,7 +54,7 @@
             </div>
 
             {# Ammo Type #}
-            <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
+            {# <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
                 <div class="sheet-label">
                     Ammo Type:
                 </div>
@@ -63,7 +63,7 @@
                     <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
                 {% endfor %}
             </select>
-            </div>
+            </div> #}
 
         </div>
 
@@ -73,8 +73,10 @@
             <span readonly name="attr_{{fields.card.flavor | getAttr | attach(prefix, num)}}"></span>
         </div>
         <div class="sheet-card-actions">
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Rolls}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}'">Attack</button>
-            <button type="roll" class="sheet-reload-button btn" name="act_{{options.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button>
+            {# Since roll20 uses curly braces for roll buttons, we need to do some ridiculous escaping and we can't have spaces #}
+            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
+            value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" >Attack/Defend</button>
+            {# <button type="roll" class="sheet-reload-button btn" name="act_{{options.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button> #}
             <button type="action" class="sheet-equip-button btn" name="act_{{options.card.actions.equip | attach(prefix, num)}}">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_{{options.card.actions.unequip | attach(prefix, num)}}">Unequip</button>
             <button type="roll" class="sheet-export-button" name="act_{{options.card.actions.export}}" value="{{exportButton(type=type) | trim}}" >Export</button>

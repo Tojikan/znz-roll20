@@ -63,6 +63,11 @@ function createInventoryItem(character, item){
         }
 
         let fld = card[key]; //get original field
+
+        if (!fld){
+            continue;
+        }
+
         let attr = {};
 
         attr.name = `repeating_${charFields.inventory.id}_${rowId}_${fld.id}`;

@@ -1,22 +1,19 @@
-import {fields as character} from '../model/character';
+import { fields as charFields } from '../model/character';
 
 
 export function attrAlert(obj, prev){
     const watchedAttr = [
-        character.stats.hp.id,
-        character.stats.ap.id,
-        character.weaponslots.id,
-        character.equipmentslots.id
+        charFields.stats.hp.id,
+        charFields.stats.ap.id,
+        charFields.weaponslots.id,
+        charFields.equipmentslots.id,
+        charFields.defense.id,
+        charFields.defense.bonus.id
     ];
-    const ammoTypes = character.ammo.options;
     let attr = '';
 
-    for (let type of ammoTypes){
-        watchedAttr.push(type.id);
-    }
-
     if (watchedAttr.includes(obj.get("name"))){
-        attr = obj.get("name").replace('ammo_', '');
+        attr = obj.get("name");
     } else {
         return;
     }

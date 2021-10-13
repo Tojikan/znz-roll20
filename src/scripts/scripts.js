@@ -23,24 +23,24 @@ var Main = Main || (function(){
         }
 
         // Reload
-        if (msg.content.startsWith("!!reload")){
-            if (!("weapon" in args)){
-                sendMessage('You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', sender, 'error');
-                return
-            }
+        // if (msg.content.startsWith("!!reload")){
+        //     if (!("weapon" in args)){
+        //         sendMessage('You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', sender, 'error');
+        //         return
+        //     }
 
-            const response = handleReload(character, args.weapon);
+        //     const response = handleReload(character, args.weapon);
 
-            sendMessage(response.msg, "Reload Script", response.type);
-            return;
-        }
+        //     sendMessage(response.msg, "Reload Script", response.type);
+        //     return;
+        // }
 
 
         //Pickup
         if (msg.content.startsWith("!!pickup")){
             const response = handlePickup(character, args);
 
-            sendMessage(response.msg, "Pickup Script", response.type);
+            sendMessage(response.msg, sender, response.type);
             return;
         }
 
@@ -49,17 +49,64 @@ var Main = Main || (function(){
         if (msg.content.startsWith("!!attack")){
             const response = handleAttack(character, args);
 
-            if ('roll' in response){
-                sendChat('Attack Script', `${character.get('name')} makes an attack!`);
-                sendChat('Attack Script', `/roll ${response.roll}`);
+            let rollmsg = `&{template:default} {{name=${character.get('name')} makes an attack!}} `;
+
+            if (response.results){
+                for (let line of response.results){
+                    rollmsg += ` {{ ${line.type}= ${line.msg} }} `
+                }
             }
 
-            if (response.msg){
-                sendMessage(response.msg, 'Attack Script', response.type);
+            // Display attack roll response.
+            if ('roll' in response){
+                sendChat('', `/roll ${response.roll}`, function(obj){
+                    let rollResult = JSON.parse(obj[0].content);
+                    log("Attack: " + rollResult.total);
+
+                    //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
+                    let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
+
+                    rollmsg += `{{Attack Rolls= ${rollText}}} {{Attack Result = [[${rollResult.total}]]}}`;
+
+                    sendChat(sender, rollmsg); //because sendChat is asynch, we have to call this here in a separate condition
+                });
+            } else {
+
+                sendChat(sender, rollmsg);
+            }
+
+
+            // Display Defense Roll Response
+            if ('defenseResults' in response){
+
+                log(response);
+
+                let defensemsg = `&{template:default} {{name=${character.get('name')} Defends!}} `;
+
+                for (let line of response.defenseResults){
+                    defensemsg += ` {{ ${line.type}= ${line.msg} }} `
+                }
+                if ('defenseRoll' in response ){
+                    sendChat('', `/roll ${response.defenseRoll}`, function(obj){
+                        let rollResult = JSON.parse(obj[0].content);
+                        log("Defense: " + rollResult.total);
+    
+                        //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
+                        let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
+    
+                        defensemsg += `{{Defense Rolls= ${rollText}}} {{Result = [[${rollResult.total}]]}}`;
+    
+                        sendChat(sender, defensemsg); //because sendChat is asynch, we have to call this here in a separate condition
+                    });
+                } else {
+                    sendChat(sender, defensemsg);
+                }
+
             }
 
         }
     };
+
     
     const sendMessage = function(msg, who, type){
         let textColor = '#000',
@@ -82,6 +129,12 @@ var Main = Main || (function(){
                 bgColor = '#baedc3';
                 textColor = '#135314';
                 break;
+            case "header":
+                sendChat(
+                    `${who}`,
+                    `<h3 style="border: solid 1px black; background-color: white; padding: 5px;">${msg}</h3>`
+                );             
+                return;
         }
 
         sendChat(
