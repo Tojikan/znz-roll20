@@ -75,18 +75,12 @@
         <div class="sheet-card-actions">
             {# Since roll20 uses curly braces for roll buttons, we need to do some ridiculous escaping and we can't have spaces #}
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}} >Attack/Defend</button">
             {# <button type="roll" class="sheet-reload-button btn" name="act_{{options.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button> #}
             <button type="action" class="sheet-equip-button btn" name="act_{{options.card.actions.equip | attach(prefix, num)}}">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_{{options.card.actions.unequip | attach(prefix, num)}}">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_{{options.card.actions.export}}" value="{{exportButton(type=type) | trim}}" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_{{options.card.actions.export}}" value="!!pickup {{ fields.card | exportItem }} characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_{{options.card.actions.delete | attach(prefix, num)}}">Delete</button>
         </div>
     </div>
 {% endmacro %}
-
-
-{# This is hardcoded for now #}
-{%- macro exportButton(type='') %}
-    **Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'
-{%- endmacro %}

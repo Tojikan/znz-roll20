@@ -46,7 +46,7 @@
 
 
     "ammo": {
-        "name": "Ammo",
+        "name": "Reload",
         "type": "inventory",
         "description": "Fill 1 Ranged weapon to its max ammo.",
         "flavor": "All-purpose, one size fits all ammunition.",
@@ -273,7 +273,7 @@
         "quantity": 3
     },
     "revolver": {
-        "name": "revolver",
+        "name": "Revolver",
         "type": "weapon",
         "weapontype": "ranged",
         "damage": "1d12r<4",

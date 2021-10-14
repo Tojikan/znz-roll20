@@ -238,8 +238,8 @@
      * Step 1 - Splits chat by space unless the space is within single or double quotes.                                    Example: !example with 'text line' "hello world" gets split to ["!example", "with", "text line" "hello world"]
      * Step 2 - Tokenize everything into a Struct using a '=' to denote an argument in the form of [arg]=[value].           Example: !example test="hello world" is {0:"!example" test: "hello world"}
      * Step 2a - Everything to left of '=' becomes the key and everything to the right becomes the value
-     * Step 2b - If no '=', the key is the array position of the split
-     * Step 3 - If no regex match for =, check for any flags in the form of --flag                                          Example: --unarmed    
+     * Step 2b - If no '=', the value will be the array position
+     * Step 3 - If no regex match for =, check for any flags in the form of --flag. Set this to true.                                          Example: --unarmed    
      * Return the struct
      * 
      * There should not be spaces between '=' and the arg/value
@@ -273,7 +273,7 @@
                 let flag = quoteSplit[i].substring(2);
                 result[flag] = true;
             } else { //Default - array position
-                result[i] = quoteSplit[i];
+                result[quoteSplit[i]] = i;
             }
         }
         return result;
@@ -307,7 +307,8 @@
 
             if (!playerIsGM(msg.playerid) && 
             !_.contains(character.get('controlledby').split(','), msg.playerid) &&
-            !_.contains(character.get('controlledby').split(','),'all')){
+            !_.contains(character.get('controlledby').split(','),'all') && 
+            msg.playerid !== 'API'){
                 return null;
             }
 
@@ -417,10 +418,10 @@
 
     const fields = {
         name: {
-            id: 'itemname'
+            id: 'name'
         },
         type: {
-            id: 'itemtype',
+            id: 'type',
             label: "Item Type",
             options: [
                 'inventory',
@@ -429,7 +430,7 @@
             ]
         },
         damage: {
-            id: 'itemdamage'
+            id: 'damage'
         },
         weapontype: {
             id: 'weapontype',
@@ -448,16 +449,95 @@
                 ranged: 'Ammo'
             }
         },
-        ammotype: {
-            id: 'ammotype',
-            label: 'Ammo Type'
-        },
+        // ammotype: {
+        //     id: 'ammotype',
+        //     label: 'Ammo Type'
+        // },
         description: {
             id: 'description'
         }, 
         flavor: {
             id: 'flavor'
         },
+    };
+
+    const handleReload = function(args, character){
+        const getAttrName = function(id, num){
+            return `${fields$1.weaponslots.type}_${id}_${num}`;
+        };    
+
+        if (!("weapon" in args) || !Number.isInteger(args['weapon'])){
+            return {msg:'You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', type:'error'};
+        }
+
+        let weaponId = args['weapon'];
+
+        const itemType = getAttr(character, getAttrName(fields.type.id, weaponId)),
+            weaponType = getAttr(character, getAttrName(fields.weapontype.id, weaponId)),
+            ammoType = getAttr(character, getAttrName(fields.ammotype.id, weaponId)),
+            ammo = getAttr(character, getAttrName(fields.uses.id, weaponId)),
+            active = getAttr(character, fields$1.weaponslots.type + '_' + weaponId);
+
+            log(active);
+            
+            if (!active){
+                return {msg: "Error! Could not check item active!", type: "error"};
+            } else if (!itemType){
+                return {msg: "Error! Could not get item type!", type: "error"};
+            } else if (!weaponType){
+                return {msg: "Error! Could not get weapontype!", type: "error"};
+            } else if (!ammoType){
+                return {msg: "Error! Could not get ammotype!", type: "error"};
+            } else if (!ammo){
+                return  {msg: "Error! Could not get ammo!", type: "error"};
+            } else if (itemType.get('current') !== 'weapon'){
+                return {msg: "Error! Item is not a weapon!", type: "error"};
+            } else if (weaponType.get('current') !== 'ranged'){
+                return {msg: "Error! Item is not a ranged weapon!", type: "error"};
+            }
+            
+            const ammoMax = ammo.get("max"),
+                ammoStore = getAttr(character, ammoType.get('current')), //ammoType dropdown values are the attribute for the appropriate ammo store.
+                isActive = active.get('current');
+        
+        if (!isActive){
+            return  {msg: `Weapon ${weaponId} is not active!`, type: "warning"};
+        } else if (!ammoMax){
+            return  {msg: "Error! Could not get max ammo!", type: "error"};
+        } else if (!ammoStore){
+            return  {msg: "Error! Could not get ammo store!", type: "error"};
+        }
+        
+        const current = parseInt(ammo.get('current'), 10) || 0,
+            max = parseInt(ammoMax, 10) || 0,
+            store = parseInt(ammoStore.get('current'), 10) || 0,
+            reload = max - current,
+            ammoText = ammoType.get('current').replace('ammo_', '');
+
+        if (current >= max){
+            return  {msg: "Weapon is already at max ammo!", type: "info"};
+        }
+
+        if (store <= 0){
+            //No Ammo
+            return {msg: `${character.get('name')} has no ${ammoText} ammo to reload with.`, type:"warning"}
+        } else if (reload >= store){
+            //Successful Reload - Partial Reload
+            ammo.setWithWorker({current: store + current});
+            ammoStore.setWithWorker({current: 0});
+            return {msg: `${character.get('name')} reloads with the last of their ${ammoText} ammo.`, type:"warning"}
+        } else {
+            //Successful Reload - Full Reload
+            ammo.setWithWorker({current: max});
+            ammoStore.setWithWorker({current: store - reload});
+            return {msg: `${character.get('name')} reloads. They have ${store - reload} ${ammoText} ammo remaining.`, type:"success"}
+        }
+    };
+
+    const reload = {
+        caller: '!!reload',
+        handler: handleReload,
+        requires: ['character']
     };
 
     var snack = {
@@ -503,7 +583,7 @@
     	quantity: 2
     };
     var ammo = {
-    	name: "Ammo",
+    	name: "Reload",
     	type: "inventory",
     	description: "Fill 1 Ranged weapon to its max ammo.",
     	flavor: "All-purpose, one size fits all ammunition.",
@@ -716,7 +796,7 @@
     	quantity: 3
     };
     var revolver = {
-    	name: "revolver",
+    	name: "Revolver",
     	type: "weapon",
     	weapontype: "ranged",
     	damage: "1d12r<4",
@@ -854,7 +934,7 @@
     	flamethrower: flamethrower
     };
 
-    var itemtemplates = /*#__PURE__*/Object.freeze({
+    var items$1 = /*#__PURE__*/Object.freeze({
         __proto__: null,
         snack: snack,
         energydrink: energydrink,
@@ -901,11 +981,10 @@
         'default': items
     });
 
-    const templates = itemtemplates;
+    const templates = items$1;
     const acceptedFields = (()=>{ //get acceptable params - the key of the field in card. Note we use the field key NOT the field ID!
         let result = [];
         for (let key in fields){
-            if (key == 'actions') continue; //ignore actions
 
             result.push(key);
 
@@ -915,7 +994,7 @@
     })();
 
 
-    function handlePickup(character, args){
+    const handlePickup = function(args, character){
         
         let item = {};
 
@@ -943,11 +1022,11 @@
             }
 
             createInventoryItem(character, item);
-            return {msg: `${character.get('name')} picked up a(n) ${item["name"] || 'Item'}`, type:"success"};
+            return {msg: `${character.get('name')} picked up a ${item["name"] || 'Item'}`, type:"success"};
         } else {
             return {msg: "Error: Invalid item or no arguments provided.", type: "error"}
         }
-    }
+    };
 
 
     function createInventoryItem(character, item){
@@ -986,7 +1065,20 @@
         }
     }
 
-    function handleAttack(character, args){
+    const pickup = {
+        caller: "!!pickup",
+        handler: handlePickup,
+        requires: ['character']
+    };
+
+    /**
+     * Sets up the Attack Roll
+     * 
+     * @param {*} args 
+     * @param {*} character 
+     * @returns 
+     */
+    const handleAttack = function(args, character){
 
         if (!("rolls" in args)){
             return {msg: "You must specify the number of rolls!", type:"error"};
@@ -1061,7 +1153,7 @@
                         results.push({msg: `<span style='color:red'> Did not have enough ${resourceText} for ${args['rolls']} attacks! </span>`, type:`Problem`});
                     }
 
-                    results.push({msg: `${dice} ${(bonus > 0) ? `( + ${bonus} ${type} skill bonus}` : ''}`, type:`Attack Roll`});
+                    results.push({msg: `${dice} ${(bonus > 0) ? `(+${bonus} ${type} skill bonus}` : ''}`, type:`Attack Roll`});
                     
 
                     results.push({msg: rolls, type:`Attacks Made`});
@@ -1117,18 +1209,78 @@
             }
         }
         
-        
-        
-        
         return retVal;
-    }
+    };
+
+    /**
+     * Custom response handler. Renders our attack into the default roll template
+     * 
+     * Additionally, make another roll for defense if defense is included.
+     * 
+     * @param {*} response 
+     * @param {*} sender 
+     * @param {*} character 
+     */
+    const renderAttack = function(response, sender, character){
+        let rollmsg = `&{template:default} {{name=${character.get('name')} makes an attack!}} `;
+
+        if (response.results){
+            for (let line of response.results){
+                rollmsg += ` {{ ${line.type}= ${line.msg} }} `;
+            }
+        }
+
+        // Display attack roll response.
+        if ('roll' in response){
+            sendChat('', `/roll ${response.roll}`, function(obj){
+                let rollResult = JSON.parse(obj[0].content);
+                log("Attack: " + rollResult.total);
+
+                //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
+                let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
+
+                rollmsg += `{{Attack Rolls= ${rollText}}} {{Attack Result = [[${rollResult.total}]]}}`;
+
+                sendChat(sender, rollmsg); //because sendChat is asynch, we have to call this here in a separate condition
+            });
+        } else {
+            sendChat(sender, rollmsg);
+        }
+
+        // Display Defense Roll Response
+        if ('defenseResults' in response){
+
+            let defensemsg = `&{template:default} {{name=${character.get('name')} Defends!}} `;
+
+            for (let line of response.defenseResults){
+                defensemsg += ` {{ ${line.type}= ${line.msg} }} `;
+            }
+            if ('defenseRoll' in response ){
+                sendChat('', `/roll ${response.defenseRoll}`, function(obj){
+                    let rollResult = JSON.parse(obj[0].content);
+                    log("Defense: " + rollResult.total);
+
+                    //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
+                    let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
+
+                    defensemsg += `{{Defense Rolls= ${rollText}}} {{Result = [[${rollResult.total}]]}}`;
+
+                    sendChat(sender, defensemsg); //because sendChat is asynch, we have to call this here in a separate condition
+                });
+            } else {
+                sendChat(sender, defensemsg);
+            }
+
+        }
+        
+    };
 
 
+    //generate rolltext in the form of {{dice,dice,dice}}
     function generateRollText(amount, dice){
 
         let rollText = '';
 
-        //generate rolltext in the form of {{dice,dice,dice}}
         for (let i = 0; i < amount; i++){
             rollText += dice;
 
@@ -1141,6 +1293,7 @@
     }
 
 
+    //Spend 1 of the given attribute per roll.
     function spendResource(amount, resource, character){
         let attr = getAttr(character, resource);
 
@@ -1150,8 +1303,6 @@
 
         let current = attr.get('current'),
             newVal = Math.max( current - amount, 0); //floor it at 0
-
-        log(newVal);
 
         
         attr.setWithWorker({current: newVal});
@@ -1163,109 +1314,283 @@
         }
     }
 
+
+    const attack = {
+        caller: '!!attack',
+        handler: handleAttack,
+        responder: renderAttack,
+        requires: ['character']
+    };
+
+    class Deck {
+        constructor(arr=[]){
+            this.deck = arr;
+        }
+
+        addCard(card, random=true){
+
+            if (random){
+                let i = Math.floor(Math.random() * this.deck.length);
+                this.deck.splice(i, 0, card);
+            } else {
+                this.deck.push(card);
+            }
+        }
+
+        drawCard(){
+            return this.deck.pop();
+        }
+
+        removeCard(card){
+            for (let i = this.deck.length - 1; i >= 0; i--){
+                if (this.deck[i] == card){
+                    this.deck.splice(i, 1);
+                    return;
+                }
+            }
+        }
+
+        shuffleDeck(){
+            for (let i = this.deck.length - 1; i > 0; i--){
+                let j = Math.floor(Math.random() * (i + 1));
+                let temp = this.deck[i];
+
+                this.deck[i] = this.deck[j];
+                this.deck[j] = temp;
+            }
+        }
+
+        clearDeck(){
+            this.deck = [];
+        }
+
+        getDeck(){
+            return this.deck;
+        }
+    }
+
+
+    const cardDeck = (function(){
+        const deck = new Deck();
+
+        const setupDeck = function(){
+            deck.clearDeck();
+
+            for (let key in items$1){
+                let item = items$1[key],
+                    count = item.quantity || 1;
+
+                if(key == 'default'){ //somehow, we're importing a default value.
+                    continue;
+                }
+
+                for (let i = 0; i < count; i++){
+                    deck.addCard(key);
+                }
+            }
+
+            deck.shuffleDeck();
+        };
+
+
+        const handleArgs = function(args, character){
+            let retVal = {};
+
+            if ("reset" in args && args['reset']==true){
+                setupDeck();
+                log('Deck Reset!');
+                log(deck.getDeck());
+            }
+
+            if ("shuffle" in args && args['shuffle']==true){
+                log('Deck Shuffled!');
+                deck.shuffleDeck();
+                log(deck.getDeck());
+            }
+
+            if ("draw" in args){
+                log('Card Drawn!');
+                let card = deck.drawCard();
+                log(card);
+                log(deck.getDeck());
+
+
+                if (!card){ 
+                    retVal.error = "Deck has no more cards!";
+                } else {
+                    retVal.card = card;
+                }
+
+            }
+
+            if ("add" in args && args['add'].length){
+                log('Card Added!');
+                deck.addCard(args['add']);
+                log(deck.getDeck());
+            }
+
+            if ("remove" in args && args['remove'].length){
+                log('Card Removed!');
+                deck.removeCard(args['remove']);
+                log(deck.getDeck());
+            }
+
+            if ("info" in args){
+                retVal.info = `Deck has ${deck.getDeck().length} cards remaining!`;
+            }
+            
+            return retVal;
+        };
+        
+        const handleResponse = function(response, sender, character){
+            
+            if (response){
+                let msg = '';
+                if ('info' in response){
+                    sendChat(sender, `/w gm ${response.info}`);
+                }
+                
+                if ('error' in response || 'card' in response ){
+                    msg += `&{template:default} {{name=${character.get('name')} attempts to scavenge for an item!}} `;
+                }
+
+                if ('error' in response){
+                    msg += `{{Error= <span style="color:red">${response.error}</span>`;
+                }
+                
+                if ('card' in response){
+                    let itemkey = response.card;
+
+                    if (itemkey in items$1){
+                        let item = items$1[itemkey];
+
+                        log(item);
+                        log(itemkey);
+
+                        msg += ` {{Result= ${character.get('name')} found a ${item.name}!}} `;
+
+                        sendChat(sender, `!!pickup item='${itemkey}' characterid='${character.get('id')}'`);
+                    } else {
+                        msg += `{{Result= ${character.get('name')} found a ${itemkey}. This is not a registered item!}}`;
+                    }
+                }
+
+
+                if (msg.length){
+                    sendChat(sender, msg);
+                }
+            }
+        };
+
+        
+        setupDeck(); //Setup on initial upload of script.
+
+        return {
+            caller: '!!deck', 
+            handler: handleArgs,
+            responder: handleResponse,
+            requires: ['character']
+        };
+    })();
+
     var Main = Main || (function(){
+
+        const apiCallers = {};
+        const attrWatchers = [];
+
+        /**
+         * Register API Callers. Hook for adding in new APIs into this main one.
+         * @param {*} obj 
+         * @returns 
+         */
+        const RegisterApiCaller = function(obj){
+            if (!('caller' in obj) || !('handler' in obj)){
+                return;
+            }
+
+            apiCallers[obj.caller] = {
+                handler: obj.handler
+            };
+
+            if ('responder' in obj){
+                apiCallers[obj.caller].responder = obj.responder;
+            } else {
+                apiCallers[obj.caller].responder = standardResponder;
+            }
+
+            if ('requires' in obj){
+
+                if (obj['requires'].includes('character')){
+                    apiCallers[obj.caller].requiresChar = true;
+                }
+            }
+        };
+
+
+        const RegisterAttrWatcher = function(obj){
+            attrWatchers.push(obj);
+        };
+
+        /**
+         * Default responder, which just prints out a message of a given type.
+         * @param {*} obj 
+         * @param {*} sender 
+         * @param {*} character 
+         */
+        const standardResponder = function(obj, sender, character){
+            if ("msg" in obj && "type" in obj){
+                sendMessage(obj.msg, sender, obj.type);
+            }
+        };
+
+        /**
+         * Router function. Takes a chat msg that begins with an API and then matches it to an API Caller thats
+         * registered to this. Then call the appropriate handler and responder 
+         * 
+         * @param {*} msg 
+         * @returns 
+         */
         const HandleInput = function(msg) {
 
             if (msg.type !== "api"){
                 return;
             }
-
-            //Initial Validation
+            
+            // Setup our character and args.
             const args = splitArgs(msg.content),
                 sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
                 character = getCharacter(sender, msg, args);
 
-            if (!character){
-                sendMessage("You must select a valid character that you control!", sender, 'error');
-                return;
-            }
+            // Go through our registered APIs and call as appropriate
+            for (let api in apiCallers){
+                if (msg.content.startsWith(api)){
+                    let caller = apiCallers[api];
 
-            // Reload
-            // if (msg.content.startsWith("!!reload")){
-            //     if (!("weapon" in args)){
-            //         sendMessage('You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', sender, 'error');
-            //         return
-            //     }
-
-            //     const response = handleReload(character, args.weapon);
-
-            //     sendMessage(response.msg, "Reload Script", response.type);
-            //     return;
-            // }
-
-
-            //Pickup
-            if (msg.content.startsWith("!!pickup")){
-                const response = handlePickup(character, args);
-
-                sendMessage(response.msg, sender, response.type);
-                return;
-            }
-
-
-            //attack
-            if (msg.content.startsWith("!!attack")){
-                const response = handleAttack(character, args);
-
-                let rollmsg = `&{template:default} {{name=${character.get('name')} makes an attack!}} `;
-
-                if (response.results){
-                    for (let line of response.results){
-                        rollmsg += ` {{ ${line.type}= ${line.msg} }} `;
-                    }
-                }
-
-                // Display attack roll response.
-                if ('roll' in response){
-                    sendChat('', `/roll ${response.roll}`, function(obj){
-                        let rollResult = JSON.parse(obj[0].content);
-                        log("Attack: " + rollResult.total);
-
-                        //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
-                        let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
-
-                        rollmsg += `{{Attack Rolls= ${rollText}}} {{Attack Result = [[${rollResult.total}]]}}`;
-
-                        sendChat(sender, rollmsg); //because sendChat is asynch, we have to call this here in a separate condition
-                    });
-                } else {
-
-                    sendChat(sender, rollmsg);
-                }
-
-
-                // Display Defense Roll Response
-                if ('defenseResults' in response){
-
-                    log(response);
-
-                    let defensemsg = `&{template:default} {{name=${character.get('name')} Defends!}} `;
-
-                    for (let line of response.defenseResults){
-                        defensemsg += ` {{ ${line.type}= ${line.msg} }} `;
-                    }
-                    if ('defenseRoll' in response ){
-                        sendChat('', `/roll ${response.defenseRoll}`, function(obj){
-                            let rollResult = JSON.parse(obj[0].content);
-                            log("Defense: " + rollResult.total);
-        
-                            //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
-                            let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
-        
-                            defensemsg += `{{Defense Rolls= ${rollText}}} {{Result = [[${rollResult.total}]]}}`;
-        
-                            sendChat(sender, defensemsg); //because sendChat is asynch, we have to call this here in a separate condition
-                        });
-                    } else {
-                        sendChat(sender, defensemsg);
+                    if (caller.requiresChar && !character){
+                        sendMessage("You must select a target token!", sender, 'error');
+                        return;
                     }
 
-                }
+                    let response = caller.handler(args, character);
 
+                    caller.responder(response, sender, character);
+                }
             }
         };
 
-        
+        const HandleAttributeChange = function(obj, prev){
+            for (let watcher of attrWatchers){
+                watcher(obj, prev);
+            }
+        };
+
+        /**
+         * Post a formatted text to chat.
+         * @param {*} msg 
+         * @param {*} who 
+         * @param {*} type 
+         * @returns 
+         */   
         const sendMessage = function(msg, who, type){
             let textColor = '#000',
                 bgColor = '#fff';
@@ -1297,21 +1622,30 @@
 
             sendChat(
                 `${who}`,
-                `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${msg}</div>`
+                `<div style="padding:3px; border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 120%;">${msg}</div>`
     		);
         };
         
-        const RegisterEventHandlers = function() {
-    		on('chat:message', HandleInput);
-            on('change:attribute', attrAlert);
+        const init = function() {
+            on('chat:message', HandleInput);
+            on('change:attribute', HandleAttributeChange);
     	};
-
+        
         return {
-            RegisterEventHandlers: RegisterEventHandlers
+            init: init,
+            RegisterApiCaller: RegisterApiCaller,
+            RegisterAttrWatcher: RegisterAttrWatcher
         }
     })();
+
+
     on("ready", function(){
-        Main.RegisterEventHandlers();
+        Main.RegisterApiCaller(cardDeck);
+        Main.RegisterApiCaller(pickup);
+        Main.RegisterApiCaller(reload);
+        Main.RegisterApiCaller(attack);
+        Main.RegisterAttrWatcher(attrAlert);
+        Main.init();
     });
 
 })();

@@ -1,13 +1,12 @@
 import { fields as card } from '../model/card';
 import { fields as charFields } from '../model/character';
 import * as itemtemplates from '../model/items.json';
-import { generateRowID, getAttrVal, getRepeaterIds } from "./_helpers";
+import { generateRowID, getAttr, getAttrVal, getRepeaterIds } from "./_helpers";
 
 const templates = itemtemplates;
 const acceptedFields = (()=>{ //get acceptable params - the key of the field in card. Note we use the field key NOT the field ID!
     let result = [];
     for (let key in card){
-        if (key == 'actions') continue; //ignore actions
 
         result.push(key);
 
@@ -17,7 +16,7 @@ const acceptedFields = (()=>{ //get acceptable params - the key of the field in 
 })();
 
 
-export function handlePickup(character, args){
+const handlePickup = function(args, character){
     
     let item = {};
 
@@ -45,7 +44,7 @@ export function handlePickup(character, args){
         }
 
         createInventoryItem(character, item);
-        return {msg: `${character.get('name')} picked up a(n) ${item["name"] || 'Item'}`, type:"success"};
+        return {msg: `${character.get('name')} picked up a ${item["name"] || 'Item'}`, type:"success"};
     } else {
         return {msg: "Error: Invalid item or no arguments provided.", type: "error"}
     }
@@ -86,4 +85,10 @@ function createInventoryItem(character, item){
 
         createObj("attribute", attr);
     }
+}
+
+export const pickup = {
+    caller: "!!pickup",
+    handler: handlePickup,
+    requires: ['character']
 }

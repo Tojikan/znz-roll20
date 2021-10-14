@@ -10,8 +10,8 @@
  * Step 1 - Splits chat by space unless the space is within single or double quotes.                                    Example: !example with 'text line' "hello world" gets split to ["!example", "with", "text line" "hello world"]
  * Step 2 - Tokenize everything into a Struct using a '=' to denote an argument in the form of [arg]=[value].           Example: !example test="hello world" is {0:"!example" test: "hello world"}
  * Step 2a - Everything to left of '=' becomes the key and everything to the right becomes the value
- * Step 2b - If no '=', the key is the array position of the split
- * Step 3 - If no regex match for =, check for any flags in the form of --flag                                          Example: --unarmed    
+ * Step 2b - If no '=', the value will be the array position
+ * Step 3 - If no regex match for =, check for any flags in the form of --flag. Set this to true.                                          Example: --unarmed    
  * Return the struct
  * 
  * There should not be spaces between '=' and the arg/value
@@ -45,7 +45,7 @@
             let flag = quoteSplit[i].substring(2);
             result[flag] = true;
         } else { //Default - array position
-            result[i] = quoteSplit[i];
+            result[quoteSplit[i]] = i;
         }
     }
     return result;
@@ -79,7 +79,8 @@ export function getCharacter(sender, msg, args = {}){
 
         if (!playerIsGM(msg.playerid) && 
         !_.contains(character.get('controlledby').split(','), msg.playerid) &&
-        !_.contains(character.get('controlledby').split(','),'all')){
+        !_.contains(character.get('controlledby').split(','),'all') && 
+        msg.playerid !== 'API'){
             return null;
         }
 

@@ -102,6 +102,8 @@ export function equip(){
             }
 
             attrSet[type + '_' + slot] = 0; //make the slot available again.
+
+            console.log(attrSet);
             setAttrs(attrSet);
         });
     }
@@ -112,9 +114,6 @@ export function equip(){
         const invFields = createFieldIdArray('repeating_' + character.inventory.id);
 
         const bothFields = invFields.concat(slotFields);
-
-        console.log(bothFields);
-        console.log(invFields);
 
         getAttrs(bothFields, function(values){
             //retrieve given card type.
@@ -158,11 +157,6 @@ export function equip(){
     on(`clicked:repeating_${character.inventory.id}:${options.actions.equip}`, function(evInfo){
         const rowId = getButtonRowId(evInfo);
         equipItem(rowId);
-    });
-
-    on(`clicked:repeating_${character.inventory.id}:${options.actions.delete}`, function(evInfo){
-        const rowId = getButtonRowId(evInfo);
-        removeRepeatingRow(rowId);
     });
 
 

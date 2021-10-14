@@ -277,16 +277,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_itemtype_1" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_type_1" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_itemtype_1" value="weapon" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_type_1" value="weapon" checked/>
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_itemtype_1" value="equipment" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_type_1" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_weapon_itemtype_1">
+            <select class="sheet-shy" name="attr_weapon_type_1">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -306,7 +306,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_weapon_itemname_1" placeholder="Item Name">
+            <input type="text" name="attr_weapon_name_1" placeholder="Item Name">
         </div>
 
         
@@ -321,7 +321,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_weapon_itemdamage_1" value="0" />
+                <input class="sheet-shy" type="text" name="attr_weapon_damage_1" value="0" />
             </div>
 
             
@@ -352,11 +352,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_itemdamage_1}' weaponname='@{weapon_itemname_1}' type='@{weapon_weapontype_1}' resource='weapon_uses_1' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_damage_1}' weaponname='@{weapon_name_1}' type='@{weapon_weapontype_1}' resource='weapon_uses_1' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_1">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_1">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_weapon_deleteitem_1">Delete</button>
         </div>
     </div>
@@ -374,16 +374,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_itemtype_2" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_type_2" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_itemtype_2" value="weapon" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_type_2" value="weapon" checked/>
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_itemtype_2" value="equipment" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_type_2" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_weapon_itemtype_2">
+            <select class="sheet-shy" name="attr_weapon_type_2">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -403,7 +403,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_weapon_itemname_2" placeholder="Item Name">
+            <input type="text" name="attr_weapon_name_2" placeholder="Item Name">
         </div>
 
         
@@ -418,7 +418,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_weapon_itemdamage_2" value="0" />
+                <input class="sheet-shy" type="text" name="attr_weapon_damage_2" value="0" />
             </div>
 
             
@@ -449,11 +449,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_itemdamage_2}' weaponname='@{weapon_itemname_2}' type='@{weapon_weapontype_2}' resource='weapon_uses_2' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_damage_2}' weaponname='@{weapon_name_2}' type='@{weapon_weapontype_2}' resource='weapon_uses_2' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_2">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_2">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_weapon_deleteitem_2">Delete</button>
         </div>
     </div>
@@ -471,16 +471,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_itemtype_3" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_weapon_type_3" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_itemtype_3" value="weapon" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_weapon_type_3" value="weapon" checked/>
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_itemtype_3" value="equipment" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_weapon_type_3" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_weapon_itemtype_3">
+            <select class="sheet-shy" name="attr_weapon_type_3">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -500,7 +500,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_weapon_itemname_3" placeholder="Item Name">
+            <input type="text" name="attr_weapon_name_3" placeholder="Item Name">
         </div>
 
         
@@ -515,7 +515,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_weapon_itemdamage_3" value="0" />
+                <input class="sheet-shy" type="text" name="attr_weapon_damage_3" value="0" />
             </div>
 
             
@@ -546,11 +546,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_itemdamage_3}' weaponname='@{weapon_itemname_3}' type='@{weapon_weapontype_3}' resource='weapon_uses_3' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{weapon_damage_3}' weaponname='@{weapon_name_3}' type='@{weapon_weapontype_3}' resource='weapon_uses_3' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_weapon_equipitem_3">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_weapon_unequipitem_3">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_weapon_deleteitem_3">Delete</button>
         </div>
     </div>
@@ -604,16 +604,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_1" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_type_1" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_1" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_type_1" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_1" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_type_1" value="equipment" checked/>
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_1">
+            <select class="sheet-shy" name="attr_equipment_type_1">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -633,7 +633,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_1" placeholder="Item Name">
+            <input type="text" name="attr_equipment_name_1" placeholder="Item Name">
         </div>
 
         
@@ -648,7 +648,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_1" value="0" />
+                <input class="sheet-shy" type="text" name="attr_equipment_damage_1" value="0" />
             </div>
 
             
@@ -679,11 +679,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_1}' weaponname='@{equipment_itemname_1}' type='@{equipment_weapontype_1}' resource='equipment_uses_1' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_damage_1}' weaponname='@{equipment_name_1}' type='@{equipment_weapontype_1}' resource='equipment_uses_1' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_1">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_1">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_1">Delete</button>
         </div>
     </div>
@@ -701,16 +701,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_2" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_type_2" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_2" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_type_2" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_2" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_type_2" value="equipment" checked/>
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_2">
+            <select class="sheet-shy" name="attr_equipment_type_2">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -730,7 +730,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_2" placeholder="Item Name">
+            <input type="text" name="attr_equipment_name_2" placeholder="Item Name">
         </div>
 
         
@@ -745,7 +745,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_2" value="0" />
+                <input class="sheet-shy" type="text" name="attr_equipment_damage_2" value="0" />
             </div>
 
             
@@ -776,11 +776,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_2}' weaponname='@{equipment_itemname_2}' type='@{equipment_weapontype_2}' resource='equipment_uses_2' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_damage_2}' weaponname='@{equipment_name_2}' type='@{equipment_weapontype_2}' resource='equipment_uses_2' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_2">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_2">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_2">Delete</button>
         </div>
     </div>
@@ -798,16 +798,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_3" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_type_3" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_3" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_type_3" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_3" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_type_3" value="equipment" checked/>
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_3">
+            <select class="sheet-shy" name="attr_equipment_type_3">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -827,7 +827,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_3" placeholder="Item Name">
+            <input type="text" name="attr_equipment_name_3" placeholder="Item Name">
         </div>
 
         
@@ -842,7 +842,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_3" value="0" />
+                <input class="sheet-shy" type="text" name="attr_equipment_damage_3" value="0" />
             </div>
 
             
@@ -873,11 +873,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_3}' weaponname='@{equipment_itemname_3}' type='@{equipment_weapontype_3}' resource='equipment_uses_3' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_damage_3}' weaponname='@{equipment_name_3}' type='@{equipment_weapontype_3}' resource='equipment_uses_3' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_3">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_3">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_3">Delete</button>
         </div>
     </div>
@@ -895,16 +895,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_4" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_type_4" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_4" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_type_4" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_4" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_type_4" value="equipment" checked/>
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_4">
+            <select class="sheet-shy" name="attr_equipment_type_4">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -924,7 +924,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_4" placeholder="Item Name">
+            <input type="text" name="attr_equipment_name_4" placeholder="Item Name">
         </div>
 
         
@@ -939,7 +939,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_4" value="0" />
+                <input class="sheet-shy" type="text" name="attr_equipment_damage_4" value="0" />
             </div>
 
             
@@ -970,11 +970,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_4}' weaponname='@{equipment_itemname_4}' type='@{equipment_weapontype_4}' resource='equipment_uses_4' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_damage_4}' weaponname='@{equipment_name_4}' type='@{equipment_weapontype_4}' resource='equipment_uses_4' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_4">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_4">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_4">Delete</button>
         </div>
     </div>
@@ -992,16 +992,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_itemtype_5" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_equipment_type_5" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_itemtype_5" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_equipment_type_5" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_itemtype_5" value="equipment" checked/>
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_equipment_type_5" value="equipment" checked/>
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_equipment_itemtype_5">
+            <select class="sheet-shy" name="attr_equipment_type_5">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -1021,7 +1021,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_equipment_itemname_5" placeholder="Item Name">
+            <input type="text" name="attr_equipment_name_5" placeholder="Item Name">
         </div>
 
         
@@ -1036,7 +1036,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_equipment_itemdamage_5" value="0" />
+                <input class="sheet-shy" type="text" name="attr_equipment_damage_5" value="0" />
             </div>
 
             
@@ -1067,11 +1067,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_itemdamage_5}' weaponname='@{equipment_itemname_5}' type='@{equipment_weapontype_5}' resource='equipment_uses_5' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{equipment_damage_5}' weaponname='@{equipment_name_5}' type='@{equipment_weapontype_5}' resource='equipment_uses_5' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_equipment_equipitem_5">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_equipment_unequipitem_5">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_equipment_deleteitem_5">Delete</button>
         </div>
     </div>
@@ -1102,16 +1102,16 @@
     <div class="sheet-card">
         
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_itemtype" value="inventory" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-inventory" name="attr_type" value="inventory" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_itemtype" value="weapon" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-weapon" name="attr_type" value="weapon" />
         
-            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_itemtype" value="equipment" />
+            <input type="checkbox" class="sheet-hidden sheet-toggle-equipment" name="attr_type" value="equipment" />
         
 
         
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_itemtype">
+            <select class="sheet-shy" name="attr_type">
                 
                     <option value="inventory" >Consumable </option>
                 
@@ -1131,7 +1131,7 @@
 
         
         <div class="sheet-card-name">
-            <input type="text" name="attr_itemname" placeholder="Item Name">
+            <input type="text" name="attr_name" placeholder="Item Name">
         </div>
 
         
@@ -1146,7 +1146,7 @@
             
             <div class="sheet-card-damage  sheet-card-line">
                 <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_itemdamage" value="0" />
+                <input class="sheet-shy" type="text" name="attr_damage" value="0" />
             </div>
 
             
@@ -1177,11 +1177,11 @@
         <div class="sheet-card-actions">
             
             <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{itemdamage}' weaponname='@{itemname}' type='@{weapontype}' resource='uses' characterid='@{character_id}'" >Attack/Defend</button>
+            value="!!attack rolls='?{Number of Attacks | @{ap_rolls}}' defend='?{Number of Defense Rolls | @{ap_rolls}}' dice='@{damage}' weaponname='@{name}' type='@{weapontype}' resource='uses' characterid='@{character_id}'" name="roll_attackweapon >Attack/Defend</button">
             
             <button type="action" class="sheet-equip-button btn" name="act_equipitem">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_unequipitem">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="act_exportitem" value="**Export Item:** \n !!pickup name='@{itemname}' type='@{itemtype}' damage='@{itemdamage}' weapontype='@{weapontype}' uses='@{uses}' uses_max='@{uses_max}' ammotype='@{ammotype}' description='@{description}' flavor='@{flavor}'" >Export</button>
+            <button type="roll" class="sheet-export-button" name="roll_exportitem" value="!!pickup  name=&#39;@{name}&#39;  type=&#39;@{type}&#39;  damage=&#39;@{damage}&#39;  weapontype=&#39;@{weapontype}&#39;  uses=&#39;@{uses}&#39;  description=&#39;@{description}&#39;  flavor=&#39;@{flavor}&#39;  characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_deleteitem">Delete</button>
         </div>
     </div>
@@ -1383,10 +1383,10 @@
 
     const fields = {
         name: {
-            id: 'itemname'
+            id: 'name'
         },
         type: {
-            id: 'itemtype',
+            id: 'type',
             label: "Item Type",
             options: [
                 'inventory',
@@ -1395,7 +1395,7 @@
             ]
         },
         damage: {
-            id: 'itemdamage'
+            id: 'damage'
         },
         weapontype: {
             id: 'weapontype',
@@ -1414,10 +1414,10 @@
                 ranged: 'Ammo'
             }
         },
-        ammotype: {
-            id: 'ammotype',
-            label: 'Ammo Type'
-        },
+        // ammotype: {
+        //     id: 'ammotype',
+        //     label: 'Ammo Type'
+        // },
         description: {
             id: 'description'
         }, 
@@ -1474,6 +1474,13 @@
 
         return result;
     };
+
+    function deleteItem(){
+        on(`clicked:repeating_${fields$1.inventory.id}:${options.actions.delete}`, function(evInfo){
+            const rowId = getButtonRowId(evInfo);
+            removeRepeatingRow(rowId);
+        });
+    }
 
     function equip(){
         const itemFields = {...fields};
@@ -1574,6 +1581,8 @@
                 }
 
                 attrSet[type + '_' + slot] = 0; //make the slot available again.
+
+                console.log(attrSet);
                 setAttrs(attrSet);
             });
         };
@@ -1584,9 +1593,6 @@
             const invFields = createFieldIdArray('repeating_' + fields$1.inventory.id);
 
             const bothFields = invFields.concat(slotFields);
-
-            console.log(bothFields);
-            console.log(invFields);
 
             getAttrs(bothFields, function(values){
                 //retrieve given card type.
@@ -1630,11 +1636,6 @@
         on(`clicked:repeating_${fields$1.inventory.id}:${options.actions.equip}`, function(evInfo){
             const rowId = getButtonRowId(evInfo);
             equipItem(rowId);
-        });
-
-        on(`clicked:repeating_${fields$1.inventory.id}:${options.actions.delete}`, function(evInfo){
-            const rowId = getButtonRowId(evInfo);
-            removeRepeatingRow(rowId);
         });
 
 
@@ -1711,6 +1712,7 @@
     equip();
     limit();
     rollOptions();
+    deleteItem();
 
 })();
 

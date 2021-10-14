@@ -4,7 +4,7 @@
   "description": "Build Character Sheet, Scripts, and other assets for ZnZ Roll20",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha  --require @babel/register"
   },
   "repository": {
     "type": "git",

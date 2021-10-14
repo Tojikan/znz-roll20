@@ -1,113 +1,109 @@
 import { attrAlert } from "./attrAlert";
-import { handleReload } from "./reload";
-import { handlePickup } from "./pickup";
-import { handleAttack } from "./attack";
+import { reload } from "./reload";
+import { pickup } from "./pickup";
+import { attack } from "./attack";
 import { splitArgs, getCharacter } from "./_helpers";
+import { cardDeck } from "./deck";
 
 
 var Main = Main || (function(){
+
+    const apiCallers = {};
+    const attrWatchers = [];
+
+    /**
+     * Register API Callers. Hook for adding in new APIs into this main one.
+     * @param {*} obj 
+     * @returns 
+     */
+    const RegisterApiCaller = function(obj){
+        if (!('caller' in obj) || !('handler' in obj)){
+            return;
+        }
+
+        apiCallers[obj.caller] = {
+            handler: obj.handler
+        }
+
+        if ('responder' in obj){
+            apiCallers[obj.caller].responder = obj.responder;
+        } else {
+            apiCallers[obj.caller].responder = standardResponder;
+        }
+
+        if ('requires' in obj){
+
+            if (obj['requires'].includes('character')){
+                apiCallers[obj.caller].requiresChar = true;
+            }
+        }
+    }
+
+
+    const RegisterAttrWatcher = function(obj){
+        attrWatchers.push(obj);
+    }
+
+    /**
+     * Default responder, which just prints out a message of a given type.
+     * @param {*} obj 
+     * @param {*} sender 
+     * @param {*} character 
+     */
+    const standardResponder = function(obj, sender, character){
+        if ("msg" in obj && "type" in obj){
+            sendMessage(obj.msg, sender, obj.type);
+        }
+    }
+
+    /**
+     * Router function. Takes a chat msg that begins with an API and then matches it to an API Caller thats
+     * registered to this. Then call the appropriate handler and responder 
+     * 
+     * @param {*} msg 
+     * @returns 
+     */
     const HandleInput = function(msg) {
 
         if (msg.type !== "api"){
             return;
         }
-
-        //Initial Validation
+        
+        // Setup our character and args.
         const args = splitArgs(msg.content),
             sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
             character = getCharacter(sender, msg, args);
 
-        if (!character){
-            sendMessage("You must select a valid character that you control!", sender, 'error');
-            return;
-        }
+        // Go through our registered APIs and call as appropriate
+        for (let api in apiCallers){
+            if (msg.content.startsWith(api)){
+                let caller = apiCallers[api];
 
-        // Reload
-        // if (msg.content.startsWith("!!reload")){
-        //     if (!("weapon" in args)){
-        //         sendMessage('You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', sender, 'error');
-        //         return
-        //     }
-
-        //     const response = handleReload(character, args.weapon);
-
-        //     sendMessage(response.msg, "Reload Script", response.type);
-        //     return;
-        // }
-
-
-        //Pickup
-        if (msg.content.startsWith("!!pickup")){
-            const response = handlePickup(character, args);
-
-            sendMessage(response.msg, sender, response.type);
-            return;
-        }
-
-
-        //attack
-        if (msg.content.startsWith("!!attack")){
-            const response = handleAttack(character, args);
-
-            let rollmsg = `&{template:default} {{name=${character.get('name')} makes an attack!}} `;
-
-            if (response.results){
-                for (let line of response.results){
-                    rollmsg += ` {{ ${line.type}= ${line.msg} }} `
-                }
-            }
-
-            // Display attack roll response.
-            if ('roll' in response){
-                sendChat('', `/roll ${response.roll}`, function(obj){
-                    let rollResult = JSON.parse(obj[0].content);
-                    log("Attack: " + rollResult.total);
-
-                    //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
-                    let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
-
-                    rollmsg += `{{Attack Rolls= ${rollText}}} {{Attack Result = [[${rollResult.total}]]}}`;
-
-                    sendChat(sender, rollmsg); //because sendChat is asynch, we have to call this here in a separate condition
-                });
-            } else {
-
-                sendChat(sender, rollmsg);
-            }
-
-
-            // Display Defense Roll Response
-            if ('defenseResults' in response){
-
-                log(response);
-
-                let defensemsg = `&{template:default} {{name=${character.get('name')} Defends!}} `;
-
-                for (let line of response.defenseResults){
-                    defensemsg += ` {{ ${line.type}= ${line.msg} }} `
-                }
-                if ('defenseRoll' in response ){
-                    sendChat('', `/roll ${response.defenseRoll}`, function(obj){
-                        let rollResult = JSON.parse(obj[0].content);
-                        log("Defense: " + rollResult.total);
-    
-                        //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
-                        let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
-    
-                        defensemsg += `{{Defense Rolls= ${rollText}}} {{Result = [[${rollResult.total}]]}}`;
-    
-                        sendChat(sender, defensemsg); //because sendChat is asynch, we have to call this here in a separate condition
-                    });
-                } else {
-                    sendChat(sender, defensemsg);
+                if (caller.requiresChar && !character){
+                    sendMessage("You must select a target token!", sender, 'error');
+                    return;
                 }
 
-            }
+                let response = caller.handler(args, character);
 
+                caller.responder(response, sender, character);
+            }
         }
     };
 
-    
+    const HandleAttributeChange = function(obj, prev){
+        for (let watcher of attrWatchers){
+            watcher(obj, prev);
+        }
+    }
+
+    /**
+     * Post a formatted text to chat.
+     * @param {*} msg 
+     * @param {*} who 
+     * @param {*} type 
+     * @returns 
+     */   
     const sendMessage = function(msg, who, type){
         let textColor = '#000',
             bgColor = '#fff';
@@ -139,19 +135,28 @@ var Main = Main || (function(){
 
         sendChat(
             `${who}`,
-            `<div style="padding:1px 3px;border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 80%;">${msg}</div>`
+            `<div style="padding:3px; border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 120%;">${msg}</div>`
 		);
     }
     
-    const RegisterEventHandlers = function() {
-		on('chat:message', HandleInput);
-        on('change:attribute', attrAlert);
+    const init = function() {
+        on('chat:message', HandleInput);
+        on('change:attribute', HandleAttributeChange);
 	};
-
+    
     return {
-        RegisterEventHandlers: RegisterEventHandlers
+        init: init,
+        RegisterApiCaller: RegisterApiCaller,
+        RegisterAttrWatcher: RegisterAttrWatcher
     }
 })();
+
+
 on("ready", function(){
-    Main.RegisterEventHandlers();
+    Main.RegisterApiCaller(cardDeck);
+    Main.RegisterApiCaller(pickup);
+    Main.RegisterApiCaller(reload);
+    Main.RegisterApiCaller(attack);
+    Main.RegisterAttrWatcher(attrAlert);
+    Main.init();
 });

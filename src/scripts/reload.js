@@ -2,10 +2,16 @@ import { getAttr } from "./_helpers";
 import { fields as card} from '../model/card';
 import { fields as charFields} from '../model/character';
 
-export function handleReload(character, weaponId){
+const handleReload = function(args, character){
     const getAttrName = function(id, num){
         return `${charFields.weaponslots.type}_${id}_${num}`;
     }    
+
+    if (!("weapon" in args) || !Number.isInteger(args['weapon'])){
+        return {msg:'You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', type:'error'};
+    }
+
+    let weaponId = args['weapon'];
 
     const itemType = getAttr(character, getAttrName(card.type.id, weaponId)),
         weaponType = getAttr(character, getAttrName(card.weapontype.id, weaponId)),
@@ -69,5 +75,9 @@ export function handleReload(character, weaponId){
     }
 }
 
-
+export const reload = {
+    caller: '!!reload',
+    handler: handleReload,
+    requires: ['character']
+}
 

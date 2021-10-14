@@ -119,11 +119,25 @@ const filters = {
         }
 
         return result;
+    },
+
+    exportItem: function(obj){
+        let result = '';
+
+        for (let key in obj){
+            let fld = obj[key];
+
+            if ('id' in fld){
+                let id = fld.id;
+                result += ` ${id}='@{${id}}' `;
+            }
+        }
+
+        return result;
     }
 };
 
-const sassHeaders = `
-`
+const sassHeaders = ``
 
 module.exports = {
     BuildContext: BuildContext,

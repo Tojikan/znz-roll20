@@ -1,9 +1,9 @@
 export const fields = {
     name: {
-        id: 'itemname'
+        id: 'name'
     },
     type: {
-        id: 'itemtype',
+        id: 'type',
         label: "Item Type",
         options: [
             'inventory',
@@ -12,7 +12,7 @@ export const fields = {
         ]
     },
     damage: {
-        id: 'itemdamage'
+        id: 'damage'
     },
     weapontype: {
         id: 'weapontype',
@@ -31,10 +31,10 @@ export const fields = {
             ranged: 'Ammo'
         }
     },
-    ammotype: {
-        id: 'ammotype',
-        label: 'Ammo Type'
-    },
+    // ammotype: {
+    //     id: 'ammotype',
+    //     label: 'Ammo Type'
+    // },
     description: {
         id: 'description'
     }, 
