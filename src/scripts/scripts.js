@@ -2,6 +2,7 @@ import { attrAlert } from "./attrAlert";
 import { reload } from "./reload";
 import { pickup } from "./pickup";
 import { attack } from "./attack";
+import { combat } from './combat';
 import { splitArgs, getCharacter } from "./_helpers";
 import { cardDeck } from "./deck";
 
@@ -156,7 +157,8 @@ on("ready", function(){
     Main.RegisterApiCaller(cardDeck);
     Main.RegisterApiCaller(pickup);
     Main.RegisterApiCaller(reload);
-    Main.RegisterApiCaller(attack);
+    // Main.RegisterApiCaller(attack);
+    Main.RegisterApiCaller(combat);
     Main.RegisterAttrWatcher(attrAlert);
     Main.init();
 });

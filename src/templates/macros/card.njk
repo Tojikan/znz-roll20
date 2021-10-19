@@ -20,6 +20,11 @@
             </select>
         </div>
 
+        {# Checkboxes for weapon type show and hide #}
+        {% for type in fields.card.weapontype.options %}
+            <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{fields.card.weapontype | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if loop.first }}/>
+        {% endfor %}
+
         {# Name #}
         <div class="sheet-card-name">
             <input type="text" name="attr_{{fields.card.name | getAttr | attach(prefix, num)}}" placeholder="Item Name">
@@ -27,10 +32,6 @@
 
         {# Weapon Only #}
         <div class="sheet-card-weapon-fields">        
-            {# Checkboxes for show and hide #}
-            {% for type in fields.card.weapontype.options %}
-                <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{fields.card.weapontype | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if loop.first }}/>
-            {% endfor %}
             
             {# Damage #}
             <div class="sheet-card-damage  sheet-card-line">
@@ -74,8 +75,11 @@
         </div>
         <div class="sheet-card-actions">
             {# Since roll20 uses curly braces for roll buttons, we need to do some ridiculous escaping and we can't have spaces #}
-            <button type="roll" class="sheet-attack-button sheet-attack-melee btn" 
-            value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}} >Attack/Defend</button">
+            {# <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button> #}
+            
+            
+            {# melee #}<button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.skills.options.melee.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
+            {# ranged #}<button type="roll" class="sheet-attack-button sheet-attack-ranged btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.skills.options.ranged.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
             {# <button type="roll" class="sheet-reload-button btn" name="act_{{options.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button> #}
             <button type="action" class="sheet-equip-button btn" name="act_{{options.card.actions.equip | attach(prefix, num)}}">Equip</button>
             <button type="action" class="sheet-unequip-button btn" name="act_{{options.card.actions.unequip | attach(prefix, num)}}">Unequip</button>

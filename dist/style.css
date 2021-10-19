@@ -263,22 +263,19 @@ textarea.sheet-vertical {
     display: none;
     text-align: right; }
 
+.sheet-card .sheet-show-ranged:checked ~ .sheet-card-weapon-fields .sheet-ranged-only {
+  display: block; }
+
+.sheet-card .sheet-show-ranged:checked ~ .sheet-card-weapon-fields .sheet-melee-only {
+  display: none; }
+
+.sheet-card .sheet-show-melee:checked ~ .sheet-card-weapon-fields .sheet-melee-only {
+  display: block; }
+
+.sheet-card .sheet-show-melee:checked ~ .sheet-card-weapon-fields .sheet-ranged-only {
+  display: none; }
+
 .sheet-card .sheet-card-weapon-fields .sheet-ranged-only {
-  display: none; }
-
-.sheet-card .sheet-card-weapon-fields .sheet-show-ranged:checked ~ .sheet-card-uses .sheet-ranged-only {
-  display: block; }
-
-.sheet-card .sheet-card-weapon-fields .sheet-show-ranged:checked ~ .sheet-card-uses .sheet-melee-only {
-  display: none; }
-
-.sheet-card .sheet-card-weapon-fields .sheet-show-ranged:checked ~ .sheet-ranged-only {
-  display: block; }
-
-.sheet-card .sheet-card-weapon-fields .sheet-show-melee:checked ~ .sheet-card-uses .sheet-melee-only {
-  display: block; }
-
-.sheet-card .sheet-card-weapon-fields .sheet-show-melee:checked ~ .sheet-card-uses .sheet-ranged-only {
   display: none; }
 
 .sheet-card .sheet-card-textarea {
@@ -363,8 +360,10 @@ textarea.sheet-vertical {
 .sheet-equipment .sheet-wrap .sheet-slot {
   flex-basis: 18%; }
 
-.sheet-weapon-slots .sheet-card .sheet-card-actions button.sheet-attack-button,
-.sheet-weapon-slots .sheet-card .sheet-card-actions button.sheet-reload-button {
+.sheet-weapon-slots .sheet-card .sheet-show-melee:checked ~ .sheet-card-actions .sheet-attack-melee {
+  display: inline-block; }
+
+.sheet-weapon-slots .sheet-card .sheet-show-ranged:checked ~ .sheet-card-actions .sheet-attack-ranged {
   display: inline-block; }
 
 .sheet-weapon-slots .sheet-card .sheet-card-actions button.sheet-unequip-button,

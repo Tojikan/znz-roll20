@@ -14,6 +14,7 @@ export const getButtonRowId = function(eventInfo){
         return '';
     }
 
+    //descending order
     if (flip){
         for (let i = num; i >= 0; i--){
             result += i.toString();
@@ -23,7 +24,7 @@ export const getButtonRowId = function(eventInfo){
             }
         }
     } else {
-        
+        //ascneding order
         for (let i = 0; i <= num; i++){
             result += i.toString();
     

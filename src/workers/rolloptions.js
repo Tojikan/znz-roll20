@@ -21,10 +21,12 @@ export function rollOptions(){
                         [attr + '_rolls'] : sequenceNumber(numOfDice, '|', true) //start at value
                     }
 
-                    console.log(attrSet);
-    
-                    setAttrs(attrSet);
+                    // Add bonus options
+                    for (let i = 1; i <= numOfDice; i++){
+                        attrSet[attr + '_rolls'] += `| ${numOfDice }( + ${i} bonus rolls ), ${numOfDice}b${i}`;
+                    }
 
+                    setAttrs(attrSet);
                 });
             })
         }

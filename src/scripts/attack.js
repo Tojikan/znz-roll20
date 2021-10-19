@@ -10,6 +10,7 @@ import { getAttr, getAttrVal } from './_helpers';
  */
 const handleAttack = function(args, character){
 
+    
     if (!("rolls" in args)){
         return {msg: "You must specify the number of rolls!", type:"error"};
     }
@@ -201,8 +202,14 @@ const renderAttack = function(response, sender, character){
             sendChat(sender, defensemsg);
         }
 
+    }   
+}
+
+function getBonusDice(roll){
+    return {
+        roll: roll.split('b')[0],
+        bonus: roll.split('b')[1]
     }
-    
 }
 
 

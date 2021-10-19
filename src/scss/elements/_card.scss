@@ -58,45 +58,39 @@
         }
     }
     
+    // Show different label or field if melee/ranged
+    .sheet-show-ranged {
+        &:checked {
+            ~ .sheet-card-weapon-fields {
+                .sheet-ranged-only {
+                    display: block;
+                }
+
+                .sheet-melee-only {
+                    display: none;
+                }
+            }
+        }
+    }
+    
+    .sheet-show-melee {
+        &:checked {
+            ~ .sheet-card-weapon-fields {
+                .sheet-melee-only {
+                    display: block;
+                }
+
+                .sheet-ranged-only {
+                    display: none;
+                }
+            }
+        }
+    }
     
     // Weapon Fields
     .sheet-card-weapon-fields {
         .sheet-ranged-only{
             display: none; //melee is default selection
-        }
-
-        // Show different label or field if melee/ranged
-        .sheet-show-ranged {
-            &:checked {
-                ~ .sheet-card-uses {
-                    .sheet-ranged-only {
-                        display: block;
-                    }
-
-                    .sheet-melee-only {
-                        display: none;
-                    }
-                }
-
-                //show ammo type
-                ~ .sheet-ranged-only {
-                    display: block
-                }
-            }
-        }
-        
-        .sheet-show-melee {
-            &:checked {
-                ~ .sheet-card-uses {
-                    .sheet-melee-only {
-                        display: block;
-                    }
-
-                    .sheet-ranged-only {
-                        display: none;
-                    }
-                }
-            }
         }
     }
 

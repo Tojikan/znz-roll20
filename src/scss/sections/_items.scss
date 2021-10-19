@@ -58,11 +58,25 @@
 // Show Buttons
 .sheet-weapon-slots {
     .sheet-card {
-        .sheet-card-actions {
-            button.sheet-attack-button,
-            button.sheet-reload-button 
-            {
-                display: inline-block;
+        .sheet-show-melee {
+            &:checked {
+                ~ .sheet-card-actions {
+                    .sheet-attack-melee
+                    {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+        .sheet-show-ranged {
+            &:checked {
+                ~ .sheet-card-actions {
+                    .sheet-attack-ranged
+                    {
+                        display: inline-block;
+                    }
+                }
             }
         }
     }
