@@ -380,6 +380,20 @@ textarea.sheet-vertical {
 .sheet-inventory .sheet-card .sheet-card-actions button.sheet-delete-button {
   display: inline-block; }
 
+.sheet-rolltemplate-zroll .sheet-template-container {
+  border: solid 2px black; }
+
+.sheet-rolltemplate-zroll .sheet-zroll-header {
+  color: white;
+  background-color: purple;
+  border: solid 3px black;
+  padding: 1rem;
+  font-weight: 700; }
+
+.sheet-rolltemplate-zroll .sheet-zroll-row {
+  padding: 1rem;
+  border: double 2px black; }
+
 .sheet-character {
   font-size: 10px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }

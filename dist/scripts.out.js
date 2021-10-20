@@ -8,11 +8,6 @@
     		description: ""
     	},
     	{
-    		id: "actionstar",
-    		label: "Action Star",
-    		description: "Increase your max action points by 2"
-    	},
-    	{
     		id: "cheerleader",
     		label: "Cheerleader",
     		description: "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
@@ -33,9 +28,19 @@
     		description: "Use a D10 when restoring health and add 1 bonus dice roll."
     	},
     	{
-    		id: "Reflexes",
-    		label: "Reflexes",
-    		description: "Use a D10 when doing defense rolls."
+    		id: "dockworker",
+    		label: "Dock Worker",
+    		description: "Upon entering a zone, can identify 1 building that will not have a key item."
+    	},
+    	{
+    		id: "engineer",
+    		label: "Engineer",
+    		description: "Can put together the boat in 2 turns instead of 5."
+    	},
+    	{
+    		id: "runner",
+    		label: "Runner",
+    		description: "Incur no AP penalty when moving between zones."
     	},
     	{
     		id: "scavenger",
@@ -43,19 +48,14 @@
     		description: "Whenever you scavenge, scavenge 1 additional item."
     	},
     	{
-    		id: "scout",
-    		label: "Scout",
-    		description: "Gain better vision in the dark. Sense approaching enemies."
-    	},
-    	{
     		id: "sniper",
     		label: "Sniper",
-    		description: "Add +2 on every attack roll you make."
+    		description: "Add 2 bonus rolls to any ranged attack."
     	},
     	{
-    		id: "tanky",
-    		label: "Tanky",
-    		description: "Increase your starting health by 20."
+    		id: "speedster",
+    		label: "speedster",
+    		description: "Move 3 spaces instead of 2 on move actions."
     	}
     ];
 
@@ -250,9 +250,19 @@
         var result = {},
             argsRegex = /(.*)=(.*)/, //can't be global but shouldn't need it as we are splitting args. 
             quoteRegex = /(?:[^\s"']+|"[^"]*"|'[^']*')+/g; //Split on spaces unless space is within single or double quotes - https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
+            
         
             var quoteSplit = input.match(quoteRegex).map(e => {
-                return e.replace(/['"]+/g, ''); //remove quotes
+                //https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
+                let quote = /(["'])(?:(?=(\\?))\2.)*?\1/g.exec(e); //get either ' or ", whatever is first
+
+                //if no quotes, will be null
+                if (quote){
+                    let re = new RegExp(quote[1], "g");
+                    return e.replace(re, ''); //remove outer quotes
+                } else {
+                    return e;
+                }
             });
 
             
@@ -543,51 +553,51 @@
     var snack = {
     	name: "Snack",
     	type: "inventory",
-    	description: "Restore 1 AP (cannot exceed max)",
+    	description: "Restore 1 AP (cannot exceed max). Cannot be used during combat",
     	flavor: "Organic, locally-sourced zombie-killing fuel in eco-friendly packaging.",
-    	quantity: 10
+    	quantity: 7
     };
     var energydrink = {
     	name: "Energy Drink",
     	type: "inventory",
-    	description: "Gain 2 AP (cannot exceed max).",
+    	description: "Gain 2 AP (cannot exceed max). Cannot be used during combat",
     	flavor: "It's got Electrolytes. It's what plants crave.",
-    	quantity: 8
+    	quantity: 5
     };
     var adrenaline = {
     	name: "Adrenaline",
     	type: "inventory",
     	description: "Gain 5 AP. Can exceed your max.",
     	flavor: "When you need a rush.",
-    	quantity: 2
+    	quantity: 3
     };
     var bandage = {
     	name: "Bandage",
     	type: "inventory",
-    	description: "Restore 1d6 health.",
+    	description: "Restore 1d6 health. Cannot be used during combat.",
     	flavor: "It's even got a dinosaur on it!",
-    	quantity: 6
+    	quantity: 5
     };
     var firstaidkit = {
     	name: "First Aid Kit",
     	type: "inventory",
-    	description: "Restore 2d6 health.",
+    	description: "Restore 2d6 health. Cannot be used during combat.",
     	flavor: "It's basically just two bandages in a box.",
-    	quantity: 4
+    	quantity: 3
     };
     var medkit = {
     	name: "Med Kit",
     	type: "inventory",
-    	description: "Restore 4d6 health.",
+    	description: "Restore 4d6 health. Cannot be used during combat.",
     	flavor: "It's merely a flesh wound.",
     	quantity: 2
     };
     var ammo = {
     	name: "Reload",
     	type: "inventory",
-    	description: "Fill 1 Ranged weapon to its max ammo.",
+    	description: "Fill 1 Ranged weapon to its max ammo. Uses 3 AP to use during combat.",
     	flavor: "All-purpose, one size fits all ammunition.",
-    	quantity: 20
+    	quantity: 15
     };
     var backpack = {
     	name: "Fanny Pack",
@@ -601,42 +611,42 @@
     	type: "equipment",
     	description: "When this is equipped, increase your available weapon slots by 1 (Up to a maximum of 4 weapon slots)",
     	flavor: "Your standard handgun/rifle/sword/rocket launcher holder.",
-    	quantity: 4
+    	quantity: 3
     };
     var belt = {
     	name: "Utiliy Belt",
     	type: "inventory",
     	description: "Delete this item. Increase your available equipment slots by 1 (Up to a maximum of 5 equipment slots)",
     	flavor: "Batman would be jealous.",
-    	quantity: 4
+    	quantity: 3
     };
     var barricade1 = {
     	name: "Sandbags!",
     	type: "inventory",
-    	description: "Delete this item. Build a barricade anywhere with 2d6 health.",
+    	description: "Delete this item. Build a barricade anywhere with 2d6 health. Cannot use during combat",
     	flavor: "Made with really, really lightweight sand.",
-    	quantity: 8
+    	quantity: 6
     };
     var barricade2 = {
     	name: "Boards and Nails",
     	type: "inventory",
-    	description: "Delete this item. Build a barricade with 4d6 health",
+    	description: "Delete this item. Build a barricade with 4d6 health. Cannot use during combat",
     	flavor: "No hammer required.",
-    	quantity: 6
+    	quantity: 4
     };
     var armor1 = {
     	name: "Improvised Armor",
     	type: "equipment",
     	description: "Increase your Armor by 1.",
     	flavor: "Enough Duct Tape can do just about anything.",
-    	quantity: 4
+    	quantity: 3
     };
     var armor2 = {
     	name: "Sporting Pads",
     	type: "equipment",
     	description: "Increase your Armor by 2.",
     	flavor: "Perfect for doing that sport with the sporting ball.",
-    	quantity: 3
+    	quantity: 2
     };
     var armor3 = {
     	name: "Tactical Gear",
@@ -657,14 +667,14 @@
     	type: "equipment",
     	description: "Increase your dodge roll by 1.",
     	flavor: "You feel just a tad bit more limber.",
-    	quantity: 4
+    	quantity: 2
     };
     var dodge2 = {
     	name: "Arm Guards",
     	type: "equipment",
     	description: "Increase your dodge roll by 2.",
     	flavor: "Good luck biting into these.",
-    	quantity: 3
+    	quantity: 2
     };
     var dodge3 = {
     	name: "Shield",
@@ -692,7 +702,7 @@
     	type: "equipment",
     	description: "Light a square and its adjacent squares on fire within 7 squares for 3 rounds. Deals 10 damage and 5 ongoing damage to anyone who walks through.",
     	flavor: "Liquor? I barely even lit her on fire!",
-    	quantity: 3
+    	quantity: 2
     };
     var knife = {
     	name: "Knife",
@@ -701,7 +711,7 @@
     	damage: "1d4",
     	uses: 20,
     	flavor: "Great for cutting vegetables, fruit, and brains.",
-    	quantity: 0
+    	quantity: 1
     };
     var baseballbat = {
     	name: "Baseball Bat",
@@ -710,7 +720,7 @@
     	damage: "1d6",
     	uses: 30,
     	flavor: "It is now past the time... for America's favorite pastime.",
-    	quantity: 3
+    	quantity: 1
     };
     var nailbat = {
     	name: "Nailbat",
@@ -719,7 +729,7 @@
     	damage: "1d8+2",
     	uses: 20,
     	flavor: "Peanut Butter and Jelly. Burger and Fries. Ham and Cheese. Nails and a Bat. ",
-    	quantity: 3
+    	quantity: 1
     };
     var combatknife = {
     	name: "Ka-Bar Knife",
@@ -728,7 +738,7 @@
     	damage: "1d8",
     	uses: 40,
     	flavor: "Hoo-rah.",
-    	quantity: 3
+    	quantity: 1
     };
     var machete = {
     	name: "Machete",
@@ -737,7 +747,7 @@
     	damage: "1d10",
     	uses: 40,
     	flavor: "Great tool for re-deading the undead.",
-    	quantity: 3
+    	quantity: 1
     };
     var axe = {
     	name: "Axe",
@@ -746,7 +756,7 @@
     	damage: "1d12",
     	uses: 50,
     	flavor: "Stumped?",
-    	quantity: 2
+    	quantity: 1
     };
     var katana = {
     	name: "Katana",
@@ -755,7 +765,7 @@
     	damage: "1d12+4",
     	uses: 40,
     	flavor: "Forgive me sensei, I must go all out. Just this once.",
-    	quantity: 2
+    	quantity: 1
     };
     var sword = {
     	name: "Sword",
@@ -764,7 +774,7 @@
     	damage: "1d16",
     	uses: 60,
     	flavor: "Why socialize when you could study the way of the sword?",
-    	quantity: 2
+    	quantity: 1
     };
     var chainsaw = {
     	name: "Chainsaw",
@@ -793,7 +803,7 @@
     	uses: 10,
     	ammotype: "ammo_1d6",
     	flavor: "Pew pew pew.",
-    	quantity: 3
+    	quantity: 1
     };
     var revolver = {
     	name: "Revolver",
@@ -803,7 +813,7 @@
     	uses: 6,
     	ammotype: "ammo_d8",
     	flavor: "Do you feel lucky?",
-    	quantity: 3
+    	quantity: 1
     };
     var uzi = {
     	name: "Uzi",
@@ -813,7 +823,7 @@
     	uses: 20,
     	ammotype: "ammo_1d6",
     	flavor: "Spray and Pray",
-    	quantity: 2
+    	quantity: 1
     };
     var bow = {
     	name: "Bow",
@@ -824,7 +834,7 @@
     	ammotype: "ammo_arrow",
     	description: "If you kill your target, leave a marker at the target. You can regain all spent Arrows used this turn if you pick up the marker",
     	flavor: "Silent but deadly.",
-    	quantity: 2
+    	quantity: 1
     };
     var shotgun = {
     	name: "Shotgun",
@@ -834,7 +844,7 @@
     	uses: 5,
     	ammotype: "ammo_d4",
     	flavor: "Hail to the King, baby.",
-    	quantity: 3
+    	quantity: 1
     };
     var assaultrifle = {
     	name: "Assault Rifle",
@@ -844,7 +854,7 @@
     	uses: 25,
     	ammotype: "ammo_d10",
     	flavor: "Now we're talking.",
-    	quantity: 2
+    	quantity: 1
     };
     var snipperrifle = {
     	name: "Sniper Rifle",
@@ -854,7 +864,7 @@
     	uses: 5,
     	ammotype: "ammo_d12",
     	flavor: "BOOM! Headshot!",
-    	quantity: 2
+    	quantity: 1
     };
     var machinegun = {
     	name: "Machine Gun",
@@ -1096,11 +1106,7 @@
             if (!("sdice" in args) && !("gdice" in args)){
                 return {error: "Did not specify the dice to roll."};
             }
-        
-            if (!Number.isInteger(args['success']) || !Number.isInteger(args['guard'])){
-                return {error: "Amount of rolls must be an integer!"};
-            }
-        
+
             let rollResult = {}, // success and guard appended to this later on so its easier to type
                 success = {
                     original: this.parseRolls(args['success']).roll, //track original value before its changed
@@ -1119,6 +1125,27 @@
                     bonus: args['gbonus'] || 0
                 },
                 limit = parseInt(args['limit'], 10) || null;
+                
+            // Spend a given resource up to the amount of dice rolled, but if resources are exhausted, reduce rolls.
+            const spendResource = this.spendResource;//so we can call this function  within calculateResource
+            const calculateResource = function(type){
+        
+                if (type.resource){
+                    let resourceSpend = spendResource(type.rolls, type.resource, character);
+
+                    log(resourceSpend);
+        
+                    if (resourceSpend && resourceSpend.spent < type.rolls){
+                        type.rolls = resourceSpend.spent;
+                        type.resourceLimited = true;
+                    }
+        
+                    type.resourceSpend = resourceSpend;
+                }
+            };
+        
+            calculateResource(success);
+            calculateResource(guard);
         
         
             // Limit total rolls to a certain number
@@ -1141,25 +1168,7 @@
                 }
             }
 
-            const spendResource = this.spendResource;
-        
-            // Spend a given resource up to the amount of dice rolled, but if resources are exhausted, reduce rolls.
-            const calculateResource = function(type){
-        
-                if (type.resource){
-                    let resourceSpend = spendResource(type.rolls, type.resource, character);
-        
-                    if (resourceSpend.spent < type.rolls){
-                        type.rolls = resourceSpend.spent;
-                        type.resourceLimited = true;
-                    }
-        
-                    type.resourceSpend = resourceSpend;
-                }
-            };
-        
-            calculateResource(success);
-            calculateResource(guard);
+
         
             
             success.rolltext = this.generateRollText(success.rolls + success.bonusrolls, `${success.dice} + ${success.bonus}` );
@@ -1274,29 +1283,24 @@
             description += `**Available AP:**${response.actions} \n`;
 
 
-            output += ` {{description=${description}}} {{successlabel=Attack}} {{guardlabel=Defense}} `;
-
-
-            let msg = '';
-
             if (response.successLimited || response.guardLimited){
-                msg += `***${response.charname} did not have enough AP to complete attempted actions*** \n`;
+                description += `***${response.charname} did not have enough AP to complete attempted actions*** \n`;
             }
 
             if (response.resourceLimited){
                 if (response.type){
                     if (response.type == 'melee'){
-                        msg += `***${response.charname}'s  ${response.weapon} is broken!*** \n`;
+                        description += `***${response.charname}'s  ${response.weapon} is broken!*** \n`;
                     } else {
-                        msg += `***${response.charname}'s  ${response.weapon} is out of ammo!*** \n`;
+                        description += `***${response.charname}'s  ${response.weapon} is out of ammo!*** \n`;
                     }
                 } else {
-                    msg += `***${response.charname}'s  ${response.weapon} is out of uses!*** \n`;
+                    description += `***${response.charname}'s  ${response.weapon} is out of uses!*** \n`;
                 }
             }
 
-            output += ` {{message=${msg}}} `;
 
+            output += ` {{description=${description}}} {{successlabel=Attack}} {{guardlabel=Defense}} `;
 
             const getRollResult = function(obj){
                 let rollResult = JSON.parse(obj[0].content);
@@ -1394,26 +1398,42 @@
         getDeck(){
             return this.deck;
         }
+
+        getLength(){
+            return this.deck.length;
+        }
     }
 
 
     const cardDeck = (function(){
         const deck = new Deck();
+        const ratio = 1;
+
 
         const setupDeck = function(){
             deck.clearDeck();
 
             for (let key in items$1){
                 let item = items$1[key],
-                    count = item.quantity || 1;
+                    quantity = item.quantity || 1;
 
                 if(key == 'default'){ //somehow, we're importing a default value.
                     continue;
                 }
 
+                
+                let count = Math.floor(ratio * quantity);
+
                 for (let i = 0; i < count; i++){
                     deck.addCard(key);
                 }
+            }
+
+            //because unit testing throws an error here for some reason (log is not a function unless on roll20)
+            try {
+                log("Initialized Deck with " + deck.getLength() + ' cards!');
+            } catch(e){
+
             }
 
             deck.shuffleDeck();
@@ -1447,7 +1467,23 @@
                 } else {
                     retVal.card = card;
                 }
+            }
 
+            if ("set" in args){
+                try {
+                    log(args['set']);
+                    let json = JSON.parse(args['set']);
+                    deck.clearDeck();
+                    for(let itm of json){
+                        deck.addCard(itm);
+                    }
+                    log("Set Deck with " + deck.getLength() + ' cards!');
+
+                    deck.shuffleDeck();
+                } catch(e){
+                    log(e.message);
+                    log('Error');
+                }
             }
 
             if ("add" in args && args['add'].length){
@@ -1482,7 +1518,7 @@
                 }
 
                 if ('error' in response){
-                    msg += `{{Error= <span style="color:red">${response.error}</span>`;
+                    msg += ` {{Error=${response.error}}}`;
                 }
                 
                 if ('card' in response){

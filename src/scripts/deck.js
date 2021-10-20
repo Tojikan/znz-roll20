@@ -47,26 +47,42 @@ export class Deck {
     getDeck(){
         return this.deck;
     }
+
+    getLength(){
+        return this.deck.length;
+    }
 }
 
 
 export const cardDeck = (function(){
     const deck = new Deck();
+    const ratio = 1;
+
 
     const setupDeck = function(){
         deck.clearDeck();
 
         for (let key in items){
             let item = items[key],
-                count = item.quantity || 1;
+                quantity = item.quantity || 1;
 
             if(key == 'default'){ //somehow, we're importing a default value.
                 continue;
             }
 
+            
+            let count = Math.floor(ratio * quantity);
+
             for (let i = 0; i < count; i++){
                 deck.addCard(key);
             }
+        }
+
+        //because unit testing throws an error here for some reason (log is not a function unless on roll20)
+        try {
+            log("Initialized Deck with " + deck.getLength() + ' cards!');
+        } catch(e){
+
         }
 
         deck.shuffleDeck();
@@ -100,7 +116,23 @@ export const cardDeck = (function(){
             } else {
                 retVal.card = card;
             }
+        }
 
+        if ("set" in args){
+            try {
+                log(args['set']);
+                let json = JSON.parse(args['set']);
+                deck.clearDeck();
+                for(let itm of json){
+                    deck.addCard(itm);
+                }
+                log("Set Deck with " + deck.getLength() + ' cards!');
+
+                deck.shuffleDeck();
+            } catch(e){
+                log(e.message);
+                log('Error');
+            }
         }
 
         if ("add" in args && args['add'].length){
@@ -135,7 +167,7 @@ export const cardDeck = (function(){
             }
 
             if ('error' in response){
-                msg += `{{Error= <span style="color:red">${response.error}</span>`;
+                msg += ` {{Error=${response.error}}}`;
             }
             
             if ('card' in response){

@@ -2,44 +2,44 @@
     "snack": {
         "name": "Snack",
         "type": "inventory",
-        "description": "Restore 1 AP (cannot exceed max)",
+        "description": "Restore 1 AP (cannot exceed max). Cannot be used during combat",
         "flavor": "Organic, locally-sourced zombie-killing fuel in eco-friendly packaging.",
-        "quantity": 10
+        "quantity": 7
     },
     "energydrink": {
         "name": "Energy Drink",
         "type": "inventory",
-        "description": "Gain 2 AP (cannot exceed max).",
+        "description": "Gain 2 AP (cannot exceed max). Cannot be used during combat",
         "flavor": "It's got Electrolytes. It's what plants crave.",
-        "quantity": 8
+        "quantity": 5
     },
     "adrenaline": {
         "name": "Adrenaline",
         "type": "inventory",
         "description": "Gain 5 AP. Can exceed your max.",
         "flavor": "When you need a rush.",
-        "quantity": 2
+        "quantity": 3
     },
 
 
     "bandage": {
         "name": "Bandage",
         "type": "inventory",
-        "description": "Restore 1d6 health.",
+        "description": "Restore 1d6 health. Cannot be used during combat.",
         "flavor": "It's even got a dinosaur on it!",
-        "quantity": 6
+        "quantity": 5
     },
     "firstaidkit": {
         "name": "First Aid Kit",
         "type": "inventory",
-        "description": "Restore 2d6 health.",
+        "description": "Restore 2d6 health. Cannot be used during combat.",
         "flavor": "It's basically just two bandages in a box.",
-        "quantity": 4
+        "quantity": 3
     },
     "medkit": {
         "name": "Med Kit",
         "type": "inventory",
-        "description": "Restore 4d6 health.",
+        "description": "Restore 4d6 health. Cannot be used during combat.",
         "flavor": "It's merely a flesh wound.",
         "quantity": 2
     },
@@ -48,9 +48,9 @@
     "ammo": {
         "name": "Reload",
         "type": "inventory",
-        "description": "Fill 1 Ranged weapon to its max ammo.",
+        "description": "Fill 1 Ranged weapon to its max ammo. Uses 3 AP to use during combat.",
         "flavor": "All-purpose, one size fits all ammunition.",
-        "quantity": 20
+        "quantity": 15
     },
 
     "backpack": {
@@ -65,30 +65,30 @@
         "type": "equipment",
         "description": "When this is equipped, increase your available weapon slots by 1 (Up to a maximum of 4 weapon slots)",
         "flavor": "Your standard handgun/rifle/sword/rocket launcher holder.",
-        "quantity": 4
+        "quantity": 3
     },
     "belt": {
         "name": "Utiliy Belt",
         "type": "inventory",
         "description": "Delete this item. Increase your available equipment slots by 1 (Up to a maximum of 5 equipment slots)",
         "flavor": "Batman would be jealous.",
-        "quantity": 4
+        "quantity": 3
     },
 
 
     "barricade1": {
         "name": "Sandbags!",
         "type": "inventory",
-        "description": "Delete this item. Build a barricade anywhere with 2d6 health.",
+        "description": "Delete this item. Build a barricade anywhere with 2d6 health. Cannot use during combat",
         "flavor": "Made with really, really lightweight sand.",
-        "quantity": 8
+        "quantity": 6
     },
     "barricade2": {
         "name": "Boards and Nails",
         "type": "inventory",
-        "description": "Delete this item. Build a barricade with 4d6 health",
+        "description": "Delete this item. Build a barricade with 4d6 health. Cannot use during combat",
         "flavor": "No hammer required.",
-        "quantity": 6
+        "quantity": 4
     },
 
 
@@ -97,14 +97,14 @@
         "type": "equipment",
         "description": "Increase your Armor by 1.",
         "flavor": "Enough Duct Tape can do just about anything.",
-        "quantity": 4
+        "quantity": 3
     },
     "armor2": {
         "name": "Sporting Pads",
         "type": "equipment",
         "description": "Increase your Armor by 2.",
         "flavor": "Perfect for doing that sport with the sporting ball.",
-        "quantity": 3
+        "quantity": 2
     },
     "armor3": {
         "name": "Tactical Gear",
@@ -127,14 +127,14 @@
         "type": "equipment",
         "description": "Increase your dodge roll by 1.",
         "flavor": "You feel just a tad bit more limber.",
-        "quantity": 4
+        "quantity": 2
     },
     "dodge2": {
         "name": "Arm Guards",
         "type": "equipment",
         "description": "Increase your dodge roll by 2.",
         "flavor": "Good luck biting into these.",
-        "quantity": 3
+        "quantity": 2
     },
     "dodge3": {
         "name": "Shield",
@@ -164,7 +164,7 @@
         "type": "equipment",
         "description": "Light a square and its adjacent squares on fire within 7 squares for 3 rounds. Deals 10 damage and 5 ongoing damage to anyone who walks through.",
         "flavor": "Liquor? I barely even lit her on fire!",
-        "quantity": 3
+        "quantity": 2
     },
 
 
@@ -176,7 +176,7 @@
         "damage": "1d4",
         "uses": 20,
         "flavor": "Great for cutting vegetables, fruit, and brains.",
-        "quantity": 0
+        "quantity": 1
     },
     "baseballbat": {
         "name": "Baseball Bat",
@@ -185,7 +185,7 @@
         "damage": "1d6",
         "uses": 30,
         "flavor": "It is now past the time... for America's favorite pastime.",
-        "quantity": 3
+        "quantity": 1
     },
     "nailbat": {
         "name": "Nailbat",
@@ -194,7 +194,7 @@
         "damage": "1d8+2",
         "uses": 20,
         "flavor": "Peanut Butter and Jelly. Burger and Fries. Ham and Cheese. Nails and a Bat. ",
-        "quantity": 3
+        "quantity": 1
     },
     "combatknife": {
         "name": "Ka-Bar Knife",
@@ -203,7 +203,7 @@
         "damage": "1d8",
         "uses": 40,
         "flavor": "Hoo-rah.",
-        "quantity": 3
+        "quantity": 1
     },
     "machete": {
         "name": "Machete",
@@ -212,7 +212,7 @@
         "damage": "1d10",
         "uses": 40,
         "flavor": "Great tool for re-deading the undead.",
-        "quantity": 3
+        "quantity": 1
     },
     "axe": {
         "name": "Axe",
@@ -221,7 +221,7 @@
         "damage": "1d12",
         "uses": 50,
         "flavor": "Stumped?",
-        "quantity": 2
+        "quantity": 1
     },
     "katana": {
         "name": "Katana",
@@ -230,7 +230,7 @@
         "damage": "1d12+4",
         "uses": 40,
         "flavor": "Forgive me sensei, I must go all out. Just this once.",
-        "quantity": 2
+        "quantity": 1
     },
     "sword": {
         "name": "Sword",
@@ -239,7 +239,7 @@
         "damage": "1d16",
         "uses": 60,
         "flavor": "Why socialize when you could study the way of the sword?",
-        "quantity": 2
+        "quantity": 1
     },
     "chainsaw": {
         "name": "Chainsaw",
@@ -270,7 +270,7 @@
         "uses": 10,
         "ammotype": "ammo_1d6",
         "flavor": "Pew pew pew.",
-        "quantity": 3
+        "quantity": 1
     },
     "revolver": {
         "name": "Revolver",
@@ -280,7 +280,7 @@
         "uses": 6,
         "ammotype": "ammo_d8",
         "flavor": "Do you feel lucky?",
-        "quantity": 3
+        "quantity": 1
     },
     "uzi": {
         "name": "Uzi",
@@ -290,7 +290,7 @@
         "uses": 20,
         "ammotype": "ammo_1d6",
         "flavor": "Spray and Pray",
-        "quantity": 2
+        "quantity": 1
     },
     "bow": {
         "name": "Bow",
@@ -301,7 +301,7 @@
         "ammotype": "ammo_arrow",
         "description": "If you kill your target, leave a marker at the target. You can regain all spent Arrows used this turn if you pick up the marker",
         "flavor": "Silent but deadly.",
-        "quantity": 2
+        "quantity": 1
     },
     "shotgun": {
         "name": "Shotgun",
@@ -311,7 +311,7 @@
         "uses": 5,
         "ammotype": "ammo_d4",
         "flavor": "Hail to the King, baby.",
-        "quantity": 3
+        "quantity": 1
     },
     "assaultrifle": {
         "name": "Assault Rifle",
@@ -321,7 +321,7 @@
         "uses": 25,
         "ammotype": "ammo_d10",
         "flavor": "Now we're talking.",
-        "quantity": 2
+        "quantity": 1
     },
     "snipperrifle": {
         "name": "Sniper Rifle",
@@ -331,7 +331,7 @@
         "uses": 5,
         "ammotype": "ammo_d12",
         "flavor": "BOOM! Headshot!",
-        "quantity": 2
+        "quantity": 1
     },
     "machinegun": {
         "name": "Machine Gun",

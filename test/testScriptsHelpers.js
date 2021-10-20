@@ -27,7 +27,7 @@ describe('splitArgs', function(){
     });
 
     it('Includes everything in quotes', function(){
-        let result = splitArgs('!!test test1="123 123" test2=\'single quotes\' test3="\'abc123\'" test4=regular');
+        let result = splitArgs('!!test test1="123 123" test2=\'single quotes\' test3="abc123" test4=regular');
 
         console.log(result);
 
@@ -72,4 +72,24 @@ describe('splitArgs', function(){
         assert.ok('test5' in result);
         assert.ok(result['test5'] == 'regular');
     })
+
+    it('nested quotes', function(){
+        let result = splitArgs('!!test test1="\'123 123\'" test2=\'"single quotes"\' test4="regular"');
+
+        console.log(result);
+
+        assert.ok('!!test' in result);
+        assert.ok(result['!!test'] == 0);
+
+        assert.ok('test1' in result);
+        assert.ok(result['test1'] == "'123 123'");
+
+        assert.ok('test2' in result);
+        assert.ok(result['test2'] == '"single quotes"');
+
+        assert.ok('test4' in result);
+        assert.ok(result['test4'] == 'regular');
+
+        assert.ok(!('test5' in result));
+    });
 });

@@ -22,9 +22,19 @@
     var result = {},
         argsRegex = /(.*)=(.*)/, //can't be global but shouldn't need it as we are splitting args. 
         quoteRegex = /(?:[^\s"']+|"[^"]*"|'[^']*')+/g; //Split on spaces unless space is within single or double quotes - https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
+        
     
         var quoteSplit = input.match(quoteRegex).map(e => {
-            return e.replace(/['"]+/g, ''); //remove quotes
+            //https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
+            let quote = /(["'])(?:(?=(\\?))\2.)*?\1/g.exec(e); //get either ' or ", whatever is first
+
+            //if no quotes, will be null
+            if (quote){
+                let re = new RegExp(quote[1], "g");
+                return e.replace(re, ''); //remove outer quotes
+            } else {
+                return e;
+            }
         });
 
         

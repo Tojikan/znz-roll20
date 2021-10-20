@@ -5,11 +5,6 @@
         "description": ""
     },
     {
-        "id": "actionstar",
-        "label": "Action Star",
-        "description": "Increase your max action points by 2"
-    },
-    {
         "id": "cheerleader",
         "label": "Cheerleader",
         "description": "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
@@ -30,9 +25,19 @@
         "description": "Use a D10 when restoring health and add 1 bonus dice roll."
     },
     {
-        "id": "Reflexes",
-        "label": "Reflexes",
-        "description": "Use a D10 when doing defense rolls."
+        "id": "dockworker",
+        "label": "Dock Worker",
+        "description": "Upon entering a zone, can identify 1 building that will not have a key item."
+    },
+    {
+        "id": "engineer",
+        "label": "Engineer",
+        "description": "Can put together the boat in 2 turns instead of 5."
+    },
+    {
+        "id": "runner",
+        "label": "Runner",
+        "description": "Incur no AP penalty when moving between zones."
     },
     {
         "id": "scavenger",
@@ -40,18 +45,13 @@
         "description": "Whenever you scavenge, scavenge 1 additional item."
     },
     {
-        "id": "scout",
-        "label": "Scout",
-        "description": "Gain better vision in the dark. Sense approaching enemies."
-    },
-    {
         "id": "sniper",
         "label": "Sniper",
-        "description": "Add +2 on every attack roll you make."
+        "description": "Add 2 bonus rolls to any ranged attack."
     },
     {
-        "id": "tanky",
-        "label": "Tanky",
-        "description": "Increase your starting health by 20."
+        "id": "speedster",
+        "label": "speedster",
+        "description": "Move 3 spaces instead of 2 on move actions."
     }
 ]

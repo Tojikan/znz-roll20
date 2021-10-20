@@ -56,29 +56,24 @@ const renderResults = function(response, sender, character){
         description += `**Available AP:**${response.actions} \n`;
 
 
-        output += ` {{description=${description}}} {{successlabel=Attack}} {{guardlabel=Defense}} `;
-
-
-        let msg = '';
-
         if (response.successLimited || response.guardLimited){
-            msg += `***${response.charname} did not have enough AP to complete attempted actions*** \n`;
+            description += `***${response.charname} did not have enough AP to complete attempted actions*** \n`;
         }
 
         if (response.resourceLimited){
             if (response.type){
                 if (response.type == 'melee'){
-                    msg += `***${response.charname}'s  ${response.weapon} is broken!*** \n`;
+                    description += `***${response.charname}'s  ${response.weapon} is broken!*** \n`;
                 } else {
-                    msg += `***${response.charname}'s  ${response.weapon} is out of ammo!*** \n`;
+                    description += `***${response.charname}'s  ${response.weapon} is out of ammo!*** \n`;
                 }
             } else {
-                msg += `***${response.charname}'s  ${response.weapon} is out of uses!*** \n`;
+                description += `***${response.charname}'s  ${response.weapon} is out of uses!*** \n`;
             }
         }
 
-        output += ` {{message=${msg}}} `
 
+        output += ` {{description=${description}}} {{successlabel=Attack}} {{guardlabel=Defense}} `;
 
         const getRollResult = function(obj){
             let rollResult = JSON.parse(obj[0].content);

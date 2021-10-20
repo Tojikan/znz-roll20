@@ -26,11 +26,7 @@ export const zRoll = {
         if (!("sdice" in args) && !("gdice" in args)){
             return {error: "Did not specify the dice to roll."};
         }
-    
-        if (!Number.isInteger(args['success']) || !Number.isInteger(args['guard'])){
-            return {error: "Amount of rolls must be an integer!"};
-        }
-    
+
         let rollResult = {}, // success and guard appended to this later on so its easier to type
             success = {
                 original: this.parseRolls(args['success']).roll, //track original value before its changed
@@ -49,6 +45,27 @@ export const zRoll = {
                 bonus: args['gbonus'] || 0
             },
             limit = parseInt(args['limit'], 10) || null;
+            
+        // Spend a given resource up to the amount of dice rolled, but if resources are exhausted, reduce rolls.
+        const spendResource = this.spendResource;//so we can call this function  within calculateResource
+        const calculateResource = function(type){
+    
+            if (type.resource){
+                let resourceSpend = spendResource(type.rolls, type.resource, character);
+
+                log(resourceSpend);
+    
+                if (resourceSpend && resourceSpend.spent < type.rolls){
+                    type.rolls = resourceSpend.spent;
+                    type.resourceLimited = true;
+                }
+    
+                type.resourceSpend = resourceSpend;
+            }
+        }
+    
+        calculateResource(success);
+        calculateResource(guard);
     
     
         // Limit total rolls to a certain number
@@ -71,25 +88,7 @@ export const zRoll = {
             }
         }
 
-        const spendResource = this.spendResource;
-    
-        // Spend a given resource up to the amount of dice rolled, but if resources are exhausted, reduce rolls.
-        const calculateResource = function(type){
-    
-            if (type.resource){
-                let resourceSpend = spendResource(type.rolls, type.resource, character);
-    
-                if (resourceSpend.spent < type.rolls){
-                    type.rolls = resourceSpend.spent;
-                    type.resourceLimited = true;
-                }
-    
-                type.resourceSpend = resourceSpend;
-            }
-        }
-    
-        calculateResource(success);
-        calculateResource(guard);
+
     
         
         success.rolltext = this.generateRollText(success.rolls + success.bonusrolls, `${success.dice} + ${success.bonus}` );
