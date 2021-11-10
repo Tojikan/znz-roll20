@@ -1,6 +1,6 @@
 .sheet-slot-toggle {
     //Show Hide Available Weapon Slots!
-    @for $i from 1 through 4 { // 1 indexed. This var injected via Gulp
+    @for $i from 1 through 10 { // 1 indexed. 
         // If weapon slot i is checked...
         .sheet-slot-toggle-#{$i}:checked{
 
@@ -74,7 +74,7 @@
     }
 
     .sheet-slot {
-        width: 225px;
+        width: 25%;
         display: none;
         border: solid 4px $gray;
         border-radius: 1rem;

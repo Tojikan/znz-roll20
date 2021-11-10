@@ -13,6 +13,12 @@
     $elClass - class of content to show/hide
     $toggleClass - class of hidden input
 **/
+.sheet-main {
+  flex-basis: 80%; }
+
+.sheet-sidebar {
+  flex-basis: 20%; }
+
 .sheet-character label {
   font-size: 1.8rem; }
 
@@ -34,20 +40,6 @@
 
 .sheet-subtext {
   font-size: 1.2rem; }
-
-.sheet-bubble {
-  padding: 2rem;
-  border: solid 3px black;
-  border-radius: 2rem;
-  font-size: 1.4rem;
-  margin-right: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center; }
-  .sheet-bubble label {
-    text-align: center; }
-  .sheet-bubble .sheet-content {
-    width: 100%; }
 
 input, textarea {
   width: 100%; }
@@ -129,6 +121,52 @@ textarea.sheet-vertical {
     .sheet-dice-input input.sheet-amount {
       text-align: right; }
 
+.sheet-toggle-select .sheet-toggler {
+  margin-right: 2rem;
+  flex-basis: 35%; }
+
+.sheet-toggle-select .sheet-text {
+  flex-basis: 65%; }
+
+.sheet-list .sheet-line .sheet-label {
+  text-align: left;
+  width: 100%;
+  margin-right: 1rem; }
+
+.sheet-bubble {
+  padding: 2rem;
+  padding-top: 3rem;
+  border: solid 3px black;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  position: relative; }
+  .sheet-bubble .sheet-content {
+    width: 100%; }
+  .sheet-bubble .sheet-title {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 0.25rem 1rem;
+    border: solid 3px black;
+    background-color: white;
+    font-weight: 700;
+    white-space: nowrap; }
+  .sheet-bubble.flex-30 {
+    flex-basis: 30%; }
+  .sheet-bubble.flex-40 {
+    flex-basis: 40%; }
+  .sheet-bubble.flex-50 {
+    flex-basis: 50%; }
+  .sheet-bubble.flex-60 {
+    flex-basis: 60%; }
+  .sheet-bubble.extra-bottom {
+    margin-bottom: 3rem; }
+
 .sheet-inner-toggle .sheet-control,
 .sheet-toggle .sheet-control,
 .sheet-toggle-adj .sheet-control {
@@ -175,6 +213,141 @@ textarea.sheet-vertical {
 .sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-4 {
   display: block; }
 
+.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-6 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-6 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-7 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-6 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-7 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-8 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-6 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-7 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-8 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-9 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-1 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-2 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-3 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-4 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-5 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-6 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-7 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-8 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-9 {
+  display: block; }
+
+.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-10 {
+  display: block; }
+
 .sheet-slot .sheet-content {
   display: none; }
 
@@ -205,7 +378,7 @@ textarea.sheet-vertical {
     display: flex;
     flex-wrap: wrap; }
   .sheet-slot-section .sheet-slot {
-    width: 225px;
+    width: 25%;
     display: none;
     border: solid 4px #d3d3d3;
     border-radius: 1rem;

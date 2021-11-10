@@ -67,7 +67,6 @@ textarea {
 
 
 // Line input
-
 .sheet-line {
     display: flex;
     justify-content: space-around;
@@ -117,6 +116,31 @@ textarea {
 
         &.sheet-amount {
             text-align: right;
+        }
+    }
+}
+
+
+//toggle-select
+.sheet-toggle-select {
+    .sheet-toggler {
+        margin-right: 2rem;
+        flex-basis: 35%;
+    }
+
+    .sheet-text {
+        flex-basis:65%;
+    }
+}
+
+
+//list
+.sheet-list {
+    .sheet-line {
+        .sheet-label {
+            text-align: left;
+            width: 100%;
+            margin-right: 1rem;
         }
     }
 }

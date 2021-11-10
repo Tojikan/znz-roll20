@@ -8,45 +8,31 @@ export const fields = {
     ammo: {
         id: "ammo",
         type: "list",
+        default: 0,
         options: {
-            d4: {
-                id: "ammo_d4",
-                default: 0,
-                label: "d4"
+            light: {
+                id: "ammo_light",
+                bundle: 30,
+                label: "Light"
             },
-            d6: {
-                id: "ammo_d6",
-                default: 0,
-                label: "d6"
+            medium: {
+                id: "ammo_medium",
+                bundle: 30,
+                label: "Medium"
             },
-            d8: {
-                id: "ammo_d8",
-                default: 0,
-                label: "d8"
-            },
-            d10: {
-                id: "ammo_d10",
-                default: 0,
-                label: "d10"
-            },
-            d12: {
-                id: "ammo_d12",
-                default: 0,
-                label: "d12"
-            },
-            d20: {
-                id: "ammo_d20",
-                default: 0,
-                label: "d20"
+            heavy: {
+                id: "ammo_heavy",
+                bundle: 30,
+                label: "Heavy"
             },
             bolt: {
                 id: "ammo_bolt",
-                default: 0,
+                bundle: 5,
                 label: "Bolts"
             },
             arrow: {
                 id: "ammo_arrow",
-                default: 0,
+                bundle: 5,
                 label: "Arrows"
             }
         }
@@ -60,35 +46,75 @@ export const fields = {
         },
         ap: {
             id: "ap",
-            default: 5,
+            default: 15,
             type: "max",
             label: "AP",
-            rollable: true
+            rollable: true,
+            pool: 'ap_pool'
         },
     },
-    skills: {
-        id: "skills",
+    combatskills: {
+        id: "combatskills",
         type: "list",
+        label: "Combat Skills",
+        default: 3,
         options: {
+            guard: {
+                id: "guard_skill",
+                label: "Guard"
+            },
+            throw: {
+                id: "throw_skill",
+                label: "Throw"
+            },
             melee: {
                 id: "melee_skill",
-                default: "0",
                 label: "Melee"
             },
             ranged: {
                 id: "ranged_skill",
-                default: "0",
                 label: "Ranged"
             }
         }
     },
-    defense: {
-        id: "defense",
-        default: 4,
-        type: "dice",
-        bonus: {
-            id: 'defense_bonus',
-            default: 0
+    skills: {
+        id: "skills",
+        type: "list",
+        label: "Skills",
+        default: 0,
+        options: {
+            lockpick: {
+                id: "lockpick_skill",
+                label: "Lockpick"
+            },
+            scout: {
+                id: "scout_skill",
+                label: "Scout"
+            },
+            stealth: {
+                id: "stealth_skill",
+                label: "Stealth"
+            },
+            social: {
+                id: "social_skill",
+                label: "Socialize"
+            },
+            firstaid: {
+                id: "firstaid_skill",
+                label: "First Aid"
+            },
+            construction: {
+                id: "construction_skill",
+                label: "Construction"
+            },
+            hacking: {
+                id: "hacking_skill",
+                label: "Hacking"
+            },
+            athletics: {
+                id: "athletics_skill",
+                label: "Athletics"
+            }
         }
     },
     ability: {
@@ -96,17 +122,17 @@ export const fields = {
         type: "toggleselect",
         options: abilities
     },
-    weaponslots: {
-        id: "weaponslots",
-        label: "Weapons",
-        default: 1,
-        max: 3,
-        type: "weapon"
-    },
+    // weaponslots: {
+    //     id: "weaponslots",
+    //     label: "Weapons",
+    //     default: 1,
+    //     max: 3,
+    //     type: "weapon"
+    // },
     equipmentslots: {
         id: "equipmentslots",
         default: 3,
-        max: 5,
+        max: 10,
         type: "equipment",
         label: "Equipment"
     },

@@ -1,17 +1,32 @@
 
 {% import 'macros/card.njk' as card %}
+{% import 'macros/bubble.njk' as bubble %}
 
 
 <div class="sheet-character">
-    {% include "./sections/header.njk" %} 
 
+    <div class="sheet-row-flex">
+        <div class="sheet-main">
+            <div class="sheet-row-flex">
+                {{bubble.create(fields.character.stats.hp, 'max', 'Health')}}
+                {{bubble.create(fields.character.stats.ap, 'max')}}
+                {{bubble.create(fields.character.notes, 'textarea', class='flex-60')}}
+            </div>
+            {{bubble.create(fields.character.ability, 'toggleselect', class="extra-bottom")}}
 
-    {% include "./sections/slots.njk" %}
-    
-
-    {% include "./sections/inventory.njk" %}
-
-
+            {% include "./sections/equipment.njk" %}
+        </div>
+        <div class="sheet-sidebar">
+            {{bubble.create(fields.character.ammo, 'list', class="extra-bottom")}}
+            {{bubble.create(fields.character.combatskills, 'list', class="extra-bottom")}}
+            {{bubble.create(fields.character.skills, 'list', class="extra-bottom")}}
+        </div>
+    </div>
+    <div class="sheet-bottom">
+        <div class="sheet-ap-pool">
+        
+        </div>
+    </div>
 </div>
 
 {% include "./rolltemplates/zroll.njk" %}

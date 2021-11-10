@@ -1,66 +1,61 @@
 (function () {
     'use strict';
 
-    var abilities = [
-    	{
-    		id: "",
-    		label: "",
-    		description: ""
-    	},
-    	{
-    		id: "cheerleader",
-    		label: "Cheerleader",
-    		description: "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
-    	},
-    	{
-    		id: "brawler",
-    		label: "Brawler",
-    		description: "Adds 2 bonus rolls to any melee attack."
-    	},
-    	{
-    		id: "builder",
-    		label: "Builder",
-    		description: "Use a D10 when building barricades and add 1 bonus dice roll."
-    	},
-    	{
-    		id: "doctor",
-    		label: "Doctor",
-    		description: "Use a D10 when restoring health and add 1 bonus dice roll."
-    	},
-    	{
-    		id: "dockworker",
-    		label: "Dock Worker",
-    		description: "Upon entering a zone, can identify 1 building that will not have a key item."
-    	},
-    	{
-    		id: "engineer",
-    		label: "Engineer",
-    		description: "Can put together the boat in 2 turns instead of 5."
-    	},
-    	{
-    		id: "runner",
-    		label: "Runner",
-    		description: "Incur no AP penalty when moving between zones."
-    	},
-    	{
-    		id: "scavenger",
-    		label: "Scavenger",
-    		description: "Whenever you scavenge, scavenge 1 additional item."
-    	},
-    	{
-    		id: "sniper",
-    		label: "Sniper",
-    		description: "Add 2 bonus rolls to any ranged attack."
-    	},
-    	{
-    		id: "speedster",
-    		label: "speedster",
-    		description: "Move 3 spaces instead of 2 on move actions."
-    	}
-    ];
+    var abc = {
+    	id: "selectability",
+    	label: "Select an Ability",
+    	description: ""
+    };
+    var parkour = {
+    	id: "Parkour",
+    	description: "Movement no longer uses AP, but you are limited to moving 5 spaces a turn. You can vault off nearby terrain to move past enemies freely."
+    };
+    var brawler = {
+    	id: "brawler",
+    	description: "Any excess guard is dealt as damage."
+    };
+    var cheerleader = {
+    	id: "cheerleader",
+    	description: "Reduce difficulty of roll for adjacent allies by 1 level."
+    };
+    var builder = {
+    	id: "builder",
+    	description: "Create a distraction device by spending 1 AP and 1 Item. The device will attract common zombies towards it for some time."
+    };
+    var scavenger = {
+    	id: "scavenger",
+    	description: "Draw 1 additional cards when you scavenge. If you are scavenging a location alone, draw 3."
+    };
+    var sniper = {
+    	id: "sniper",
+    	description: "If you don't attack this turn, you can make a free attack roll and add that to next turn's ranged attack."
+    };
+    var prepared = {
+    	id: "prepared",
+    	label: "Doomsday Prep",
+    	description: "Start the game with 5 free scavenge actions and 2 additional equipment slots."
+    };
+    var abilities = {
+    	abc: abc,
+    	parkour: parkour,
+    	brawler: brawler,
+    	cheerleader: cheerleader,
+    	builder: builder,
+    	scavenger: scavenger,
+    	sniper: sniper,
+    	prepared: prepared
+    };
 
     var abilities$1 = /*#__PURE__*/Object.freeze({
         __proto__: null,
+        abc: abc,
+        parkour: parkour,
+        brawler: brawler,
+        cheerleader: cheerleader,
+        builder: builder,
+        scavenger: scavenger,
+        sniper: sniper,
+        prepared: prepared,
         'default': abilities
     });
 
@@ -72,45 +67,31 @@
         ammo: {
             id: "ammo",
             type: "list",
+            default: 0,
             options: {
-                d4: {
-                    id: "ammo_d4",
-                    default: 0,
-                    label: "d4"
+                light: {
+                    id: "ammo_light",
+                    bundle: 30,
+                    label: "Light"
                 },
-                d6: {
-                    id: "ammo_d6",
-                    default: 0,
-                    label: "d6"
+                medium: {
+                    id: "ammo_medium",
+                    bundle: 30,
+                    label: "Medium"
                 },
-                d8: {
-                    id: "ammo_d8",
-                    default: 0,
-                    label: "d8"
-                },
-                d10: {
-                    id: "ammo_d10",
-                    default: 0,
-                    label: "d10"
-                },
-                d12: {
-                    id: "ammo_d12",
-                    default: 0,
-                    label: "d12"
-                },
-                d20: {
-                    id: "ammo_d20",
-                    default: 0,
-                    label: "d20"
+                heavy: {
+                    id: "ammo_heavy",
+                    bundle: 30,
+                    label: "Heavy"
                 },
                 bolt: {
                     id: "ammo_bolt",
-                    default: 0,
+                    bundle: 5,
                     label: "Bolts"
                 },
                 arrow: {
                     id: "ammo_arrow",
-                    default: 0,
+                    bundle: 5,
                     label: "Arrows"
                 }
             }
@@ -124,35 +105,75 @@
             },
             ap: {
                 id: "ap",
-                default: 5,
+                default: 15,
                 type: "max",
                 label: "AP",
-                rollable: true
+                rollable: true,
+                pool: 'ap_pool'
             },
         },
-        skills: {
-            id: "skills",
+        combatskills: {
+            id: "combatskills",
             type: "list",
+            label: "Combat Skills",
+            default: 3,
             options: {
+                guard: {
+                    id: "guard_skill",
+                    label: "Guard"
+                },
+                throw: {
+                    id: "throw_skill",
+                    label: "Throw"
+                },
                 melee: {
                     id: "melee_skill",
-                    default: "0",
                     label: "Melee"
                 },
                 ranged: {
                     id: "ranged_skill",
-                    default: "0",
                     label: "Ranged"
                 }
             }
         },
-        defense: {
-            id: "defense",
-            default: 4,
-            type: "dice",
-            bonus: {
-                id: 'defense_bonus',
-                default: 0
+        skills: {
+            id: "skills",
+            type: "list",
+            label: "Skills",
+            default: 0,
+            options: {
+                lockpick: {
+                    id: "lockpick_skill",
+                    label: "Lockpick"
+                },
+                scout: {
+                    id: "scout_skill",
+                    label: "Scout"
+                },
+                stealth: {
+                    id: "stealth_skill",
+                    label: "Stealth"
+                },
+                social: {
+                    id: "social_skill",
+                    label: "Socialize"
+                },
+                firstaid: {
+                    id: "firstaid_skill",
+                    label: "First Aid"
+                },
+                construction: {
+                    id: "construction_skill",
+                    label: "Construction"
+                },
+                hacking: {
+                    id: "hacking_skill",
+                    label: "Hacking"
+                },
+                athletics: {
+                    id: "athletics_skill",
+                    label: "Athletics"
+                }
             }
         },
         ability: {
@@ -160,17 +181,17 @@
             type: "toggleselect",
             options: abilities$1
         },
-        weaponslots: {
-            id: "weaponslots",
-            label: "Weapons",
-            default: 1,
-            max: 3,
-            type: "weapon"
-        },
+        // weaponslots: {
+        //     id: "weaponslots",
+        //     label: "Weapons",
+        //     default: 1,
+        //     max: 3,
+        //     type: "weapon"
+        // },
         equipmentslots: {
             id: "equipmentslots",
             default: 3,
-            max: 5,
+            max: 10,
             type: "equipment",
             label: "Equipment"
         },

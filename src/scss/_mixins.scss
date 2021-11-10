@@ -31,3 +31,11 @@
         display: block!important;
     }
 }
+
+
+@mixin flexBasis($width){
+    
+    &.flex-#{$width}{
+        flex-basis: $width * 1%;
+    }
+}

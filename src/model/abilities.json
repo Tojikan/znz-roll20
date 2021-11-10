@@ -1,57 +1,36 @@
-[
-    {
-        "id": "",
-        "label": "",
+{
+    "abc": {
+        "id": "selectability",
+        "label": "Select an Ability",
         "description": ""
     },
-    {
-        "id": "cheerleader",
-        "label": "Cheerleader",
-        "description": "<strong>Action:</strong> Give adjacent players a single bonus dice roll until your next turn."
+    "parkour": {
+        "id": "Parkour",
+        "description": "Movement no longer uses AP, but you are limited to moving 5 spaces a turn. You can vault off nearby terrain to move past enemies freely."
     },
-    {
+    "brawler": {
         "id": "brawler",
-        "label": "Brawler",
-        "description": "Adds 2 bonus rolls to any melee attack."
+        "description": "Any excess guard is dealt as damage."
     },
-    {
+    "cheerleader": {
+        "id": "cheerleader",
+        "description": "Reduce difficulty of roll for adjacent allies by 1 level."
+    },
+    "builder": {
         "id": "builder",
-        "label": "Builder",
-        "description": "Use a D10 when building barricades and add 1 bonus dice roll."
+        "description": "Create a distraction device by spending 1 AP and 1 Item. The device will attract common zombies towards it for some time."
     },
-    {
-        "id": "doctor",
-        "label": "Doctor",
-        "description": "Use a D10 when restoring health and add 1 bonus dice roll."
-    },
-    {
-        "id": "dockworker",
-        "label": "Dock Worker",
-        "description": "Upon entering a zone, can identify 1 building that will not have a key item."
-    },
-    {
-        "id": "engineer",
-        "label": "Engineer",
-        "description": "Can put together the boat in 2 turns instead of 5."
-    },
-    {
-        "id": "runner",
-        "label": "Runner",
-        "description": "Incur no AP penalty when moving between zones."
-    },
-    {
+    "scavenger": {
         "id": "scavenger",
-        "label": "Scavenger",
-        "description": "Whenever you scavenge, scavenge 1 additional item."
+        "description": "Draw 1 additional cards when you scavenge. If you are scavenging a location alone, draw 3."
     },
-    {
+    "sniper": {
         "id": "sniper",
-        "label": "Sniper",
-        "description": "Add 2 bonus rolls to any ranged attack."
+        "description": "If you don't attack this turn, you can make a free attack roll and add that to next turn's ranged attack."
     },
-    {
-        "id": "speedster",
-        "label": "speedster",
-        "description": "Move 3 spaces instead of 2 on move actions."
+    "prepared": {
+        "id": "prepared",
+        "label": "Doomsday Prep",
+        "description": "Start the game with 5 free scavenge actions and 2 additional equipment slots."
     }
-]
+}

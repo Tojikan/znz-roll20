@@ -1,10 +1,18 @@
-{% macro create(field, class='') %}
+{% macro create(field, type, label, class='') %}
 
     <div class="sheet-bubble {{class}}">
-        <div class="sheet-content">
-            <label>{{ field | getLabel }}</label>
+        <div class="sheet-title">
+            {% if label %}
+                {{ label }}
+            {% else %}
+                {{ field | getLabel }}
+            {% endif %}
+        </div>
 
-            {% switch field.type %}
+        <div class="sheet-content">
+            {% switch type %}
+                {% case "max" %}
+                    {{ createMax(field=field) }}
                 {% case "list" %}
                     {{ createList(field=field) }}
                 {% case "dice" %}
@@ -21,32 +29,14 @@
     </div>
 {% endmacro %}
 
-
-
-{% macro createStats(field, class='') %}
-    <div class="sheet-bubble  {{class}}">
-        <div class="sheet-content">
-            <div class="sheet-row-flex sheet-space-around">
-                {% for key, item in field %}
-                    <div class="sheet-stat">
-                        <label>{{item | getLabel}} </label>
-                        <div class="sheet-max">
-                            <div>
-                                <input type="text" class="sheet-number sheet-shy" name="attr_{{item | getAttr}}" value="{{item.default}}"/>
-                            </div>
-                            <div class="sheet-divider">/</div>
-                            <div>
-                                <input type="text" class="sheet-number sheet-shy" name="attr_{{item| getAttr}}_max" value="{{item.default}}"/>
-                            </div>
-
-                            {% if item.rollable %}
-                            {# Use a sheet worker to iterate over this field so we can create |1|2|3 dropdowns for roll buttons #}
-                            <input type="text" class="sheet-hidden" name="attr_{{item | getAttr}}_rolls" value="{{item.default}}"/>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+{% macro createMax(field) %}
+    <div class="sheet-max">
+        <div>
+            <input type="text" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
+        </div>
+        <div class="sheet-divider">/</div>
+        <div>
+            <input type="text" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}_max" value="{{field.default}}"/>
         </div>
     </div>
 {% endmacro %}
@@ -57,13 +47,12 @@
 {% endmacro %}
 
 
-
 {% macro createList(field) %}
     <div class="sheet-list">
-        {% for key, item in field.options%}
+        {% for key, item in field.options | dictsort %}
             <div class="sheet-line">
                 <div class="sheet-label">{{item | getLabel}}</div>
-                <input type="text" class="sheet-number" name="attr_{{item | getAttr}}" value="{{item.default}}"/>
+                <input type="text" class="sheet-number" name="attr_{{item | getAttr}}" value="{{field.default}}"/>
             </div>
         {% endfor %}
     </div>
@@ -88,19 +77,22 @@
 {% macro createToggleSelect(field) %}
     <div class="sheet-row-flex sheet-toggle-select">
         <div class="sheet-toggler">
+
             <select name="attr_{{field | getAttr}}">
-                {% for num, item in field.options %}
-                    <option value="{{item | getAttr}}" {{"selected" if loop.first}}>{{item | getLabel}}</option>
+                {% for num, item in field.options | dictsort %}
+                    {% if num != 'default'%} <option value="{{item | getAttr}}"> {{item | getLabel}} </option>{% endif %}
                 {% endfor %}
             </select>
         </div>
 
         <div class="sheet-text sheet-toggle-adj">
-            {% for opt, item in field.options %}
+            {% for opt, item in field.options | dictsort %}
+                {% if opt != 'default'%} {# Not sure why but default is sneaking in there #}
                 <input type="checkbox" class="sheet-control" name="attr_{{field | getAttr}}" value="{{item | getAttr}}" {{"checked" if loop.first}} />
                 <div class="sheet-description-text sheet-content">
                     {{item.description | safe}}
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

@@ -33,7 +33,6 @@ function sheet(){
                 //Adds our data to global variable so we can reference anywhere in njk templates
                 env.addGlobal('fields', buildContext.getFields().fields);
                 env.addGlobal('options', buildContext.getFields().options);
-                
         
                 //Takes all functions in exported filters and adds them as filters to NJKS
                 const filters = require('./BuildContext').filters; //use require so we can dynamically include new filters as they are added
@@ -68,6 +67,9 @@ function sheet(){
             }))                                   
         //Just in case you forget
         .pipe(replace('text/javascript', 'text/worker'))
+        //roll20 and nunjucks conflicts on use of {{ - convert <% %> into {{ }} when publishing the html to roll20
+        .pipe(replace('<%', '{{')) 
+        .pipe(replace('%>', '}}'))
         .pipe(gulp.dest('./dist'));
 }
 
