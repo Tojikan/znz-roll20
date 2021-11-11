@@ -3,7 +3,7 @@ import { equip } from './equip';
 import { limit } from'./limitinventory';
 import { rollOptions } from './rolloptions';
 
-equip();
+equip().init();
 limit();
 rollOptions();
 deleteItem();

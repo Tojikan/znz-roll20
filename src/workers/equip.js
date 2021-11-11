@@ -3,106 +3,183 @@ import { fields as card } from '../model/card';
 import { options } from '../model/card';
 import { getButtonRowId } from './_helpers';
 
-export function equip(){
-    const itemFields = {...card};
+/**
+ * IDs
+ * - equipmentslots (slotsId): stores the current number of slots.
+ * - equipment_{x}: whether slot is active or not
+ */
 
-    //This gets all available equipment/weapon slots.
-    const slotFields = (function(){
-        let result = [
-            character.equipmentslots.id,
-            character.weaponslots.id
-        ];
+export function equip(itemCardFields = card){
+    //pull data into variables for easier interchangeability
+    let itemFields = {...itemCardFields},
+        slotsId = character.equipmentslots.id,
+        equipId = character.equipmentslots.type,
+        maxSlots = character.equipmentslots.max,
+        inventoryId = character.inventory.id,
+        equipPrefix = character.equipmentslots.type,
+        unequipAction = options.actions.unequip,
+        equipAction = options.actions.equip;
 
-        for (let i = 1; i <= character.equipmentslots.max; i++){
-            result.push(character.equipmentslots.type + '_' + i);
+    
+
+    /**
+     * Gets all available item slot IDs
+     */
+    const getSlotFields = function(){
+        let result = [];
+
+        // 1 - indexed
+        for (let i = 1; i <= maxSlots; i++){
+            result.push(equipId + '_' + i);
         }
+        return result;
+    };
 
-        for (let i = 1; i <= character.weaponslots.max; i++){
-            result.push(character.weaponslots.type + '_' + i);
+    /**
+     * Gets an array of all item field Ids.
+     * 
+     * @param {*} suffix - if present, adds it to the end of the field with preceeding underscore.
+     * @returns array of Id strings.
+     */
+    const getItemFieldIds = function(suffix, prefix, fields=itemFields){
+        let result = [];
+        
+        const affix = function(str){
+            let result = str;
+
+            if (suffix && suffix.toString().length){
+                result = result + '_' + suffix;
+            }
+
+            if (prefix && prefix.length){
+                result = prefix + '_' + result;
+            }
+
+            return result;
+        };
+
+        for (const key in fields){
+            let fld = fields[key],
+                id = affix(fld.id);
+
+            result.push(id);
+
+            if ('max' in fld && fld.max.length){
+                result.push(affix(fld.max));
+            }
         }
 
         return result;
-    })();
+    }
 
-    //Finds the next available slot for a given type. Pass it values so it can parse through the values - values should contain the retrieved values for all available slots.
-    const findAvailableSlot = function(type, values){
-        let max = (type == character.weaponslots.type) ? values[character.weaponslots.id] : values[character.equipmentslots.id];
+    /**
+     * Generates a setAttrs object for an empty equipment object
+     * 
+     * @param {*} fields - in case you need custom fields for testing or something.
+     */
+    const generateBlankEquipmentObj = function(id, fields=itemFields){
 
-        for (let i = 1; i <= max; i++){
-            if (values[type + '_' + i] == 0){
-                return i;
+        let result = {};
+        
+        for (const key in fields){
+            const fld = fields[key],
+                newKey = equipPrefix + '_' + key + '_' + id;
+
+
+            if ('default' in fld){
+                result[newKey] = fld.default;
+            } else {
+                result[newKey] = '';
+
+                if ('max' in fld){
+                    result[fld.max + '_' + id] = '';
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Remaps the values of an object to a modified version of its original key
+     * 
+     * @param {obj} obj - object to remap keys with text affixed to it
+     * @param {text} affix - text to add to front or back when transposing
+     * @param {bool} pre - add to front of key when transposing. Set false to add to back.
+     * @param {fn} keyfn - callback function to allow additional modifications on the key. Is passed the key and it should return a string.
+     */
+    const remapKeys = function(obj, affix, pre=true, keyfn){
+        const result = {};
+
+        for (const key in obj){
+            let keyText = key;
+
+            if (keyfn){
+                keyText = keyfn(keyText);
+            }
+
+            const newKey = (pre ? `${affix}${keyText}` : `${keyText}${affix}`);
+            result[newKey] = obj[key];
+        }
+
+        return result;
+    }
+
+    /**
+     * Find next available slot.
+     * 
+     * @param {*} values values retrieved from getAttrs. Should contain all equipmentslots.
+     * @returns the Index number of the slot
+     */
+    const findNextAvailableSlotIndex = function(values){
+        if (slotsId in values){
+            //only check up to the character's currently number of slots
+            let max = values[slotsId];
+    
+            //Find next open slot and return.
+            for (let i = 1; i <= max; i++){
+                if (values[equipId + '_' + i] == 0){
+                    return i;
+                }
             }
         }
 
         return null;
     };
 
-    //get appropriate ID for an attribute in a slot.
-    const getSlotId = function(type, attrId, slot){
-        return `${type}_${attrId}_${slot}`
-    }
-
-    // Create an array of appropriate field Ids.
-    // Give it a prefix to just append a simple prefix to the Id as in the case of repeating inventory
-    // Give it a type and slot to call getSlotId as in the case of slots.
-    const createFieldIdArray = function(prefix, type, slot){
-        let result = [];
-
-        for (let key in itemFields){
-            let fld = itemFields[key];
-            let name;
-            if (prefix.length){
-                name = prefix + '_' + fld.id;
-            } else if (type && slot){
-                name = getSlotId(type, fld.id, slot);
-            } else {
-                name = fld.id;
-            }
-            result.push(name);
-
-            if ('max' in fld && fld.max == true){
-                result.push(name + '_max');
-            }
-        }
-        return result;
-    }
-
-
-    const unequipItem = function(type, slot){
-        let unequipFields = createFieldIdArray('', type, slot);
+    /**
+     * Unequip a given slot.
+     * 
+     * @param {*} slotIndex - Which slot to unequip
+     */
+    const unequipItem = function(slotIndex){
+        //Get array of fields
+        let unequipFields = getItemFieldIds(slotIndex, equipPrefix);
         
         getAttrs(unequipFields, function(values){
-            const rowId = generateRowID();
-            var attrSet = {};
+            const rowId = generateRowID(); 
 
-            for (const key in itemFields){
-                const fld = itemFields[key]; //the original field
+            //create new inv item to create
+            const newInvItem = remapKeys(values,  `repeating_${inventoryId}_${rowId}_`, true, function(x){ 
+                let result = x.replace('equipment_', '');
+                let last = result.lastIndexOf(`_${slotIndex}`); //lastIndex so we make sure to only get the end
                 
-                //unequiping is basically swapping objects
-                const unequipkey = getSlotId(type, fld.id, slot);
-                const invkey = `repeating_${character.inventory.id}_${rowId}_${fld.id}`;
-
-                attrSet[invkey] = values[unequipkey];
-
-                if ('max' in fld && fld.max == true){
-                    attrSet[invkey + '_max'] = values[unequipkey + '_max'];
-                }
-
-
-                //clear out equipped fields
-                if ('default' in fld){
-                    attrSet[unequipkey] = fld.default;
+                if (last > 0){
+                    return result.substring(0, last);
                 } else {
-                    attrSet[unequipkey] = '';
-
-                    if ('max' in fld && fld.max == true){
-                        attrSet[unequipkey + '_max'] = '';
-                    }
+                    return result;
                 }
-            }
+            });
+            
+            //clear equipment fields
+            const emptyEquipment = generateBlankEquipmentObj(slotIndex);
 
-            attrSet[type + '_' + slot] = 0; //make the slot available again.
+            const attrSet = {
+                ...newInvItem,
+                ...emptyEquipment
+            };
 
+            //make the slot available again.
+            attrSet[`${equipId}_${slotIndex}`] = 0;
             console.log(attrSet);
             setAttrs(attrSet);
         });
@@ -110,65 +187,67 @@ export function equip(){
 
 
     const equipItem = function(rowId){
-        // Get both slots and inventory fields
-        const invFields = createFieldIdArray('repeating_' + character.inventory.id);
-
-        const bothFields = invFields.concat(slotFields);
+        // Get fields for both equipment and inventory and the id for equipment slots
+        const bothFields = getItemFieldIds('', `repeating_${inventoryId}`)
+                .concat(getSlotFields());
+            bothFields.push(slotsId);
 
         getAttrs(bothFields, function(values){
-            //retrieve given card type.
-            let type = values[`repeating_inventory_${card.type.id}`];
-            if (type == character.inventory.type){ return;} //only equip weapons and equipment
-            
-            let slot = findAvailableSlot(type, values); //now find an available slot for its type.
+            // find availble slot
+            let availableSlotIndex = findNextAvailableSlotIndex(values);
 
             //Slot is available!
-            if (slot){
-                var attrSet = {};
+            if (availableSlotIndex){
+                
+                //only consider inventory fields for remapping
+                let inventoryFields = Object.keys(values)
+                    .filter(x => x.includes(`repeating_${inventoryId}`))
+                    .reduce((obj, key) => {
+                        obj[key] = values[key];
+                        return obj;
+                    }, {});
 
-                //Loop to transpose repeating inventory field to the appropriate slot
-                //basically swapping objects
-                for (const key in itemFields) {
-                    const fld = itemFields[key];
-                    const invkey = `repeating_${character.inventory.id}_${fld.id}`;
-                    const equipkey = getSlotId(type, fld.id, slot);
+            
+                
+                //filter add index, filter out repeating_inventory
+                let newEquipment = remapKeys(inventoryFields, `_${availableSlotIndex}`, false, (x) => { return x.replace(`repeating_${inventoryId}_`, `${equipPrefix}_`);});
+                
+                const attrSet = {
+                    ...newEquipment
+                };
 
-                    if (invkey in values && typeof values[invkey] != 'undefined'){
-                        attrSet[equipkey] = values[invkey];
-                        
-                        // don't forget max
-                        if ('max' in fld && fld.max == true){
-                            attrSet[equipkey + '_max'] = values[invkey + '_max'];
-                        }
-                    } else {
-                        attrSet[equipkey] = ''; //default value
-                    }
-                }
+                // set slot to active
+                attrSet[equipId + '_' + availableSlotIndex] = 'on';
 
-                attrSet[type + '_' + slot] = 'on';
                 removeRepeatingRow(rowId); //remove current row
+                console.log(attrSet);
                 setAttrs(attrSet);
+            } else {
+                console.log('No slot found!');
             }
         });
     }
 
-
-    // Hooks for buttons
-    on(`clicked:repeating_${character.inventory.id}:${options.actions.equip}`, function(evInfo){
-        const rowId = getButtonRowId(evInfo);
-        equipItem(rowId);
-    });
-
-
-    for (let i = 1; i <= character.weaponslots.max; i++){
-        on(`clicked:${character.weaponslots.type}_${options.actions.unequip}_${i}`, function(){
-            unequipItem(character.weaponslots.type, i);
+    const init = function(){
+        // Hooks for buttons
+        on(`clicked:repeating_${inventoryId}:${equipAction}`, function(evInfo){
+            const rowId = getButtonRowId(evInfo);
+            equipItem(rowId);
         });
+    
+        for (let i = 1; i <= maxSlots; i++){
+            on(`clicked:${equipId}_${unequipAction}_${i}`, function(){
+                unequipItem(i);
+            });
+        }
     }
 
-    for (let i = 1; i <= character.equipmentslots.max; i++){
-        on(`clicked:${character.equipmentslots.type}_${options.actions.unequip}_${i}`, function(){
-            unequipItem(character.equipmentslots.type, i);
-        });
+    return {
+        init: init,
+        getItemFieldIds: getItemFieldIds,
+        generateBlankEquipmentObj: generateBlankEquipmentObj,
+        remapKeys:  remapKeys,
+        findNextAvailableSlotIndex: findNextAvailableSlotIndex,
+        getSlotFields: getSlotFields
     }
 }

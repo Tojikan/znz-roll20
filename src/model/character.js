@@ -131,15 +131,15 @@ export const fields = {
     // },
     equipmentslots: {
         id: "equipmentslots",
-        default: 3,
-        max: 10,
+        default: 2,
+        max: 6,
         type: "equipment",
         label: "Equipment"
     },
     inventory: {
         id: "inventory",
         default: 5,
-        max: 9,
+        max: 12,
         label: "Inventory"
     }
 }

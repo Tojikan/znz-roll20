@@ -5,8 +5,8 @@
         "description": ""
     },
     "parkour": {
-        "id": "Parkour",
-        "description": "Movement no longer uses AP, but you are limited to moving 5 spaces a turn. You can vault off nearby terrain to move past enemies freely."
+        "id": "Speedster",
+        "description": "You can move 3 spaces at no cost on your turn."
     },
     "brawler": {
         "id": "brawler",
