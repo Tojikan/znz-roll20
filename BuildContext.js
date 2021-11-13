@@ -3,80 +3,61 @@ const fs = require('fs');
 const path = require('path');
 import {fields as character} from './src/model/character';
 
-class BuildContext{
-    constructor(dataFolder){
-        //make sure data folder ends with backslash
-        var lastChar = dataFolder.substr(-1);
-        if (lastChar !== '/'){
-            dataFolder += '/';
-        }
-
-        this.dataFolder = dataFolder;
+const getModel = function(dataFolder){
+    //make sure data folder ends with backslash
+    var lastChar = dataFolder.substr(-1);
+    if (lastChar !== '/'){
+        dataFolder += '/';
     }
 
-    /**
-     * Reads all JSON files and exported JS in data folder.
-     * In exported JS, we only consider the "fields" key in the exported object.
-     * 
-     * @returns Object where each key is the filename and the value is the JSON or JS Export.
-     */
-    getFields(){
-        let data = {
-            fields: {},
-            options: {}
-        };
-        let files = fs.readdirSync(this.dataFolder);
-
-        files.forEach(file => {
-            //If JSON, simply parse it.
-            if (path.extname(file) === '.json' && file.indexOf('schema') < 0){ //ignore schema
-                
-                delete require.cache[require.resolve(this.dataFolder + file)]; //clear cache first before we use it.
-                let filename = path.basename(file, '.json');
-
-
-                data[filename] = JSON.parse(fs.readFileSync(this.dataFolder + file));
-            //If JS, save exports
-            } else if (path.extname(file) === '.js'){
-                
-                delete require.cache[require.resolve(this.dataFolder + file)];
-                let filename = path.basename(file, '.js');
-                let exported = require(this.dataFolder + file);
-
-                if ('fields' in exported){
-                    data.fields[filename] = exported['fields'];
-                }
-
-                if ('options' in exported){
-                    data.options[filename] = exported['options']
-                }
-            }
-        });
-
-        return data;
-    }
-
-    /**
-     * Clear require cache contents of folder
-     */
-    clearDataCache(){
-        let dataFiles = fs.readdirSync(this.dataFolder);
+    //Clear require cache contents of folder
+    const clearDataCache = function(){
+        let dataFiles = fs.readdirSync(dataFolder);
 
         dataFiles.forEach(file => {
             if (path.extname(file) === '.json' || path.extname(file) === '.js'){
-                delete require.cache[require.resolve(this.dataFolder + file)];
+                delete require.cache[require.resolve(dataFolder + file)];
             }
         });
     }
+    
+    clearDataCache();
+    let files = fs.readdirSync(dataFolder);
+    
+    let data = {
+        fields: {},
+        options: {}
+    };
+
+    files.forEach(file => {
+        //If JSON, simply parse it.
+        if (path.extname(file) === '.json' && file.indexOf('schema') < 0){ //ignore schema
+            
+            delete require.cache[require.resolve(dataFolder + file)]; //clear cache first before we use it.
+            let filename = path.basename(file, '.json');
 
 
-    getContext(){
-        this.clearDataCache();
-        return {
-            data: this.getFields()
-        };
-    }
+            data[filename] = JSON.parse(fs.readFileSync(dataFolder + file));
+        //If JS, save exports
+        } else if (path.extname(file) === '.js'){
+            
+            delete require.cache[require.resolve(dataFolder + file)];
+            let filename = path.basename(file, '.js');
+            let exported = require(dataFolder + file);
+
+            if ('fields' in exported){
+                data.fields[filename] = exported['fields'];
+            }
+
+            if ('options' in exported){
+                data.options[filename] = exported['options']
+            }
+        }
+    });
+
+    return data;
 }
+
 
 // Nunjucks Filters
 const filters = {
@@ -139,11 +120,15 @@ const filters = {
 };
 
 const sassHeaders = `
-    $maxSlots = ${character.equipmentslots.max};
-`
+    $maxEquipmentSlots: ${character.equipmentslots.max};
+
+    $abilityCount: ${Object.keys(character.ability.options).length};
+`;
 
 module.exports = {
-    BuildContext: BuildContext,
+    getModel: getModel,
     filters:  filters,
     sassHeaders: sassHeaders
 };
+
+

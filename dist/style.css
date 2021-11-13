@@ -121,13 +121,6 @@ textarea.sheet-vertical {
     .sheet-dice-input input.sheet-amount {
       text-align: right; }
 
-.sheet-toggle-select .sheet-toggler {
-  margin-right: 2rem;
-  flex-basis: 35%; }
-
-.sheet-toggle-select .sheet-text {
-  flex-basis: 65%; }
-
 .sheet-list .sheet-line .sheet-label {
   text-align: left;
   width: 100%;
@@ -166,22 +159,6 @@ textarea.sheet-vertical {
     flex-basis: 60%; }
   .sheet-bubble.extra-bottom {
     margin-bottom: 3rem; }
-
-.sheet-inner-toggle .sheet-control,
-.sheet-toggle .sheet-control,
-.sheet-toggle-adj .sheet-control {
-  display: none; }
-
-.sheet-inner-toggle .sheet-content,
-.sheet-toggle .sheet-content,
-.sheet-toggle-adj .sheet-content {
-  display: none; }
-
-.sheet-inner-toggle .sheet-control:checked ~ .sheet-content, .sheet-toggle .sheet-control:checked ~ .sheet-content {
-  display: block; }
-
-.sheet-toggle-adj .sheet-control:checked + .sheet-content {
-  display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-1:checked ~ .sheet-slot-1 {
   display: block; }
@@ -244,108 +221,6 @@ textarea.sheet-vertical {
   display: block; }
 
 .sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-1 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-2 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-3 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-4 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-5 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-7:checked ~ .sheet-slot-7 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-1 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-2 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-3 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-4 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-5 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-7 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-8:checked ~ .sheet-slot-8 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-1 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-2 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-3 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-4 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-5 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-7 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-8 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-9:checked ~ .sheet-slot-9 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-1 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-2 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-3 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-4 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-5 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-6 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-7 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-8 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-9 {
-  display: block; }
-
-.sheet-slot-toggle .sheet-slot-toggle-10:checked ~ .sheet-slot-10 {
   display: block; }
 
 .sheet-slot .sheet-content {
@@ -487,6 +362,73 @@ textarea.sheet-vertical {
 
 .sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-weapon-fields {
   display: block !important; }
+
+.slot-content {
+  display: none; }
+
+input.slot-control:checked ~ .slot-content {
+  display: block; }
+
+.select-switch-display-1 {
+  display: none; }
+
+input.select-switch-control-1:checked ~ .select-switch-display-1 {
+  display: block; }
+
+.select-switch-display-2 {
+  display: none; }
+
+input.select-switch-control-2:checked ~ .select-switch-display-2 {
+  display: block; }
+
+.select-switch-display-3 {
+  display: none; }
+
+input.select-switch-control-3:checked ~ .select-switch-display-3 {
+  display: block; }
+
+.select-switch-display-4 {
+  display: none; }
+
+input.select-switch-control-4:checked ~ .select-switch-display-4 {
+  display: block; }
+
+.select-switch-display-5 {
+  display: none; }
+
+input.select-switch-control-5:checked ~ .select-switch-display-5 {
+  display: block; }
+
+.select-switch-display-6 {
+  display: none; }
+
+input.select-switch-control-6:checked ~ .select-switch-display-6 {
+  display: block; }
+
+.select-switch-display-7 {
+  display: none; }
+
+input.select-switch-control-7:checked ~ .select-switch-display-7 {
+  display: block; }
+
+.select-switch-display-8 {
+  display: none; }
+
+input.select-switch-control-8:checked ~ .select-switch-display-8 {
+  display: block; }
+
+.select-switch-display-9 {
+  display: none; }
+
+input.select-switch-control-9:checked ~ .select-switch-display-9 {
+  display: block; }
+
+.select-switch .select-switch-dropdown {
+  margin-right: 2rem;
+  flex-basis: 35%; }
+
+.select-switch .select-switch-display {
+  flex-basis: 65%; }
 
 .sheet-character .sheet-header {
   display: flex; }

@@ -18,7 +18,7 @@
                 {% case "dice" %}
                     {{ createDice(field=field) }}
                 {% case "toggleselect" %}
-                    {{ createToggleSelect(field=field) }}
+                    {{ createSelectSwitch(field=field) }}
                 {% case "textarea" %}
                     {{ createTextarea(field=field) }}
 
@@ -74,9 +74,9 @@
 {% endmacro %}
 
 
-{% macro createToggleSelect(field) %}
-    <div class="sheet-row-flex sheet-toggle-select">
-        <div class="sheet-toggler">
+{% macro createSelectSwitch(field) %}
+    <div class="sheet-row-flex select-switch">
+        <div class="select-switch-dropdown">
 
             <select name="attr_{{field | getAttr}}">
                 {% for num, item in field.options | dictsort %}
@@ -85,15 +85,16 @@
             </select>
         </div>
 
-        <div class="sheet-text sheet-toggle-adj">
-            {% for opt, item in field.options | dictsort %}
-                {% if opt != 'default'%} {# Not sure why but default is sneaking in there #}
-                <input type="checkbox" class="sheet-control" name="attr_{{field | getAttr}}" value="{{item | getAttr}}" {{"checked" if loop.first}} />
-                <div class="sheet-description-text sheet-content">
-                    {{item.description | safe}}
+        {% for opt, item in field.options | dictsort %}
+            {% if opt != 'default'%} {# Not sure why but default is sneaking in there #}
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-{{loop.index}}" name="attr_{{field | getAttr}}" value="{{item | getAttr}}" {{"checked" if loop.first}} />
+
+                <div class="select-switch-display select-switch-display-{{loop.index}} ability-{{opt}}">
+                    <div class="ability-text select-switch-content-{{loop.index}}">
+                        {{item.description | safe}}
+                    </div>
                 </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endmacro %}

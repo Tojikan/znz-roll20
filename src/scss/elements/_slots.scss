@@ -1,8 +1,10 @@
+
+//Show Hide Available Slots
+// Similar to a Switch but we also need to show preceeding slots
 .sheet-slot-toggle {
-    //Show Hide Available Weapon Slots!
     //1 indexed
     //maxSlots is injected via gulp through a header
-    @for $i from 1 through $maxSlots { 
+    @for $i from 1 through $maxEquipmentSlots { 
         // If weapon slot i is checked...
         .sheet-slot-toggle-#{$i}:checked{
 

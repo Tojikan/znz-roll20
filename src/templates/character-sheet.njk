@@ -1,6 +1,7 @@
 
 {% import 'macros/card.njk' as card %}
 {% import 'macros/bubble.njk' as bubble %}
+{% import 'macros/slot.njk' as slot %}
 
 
 <div class="sheet-character">
@@ -14,7 +15,11 @@
             </div>
             {{bubble.create(fields.character.ability, 'toggleselect', class="extra-bottom")}}
 
-            {% include "./sections/equipment.njk" %}
+
+        <div class="sheet-equipment-slots">
+            {{ slot.create(fields.character.equipmentslots.label, 'Unused Slot', fields.character.equipmentslots) }}
+        </div>
+
         </div>
         <div class="sheet-sidebar">
             {{bubble.create(fields.character.ammo, 'list', class="extra-bottom")}}
