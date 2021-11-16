@@ -43,7 +43,7 @@
 
         <div class="type-fields">
             {%-
-            set fieldClasses = [
+            set weaponClasses = [
                     type.ranged.id, 
                     type.melee.id, 
                     type.projectile.id,
@@ -51,67 +51,82 @@
                 ] 
             -%}
 
-            <div class="weapon-fields sheet-row-flex align-bottom">
-                {# Dmg #}
-                <div class="card-damage card-block {{ generateFieldClasses(fieldClasses) }}">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_{{fields.card.damage | getAttr | attach(prefix, num)}}" value="0" />
-                    </div>
-                </div>
-                
-                {# Now add armor #}
-                {%- set fieldClasses = (fieldClasses.push(type.armor.id), fieldClasses) -%}
-                {# AP Cost #}
-                <div class="card-use-cost card-block {{ generateFieldClasses(fieldClasses) }}">
-                    <div class="card-field-label">
-                        {{ fields.card.cost | getLabel }}
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_{{fields.card.cost | getAttr | attach(prefix, num)}}" value="1"/>
-                    </div>
-                </div>
-                {# Uses #}
-                <div class="card-uses card-block {{ generateFieldClasses(fieldClasses) }}">
-                    {# Ranged Only #}
-                    {%-
-                    set rangedClasses = [
-                            type.ranged.id, 
-                            type.projectile.id,
-                            type.throwing.id
-                        ] 
-                    -%}
-                    <div class="card-field-label {{ generateFieldClasses(rangedClasses) }}">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_{{fields.card.ammotype | getAttr | attach(prefix, num)}}">
-                                <optgroup>
-                                {% for key, type in fields.character.ammo.options %}
-                                    <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
-                                {% endfor %}
-                                </optgroup>
-                            </select>
-                        )
+            <div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    {# Dmg #}
+                    <div class="card-damage card-block {{ generateFieldClasses(weaponClasses) }}">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_{{fields.card.damage | getAttr | attach(prefix, num)}}" value="0" />
                         </div>
                     </div>
-                    {# Ranged Only #}
-                    {%-
-                    set otherClasses = [
-                            type.melee.id, 
-                            type.armor.id
-                        ] 
-                    -%}
-                    <div class="card-field-label {{ generateFieldClasses(otherClasses) }}">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_{{fields.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
+                    
+                    {# Accuracy #}
+                    <div class="card-accuracy card-block {{ generateFieldClasses(weaponClasses)}}">
+                        <div class="card-field-label">
+                            {{ fields.card.accuracy | getLabel }}
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_{{fields.card.uses.max | attach(prefix, num)}}" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_{{fields.card.accuracy | getAttr | attach(prefix, num)}}" value="1"/>
                         </div>
                     </div>
+
+                    {# Now add armor #}
+                    {%- set armorWeapon = (weaponClasses.push(type.armor.id), weaponClasses) -%}
+                    
+                    {# AP Cost #}
+                    <div class="card-use-cost card-block {{ generateFieldClasses(armorWeapon) }}">
+                        <div class="card-field-label">
+                            {{ fields.card.cost | getLabel }}
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_{{fields.card.cost | getAttr | attach(prefix, num)}}" value="1"/>
+                        </div>
+                    </div>
+
+                    {# Uses #}
+                    <div class="card-uses card-block {{ generateFieldClasses(armorWeapon) }}">
+                        {# Ranged Only #}
+                        {%-
+                        set rangedClasses = [
+                                type.ranged.id, 
+                                type.projectile.id,
+                                type.throwing.id
+                            ] 
+                        -%}
+                        <div class="card-field-label {{ generateFieldClasses(rangedClasses) }}">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_{{fields.card.ammotype | getAttr | attach(prefix, num)}}">
+                                    <optgroup>
+                                    {% for key, type in fields.character.ammo.options %}
+                                        <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
+                                    {% endfor %}
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        {# Others #}
+                        {%-
+                        set otherClasses = [
+                                type.melee.id, 
+                                type.armor.id
+                            ] 
+                        -%}
+                        <div class="card-field-label {{ generateFieldClasses(otherClasses) }}">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_{{fields.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_{{fields.card.uses.max | attach(prefix, num)}}" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>

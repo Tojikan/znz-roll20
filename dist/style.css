@@ -26,6 +26,8 @@
     align-items: flex-end; }
   .sheet-row-flex.vert {
     flex-direction: column; }
+  .sheet-row-flex.wrap {
+    flex-wrap: wrap; }
 
 .sheet-divider {
   margin: 0 0.5rem;
@@ -368,12 +370,12 @@ textarea.sheet-vertical {
   .sheet-card .card-actions button.sheet-delete-button {
     margin-left: auto; }
 
-.sheet-card .weapon-fields .card-block {
-  padding: 0 0.5rem;
-  margin-bottom: 0; }
-
-.sheet-card .weapon-fields .card-damage {
-  flex-basis: 40%; }
+.sheet-card .weapon-fields {
+  margin-bottom: -0.75rem; }
+  .sheet-card .weapon-fields .card-block {
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+    flex-basis: 40%; }
 
 .sheet-equipment-slots .sheet-card .card-actions .action-unequip {
   display: block; }

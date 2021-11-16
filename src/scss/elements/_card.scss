@@ -140,12 +140,11 @@
 
     // SPECIFIC
     .weapon-fields {
+        margin-bottom: -0.75rem;
+
         .card-block {
             padding: 0 0.5rem;
-            margin-bottom: 0;
-        }
-
-        .card-damage {
+            margin-bottom: 1rem;
             flex-basis: 40%;
         }
     }

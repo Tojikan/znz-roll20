@@ -525,6 +525,10 @@
             id:'cost',
             label: 'AP Cost'
         },
+        accuracy: {
+            id:'accuracy',
+            label: 'Accuracy'
+        },
         ammotype: {
             id: 'ammotype',
             label: 'Ammo Type',

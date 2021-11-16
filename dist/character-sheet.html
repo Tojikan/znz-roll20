@@ -468,58 +468,72 @@
             </div>
         </div>
 
-        <div class="type-fields"><div class="weapon-fields sheet-row-flex align-bottom">
-                
-                <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_equipment_damage_1" value="0" />
-                    </div>
-                </div>
-                
-                
-                <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label">
-                        AP Cost
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_equipment_cost_1" value="1"/>
-                    </div>
-                </div>
-                
-                <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_equipment_ammotype_1">
-                                <optgroup>
-                                
-                                    <option value="ammo_light"  selected="selected" >Light</option>
-                                
-                                    <option value="ammo_medium" >Medium</option>
-                                
-                                    <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
-                                
-                                    <option value="ammo_arrow" >Arrows</option>
-                                
-                                </optgroup>
-                            </select>
-                        )
+        <div class="type-fields"><div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    
+                    <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_equipment_damage_1" value="0" />
                         </div>
                     </div>
-                    <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_1" value="0"/>
+                    
+                    
+                    <div class="card-accuracy card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">
+                            Accuracy
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_max_1" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_1" value="1"/>
                         </div>
                     </div>
+
+                    
+                    <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label">
+                            AP Cost
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_cost_1" value="1"/>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_equipment_ammotype_1">
+                                    <optgroup>
+                                    
+                                        <option value="ammo_light"  selected="selected" >Light</option>
+                                    
+                                        <option value="ammo_medium" >Medium</option>
+                                    
+                                        <option value="ammo_heavy" >Heavy</option>
+                                    
+                                        <option value="ammo_bolt" >Bolts</option>
+                                    
+                                        <option value="ammo_arrow" >Arrows</option>
+                                    
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_1" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_max_1" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -616,58 +630,72 @@
             </div>
         </div>
 
-        <div class="type-fields"><div class="weapon-fields sheet-row-flex align-bottom">
-                
-                <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_equipment_damage_2" value="0" />
-                    </div>
-                </div>
-                
-                
-                <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label">
-                        AP Cost
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_equipment_cost_2" value="1"/>
-                    </div>
-                </div>
-                
-                <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_equipment_ammotype_2">
-                                <optgroup>
-                                
-                                    <option value="ammo_light"  selected="selected" >Light</option>
-                                
-                                    <option value="ammo_medium" >Medium</option>
-                                
-                                    <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
-                                
-                                    <option value="ammo_arrow" >Arrows</option>
-                                
-                                </optgroup>
-                            </select>
-                        )
+        <div class="type-fields"><div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    
+                    <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_equipment_damage_2" value="0" />
                         </div>
                     </div>
-                    <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_2" value="0"/>
+                    
+                    
+                    <div class="card-accuracy card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">
+                            Accuracy
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_max_2" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_2" value="1"/>
                         </div>
                     </div>
+
+                    
+                    <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label">
+                            AP Cost
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_cost_2" value="1"/>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_equipment_ammotype_2">
+                                    <optgroup>
+                                    
+                                        <option value="ammo_light"  selected="selected" >Light</option>
+                                    
+                                        <option value="ammo_medium" >Medium</option>
+                                    
+                                        <option value="ammo_heavy" >Heavy</option>
+                                    
+                                        <option value="ammo_bolt" >Bolts</option>
+                                    
+                                        <option value="ammo_arrow" >Arrows</option>
+                                    
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_2" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_max_2" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -764,58 +792,72 @@
             </div>
         </div>
 
-        <div class="type-fields"><div class="weapon-fields sheet-row-flex align-bottom">
-                
-                <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_equipment_damage_3" value="0" />
-                    </div>
-                </div>
-                
-                
-                <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label">
-                        AP Cost
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_equipment_cost_3" value="1"/>
-                    </div>
-                </div>
-                
-                <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_equipment_ammotype_3">
-                                <optgroup>
-                                
-                                    <option value="ammo_light"  selected="selected" >Light</option>
-                                
-                                    <option value="ammo_medium" >Medium</option>
-                                
-                                    <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
-                                
-                                    <option value="ammo_arrow" >Arrows</option>
-                                
-                                </optgroup>
-                            </select>
-                        )
+        <div class="type-fields"><div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    
+                    <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_equipment_damage_3" value="0" />
                         </div>
                     </div>
-                    <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_3" value="0"/>
+                    
+                    
+                    <div class="card-accuracy card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">
+                            Accuracy
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_max_3" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_3" value="1"/>
                         </div>
                     </div>
+
+                    
+                    <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label">
+                            AP Cost
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_cost_3" value="1"/>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_equipment_ammotype_3">
+                                    <optgroup>
+                                    
+                                        <option value="ammo_light"  selected="selected" >Light</option>
+                                    
+                                        <option value="ammo_medium" >Medium</option>
+                                    
+                                        <option value="ammo_heavy" >Heavy</option>
+                                    
+                                        <option value="ammo_bolt" >Bolts</option>
+                                    
+                                        <option value="ammo_arrow" >Arrows</option>
+                                    
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_3" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_max_3" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -912,58 +954,72 @@
             </div>
         </div>
 
-        <div class="type-fields"><div class="weapon-fields sheet-row-flex align-bottom">
-                
-                <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_equipment_damage_4" value="0" />
-                    </div>
-                </div>
-                
-                
-                <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label">
-                        AP Cost
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_equipment_cost_4" value="1"/>
-                    </div>
-                </div>
-                
-                <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_equipment_ammotype_4">
-                                <optgroup>
-                                
-                                    <option value="ammo_light"  selected="selected" >Light</option>
-                                
-                                    <option value="ammo_medium" >Medium</option>
-                                
-                                    <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
-                                
-                                    <option value="ammo_arrow" >Arrows</option>
-                                
-                                </optgroup>
-                            </select>
-                        )
+        <div class="type-fields"><div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    
+                    <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_equipment_damage_4" value="0" />
                         </div>
                     </div>
-                    <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_4" value="0"/>
+                    
+                    
+                    <div class="card-accuracy card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">
+                            Accuracy
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_max_4" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_4" value="1"/>
                         </div>
                     </div>
+
+                    
+                    <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label">
+                            AP Cost
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_cost_4" value="1"/>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_equipment_ammotype_4">
+                                    <optgroup>
+                                    
+                                        <option value="ammo_light"  selected="selected" >Light</option>
+                                    
+                                        <option value="ammo_medium" >Medium</option>
+                                    
+                                        <option value="ammo_heavy" >Heavy</option>
+                                    
+                                        <option value="ammo_bolt" >Bolts</option>
+                                    
+                                        <option value="ammo_arrow" >Arrows</option>
+                                    
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_4" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_max_4" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -1060,58 +1116,72 @@
             </div>
         </div>
 
-        <div class="type-fields"><div class="weapon-fields sheet-row-flex align-bottom">
-                
-                <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_equipment_damage_5" value="0" />
-                    </div>
-                </div>
-                
-                
-                <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label">
-                        AP Cost
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_equipment_cost_5" value="1"/>
-                    </div>
-                </div>
-                
-                <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_equipment_ammotype_5">
-                                <optgroup>
-                                
-                                    <option value="ammo_light"  selected="selected" >Light</option>
-                                
-                                    <option value="ammo_medium" >Medium</option>
-                                
-                                    <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
-                                
-                                    <option value="ammo_arrow" >Arrows</option>
-                                
-                                </optgroup>
-                            </select>
-                        )
+        <div class="type-fields"><div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    
+                    <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_equipment_damage_5" value="0" />
                         </div>
                     </div>
-                    <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_5" value="0"/>
+                    
+                    
+                    <div class="card-accuracy card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">
+                            Accuracy
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_max_5" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_5" value="1"/>
                         </div>
                     </div>
+
+                    
+                    <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label">
+                            AP Cost
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_cost_5" value="1"/>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_equipment_ammotype_5">
+                                    <optgroup>
+                                    
+                                        <option value="ammo_light"  selected="selected" >Light</option>
+                                    
+                                        <option value="ammo_medium" >Medium</option>
+                                    
+                                        <option value="ammo_heavy" >Heavy</option>
+                                    
+                                        <option value="ammo_bolt" >Bolts</option>
+                                    
+                                        <option value="ammo_arrow" >Arrows</option>
+                                    
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_5" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_max_5" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -1208,58 +1278,72 @@
             </div>
         </div>
 
-        <div class="type-fields"><div class="weapon-fields sheet-row-flex align-bottom">
-                
-                <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_equipment_damage_6" value="0" />
-                    </div>
-                </div>
-                
-                
-                <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label">
-                        AP Cost
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_equipment_cost_6" value="1"/>
-                    </div>
-                </div>
-                
-                <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_equipment_ammotype_6">
-                                <optgroup>
-                                
-                                    <option value="ammo_light"  selected="selected" >Light</option>
-                                
-                                    <option value="ammo_medium" >Medium</option>
-                                
-                                    <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
-                                
-                                    <option value="ammo_arrow" >Arrows</option>
-                                
-                                </optgroup>
-                            </select>
-                        )
+        <div class="type-fields"><div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    
+                    <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_equipment_damage_6" value="0" />
                         </div>
                     </div>
-                    <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_6" value="0"/>
+                    
+                    
+                    <div class="card-accuracy card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">
+                            Accuracy
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_equipment_uses_max_6" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_6" value="1"/>
                         </div>
                     </div>
+
+                    
+                    <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label">
+                            AP Cost
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_equipment_cost_6" value="1"/>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_equipment_ammotype_6">
+                                    <optgroup>
+                                    
+                                        <option value="ammo_light"  selected="selected" >Light</option>
+                                    
+                                        <option value="ammo_medium" >Medium</option>
+                                    
+                                        <option value="ammo_heavy" >Heavy</option>
+                                    
+                                        <option value="ammo_bolt" >Bolts</option>
+                                    
+                                        <option value="ammo_arrow" >Arrows</option>
+                                    
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_6" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_equipment_uses_max_6" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -1367,58 +1451,72 @@
             </div>
         </div>
 
-        <div class="type-fields"><div class="weapon-fields sheet-row-flex align-bottom">
-                
-                <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
-                    <div class="card-field-label">Damage</div>
-                    <div class="card-field-input">
-                        <input class="sheet-shy " type="number" name="attr_damage" value="0" />
-                    </div>
-                </div>
-                
-                
-                <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label">
-                        AP Cost
-                    </div>
-                    <div class="card-field-input">
-                        <input type="number" class=" sheet-shy" name="attr_cost" value="1"/>
-                    </div>
-                </div>
-                
-                <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
-                    <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
-                        Ammo 
-                        <div>
-                        (
-                            <select class="sheet-shy" name="attr_ammotype">
-                                <optgroup>
-                                
-                                    <option value="ammo_light"  selected="selected" >Light</option>
-                                
-                                    <option value="ammo_medium" >Medium</option>
-                                
-                                    <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
-                                
-                                    <option value="ammo_arrow" >Arrows</option>
-                                
-                                </optgroup>
-                            </select>
-                        )
+        <div class="type-fields"><div class="weapon-fields">
+                <div class="sheet-row-flex align-bottom wrap">
+                    
+                    <div class="card-damage card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">Damage</div>
+                        <div class="card-field-input">
+                            <input class="sheet-shy " type="number" name="attr_damage" value="0" />
                         </div>
                     </div>
-                    <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
-                    <div class="card-field-input sheet-max">
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_uses" value="0"/>
+                    
+                    
+                    <div class="card-accuracy card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon">
+                        <div class="card-field-label">
+                            Accuracy
                         </div>
-                        <div class="sheet-divider">/</div>
-                        <div>
-                            <input type="number" class="sheet-shy" name="attr_uses_max" value="0"/>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_accuracy" value="1"/>
                         </div>
                     </div>
+
+                    
+                    <div class="card-use-cost card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label">
+                            AP Cost
+                        </div>
+                        <div class="card-field-input">
+                            <input type="number" class=" sheet-shy" name="attr_cost" value="1"/>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-uses card-block type-field type_ranged_weapon type_melee_weapon type_projectile_weapon type_throwing_weapon type_armor_item">
+                        <div class="card-field-label type-field type_ranged_weapon type_projectile_weapon type_throwing_weapon">
+                            Ammo 
+                            (
+                                <select class="sheet-shy inline" name="attr_ammotype">
+                                    <optgroup>
+                                    
+                                        <option value="ammo_light"  selected="selected" >Light</option>
+                                    
+                                        <option value="ammo_medium" >Medium</option>
+                                    
+                                        <option value="ammo_heavy" >Heavy</option>
+                                    
+                                        <option value="ammo_bolt" >Bolts</option>
+                                    
+                                        <option value="ammo_arrow" >Arrows</option>
+                                    
+                                    </optgroup>
+                                </select>
+                            )
+                        </div>
+                        <div class="card-field-label type-field type_melee_weapon type_armor_item">Durability</div>
+                        <div class="card-field-input sheet-max">
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_uses" value="0"/>
+                            </div>
+                            <div class="sheet-divider">/</div>
+                            <div>
+                                <input type="number" class="sheet-shy" name="attr_uses_max" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -1762,6 +1860,10 @@
         cost: {
             id:'cost',
             label: 'AP Cost'
+        },
+        accuracy: {
+            id:'accuracy',
+            label: 'Accuracy'
         },
         ammotype: {
             id: 'ammotype',
