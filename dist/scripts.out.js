@@ -7,8 +7,8 @@
     	description: ""
     };
     var parkour = {
-    	id: "Parkour",
-    	description: "Movement no longer uses AP, but you are limited to moving 5 spaces a turn. You can vault off nearby terrain to move past enemies freely."
+    	id: "Speedster",
+    	description: "You can move 3 spaces at no cost on your turn."
     };
     var brawler = {
     	id: "brawler",
@@ -133,6 +133,10 @@
                 ranged: {
                     id: "ranged_skill",
                     label: "Ranged"
+                },
+                projectile: {
+                    id: "projectile_skill",
+                    label: "Projectile"
                 }
             }
         },
@@ -190,15 +194,15 @@
         // },
         equipmentslots: {
             id: "equipmentslots",
-            default: 3,
-            max: 10,
+            default: 2,
+            max: 6,
             type: "equipment",
             label: "Equipment"
         },
         inventory: {
             id: "inventory",
             default: 5,
-            max: 9,
+            max: 12,
             label: "Inventory"
         }
     };
@@ -447,49 +451,90 @@
         })();
     };
 
+    var aaany = {
+    	id: "misc",
+    	label: "Misc"
+    };
+    var melee = {
+    	id: "melee_weapon",
+    	label: "Melee Weapon"
+    };
+    var ranged = {
+    	id: "ranged_weapon",
+    	label: "Ranged Weapon"
+    };
+    var projectile = {
+    	id: "projectile_weapon",
+    	label: "Projectile Weapon"
+    };
+    var throwing = {
+    	id: "throwing_weapon",
+    	label: "Throwing Weapon"
+    };
+    var consumable = {
+    	id: "consumable_item",
+    	label: "Consumable"
+    };
+    var armor = {
+    	id: "armor_item",
+    	label: "Armor"
+    };
+    var itemtypes = {
+    	aaany: aaany,
+    	melee: melee,
+    	ranged: ranged,
+    	projectile: projectile,
+    	throwing: throwing,
+    	consumable: consumable,
+    	armor: armor
+    };
+
+    var itemTypes = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        aaany: aaany,
+        melee: melee,
+        ranged: ranged,
+        projectile: projectile,
+        throwing: throwing,
+        consumable: consumable,
+        armor: armor,
+        'default': itemtypes
+    });
+
     const fields = {
         name: {
             id: 'name'
         },
         type: {
             id: 'type',
-            label: "Item Type",
-            options: [
-                'inventory',
-                'weapon',
-                'equipment'
-            ]
+            label: 'Item Type',
+            options: itemTypes
         },
         damage: {
             id: 'damage'
-        },
-        weapontype: {
-            id: 'weapontype',
-            options: [
-                'melee',
-                'ranged'
-            ],
-            label: 'Weapon Type',
-            default: 'melee'
         },
         uses: {
             id: 'uses',
             max: 'uses_max', // easier to handle ids and indexflight from rochesbalti
             labels: {
-                melee: 'Durability',
-                ranged: 'Ammo'
+                ranged: 'Ammo',
+                other: 'Durability',
             }
         },
-        // ammotype: {
-        //     id: 'ammotype',
-        //     label: 'Ammo Type'
-        // },
+        cost: {
+            id:'cost',
+            label: 'AP Cost'
+        },
+        ammotype: {
+            id: 'ammotype',
+            label: 'Ammo Type',
+        },
         description: {
             id: 'description'
         }, 
         flavor: {
             id: 'flavor'
-        },
+        }
     };
 
     const handleReload = function(args, character){

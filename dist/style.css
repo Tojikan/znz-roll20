@@ -13,19 +13,19 @@
     $elClass - class of content to show/hide
     $toggleClass - class of hidden input
 **/
-.sheet-main {
-  flex-basis: 80%; }
-
-.sheet-sidebar {
-  flex-basis: 20%; }
-
 .sheet-character label {
   font-size: 1.8rem; }
 
 .sheet-row-flex {
   display: flex; }
-  .sheet-row-flex.sheet-space-around {
+  .sheet-row-flex.space-around {
     justify-content: space-around; }
+  .sheet-row-flex.space-between {
+    justify-content: space-between; }
+  .sheet-row-flex.align-bottom {
+    align-items: flex-end; }
+  .sheet-row-flex.vert {
+    flex-direction: column; }
 
 .sheet-divider {
   margin: 0 0.5rem;
@@ -41,6 +41,24 @@
 .sheet-subtext {
   font-size: 1.2rem; }
 
+.sheet-label-row {
+  justify-content: start;
+  align-items: baseline; }
+  .sheet-label-row .sheet-label {
+    display: inline-block;
+    width: auto;
+    margin-right: 2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem; }
+  .sheet-label-row .sheet-sublabel {
+    font-size: 1.2rem; }
+    .sheet-label-row .sheet-sublabel input {
+      font-size: 1.2rem; }
+      .sheet-label-row .sheet-sublabel input.sheet-shy {
+        padding: 0;
+        width: 2.5rem; }
+
 input, textarea {
   width: 100%; }
 
@@ -54,6 +72,8 @@ input {
     border: none; }
   input:hover {
     background-color: #e5fffb; }
+  input.halved {
+    width: 50% !important; }
   input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     /* Chrome */
@@ -85,17 +105,17 @@ textarea.sheet-small {
 textarea.sheet-vertical {
   resize: vertical; }
 
-.sheet-line {
+.sheet-line, .line-input {
   display: flex;
   justify-content: space-around; }
-  .sheet-line .sheet-label {
+  .sheet-line .sheet-label, .line-input .sheet-label {
     font-size: 1.4rem;
     text-align: right;
     display: flex;
     flex-direction: column;
     justify-content: end;
     font-weight: 500; }
-  .sheet-line input {
+  .sheet-line input, .line-input input {
     border: none;
     border-bottom: solid 1px #a0a0a0;
     border-radius: 0; }
@@ -160,208 +180,227 @@ textarea.sheet-vertical {
   .sheet-bubble.extra-bottom {
     margin-bottom: 3rem; }
 
-.sheet-slot-toggle .sheet-slot-toggle-1:checked ~ .sheet-slot-1 {
+.content-toggleselect {
+  height: 100%; }
+  .content-toggleselect .select-switch-dropdown {
+    margin-bottom: 2rem; }
+
+.content-list {
+  height: 100%; }
+
+.slot-toggled .slots-list .slot-toggle-1:checked ~ .slot-1 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-1 {
+.slot-toggled .slots-list .slot-toggle-2:checked ~ .slot-1 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-2:checked ~ .sheet-slot-2 {
+.slot-toggled .slots-list .slot-toggle-2:checked ~ .slot-2 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-1 {
+.slot-toggled .slots-list .slot-toggle-3:checked ~ .slot-1 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-2 {
+.slot-toggled .slots-list .slot-toggle-3:checked ~ .slot-2 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-3:checked ~ .sheet-slot-3 {
+.slot-toggled .slots-list .slot-toggle-3:checked ~ .slot-3 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-1 {
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-1 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-2 {
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-2 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-3 {
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-3 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-4:checked ~ .sheet-slot-4 {
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-4 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-1 {
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-1 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-2 {
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-2 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-3 {
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-3 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-4 {
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-4 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-5:checked ~ .sheet-slot-5 {
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-5 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-1 {
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-1 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-2 {
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-2 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-3 {
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-3 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-4 {
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-4 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-5 {
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-5 {
   display: block; }
 
-.sheet-slot-toggle .sheet-slot-toggle-6:checked ~ .sheet-slot-6 {
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-6 {
   display: block; }
 
-.sheet-slot .sheet-content {
+.slot-toggled .slot {
   display: none; }
-
-.sheet-slot .sheet-active {
-  display: none; }
-  .sheet-slot .sheet-active:checked ~ .sheet-content {
-    display: block; }
-  .sheet-slot .sheet-active:checked ~ .sheet-empty-text {
+  .slot-toggled .slot .slot-control:checked ~ .empty-text {
     display: none; }
 
-.sheet-slot-section {
+.slot-section {
   margin-top: 4rem; }
-  .sheet-slot-section .sheet-label-row {
-    justify-content: start; }
-    .sheet-slot-section .sheet-label-row label {
-      display: inline-block;
-      width: auto;
-      margin-right: 2rem; }
-    .sheet-slot-section .sheet-label-row .sheet-subtext {
-      font-size: 1.2rem; }
-      .sheet-slot-section .sheet-label-row .sheet-subtext input {
-        font-size: 1.2rem; }
-        .sheet-slot-section .sheet-label-row .sheet-subtext input.sheet-shy {
-          padding: 0;
-          width: 2.5rem; }
-  .sheet-slot-section .sheet-wrap {
-    margin-top: 1rem;
+  .slot-section .slots-list {
     display: flex;
-    flex-wrap: wrap; }
-  .sheet-slot-section .sheet-slot {
-    width: 25%;
-    display: none;
-    border: solid 4px #d3d3d3;
-    border-radius: 1rem;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px; }
+  .slot-section .slot {
+    margin-bottom: 2rem;
     min-height: 5rem;
-    padding: 1rem;
-    margin-right: 2rem;
-    margin-bottom: 2rem; }
-    .sheet-slot-section .sheet-slot .sheet-empty-text {
+    padding: 0 0.5rem;
+    flex-basis: 32%; }
+    .slot-section .slot .slot-content-wrapper {
+      border: solid 4px #d3d3d3;
+      border-radius: 1rem;
+      padding: 1rem; }
+    .slot-section .slot .empty-text {
       height: 100%;
       font-size: 1.4rem;
       text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: center; }
-    .sheet-slot-section .sheet-slot .sheet-content {
+    .slot-section .slot .slot-content {
       width: 100%; }
 
 .sheet-card select {
   height: 2rem;
   padding: 0;
-  margin: 0;
-  width: 50%; }
+  margin: 0; }
 
-.sheet-card .sheet-card-line {
+.sheet-card .card-field-label {
+  font-weight: 700;
+  font-size: 1.4rem; }
+  .sheet-card .card-field-label select {
+    display: inline-block;
+    width: 50%;
+    text-align: center; }
+    .sheet-card .card-field-label select optgroup {
+      font-size: 1.2rem; }
+
+.sheet-card .sheet-max input {
+  width: 4rem; }
+
+.sheet-card .card-name {
+  margin-bottom: 1.2rem; }
+  .sheet-card .card-name input[type=text] {
+    font-weight: 700;
+    color: black;
+    border: none;
+    border-bottom: solid 3px black; }
+    .sheet-card .card-name input[type=text]::placeholder {
+      color: #d3d3d3;
+      font-weight: 300; }
+
+.sheet-card .card-line {
   display: flex;
-  width: 80%;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
   margin-bottom: 1rem; }
-  .sheet-card .sheet-card-line .sheet-label {
-    flex-basis: 50%;
-    font-weight: 700;
-    font-size: 1.4rem; }
-  .sheet-card .sheet-card-line select,
-  .sheet-card .sheet-card-line input {
+  .sheet-card .card-line .card-field-label {
+    flex-basis: 50%; }
+  .sheet-card .card-line select,
+  .sheet-card .card-line input {
     font-size: 1.4rem;
     padding: 0;
     text-align: center; }
 
-.sheet-card .sheet-card-name {
-  margin-bottom: 1.5rem; }
-  .sheet-card .sheet-card-name input[type=text] {
-    font-weight: 700;
-    color: black; }
-    .sheet-card .sheet-card-name input[type=text]::placeholder {
-      color: #d3d3d3;
-      font-weight: 300; }
+.sheet-card .card-block {
+  text-align: center;
+  max-width: 50%;
+  margin: auto; }
+  .sheet-card .card-block .card-field-label {
+    font-size: 1rem; }
+  .sheet-card .card-block .card-field-input {
+    width: 100%; }
+    .sheet-card .card-block .card-field-input input {
+      text-align: center;
+      width: 100%;
+      font-size: 1.8rem; }
 
 .sheet-card .sheet-card-type {
   display: none; }
   .sheet-card .sheet-card-type select {
     font-size: 1rem; }
-  .sheet-card .sheet-card-type .sheet-weapon-only {
-    display: none;
-    text-align: right; }
 
-.sheet-card .sheet-show-ranged:checked ~ .sheet-card-weapon-fields .sheet-ranged-only {
-  display: block; }
-
-.sheet-card .sheet-show-ranged:checked ~ .sheet-card-weapon-fields .sheet-melee-only {
-  display: none; }
-
-.sheet-card .sheet-show-melee:checked ~ .sheet-card-weapon-fields .sheet-melee-only {
-  display: block; }
-
-.sheet-card .sheet-show-melee:checked ~ .sheet-card-weapon-fields .sheet-ranged-only {
-  display: none; }
-
-.sheet-card .sheet-card-weapon-fields .sheet-ranged-only {
-  display: none; }
-
-.sheet-card .sheet-card-textarea {
-  width: 90%;
-  margin: auto;
+.sheet-card .card-notes {
   margin-top: 2rem;
   border: solid 2px #d3d3d3;
   border-radius: 1rem;
-  padding: 1rem; }
-  .sheet-card .sheet-card-textarea textarea {
-    height: 4rem;
-    box-sizing: border-box; }
-  .sheet-card .sheet-card-textarea span {
+  padding: 0.5rem; }
+  .sheet-card .card-notes textarea {
+    height: 5rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-size: 1.2rem;
+    margin-bottom: 0; }
+  .sheet-card .card-notes span {
     font-style: italic;
-    font-size: 1.4rem; }
+    font-size: 1.2rem; }
 
-.sheet-card .sheet-card-actions {
+.sheet-card .card-actions {
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem auto; }
-  .sheet-card .sheet-card-actions button {
-    display: none;
-    flex-basis: 15%;
-    margin: 0 0.5rem; }
-    .sheet-card .sheet-card-actions button.sheet-delete-button {
-      margin-left: auto; }
+  margin: 1rem -0.5rem; }
+  .sheet-card .card-actions .card-action {
+    padding: 0 0.5rem;
+    display: none; }
+  .sheet-card .card-actions button.sheet-delete-button {
+    margin-left: auto; }
 
-.sheet-card .sheet-weapon-only {
-  display: none !important; }
+.sheet-card .weapon-fields .card-block {
+  padding: 0 0.5rem;
+  margin-bottom: 0; }
 
-.sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-type .sheet-weapon-only {
-  display: block !important; }
+.sheet-card .weapon-fields .card-damage {
+  flex-basis: 40%; }
 
-.sheet-card .sheet-card-weapon-fields {
-  display: none !important; }
+.sheet-equipment-slots .sheet-card .card-actions .action-unequip {
+  display: block; }
 
-.sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-weapon-fields {
-  display: block !important; }
+.sheet-inventory {
+  margin-top: 1rem; }
+  .sheet-inventory .sheet-slot-section .sheet-slot {
+    display: block; }
+  .sheet-inventory .repcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px; }
+    .sheet-inventory .repcontainer .repitem {
+      flex-basis: 33%; }
+  .sheet-inventory .sheet-card .sheet-card-type {
+    display: block;
+    width: 60%; }
+    .sheet-inventory .sheet-card .sheet-card-type select {
+      padding: 0 0.6rem; }
+  .sheet-inventory .repcontrol .repcontrol_edit {
+    float: none;
+    margin-right: 2rem; }
+  .sheet-inventory .sheet-wrap {
+    flex-wrap: wrap; }
+  .sheet-inventory .sheet-card .card-actions .action-equip {
+    display: block; }
 
 .slot-content {
   display: none; }
@@ -430,6 +469,30 @@ input.select-switch-control-9:checked ~ .select-switch-display-9 {
 .select-switch .select-switch-display {
   flex-basis: 65%; }
 
+.type-field {
+  display: none; }
+
+.type-toggle-misc:checked ~ .type-fields .type_misc {
+  display: block; }
+
+.type-toggle-melee_weapon:checked ~ .type-fields .type_melee_weapon {
+  display: block; }
+
+.type-toggle-ranged_weapon:checked ~ .type-fields .type_ranged_weapon {
+  display: block; }
+
+.type-toggle-projectile_weapon:checked ~ .type-fields .type_projectile_weapon {
+  display: block; }
+
+.type-toggle-throwing_weapon:checked ~ .type-fields .type_throwing_weapon {
+  display: block; }
+
+.type-toggle-consumable_item:checked ~ .type-fields .type_consumable_item {
+  display: block; }
+
+.type-toggle-armor_item:checked ~ .type-fields .type_armor_item {
+  display: block; }
+
 .sheet-character .sheet-header {
   display: flex; }
   .sheet-character .sheet-header .sheet-main {
@@ -451,49 +514,6 @@ input.select-switch-control-9:checked ~ .select-switch-display-9 {
 
 .sheet-toggle-select .sheet-text {
   flex-basis: 65%; }
-
-.sheet-inventory {
-  margin-top: 1rem; }
-  .sheet-inventory .sheet-slot-section .sheet-slot {
-    display: block; }
-  .sheet-inventory .repcontainer {
-    display: flex;
-    flex-wrap: wrap; }
-  .sheet-inventory .sheet-card .sheet-card-type {
-    display: flex; }
-  .sheet-inventory .sheet-card .sheet-show-ranged:checked ~ .sheet-ranged-only {
-    display: flex; }
-  .sheet-inventory .repcontrol .repcontrol_edit {
-    float: none;
-    margin-right: 2rem; }
-  .sheet-inventory .sheet-wrap {
-    flex-wrap: wrap; }
-    .sheet-inventory .sheet-wrap .sheet-slot {
-      flex-basis: 20%;
-      margin-bottom: 1rem; }
-
-.sheet-equipment .sheet-wrap .sheet-slot {
-  flex-basis: 18%; }
-
-.sheet-weapon-slots .sheet-card .sheet-show-melee:checked ~ .sheet-card-actions .sheet-attack-melee {
-  display: inline-block; }
-
-.sheet-weapon-slots .sheet-card .sheet-show-ranged:checked ~ .sheet-card-actions .sheet-attack-ranged {
-  display: inline-block; }
-
-.sheet-weapon-slots .sheet-card .sheet-card-actions button.sheet-unequip-button,
-.sheet-equipment-slots .sheet-card .sheet-card-actions button.sheet-unequip-button {
-  display: inline-block; }
-
-.sheet-inventory .sheet-card .sheet-toggle-weapon:checked ~ .sheet-card-actions button.sheet-equip-button,
-.sheet-inventory .sheet-card .sheet-toggle-equipment:checked ~ .sheet-card-actions button.sheet-equip-button {
-  display: inline-block; }
-
-.sheet-inventory .sheet-card .sheet-card-actions button.sheet-export-button {
-  display: inline-block; }
-
-.sheet-inventory .sheet-card .sheet-card-actions button.sheet-delete-button {
-  display: inline-block; }
 
 .sheet-rolltemplate-zroll .sheet-template-container {
   border: solid 2px black; }

@@ -2,6 +2,7 @@ require("@babel/register");
 const fs = require('fs');
 const path = require('path');
 import {fields as character} from './src/model/character';
+import * as types from './src/model/itemtypes';
 
 const getModel = function(dataFolder){
     //make sure data folder ends with backslash
@@ -47,8 +48,8 @@ const getModel = function(dataFolder){
 
             if ('fields' in exported){
                 data.fields[filename] = exported['fields'];
-            }
-
+            } 
+            
             if ('options' in exported){
                 data.options[filename] = exported['options']
             }
@@ -123,6 +124,12 @@ const sassHeaders = `
     $maxEquipmentSlots: ${character.equipmentslots.max};
 
     $abilityCount: ${Object.keys(character.ability.options).length};
+
+
+    $itemTypes: ${Object.keys(types).reduce((prev, key) =>{
+        prev.push(types[key].id);
+        return prev;
+    }, []).join(',')};
 `;
 
 module.exports = {

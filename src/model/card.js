@@ -1,46 +1,39 @@
+import * as itemTypes from './itemtypes.json';
+
 export const fields = {
     name: {
         id: 'name'
     },
     type: {
         id: 'type',
-        label: "Item Type",
-        options: [
-            'inventory',
-            'weapon',
-            'equipment'
-        ]
+        label: 'Item Type',
+        options: itemTypes
     },
     damage: {
         id: 'damage'
-    },
-    weapontype: {
-        id: 'weapontype',
-        options: [
-            'melee',
-            'ranged'
-        ],
-        label: 'Weapon Type',
-        default: 'melee'
     },
     uses: {
         id: 'uses',
         max: 'uses_max', // easier to handle ids and indexflight from rochesbalti
         labels: {
-            melee: 'Durability',
-            ranged: 'Ammo'
+            ranged: 'Ammo',
+            other: 'Durability',
         }
     },
-    // ammotype: {
-    //     id: 'ammotype',
-    //     label: 'Ammo Type'
-    // },
+    cost: {
+        id:'cost',
+        label: 'AP Cost'
+    },
+    ammotype: {
+        id: 'ammotype',
+        label: 'Ammo Type',
+    },
     description: {
         id: 'description'
     }, 
     flavor: {
         id: 'flavor'
-    },
+    }
 }
 
 
@@ -52,5 +45,6 @@ export const options = {
         reload: 'reloadweapon',
         equip: 'equipitem',
         unequip: 'unequipitem'
-    }
+    },
+    itemtypes: itemTypes
 }

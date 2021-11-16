@@ -35,4 +35,17 @@
         margin-bottom: $gap * 1.5;
     }
 
+    
+}
+
+.content-toggleselect {
+    height: 100%;
+
+    .select-switch-dropdown {
+        margin-bottom: $gap;
+    }
+}
+
+.content-list {
+    height: 100%;
 }

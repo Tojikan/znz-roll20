@@ -20,6 +20,9 @@ input {
         background-color: $lightblue;
     }
 
+    &.halved {
+        width: 50%!important;
+    }
     
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button{
@@ -29,6 +32,7 @@ input {
     &[type=number]{
         -moz-appearance:textfield; /* Firefox */
     }
+
 }
 
 
@@ -67,7 +71,7 @@ textarea {
 
 
 // Line input
-.sheet-line {
+.sheet-line, .line-input {
     display: flex;
     justify-content: space-around;
 

@@ -1,0 +1,30 @@
+{
+    "aaany": {
+        "id": "misc",
+        "label": "Misc"
+    },
+    "melee": {
+        "id": "melee_weapon",
+        "label": "Melee Weapon"
+    },
+    "ranged": {
+        "id": "ranged_weapon",
+        "label": "Ranged Weapon"
+    },
+    "projectile": {
+        "id": "projectile_weapon",
+        "label": "Projectile Weapon"
+    },
+    "throwing": {
+        "id": "throwing_weapon",
+        "label": "Throwing Weapon"
+    },
+    "consumable": {
+        "id": "consumable_item",
+        "label": "Consumable"
+    },
+    "armor": {
+        "id": "armor_item",
+        "label": "Armor"
+    }
+}

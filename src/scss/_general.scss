@@ -8,10 +8,23 @@
 .sheet-row-flex {
     display: flex;
 
-    &.sheet-space-around {
+    &.space-around {
         justify-content: space-around;
     }
+
+    &.space-between {
+        justify-content: space-between;;
+    }
+
+    &.align-bottom {
+        align-items: flex-end;
+    }
+
+    &.vert {
+        flex-direction: column;;
+    }
 }
+
 
 
 .sheet-divider {
@@ -31,4 +44,32 @@
 
 .sheet-subtext {
     font-size: $small;
+}
+
+//labels
+.sheet-label-row {
+    justify-content: start;
+    align-items: baseline;
+
+    .sheet-label {
+        display: inline-block;
+        width: auto;
+        margin-right: 2rem;
+        font-size: $medium;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .sheet-sublabel {
+        font-size: $small;
+
+        input {
+            font-size: $small;
+            
+            &.sheet-shy {
+                padding: 0;
+                width: 2.5rem;
+            }
+        }
+    }
 }

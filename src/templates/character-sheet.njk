@@ -5,27 +5,21 @@
 
 
 <div class="sheet-character">
+    <div class="sheet-row-flex">
+        {{bubble.create(fields.character.stats.hp, 'max', 'Health')}}
+        {{bubble.create(fields.character.stats.ap, 'max')}}
+        {{bubble.create(fields.character.notes, 'textarea', class='flex-60')}}
+    </div>
 
     <div class="sheet-row-flex">
-        <div class="sheet-main">
-            <div class="sheet-row-flex">
-                {{bubble.create(fields.character.stats.hp, 'max', 'Health')}}
-                {{bubble.create(fields.character.stats.ap, 'max')}}
-                {{bubble.create(fields.character.notes, 'textarea', class='flex-60')}}
-            </div>
-            {{bubble.create(fields.character.ability, 'toggleselect', class="extra-bottom")}}
+        {{bubble.create(fields.character.skills, 'list')}}
+        {{bubble.create(fields.character.combatskills, 'list', class="extra-bottom")}}
+        {{bubble.create(fields.character.ammo, 'list', class="extra-bottom")}}
+        {{bubble.create(fields.character.ability, 'toggleselect', class="extra-bottom")}}
+    </div>
 
-
-        <div class="sheet-equipment-slots">
-            {{ slot.create(fields.character.equipmentslots.label, 'Unused Slot', fields.character.equipmentslots) }}
-        </div>
-
-        </div>
-        <div class="sheet-sidebar">
-            {{bubble.create(fields.character.ammo, 'list', class="extra-bottom")}}
-            {{bubble.create(fields.character.combatskills, 'list', class="extra-bottom")}}
-            {{bubble.create(fields.character.skills, 'list', class="extra-bottom")}}
-        </div>
+    <div class="sheet-equipment-slots">
+        {{ slot.create(fields.character.equipmentslots.label, 'Unused Slot', fields.character.equipmentslots) }}
     </div>
     {% include "./sections/inventory.njk" %}
     <div class="sheet-bottom">

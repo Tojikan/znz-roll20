@@ -1,80 +1,134 @@
+
+{# Use classes to dynamically set which field appears based on dropdown by appending an array of classes #}
+{% macro generateFieldClasses(types) %}
+    {%- set result = 'type-field' -%}
+    {%- for type in types -%}
+        {%- set str = [" ","type_", type] | join -%}
+        {%- set result = [result, str] | join -%}
+    {%- endfor -%}
+    {{- result -}}
+{% endmacro %}
+
+
 {% macro create(num, prefix='inventory') %}
 
-    <div class="sheet-card">
-        {# Checkboxes for show and hide #}
-        {% for type in fields.card.type.options %}
-            <input type="checkbox" class="sheet-hidden sheet-toggle-{{type}}" name="attr_{{fields.card.type | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if prefix == type }}/>
-        {% endfor %}
+    {# for easier shorthand #}
+    {% set type = options.card.itemtypes %}
 
+    <div class="sheet-card">
         {# Type indicator #}
         <div class="sheet-card-type">
-            <select class="sheet-shy" name="attr_{{fields.card.type | getAttr | attach(prefix, num)}}">
-                {% for type in fields.card.type.options %}
-                    <option value="{{type}}" {% if prefix == type%} selected="selected" {%endif%}>{% if type == 'inventory' %}Consumable {% else %}{{type | capitalize}}{% endif %}</option>
-                {% endfor %}
-            </select>            
-            <select class="sheet-shy sheet-weapon-only" name="attr_{{fields.card.weapontype | getAttr | attach(prefix, num)}}">
-                {% for type in fields.card.weapontype.options %}
-                    <option value="{{type}}" {% if loop.first%} selected="selected" {%endif%}>{{type | capitalize}}</option>
-                {% endfor %}
-            </select>
+            <div class="card-field-input">
+                <select class="sheet-shy" name="attr_{{fields.card.type | getAttr | attach(prefix, num)}}">
+                    {% for key, item in fields.card.type.options | dictsort %}
+                        {% if key != 'default' %}
+                            <option value="{{item.id}}">{{item.label}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>            
+            </div>
         </div>
 
-        {# Checkboxes for weapon type show and hide #}
-        {% for type in fields.card.weapontype.options %}
-            <input type="checkbox" class="sheet-hidden sheet-show-{{type}}" name="attr_{{fields.card.weapontype | getAttr | attach(prefix, num)}}" value="{{type}}" {{ "checked" if loop.first }}/>
+        {# Checkboxes for show and hide #}
+        {% for key, item in fields.card.type.options %}
+            <input type="checkbox" class="sheet-hidden type-toggle-{{item | getAttr}}" name="attr_{{fields.card.type | getAttr | attach(prefix, num)}}" value="{{item | getAttr}}"/>
         {% endfor %}
 
-        {# Name #}
-        <div class="sheet-card-name">
-            <input type="text" name="attr_{{fields.card.name | getAttr | attach(prefix, num)}}" placeholder="Item Name">
+        {# Name - always on the top #}
+        <div class="card-name">
+            <div class="card-field-input">
+                <input type="text" name="attr_{{fields.card.name | getAttr | attach(prefix, num)}}" placeholder="Item Name">
+            </div>
         </div>
 
-        {# Weapon Only #}
-        <div class="sheet-card-weapon-fields">        
-            
-            {# Damage #}
-            <div class="sheet-card-damage  sheet-card-line">
-                <div class="sheet-label">Damage:</div>
-                <input class="sheet-shy" type="text" name="attr_{{fields.card.damage | getAttr | attach(prefix, num)}}" value="0" />
-            </div>
+        <div class="type-fields">
+            {%-
+            set fieldClasses = [
+                    type.ranged.id, 
+                    type.melee.id, 
+                    type.projectile.id,
+                    type.throwing.id
+                ] 
+            -%}
 
-            {# Uses #}
-            <div class="sheet-card-uses sheet-card-line">
-                <div class="sheet-label sheet-ranged-only">Ammo:</div>
-                <div class="sheet-label sheet-melee-only">Durability:</div>
-                <div class="sheet-max">
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_{{fields.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
+            <div class="weapon-fields sheet-row-flex align-bottom">
+                {# Dmg #}
+                <div class="card-damage card-block {{ generateFieldClasses(fieldClasses) }}">
+                    <div class="card-field-label">Damage</div>
+                    <div class="card-field-input">
+                        <input class="sheet-shy " type="number" name="attr_{{fields.card.damage | getAttr | attach(prefix, num)}}" value="0" />
                     </div>
-                    <div class="sheet-divider">/</div>
-                    <div>
-                        <input type="text" class="sheet-number sheet-shy" name="attr_{{fields.card.uses.max | attach(prefix, num)}}" value="0"/>
+                </div>
+                
+                {# Now add armor #}
+                {%- set fieldClasses = (fieldClasses.push(type.armor.id), fieldClasses) -%}
+                {# AP Cost #}
+                <div class="card-use-cost card-block {{ generateFieldClasses(fieldClasses) }}">
+                    <div class="card-field-label">
+                        {{ fields.card.cost | getLabel }}
+                    </div>
+                    <div class="card-field-input">
+                        <input type="number" class=" sheet-shy" name="attr_{{fields.card.cost | getAttr | attach(prefix, num)}}" value="1"/>
+                    </div>
+                </div>
+                {# Uses #}
+                <div class="card-uses card-block {{ generateFieldClasses(fieldClasses) }}">
+                    {# Ranged Only #}
+                    {%-
+                    set rangedClasses = [
+                            type.ranged.id, 
+                            type.projectile.id,
+                            type.throwing.id
+                        ] 
+                    -%}
+                    <div class="card-field-label {{ generateFieldClasses(rangedClasses) }}">
+                        Ammo 
+                        <div>
+                        (
+                            <select class="sheet-shy" name="attr_{{fields.card.ammotype | getAttr | attach(prefix, num)}}">
+                                <optgroup>
+                                {% for key, type in fields.character.ammo.options %}
+                                    <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
+                                {% endfor %}
+                                </optgroup>
+                            </select>
+                        )
+                        </div>
+                    </div>
+                    {# Ranged Only #}
+                    {%-
+                    set otherClasses = [
+                            type.melee.id, 
+                            type.armor.id
+                        ] 
+                    -%}
+                    <div class="card-field-label {{ generateFieldClasses(otherClasses) }}">Durability</div>
+                    <div class="card-field-input sheet-max">
+                        <div>
+                            <input type="number" class="sheet-shy" name="attr_{{fields.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
+                        </div>
+                        <div class="sheet-divider">/</div>
+                        <div>
+                            <input type="number" class="sheet-shy" name="attr_{{fields.card.uses.max | attach(prefix, num)}}" value="0"/>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {# Ammo Type #}
-            {# <div class="sheet-card-ammo-type sheet-card-line sheet-ranged-only">
-                <div class="sheet-label">
-                    Ammo Type:
-                </div>
-                <select class="sheet-shy" name="attr_{{fields.card.ammotype | getAttr | attach(prefix, num)}}">
-                {% for key, type in fields.character.ammo.options %}
-                    <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
-                {% endfor %}
-            </select>
-            </div> #}
-
         </div>
-
-        <div class="sheet-card-textarea">
+        <div class="card-notes">
             <textarea class="sheet-shy" name="attr_{{fields.card.description | getAttr | attach(prefix, num)}}"></textarea>
-            <input type="text" class="sheet-hidden" name="attr_{{fields.card.flavor | getAttr | attach(prefix, num)}}"/>
-            <span readonly name="attr_{{fields.card.flavor | getAttr | attach(prefix, num)}}"></span>
         </div>
+        
+        <div class="card-actions">
+            {# Since roll20 uses curly braces for roll buttons, gulp replaces <% with double curly braces#}
+            <div class="card-action action-equip"><button type="action" name="act_{{options.card.actions.equip | attach(prefix, num)}}">Equip</button></div>
+            <div class="card-action action-unequip"><button type="action" name="act_{{options.card.actions.unequip | attach(prefix, num)}}">Unequip</button></div>
+        </div>
+
+    </div>
+{% endmacro %}
+
         <div class="sheet-card-actions">
-            {# Since roll20 uses curly braces for roll buttons, we need to do some ridiculous escaping and we can't have spaces #}
             {# <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button> #}
             
             
@@ -87,4 +141,3 @@
             <button type="action" class="sheet-delete-button btn-danger" name="act_{{options.card.actions.delete | attach(prefix, num)}}">Delete</button>
         </div>
     </div>
-{% endmacro %}

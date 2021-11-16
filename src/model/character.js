@@ -74,6 +74,10 @@ export const fields = {
             ranged: {
                 id: "ranged_skill",
                 label: "Ranged"
+            },
+            projectile: {
+                id: "projectile_skill",
+                label: "Projectile"
             }
         }
     },
