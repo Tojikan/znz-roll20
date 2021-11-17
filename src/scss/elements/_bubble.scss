@@ -1,6 +1,6 @@
 .sheet-bubble {
-    padding: 2rem;
-    padding-top: 3rem;
+    padding: 1.5rem;
+    padding-top: 2rem;
     border: solid 3px $black;
     border-radius: 2rem;
     font-size: $medium;
@@ -36,14 +36,6 @@
     }
 
     
-}
-
-.content-toggleselect {
-    height: 100%;
-
-    .select-switch-dropdown {
-        margin-bottom: $gap;
-    }
 }
 
 .content-list {

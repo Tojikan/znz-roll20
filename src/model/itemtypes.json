@@ -3,13 +3,17 @@
         "id": "misc",
         "label": "Misc"
     },
-    "melee": {
-        "id": "melee_weapon",
-        "label": "Melee Weapon"
+    "blunt": {
+        "id": "blunt_melee_weapon",
+        "label": "Blunt Melee Weapon"
     },
-    "ranged": {
-        "id": "ranged_weapon",
-        "label": "Ranged Weapon"
+    "sharp": {
+        "id": "sharp_melee_weapon",
+        "label": "Sharp Melee Weapon"
+    },
+    "firearm": {
+        "id": "firearms_weapon",
+        "label": "Firearm"
     },
     "projectile": {
         "id": "projectile_weapon",

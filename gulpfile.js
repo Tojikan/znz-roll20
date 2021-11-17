@@ -64,8 +64,8 @@ function sheet(){
         //Just in case you forget
         .pipe(replace('text/javascript', 'text/worker'))
         //roll20 and nunjucks conflicts on use of {{ - convert <% %> into {{ }} when publishing the html to roll20
-        .pipe(replace('<%', '{{')) 
-        .pipe(replace('%>', '}}'))
+        .pipe(replace('<%', '@{')) 
+        .pipe(replace('%>', '}'))
         .pipe(gulp.dest('./dist'));
 }
 

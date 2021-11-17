@@ -47,7 +47,7 @@ const handleAttack = function(args, character){
         } else {
             resourceText = 'Ammo';
             type = "Ranged";
-            bonus = getAttrVal(character, charFields.skills.options.ranged.id);
+            bonus = getAttrVal(character, charFields.skills.options.firearm.id);
         }
 
     }

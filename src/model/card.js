@@ -10,7 +10,8 @@ export const fields = {
         options: itemTypes
     },
     damage: {
-        id: 'damage'
+        id: 'damage',
+        default: 2
     },
     uses: {
         id: 'uses',
@@ -20,13 +21,12 @@ export const fields = {
             other: 'Durability',
         }
     },
-    cost: {
-        id:'cost',
-        label: 'AP Cost'
-    },
-    accuracy: {
+    attacks: {
         id:'accuracy',
-        label: 'Accuracy'
+        label: 'Difficulty Mod',
+        min: 1,
+        default: 3,
+        max: 5
     },
     ammotype: {
         id: 'ammotype',
@@ -43,12 +43,49 @@ export const fields = {
 
 export const options = {
     actions: {
-        export:'exportitem', 
-        delete:'deleteitem',
-        attack:'attackweapon',
-        reload: 'reloadweapon',
-        equip: 'equipitem',
-        unequip: 'unequipitem'
+        // export:'exportitem', 
+        // delete:'deleteitem',
+        // attack:'attackweapon',
+        // reload: 'reloadweapon',
+
+        attackblunt: {
+            id:'attackblunt',
+            class: [
+                itemTypes.blunt
+            ],
+            type: 'roll',
+            label: 'Attack'
+        },
+
+        export: {
+            id: 'exportitem',
+            class: [
+                'inventory'
+            ]
+        },
+        delete: {
+            id:'deleteitem',
+            class: [
+                'inventory'
+            ]
+        },
+        equip: {
+            id: 'equipitem',
+            class: [
+                'inventory'
+            ],
+            type: 'action',
+            label: 'Equip'
+        },
+        unequip: {
+            id: 'unequipitem',
+            class: [
+                'inventory'
+            ],
+            type: 'action',
+            label: 'Unequip'
+        }
+
     },
     itemtypes: itemTypes
 }

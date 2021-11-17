@@ -16,8 +16,12 @@
         justify-content: space-between;;
     }
 
-    &.align-bottom {
+    &.align-end {
         align-items: flex-end;
+    }
+
+    &.align-start {
+        align-items: flex-start;
     }
 
     &.vert {

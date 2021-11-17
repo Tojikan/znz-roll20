@@ -38,19 +38,23 @@ export const fields = {
         }
     },
     stats: {
-        hp: {
-            id: "hp",
+        health: {
+            id: "health",
             default: 30,
             type: "max",
-            label: "HP"
+            label: "Health"
+        },
+        stamina: {
+            id: "stamina",
+            default: 10,
+            type: "max",
+            label: "Stamina"
         },
         ap: {
             id: "ap",
-            default: 15,
+            default: 4,
             type: "max",
-            label: "AP",
-            rollable: true,
-            pool: 'ap_pool'
+            label: "AP"
         },
     },
     combatskills: {
@@ -67,13 +71,21 @@ export const fields = {
                 id: "throw_skill",
                 label: "Throw"
             },
-            melee: {
-                id: "melee_skill",
-                label: "Melee"
+            blunt: {
+                id: "blunt_melee_skill",
+                label: "Blunt Melee"
             },
-            ranged: {
-                id: "ranged_skill",
-                label: "Ranged"
+            firearm: {
+                id: "firearm_skill",
+                label: "Firearm"
+            },
+            sharp: {
+                id: "sharp_melee_skill",
+                label: "Sharp Melee"
+            },
+            unarmed: {
+                id: "unarmed_melee_skill",
+                label: "Unarmed"
             },
             projectile: {
                 id: "projectile_skill",
@@ -126,13 +138,6 @@ export const fields = {
         type: "toggleselect",
         options: abilities
     },
-    // weaponslots: {
-    //     id: "weaponslots",
-    //     label: "Weapons",
-    //     default: 1,
-    //     max: 3,
-    //     type: "weapon"
-    // },
     equipmentslots: {
         id: "equipmentslots",
         default: 2,

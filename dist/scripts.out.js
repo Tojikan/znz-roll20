@@ -97,19 +97,23 @@
             }
         },
         stats: {
-            hp: {
-                id: "hp",
+            health: {
+                id: "health",
                 default: 30,
                 type: "max",
-                label: "HP"
+                label: "Health"
+            },
+            stamina: {
+                id: "stamina",
+                default: 10,
+                type: "max",
+                label: "Stamina"
             },
             ap: {
                 id: "ap",
-                default: 15,
+                default: 4,
                 type: "max",
-                label: "AP",
-                rollable: true,
-                pool: 'ap_pool'
+                label: "AP"
             },
         },
         combatskills: {
@@ -126,13 +130,21 @@
                     id: "throw_skill",
                     label: "Throw"
                 },
-                melee: {
-                    id: "melee_skill",
-                    label: "Melee"
+                blunt: {
+                    id: "blunt_melee_skill",
+                    label: "Blunt Melee"
                 },
-                ranged: {
-                    id: "ranged_skill",
-                    label: "Ranged"
+                firearm: {
+                    id: "firearm_skill",
+                    label: "Firearm"
+                },
+                sharp: {
+                    id: "sharp_melee_skill",
+                    label: "Sharp Melee"
+                },
+                unarmed: {
+                    id: "unarmed_melee_skill",
+                    label: "Unarmed"
                 },
                 projectile: {
                     id: "projectile_skill",
@@ -185,13 +197,6 @@
             type: "toggleselect",
             options: abilities$1
         },
-        // weaponslots: {
-        //     id: "weaponslots",
-        //     label: "Weapons",
-        //     default: 1,
-        //     max: 3,
-        //     type: "weapon"
-        // },
         equipmentslots: {
             id: "equipmentslots",
             default: 2,
@@ -209,7 +214,7 @@
 
     function attrAlert(obj, prev){
         const watchedAttr = [
-            fields$1.stats.hp.id,
+            fields$1.stats.health.id,
             fields$1.stats.ap.id,
             fields$1.weaponslots.id,
             fields$1.equipmentslots.id,
@@ -455,13 +460,17 @@
     	id: "misc",
     	label: "Misc"
     };
-    var melee = {
-    	id: "melee_weapon",
-    	label: "Melee Weapon"
+    var blunt = {
+    	id: "blunt_melee_weapon",
+    	label: "Blunt Melee Weapon"
     };
-    var ranged = {
-    	id: "ranged_weapon",
-    	label: "Ranged Weapon"
+    var sharp = {
+    	id: "sharp_melee_weapon",
+    	label: "Sharp Melee Weapon"
+    };
+    var firearm = {
+    	id: "firearms_weapon",
+    	label: "Firearm"
     };
     var projectile = {
     	id: "projectile_weapon",
@@ -481,8 +490,9 @@
     };
     var itemtypes = {
     	aaany: aaany,
-    	melee: melee,
-    	ranged: ranged,
+    	blunt: blunt,
+    	sharp: sharp,
+    	firearm: firearm,
     	projectile: projectile,
     	throwing: throwing,
     	consumable: consumable,
@@ -492,8 +502,9 @@
     var itemTypes = /*#__PURE__*/Object.freeze({
         __proto__: null,
         aaany: aaany,
-        melee: melee,
-        ranged: ranged,
+        blunt: blunt,
+        sharp: sharp,
+        firearm: firearm,
         projectile: projectile,
         throwing: throwing,
         consumable: consumable,
@@ -511,7 +522,8 @@
             options: itemTypes
         },
         damage: {
-            id: 'damage'
+            id: 'damage',
+            default: 2
         },
         uses: {
             id: 'uses',
@@ -521,13 +533,12 @@
                 other: 'Durability',
             }
         },
-        cost: {
-            id:'cost',
-            label: 'AP Cost'
-        },
-        accuracy: {
+        attacks: {
             id:'accuracy',
-            label: 'Accuracy'
+            label: 'Difficulty Mod',
+            min: 1,
+            default: 3,
+            max: 5
         },
         ammotype: {
             id: 'ammotype',

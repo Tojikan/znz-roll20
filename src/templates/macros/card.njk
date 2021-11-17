@@ -10,6 +10,14 @@
 {% endmacro %}
 
 
+{# For single class #}
+{% macro generateFieldClass(type) %}
+    {%- set result = 'type-field' -%}
+    {%- set result = [result," ", "type_", type] | join -%}
+    {{- result -}}
+{% endmacro %}
+
+
 {% macro create(num, prefix='inventory') %}
 
     {# for easier shorthand #}
@@ -42,78 +50,78 @@
         </div>
 
         <div class="type-fields">
-            {%-
-            set weaponClasses = [
-                    type.ranged.id, 
-                    type.melee.id, 
-                    type.projectile.id,
-                    type.throwing.id
-                ] 
-            -%}
+            {%- set weaponClasses = [
+                type.firearm.id, 
+                type.blunt.id, 
+                type.sharp.id, 
+                type.projectile.id,
+                type.throwing.id
+            ] -%}
+
+            {%- set rangedClasses = [
+                type.firearm.id, 
+                type.projectile.id,
+                type.throwing.id
+            ] -%}
+
+            {%- set armorClasses = [
+                type.armor.id
+            ]-%}
+
+            {%- set durabilityClasses = [
+                type.blunt.id, 
+                type.sharp.id, 
+                type.armor.id
+            ]-%}
+
+            {%- set equipmentClasses = [
+                type.firearm.id, 
+                type.blunt.id, 
+                type.sharp.id, 
+                type.projectile.id,
+                type.throwing.id,
+                type.armor.id
+            ] -%}
 
             <div class="weapon-fields">
-                <div class="sheet-row-flex align-bottom wrap">
+                <div class="sheet-row-flex align-start wrap">
                     {# Dmg #}
-                    <div class="card-damage card-block {{ generateFieldClasses(weaponClasses) }}">
-                        <div class="card-field-label">Damage</div>
+                    <div class="card-damage card-block {{ generateFieldClasses(equipmentClasses) }}">
+                        <div class="card-field-label {{ generateFieldClasses(weaponClasses) }}">Damage</div>
+                        <div class="card-field-label {{ generateFieldClasses(armorClasses) }}">Block</div>
                         <div class="card-field-input">
-                            <input class="sheet-shy " type="number" name="attr_{{fields.card.damage | getAttr | attach(prefix, num)}}" value="0" />
+                            <input class="sheet-shy " type="number" name="attr_{{fields.card.damage | getAttr | attach(prefix, num)}}" value="{{fields.card.damage.default}}" />
                         </div>
                     </div>
                     
                     {# Accuracy #}
                     <div class="card-accuracy card-block {{ generateFieldClasses(weaponClasses)}}">
                         <div class="card-field-label">
-                            {{ fields.card.accuracy | getLabel }}
+                            {{ fields.card.attacks | getLabel }}
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_{{fields.card.accuracy | getAttr | attach(prefix, num)}}" value="1"/>
+                            <input type="number" class=" sheet-shy" name="attr_{{fields.card.attacks | getAttr | attach(prefix, num)}}" value="{{fields.card.attacks.default}}"/>
                         </div>
                     </div>
+                    <name="@{}">
 
-                    {# Now add armor #}
-                    {%- set armorWeapon = (weaponClasses.push(type.armor.id), weaponClasses) -%}
-                    
-                    {# AP Cost #}
-                    <div class="card-use-cost card-block {{ generateFieldClasses(armorWeapon) }}">
-                        <div class="card-field-label">
-                            {{ fields.card.cost | getLabel }}
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_{{fields.card.cost | getAttr | attach(prefix, num)}}" value="1"/>
-                        </div>
-                    </div>
 
                     {# Uses #}
-                    <div class="card-uses card-block {{ generateFieldClasses(armorWeapon) }}">
+                    <div class="card-uses card-block {{ generateFieldClasses(equipmentClasses) }}">
                         {# Ranged Only #}
-                        {%-
-                        set rangedClasses = [
-                                type.ranged.id, 
-                                type.projectile.id,
-                                type.throwing.id
-                            ] 
-                        -%}
                         <div class="card-field-label {{ generateFieldClasses(rangedClasses) }}">
-                            Ammo 
-                            (
-                                <select class="sheet-shy inline" name="attr_{{fields.card.ammotype | getAttr | attach(prefix, num)}}">
-                                    <optgroup>
-                                    {% for key, type in fields.character.ammo.options %}
-                                        <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
-                                    {% endfor %}
-                                    </optgroup>
-                                </select>
-                            )
+                            Ammo
+                            (<select class="sheet-shy inline sheet-input" name="attr_{{fields.card.ammotype | getAttr | attach(prefix, num)}}">
+                                <optgroup>
+                                {% for key, type in fields.character.ammo.options %}
+                                    <option value="{{type | getAttr}}" {% if loop.first%} selected="selected" {%endif%}>{{type | getLabel}}</option>
+                                {% endfor %}
+                                </optgroup>
+                            </select>)
                         </div>
                         {# Others #}
-                        {%-
-                        set otherClasses = [
-                                type.melee.id, 
-                                type.armor.id
-                            ] 
-                        -%}
-                        <div class="card-field-label {{ generateFieldClasses(otherClasses) }}">Durability</div>
+
+                        <div class="card-field-label {{ generateFieldClasses(durabilityClasses) }}">Durability</div>
                         <div class="card-field-input sheet-max">
                             <div>
                                 <input type="number" class="sheet-shy" name="attr_{{fields.card.uses | getAttr | attach(prefix, num)}}" value="0"/>
@@ -124,9 +132,6 @@
                             </div>
                         </div>
                     </div>
-
-                    
-
                 </div>
             </div>
         </div>
@@ -136,10 +141,41 @@
         
         <div class="card-actions">
             {# Since roll20 uses curly braces for roll buttons, gulp replaces <% with double curly braces#}
-            <div class="card-action action-equip"><button type="action" name="act_{{options.card.actions.equip | attach(prefix, num)}}">Equip</button></div>
-            <div class="card-action action-unequip"><button type="action" name="act_{{options.card.actions.unequip | attach(prefix, num)}}">Unequip</button></div>
+
+            {# Equip/Unequip #}
+            {% if prefix == 'equipment' %}
+                <div class="card-action action-{{options.card.actions.unequip.id | attach(prefix, num)}} {{generateFieldClass('equipment')}} "><button type="action" name="act_{{options.card.actions.unequip.id | attach(prefix, num)}}">Unequip</button></div>
+            {% else %}
+                <div class="card-action action-{{options.card.actions.equip.id | attach(prefix, num)}} {{generateFieldClass('inventory')}} "><button type="action" name="act_{{options.card.actions.equip.id | attach(prefix, num)}}">Equip</button></div>
+                <div class="card-action action-{{options.card.actions.export.id | attach(prefix, num)}} {{generateFieldClass('inventory')}}"><button type="roll" name="roll_{{options.card.actions.export.id}}" value="Export Item:<br/>  !!pickup {{ fields.card | exportItem }}" >Export</button></div>
+                <div class="card-action action-{{options.card.actions.delete.id | attach(prefix, num)}} {{generateFieldClass('inventory')}} "><button type="action" name="act_{{options.card.actions.delete.id | attach(prefix, num)}}">Delete</button></div>
+            {% endif %}
+
+
+
+
+            <button type="roll" class="card-action sheet-attack-ranged" value="/roll <%{{fields.character.stats.ap | getAttr }}%>d10<<%{{fields.character.combatskills.options.firearm | getAttr}}%>" name="roll_{{options.card.actions.attack}}" >attack</button>
         </div>
 
+    </div>
+{% endmacro %}
+
+
+{% macro cardAction(key, action, prefix, num) %}
+
+    {% switch key %}
+        {% case 'attackblunt' %}
+            {% set rollCommand = '!!aproll q=<%{{fields.character.stats.stamina | getAttr}}' %}
+    {% endswitch %}
+
+
+
+    <div class="card-action action-{{action.id}}">
+        {% if action.type == 'roll' %}
+            <button type="roll" class="card-roll-btn" value="{{rollCommand}}">{{action.label}}</button>
+        {% else %}
+            <button type="action" name="act_{{action.id | attach(prefix, num)}}">{{action.label}}</button>
+        {% endif %}
     </div>
 {% endmacro %}
 
@@ -147,11 +183,11 @@
             {# <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button> #}
             
             
-            {# melee #}<button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.combatskills.options.melee.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
-            {# ranged #}<button type="roll" class="sheet-attack-button sheet-attack-ranged btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.combatskills.options.ranged.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
+            {# melee #}<button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.combatskills.options.blunt.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
+            {# ranged #}<button type="roll" class="sheet-attack-button sheet-attack-ranged btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.combatskills.options.firearm.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
             {# <button type="roll" class="sheet-reload-button btn" name="act_{{options.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button> #}
-            <button type="action" class="sheet-equip-button btn" name="act_{{options.card.actions.equip | attach(prefix, num)}}">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_{{options.card.actions.unequip | attach(prefix, num)}}">Unequip</button>
+            <button type="action" class="sheet-equip-button btn" name="act_{{options.card.actions.equip.id | attach(prefix, num)}}">Equip</button>
+            <button type="action" class="sheet-unequip-button btn" name="act_{{options.card.actions.unequip.id | attach(prefix, num)}}">Unequip</button>
             <button type="roll" class="sheet-export-button" name="roll_{{options.card.actions.export}}" value="!!pickup {{ fields.card | exportItem }} characterid=@{target|Target 1|character_id}'" >Trade Item</button>
             <button type="action" class="sheet-delete-button btn-danger" name="act_{{options.card.actions.delete | attach(prefix, num)}}">Delete</button>
         </div>

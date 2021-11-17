@@ -13,6 +13,12 @@
     $elClass - class of content to show/hide
     $toggleClass - class of hidden input
 **/
+.sheet-main {
+  flex-basis: 75%; }
+
+.sheet-sidebar {
+  flex-basis: 25%; }
+
 .sheet-character label {
   font-size: 1.8rem; }
 
@@ -22,8 +28,10 @@
     justify-content: space-around; }
   .sheet-row-flex.space-between {
     justify-content: space-between; }
-  .sheet-row-flex.align-bottom {
+  .sheet-row-flex.align-end {
     align-items: flex-end; }
+  .sheet-row-flex.align-start {
+    align-items: flex-start; }
   .sheet-row-flex.vert {
     flex-direction: column; }
   .sheet-row-flex.wrap {
@@ -149,8 +157,8 @@ textarea.sheet-vertical {
   margin-right: 1rem; }
 
 .sheet-bubble {
-  padding: 2rem;
-  padding-top: 3rem;
+  padding: 1.5rem;
+  padding-top: 2rem;
   border: solid 3px black;
   border-radius: 2rem;
   font-size: 1.4rem;
@@ -181,11 +189,6 @@ textarea.sheet-vertical {
     flex-basis: 60%; }
   .sheet-bubble.extra-bottom {
     margin-bottom: 3rem; }
-
-.content-toggleselect {
-  height: 100%; }
-  .content-toggleselect .select-switch-dropdown {
-    margin-bottom: 2rem; }
 
 .content-list {
   height: 100%; }
@@ -284,6 +287,9 @@ textarea.sheet-vertical {
     .slot-section .slot .slot-content {
       width: 100%; }
 
+.sheet-equipment-slots .slot-section .slot {
+  flex-basis: 30%; }
+
 .sheet-card select {
   height: 2rem;
   padding: 0;
@@ -295,9 +301,8 @@ textarea.sheet-vertical {
   .sheet-card .card-field-label select {
     display: inline-block;
     width: 50%;
-    text-align: center; }
-    .sheet-card .card-field-label select optgroup {
-      font-size: 1.2rem; }
+    text-align: center;
+    font-size: 1rem; }
 
 .sheet-card .sheet-max input {
   width: 4rem; }
@@ -329,8 +334,10 @@ textarea.sheet-vertical {
 
 .sheet-card .card-block {
   text-align: center;
-  max-width: 50%;
-  margin: auto; }
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+  flex-basis: 40%;
+  flex-grow: 1; }
   .sheet-card .card-block .card-field-label {
     font-size: 1rem; }
   .sheet-card .card-block .card-field-input {
@@ -338,7 +345,7 @@ textarea.sheet-vertical {
     .sheet-card .card-block .card-field-input input {
       text-align: center;
       width: 100%;
-      font-size: 1.8rem; }
+      font-size: 1.4rem; }
 
 .sheet-card .sheet-card-type {
   display: none; }
@@ -346,7 +353,7 @@ textarea.sheet-vertical {
     font-size: 1rem; }
 
 .sheet-card .card-notes {
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: solid 2px #d3d3d3;
   border-radius: 1rem;
   padding: 0.5rem; }
@@ -366,18 +373,22 @@ textarea.sheet-vertical {
   margin: 1rem -0.5rem; }
   .sheet-card .card-actions .card-action {
     padding: 0 0.5rem;
-    display: none; }
-  .sheet-card .card-actions button.sheet-delete-button {
-    margin-left: auto; }
+    display: none;
+    margin-bottom: 1rem; }
+  .sheet-card .card-actions .action-deleteitem button {
+    background-color: #da4f49;
+    color: white; }
+  .sheet-card .card-actions .action-exportitem button {
+    background: none;
+    border: solid 1px black;
+    border-radius: 0; }
+    .sheet-card .card-actions .action-exportitem button:before {
+      content: none; }
 
-.sheet-card .weapon-fields {
-  margin-bottom: -0.75rem; }
-  .sheet-card .weapon-fields .card-block {
-    padding: 0 0.5rem;
-    margin-bottom: 1rem;
-    flex-basis: 40%; }
+.sheet-card .card-uses.card-block .card-field-label {
+  white-space: nowrap; }
 
-.sheet-equipment-slots .sheet-card .card-actions .action-unequip {
+.sheet-equipment-slots .sheet-card .card-actions .type_equipment {
   display: block; }
 
 .sheet-inventory {
@@ -390,7 +401,7 @@ textarea.sheet-vertical {
     margin-left: -10px;
     margin-right: -10px; }
     .sheet-inventory .repcontainer .repitem {
-      flex-basis: 33%; }
+      flex-basis: 25%; }
   .sheet-inventory .sheet-card .sheet-card-type {
     display: block;
     width: 60%; }
@@ -401,7 +412,7 @@ textarea.sheet-vertical {
     margin-right: 2rem; }
   .sheet-inventory .sheet-wrap {
     flex-wrap: wrap; }
-  .sheet-inventory .sheet-card .card-actions .action-equip {
+  .sheet-inventory .sheet-card .card-actions .type_inventory {
     display: block; }
 
 .slot-content {
@@ -477,10 +488,13 @@ input.select-switch-control-9:checked ~ .select-switch-display-9 {
 .type-toggle-misc:checked ~ .type-fields .type_misc {
   display: block; }
 
-.type-toggle-melee_weapon:checked ~ .type-fields .type_melee_weapon {
+.type-toggle-blunt_melee_weapon:checked ~ .type-fields .type_blunt_melee_weapon {
   display: block; }
 
-.type-toggle-ranged_weapon:checked ~ .type-fields .type_ranged_weapon {
+.type-toggle-sharp_melee_weapon:checked ~ .type-fields .type_sharp_melee_weapon {
+  display: block; }
+
+.type-toggle-firearms_weapon:checked ~ .type-fields .type_firearms_weapon {
   display: block; }
 
 .type-toggle-projectile_weapon:checked ~ .type-fields .type_projectile_weapon {

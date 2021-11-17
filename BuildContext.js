@@ -4,6 +4,28 @@ const path = require('path');
 import {fields as character} from './src/model/character';
 import * as types from './src/model/itemtypes';
 
+//Clear require cache contents of folder
+const clearDataCache = function(){
+    let dataFiles = fs.readdirSync(dataFolder);
+
+    dataFiles.forEach(file => {
+        if (path.extname(file) === '.json' || path.extname(file) === '.js'){
+            delete require.cache[require.resolve(dataFolder + file)];
+        }
+    });
+}
+
+
+/**
+ * Imports files for our sheet model in a folder into a single object where we can refer to it.
+ * JSON files are saved in the result
+ * JS Exports - only exported 'fields' and 'options' are saved into th eobject. 
+ * 
+ * Filename is used as the key.
+ * 
+ * @param {filepath} dataFolder - folder to import
+ * @returns 
+ */
 const getModel = function(dataFolder){
     //make sure data folder ends with backslash
     var lastChar = dataFolder.substr(-1);
@@ -11,16 +33,6 @@ const getModel = function(dataFolder){
         dataFolder += '/';
     }
 
-    //Clear require cache contents of folder
-    const clearDataCache = function(){
-        let dataFiles = fs.readdirSync(dataFolder);
-
-        dataFiles.forEach(file => {
-            if (path.extname(file) === '.json' || path.extname(file) === '.js'){
-                delete require.cache[require.resolve(dataFolder + file)];
-            }
-        });
-    }
     
     clearDataCache();
     let files = fs.readdirSync(dataFolder);
@@ -120,6 +132,8 @@ const filters = {
     }
 };
 
+//Headers to inject into top of Sass file.
+//Gulp process needs to be stopped for changes to take.
 const sassHeaders = `
     $maxEquipmentSlots: ${character.equipmentslots.max};
 
@@ -131,6 +145,7 @@ const sassHeaders = `
         return prev;
     }, []).join(',')};
 `;
+
 
 module.exports = {
     getModel: getModel,

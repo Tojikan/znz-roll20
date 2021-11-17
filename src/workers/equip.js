@@ -17,8 +17,8 @@ export function equip(itemCardFields = card){
         maxSlots = character.equipmentslots.max,
         inventoryId = character.inventory.id,
         equipPrefix = character.equipmentslots.type,
-        unequipAction = options.actions.unequip,
-        equipAction = options.actions.equip;
+        unequipAction = options.actions.unequip.id,
+        equipAction = options.actions.equip.id;
 
     
 

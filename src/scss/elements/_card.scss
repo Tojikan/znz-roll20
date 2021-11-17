@@ -18,10 +18,7 @@
             display: inline-block;
             width: 50%;
             text-align: center;
-            
-            optgroup {
-                font-size: $small;
-            }
+            font-size: $xSmall;
         }
     }
 
@@ -71,8 +68,10 @@
     // Vertical - Label then Field
     .card-block {
         text-align: center;
-        max-width: 50%;
-        margin: auto;
+        padding: 0 0.5rem;
+        margin-bottom: 1rem;
+        flex-basis: 40%;
+        flex-grow: 1;
 
         .card-field-label{
             font-size: $xSmall;
@@ -84,7 +83,7 @@
             input {
                 text-align: center;
                 width: 100%;
-                font-size: $large;
+                font-size: $medium;
             }
         }
     }
@@ -101,7 +100,7 @@
 
     //Textarea fields
     .card-notes{
-        margin-top: 2rem;
+        margin-top: 1rem;
         border: solid 2px $gray;
         border-radius: 1rem;
         padding: 0.5rem;
@@ -129,23 +128,35 @@
         .card-action {
             padding: 0 0.5rem;
             display: none;
+            margin-bottom: 1rem;
         }
 
-        button {
-            &.sheet-delete-button {
-                margin-left: auto;
+        .action-deleteitem {
+            button {
+                background-color: $red;
+                color: $white;
+            }
+        }
+
+        .action-exportitem {
+            button {
+                background: none;
+                border: solid 1px $black;
+                border-radius: 0;
+                
+                &:before {
+                    content: none;
+                }
             }
         }
     }
 
-    // SPECIFIC
-    .weapon-fields {
-        margin-bottom: -0.75rem;
-
-        .card-block {
-            padding: 0 0.5rem;
-            margin-bottom: 1rem;
-            flex-basis: 40%;
+    //Uses Specific
+    .card-uses {
+        &.card-block {
+            .card-field-label {
+                white-space: nowrap;
+            }
         }
     }
 }
@@ -155,7 +166,7 @@
 .sheet-equipment-slots {
     .sheet-card{
         .card-actions {
-            .action-unequip {
+            .type_equipment {
                 display: block;
             }
         }
@@ -182,7 +193,7 @@
         margin-right: -10px;
 
         .repitem {
-            flex-basis: 33%;
+            flex-basis: 25%;
         }
     }
 
@@ -211,7 +222,7 @@
 
     .sheet-card{
         .card-actions {
-            .action-equip {
+            .type_inventory {
                 display: block;
             }
         }
