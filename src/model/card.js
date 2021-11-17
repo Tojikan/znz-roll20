@@ -23,7 +23,7 @@ export const fields = {
     },
     attacks: {
         id:'accuracy',
-        label: 'Difficulty Mod',
+        label: 'Accuracy Mod',
         min: 1,
         default: 3,
         max: 5

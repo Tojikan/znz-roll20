@@ -5,10 +5,8 @@ export function attrAlert(obj, prev){
     const watchedAttr = [
         charFields.stats.health.id,
         charFields.stats.ap.id,
-        charFields.weaponslots.id,
-        charFields.equipmentslots.id,
-        charFields.defense.id,
-        charFields.defense.bonus.id
+        charFields.stats.stamina.id,
+        charFields.equipmentslots.id
     ];
     let attr = '';
 

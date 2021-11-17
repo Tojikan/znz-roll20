@@ -1,9 +1,11 @@
 import { getAttr } from './_helpers';
 
-
-export const zRoll = {
+/**
+ * Roll System where we roll a success and guard as a dual roll
+ */
+export const sgRoll = {
     /**
-     * Parse a set of args to set up a ZRoll Dice Object.
+     * Parse a set of args to set up a sgRoll Dice Object.
      * 
      * Looks at these available args
      *  - success: Number of success rolls that determine if roll succeeds

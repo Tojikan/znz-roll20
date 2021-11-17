@@ -1,11 +1,11 @@
-import { zRoll } from "./zroll";
+import { sgRoll } from "./_Roll-SG";
 import { getAttrVal } from "./_helpers";
 import { fields as charFields } from '../model/character';
 
 
 
 const handleCombat = function(args, character){
-    const result = zRoll.handleRoll(args, character);
+    const result = sgRoll.handleRoll(args, character);
 
     const response = {
         result: result,
@@ -37,7 +37,7 @@ const renderResults = function(response, sender, character){
     if ('error' in response.result) {
         sendChat('Attack Script Error', `<div style="color: red">${result.error}</div>`);
     } else if (response.attackRoll && response.defenseRoll){
-        let output = `&{template:zroll} {{name=${response.charname} enters into Combat!}} `;
+        let output = `&{template:sgRoll} {{name=${response.charname} enters into Combat!}} `;
 
         let description = `**Attempted:** ${response.attemptedAttacks} attacks  &#124;  ${response.attemptedDefense} defense  \n`;
         description += `**Actual:** ${response.actualAttacks} attacks  &#124;  ${response.actualDefense} defense  \n`;

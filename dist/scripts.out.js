@@ -216,10 +216,8 @@
         const watchedAttr = [
             fields$1.stats.health.id,
             fields$1.stats.ap.id,
-            fields$1.weaponslots.id,
-            fields$1.equipmentslots.id,
-            fields$1.defense.id,
-            fields$1.defense.bonus.id
+            fields$1.stats.stamina.id,
+            fields$1.equipmentslots.id
         ];
         let attr = '';
 
@@ -259,6 +257,35 @@
     /**
      *  Library of usefull Roll20 API Functions
      */
+
+
+    /**
+     * Spends X amount of attribute for a player. The attribute will be floored to 09
+     * 
+     * @param {integer} amount - Amount to reduce by
+     * @param {string} resource - Attribute
+     * @param {string} character - char ID
+     * @returns object showing results of the spend.
+     */
+    function spendResource(amount, resource, character){
+        let attr = getAttr(character, resource);
+
+        if (!attr){
+            return null;
+        }
+
+        let current = attr.get('current'),
+            newVal = Math.max( current - amount, 0); //floor it at 0
+
+        
+        attr.setWithWorker({current: newVal});
+
+        return {
+            spent: current - newVal,
+            remaining: newVal,
+            initial: current
+        }
+    }
 
 
 
@@ -535,7 +562,7 @@
         },
         attacks: {
             id:'accuracy',
-            label: 'Difficulty Mod',
+            label: 'Accuracy Mod',
             min: 1,
             default: 3,
             max: 5
@@ -1162,277 +1189,207 @@
         requires: ['character']
     };
 
-    const zRoll = {
+    /**
+     * Roll System where we use a declining Pool of dice.
+     * 
+     * For each roll, we roll up to a single specified pool amount. Each roll is compared against a target success number to obtain a number of successes.
+     * 
+     * Then we can subtract a cost from a specified attribute. Usually want to subtract the pool by 1.
+     * 
+     */
+    const RollAP = (function(){
+        const handleResults = function(response, sender, character){
+            let output = `&{template:default} {{name=${response.title || 'AP Roll'}}}`;
+
+            //Action flavor text
+            if ('action' in response){
+                output += ` {{action=${response.action}}}`;
+            }
+
+
+            if ('fail' in response){
+                output += ` {{failure=${response.fail}}}`;
+            }
+
+            if ('roll' in response){
+
+                let multi = response.multiply.field || 1;            
+
+                // do roll separately so we can reference them later on as per https://wiki.roll20.net/Reusing_Rolls
+                output += ` [[[[${response.roll}]]*[[${multi}]]]] `;
+
+                output += ` {{Roll= $[[0]] Successes!}} `;
+
+                
+                if ('multiply' in response){
+                    output += ` {{${response.multiply.label}=$[[0]] * $[[1]]==$[[2]] }}`;
+                }
+            }
+            
+            sendChat(sender, output);
+        },
+
+
         /**
-         * Parse a set of args to set up a ZRoll Dice Object.
-         * 
-         * Looks at these available args
-         *  - success: Number of success rolls that determine if roll succeeds
-         *  - guard: Number of guard rolls that determine defense against negative results.
-         *  - - accepts integers, like 1,2,3 or XbX to add free bonus dice (2b2 means 2 dice + 2 free bonus dice.)
-         *  - sdice / gdice: dice to use for success/guard respectively
-         *  - sresource / gresource: an attribute to decrement per success/guard roll.
-         *  - sbonus / gbonus: additive bonus onto the roll
-         * 
+         * Roll Logic - subtract costs, generate a roll text and return
          * 
          * @param {*} args 
          * @param {*} character 
-         * @returns results of the roll.
+         * @returns 
          */
-        handleRoll(args, character){
-            if (!("success" in args) && !("guard" in args)){
-                return {error: "Did not specify an amount of rolls!"};
-            }
-        
-            if (!("sdice" in args) && !("gdice" in args)){
-                return {error: "Did not specify the dice to roll."};
-            }
+        handleRoll = function(args, character){
+            const params = setupParams(args);
+            const result = {title: args.title, action: args.action};
 
-            let rollResult = {}, // success and guard appended to this later on so its easier to type
-                success = {
-                    original: this.parseRolls(args['success']).roll, //track original value before its changed
-                    rolls: this.parseRolls(args['success']).roll,
-                    bonusrolls: this.parseRolls(args['success']).bonusrolls,
-                    dice: args['sdice'] || 0,
-                    resource: args['sresource'],
-                    bonus: args['sbonus'] || 0
-                },
-                guard = {
-                    original: this.parseRolls(args['guard']).roll,
-                    rolls: this.parseRolls(args['guard']).roll,
-                    bonusrolls: this.parseRolls(args['guard']).bonusrolls,
-                    dice: args['gdice'] || 0,
-                    resource: args['gresource'],
-                    bonus: args['gbonus'] || 0
-                },
-                limit = parseInt(args['limit'], 10) || null;
-                
-            // Spend a given resource up to the amount of dice rolled, but if resources are exhausted, reduce rolls.
-            const spendResource = this.spendResource;//so we can call this function  within calculateResource
-            const calculateResource = function(type){
-        
-                if (type.resource){
-                    let resourceSpend = spendResource(type.rolls, type.resource, character);
 
-                    log(resourceSpend);
-        
-                    if (resourceSpend && resourceSpend.spent < type.rolls){
-                        type.rolls = resourceSpend.spent;
-                        type.resourceLimited = true;
-                    }
-        
-                    type.resourceSpend = resourceSpend;
+            if (params.cost > 0){
+                if (!character){
+                    throw 'Attempted to subtract resource without specifying a target token!';
                 }
+
+                log(params.resource);
+
+                for (let res of params.resource){
+                    let val = getAttrVal(character, res.field);
+                    
+                    //check if we can roll at all 
+                    if (val - params.cost < 0){
+                        result.fail = `${character.get('name')} does not have enough ${res.label}!`;
+                        return result;
+                    }
+                }
+
+                // Loop again for spending resource  as we want to make sure the first loop catches any failures first
+                for (let res of params.resource){
+                    spendResource(params.cost, res.field, character);
+                }
+            }
+
+
+            if (params.multiply.length){
+                result.multiply = params.multiply[0];
+            }
+
+            result.roll = generateRollText(params.pool, params.dice, params.target, params.modifier, params.difficulty);
+
+            return result;
+        },
+
+        /**
+         * Generates a roll command.
+         * 
+         * @param {int} dice - dice to use
+         * @param {int} dicemod - modifiers on dice
+         * @param {int} amount - amount of dice
+         * @param {int} mod - modifier on each roll
+         */
+        generateRollText = function(amount, dice, target, mod = 0, dicemod = 0){
+
+            //Why subtract?
+            //Since we are using less than for comparison (<), smaller dice is better. 1 is the best roll we can get.
+            //But we want positive values on the sheet to symbolize improvements. 
+            //So subtract instead of add as positive values would then improve rolls and negative would then make it worse.
+            let totalDice = dice - dicemod;
+            let modifier = (mod != 0) ? `-${mod}` : '';
+
+            return `{${amount}d${totalDice}${modifier}}<${target}`
+        },
+
+        defaultParams = function(){
+            return {
+                dice: 10,
+                pool: 10,
+                cost: 1,
+                target: 3,
+                multiply: '',
+                resource: `${fields$1.stats.ap.id}:${fields$1.stats.ap.label}`,
+                modifier: '',
+                difficulty: '',
+                title: 'AP Roll',
+                action: ''
             };
-        
-            calculateResource(success);
-            calculateResource(guard);
-        
-        
-            // Limit total rolls to a certain number
-            if (limit && limit > 0){
-                rollResult.limit = limit;
-        
-                
-                while (success.rolls + guard.rolls > limit){
-                    //decrease guard first
-                    if (guard.rolls > 0) {
-                        guard.limited = true;
-                        guard.rolls--;
-                    } else if (success.rolls > 0){
-                        success.limited = true;
-                        success.rolls--;
-                    } else {
-                        //Only way to get here would be if limit is negative or something.
-                        return {error: "You did something with negative numbers, didnt you?"}
-                    }
+        },
+
+        /**
+         * Parse Args for the roll. Multiple values for 1 param can be split by |
+         * 
+         * Args
+         * @property {integer} dice                         - Which dice to use
+         * @property {integer} pool                         - Amount of Dice for the roll.
+         * @property {integer} cost                         - Cost per roll. Defaults to 1
+         * @property {integer} target                       - Target Number to match to be considered a success.
+         * @property {string}  multiply                     - Add a line to multiply results of the roll. Add label with : (example - prop:label)
+         * @property {string}  resource                     - What char attr to subtract cost from. You can add a label with : (example - attr:label)
+         * @property {integer or string} modifier           - add a modifier to each roll. Note this gets added on each dice in the pool
+         * @property {integer or string} difficulty         - add a modifier to the dice itself. Modifies which dice you end up rolling.
+         * 
+         * @param {object} args 
+         * @param {string} character 
+         */
+        setupParams  = function(args){
+            const defParams = defaultParams();
+
+            //overwrite default with provided args
+            const params = {...defParams, ...args};
+
+            if (!Number.isInteger(params.dice) || !Number.isInteger(params.pool) || !Number.isInteger(params.cost)){
+                throw 'Invalid Parameters - expected an Integer!';
+            }
+
+            params.resource = parseFieldLabel(parseMultiArg(params.resource));
+            params.modifier = sumValues(parseMultiArg(params.modifier));
+            params.difficulty = sumValues(parseMultiArg(params.difficulty));
+            params.multiply = parseFieldLabel([params.multiply], 'Effect');
+            
+            return params;
+        },
+
+
+        //sum up an array of strings
+        sumValues = function(values){
+            return values.reduce((prev, curr) =>{
+                return prev + (Number.parseInt(curr, 10) || 0);
+            }, 0)
+        },
+
+        //parse array of strings into an array of label/fields
+        //use : to denote field:label
+        parseFieldLabel = function(resources, defaultLabel = ''){
+            const result = [];
+
+            for (let res of resources){
+                let split = res.split(':');
+
+                if (split.length && split[0].length){
+                    let label = split[1] || (defaultLabel.length ? defaultLabel : split[0]);
+                    result.push({
+                        field: split[0].trim(),
+                        label: label.trim()
+                    });
                 }
             }
 
-
-        
-            
-            success.rolltext = this.generateRollText(success.rolls + success.bonusrolls, `${success.dice} + ${success.bonus}` );
-            guard.rolltext = this.generateRollText(guard.rolls + guard.bonusrolls, `${guard.dice} + ${guard.bonus}` );
-        
-        
-            rollResult.success = success;
-            rollResult.guard = guard;
-        
-            return rollResult;
+            return result;
         },
-        
-        parseRolls(text){
-            return {
-                roll: parseInt(text.toString().split('b')[0], 10) || 0,
-                bonusrolls: parseInt(text.toString().split('b')[1], 10) || 0
-            }
-        },
-        
-        
-        //generate rolltext in the form of {{dice,dice,dice}}
-        generateRollText(amount, dice){
-        
-            let rollText = '';
-        
-            for (let i = 0; i < amount; i++){
-                rollText += dice;
-        
-                if (i < amount - 1){
-                    rollText += ',';
-                }
-            }
 
-            if (!rollText.length){
-                rollText = 0;
-            }
-        
-            return `{{${rollText}}}`;
-        },
-        
-        //Spend 1 of the given attribute per roll.
-        spendResource(amount, resource, character){
-            let attr = getAttr(character, resource);
-        
-            if (!attr){
-                return null;
-            }
-        
-            let current = attr.get('current'),
-                newVal = Math.max( current - amount, 0); //floor it at 0
-        
-            
-            attr.setWithWorker({current: newVal});
-        
-            return {
-                spent: current - newVal,
-                remaining: newVal,
-                initial: current
-            }
-        }
-    };
-
-    const handleCombat = function(args, character){
-        const result = zRoll.handleRoll(args, character);
-
-        const response = {
-            result: result,
-            weapon: args['weaponname'] || 'Weapon',
-            type: args['type'] || null,
-            actions:  getAttrVal(character, fields$1.stats.ap.id),
-            charname: character.get('name'),
-            attemptedAttacks: result.success.original,
-            attemptedDefense: result.guard.original,
-            actualAttacks: result.success.rolls,
-            actualDefense: result.guard.rolls,
-            bonusAttacks: result.success.bonusrolls,
-            bonusDefense: result.guard.bonusrolls,
-            attackBonus: result.success.bonus,
-            defenseBonus: result.guard.bonus,
-            attackDice: result.success.dice,
-            guardDice: result.guard.dice,
-            successLimited: result.success.limited,
-            guardLimited: result.success.limited,
-            resourceLimited: result.success.resourceLimited,
-            attackRoll: result.success.rolltext,
-            defenseRoll: result.guard.rolltext,
+        //Split among pipe so we can have multiple args
+        parseMultiArg = function(arg){
+            return arg.toString().split('|').map(x => x.trim()).filter(x => x);
         };
 
-        return response;
-    };
-
-    const renderResults = function(response, sender, character){
-        if ('error' in response.result) {
-            sendChat('Attack Script Error', `<div style="color: red">${result.error}</div>`);
-        } else if (response.attackRoll && response.defenseRoll){
-            let output = `&{template:zroll} {{name=${response.charname} enters into Combat!}} `;
-
-            let description = `**Attempted:** ${response.attemptedAttacks} attacks  &#124;  ${response.attemptedDefense} defense  \n`;
-            description += `**Actual:** ${response.actualAttacks} attacks  &#124;  ${response.actualDefense} defense  \n`;
-            description += `**Weapon:** ${response.weapon} \n`;
-            description += `**Attack Dice:** ${response.attackDice} + ${response.attackBonus}  \n`;
-            description += `**Defense Dice:** ${response.guardDice} + ${response.defenseBonus} \n`;
-
-            if (response.bonusAttacks > 0){
-                description += `**Bonus Attack Rolls:** ${response.bonusAttacks}  \n`;
-            }
-
-            if (response.bonusDefense > 0){
-                description += `**Bonus Defense Rolls:** ${response.bonusDefense}  \n`;
-            }
-
-            description += `**Available AP:**${response.actions} \n`;
-
-
-            if (response.successLimited || response.guardLimited){
-                description += `***${response.charname} did not have enough AP to complete attempted actions*** \n`;
-            }
-
-            if (response.resourceLimited){
-                if (response.type){
-                    if (response.type == 'melee'){
-                        description += `***${response.charname}'s  ${response.weapon} is broken!*** \n`;
-                    } else {
-                        description += `***${response.charname}'s  ${response.weapon} is out of ammo!*** \n`;
-                    }
-                } else {
-                    description += `***${response.charname}'s  ${response.weapon} is out of uses!*** \n`;
-                }
-            }
-
-
-            output += ` {{description=${description}}} {{successlabel=Attack}} {{guardlabel=Defense}} `;
-
-            const getRollResult = function(obj){
-                let rollResult = JSON.parse(obj[0].content);
-
-                //We get a super nested result since its in a group. So just hardcode it and hope the result stays in the same format
-                let rollText = rollResult.rolls[0].rolls[0][0].results.map(x => `[[${x.v}]]`).join(' ') || '';
-                
-                return {
-                    total: rollResult.total,
-                    text: rollText
-                };
-            };
-
-            
-
-            // Roll Attack
-            sendChat('', `/roll ${response.attackRoll}`, function(obj){
-
-                let result = getRollResult(obj);
-
-                output += ` {{success=${result.total}}} {{successrolls=${result.text}}} `;
-
-                // Roll Defense
-                sendChat('', `/roll ${response.defenseRoll}`, function(obj){
-
-                    let result = getRollResult(obj);
-
-                    output += ` {{guard=${result.total}}} {{guardrolls=${result.text}}} `;
-
-                    //now finally send the message
-                    sendChat(sender, output);
-                });
-            });
-        } else {
-            log('Unknown Combat Script Error');
-            log(response);
-            sendChat('Attack Script Error', `<div style="color: red">Something happened but I don't know what.</div>`);
+        //TODO - probably a cleaner way to do this but otherwise we get errors with missing functions and stuff
+        return {
+            caller: '!!aproll',
+            handler: handleRoll,
+            responder: handleResults,
+            generateRollText: generateRollText,
+            parseFieldLabel: parseFieldLabel,
+            parseMultiArg: parseMultiArg,
+            defaultParams: defaultParams,
+            sumValues: sumValues,
+            setupParams: setupParams
         }
-
-    };
-
-
-
-
-
-    const combat = {
-        caller: '!!combat',
-        handler: handleCombat,
-        responder: renderResults,
-        requires: ['character']
-    };
+    })();
 
     class Deck {
         constructor(arr=[]){
@@ -1637,6 +1594,10 @@
         };
     })();
 
+    /**
+     * Main handler. We register our API Scripts into this so we can have a single caller for all api scripts.
+     */
+
     var Main = Main || (function(){
 
         const apiCallers = {};
@@ -1644,7 +1605,8 @@
 
         /**
          * Register API Callers. Hook for adding in new APIs into this main one.
-         * @param {*} obj 
+         * 
+         * @param {*} obj - Expects an object which contains 'caller' - msg in api to trigger the script - and 'handler' - function that does the api work based off the passed in args.
          * @returns 
          */
         const RegisterApiCaller = function(obj){
@@ -1661,16 +1623,12 @@
             } else {
                 apiCallers[obj.caller].responder = standardResponder;
             }
-
-            if ('requires' in obj){
-
-                if (obj['requires'].includes('character')){
-                    apiCallers[obj.caller].requiresChar = true;
-                }
-            }
         };
 
 
+        /**
+         * Add an attribute watcher.
+         */
         const RegisterAttrWatcher = function(obj){
             attrWatchers.push(obj);
         };
@@ -1706,25 +1664,31 @@
                 character = getCharacter(sender, msg, args);
 
             // Go through our registered APIs and call as appropriate
-            for (let api in apiCallers){
+            for (const api in apiCallers){
                 if (msg.content.startsWith(api)){
-                    let caller = apiCallers[api];
-
-                    if (caller.requiresChar && !character){
-                        sendMessage("You must select a target token!", sender, 'error');
-                        return;
+                    try {
+                        let caller = apiCallers[api];
+        
+                        // Flow - API handles the args, and then sends it to a responder to do the rest.
+                        let response = caller.handler(args, character);
+                        caller.responder(response, sender, character);
+                    } catch(err){
+                        log(err);
+                        sendMessage(err, 'Error: ' + api, 'error');
                     }
-
-                    let response = caller.handler(args, character);
-
-                    caller.responder(response, sender, character);
                 }
             }
         };
 
+        // Single function call for all attribute watchers
         const HandleAttributeChange = function(obj, prev){
             for (let watcher of attrWatchers){
-                watcher(obj, prev);
+                try {
+                    watcher(obj, prev);
+                } catch(err){
+                    log(watcher);
+                    sendMessage(err, 'Error in attribute watcher:', 'error');
+                }
             }
         };
 
@@ -1787,8 +1751,9 @@
         Main.RegisterApiCaller(cardDeck);
         Main.RegisterApiCaller(pickup);
         Main.RegisterApiCaller(reload);
+        Main.RegisterApiCaller(RollAP);
         // Main.RegisterApiCaller(attack);
-        Main.RegisterApiCaller(combat);
+        // Main.RegisterApiCaller(combat);
         Main.RegisterAttrWatcher(attrAlert);
         Main.init();
     });

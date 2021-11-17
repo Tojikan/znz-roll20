@@ -4,16 +4,7 @@ const path = require('path');
 import {fields as character} from './src/model/character';
 import * as types from './src/model/itemtypes';
 
-//Clear require cache contents of folder
-const clearDataCache = function(){
-    let dataFiles = fs.readdirSync(dataFolder);
 
-    dataFiles.forEach(file => {
-        if (path.extname(file) === '.json' || path.extname(file) === '.js'){
-            delete require.cache[require.resolve(dataFolder + file)];
-        }
-    });
-}
 
 
 /**
@@ -33,8 +24,18 @@ const getModel = function(dataFolder){
         dataFolder += '/';
     }
 
+    //Clear require cache contents of folder
+    const clearDataCache = function(dataFolder){
+        let dataFiles = fs.readdirSync(dataFolder);
+
+        dataFiles.forEach(file => {
+            if (path.extname(file) === '.json' || path.extname(file) === '.js'){
+                delete require.cache[require.resolve(dataFolder + file)];
+            }
+        });
+    }
+    clearDataCache(dataFolder);
     
-    clearDataCache();
     let files = fs.readdirSync(dataFolder);
     
     let data = {

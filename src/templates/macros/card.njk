@@ -153,8 +153,8 @@
 
 
 
-
-            <button type="roll" class="card-action sheet-attack-ranged" value="/roll <%{{fields.character.stats.ap | getAttr }}%>d10<<%{{fields.character.combatskills.options.firearm | getAttr}}%>" name="roll_{{options.card.actions.attack}}" >attack</button>
+            <button type="roll" class="" value="!!aproll pool=<%{{fields.character.stats.stamina | getAttr}}%> cost=0  title='Test Roll' action='No cost roll!' target='<%{{fields.character.combatskills.options.firearm | getAttr}}%>' multiply='5:Damage'">No Cost Attack</button>
+            <button type="roll" class="" value="!!aproll pool='<%{{fields.character.stats.stamina | getAttr}}%>' cost=1 resource='{{fields.character.stats.ap.id}}:{{fields.character.stats.ap.label}}|{{fields.character.stats.stamina | getAttr}}:{{fields.character.stats.stamina | getLabel}}' target='<%{{fields.character.combatskills.options.firearm | getAttr}}%>' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
         </div>
 
     </div>

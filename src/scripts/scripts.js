@@ -1,11 +1,15 @@
 import { attrAlert } from "./attrAlert";
 import { reload } from "./reload";
 import { pickup } from "./pickup";
-import { attack } from "./attack";
-import { combat } from './combat';
+import { RollAP } from "./rollAP";
+// import { attack } from "./attack";
+// import { combat } from './combat';
 import { splitArgs, getCharacter } from "./_helpers";
 import { cardDeck } from "./deck";
 
+/**
+ * Main handler. We register our API Scripts into this so we can have a single caller for all api scripts.
+ */
 
 var Main = Main || (function(){
 
@@ -14,7 +18,8 @@ var Main = Main || (function(){
 
     /**
      * Register API Callers. Hook for adding in new APIs into this main one.
-     * @param {*} obj 
+     * 
+     * @param {*} obj - Expects an object which contains 'caller' - msg in api to trigger the script - and 'handler' - function that does the api work based off the passed in args.
      * @returns 
      */
     const RegisterApiCaller = function(obj){
@@ -31,16 +36,12 @@ var Main = Main || (function(){
         } else {
             apiCallers[obj.caller].responder = standardResponder;
         }
-
-        if ('requires' in obj){
-
-            if (obj['requires'].includes('character')){
-                apiCallers[obj.caller].requiresChar = true;
-            }
-        }
     }
 
 
+    /**
+     * Add an attribute watcher.
+     */
     const RegisterAttrWatcher = function(obj){
         attrWatchers.push(obj);
     }
@@ -76,25 +77,31 @@ var Main = Main || (function(){
             character = getCharacter(sender, msg, args);
 
         // Go through our registered APIs and call as appropriate
-        for (let api in apiCallers){
+        for (const api in apiCallers){
             if (msg.content.startsWith(api)){
-                let caller = apiCallers[api];
-
-                if (caller.requiresChar && !character){
-                    sendMessage("You must select a target token!", sender, 'error');
-                    return;
+                try {
+                    let caller = apiCallers[api];
+    
+                    // Flow - API handles the args, and then sends it to a responder to do the rest.
+                    let response = caller.handler(args, character);
+                    caller.responder(response, sender, character);
+                } catch(err){
+                    log(err);
+                    sendMessage(err, 'Error: ' + api, 'error');
                 }
-
-                let response = caller.handler(args, character);
-
-                caller.responder(response, sender, character);
             }
         }
     };
 
+    // Single function call for all attribute watchers
     const HandleAttributeChange = function(obj, prev){
         for (let watcher of attrWatchers){
-            watcher(obj, prev);
+            try {
+                watcher(obj, prev);
+            } catch(err){
+                log(watcher);
+                sendMessage(err, 'Error in attribute watcher:', 'error');
+            }
         }
     }
 
@@ -157,8 +164,9 @@ on("ready", function(){
     Main.RegisterApiCaller(cardDeck);
     Main.RegisterApiCaller(pickup);
     Main.RegisterApiCaller(reload);
+    Main.RegisterApiCaller(RollAP);
     // Main.RegisterApiCaller(attack);
-    Main.RegisterApiCaller(combat);
+    // Main.RegisterApiCaller(combat);
     Main.RegisterAttrWatcher(attrAlert);
     Main.init();
 });

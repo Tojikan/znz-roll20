@@ -3,6 +3,35 @@
  */
 
 
+/**
+ * Spends X amount of attribute for a player. The attribute will be floored to 09
+ * 
+ * @param {integer} amount - Amount to reduce by
+ * @param {string} resource - Attribute
+ * @param {string} character - char ID
+ * @returns object showing results of the spend.
+ */
+export function spendResource(amount, resource, character){
+    let attr = getAttr(character, resource);
+
+    if (!attr){
+        return null;
+    }
+
+    let current = attr.get('current'),
+        newVal = Math.max( current - amount, 0); //floor it at 0
+
+    
+    attr.setWithWorker({current: newVal});
+
+    return {
+        spent: current - newVal,
+        remaining: newVal,
+        initial: current
+    }
+}
+
+
 
 /**
  * Tokenizes chat inputs for API commands
