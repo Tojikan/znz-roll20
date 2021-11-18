@@ -18,9 +18,9 @@
     	id: "cheerleader",
     	description: "Reduce difficulty of roll for adjacent allies by 1 level."
     };
-    var builder = {
-    	id: "builder",
-    	description: "Create a distraction device by spending 1 AP and 1 Item. The device will attract common zombies towards it for some time."
+    var tinkerer = {
+    	id: "tinkerer",
+    	description: "Create a distraction device out of combat by using 1 stamina and 1 item. The device draws nearby zombies."
     };
     var scavenger = {
     	id: "scavenger",
@@ -28,7 +28,7 @@
     };
     var sniper = {
     	id: "sniper",
-    	description: "If you don't attack this turn, you can make a free attack roll and add that to next turn's ranged attack."
+    	description: "If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack."
     };
     var prepared = {
     	id: "prepared",
@@ -40,7 +40,7 @@
     	parkour: parkour,
     	brawler: brawler,
     	cheerleader: cheerleader,
-    	builder: builder,
+    	tinkerer: tinkerer,
     	scavenger: scavenger,
     	sniper: sniper,
     	prepared: prepared
@@ -52,7 +52,7 @@
         parkour: parkour,
         brawler: brawler,
         cheerleader: cheerleader,
-        builder: builder,
+        tinkerer: tinkerer,
         scavenger: scavenger,
         sniper: sniper,
         prepared: prepared,
@@ -111,10 +111,24 @@
             },
             ap: {
                 id: "ap",
-                default: 4,
+                default: 3,
                 type: "max",
                 label: "AP"
             },
+            fatigue: {
+                id: "fatigue",
+                default: 0,
+                label: "Fatigue"
+            }
+        },
+        rolloptions: {
+            cost: {
+                id: 'rollcost',
+            },
+            difficulty: {
+                id: 'rolldifficulty'
+            }
+
         },
         combatskills: {
             id: "combatskills",
@@ -209,14 +223,29 @@
             default: 5,
             max: 12,
             label: "Inventory"
+        },
+        actions: {
+            resetap: {
+                id:'resetAp',
+                label: "Reset AP"
+            },
+            resetfatigue: {
+                id:'resetFatigue',
+                label: "Reset Fatigue"
+            },
+            move: {
+                id:'moveSpaces',
+                label: "Calculate Move"
+            }
         }
+
     };
 
     function attrAlert(obj, prev){
         const watchedAttr = [
             fields$1.stats.health.id,
-            fields$1.stats.ap.id,
             fields$1.stats.stamina.id,
+            fields$1.stats.stamina.id + '_max',
             fields$1.equipmentslots.id
         ];
         let attr = '';
@@ -260,7 +289,34 @@
 
 
     /**
-     * Spends X amount of attribute for a player. The attribute will be floored to 09
+     * Increase an attribute by 1 
+     * @param {*} amount 
+     * @param {*} resource 
+     * @param {*} character 
+     * @returns 
+     */
+    function incrementCounter(character, attrId, amount=1){
+        let attr = getAttr(character, attrId);
+
+        if (!attr){
+            return null;
+        }
+
+        let current = attr.get('current'),
+            newValue = parseInt(current, 10) + 1;
+
+        attr.setWithWorker({current: newValue});
+
+        return {
+            initial: current,
+            newValue: newValue
+        }
+    }
+
+
+
+    /**
+     * Spends X amount of attribute for a player. The attribute will be floored to 0
      * 
      * @param {integer} amount - Amount to reduce by
      * @param {string} resource - Attribute
@@ -560,12 +616,10 @@
                 other: 'Durability',
             }
         },
-        attacks: {
+        accuracy: {
             id:'accuracy',
             label: 'Accuracy Mod',
-            min: 1,
-            default: 3,
-            max: 5
+            default: 0
         },
         ammotype: {
             id: 'ammotype',
@@ -1212,8 +1266,13 @@
             }
 
             if ('roll' in response){
+                
+                let multi = 1;
 
-                let multi = response.multiply.field || 1;            
+                if ('multiply' in response) {
+                    multi = response.multiply.field;            
+                }
+
 
                 // do roll separately so we can reference them later on as per https://wiki.roll20.net/Reusing_Rolls
                 output += ` [[[[${response.roll}]]*[[${multi}]]]] `;
@@ -1241,13 +1300,10 @@
             const params = setupParams(args);
             const result = {title: args.title, action: args.action};
 
-
             if (params.cost > 0){
                 if (!character){
                     throw 'Attempted to subtract resource without specifying a target token!';
                 }
-
-                log(params.resource);
 
                 for (let res of params.resource){
                     let val = getAttrVal(character, res.field);
@@ -1263,6 +1319,11 @@
                 for (let res of params.resource){
                     spendResource(params.cost, res.field, character);
                 }
+
+                //Increase counters.
+                for (let count of params.counter){
+                    incrementCounter(character, count);
+                }
             }
 
 
@@ -1270,7 +1331,7 @@
                 result.multiply = params.multiply[0];
             }
 
-            result.roll = generateRollText(params.pool, params.dice, params.target, params.modifier, params.difficulty);
+            result.roll = generateRollText((params.pool + params.amountmod), params.dice, params.target, params.modifier, params.difficulty);
 
             return result;
         },
@@ -1285,11 +1346,8 @@
          */
         generateRollText = function(amount, dice, target, mod = 0, dicemod = 0){
 
-            //Why subtract?
-            //Since we are using less than for comparison (<), smaller dice is better. 1 is the best roll we can get.
-            //But we want positive values on the sheet to symbolize improvements. 
-            //So subtract instead of add as positive values would then improve rolls and negative would then make it worse.
-            let totalDice = dice - dicemod;
+            //assume any conversions on negative rolls get handled prior to this method
+            let totalDice = dice + dicemod;
             let modifier = (mod != 0) ? `-${mod}` : '';
 
             return `{${amount}d${totalDice}${modifier}}<${target}`
@@ -1301,10 +1359,12 @@
                 pool: 10,
                 cost: 1,
                 target: 3,
+                counter: '',
                 multiply: '',
                 resource: `${fields$1.stats.ap.id}:${fields$1.stats.ap.label}`,
                 modifier: '',
                 difficulty: '',
+                amountmod: '',
                 title: 'AP Roll',
                 action: ''
             };
@@ -1319,10 +1379,11 @@
          * @property {integer} cost                         - Cost per roll. Defaults to 1
          * @property {integer} target                       - Target Number to match to be considered a success.
          * @property {string}  multiply                     - Add a line to multiply results of the roll. Add label with : (example - prop:label)
+         * @property {string}  counter                      - What char attr to add 1 to. Add label with : (example - prop:label)
          * @property {string}  resource                     - What char attr to subtract cost from. You can add a label with : (example - attr:label)
          * @property {integer or string} modifier           - add a modifier to each roll. Note this gets added on each dice in the pool
          * @property {integer or string} difficulty         - add a modifier to the dice itself. Modifies which dice you end up rolling.
-         * 
+         * @property {integer or string} amountmod            - add a modifier to the number of dice.
          * @param {object} args 
          * @param {string} character 
          */
@@ -1336,10 +1397,16 @@
                 throw 'Invalid Parameters - expected an Integer!';
             }
 
+            log(params.difficulty);
+
             params.resource = parseFieldLabel(parseMultiArg(params.resource));
             params.modifier = sumValues(parseMultiArg(params.modifier));
             params.difficulty = sumValues(parseMultiArg(params.difficulty));
+            params.amountmod = sumValues(parseMultiArg(params.amountmod));
             params.multiply = parseFieldLabel([params.multiply], 'Effect');
+            params.counter = parseMultiArg(params.counter);
+
+            log(params.difficulty);
             
             return params;
         },
@@ -1374,7 +1441,10 @@
 
         //Split among pipe so we can have multiple args
         parseMultiArg = function(arg){
-            return arg.toString().split('|').map(x => x.trim()).filter(x => x);
+            return arg.toString()
+                .split('|')
+                .map(x => x.trim().replace('--', '-')) //replace -- so that a double negative just becomes a single negative (for accuracy vs difficulty). the only other place is fatigue, which is hard limited to positive numbers.
+                .filter(x => x);
         };
 
         //TODO - probably a cleaner way to do this but otherwise we get errors with missing functions and stuff
@@ -1657,6 +1727,8 @@
             if (msg.type !== "api"){
                 return;
             }
+
+            log(msg.content);
             
             // Setup our character and args.
             const args = splitArgs(msg.content),
@@ -1674,6 +1746,7 @@
                         caller.responder(response, sender, character);
                     } catch(err){
                         log(err);
+                        log(err.stack);
                         sendMessage(err, 'Error: ' + api, 'error');
                     }
                 }
@@ -1687,6 +1760,8 @@
                     watcher(obj, prev);
                 } catch(err){
                     log(watcher);
+                    log(err);
+                    log(err.stack);
                     sendMessage(err, 'Error in attribute watcher:', 'error');
                 }
             }

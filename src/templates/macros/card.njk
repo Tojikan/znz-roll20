@@ -40,6 +40,10 @@
         {# Checkboxes for show and hide #}
         {% for key, item in fields.card.type.options %}
             <input type="checkbox" class="sheet-hidden type-toggle-{{item | getAttr}}" name="attr_{{fields.card.type | getAttr | attach(prefix, num)}}" value="{{item | getAttr}}"/>
+            {# Label for show in equipment #}
+            <div class="type-fields type-label">
+                <span class="{{ generateFieldClass(item.id) }}">{{item | getLabel}}</span>
+            </div>
         {% endfor %}
 
         {# Name - always on the top #}
@@ -97,10 +101,10 @@
                     {# Accuracy #}
                     <div class="card-accuracy card-block {{ generateFieldClasses(weaponClasses)}}">
                         <div class="card-field-label">
-                            {{ fields.card.attacks | getLabel }}
+                            {{ fields.card.accuracy | getLabel }}
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_{{fields.card.attacks | getAttr | attach(prefix, num)}}" value="{{fields.card.attacks.default}}"/>
+                            <input type="number" class=" sheet-shy" name="attr_{{fields.card.accuracy | getAttr | attach(prefix, num)}}" value="{{fields.card.accuracy.default}}"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -139,12 +143,75 @@
             <textarea class="sheet-shy" name="attr_{{fields.card.description | getAttr | attach(prefix, num)}}"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             {# Since roll20 uses curly braces for roll buttons, gulp replaces <% with double curly braces#}
 
             {# Equip/Unequip #}
             {% if prefix == 'equipment' %}
                 <div class="card-action action-{{options.card.actions.unequip.id | attach(prefix, num)}} {{generateFieldClass('equipment')}} "><button type="action" name="act_{{options.card.actions.unequip.id | attach(prefix, num)}}">Unequip</button></div>
+
+                {# Attacks - TODO set it up into a loop? #}
+
+                {# Blunt #}
+                {{- attackButton(
+                    options.card.itemtypes.blunt.id,
+                    'Blunt Melee Attack',
+                    ['@{character_name} bashes with a(n) <%', fields.card.name | getAttr | attach(prefix, num),'%>!'] | join,
+                    [ '<%', fields.character.combatskills.options.blunt | getAttr, '%>'] | join,
+                    'Attack',
+                    prefix,
+                    num
+                )-}}
+                {# Sharp #}
+                {{- attackButton(
+                    options.card.itemtypes.sharp.id,
+                    'Sharp Melee Attack',
+                    ['@{character_name} slices and stabs with a(n) <%', fields.card.name | getAttr | attach(prefix, num),'%>!'] | join,
+                    [ '<%', fields.character.combatskills.options.sharp | getAttr, '%>'] | join,
+                    'Attack',
+                    prefix,
+                    num
+                )-}}
+                {# Firearm #}
+                {{- attackButton(
+                    options.card.itemtypes.firearm.id,
+                    'Firearm Ranged Attack',
+                    ['@{character_name} shoots a(n) <%', fields.card.name | getAttr | attach(prefix, num),'%>!'] | join,
+                    [ '<%', fields.character.combatskills.options.firearm | getAttr, '%>'] | join,
+                    'Attack',
+                    prefix,
+                    num
+                )-}}
+                {# Projectile #}
+                {{- attackButton(
+                    options.card.itemtypes.projectile.id,
+                    'Projectile Ranged Attack',
+                    ['@{character_name} fires a(n) <%', fields.card.name | getAttr | attach(prefix, num),'%>!'] | join,
+                    [ '<%', fields.character.combatskills.options.projectile | getAttr, '%>'] | join,
+                    'Attack',
+                    prefix,
+                    num
+                )-}}
+                {# Throwing #}
+                {{- attackButton(
+                    options.card.itemtypes.throwing.id,
+                    'Throwing Ranged Attack',
+                    ['@{character_name} throws a(n) <%', fields.card.name | getAttr | attach(prefix, num),'%>!'] | join,
+                    [ '<%', fields.character.combatskills.options.throw | getAttr, '%>'] | join,
+                    'Attack',
+                    prefix,
+                    num
+                )-}}
+                {# Armor #}
+                {{- armorButton(
+                    options.card.itemtypes.armor.id,
+                    'Block',
+                    ['@{character_name} blocks with  a(n) <%', fields.card.name | getAttr | attach(prefix, num),'%>!'] | join,
+                    [ '<%', fields.character.combatskills.options.guard | getAttr, '%>'] | join,
+                    'Block',
+                    prefix,
+                    num
+                )-}}
             {% else %}
                 <div class="card-action action-{{options.card.actions.equip.id | attach(prefix, num)}} {{generateFieldClass('inventory')}} "><button type="action" name="act_{{options.card.actions.equip.id | attach(prefix, num)}}">Equip</button></div>
                 <div class="card-action action-{{options.card.actions.export.id | attach(prefix, num)}} {{generateFieldClass('inventory')}}"><button type="roll" name="roll_{{options.card.actions.export.id}}" value="Export Item:<br/>  !!pickup {{ fields.card | exportItem }}" >Export</button></div>
@@ -153,42 +220,18 @@
 
 
 
-            <button type="roll" class="" value="!!aproll pool=<%{{fields.character.stats.stamina | getAttr}}%> cost=0  title='Test Roll' action='No cost roll!' target='<%{{fields.character.combatskills.options.firearm | getAttr}}%>' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='<%{{fields.character.stats.stamina | getAttr}}%>' cost=1 resource='{{fields.character.stats.ap.id}}:{{fields.character.stats.ap.label}}|{{fields.character.stats.stamina | getAttr}}:{{fields.character.stats.stamina | getLabel}}' target='<%{{fields.character.combatskills.options.firearm | getAttr}}%>' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
+            {# <button type="roll" class="" value="!!aproll pool=<%{{fields.character.stats.stamina | getAttr}}%> cost=0  title='Test Roll' action='No cost roll!' target='<%{{fields.character.combatskills.options.firearm | getAttr}}%>' multiply='5:Damage'">No Cost Attack</button>
+            <button type="roll" class="" value="!!aproll pool='<%{{fields.character.stats.stamina | getAttr}}%>' cost=1 resource='{{fields.character.stats.ap.id}}:{{fields.character.stats.ap.label}}|{{fields.character.stats.stamina | getAttr}}:{{fields.character.stats.stamina | getLabel}}' target='<%{{fields.character.combatskills.options.firearm | getAttr}}%>' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button> #}
         </div>
 
     </div>
 {% endmacro %}
 
-
-{% macro cardAction(key, action, prefix, num) %}
-
-    {% switch key %}
-        {% case 'attackblunt' %}
-            {% set rollCommand = '!!aproll q=<%{{fields.character.stats.stamina | getAttr}}' %}
-    {% endswitch %}
-
-
-
-    <div class="card-action action-{{action.id}}">
-        {% if action.type == 'roll' %}
-            <button type="roll" class="card-roll-btn" value="{{rollCommand}}">{{action.label}}</button>
-        {% else %}
-            <button type="action" name="act_{{action.id | attach(prefix, num)}}">{{action.label}}</button>
-        {% endif %}
-    </div>
+{# Template for an attack button #}
+{% macro attackButton(typeid, title, action, target, buttontext, prefix, num) %}
+    <div class="card-action {{generateFieldClass( typeid )}} "><button type="roll" class="card-roll-btn" value="!!aproll pool='<%{{fields.character.stats.stamina | getAttr}}%>' cost='<%{{fields.character.rolloptions.cost.id | getAttr}}%>' resource='{{fields.character.stats.ap | getAttr }}:{{fields.character.stats.ap  | getLabel }}|{{fields.card.uses | getAttr | attach(prefix, num)}}:{{fields.card.uses | getLabel}}'  title='{{title | safe}}' action='{{action | safe}}' target='{{target | safe}}' multiply='<%{{fields.card.damage | getAttr | attach(prefix, num)}}%>:Damage' amountmod='-<%{{fields.character.stats.fatigue | getAttr}}%>' counter='{{fields.character.stats.fatigue | getAttr}}' difficulty='-<%{{fields.card.accuracy | getAttr | attach(prefix,num)}}%>|<%{{fields.character.rolloptions.difficulty | getAttr}}%>'">{{buttontext | safe}}</button></div>
 {% endmacro %}
 
-        <div class="sheet-card-actions">
-            {# <button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!attack rolls='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' defend='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' dice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' resource='{{fields.card.uses.id | attach(prefix, num)}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button> #}
-            
-            
-            {# melee #}<button type="roll" class="sheet-attack-button sheet-attack-melee btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.combatskills.options.blunt.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
-            {# ranged #}<button type="roll" class="sheet-attack-button sheet-attack-ranged btn" value="!!combat success='?{Number of Attacks | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' guard='?{Number of Defense Rolls | {{'@{'}}{{fields.character.stats.ap.id}}_rolls{{'}'}}}' sdice='{{'@{'}}{{fields.card.damage.id | attach(prefix, num)}}{{'}'}}' gdice='d{{'@{'}}{{fields.character.defense.id}}{{'}'}}' sbonus='{{'@{'}}{{fields.character.combatskills.options.firearm.id}}{{'}'}}' gbonus='{{'@{'}}{{fields.character.defense.bonus.id}}{{'}'}}' weaponname='{{'@{'}}{{fields.card.name.id | attach(prefix, num)}}{{'}'}}' type='{{'@{'}}{{fields.card.weapontype.id | attach(prefix, num)}}{{'}'}}' sresource='{{fields.card.uses.id | attach(prefix, num)}}'  limit='{{'@{'}}{{fields.character.stats.ap.id}}{{'}'}}' characterid='@{character_id}'" name="roll_{{options.card.actions.attack}}" >Combat</button>
-            {# <button type="roll" class="sheet-reload-button btn" name="act_{{options.card.actions.reload | attach(prefix, num)}}" value="!!reload weapon={{num}}">Reload</button> #}
-            <button type="action" class="sheet-equip-button btn" name="act_{{options.card.actions.equip.id | attach(prefix, num)}}">Equip</button>
-            <button type="action" class="sheet-unequip-button btn" name="act_{{options.card.actions.unequip.id | attach(prefix, num)}}">Unequip</button>
-            <button type="roll" class="sheet-export-button" name="roll_{{options.card.actions.export}}" value="!!pickup {{ fields.card | exportItem }} characterid=@{target|Target 1|character_id}'" >Trade Item</button>
-            <button type="action" class="sheet-delete-button btn-danger" name="act_{{options.card.actions.delete | attach(prefix, num)}}">Delete</button>
-        </div>
-    </div>
+{% macro armorButton(typeid, title, action, target, buttontext, prefix, num) %}
+    <div class="card-action {{generateFieldClass( typeid )}} "><button type="roll" class="card-roll-btn" value="!!aproll pool='<%{{fields.character.stats.stamina | getAttr}}%>' cost='<%{{fields.character.rolloptions.cost.id | getAttr}}%>' resource='{{fields.character.stats.ap | getAttr }}:{{fields.character.stats.ap  | getLabel }}|{{fields.card.uses | getAttr | attach(prefix, num)}}:{{fields.card.uses | getLabel}}'  title='{{title | safe}}' action='{{action | safe}}' target='{{target | safe}}' multiply='<%{{fields.card.damage | getAttr | attach(prefix, num)}}%>:Damage' amountmod='-<%{{fields.character.stats.fatigue | getAttr}}%>' counter='{{fields.character.stats.fatigue | getAttr}}' difficulty='<%{{fields.character.rolloptions.difficulty | getAttr}}%>'">{{buttontext | safe}}</button></div>
+{% endmacro %}

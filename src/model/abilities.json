@@ -16,9 +16,9 @@
         "id": "cheerleader",
         "description": "Reduce difficulty of roll for adjacent allies by 1 level."
     },
-    "builder": {
-        "id": "builder",
-        "description": "Create a distraction device by spending 1 AP and 1 Item. The device will attract common zombies towards it for some time."
+    "tinkerer": {
+        "id": "tinkerer",
+        "description": "Create a distraction device out of combat by using 1 stamina and 1 item. The device draws nearby zombies."
     },
     "scavenger": {
         "id": "scavenger",
@@ -26,7 +26,7 @@
     },
     "sniper": {
         "id": "sniper",
-        "description": "If you don't attack this turn, you can make a free attack roll and add that to next turn's ranged attack."
+        "description": "If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack."
     },
     "prepared": {
         "id": "prepared",

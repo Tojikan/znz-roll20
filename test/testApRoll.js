@@ -14,6 +14,7 @@ describe('Ap Roll', function(){
             expected.modifier = 0;
             expected.difficulty = 0;
             expected.multiply = [];
+            expected.counter = [];
             expected.resource = [{label:'AP', field:'ap'}]
 
 

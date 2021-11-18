@@ -4,7 +4,34 @@
 
 
 /**
- * Spends X amount of attribute for a player. The attribute will be floored to 09
+ * Increase an attribute by 1 
+ * @param {*} amount 
+ * @param {*} resource 
+ * @param {*} character 
+ * @returns 
+ */
+export function incrementCounter(character, attrId, amount=1){
+    let attr = getAttr(character, attrId);
+
+    if (!attr){
+        return null;
+    }
+
+    let current = attr.get('current'),
+        newValue = parseInt(current, 10) + 1;
+
+    attr.setWithWorker({current: newValue});
+
+    return {
+        initial: current,
+        newValue: newValue
+    }
+}
+
+
+
+/**
+ * Spends X amount of attribute for a player. The attribute will be floored to 0
  * 
  * @param {integer} amount - Amount to reduce by
  * @param {string} resource - Attribute

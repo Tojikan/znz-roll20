@@ -4,8 +4,8 @@ import { fields as charFields } from '../model/character';
 export function attrAlert(obj, prev){
     const watchedAttr = [
         charFields.stats.health.id,
-        charFields.stats.ap.id,
         charFields.stats.stamina.id,
+        charFields.stats.stamina.id + '_max',
         charFields.equipmentslots.id
     ];
     let attr = '';

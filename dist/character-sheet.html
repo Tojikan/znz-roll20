@@ -22,11 +22,11 @@
                     
     <div class="sheet-max">
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_health" value="30"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_health" value="30"/>
         </div>
         <div class="sheet-divider">/</div>
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_health_max" value="30"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_health_max" value="30"/>
         </div>
     </div>
 
@@ -48,12 +48,32 @@
                     
     <div class="sheet-max">
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_stamina" value="10"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_stamina" value="10"/>
         </div>
         <div class="sheet-divider">/</div>
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_stamina_max" value="10"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_stamina_max" value="10"/>
         </div>
+    </div>
+
+                
+        </div>
+    </div>
+
+                
+
+    <div class="sheet-bubble ">
+        <div class="sheet-title">
+            
+                Fatigue
+            
+        </div>
+
+        <div class="sheet-content content-number">
+            
+                    
+    <div class="sheet-input">
+        <input type="number" class="sheet-shy centered" name="attr_fatigue" value="0"/>
     </div>
 
                 
@@ -74,11 +94,11 @@
                     
     <div class="sheet-max">
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_ap" value="4"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_ap" value="3"/>
         </div>
         <div class="sheet-divider">/</div>
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_ap_max" value="4"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_ap_max" value="3"/>
         </div>
     </div>
 
@@ -86,9 +106,11 @@
         </div>
     </div>
 
+            </div>
+            <div class="sheet-row-flex">
                 
 
-    <div class="sheet-bubble flex-60">
+    <div class="sheet-bubble flex-30">
         <div class="sheet-title">
             
                 Notes
@@ -105,10 +127,9 @@
         </div>
     </div>
 
-            </div>
-            
+                
 
-    <div class="sheet-bubble extra-bottom">
+    <div class="sheet-bubble flex-60">
         <div class="sheet-title">
             
                 Ability
@@ -118,7 +139,7 @@
         <div class="sheet-content content-toggleselect">
             
                     
-    <div class="sheet-row-flex select-switch">
+    <div class="sheet-row-flex vert align-center select-switch">
         <div class="select-switch-dropdown">
 
             <select name="attr_ability">
@@ -126,8 +147,6 @@
                      <option value="selectability"> Select an Ability </option>
                 
                      <option value="brawler"> Brawler </option>
-                
-                     <option value="builder"> Builder </option>
                 
                      <option value="cheerleader"> Cheerleader </option>
                 
@@ -140,6 +159,8 @@
                      <option value="scavenger"> Scavenger </option>
                 
                      <option value="sniper"> Sniper </option>
+                
+                     <option value="tinkerer"> Tinkerer </option>
                 
             </select>
         </div>
@@ -166,20 +187,10 @@
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-3" name="attr_ability" value="builder"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-3" name="attr_ability" value="cheerleader"  />
 
-                <div class="select-switch-display select-switch-display-3 ability-builder">
+                <div class="select-switch-display select-switch-display-3 ability-cheerleader">
                     <div class="ability-text select-switch-content-3">
-                        Create a distraction device by spending 1 AP and 1 Item. The device will attract common zombies towards it for some time.
-                    </div>
-                </div>
-            
-        
-             
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-4" name="attr_ability" value="cheerleader"  />
-
-                <div class="select-switch-display select-switch-display-4 ability-cheerleader">
-                    <div class="ability-text select-switch-content-4">
                         Reduce difficulty of roll for adjacent allies by 1 level.
                     </div>
                 </div>
@@ -188,41 +199,51 @@
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-6" name="attr_ability" value="Speedster"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-5" name="attr_ability" value="Speedster"  />
 
-                <div class="select-switch-display select-switch-display-6 ability-parkour">
-                    <div class="ability-text select-switch-content-6">
+                <div class="select-switch-display select-switch-display-5 ability-parkour">
+                    <div class="ability-text select-switch-content-5">
                         You can move 3 spaces at no cost on your turn.
                     </div>
                 </div>
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-7" name="attr_ability" value="prepared"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-6" name="attr_ability" value="prepared"  />
 
-                <div class="select-switch-display select-switch-display-7 ability-prepared">
-                    <div class="ability-text select-switch-content-7">
+                <div class="select-switch-display select-switch-display-6 ability-prepared">
+                    <div class="ability-text select-switch-content-6">
                         Start the game with 5 free scavenge actions and 2 additional equipment slots.
                     </div>
                 </div>
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-8" name="attr_ability" value="scavenger"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-7" name="attr_ability" value="scavenger"  />
 
-                <div class="select-switch-display select-switch-display-8 ability-scavenger">
-                    <div class="ability-text select-switch-content-8">
+                <div class="select-switch-display select-switch-display-7 ability-scavenger">
+                    <div class="ability-text select-switch-content-7">
                         Draw 1 additional cards when you scavenge. If you are scavenging a location alone, draw 3.
                     </div>
                 </div>
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-9" name="attr_ability" value="sniper"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-8" name="attr_ability" value="sniper"  />
 
-                <div class="select-switch-display select-switch-display-9 ability-sniper">
+                <div class="select-switch-display select-switch-display-8 ability-sniper">
+                    <div class="ability-text select-switch-content-8">
+                        If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack.
+                    </div>
+                </div>
+            
+        
+             
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-9" name="attr_ability" value="tinkerer"  />
+
+                <div class="select-switch-display select-switch-display-9 ability-tinkerer">
                     <div class="ability-text select-switch-content-9">
-                        If you don't attack this turn, you can make a free attack roll and add that to next turn's ranged attack.
+                        Create a distraction device out of combat by using 1 stamina and 1 item. The device draws nearby zombies.
                     </div>
                 </div>
             
@@ -233,6 +254,9 @@
         </div>
     </div>
 
+            </div>
+
+            <div class="action-dodge"><button type="roll" class="card-roll-btn" value="!!aproll pool=@{stamina} cost=@{rollcost}  title='Dodge' action='@{character_name} attempts to dodge!' target='@{guard_skill}' counter='fatigue' amountmod='-@{fatigue}'">Dodge</button></div>
             <div class="sheet-equipment-slots">
                 
 
@@ -323,22 +347,58 @@
         
         
             <input type="checkbox" class="sheet-hidden type-toggle-misc" name="attr_equipment_type_1" value="misc"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_misc">Misc</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-blunt_melee_weapon" name="attr_equipment_type_1" value="blunt_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_blunt_melee_weapon">Blunt Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-sharp_melee_weapon" name="attr_equipment_type_1" value="sharp_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_sharp_melee_weapon">Sharp Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-firearms_weapon" name="attr_equipment_type_1" value="firearms_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_firearms_weapon">Firearm</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-projectile_weapon" name="attr_equipment_type_1" value="projectile_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_projectile_weapon">Projectile Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-throwing_weapon" name="attr_equipment_type_1" value="throwing_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_throwing_weapon">Throwing Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-consumable_item" name="attr_equipment_type_1" value="consumable_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_consumable_item">Consumable</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-armor_item" name="attr_equipment_type_1" value="armor_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_armor_item">Armor</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-" name="attr_equipment_type_1" value=""/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_"></span>
+            </div>
         
 
         
@@ -365,7 +425,7 @@
                             Accuracy Mod
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_1" value="3"/>
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_1" value="0"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -412,18 +472,32 @@
             <textarea class="sheet-shy" name="attr_equipment_description_1"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             
 
             
             
                 <div class="card-action action-equipment_unequipitem_1 type-field type_equipment "><button type="action" name="act_equipment_unequipitem_1">Unequip</button></div>
+
+                
+
+                
+    <div class="card-action type-field type_blunt_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_1:Uses'  title='Blunt Melee Attack' action='@{character_name} bashes with a(n) @{equipment_name_1}!' target='@{blunt_melee_skill}' multiply='@{equipment_damage_1}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_1}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_sharp_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_1:Uses'  title='Sharp Melee Attack' action='@{character_name} slices and stabs with a(n) @{equipment_name_1}!' target='@{sharp_melee_skill}' multiply='@{equipment_damage_1}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_1}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_firearms_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_1:Uses'  title='Firearm Ranged Attack' action='@{character_name} shoots a(n) @{equipment_name_1}!' target='@{firearm_skill}' multiply='@{equipment_damage_1}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_1}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_projectile_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_1:Uses'  title='Projectile Ranged Attack' action='@{character_name} fires a(n) @{equipment_name_1}!' target='@{projectile_skill}' multiply='@{equipment_damage_1}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_1}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_throwing_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_1:Uses'  title='Throwing Ranged Attack' action='@{character_name} throws a(n) @{equipment_name_1}!' target='@{throw_skill}' multiply='@{equipment_damage_1}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_1}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_armor_item "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_1:Uses'  title='Block' action='@{character_name} blocks with  a(n) @{equipment_name_1}!' target='@{guard_skill}' multiply='@{equipment_damage_1}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='@{rolldifficulty}'">Block</button></div>
+
+
+
+
             
-
-
-
-            <button type="roll" class="" value="!!aproll pool=@{stamina} cost=0  title='Test Roll' action='No cost roll!' target='@{firearm_skill}' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='@{stamina}' cost=1 resource='ap:AP|stamina:Stamina' target='@{firearm_skill}' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
         </div>
 
     </div>
@@ -490,22 +564,58 @@
         
         
             <input type="checkbox" class="sheet-hidden type-toggle-misc" name="attr_equipment_type_2" value="misc"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_misc">Misc</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-blunt_melee_weapon" name="attr_equipment_type_2" value="blunt_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_blunt_melee_weapon">Blunt Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-sharp_melee_weapon" name="attr_equipment_type_2" value="sharp_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_sharp_melee_weapon">Sharp Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-firearms_weapon" name="attr_equipment_type_2" value="firearms_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_firearms_weapon">Firearm</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-projectile_weapon" name="attr_equipment_type_2" value="projectile_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_projectile_weapon">Projectile Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-throwing_weapon" name="attr_equipment_type_2" value="throwing_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_throwing_weapon">Throwing Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-consumable_item" name="attr_equipment_type_2" value="consumable_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_consumable_item">Consumable</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-armor_item" name="attr_equipment_type_2" value="armor_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_armor_item">Armor</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-" name="attr_equipment_type_2" value=""/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_"></span>
+            </div>
         
 
         
@@ -532,7 +642,7 @@
                             Accuracy Mod
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_2" value="3"/>
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_2" value="0"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -579,18 +689,32 @@
             <textarea class="sheet-shy" name="attr_equipment_description_2"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             
 
             
             
                 <div class="card-action action-equipment_unequipitem_2 type-field type_equipment "><button type="action" name="act_equipment_unequipitem_2">Unequip</button></div>
+
+                
+
+                
+    <div class="card-action type-field type_blunt_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_2:Uses'  title='Blunt Melee Attack' action='@{character_name} bashes with a(n) @{equipment_name_2}!' target='@{blunt_melee_skill}' multiply='@{equipment_damage_2}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_2}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_sharp_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_2:Uses'  title='Sharp Melee Attack' action='@{character_name} slices and stabs with a(n) @{equipment_name_2}!' target='@{sharp_melee_skill}' multiply='@{equipment_damage_2}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_2}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_firearms_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_2:Uses'  title='Firearm Ranged Attack' action='@{character_name} shoots a(n) @{equipment_name_2}!' target='@{firearm_skill}' multiply='@{equipment_damage_2}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_2}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_projectile_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_2:Uses'  title='Projectile Ranged Attack' action='@{character_name} fires a(n) @{equipment_name_2}!' target='@{projectile_skill}' multiply='@{equipment_damage_2}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_2}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_throwing_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_2:Uses'  title='Throwing Ranged Attack' action='@{character_name} throws a(n) @{equipment_name_2}!' target='@{throw_skill}' multiply='@{equipment_damage_2}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_2}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_armor_item "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_2:Uses'  title='Block' action='@{character_name} blocks with  a(n) @{equipment_name_2}!' target='@{guard_skill}' multiply='@{equipment_damage_2}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='@{rolldifficulty}'">Block</button></div>
+
+
+
+
             
-
-
-
-            <button type="roll" class="" value="!!aproll pool=@{stamina} cost=0  title='Test Roll' action='No cost roll!' target='@{firearm_skill}' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='@{stamina}' cost=1 resource='ap:AP|stamina:Stamina' target='@{firearm_skill}' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
         </div>
 
     </div>
@@ -657,22 +781,58 @@
         
         
             <input type="checkbox" class="sheet-hidden type-toggle-misc" name="attr_equipment_type_3" value="misc"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_misc">Misc</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-blunt_melee_weapon" name="attr_equipment_type_3" value="blunt_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_blunt_melee_weapon">Blunt Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-sharp_melee_weapon" name="attr_equipment_type_3" value="sharp_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_sharp_melee_weapon">Sharp Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-firearms_weapon" name="attr_equipment_type_3" value="firearms_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_firearms_weapon">Firearm</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-projectile_weapon" name="attr_equipment_type_3" value="projectile_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_projectile_weapon">Projectile Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-throwing_weapon" name="attr_equipment_type_3" value="throwing_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_throwing_weapon">Throwing Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-consumable_item" name="attr_equipment_type_3" value="consumable_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_consumable_item">Consumable</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-armor_item" name="attr_equipment_type_3" value="armor_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_armor_item">Armor</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-" name="attr_equipment_type_3" value=""/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_"></span>
+            </div>
         
 
         
@@ -699,7 +859,7 @@
                             Accuracy Mod
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_3" value="3"/>
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_3" value="0"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -746,18 +906,32 @@
             <textarea class="sheet-shy" name="attr_equipment_description_3"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             
 
             
             
                 <div class="card-action action-equipment_unequipitem_3 type-field type_equipment "><button type="action" name="act_equipment_unequipitem_3">Unequip</button></div>
+
+                
+
+                
+    <div class="card-action type-field type_blunt_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_3:Uses'  title='Blunt Melee Attack' action='@{character_name} bashes with a(n) @{equipment_name_3}!' target='@{blunt_melee_skill}' multiply='@{equipment_damage_3}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_3}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_sharp_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_3:Uses'  title='Sharp Melee Attack' action='@{character_name} slices and stabs with a(n) @{equipment_name_3}!' target='@{sharp_melee_skill}' multiply='@{equipment_damage_3}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_3}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_firearms_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_3:Uses'  title='Firearm Ranged Attack' action='@{character_name} shoots a(n) @{equipment_name_3}!' target='@{firearm_skill}' multiply='@{equipment_damage_3}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_3}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_projectile_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_3:Uses'  title='Projectile Ranged Attack' action='@{character_name} fires a(n) @{equipment_name_3}!' target='@{projectile_skill}' multiply='@{equipment_damage_3}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_3}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_throwing_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_3:Uses'  title='Throwing Ranged Attack' action='@{character_name} throws a(n) @{equipment_name_3}!' target='@{throw_skill}' multiply='@{equipment_damage_3}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_3}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_armor_item "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_3:Uses'  title='Block' action='@{character_name} blocks with  a(n) @{equipment_name_3}!' target='@{guard_skill}' multiply='@{equipment_damage_3}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='@{rolldifficulty}'">Block</button></div>
+
+
+
+
             
-
-
-
-            <button type="roll" class="" value="!!aproll pool=@{stamina} cost=0  title='Test Roll' action='No cost roll!' target='@{firearm_skill}' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='@{stamina}' cost=1 resource='ap:AP|stamina:Stamina' target='@{firearm_skill}' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
         </div>
 
     </div>
@@ -824,22 +998,58 @@
         
         
             <input type="checkbox" class="sheet-hidden type-toggle-misc" name="attr_equipment_type_4" value="misc"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_misc">Misc</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-blunt_melee_weapon" name="attr_equipment_type_4" value="blunt_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_blunt_melee_weapon">Blunt Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-sharp_melee_weapon" name="attr_equipment_type_4" value="sharp_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_sharp_melee_weapon">Sharp Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-firearms_weapon" name="attr_equipment_type_4" value="firearms_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_firearms_weapon">Firearm</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-projectile_weapon" name="attr_equipment_type_4" value="projectile_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_projectile_weapon">Projectile Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-throwing_weapon" name="attr_equipment_type_4" value="throwing_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_throwing_weapon">Throwing Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-consumable_item" name="attr_equipment_type_4" value="consumable_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_consumable_item">Consumable</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-armor_item" name="attr_equipment_type_4" value="armor_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_armor_item">Armor</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-" name="attr_equipment_type_4" value=""/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_"></span>
+            </div>
         
 
         
@@ -866,7 +1076,7 @@
                             Accuracy Mod
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_4" value="3"/>
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_4" value="0"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -913,18 +1123,32 @@
             <textarea class="sheet-shy" name="attr_equipment_description_4"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             
 
             
             
                 <div class="card-action action-equipment_unequipitem_4 type-field type_equipment "><button type="action" name="act_equipment_unequipitem_4">Unequip</button></div>
+
+                
+
+                
+    <div class="card-action type-field type_blunt_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_4:Uses'  title='Blunt Melee Attack' action='@{character_name} bashes with a(n) @{equipment_name_4}!' target='@{blunt_melee_skill}' multiply='@{equipment_damage_4}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_4}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_sharp_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_4:Uses'  title='Sharp Melee Attack' action='@{character_name} slices and stabs with a(n) @{equipment_name_4}!' target='@{sharp_melee_skill}' multiply='@{equipment_damage_4}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_4}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_firearms_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_4:Uses'  title='Firearm Ranged Attack' action='@{character_name} shoots a(n) @{equipment_name_4}!' target='@{firearm_skill}' multiply='@{equipment_damage_4}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_4}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_projectile_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_4:Uses'  title='Projectile Ranged Attack' action='@{character_name} fires a(n) @{equipment_name_4}!' target='@{projectile_skill}' multiply='@{equipment_damage_4}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_4}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_throwing_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_4:Uses'  title='Throwing Ranged Attack' action='@{character_name} throws a(n) @{equipment_name_4}!' target='@{throw_skill}' multiply='@{equipment_damage_4}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_4}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_armor_item "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_4:Uses'  title='Block' action='@{character_name} blocks with  a(n) @{equipment_name_4}!' target='@{guard_skill}' multiply='@{equipment_damage_4}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='@{rolldifficulty}'">Block</button></div>
+
+
+
+
             
-
-
-
-            <button type="roll" class="" value="!!aproll pool=@{stamina} cost=0  title='Test Roll' action='No cost roll!' target='@{firearm_skill}' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='@{stamina}' cost=1 resource='ap:AP|stamina:Stamina' target='@{firearm_skill}' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
         </div>
 
     </div>
@@ -991,22 +1215,58 @@
         
         
             <input type="checkbox" class="sheet-hidden type-toggle-misc" name="attr_equipment_type_5" value="misc"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_misc">Misc</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-blunt_melee_weapon" name="attr_equipment_type_5" value="blunt_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_blunt_melee_weapon">Blunt Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-sharp_melee_weapon" name="attr_equipment_type_5" value="sharp_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_sharp_melee_weapon">Sharp Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-firearms_weapon" name="attr_equipment_type_5" value="firearms_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_firearms_weapon">Firearm</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-projectile_weapon" name="attr_equipment_type_5" value="projectile_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_projectile_weapon">Projectile Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-throwing_weapon" name="attr_equipment_type_5" value="throwing_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_throwing_weapon">Throwing Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-consumable_item" name="attr_equipment_type_5" value="consumable_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_consumable_item">Consumable</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-armor_item" name="attr_equipment_type_5" value="armor_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_armor_item">Armor</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-" name="attr_equipment_type_5" value=""/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_"></span>
+            </div>
         
 
         
@@ -1033,7 +1293,7 @@
                             Accuracy Mod
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_5" value="3"/>
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_5" value="0"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -1080,18 +1340,32 @@
             <textarea class="sheet-shy" name="attr_equipment_description_5"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             
 
             
             
                 <div class="card-action action-equipment_unequipitem_5 type-field type_equipment "><button type="action" name="act_equipment_unequipitem_5">Unequip</button></div>
+
+                
+
+                
+    <div class="card-action type-field type_blunt_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_5:Uses'  title='Blunt Melee Attack' action='@{character_name} bashes with a(n) @{equipment_name_5}!' target='@{blunt_melee_skill}' multiply='@{equipment_damage_5}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_5}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_sharp_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_5:Uses'  title='Sharp Melee Attack' action='@{character_name} slices and stabs with a(n) @{equipment_name_5}!' target='@{sharp_melee_skill}' multiply='@{equipment_damage_5}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_5}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_firearms_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_5:Uses'  title='Firearm Ranged Attack' action='@{character_name} shoots a(n) @{equipment_name_5}!' target='@{firearm_skill}' multiply='@{equipment_damage_5}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_5}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_projectile_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_5:Uses'  title='Projectile Ranged Attack' action='@{character_name} fires a(n) @{equipment_name_5}!' target='@{projectile_skill}' multiply='@{equipment_damage_5}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_5}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_throwing_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_5:Uses'  title='Throwing Ranged Attack' action='@{character_name} throws a(n) @{equipment_name_5}!' target='@{throw_skill}' multiply='@{equipment_damage_5}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_5}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_armor_item "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_5:Uses'  title='Block' action='@{character_name} blocks with  a(n) @{equipment_name_5}!' target='@{guard_skill}' multiply='@{equipment_damage_5}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='@{rolldifficulty}'">Block</button></div>
+
+
+
+
             
-
-
-
-            <button type="roll" class="" value="!!aproll pool=@{stamina} cost=0  title='Test Roll' action='No cost roll!' target='@{firearm_skill}' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='@{stamina}' cost=1 resource='ap:AP|stamina:Stamina' target='@{firearm_skill}' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
         </div>
 
     </div>
@@ -1158,22 +1432,58 @@
         
         
             <input type="checkbox" class="sheet-hidden type-toggle-misc" name="attr_equipment_type_6" value="misc"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_misc">Misc</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-blunt_melee_weapon" name="attr_equipment_type_6" value="blunt_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_blunt_melee_weapon">Blunt Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-sharp_melee_weapon" name="attr_equipment_type_6" value="sharp_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_sharp_melee_weapon">Sharp Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-firearms_weapon" name="attr_equipment_type_6" value="firearms_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_firearms_weapon">Firearm</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-projectile_weapon" name="attr_equipment_type_6" value="projectile_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_projectile_weapon">Projectile Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-throwing_weapon" name="attr_equipment_type_6" value="throwing_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_throwing_weapon">Throwing Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-consumable_item" name="attr_equipment_type_6" value="consumable_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_consumable_item">Consumable</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-armor_item" name="attr_equipment_type_6" value="armor_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_armor_item">Armor</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-" name="attr_equipment_type_6" value=""/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_"></span>
+            </div>
         
 
         
@@ -1200,7 +1510,7 @@
                             Accuracy Mod
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_6" value="3"/>
+                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_6" value="0"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -1247,18 +1557,32 @@
             <textarea class="sheet-shy" name="attr_equipment_description_6"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             
 
             
             
                 <div class="card-action action-equipment_unequipitem_6 type-field type_equipment "><button type="action" name="act_equipment_unequipitem_6">Unequip</button></div>
+
+                
+
+                
+    <div class="card-action type-field type_blunt_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_6:Uses'  title='Blunt Melee Attack' action='@{character_name} bashes with a(n) @{equipment_name_6}!' target='@{blunt_melee_skill}' multiply='@{equipment_damage_6}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_6}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_sharp_melee_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_6:Uses'  title='Sharp Melee Attack' action='@{character_name} slices and stabs with a(n) @{equipment_name_6}!' target='@{sharp_melee_skill}' multiply='@{equipment_damage_6}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_6}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_firearms_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_6:Uses'  title='Firearm Ranged Attack' action='@{character_name} shoots a(n) @{equipment_name_6}!' target='@{firearm_skill}' multiply='@{equipment_damage_6}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_6}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_projectile_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_6:Uses'  title='Projectile Ranged Attack' action='@{character_name} fires a(n) @{equipment_name_6}!' target='@{projectile_skill}' multiply='@{equipment_damage_6}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_6}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_throwing_weapon "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_6:Uses'  title='Throwing Ranged Attack' action='@{character_name} throws a(n) @{equipment_name_6}!' target='@{throw_skill}' multiply='@{equipment_damage_6}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='-@{equipment_accuracy_6}|@{rolldifficulty}'">Attack</button></div>
+
+    <div class="card-action type-field type_armor_item "><button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' cost='@{rollcost}' resource='ap:AP|equipment_uses_6:Uses'  title='Block' action='@{character_name} blocks with  a(n) @{equipment_name_6}!' target='@{guard_skill}' multiply='@{equipment_damage_6}:Damage' amountmod='-@{fatigue}' counter='fatigue' difficulty='@{rolldifficulty}'">Block</button></div>
+
+
+
+
             
-
-
-
-            <button type="roll" class="" value="!!aproll pool=@{stamina} cost=0  title='Test Roll' action='No cost roll!' target='@{firearm_skill}' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='@{stamina}' cost=1 resource='ap:AP|stamina:Stamina' target='@{firearm_skill}' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
         </div>
 
     </div>
@@ -1290,27 +1614,27 @@
         
             <div class="sheet-line">
                 <div class="sheet-label">Arrows</div>
-                <input type="text" class="sheet-number" name="attr_ammo_arrow" value="0"/>
+                <input type="number" class="sheet-number" name="attr_ammo_arrow" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Bolts</div>
-                <input type="text" class="sheet-number" name="attr_ammo_bolt" value="0"/>
+                <input type="number" class="sheet-number" name="attr_ammo_bolt" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Heavy</div>
-                <input type="text" class="sheet-number" name="attr_ammo_heavy" value="0"/>
+                <input type="number" class="sheet-number" name="attr_ammo_heavy" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Light</div>
-                <input type="text" class="sheet-number" name="attr_ammo_light" value="0"/>
+                <input type="number" class="sheet-number" name="attr_ammo_light" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Medium</div>
-                <input type="text" class="sheet-number" name="attr_ammo_medium" value="0"/>
+                <input type="number" class="sheet-number" name="attr_ammo_medium" value="0"/>
             </div>
         
     </div>
@@ -1335,37 +1659,37 @@
         
             <div class="sheet-line">
                 <div class="sheet-label">Blunt Melee</div>
-                <input type="text" class="sheet-number" name="attr_blunt_melee_skill" value="3"/>
+                <input type="number" class="sheet-number" name="attr_blunt_melee_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Firearm</div>
-                <input type="text" class="sheet-number" name="attr_firearm_skill" value="3"/>
+                <input type="number" class="sheet-number" name="attr_firearm_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Guard</div>
-                <input type="text" class="sheet-number" name="attr_guard_skill" value="3"/>
+                <input type="number" class="sheet-number" name="attr_guard_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Projectile</div>
-                <input type="text" class="sheet-number" name="attr_projectile_skill" value="3"/>
+                <input type="number" class="sheet-number" name="attr_projectile_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Sharp Melee</div>
-                <input type="text" class="sheet-number" name="attr_sharp_melee_skill" value="3"/>
+                <input type="number" class="sheet-number" name="attr_sharp_melee_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Throw</div>
-                <input type="text" class="sheet-number" name="attr_throw_skill" value="3"/>
+                <input type="number" class="sheet-number" name="attr_throw_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Unarmed</div>
-                <input type="text" class="sheet-number" name="attr_unarmed_melee_skill" value="3"/>
+                <input type="number" class="sheet-number" name="attr_unarmed_melee_skill" value="3"/>
             </div>
         
     </div>
@@ -1390,42 +1714,42 @@
         
             <div class="sheet-line">
                 <div class="sheet-label">Athletics</div>
-                <input type="text" class="sheet-number" name="attr_athletics_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_athletics_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Construction</div>
-                <input type="text" class="sheet-number" name="attr_construction_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_construction_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">First Aid</div>
-                <input type="text" class="sheet-number" name="attr_firstaid_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_firstaid_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Hacking</div>
-                <input type="text" class="sheet-number" name="attr_hacking_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_hacking_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Lockpick</div>
-                <input type="text" class="sheet-number" name="attr_lockpick_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_lockpick_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Scout</div>
-                <input type="text" class="sheet-number" name="attr_scout_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_scout_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Socialize</div>
-                <input type="text" class="sheet-number" name="attr_social_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_social_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
                 <div class="sheet-label">Stealth</div>
-                <input type="text" class="sheet-number" name="attr_stealth_skill" value="0"/>
+                <input type="number" class="sheet-number" name="attr_stealth_skill" value="0"/>
             </div>
         
     </div>
@@ -1501,22 +1825,58 @@
         
         
             <input type="checkbox" class="sheet-hidden type-toggle-misc" name="attr_type" value="misc"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_misc">Misc</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-blunt_melee_weapon" name="attr_type" value="blunt_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_blunt_melee_weapon">Blunt Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-sharp_melee_weapon" name="attr_type" value="sharp_melee_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_sharp_melee_weapon">Sharp Melee Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-firearms_weapon" name="attr_type" value="firearms_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_firearms_weapon">Firearm</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-projectile_weapon" name="attr_type" value="projectile_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_projectile_weapon">Projectile Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-throwing_weapon" name="attr_type" value="throwing_weapon"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_throwing_weapon">Throwing Weapon</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-consumable_item" name="attr_type" value="consumable_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_consumable_item">Consumable</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-armor_item" name="attr_type" value="armor_item"/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_armor_item">Armor</span>
+            </div>
         
             <input type="checkbox" class="sheet-hidden type-toggle-" name="attr_type" value=""/>
+            
+            <div class="type-fields type-label">
+                <span class="type-field type_"></span>
+            </div>
         
 
         
@@ -1543,7 +1903,7 @@
                             Accuracy Mod
                         </div>
                         <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_accuracy" value="3"/>
+                            <input type="number" class=" sheet-shy" name="attr_accuracy" value="0"/>
                         </div>
                     </div>
                     <name="@{}">
@@ -1590,7 +1950,7 @@
             <textarea class="sheet-shy" name="attr_description"></textarea>
         </div>
         
-        <div class="card-actions">
+        <div class="card-actions type-fields">
             
 
             
@@ -1602,8 +1962,7 @@
 
 
 
-            <button type="roll" class="" value="!!aproll pool=@{stamina} cost=0  title='Test Roll' action='No cost roll!' target='@{firearm_skill}' multiply='5:Damage'">No Cost Attack</button>
-            <button type="roll" class="" value="!!aproll pool='@{stamina}' cost=1 resource='ap:AP|stamina:Stamina' target='@{firearm_skill}' multiply='5:Damage' title='Test Roll' action='Imma rolling with cost!' characterid='@{character_id}'">Cost Attack</button>
+            
         </div>
 
     </div>
@@ -1614,9 +1973,70 @@
         </div>
     </div> 
     <div class="sheet-bottom">
-        <div class="sheet-ap-pool">
         
+
+<div class="roll-widget">
+    <div class="ap-counter">
+        <div class="counter-label">AP</div>
+        
+    <div class="sheet-input">
+        <input type="number" class="sheet-shy centered" name="attr_ap" value="3"/>
+    </div>
+
+        <div class="options-toggle">
+            <input class="btn-checkbox" type="checkbox" name="attr_toggle_roll_options" value="on" checked="checked">
+            <div>Options</div>
         </div>
+    </div>
+    <input class="hidden toggle-roll-controls" type="checkbox" name="attr_toggle_roll_options" value="on" checked="checked">
+    <div class="roll-controls">
+        <div class="control-option">
+            <div class="control-label">
+                Roll Type
+            </div>
+            <div class="inputs btn-radiobutton-row">
+                <div class="control btn-radiobutton">
+                    <input class="btn-radiobutton-input cost-1" type="radio" name="attr_rollcost" value="1" checked="checked">
+                    <div class="btn-radiobutton-label cost-1">Active</div>
+                </div>
+                <div class="control btn-radiobutton">
+                    <input class="btn-radiobutton-input cost-0" type="radio" name="attr_rollcost" value="0">
+                    <div class="btn-radiobutton-label cost-0">Free</div>
+                </div>
+            </div>
+        </div>
+        <div class="control-option">
+            <div class="control-label">
+                Add Roll Difficulty
+            </div>
+            <div class="inputs">
+                <div class="control">
+                    <input type="number" name="attr_rolldifficulty" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="control-option">
+            <div class="control-label">
+                Commands
+            </div>
+            <div class="inputs commands">
+                
+                <div class="control">
+                    <button type="action" name="act_resetAp">Reset AP</button>
+                </div>
+                
+                <div class="control">
+                    <button type="action" name="act_resetFatigue">Reset Fatigue</button>
+                </div>
+                
+                <div class="control">
+                    <button type="action" name="act_moveSpaces">Calculate Move</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 </div>
 
@@ -1674,9 +2094,9 @@
     	id: "cheerleader",
     	description: "Reduce difficulty of roll for adjacent allies by 1 level."
     };
-    var builder = {
-    	id: "builder",
-    	description: "Create a distraction device by spending 1 AP and 1 Item. The device will attract common zombies towards it for some time."
+    var tinkerer = {
+    	id: "tinkerer",
+    	description: "Create a distraction device out of combat by using 1 stamina and 1 item. The device draws nearby zombies."
     };
     var scavenger = {
     	id: "scavenger",
@@ -1684,7 +2104,7 @@
     };
     var sniper = {
     	id: "sniper",
-    	description: "If you don't attack this turn, you can make a free attack roll and add that to next turn's ranged attack."
+    	description: "If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack."
     };
     var prepared = {
     	id: "prepared",
@@ -1696,7 +2116,7 @@
     	parkour: parkour,
     	brawler: brawler,
     	cheerleader: cheerleader,
-    	builder: builder,
+    	tinkerer: tinkerer,
     	scavenger: scavenger,
     	sniper: sniper,
     	prepared: prepared
@@ -1708,7 +2128,7 @@
         parkour: parkour,
         brawler: brawler,
         cheerleader: cheerleader,
-        builder: builder,
+        tinkerer: tinkerer,
         scavenger: scavenger,
         sniper: sniper,
         prepared: prepared,
@@ -1767,10 +2187,24 @@
             },
             ap: {
                 id: "ap",
-                default: 4,
+                default: 3,
                 type: "max",
                 label: "AP"
             },
+            fatigue: {
+                id: "fatigue",
+                default: 0,
+                label: "Fatigue"
+            }
+        },
+        rolloptions: {
+            cost: {
+                id: 'rollcost',
+            },
+            difficulty: {
+                id: 'rolldifficulty'
+            }
+
         },
         combatskills: {
             id: "combatskills",
@@ -1865,7 +2299,22 @@
             default: 5,
             max: 12,
             label: "Inventory"
+        },
+        actions: {
+            resetap: {
+                id:'resetAp',
+                label: "Reset AP"
+            },
+            resetfatigue: {
+                id:'resetFatigue',
+                label: "Reset Fatigue"
+            },
+            move: {
+                id:'moveSpaces',
+                label: "Calculate Move"
+            }
         }
+
     };
 
     var aaany = {
@@ -1945,12 +2394,10 @@
                 other: 'Durability',
             }
         },
-        attacks: {
+        accuracy: {
             id:'accuracy',
             label: 'Accuracy Mod',
-            min: 1,
-            default: 3,
-            max: 5
+            default: 0
         },
         ammotype: {
             id: 'ammotype',
@@ -1967,45 +2414,22 @@
 
     const options = {
         actions: {
-            // export:'exportitem', 
-            // delete:'deleteitem',
-            // attack:'attackweapon',
-            // reload: 'reloadweapon',
-
-            attackblunt: {
-                id:'attackblunt',
-                class: [
-                    blunt
-                ],
-                type: 'roll',
-                label: 'Attack'
-            },
-
             export: {
-                id: 'exportitem',
-                class: [
-                    'inventory'
-                ]
+                id: 'exportitem'
             },
             delete: {
-                id:'deleteitem',
-                class: [
-                    'inventory'
-                ]
+                id:'deleteitem'
+            },
+            dodge: {
+                id:'dodge'
             },
             equip: {
                 id: 'equipitem',
-                class: [
-                    'inventory'
-                ],
                 type: 'action',
                 label: 'Equip'
             },
             unequip: {
                 id: 'unequipitem',
-                class: [
-                    'inventory'
-                ],
                 type: 'action',
                 label: 'Unequip'
             }
@@ -2017,39 +2441,6 @@
     const getButtonRowId = function(eventInfo){
         var underscoreIndex = eventInfo.sourceAttribute.lastIndexOf("_");
         return eventInfo.sourceAttribute.substr(0, underscoreIndex);
-    };
-
-    /**
-     * Given a number, spread it out and list all numbers preceding it.
-     */
-     const sequenceNumber = (num, delim='', flip=false) => {
-        var result = '';
-
-        if (!Number.isInteger(num)){
-            return '';
-        }
-
-        //descending order
-        if (flip){
-            for (let i = num; i >= 0; i--){
-                result += i.toString();
-        
-                if (i > 0 && delim.length){
-                    result += delim;
-                }
-            }
-        } else {
-            //ascneding order
-            for (let i = 0; i <= num; i++){
-                result += i.toString();
-        
-                if (i < num && delim.length){
-                    result += delim;
-                }
-            }
-        }
-
-        return result;
     };
 
     function deleteItem(){
@@ -2336,41 +2727,67 @@
         });
     }
 
-    //If a Stat is rollable, set a _rolls field to be a sequence of numbers
-    //ie if stat is 5, set _rolls field to be 1|2|3|4|5
-    //That way, we can use dropdowns for roll buttons based on the stats value
-    function rollOptions(){
-        for (let stat in fields$1.stats){
-            let curStat = fields$1.stats[stat];
+    function preventNegative(){
+        on(`change:${fields$1.stats.fatigue.id}`, function(){
 
-            if (curStat.rollable){
-                let attr = curStat.id;
-        
-                on( 'change:' + attr, function(){
-                    getAttrs([attr], function(values){
-                        let numOfDice = parseInt(values[attr], 10);
+            getAttrs([fields$1.stats.fatigue.id], function(values){
+                let fatigue = parseInt(values[fields$1.stats.fatigue.id], 10);
 
-                        var attrSet = {
-                            [attr + '_rolls'] : sequenceNumber(numOfDice, '|', true) //start at value
-                        };
 
-                        // Add bonus options
-                        for (let i = 1; i <= numOfDice; i++){
-                            attrSet[attr + '_rolls'] += `| ${numOfDice }( + ${i} bonus rolls ), ${numOfDice}b${i}`;
-                        }
+                if (isNaN(fatigue)){
+                    console.error('Error when parsing slots');
+                    return;
+                }
 
-                        setAttrs(attrSet);
-                    });
+                if (fatigue < 0) {
+                    const attrSet = {
+                        [fields$1.stats.fatigue.id]: 0
+                    };
+
+                    setAttrs(attrSet);
+                }
+            });
+        });
+    }
+
+    function rollwidget(){
+        // AP reset
+        //reset to max
+        on(`clicked:${fields$1.actions.resetap.id}`, function(evInfo){
+            getAttrs([fields$1.stats.ap.id, fields$1.stats.ap.id + '_max'], function(results){
+                setAttrs({
+                    [fields$1.stats.ap.id]: results[fields$1.stats.ap.id + '_max']
                 });
-            }
-        }
+            });
+        });
+
+        // fatigue reset
+        // reset to 0
+        on(`clicked:${fields$1.actions.resetfatigue.id}`, function(evInfo){
+            setAttrs({
+                [fields$1.stats.fatigue.id]: 0
+            });
+        });
+
+
+        // Move
+        // subtract 1
+        on(`clicked:${fields$1.actions.move.id}`, function(evInfo){
+            getAttrs([fields$1.stats.ap.id], function(results){
+                setAttrs({
+                    [fields$1.stats.ap.id]: Math.max(parseInt(results[fields$1.stats.ap.id], 10) - 1, 0)
+                });
+            });
+        });
 
     }
 
     equip().init();
     limit();
-    rollOptions();
+    // rollOptions();
     deleteItem();
+    preventNegative();
+    rollwidget();
 
 })();
 

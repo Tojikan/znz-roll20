@@ -31,6 +31,13 @@
     .select-switch-dropdown {
         margin-right: 2rem;
         flex-basis: 35%;
+
+        select {
+            width: 60%;
+            margin: auto;
+            margin-bottom: 1rem;
+            display: block;
+        }
     }
     
     .select-switch-display {

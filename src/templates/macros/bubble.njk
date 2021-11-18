@@ -17,6 +17,8 @@
                     {{ createList(field=field) }}
                 {% case "dice" %}
                     {{ createDice(field=field) }}
+                {% case "number" %}
+                    {{ createNumber(field=field) }}
                 {% case "toggleselect" %}
                     {{ createSelectSwitch(field=field) }}
                 {% case "textarea" %}
@@ -32,11 +34,11 @@
 {% macro createMax(field) %}
     <div class="sheet-max">
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
         </div>
         <div class="sheet-divider">/</div>
         <div>
-            <input type="text" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}_max" value="{{field.default}}"/>
+            <input type="number" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}_max" value="{{field.default}}"/>
         </div>
     </div>
 {% endmacro %}
@@ -52,9 +54,15 @@
         {% for key, item in field.options | dictsort %}
             <div class="sheet-line">
                 <div class="sheet-label">{{item | getLabel}}</div>
-                <input type="text" class="sheet-number" name="attr_{{item | getAttr}}" value="{{field.default}}"/>
+                <input type="number" class="sheet-number" name="attr_{{item | getAttr}}" value="{{field.default}}"/>
             </div>
         {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro createNumber(field) %}
+    <div class="sheet-input">
+        <input type="number" class="sheet-shy centered" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
     </div>
 {% endmacro %}
 
@@ -75,7 +83,7 @@
 
 
 {% macro createSelectSwitch(field) %}
-    <div class="sheet-row-flex select-switch">
+    <div class="sheet-row-flex vert align-center select-switch">
         <div class="select-switch-dropdown">
 
             <select name="attr_{{field | getAttr}}">

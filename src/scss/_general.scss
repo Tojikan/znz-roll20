@@ -81,3 +81,15 @@
         }
     }
 }
+
+
+.gridrow {
+    display: flex;
+    margin-left: -15px;
+    margin-right: 15px;
+
+    .col {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}

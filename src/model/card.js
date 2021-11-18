@@ -21,12 +21,10 @@ export const fields = {
             other: 'Durability',
         }
     },
-    attacks: {
+    accuracy: {
         id:'accuracy',
         label: 'Accuracy Mod',
-        min: 1,
-        default: 3,
-        max: 5
+        default: 0
     },
     ammotype: {
         id: 'ammotype',
@@ -43,45 +41,22 @@ export const fields = {
 
 export const options = {
     actions: {
-        // export:'exportitem', 
-        // delete:'deleteitem',
-        // attack:'attackweapon',
-        // reload: 'reloadweapon',
-
-        attackblunt: {
-            id:'attackblunt',
-            class: [
-                itemTypes.blunt
-            ],
-            type: 'roll',
-            label: 'Attack'
-        },
-
         export: {
-            id: 'exportitem',
-            class: [
-                'inventory'
-            ]
+            id: 'exportitem'
         },
         delete: {
-            id:'deleteitem',
-            class: [
-                'inventory'
-            ]
+            id:'deleteitem'
+        },
+        dodge: {
+            id:'dodge'
         },
         equip: {
             id: 'equipitem',
-            class: [
-                'inventory'
-            ],
             type: 'action',
             label: 'Equip'
         },
         unequip: {
             id: 'unequipitem',
-            class: [
-                'inventory'
-            ],
             type: 'action',
             label: 'Unequip'
         }

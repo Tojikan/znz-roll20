@@ -52,10 +52,24 @@ export const fields = {
         },
         ap: {
             id: "ap",
-            default: 4,
+            default: 3,
             type: "max",
             label: "AP"
         },
+        fatigue: {
+            id: "fatigue",
+            default: 0,
+            label: "Fatigue"
+        }
+    },
+    rolloptions: {
+        cost: {
+            id: 'rollcost',
+        },
+        difficulty: {
+            id: 'rolldifficulty'
+        }
+
     },
     combatskills: {
         id: "combatskills",
@@ -150,5 +164,20 @@ export const fields = {
         default: 5,
         max: 12,
         label: "Inventory"
+    },
+    actions: {
+        resetap: {
+            id:'resetAp',
+            label: "Reset AP"
+        },
+        resetfatigue: {
+            id:'resetFatigue',
+            label: "Reset Fatigue"
+        },
+        move: {
+            id:'moveSpaces',
+            label: "Calculate Move"
+        }
     }
+
 }

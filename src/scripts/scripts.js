@@ -70,6 +70,8 @@ var Main = Main || (function(){
         if (msg.type !== "api"){
             return;
         }
+
+        log(msg.content);
         
         // Setup our character and args.
         const args = splitArgs(msg.content),
@@ -87,6 +89,7 @@ var Main = Main || (function(){
                     caller.responder(response, sender, character);
                 } catch(err){
                     log(err);
+                    log(err.stack);
                     sendMessage(err, 'Error: ' + api, 'error');
                 }
             }
@@ -100,6 +103,8 @@ var Main = Main || (function(){
                 watcher(obj, prev);
             } catch(err){
                 log(watcher);
+                log(err);
+                log(err.stack);
                 sendMessage(err, 'Error in attribute watcher:', 'error');
             }
         }
