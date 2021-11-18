@@ -2,24 +2,42 @@ import {fields as character} from '../model/character';
 
 
 export function preventNegative(){
-    on(`change:${character.stats.fatigue.id}`, function(){
+    const prevent = [
+        character.stats.fatigue.id
+    ];
 
-        getAttrs([character.stats.fatigue.id], function(values){
-            let fatigue = parseInt(values[character.stats.fatigue.id], 10);
+    for (const key in character.ammo.options){
+        prevent.push(key.id);
+    }
 
+    for (const key in character.combatskills.options){
+        prevent.push(key.id);
+    }
 
-            if (isNaN(fatigue)){
-                console.error('Error when parsing slots');
-                return;
-            }
+    for (const key in character.skills.options){
+        prevent.push(key.id);
+    }
 
-            if (fatigue < 0) {
-                const attrSet = {
-                    [character.stats.fatigue.id]: 0
+    for (let fld of prevent){
+        on(`change:${fld}`, function(){
+    
+            getAttrs([character.stats.fatigue.id], function(values){
+                let val = parseInt(values[fld], 10);
+    
+    
+                if (isNaN(val)){
+                    console.error('Error when parsing value when preventing negative');
+                    return;
                 }
-
-                setAttrs(attrSet);
-            }
+    
+                if (val < 0) {
+                    const attrSet = {
+                        [fld]: 0
+                    }
+    
+                    setAttrs(attrSet);
+                }
+            });
         });
-    });
+    }
 }

@@ -1,83 +1,100 @@
-import { getAttr } from "./_helpers"; 
+import { getAttr, getAttrVal } from "./_helpers"; 
 import { fields as card} from '../model/card';
 import { fields as charFields} from '../model/character';
+import { spendResource } from "./_helpers";
+
+const handleResults = function(response, sender, character){
+    let title = 'Reload';
+
+    if ('title' in response){
+        title = response.title;
+    }
+
+    let output = `&{template:default} {{name=${response.title}}} {{${response.result.label}=${response.result.value}}} `;
+    sendChat(sender, output);
+};
 
 const handleReload = function(args, character){
-    const getAttrName = function(id, num){
-        return `${charFields.weaponslots.type}_${id}_${num}`;
-    }    
-
-    if (!("weapon" in args) || !Number.isInteger(args['weapon'])){
-        return {msg:'You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', type:'error'};
+    if (!'id' in args || !'type' in args || !'max' in args){
+        throw 'Invalid Parameters - requires ID and Type and Max param';
     }
 
-    let weaponId = args['weapon'];
+    let result = {};
 
-    const itemType = getAttr(character, getAttrName(card.type.id, weaponId)),
-        weaponType = getAttr(character, getAttrName(card.weapontype.id, weaponId)),
-        ammoType = getAttr(character, getAttrName(card.ammotype.id, weaponId)),
-        ammo = getAttr(character, getAttrName(card.uses.id, weaponId)),
-        active = getAttr(character, charFields.weaponslots.type + '_' + weaponId);
+    if ('title' in args){
+        result.title = args.title;
+    }
 
-        log(active);
+    let ammo = getAttr(character, args.id),
+        max = getAttr(character, args.max), //because sheet is using uses_max_5 instead of a proper max field, we have to get this separate
+        ammoType = getAttr(character, args.type),
+        ammoTypeLabel = (function(id){
+            for (let type in charFields.ammo.options){
+                if (id == type.id){
+                    return type.fulllabel;
+                }
+            }
+            return 'Ammo'
+        })(args.type);
+
         
-        if (!active){
-            return {msg: "Error! Could not check item active!", type: "error"};
-        } else if (!itemType){
-            return {msg: "Error! Could not get item type!", type: "error"};
-        } else if (!weaponType){
-            return {msg: "Error! Could not get weapontype!", type: "error"};
-        } else if (!ammoType){
-            return {msg: "Error! Could not get ammotype!", type: "error"};
-        } else if (!ammo){
-            return  {msg: "Error! Could not get ammo!", type: "error"};
-        } else if (itemType.get('current') !== 'weapon'){
-            return {msg: "Error! Item is not a weapon!", type: "error"};
-        } else if (weaponType.get('current') !== 'ranged'){
-            return {msg: "Error! Item is not a ranged weapon!", type: "error"};
+        
+    let currentAmmo = parseInt(ammo.get('current'),10) || 0,
+        maxAmmo = parseInt(max.get('current'),10) || 0,
+        currentStore = parseInt(ammoType.get('current'),10) || 0;
+    
+    if (currentStore <= 0){
+        result.result = {label: 'Failed to Reload', value:`${character.get('name')} does not have enough ${ammoTypeLabel}!`}
+        return result;
+    }
+    
+
+    let ammoToAdd = calculateAmmo(currentAmmo, maxAmmo, currentStore);
+
+    if (ammoToAdd == 0){
+       result.result = {label: 'No Reload needed', value:`Weapon is already at full Ammo!`}
+       return result;
+    }
+
+    // Subtracts from AP if cost is provided
+    // Note that AP is hardcoded in here
+    if ('cost' in args && args.cost > 0){
+        if (!character){
+            throw 'Attempted to subtract resource without specifying a target token!';
         }
-        
-        const ammoMax = ammo.get("max"),
-            ammoStore = getAttr(character, ammoType.get('current')), //ammoType dropdown values are the attribute for the appropriate ammo store.
-            isActive = active.get('current');
-    
-    if (!isActive){
-        return  {msg: `Weapon ${weaponId} is not active!`, type: "warning"};
-    } else if (!ammoMax){
-        return  {msg: "Error! Could not get max ammo!", type: "error"};
-    } else if (!ammoStore){
-        return  {msg: "Error! Could not get ammo store!", type: "error"};
-    }
-    
-    const current = parseInt(ammo.get('current'), 10) || 0,
-        max = parseInt(ammoMax, 10) || 0,
-        store = parseInt(ammoStore.get('current'), 10) || 0,
-        reload = max - current,
-        ammoText = ammoType.get('current').replace('ammo_', '');
 
-    if (current >= max){
-        return  {msg: "Weapon is already at max ammo!", type: "info"};
+        let val = getAttrVal(character, charFields.stats.ap.id);
+
+        //check if we can roll at all 
+        if (val - parseInt(args.cost, 10) < 0){
+            result.result = {label: 'Failed to Reload', value:`${character.get('name')} does not have enough AP!!`};
+            return result;
+        }
+
+
+        spendResource(args.cost, charFields.stats.ap.id, character);
     }
 
-    if (store <= 0){
-        //No Ammo
-        return {msg: `${character.get('name')} has no ${ammoText} ammo to reload with.`, type:"warning"}
-    } else if (reload >= store){
-        //Successful Reload - Partial Reload
-        ammo.setWithWorker({current: store + current});
-        ammoStore.setWithWorker({current: 0});
-        return {msg: `${character.get('name')} reloads with the last of their ${ammoText} ammo.`, type:"warning"}
-    } else {
-        //Successful Reload - Full Reload
-        ammo.setWithWorker({current: max});
-        ammoStore.setWithWorker({current: store - reload});
-        return {msg: `${character.get('name')} reloads. They have ${store - reload} ${ammoText} ammo remaining.`, type:"success"}
-    }
+    ammo.setWithWorker({current: currentAmmo + ammoToAdd});
+    ammoType.setWithWorker({current: currentStore - ammoToAdd});
+    
+    result.result = {label: 'Success', value:`${character.get('name')} reloads!`};
+    return result;
 }
+
+
+// get diff between max and curr, but limit it to size of store.
+// factors in scenarios if max < curr 
+const calculateAmmo = function (curr, max, store){
+    return Math.min( Math.max(max - curr, 0), store);
+}
+
+
 
 export const reload = {
     caller: '!!reload',
     handler: handleReload,
-    requires: ['character']
+    responder: handleResults,
+    calculateAmmo: calculateAmmo
 }
 

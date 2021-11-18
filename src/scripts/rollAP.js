@@ -11,7 +11,7 @@ import { getAttr, getAttrVal, spendResource, incrementCounter } from './_helpers
  */
 export const RollAP = (function(){
     const handleResults = function(response, sender, character){
-        let output = `&{template:default} {{name=${response.title || 'AP Roll'}}}`;
+        let output = `&{template:default} {{name=${response.title}}}`;
 
         //Action flavor text
         if ('action' in response){
@@ -42,7 +42,7 @@ export const RollAP = (function(){
                 output += ` {{${response.multiply.label}=$[[0]] * $[[1]]==$[[2]] }}`;
             }
         }
-        
+
         sendChat(sender, output);
     },
 
@@ -89,7 +89,8 @@ export const RollAP = (function(){
             result.multiply = params.multiply[0];
         }
 
-        result.roll = generateRollText((params.pool + params.amountmod), params.dice, params.target, params.modifier, params.difficulty);
+        let amt = Math.max(params.pool + params.amountmod, 1); //min amount - 1
+        result.roll = generateRollText(amt, params.dice, params.target, params.modifier, params.difficulty);
 
         return result;
     },
@@ -156,8 +157,6 @@ export const RollAP = (function(){
             throw 'Invalid Parameters - expected an Integer!';
         }
 
-        log(params.difficulty);
-
         params.resource = parseFieldLabel(parseMultiArg(params.resource));
         params.modifier = sumValues(parseMultiArg(params.modifier));
         params.difficulty = sumValues(parseMultiArg(params.difficulty));
@@ -165,8 +164,6 @@ export const RollAP = (function(){
         params.multiply = parseFieldLabel([params.multiply], 'Effect');
         params.counter = parseMultiArg(params.counter);
 
-        log(params.difficulty);
-        
         return params;
     },
 

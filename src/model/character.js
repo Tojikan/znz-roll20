@@ -13,27 +13,32 @@ export const fields = {
             light: {
                 id: "ammo_light",
                 bundle: 30,
-                label: "Light"
+                label: "Light",
+                fulllabel: "Light Ammo"
             },
             medium: {
                 id: "ammo_medium",
                 bundle: 30,
-                label: "Medium"
+                label: "Medium",
+                fulllabel: "Medium Ammo"
             },
             heavy: {
                 id: "ammo_heavy",
                 bundle: 30,
-                label: "Heavy"
+                label: "Heavy",
+                fulllabel: "Heavy Ammo"
             },
             bolt: {
                 id: "ammo_bolt",
                 bundle: 5,
-                label: "Bolts"
+                label: "Bolts",
+                fulllabel: "Bolts"
             },
             arrow: {
                 id: "ammo_arrow",
                 bundle: 5,
-                label: "Arrows"
+                label: "Arrows",
+                fulllabel: "Arrows"
             }
         }
     },

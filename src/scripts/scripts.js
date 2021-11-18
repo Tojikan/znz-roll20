@@ -71,8 +71,6 @@ var Main = Main || (function(){
             return;
         }
 
-        log(msg.content);
-        
         // Setup our character and args.
         const args = splitArgs(msg.content),
             sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),

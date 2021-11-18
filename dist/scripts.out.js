@@ -72,27 +72,32 @@
                 light: {
                     id: "ammo_light",
                     bundle: 30,
-                    label: "Light"
+                    label: "Light",
+                    fulllabel: "Light Ammo"
                 },
                 medium: {
                     id: "ammo_medium",
                     bundle: 30,
-                    label: "Medium"
+                    label: "Medium",
+                    fulllabel: "Medium Ammo"
                 },
                 heavy: {
                     id: "ammo_heavy",
                     bundle: 30,
-                    label: "Heavy"
+                    label: "Heavy",
+                    fulllabel: "Heavy Ammo"
                 },
                 bolt: {
                     id: "ammo_bolt",
                     bundle: 5,
-                    label: "Bolts"
+                    label: "Bolts",
+                    fulllabel: "Bolts"
                 },
                 arrow: {
                     id: "ammo_arrow",
                     bundle: 5,
-                    label: "Arrows"
+                    label: "Arrows",
+                    fulllabel: "Arrows"
                 }
             }
         },
@@ -610,7 +615,7 @@
         },
         uses: {
             id: 'uses',
-            max: 'uses_max', // easier to handle ids and indexflight from rochesbalti
+            max: 'uses_max', // easier to handle ids and index
             labels: {
                 ranged: 'Ammo',
                 other: 'Durability',
@@ -633,83 +638,94 @@
         }
     };
 
-    const handleReload = function(args, character){
-        const getAttrName = function(id, num){
-            return `${fields$1.weaponslots.type}_${id}_${num}`;
-        };    
+    const handleResults = function(response, sender, character){
 
-        if (!("weapon" in args) || !Number.isInteger(args['weapon'])){
-            return {msg:'You must specify a valid weapon (i.e. weapon=1  or weapon=2, etc)', type:'error'};
-        }
-
-        let weaponId = args['weapon'];
-
-        const itemType = getAttr(character, getAttrName(fields.type.id, weaponId)),
-            weaponType = getAttr(character, getAttrName(fields.weapontype.id, weaponId)),
-            ammoType = getAttr(character, getAttrName(fields.ammotype.id, weaponId)),
-            ammo = getAttr(character, getAttrName(fields.uses.id, weaponId)),
-            active = getAttr(character, fields$1.weaponslots.type + '_' + weaponId);
-
-            log(active);
-            
-            if (!active){
-                return {msg: "Error! Could not check item active!", type: "error"};
-            } else if (!itemType){
-                return {msg: "Error! Could not get item type!", type: "error"};
-            } else if (!weaponType){
-                return {msg: "Error! Could not get weapontype!", type: "error"};
-            } else if (!ammoType){
-                return {msg: "Error! Could not get ammotype!", type: "error"};
-            } else if (!ammo){
-                return  {msg: "Error! Could not get ammo!", type: "error"};
-            } else if (itemType.get('current') !== 'weapon'){
-                return {msg: "Error! Item is not a weapon!", type: "error"};
-            } else if (weaponType.get('current') !== 'ranged'){
-                return {msg: "Error! Item is not a ranged weapon!", type: "error"};
-            }
-            
-            const ammoMax = ammo.get("max"),
-                ammoStore = getAttr(character, ammoType.get('current')), //ammoType dropdown values are the attribute for the appropriate ammo store.
-                isActive = active.get('current');
-        
-        if (!isActive){
-            return  {msg: `Weapon ${weaponId} is not active!`, type: "warning"};
-        } else if (!ammoMax){
-            return  {msg: "Error! Could not get max ammo!", type: "error"};
-        } else if (!ammoStore){
-            return  {msg: "Error! Could not get ammo store!", type: "error"};
-        }
-        
-        const current = parseInt(ammo.get('current'), 10) || 0,
-            max = parseInt(ammoMax, 10) || 0,
-            store = parseInt(ammoStore.get('current'), 10) || 0,
-            reload = max - current,
-            ammoText = ammoType.get('current').replace('ammo_', '');
-
-        if (current >= max){
-            return  {msg: "Weapon is already at max ammo!", type: "info"};
-        }
-
-        if (store <= 0){
-            //No Ammo
-            return {msg: `${character.get('name')} has no ${ammoText} ammo to reload with.`, type:"warning"}
-        } else if (reload >= store){
-            //Successful Reload - Partial Reload
-            ammo.setWithWorker({current: store + current});
-            ammoStore.setWithWorker({current: 0});
-            return {msg: `${character.get('name')} reloads with the last of their ${ammoText} ammo.`, type:"warning"}
-        } else {
-            //Successful Reload - Full Reload
-            ammo.setWithWorker({current: max});
-            ammoStore.setWithWorker({current: store - reload});
-            return {msg: `${character.get('name')} reloads. They have ${store - reload} ${ammoText} ammo remaining.`, type:"success"}
-        }
+        let output = `&{template:default} {{name=${response.title}}} {{${response.result.label}=${response.result.value}}} `;
+        sendChat(sender, output);
     };
+
+    const handleReload = function(args, character){
+        if (!'id' in args || !'type' in args || !'max' in args){
+            throw 'Invalid Parameters - requires ID and Type and Max param';
+        }
+
+        let result = {};
+
+        if ('title' in args){
+            result.title = args.title;
+        }
+
+        let ammo = getAttr(character, args.id),
+            max = getAttr(character, args.max), //because sheet is using uses_max_5 instead of a proper max field, we have to get this separate
+            ammoType = getAttr(character, args.type),
+            ammoTypeLabel = (function(id){
+                for (let type in fields$1.ammo.options){
+                    if (id == type.id){
+                        return type.fulllabel;
+                    }
+                }
+                return 'Ammo'
+            })(args.type);
+
+            
+            
+        let currentAmmo = parseInt(ammo.get('current'),10) || 0,
+            maxAmmo = parseInt(max.get('current'),10) || 0,
+            currentStore = parseInt(ammoType.get('current'),10) || 0;
+        
+        if (currentStore <= 0){
+            result.result = {label: 'Failed to Reload', value:`${character.get('name')} does not have enough ${ammoTypeLabel}!`};
+            return result;
+        }
+        
+
+        let ammoToAdd = calculateAmmo(currentAmmo, maxAmmo, currentStore);
+
+        if (ammoToAdd == 0){
+           result.result = {label: 'No Reload needed', value:`Weapon is already at full Ammo!`};
+           return result;
+        }
+
+        // Subtracts from AP if cost is provided
+        // Note that AP is hardcoded in here
+        if ('cost' in args && args.cost > 0){
+            if (!character){
+                throw 'Attempted to subtract resource without specifying a target token!';
+            }
+
+            let val = getAttrVal(character, fields$1.stats.ap.id);
+
+            //check if we can roll at all 
+            if (val - parseInt(args.cost, 10) < 0){
+                result.result = {label: 'Failed to Reload', value:`${character.get('name')} does not have enough AP!!`};
+                return result;
+            }
+
+
+            spendResource(args.cost, fields$1.stats.ap.id, character);
+        }
+
+        ammo.setWithWorker({current: currentAmmo + ammoToAdd});
+        ammoType.setWithWorker({current: currentStore - ammoToAdd});
+        
+        result.result = {label: 'Success', value:`${character.get('name')} reloads!`};
+        return result;
+    };
+
+
+    // get diff between max and curr, but limit it to size of store.
+    // factors in scenarios if max < curr 
+    const calculateAmmo = function (curr, max, store){
+        return Math.min( Math.max(max - curr, 0), store);
+    };
+
+
 
     const reload = {
         caller: '!!reload',
         handler: handleReload,
-        requires: ['character']
+        responder: handleResults,
+        calculateAmmo: calculateAmmo
     };
 
     var snack = {
@@ -1253,7 +1269,7 @@
      */
     const RollAP = (function(){
         const handleResults = function(response, sender, character){
-            let output = `&{template:default} {{name=${response.title || 'AP Roll'}}}`;
+            let output = `&{template:default} {{name=${response.title}}}`;
 
             //Action flavor text
             if ('action' in response){
@@ -1284,7 +1300,7 @@
                     output += ` {{${response.multiply.label}=$[[0]] * $[[1]]==$[[2]] }}`;
                 }
             }
-            
+
             sendChat(sender, output);
         },
 
@@ -1331,7 +1347,8 @@
                 result.multiply = params.multiply[0];
             }
 
-            result.roll = generateRollText((params.pool + params.amountmod), params.dice, params.target, params.modifier, params.difficulty);
+            let amt = Math.max(params.pool + params.amountmod, 1); //min amount - 1
+            result.roll = generateRollText(amt, params.dice, params.target, params.modifier, params.difficulty);
 
             return result;
         },
@@ -1397,8 +1414,6 @@
                 throw 'Invalid Parameters - expected an Integer!';
             }
 
-            log(params.difficulty);
-
             params.resource = parseFieldLabel(parseMultiArg(params.resource));
             params.modifier = sumValues(parseMultiArg(params.modifier));
             params.difficulty = sumValues(parseMultiArg(params.difficulty));
@@ -1406,8 +1421,6 @@
             params.multiply = parseFieldLabel([params.multiply], 'Effect');
             params.counter = parseMultiArg(params.counter);
 
-            log(params.difficulty);
-            
             return params;
         },
 
@@ -1728,8 +1741,6 @@
                 return;
             }
 
-            log(msg.content);
-            
             // Setup our character and args.
             const args = splitArgs(msg.content),
                 sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),

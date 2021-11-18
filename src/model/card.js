@@ -15,7 +15,7 @@ export const fields = {
     },
     uses: {
         id: 'uses',
-        max: 'uses_max', // easier to handle ids and indexflight from rochesbalti
+        max: 'uses_max', // easier to handle ids and index
         labels: {
             ranged: 'Ammo',
             other: 'Durability',
