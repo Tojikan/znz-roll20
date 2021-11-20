@@ -6,6 +6,7 @@ const   gulp = require('gulp'),
         replace = require('gulp-replace'),
         nunjucksRender = require('gulp-nunjucks-render'),
         header = require('gulp-header');
+const { PlayerCharacterModel } = require("./src/scripts/playercharacter/playerCharacterModel");
         inject = require('gulp-inject'),
         removeEmptyLines = require('gulp-remove-empty-lines'),
         del = require('del'),
@@ -30,6 +31,12 @@ function sheet(){
                 //Adds our data to global variable so we can reference anywhere in njk templates
                 env.addGlobal('fields', buildContext.getModel(dataFolder).fields);
                 env.addGlobal('options', buildContext.getModel(dataFolder).options);
+
+                let testModel = new PlayerCharacterModel('test').export();
+                env.addGlobal('test', testModel);
+
+                console.log(testModel);
+                console.log(new PlayerCharacterModel('test').life);
         
                 //Takes all functions in exported filters and adds them as filters to NJKS
                 const filters = buildContext.filters;

@@ -3,8 +3,7 @@ const fs = require('fs');
 const path = require('path');
 import {fields as character} from './src/model/character';
 import * as types from './src/model/itemtypes';
-
-
+import { capitalize } from 'lodash';
 
 
 /**
@@ -93,7 +92,7 @@ const filters = {
         }
 
         if(obj['id'] !== undefined){
-            return obj['id'].charAt(0).toUpperCase() + obj['id'].slice(1);
+            return capitalize(obj['id']);
         }
 
         return '';
@@ -151,7 +150,8 @@ const sassHeaders = `
 module.exports = {
     getModel: getModel,
     filters:  filters,
-    sassHeaders: sassHeaders
+    sassHeaders: sassHeaders,
+    capitalize: capitalize
 };
 
 
