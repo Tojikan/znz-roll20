@@ -57,6 +57,30 @@ export const getAttrVal = function(character, attr){
     return getAttrByName(character.id, attr);
 }
 
+/**
+ * Set Attribute Value, and use default value if not present.
+ * @param {*} character 
+ * @param {*} attr
+ * @param {*} value 
+ * @returns 
+ */
+ export const setAttrVal = function(character, attr, value){
+    let attr = getAttr(character, attrId);
+
+    if (!attr){
+        return null;
+    }
+    
+    let current = attr.get('current');
+    attr.setWithWorker({current: value});
+
+
+    return {
+        initial: current,
+        newValue: valued
+    }
+}
+
 
 /**
  * Increase an attribute by 1 

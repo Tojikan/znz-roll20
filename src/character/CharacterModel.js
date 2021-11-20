@@ -1,8 +1,10 @@
 import { capitalize } from "lodash";
+import { exportFields } from "./_model";
 
-export const fields = {
+export const CharacterModel = {
     notes: {},
     ammo: {
+        type: 'list',
         list: {
             light:{},
             medium:{},
@@ -10,9 +12,15 @@ export const fields = {
             arrow:{}
         }
     },
-    health: {},
-    fatigue: {},
-    actions: {},
+    health: {
+        type: 'max'
+    },
+    fatigue: {
+        type: 'max'
+    },
+    actions: {
+        type: 'max'
+    },
     equipmentslots: {
         default: 2,
         max: 6
@@ -35,6 +43,7 @@ export const fields = {
         }
     },
     combatskills: {
+        type:'list',
         list: {
             guard: {
                 label: "Guard"
@@ -60,7 +69,8 @@ export const fields = {
         }
     },
     skills: {
-        options: {
+        type: 'list',
+        list: {
             lockpick: {
                 label: "Lockpick"
             },
@@ -88,44 +98,3 @@ export const fields = {
         }
     }
 }
-
-
-// Export our field data as a simple JSON object
-export const fieldsData = ((function(){
-    let keys = Object.keys(fields);
-    let retVal = {};
-
-    // Set ID and Label
-    const setupField = function(key, obj){
-        if (!'id' in obj){
-            obj.id = key;
-        }
-
-        if (!'label' in obj){
-            obj.label = capitalize(k);
-        }
-
-        return obj;
-    }
-
-    for (let k of keys){
-        let obj = fields[k];
-
-        obj.id = k;
-
-        setupField(k, obj);
-
-        //Set up options
-        if ('options' in obj){
-            for (let opt of Object.keys(obj.options)){\
-                //add a prefix to the option id
-                obj.options[obj] = setupField(`${k}_${opt}`, obj.options[opt]);
-            }
-        }
-
-        retVal[k] = JSON.stringify(obj);
-    }
-
-    return retVal;
-
-}))();
