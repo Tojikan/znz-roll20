@@ -6,14 +6,14 @@ describe('exportFields', function(){
         field1:{},
         field2:{id:'fieldid'},
         field3:{ label: 'NewLabel'},
-        field4:{id:'newid', label: 'TestLabel'}
+        field4:{id:'newid', label: 'TestLabel', prop1: 'testprop'}
     };
 
     const expected = {
         field1:{id:'field1', label:'Field1'},
         field2:{id:'fieldid', label:'Field2'},
         field3:{id:'field3', label:'NewLabel'},
-        field4:{id:'newid', label:'TestLabel'}
+        field4:{id:'newid', label:'TestLabel', prop1: 'testprop'}
     };
 
     it('exportsTopLevelFields', function(){

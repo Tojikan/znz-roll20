@@ -1,3 +1,5 @@
+import { capitalize } from "lodash";
+
 //TODO define
 export class Field {
     constructor(id, props){
@@ -5,11 +7,21 @@ export class Field {
         this.props = props;
     }
 
-    register(){
-
+    // Register Field in API
+    register(character){
+        return {
+            get: getAttrVal(character.id, this.id)
+        };
     }
 
-    export()
+    // Export Field into JSON
+    export() {
+        return {
+            ...this.props,
+            id: this.id,
+            label: ('label' in this.props) ? this.props.label : capitalize(this.id)
+        }
+    }
 }
 
 
