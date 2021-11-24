@@ -1,4 +1,4 @@
-{% macro create(field, type, label, class='') %}
+{% macro create(field, type, label, class='', btn=false) %}
 
     <div class="sheet-bubble {{class}}">
         <div class="sheet-title">
@@ -14,7 +14,7 @@
                 {% case "max" %}
                     {{ createMax(field=field) }}
                 {% case "list" %}
-                    {{ createList(field=field) }}
+                    {{ createList(field=field, btn=btn) }}
                 {% case "dice" %}
                     {{ createDice(field=field) }}
                 {% case "number" %}
@@ -49,10 +49,13 @@
 {% endmacro %}
 
 
-{% macro createList(field) %}
+{% macro createList(field, btn=false) %}
     <div class="sheet-list">
         {% for key, item in field.options | dictsort %}
             <div class="sheet-line">
+                {% if btn == true %}
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='<%{{fields.character.stats.stamina | getAttr}}%>' characterid='@{character_id}' cost='<%{{fields.character.rolloptions.cost.id | getAttr}}%>' resource='{{fields.character.stats.ap | getAttr }}:{{fields.character.stats.ap  | getLabel }}'  title='{{item | getLabel | safe}}' action='{{item | getLabel | safe}} roll!' target='<%{{item | getAttr | safe}}%>' amountmod='-<%{{fields.character.stats.fatigue | getAttr}}%>' counter='{{fields.character.stats.fatigue | getAttr}}'"></button>
+                {% endif %}
                 <div class="sheet-label">{{item | getLabel}}</div>
                 <input type="number" class="sheet-number" name="attr_{{item | getAttr}}" value="{{field.default}}"/>
             </div>

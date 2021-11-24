@@ -395,9 +395,8 @@ textarea {
   border-radius: 1rem;
   padding: 0.5rem; }
   .sheet-card .card-notes textarea {
-    height: 5rem;
+    height: 7rem;
     box-sizing: border-box;
-    overflow: hidden;
     font-size: 1.2rem;
     margin-bottom: 0; }
   .sheet-card .card-notes span {
@@ -506,12 +505,6 @@ input.select-switch-control-7:checked ~ .select-switch-display-7 {
   display: none; }
 
 input.select-switch-control-8:checked ~ .select-switch-display-8 {
-  display: block; }
-
-.select-switch-display-9 {
-  display: none; }
-
-input.select-switch-control-9:checked ~ .select-switch-display-9 {
   display: block; }
 
 .select-switch .select-switch-dropdown {
@@ -659,20 +652,6 @@ input.select-switch-control-9:checked ~ .select-switch-display-9 {
           white-space: nowrap; }
   .roll-widget .toggle-roll-controls:checked ~ .roll-controls {
     display: flex; }
-
-.sheet-rolltemplate-zroll .sheet-template-container {
-  border: solid 2px black; }
-
-.sheet-rolltemplate-zroll .sheet-zroll-header {
-  color: white;
-  background-color: purple;
-  border: solid 3px black;
-  padding: 1rem;
-  font-weight: 700; }
-
-.sheet-rolltemplate-zroll .sheet-zroll-row {
-  padding: 1rem;
-  border: double 2px black; }
 
 .sheet-character {
   font-size: 10px;

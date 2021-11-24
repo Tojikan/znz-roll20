@@ -4,13 +4,9 @@
         "label": "Select an Ability",
         "description": ""
     },
-    "parkour": {
-        "id": "Speedster",
-        "description": "You can move 3 spaces at no cost on your turn."
-    },
     "brawler": {
         "id": "brawler",
-        "description": "Any excess guard is dealt as damage."
+        "description": "During Guard phase, any excess guard can be dealt as damage if you declare it ahead of time. You take double damage that guard phase."
     },
     "cheerleader": {
         "id": "cheerleader",
@@ -26,7 +22,7 @@
     },
     "sniper": {
         "id": "sniper",
-        "description": "If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack."
+        "description": "If you don't do any actions at all this turn, you can take aim and add all actions as Free Ranged Attack action next turn. You lose these free actions the moment you do any action besides ranged attack next turn."
     },
     "prepared": {
         "id": "prepared",

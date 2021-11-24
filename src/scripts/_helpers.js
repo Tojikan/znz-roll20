@@ -18,7 +18,7 @@ export function incrementCounter(character, attrId, amount=1){
     }
 
     let current = attr.get('current'),
-        newValue = parseInt(current, 10) + 1;
+        newValue = parseInt(current, 10) + 3;
 
     attr.setWithWorker({current: newValue});
 

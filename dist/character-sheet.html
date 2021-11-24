@@ -152,8 +152,6 @@
                 
                     
                 
-                     <option value="Speedster"> Speedster </option>
-                
                      <option value="prepared"> Doomsday Prep </option>
                 
                      <option value="scavenger"> Scavenger </option>
@@ -181,7 +179,7 @@
 
                 <div class="select-switch-display select-switch-display-2 ability-brawler">
                     <div class="ability-text select-switch-content-2">
-                        Any excess guard is dealt as damage.
+                        During Guard phase, any excess guard can be dealt as damage if you declare it ahead of time. You take double damage that guard phase.
                     </div>
                 </div>
             
@@ -199,50 +197,40 @@
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-5" name="attr_ability" value="Speedster"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-5" name="attr_ability" value="prepared"  />
 
-                <div class="select-switch-display select-switch-display-5 ability-parkour">
+                <div class="select-switch-display select-switch-display-5 ability-prepared">
                     <div class="ability-text select-switch-content-5">
-                        You can move 3 spaces at no cost on your turn.
-                    </div>
-                </div>
-            
-        
-             
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-6" name="attr_ability" value="prepared"  />
-
-                <div class="select-switch-display select-switch-display-6 ability-prepared">
-                    <div class="ability-text select-switch-content-6">
                         Start the game with 5 free scavenge actions and 2 additional equipment slots.
                     </div>
                 </div>
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-7" name="attr_ability" value="scavenger"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-6" name="attr_ability" value="scavenger"  />
 
-                <div class="select-switch-display select-switch-display-7 ability-scavenger">
-                    <div class="ability-text select-switch-content-7">
+                <div class="select-switch-display select-switch-display-6 ability-scavenger">
+                    <div class="ability-text select-switch-content-6">
                         Draw 1 additional cards when you scavenge. If you are scavenging a location alone, draw 3.
                     </div>
                 </div>
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-8" name="attr_ability" value="sniper"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-7" name="attr_ability" value="sniper"  />
 
-                <div class="select-switch-display select-switch-display-8 ability-sniper">
-                    <div class="ability-text select-switch-content-8">
-                        If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack.
+                <div class="select-switch-display select-switch-display-7 ability-sniper">
+                    <div class="ability-text select-switch-content-7">
+                        If you don't do any actions at all this turn, you can take aim and add all actions as Free Ranged Attack action next turn. You lose these free actions the moment you do any action besides ranged attack next turn.
                     </div>
                 </div>
             
         
              
-                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-9" name="attr_ability" value="tinkerer"  />
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-8" name="attr_ability" value="tinkerer"  />
 
-                <div class="select-switch-display select-switch-display-9 ability-tinkerer">
-                    <div class="ability-text select-switch-content-9">
+                <div class="select-switch-display select-switch-display-8 ability-tinkerer">
+                    <div class="ability-text select-switch-content-8">
                         Create a distraction device out of combat by using 1 stamina and 1 item. The device draws nearby zombies.
                     </div>
                 </div>
@@ -256,7 +244,10 @@
 
             </div>
 
-            <div class="action-dodge"><button type="roll" class="card-roll-btn" value="!!aproll pool=@{stamina} cost=@{rollcost}  title='Dodge' action='@{character_name} attempts to dodge!' target='@{guard_skill}' counter='fatigue' amountmod='-@{fatigue}'">Dodge</button></div>
+            <div class="sheet-row-flex">
+                <div class="action-dodge"><button type="roll" class="card-roll-btn" value="!!aproll pool=@{stamina} cost=@{rollcost}  title='Dodge' action='@{character_name} attempts to dodge!' target='@{guard_skill}' counter='fatigue' amountmod='-@{fatigue}'">Dodge</button></div>
+                <div class="action-move"><button type="action" name="act_moveSpaces">Run</button></div>
+            </div>
             <div class="sheet-equipment-slots">
                 
 
@@ -420,15 +411,7 @@
                     </div>
                     
                     
-                    <div class="card-accuracy card-block type-field type_firearms_weapon type_blunt_melee_weapon type_sharp_melee_weapon type_projectile_weapon type_throwing_weapon">
-                        <div class="card-field-label">
-                            Accuracy Mod
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_1" value="0"/>
-                        </div>
-                    </div>
-                    <name="@{}">
+                    
 
 
                     
@@ -444,8 +427,6 @@
                                     <option value="ammo_medium" >Medium</option>
                                 
                                     <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
                                 
                                     <option value="ammo_arrow" >Arrows</option>
                                 
@@ -637,15 +618,7 @@
                     </div>
                     
                     
-                    <div class="card-accuracy card-block type-field type_firearms_weapon type_blunt_melee_weapon type_sharp_melee_weapon type_projectile_weapon type_throwing_weapon">
-                        <div class="card-field-label">
-                            Accuracy Mod
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_2" value="0"/>
-                        </div>
-                    </div>
-                    <name="@{}">
+                    
 
 
                     
@@ -661,8 +634,6 @@
                                     <option value="ammo_medium" >Medium</option>
                                 
                                     <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
                                 
                                     <option value="ammo_arrow" >Arrows</option>
                                 
@@ -854,15 +825,7 @@
                     </div>
                     
                     
-                    <div class="card-accuracy card-block type-field type_firearms_weapon type_blunt_melee_weapon type_sharp_melee_weapon type_projectile_weapon type_throwing_weapon">
-                        <div class="card-field-label">
-                            Accuracy Mod
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_3" value="0"/>
-                        </div>
-                    </div>
-                    <name="@{}">
+                    
 
 
                     
@@ -878,8 +841,6 @@
                                     <option value="ammo_medium" >Medium</option>
                                 
                                     <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
                                 
                                     <option value="ammo_arrow" >Arrows</option>
                                 
@@ -1071,15 +1032,7 @@
                     </div>
                     
                     
-                    <div class="card-accuracy card-block type-field type_firearms_weapon type_blunt_melee_weapon type_sharp_melee_weapon type_projectile_weapon type_throwing_weapon">
-                        <div class="card-field-label">
-                            Accuracy Mod
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_4" value="0"/>
-                        </div>
-                    </div>
-                    <name="@{}">
+                    
 
 
                     
@@ -1095,8 +1048,6 @@
                                     <option value="ammo_medium" >Medium</option>
                                 
                                     <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
                                 
                                     <option value="ammo_arrow" >Arrows</option>
                                 
@@ -1288,15 +1239,7 @@
                     </div>
                     
                     
-                    <div class="card-accuracy card-block type-field type_firearms_weapon type_blunt_melee_weapon type_sharp_melee_weapon type_projectile_weapon type_throwing_weapon">
-                        <div class="card-field-label">
-                            Accuracy Mod
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_5" value="0"/>
-                        </div>
-                    </div>
-                    <name="@{}">
+                    
 
 
                     
@@ -1312,8 +1255,6 @@
                                     <option value="ammo_medium" >Medium</option>
                                 
                                     <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
                                 
                                     <option value="ammo_arrow" >Arrows</option>
                                 
@@ -1505,15 +1446,7 @@
                     </div>
                     
                     
-                    <div class="card-accuracy card-block type-field type_firearms_weapon type_blunt_melee_weapon type_sharp_melee_weapon type_projectile_weapon type_throwing_weapon">
-                        <div class="card-field-label">
-                            Accuracy Mod
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_equipment_accuracy_6" value="0"/>
-                        </div>
-                    </div>
-                    <name="@{}">
+                    
 
 
                     
@@ -1529,8 +1462,6 @@
                                     <option value="ammo_medium" >Medium</option>
                                 
                                     <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
                                 
                                     <option value="ammo_arrow" >Arrows</option>
                                 
@@ -1613,26 +1544,25 @@
     <div class="sheet-list">
         
             <div class="sheet-line">
+                
                 <div class="sheet-label">Arrows</div>
                 <input type="number" class="sheet-number" name="attr_ammo_arrow" value="0"/>
             </div>
         
             <div class="sheet-line">
-                <div class="sheet-label">Bolts</div>
-                <input type="number" class="sheet-number" name="attr_ammo_bolt" value="0"/>
-            </div>
-        
-            <div class="sheet-line">
+                
                 <div class="sheet-label">Heavy</div>
                 <input type="number" class="sheet-number" name="attr_ammo_heavy" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
                 <div class="sheet-label">Light</div>
                 <input type="number" class="sheet-number" name="attr_ammo_light" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
                 <div class="sheet-label">Medium</div>
                 <input type="number" class="sheet-number" name="attr_ammo_medium" value="0"/>
             </div>
@@ -1658,36 +1588,57 @@
     <div class="sheet-list">
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Blunt Melee' action='Blunt Melee roll!' target='@{blunt_melee_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Blunt Melee</div>
                 <input type="number" class="sheet-number" name="attr_blunt_melee_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Firearm' action='Firearm roll!' target='@{firearm_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Firearm</div>
                 <input type="number" class="sheet-number" name="attr_firearm_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Guard' action='Guard roll!' target='@{guard_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Guard</div>
                 <input type="number" class="sheet-number" name="attr_guard_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Projectile' action='Projectile roll!' target='@{projectile_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Projectile</div>
                 <input type="number" class="sheet-number" name="attr_projectile_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Sharp Melee' action='Sharp Melee roll!' target='@{sharp_melee_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Sharp Melee</div>
                 <input type="number" class="sheet-number" name="attr_sharp_melee_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Throw' action='Throw roll!' target='@{throw_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Throw</div>
                 <input type="number" class="sheet-number" name="attr_throw_skill" value="3"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Unarmed' action='Unarmed roll!' target='@{unarmed_melee_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Unarmed</div>
                 <input type="number" class="sheet-number" name="attr_unarmed_melee_skill" value="3"/>
             </div>
@@ -1713,41 +1664,65 @@
     <div class="sheet-list">
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Athletics' action='Athletics roll!' target='@{athletics_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Athletics</div>
                 <input type="number" class="sheet-number" name="attr_athletics_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Construction' action='Construction roll!' target='@{construction_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Construction</div>
                 <input type="number" class="sheet-number" name="attr_construction_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='First Aid' action='First Aid roll!' target='@{firstaid_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">First Aid</div>
                 <input type="number" class="sheet-number" name="attr_firstaid_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Hacking' action='Hacking roll!' target='@{hacking_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Hacking</div>
                 <input type="number" class="sheet-number" name="attr_hacking_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Lockpick' action='Lockpick roll!' target='@{lockpick_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Lockpick</div>
                 <input type="number" class="sheet-number" name="attr_lockpick_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Scout' action='Scout roll!' target='@{scout_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Scout</div>
                 <input type="number" class="sheet-number" name="attr_scout_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Socialize' action='Socialize roll!' target='@{social_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Socialize</div>
                 <input type="number" class="sheet-number" name="attr_social_skill" value="0"/>
             </div>
         
             <div class="sheet-line">
+                
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='@{stamina}' characterid='@{character_id}' cost='@{rollcost}' resource='ap:AP'  title='Stealth' action='Stealth roll!' target='@{stealth_skill}' amountmod='-@{fatigue}' counter='fatigue'"></button>
+                
                 <div class="sheet-label">Stealth</div>
                 <input type="number" class="sheet-number" name="attr_stealth_skill" value="0"/>
             </div>
@@ -1898,15 +1873,7 @@
                     </div>
                     
                     
-                    <div class="card-accuracy card-block type-field type_firearms_weapon type_blunt_melee_weapon type_sharp_melee_weapon type_projectile_weapon type_throwing_weapon">
-                        <div class="card-field-label">
-                            Accuracy Mod
-                        </div>
-                        <div class="card-field-input">
-                            <input type="number" class=" sheet-shy" name="attr_accuracy" value="0"/>
-                        </div>
-                    </div>
-                    <name="@{}">
+                    
 
 
                     
@@ -1922,8 +1889,6 @@
                                     <option value="ammo_medium" >Medium</option>
                                 
                                     <option value="ammo_heavy" >Heavy</option>
-                                
-                                    <option value="ammo_bolt" >Bolts</option>
                                 
                                     <option value="ammo_arrow" >Arrows</option>
                                 
@@ -2029,7 +1994,7 @@
                 </div>
                 
                 <div class="control">
-                    <button type="action" name="act_moveSpaces">Calculate Move</button>
+                    <button type="action" name="act_moveSpaces">Calculate Run</button>
                 </div>
                 
             </div>
@@ -2038,37 +2003,6 @@
 </div>
     </div>
 </div>
-
-
-
-<rolltemplate class="sheet-rolltemplate-zroll">
-    <div class="sheet-template-container" style="border: solid 2px black; padding: 5px">
-        <div class="sheet-zroll-header" style="color: white; background-color: purple; padding: 5px; font-weight: 900; border: solid 3px black">
-            {{name}}
-        </div>
-        <div class="zroll-row" style="font-size: 10px; font-style: italics; padding: 5px 10px;">
-            {{description}}
-        </div>
-        <div class="sheet-zroll-row" style="border: solid 1px black;">
-            <div class="sheet-zroll-result" style="display:inline-block; width: 30%; padding: 8%; box-sizing: border-box; border-right: solid 1px black; margin: 5px 0;">
-                <strong style="display: block; text-align: center; margin-bottom: 10px;">{{successlabel}}</strong>
-                <div style="font-size: 24px; font-weight: 900; text-align: center; margin-bottom: 20px;">{{success}}</div>
-
-                <div class="sheet-zroll-rolls" style="text-align: center;">
-                    {{successrolls}}
-                </div>
-            </div>
-            <div class="sheet-zroll-result" style="display:inline-block; width: 30%; padding: 8%; box-sizing: border-box; margin: 5px 0;">
-                <strong style="display: block; text-align: center; margin-bottom: 10px;">{{guardlabel}}</strong>
-                <div style="font-size: 24px; font-weight: 900; text-align: center; margin-bottom: 20px;">{{guard}}</div>
-
-                <div class="sheet-zroll-rolls" style="text-align: center;">
-                    {{guardrolls}}
-                </div>
-            </div>
-        </div>
-    </div>
-</rolltemplate>
 
 
 <script type="text/worker">
@@ -2081,13 +2015,9 @@
     	label: "Select an Ability",
     	description: ""
     };
-    var parkour = {
-    	id: "Speedster",
-    	description: "You can move 3 spaces at no cost on your turn."
-    };
     var brawler = {
     	id: "brawler",
-    	description: "Any excess guard is dealt as damage."
+    	description: "During Guard phase, any excess guard can be dealt as damage if you declare it ahead of time. You take double damage that guard phase."
     };
     var cheerleader = {
     	id: "cheerleader",
@@ -2103,7 +2033,7 @@
     };
     var sniper = {
     	id: "sniper",
-    	description: "If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack."
+    	description: "If you don't do any actions at all this turn, you can take aim and add all actions as Free Ranged Attack action next turn. You lose these free actions the moment you do any action besides ranged attack next turn."
     };
     var prepared = {
     	id: "prepared",
@@ -2112,7 +2042,6 @@
     };
     var abilities = {
     	abc: abc,
-    	parkour: parkour,
     	brawler: brawler,
     	cheerleader: cheerleader,
     	tinkerer: tinkerer,
@@ -2124,7 +2053,6 @@
     var abilities$1 = /*#__PURE__*/Object.freeze({
         __proto__: null,
         abc: abc,
-        parkour: parkour,
         brawler: brawler,
         cheerleader: cheerleader,
         tinkerer: tinkerer,
@@ -2161,12 +2089,6 @@
                     bundle: 30,
                     label: "Heavy",
                     fulllabel: "Heavy Ammo"
-                },
-                bolt: {
-                    id: "ammo_bolt",
-                    bundle: 5,
-                    label: "Bolts",
-                    fulllabel: "Bolts"
                 },
                 arrow: {
                     id: "ammo_arrow",
@@ -2315,7 +2237,7 @@
             },
             move: {
                 id:'moveSpaces',
-                label: "Calculate Move"
+                label: "Calculate Run"
             }
         }
 
@@ -2795,9 +2717,10 @@
         // Move
         // subtract 1
         on(`clicked:${fields$1.actions.move.id}`, function(evInfo){
-            getAttrs([fields$1.stats.ap.id], function(results){
+            getAttrs([fields$1.stats.ap.id, fields$1.stats.fatigue.id], function(results){
                 setAttrs({
-                    [fields$1.stats.ap.id]: Math.max(parseInt(results[fields$1.stats.ap.id], 10) - 1, 0)
+                    [fields$1.stats.ap.id]: Math.max(parseInt(results[fields$1.stats.ap.id], 10) - 1, 0),
+                    [fields$1.stats.fatigue.id]: Math.max(parseInt(results[fields$1.stats.fatigue.id], 10) + 3, 0)
                 });
             });
         });
