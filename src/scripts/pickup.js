@@ -73,7 +73,7 @@ function createInventoryItem(character, item){
         attr.current = item[key];
         attr.characterid = character.id;
 
-        if ('max' in fld && fld.max == true){
+        if ('max' in fld){
             attr.max = item[key];
 
             if (item.hasOwnProperty(key + '_max')){

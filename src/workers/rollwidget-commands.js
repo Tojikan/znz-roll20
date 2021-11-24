@@ -24,9 +24,10 @@ export function rollwidget(){
     // Move
     // subtract 1
     on(`clicked:${character.actions.move.id}`, function(evInfo){
-        getAttrs([character.stats.ap.id], function(results){
+        getAttrs([character.stats.ap.id, character.stats.fatigue.id], function(results){
             setAttrs({
-                [character.stats.ap.id]: Math.max(parseInt(results[character.stats.ap.id], 10) - 1, 0)
+                [character.stats.ap.id]: Math.max(parseInt(results[character.stats.ap.id], 10) - 1, 0),
+                [character.stats.fatigue.id]: Math.max(parseInt(results[character.stats.fatigue.id], 10) + 3, 0)
             });
         });
     });

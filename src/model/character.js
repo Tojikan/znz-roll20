@@ -28,12 +28,6 @@ export const fields = {
                 label: "Heavy",
                 fulllabel: "Heavy Ammo"
             },
-            bolt: {
-                id: "ammo_bolt",
-                bundle: 5,
-                label: "Bolts",
-                fulllabel: "Bolts"
-            },
             arrow: {
                 id: "ammo_arrow",
                 bundle: 5,
@@ -181,7 +175,7 @@ export const fields = {
         },
         move: {
             id:'moveSpaces',
-            label: "Calculate Move"
+            label: "Calculate Run"
         }
     }
 

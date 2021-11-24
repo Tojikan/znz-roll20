@@ -6,13 +6,9 @@
     	label: "Select an Ability",
     	description: ""
     };
-    var parkour = {
-    	id: "Speedster",
-    	description: "You can move 3 spaces at no cost on your turn."
-    };
     var brawler = {
     	id: "brawler",
-    	description: "Any excess guard is dealt as damage."
+    	description: "During Guard phase, any excess guard can be dealt as damage if you declare it ahead of time. You take double damage that guard phase."
     };
     var cheerleader = {
     	id: "cheerleader",
@@ -28,7 +24,7 @@
     };
     var sniper = {
     	id: "sniper",
-    	description: "If you don't attack or guard this turn, you can make a free attack roll and add that to next turn's ranged attack."
+    	description: "If you don't do any actions at all this turn, you can take aim and add all actions as Free Ranged Attack action next turn. You lose these free actions the moment you do any action besides ranged attack next turn."
     };
     var prepared = {
     	id: "prepared",
@@ -37,7 +33,6 @@
     };
     var abilities = {
     	abc: abc,
-    	parkour: parkour,
     	brawler: brawler,
     	cheerleader: cheerleader,
     	tinkerer: tinkerer,
@@ -49,7 +44,6 @@
     var abilities$1 = /*#__PURE__*/Object.freeze({
         __proto__: null,
         abc: abc,
-        parkour: parkour,
         brawler: brawler,
         cheerleader: cheerleader,
         tinkerer: tinkerer,
@@ -86,12 +80,6 @@
                     bundle: 30,
                     label: "Heavy",
                     fulllabel: "Heavy Ammo"
-                },
-                bolt: {
-                    id: "ammo_bolt",
-                    bundle: 5,
-                    label: "Bolts",
-                    fulllabel: "Bolts"
                 },
                 arrow: {
                     id: "ammo_arrow",
@@ -240,7 +228,7 @@
             },
             move: {
                 id:'moveSpaces',
-                label: "Calculate Move"
+                label: "Calculate Run"
             }
         }
 
@@ -308,7 +296,7 @@
         }
 
         let current = attr.get('current'),
-            newValue = parseInt(current, 10) + 1;
+            newValue = parseInt(current, 10) + 3;
 
         attr.setWithWorker({current: newValue});
 
@@ -730,352 +718,280 @@
 
     var snack = {
     	name: "Snack",
-    	type: "inventory",
-    	description: "Restore 1 AP (cannot exceed max). Cannot be used during combat",
+    	type: "consumable_item",
+    	description: "Remove 10 fatigue.",
     	flavor: "Organic, locally-sourced zombie-killing fuel in eco-friendly packaging.",
-    	quantity: 7
+    	quantity: 6
     };
     var energydrink = {
     	name: "Energy Drink",
-    	type: "inventory",
-    	description: "Gain 2 AP (cannot exceed max). Cannot be used during combat",
+    	type: "consumable_item",
+    	description: "Remove 20 fatigue.",
     	flavor: "It's got Electrolytes. It's what plants crave.",
-    	quantity: 5
+    	quantity: 4
     };
     var adrenaline = {
     	name: "Adrenaline",
-    	type: "inventory",
-    	description: "Gain 5 AP. Can exceed your max.",
+    	type: "consumable_item",
+    	description: "Remove all fatigue.",
     	flavor: "When you need a rush.",
-    	quantity: 3
+    	quantity: 1
     };
     var bandage = {
     	name: "Bandage",
-    	type: "inventory",
-    	description: "Restore 1d6 health. Cannot be used during combat.",
+    	type: "consumable_item",
+    	description: "Roll First Aid. Restore health equal to x2 of your roll.",
     	flavor: "It's even got a dinosaur on it!",
-    	quantity: 5
+    	quantity: 6
     };
     var firstaidkit = {
     	name: "First Aid Kit",
-    	type: "inventory",
-    	description: "Restore 2d6 health. Cannot be used during combat.",
-    	flavor: "It's basically just two bandages in a box.",
-    	quantity: 3
+    	type: "consumable_item",
+    	description: "Roll First Aid. Restore health equal to x5 of your roll.",
+    	flavor: "Good for keeping you not dead.",
+    	quantity: 4
     };
     var medkit = {
     	name: "Med Kit",
-    	type: "inventory",
-    	description: "Restore 4d6 health. Cannot be used during combat.",
+    	type: "consumable_item",
+    	description: "Roll First Aid. Restore health equal to x10 of your roll.",
     	flavor: "It's merely a flesh wound.",
-    	quantity: 2
+    	quantity: 1
     };
     var ammo = {
     	name: "Reload",
-    	type: "inventory",
-    	description: "Fill 1 Ranged weapon to its max ammo. Uses 3 AP to use during combat.",
-    	flavor: "All-purpose, one size fits all ammunition.",
-    	quantity: 15
+    	type: "consumable_item",
+    	description: "Choose one ammo type. Gain 1d30 of that ammo with a minimum of 10",
+    	flavor: "Schrodinger's Ammo.",
+    	quantity: 20
     };
     var backpack = {
     	name: "Fanny Pack",
-    	type: "equipment",
-    	description: "When this is equipped, increase your available inventory slots by 1.",
+    	type: "consumable_item",
+    	description: "Increase available inventory slots by 1. Delete this after use.",
     	flavor: "Stylish AND functional.",
-    	quantity: 4
-    };
-    var holster = {
-    	name: "Weapon Holster",
-    	type: "equipment",
-    	description: "When this is equipped, increase your available weapon slots by 1 (Up to a maximum of 4 weapon slots)",
-    	flavor: "Your standard handgun/rifle/sword/rocket launcher holder.",
-    	quantity: 3
+    	quantity: 10
     };
     var belt = {
-    	name: "Utiliy Belt",
-    	type: "inventory",
-    	description: "Delete this item. Increase your available equipment slots by 1 (Up to a maximum of 5 equipment slots)",
+    	name: "Utility Belt",
+    	type: "consumable_item",
+    	description: "Increase your available equipment slots by 1 (Up to a maximum of 6 equipment slots). Delete this after use.",
     	flavor: "Batman would be jealous.",
-    	quantity: 3
+    	quantity: 10
     };
-    var barricade1 = {
+    var barricade = {
     	name: "Sandbags!",
-    	type: "inventory",
-    	description: "Delete this item. Build a barricade anywhere with 2d6 health. Cannot use during combat",
+    	type: "consumable_item",
+    	description: "Roll Construction. Build a barricade anywhere with health equal to 5x your roll. Delete this after use.",
     	flavor: "Made with really, really lightweight sand.",
-    	quantity: 6
-    };
-    var barricade2 = {
-    	name: "Boards and Nails",
-    	type: "inventory",
-    	description: "Delete this item. Build a barricade with 4d6 health. Cannot use during combat",
-    	flavor: "No hammer required.",
-    	quantity: 4
+    	quantity: 10
     };
     var armor1 = {
-    	name: "Improvised Armor",
-    	type: "equipment",
-    	description: "Increase your Armor by 1.",
+    	name: "Duct Tape Armguard",
+    	type: "armor_item",
     	flavor: "Enough Duct Tape can do just about anything.",
+    	damage: 5,
+    	uses: 5,
     	quantity: 3
     };
     var armor2 = {
-    	name: "Sporting Pads",
+    	name: "Sporting Guards",
     	type: "equipment",
-    	description: "Increase your Armor by 2.",
+    	damage: 5,
+    	uses: 7,
     	flavor: "Perfect for doing that sport with the sporting ball.",
-    	quantity: 2
+    	quantity: 3
     };
     var armor3 = {
-    	name: "Tactical Gear",
+    	name: "Riot Gear",
     	type: "equipment",
-    	description: "Increase your Armor by 4.",
+    	damage: 7,
+    	uses: 10,
     	flavor: "Looking pretty tacticool.",
     	quantity: 2
     };
     var armor4 = {
     	name: "Plate Armor",
     	type: "equipment",
-    	description: "Increase your Armor by 8. Reduce your dodge by 2.",
+    	damage: 15,
+    	uses: 5,
     	flavor: "Time to get medieval on their ass.",
-    	quantity: 1
-    };
-    var dodge1 = {
-    	name: "Exercise Clothes",
-    	type: "equipment",
-    	description: "Increase your dodge roll by 1.",
-    	flavor: "You feel just a tad bit more limber.",
     	quantity: 2
-    };
-    var dodge2 = {
-    	name: "Arm Guards",
-    	type: "equipment",
-    	description: "Increase your dodge roll by 2.",
-    	flavor: "Good luck biting into these.",
-    	quantity: 2
-    };
-    var dodge3 = {
-    	name: "Shield",
-    	type: "equipment",
-    	description: "Increase your dodge roll by 3.",
-    	flavor: "It's not made of vibranium, but it's a decent shield.",
-    	quantity: 2
-    };
-    var dodge4 = {
-    	name: "Really nice sneakers.",
-    	type: "equipment",
-    	description: "Increase your dodge roll by 6. Has no effect if you have any bonus armor at all. Only one can be equipped at a time.",
-    	flavor: "So light and breezy",
-    	quantity: 1
     };
     var grenade = {
     	name: "Grenade",
-    	type: "equipment",
-    	description: "Deal 40 damage to a square within 7 squares and all its adjacent squares.",
+    	type: "throwing_weapon",
+    	damage: 30,
+    	uses: 2,
+    	description: "Damage is dealt to all adjacent squares.",
     	flavor: "Just a casual fragmentation grenade lying around.",
+    	quantity: 5
+    };
+    var sharp1 = {
+    	name: "Knife",
+    	type: "sharp_melee_weapon",
+    	damage: 5,
+    	uses: 6,
+    	flavor: "Great for cutting vegetables, fruit, and brains.",
     	quantity: 3
     };
-    var molotov = {
-    	name: "Molotov",
-    	type: "equipment",
-    	description: "Light a square and its adjacent squares on fire within 7 squares for 3 rounds. Deals 10 damage and 5 ongoing damage to anyone who walks through.",
-    	flavor: "Liquor? I barely even lit her on fire!",
+    var sharp2 = {
+    	name: "Machete",
+    	type: "sharp_melee_weapon",
+    	damage: 8,
+    	uses: 8,
+    	flavor: "Great tool for re-deading the undead.",
+    	quantity: 3
+    };
+    var sharp3 = {
+    	name: "Axe",
+    	type: "sharp_melee_weapon",
+    	weapontype: "melee",
+    	damage: 12,
+    	uses: 12,
+    	flavor: "Stumped?",
     	quantity: 2
     };
-    var knife = {
-    	name: "Knife",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d4",
-    	uses: 20,
-    	flavor: "Great for cutting vegetables, fruit, and brains.",
-    	quantity: 1
-    };
-    var baseballbat = {
-    	name: "Baseball Bat",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d6",
-    	uses: 30,
-    	flavor: "It is now past the time... for America's favorite pastime.",
-    	quantity: 1
-    };
-    var nailbat = {
-    	name: "Nailbat",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d8+2",
-    	uses: 20,
-    	flavor: "Peanut Butter and Jelly. Burger and Fries. Ham and Cheese. Nails and a Bat. ",
-    	quantity: 1
-    };
-    var combatknife = {
-    	name: "Ka-Bar Knife",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d8",
-    	uses: 40,
-    	flavor: "Hoo-rah.",
-    	quantity: 1
-    };
-    var machete = {
-    	name: "Machete",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d10",
-    	uses: 40,
-    	flavor: "Great tool for re-deading the undead.",
-    	quantity: 1
-    };
-    var axe = {
-    	name: "Axe",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d12",
-    	uses: 50,
-    	flavor: "Stumped?",
-    	quantity: 1
-    };
-    var katana = {
+    var sharp4 = {
     	name: "Katana",
-    	type: "weapon",
+    	type: "sharp_melee_weapon",
     	weapontype: "melee",
-    	damage: "1d12+4",
-    	uses: 40,
+    	damage: 15,
+    	uses: 10,
     	flavor: "Forgive me sensei, I must go all out. Just this once.",
     	quantity: 1
     };
-    var sword = {
-    	name: "Sword",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d16",
-    	uses: 60,
-    	flavor: "Why socialize when you could study the way of the sword?",
-    	quantity: 1
-    };
-    var chainsaw = {
+    var sharp5 = {
     	name: "Chainsaw",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "1d20+10",
-    	uses: 10,
+    	type: "sharp_melee_weapon",
+    	damage: 20,
+    	uses: 5,
     	flavor: "It's about to be a massacre.",
     	quantity: 1
     };
-    var lawnmower = {
+    var blunt1 = {
+    	name: "Baseball Bat",
+    	type: "blunt_melee_weapon",
+    	damage: 3,
+    	uses: 10,
+    	flavor: "It is now past the time... for America's favorite pastime.",
+    	quantity: 3
+    };
+    var blunt2 = {
+    	name: "Truncheon",
+    	type: "blunt_melee_weapon",
+    	damage: 5,
+    	uses: 15,
+    	flavor: "Not to be mistaken for a luncheon.",
+    	quantity: 3
+    };
+    var blunt3 = {
+    	name: "Nailbat",
+    	type: "blunt_melee_weapon",
+    	damage: 8,
+    	uses: 15,
+    	flavor: "Peanut Butter and Jelly. Burger and Fries. Ham and Cheese. Nails and a Bat. ",
+    	quantity: 2
+    };
+    var blunt4 = {
+    	name: "Sledgehammer",
+    	type: "blunt_melee_weapon",
+    	damage: 10,
+    	uses: 15,
+    	flavor: "Hammertime.",
+    	quantity: 1
+    };
+    var blunt5 = {
     	name: "Lawnmower",
-    	type: "weapon",
-    	weapontype: "melee",
-    	damage: "25",
+    	type: "blunt_melee_weapon",
+    	damage: 20,
     	uses: 1,
     	description: "The turn you use this, you attack as you move, dealing damage to each square you move through",
     	flavor: "Party's over.",
     	quantity: 1
     };
-    var handgun = {
+    var gun1 = {
     	name: "Handgun",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d8",
-    	uses: 10,
-    	ammotype: "ammo_1d6",
+    	type: "firearms_weapon",
+    	damage: 8,
+    	uses: 7,
+    	ammotype: "ammo_light",
     	flavor: "Pew pew pew.",
-    	quantity: 1
+    	quantity: 3
     };
-    var revolver = {
-    	name: "Revolver",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d12r<4",
-    	uses: 6,
-    	ammotype: "ammo_d8",
+    var gun2 = {
+    	name: "Magnum Revolver",
+    	type: "firearms_weapon",
+    	damage: 14,
+    	uses: 4,
+    	ammotype: "ammo_heavy",
     	flavor: "Do you feel lucky?",
-    	quantity: 1
+    	quantity: 2
     };
-    var uzi = {
+    var gun3 = {
     	name: "Uzi",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d6",
-    	uses: 20,
-    	ammotype: "ammo_1d6",
+    	type: "firearms_weapon",
+    	damage: 6,
+    	uses: 10,
+    	ammotype: "ammo_light",
     	flavor: "Spray and Pray",
-    	quantity: 1
+    	quantity: 2
     };
-    var bow = {
-    	name: "Bow",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d10r<5",
-    	uses: 3,
-    	ammotype: "ammo_arrow",
-    	description: "If you kill your target, leave a marker at the target. You can regain all spent Arrows used this turn if you pick up the marker",
-    	flavor: "Silent but deadly.",
-    	quantity: 1
-    };
-    var shotgun = {
+    var gun4 = {
     	name: "Shotgun",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "4d4",
-    	uses: 5,
-    	ammotype: "ammo_d4",
+    	type: "firearms_weapon",
+    	damage: 12,
+    	uses: 6,
+    	ammotype: "ammo_medium",
     	flavor: "Hail to the King, baby.",
-    	quantity: 1
+    	quantity: 2
     };
-    var assaultrifle = {
+    var gun5 = {
     	name: "Assault Rifle",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d8+1",
-    	uses: 25,
-    	ammotype: "ammo_d10",
+    	type: "firearms_weapon",
+    	damage: 10,
+    	uses: 12,
+    	ammotype: "ammo_medium",
     	flavor: "Now we're talking.",
-    	quantity: 1
+    	quantity: 2
     };
-    var snipperrifle = {
+    var gun6 = {
     	name: "Sniper Rifle",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d20r<8",
-    	uses: 5,
-    	ammotype: "ammo_d12",
+    	type: "firearms_weapon",
+    	damage: 18,
+    	uses: 4,
+    	ammotype: "ammo_heavy",
+    	flavor: "BOOM! Headshot!",
+    	quantity: 2
+    };
+    var gun7 = {
+    	name: "Machine Gun",
+    	type: "firearms_weapon",
+    	damage: 12,
+    	uses: 20,
+    	ammotype: "ammo_heavy",
     	flavor: "BOOM! Headshot!",
     	quantity: 1
     };
-    var machinegun = {
-    	name: "Machine Gun",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d10+2",
-    	uses: 30,
-    	ammotype: "ammo_d20",
-    	description: "",
-    	flavor: "Our bullets will blot out the sun.",
-    	quantity: 1
+    var bow1 = {
+    	name: "Bow",
+    	type: "projectile_weapon",
+    	damage: 15,
+    	uses: 1,
+    	ammotype: "ammo_arrow",
+    	description: "If you hit your target, leave a marker at the target. You can regain any spent arrows this turn.",
+    	flavor: "Silent but deadly.",
+    	quantity: 2
     };
-    var grenadelauncher = {
-    	name: "Grenade Launcher",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "1d30r<10",
-    	uses: 5,
-    	ammotype: "ammo_d20",
-    	description: "This cannot be reloaded. If hitting single targets, it will damage adjacent squares to the target.",
-    	flavor: "Our bullets will blot out the sun.",
-    	quantity: 1
-    };
-    var flamethrower = {
-    	name: "Flamethrower",
-    	type: "weapon",
-    	weapontype: "ranged",
-    	damage: "20",
-    	uses: 5,
-    	ammotype: "ammo_d20",
-    	description: "This cannot be reloaded. This weapon fires in a line of 5 spaces, dealing damage to all targets within the line.",
-    	flavor: "Turns out the zombies have a weakness to being lit on freakin' fire.",
-    	quantity: 1
+    var bow2 = {
+    	name: "Compound Bow",
+    	type: "projectile_weapon",
+    	damage: 20,
+    	uses: 1,
+    	ammotype: "ammo_arrow",
+    	description: "If you hit your target, leave a marker at the target. You can regain any spent arrows this turn.",
+    	flavor: "How do you like them apples?",
+    	quantity: 2
     };
     var items = {
     	snack: snack,
@@ -1086,40 +1002,32 @@
     	medkit: medkit,
     	ammo: ammo,
     	backpack: backpack,
-    	holster: holster,
     	belt: belt,
-    	barricade1: barricade1,
-    	barricade2: barricade2,
+    	barricade: barricade,
     	armor1: armor1,
     	armor2: armor2,
     	armor3: armor3,
     	armor4: armor4,
-    	dodge1: dodge1,
-    	dodge2: dodge2,
-    	dodge3: dodge3,
-    	dodge4: dodge4,
     	grenade: grenade,
-    	molotov: molotov,
-    	knife: knife,
-    	baseballbat: baseballbat,
-    	nailbat: nailbat,
-    	combatknife: combatknife,
-    	machete: machete,
-    	axe: axe,
-    	katana: katana,
-    	sword: sword,
-    	chainsaw: chainsaw,
-    	lawnmower: lawnmower,
-    	handgun: handgun,
-    	revolver: revolver,
-    	uzi: uzi,
-    	bow: bow,
-    	shotgun: shotgun,
-    	assaultrifle: assaultrifle,
-    	snipperrifle: snipperrifle,
-    	machinegun: machinegun,
-    	grenadelauncher: grenadelauncher,
-    	flamethrower: flamethrower
+    	sharp1: sharp1,
+    	sharp2: sharp2,
+    	sharp3: sharp3,
+    	sharp4: sharp4,
+    	sharp5: sharp5,
+    	blunt1: blunt1,
+    	blunt2: blunt2,
+    	blunt3: blunt3,
+    	blunt4: blunt4,
+    	blunt5: blunt5,
+    	gun1: gun1,
+    	gun2: gun2,
+    	gun3: gun3,
+    	gun4: gun4,
+    	gun5: gun5,
+    	gun6: gun6,
+    	gun7: gun7,
+    	bow1: bow1,
+    	bow2: bow2
     };
 
     var items$1 = /*#__PURE__*/Object.freeze({
@@ -1132,40 +1040,32 @@
         medkit: medkit,
         ammo: ammo,
         backpack: backpack,
-        holster: holster,
         belt: belt,
-        barricade1: barricade1,
-        barricade2: barricade2,
+        barricade: barricade,
         armor1: armor1,
         armor2: armor2,
         armor3: armor3,
         armor4: armor4,
-        dodge1: dodge1,
-        dodge2: dodge2,
-        dodge3: dodge3,
-        dodge4: dodge4,
         grenade: grenade,
-        molotov: molotov,
-        knife: knife,
-        baseballbat: baseballbat,
-        nailbat: nailbat,
-        combatknife: combatknife,
-        machete: machete,
-        axe: axe,
-        katana: katana,
-        sword: sword,
-        chainsaw: chainsaw,
-        lawnmower: lawnmower,
-        handgun: handgun,
-        revolver: revolver,
-        uzi: uzi,
-        bow: bow,
-        shotgun: shotgun,
-        assaultrifle: assaultrifle,
-        snipperrifle: snipperrifle,
-        machinegun: machinegun,
-        grenadelauncher: grenadelauncher,
-        flamethrower: flamethrower,
+        sharp1: sharp1,
+        sharp2: sharp2,
+        sharp3: sharp3,
+        sharp4: sharp4,
+        sharp5: sharp5,
+        blunt1: blunt1,
+        blunt2: blunt2,
+        blunt3: blunt3,
+        blunt4: blunt4,
+        blunt5: blunt5,
+        gun1: gun1,
+        gun2: gun2,
+        gun3: gun3,
+        gun4: gun4,
+        gun5: gun5,
+        gun6: gun6,
+        gun7: gun7,
+        bow1: bow1,
+        bow2: bow2,
         'default': items
     });
 
@@ -1239,7 +1139,7 @@
             attr.current = item[key];
             attr.characterid = character.id;
 
-            if ('max' in fld && fld.max == true){
+            if ('max' in fld){
                 attr.max = item[key];
 
                 if (item.hasOwnProperty(key + '_max')){
@@ -1347,7 +1247,7 @@
                 result.multiply = params.multiply[0];
             }
 
-            let amt = Math.max(params.pool + params.amountmod, 1); //min amount - 1
+            let amt = Math.max(params.pool + Math.floor((parseInt((params.amountmod/10), 10) || 0)), 1); //min amount - 1
             result.roll = generateRollText(amt, params.dice, params.target, params.modifier, params.difficulty);
 
             return result;

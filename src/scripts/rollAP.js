@@ -89,7 +89,7 @@ export const RollAP = (function(){
             result.multiply = params.multiply[0];
         }
 
-        let amt = Math.max(params.pool + params.amountmod, 1); //min amount - 1
+        let amt = Math.max(params.pool + Math.floor((parseInt((params.amountmod/10), 10) || 0)), 1); //min amount - 1
         result.roll = generateRollText(amt, params.dice, params.target, params.modifier, params.difficulty);
 
         return result;
