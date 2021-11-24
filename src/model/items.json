@@ -1,0 +1,287 @@
+{
+    "snack": {
+        "name": "Snack",
+        "type": "consumable_item",
+        "description": "Remove 10 fatigue.",
+        "flavor": "Organic, locally-sourced zombie-killing fuel in eco-friendly packaging.",
+        "quantity": 6
+    },
+    "energydrink": {
+        "name": "Energy Drink",
+        "type": "consumable_item",
+        "description": "Remove 20 fatigue.",
+        "flavor": "It's got Electrolytes. It's what plants crave.",
+        "quantity": 4
+    },
+    "adrenaline": {
+        "name": "Adrenaline",
+        "type": "consumable_item",
+        "description": "Remove all fatigue.",
+        "flavor": "When you need a rush.",
+        "quantity": 1
+    },
+
+
+    "bandage": {
+        "name": "Bandage",
+        "type": "consumable_item",
+        "description": "Roll First Aid. Restore health equal to x2 of your roll.",
+        "flavor": "It's even got a dinosaur on it!",
+        "quantity": 6
+    },
+    "firstaidkit": {
+        "name": "First Aid Kit",
+        "type": "consumable_item",
+        "description": "Roll First Aid. Restore health equal to x5 of your roll.",
+        "flavor": "Good for keeping you not dead.",
+        "quantity": 4
+    },
+    "medkit": {
+        "name": "Med Kit",
+        "type": "consumable_item",
+        "description": "Roll First Aid. Restore health equal to x10 of your roll.",
+        "flavor": "It's merely a flesh wound.",
+        "quantity": 1
+    },
+
+
+    "ammo": {
+        "name": "Reload",
+        "type": "consumable_item",
+        "description": "Choose one ammo type. Gain 1d30 of that ammo with a minimum of 10",
+        "flavor": "Schrodinger's Ammo.",
+        "quantity": 20
+    },
+
+    "backpack": {
+        "name": "Fanny Pack",
+        "type": "consumable_item",
+        "description": "Increase available inventory slots by 1. Delete this after use.",
+        "flavor": "Stylish AND functional.",
+        "quantity": 10
+    },
+
+    "belt": {
+        "name": "Utility Belt",
+        "type": "consumable_item",
+        "description": "Increase your available equipment slots by 1 (Up to a maximum of 6 equipment slots). Delete this after use.",
+        "flavor": "Batman would be jealous.",
+        "quantity": 10
+    },
+
+    "barricade": {
+        "name": "Sandbags!",
+        "type": "consumable_item",
+        "description": "Roll Construction. Build a barricade anywhere with health equal to 5x your roll. Delete this after use.",
+        "flavor": "Made with really, really lightweight sand.",
+        "quantity": 10
+    },
+    "armor1": {
+        "name": "Duct Tape Armguard",
+        "type": "armor_item",
+        "flavor": "Enough Duct Tape can do just about anything.",
+        "damage": 5,
+        "uses": 5,
+        "quantity": 3
+    },
+    "armor2": {
+        "name": "Sporting Guards",
+        "type": "equipment",
+        "damage": 5,
+        "uses": 7,
+        "flavor": "Perfect for doing that sport with the sporting ball.",
+        "quantity": 3
+    },
+    "armor3": {
+        "name": "Riot Gear",
+        "type": "equipment",
+        "damage": 7,
+        "uses": 10,
+        "flavor": "Looking pretty tacticool.",
+        "quantity": 2
+    },
+    "armor4": {
+        "name": "Plate Armor",
+        "type": "equipment",
+        "damage": 15,
+        "uses": 5,
+        "flavor": "Time to get medieval on their ass.",
+        "quantity": 2
+    },
+    "grenade": {
+        "name": "Grenade",
+        "type": "throwing_weapon",
+        "damage": 30,
+        "uses": 2,
+        "description": "Damage is dealt to all adjacent squares.",
+        "flavor": "Just a casual fragmentation grenade lying around.",
+        "quantity": 5
+    },
+
+    "sharp1": {
+        "name": "Knife",
+        "type": "sharp_melee_weapon",
+        "damage": 5,
+        "uses": 6,
+        "flavor": "Great for cutting vegetables, fruit, and brains.",
+        "quantity": 3
+    },
+    "sharp2": {
+        "name": "Machete",
+        "type": "sharp_melee_weapon",
+        "damage": 8,
+        "uses": 8,
+        "flavor": "Great tool for re-deading the undead.",
+        "quantity": 3
+    },
+    "sharp3": {
+        "name": "Axe",
+        "type": "sharp_melee_weapon",
+        "weapontype": "melee",
+        "damage": 12,
+        "uses": 12,
+        "flavor": "Stumped?",
+        "quantity": 2
+    },
+    "sharp4": {
+        "name": "Katana",
+        "type": "sharp_melee_weapon",
+        "weapontype": "melee",
+        "damage": 15,
+        "uses": 10,
+        "flavor": "Forgive me sensei, I must go all out. Just this once.",
+        "quantity": 1
+    },
+    "sharp5": {
+        "name": "Chainsaw",
+        "type": "sharp_melee_weapon",
+        "damage": 20,
+        "uses": 5,
+        "flavor": "It's about to be a massacre.",
+        "quantity": 1
+    },
+    "blunt1": {
+        "name": "Baseball Bat",
+        "type": "blunt_melee_weapon",
+        "damage": 3,
+        "uses": 10,
+        "flavor": "It is now past the time... for America's favorite pastime.",
+        "quantity": 3
+    },
+    "blunt2": {
+        "name": "Truncheon",
+        "type": "blunt_melee_weapon",
+        "damage": 5,
+        "uses": 15,
+        "flavor": "Not to be mistaken for a luncheon.",
+        "quantity": 3
+    },
+    "blunt3": {
+        "name": "Nailbat",
+        "type": "blunt_melee_weapon",
+        "damage": 8,
+        "uses": 15,
+        "flavor": "Peanut Butter and Jelly. Burger and Fries. Ham and Cheese. Nails and a Bat. ",
+        "quantity": 2
+    },
+    "blunt4": {
+        "name": "Sledgehammer",
+        "type": "blunt_melee_weapon",
+        "damage": 10,
+        "uses": 15,
+        "flavor": "Hammertime.",
+        "quantity": 1
+    },
+    "blunt5": {
+        "name": "Lawnmower",
+        "type": "blunt_melee_weapon",
+        "damage": 20,
+        "uses": 1,
+        "description": "The turn you use this, you attack as you move, dealing damage to each square you move through",
+        "flavor": "Party's over.",
+        "quantity": 1
+    },
+    "gun1": {
+        "name": "Handgun",
+        "type": "firearms_weapon",
+        "damage": 8,
+        "uses": 7,
+        "ammotype": "ammo_light",
+        "flavor": "Pew pew pew.",
+        "quantity": 3
+    },
+    "gun2": {
+        "name": "Magnum Revolver",
+        "type": "firearms_weapon",
+        "damage": 14,
+        "uses": 4,
+        "ammotype": "ammo_heavy",
+        "flavor": "Do you feel lucky?",
+        "quantity": 2
+    },
+    "gun3": {
+        "name": "Uzi",
+        "type": "firearms_weapon",
+        "damage": 6,
+        "uses": 10,
+        "ammotype": "ammo_light",
+        "flavor": "Spray and Pray",
+        "quantity": 2
+    },
+    "gun4": {
+        "name": "Shotgun",
+        "type": "firearms_weapon",
+        "damage": 12,
+        "uses": 6,
+        "ammotype": "ammo_medium",
+        "flavor": "Hail to the King, baby.",
+        "quantity": 2
+    },
+    "gun5": {
+        "name": "Assault Rifle",
+        "type": "firearms_weapon",
+        "damage": 10,
+        "uses": 12,
+        "ammotype": "ammo_medium",
+        "flavor": "Now we're talking.",
+        "quantity": 2
+    },
+    "gun6": {
+        "name": "Sniper Rifle",
+        "type": "firearms_weapon",
+        "damage": 18,
+        "uses": 4,
+        "ammotype": "ammo_heavy",
+        "flavor": "BOOM! Headshot!",
+        "quantity": 2
+    },
+    "gun7": {
+        "name": "Machine Gun",
+        "type": "firearms_weapon",
+        "damage": 12,
+        "uses": 20,
+        "ammotype": "ammo_heavy",
+        "flavor": "BOOM! Headshot!",
+        "quantity": 1
+    },
+    "bow1": {
+        "name": "Bow",
+        "type": "projectile_weapon",
+        "damage": 15,
+        "uses": 1,
+        "ammotype": "ammo_arrow",
+        "description": "If you hit your target, leave a marker at the target. You can regain any spent arrows this turn.",
+        "flavor": "Silent but deadly.",
+        "quantity": 2
+    },
+    "bow2": {
+        "name": "Compound Bow",
+        "type": "projectile_weapon",
+        "damage": 20,
+        "uses": 1,
+        "ammotype": "ammo_arrow",
+        "description": "If you hit your target, leave a marker at the target. You can regain any spent arrows this turn.",
+        "flavor": "How do you like them apples?",
+        "quantity": 2
+    }
+}

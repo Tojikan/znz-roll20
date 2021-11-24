@@ -1,0 +1,236 @@
+// General Card
+.sheet-card {
+    
+    select {
+        height: 2rem;
+        padding: 0;
+        margin: 0;
+    }
+    
+    
+    // FIELDS
+    .card-field-label {
+        font-weight: 700;
+        font-size: $medium;
+
+        //for select in the label (such as for ammo type)
+        select {
+            display: inline-block;
+            width: 50%;
+            text-align: center;
+            font-size: $xSmall;
+        }
+    }
+
+    .sheet-max {
+        input {
+            width: 4rem;
+        }
+    }
+
+    //Name
+    .card-name {
+        margin-bottom: 1.2rem;
+        input[type=text]{
+            font-weight:700;
+            color: $black;
+            border: none;
+            border-bottom: solid 3px $black;
+    
+            &::placeholder {
+                color: $gray;
+                font-weight: 300;
+            }
+        }
+    }
+
+    // Horizontal - Label then Field
+    .card-line {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+        margin-bottom: 1rem;
+        
+        .card-field-label{
+            flex-basis: 50%;
+
+        }
+    
+        select,
+        input {
+            font-size: $medium;
+            padding: 0;
+            text-align: center;
+        }
+    }
+
+    // Vertical - Label then Field
+    .card-block {
+        text-align: center;
+        padding: 0 0.5rem;
+        margin-bottom: 1rem;
+        flex-basis: 40%;
+        flex-grow: 1;
+
+        .card-field-label{
+            font-size: $xSmall;
+        }
+
+        .card-field-input {
+            width: 100%;
+            
+            input {
+                text-align: center;
+                width: 100%;
+                font-size: $medium;
+            }
+        }
+    }
+
+
+    // Type Select
+    .sheet-card-type {
+        display: none; //Hide by default; only shows in inventory
+    
+        select {
+            font-size: $xSmall;
+        }
+    }
+
+    //Textarea fields
+    .card-notes{
+        margin-top: 1rem;
+        border: solid 2px $gray;
+        border-radius: 1rem;
+        padding: 0.5rem;
+        
+        textarea {
+            height: 7rem;
+            box-sizing: border-box;
+            font-size: $small;
+            margin-bottom: 0;
+        }
+
+        span {
+            font-style: italic;
+            font-size: $small;
+        }
+    }
+
+    //Actions Buttons
+    .card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 1rem -0.5rem;
+
+        .card-action {
+            padding: 0 0.5rem;
+            display: none;
+            margin-bottom: 1rem;
+        }
+
+        .action-deleteitem {
+            button {
+                background-color: $red;
+                color: $white;
+            }
+        }
+
+        .action-exportitem {
+            button {
+                background: none;
+                border: solid 1px $black;
+                border-radius: 0;
+                
+                &:before {
+                    content: none;
+                }
+            }
+        }
+    }
+
+    //Uses Specific
+    .card-uses {
+        &.card-block {
+            .card-field-label {
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+
+// Equipment Specific
+.sheet-equipment-slots {
+    .sheet-card{
+        .card-actions {
+            .type_equipment {
+                display: block;
+            }
+        }
+    }
+}
+
+
+
+
+// Inventory Specific
+.sheet-inventory {
+    margin-top: 1rem;
+    
+    .sheet-slot-section {
+        .sheet-slot {
+            display: block;
+        }
+    }
+    
+    .repcontainer {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -10px;
+        margin-right: -10px;
+
+        .repitem {
+            flex-basis: 25%;
+        }
+    }
+
+    .sheet-card {
+        .sheet-card-type {
+            display: block;
+            width:60%;
+            
+            select {
+                padding: 0 0.6rem;
+            }
+        }
+
+        .type-label {
+            display: none;
+        }
+    }
+    
+
+    .repcontrol {
+        .repcontrol_edit {
+            float: none;
+            margin-right: 2rem;
+        }
+    }
+
+    .sheet-wrap {
+        flex-wrap: wrap;
+    }
+
+    .sheet-card{
+        .card-actions {
+            .type_inventory {
+                display: block;
+            }
+        }
+    }
+}
+
+
+

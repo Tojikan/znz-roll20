@@ -1,0 +1,18 @@
+    <div class="sheet-inventory">
+        <div class="slot-section">
+            <div class="sheet-row-flex sheet-label-row">
+                <div class="sheet-label">{{fields.character.inventory | getLabel}}</div>
+                <div class="sheet-sublabel">
+                    Slots:
+                    <input type="text" class="sheet-number sheet-shy" name="attr_{{fields.character.inventory | getAttr}}" value="{{fields.character.inventory.default}}"/>
+                </div>
+            </div>
+            <fieldset class="repeating_inventory">
+                <div class="slot">
+                    <div class="slot-content-wrapper">
+                        {{ card.create("", "")}}
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div> 

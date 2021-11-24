@@ -1,0 +1,658 @@
+/**
+* Variables used throughout styles
+*/
+/**
+    Hide/Display an element when a sibling checkbox is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+/**
+    Hide/Display an element within a parent element when a sibling checkbox of parent is checked
+
+    $elClass - class of content to show/hide
+    $toggleClass - class of hidden input
+**/
+.sheet-main {
+  flex-basis: 75%; }
+
+.sheet-sidebar {
+  flex-basis: 25%; }
+
+.sheet-character label {
+  font-size: 1.8rem; }
+
+.sheet-row-flex {
+  display: flex; }
+  .sheet-row-flex.space-around {
+    justify-content: space-around; }
+  .sheet-row-flex.space-between {
+    justify-content: space-between; }
+  .sheet-row-flex.align-end {
+    align-items: flex-end; }
+  .sheet-row-flex.align-start {
+    align-items: flex-start; }
+  .sheet-row-flex.vert {
+    flex-direction: column; }
+  .sheet-row-flex.wrap {
+    flex-wrap: wrap; }
+
+.sheet-divider {
+  margin: 0 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 900; }
+
+.sheet-input {
+  text-align: center; }
+
+.sheet-hidden {
+  display: none; }
+
+.sheet-subtext {
+  font-size: 1.2rem; }
+
+.sheet-label-row {
+  justify-content: start;
+  align-items: baseline; }
+  .sheet-label-row .sheet-label {
+    display: inline-block;
+    width: auto;
+    margin-right: 2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem; }
+  .sheet-label-row .sheet-sublabel {
+    font-size: 1.2rem; }
+    .sheet-label-row .sheet-sublabel input {
+      font-size: 1.2rem; }
+      .sheet-label-row .sheet-sublabel input.sheet-shy {
+        padding: 0;
+        width: 2.5rem; }
+
+.gridrow {
+  display: flex;
+  margin-left: -15px;
+  margin-right: 15px; }
+  .gridrow .col {
+    padding-left: 15px;
+    padding-right: 15px; }
+
+input, textarea {
+  width: 100%; }
+
+input {
+  transition: 0.3s;
+  font-size: 1.6rem; }
+  input.sheet-number {
+    width: 4rem;
+    text-align: center; }
+  input.centered {
+    text-align: center; }
+  input.sheet-shy {
+    border: none; }
+  input:hover {
+    background-color: #e5fffb; }
+  input.halved {
+    width: 50% !important; }
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    /* Chrome */
+    margin: 0;
+    /* Apparently some margin are still there even though it's hidden */ }
+  input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */ }
+
+select {
+  width: 100%;
+  border: none;
+  transition: 0.3s;
+  border-bottom: solid 1px #d3d3d3;
+  border-radius: none; }
+  select:hover, select:focus {
+    background-color: #e5fffb; }
+  select.sheet-shy {
+    border: none;
+    appearance: none; }
+
+textarea {
+  box-sizing: border-box; }
+  textarea.sheet-shy {
+    resize: none;
+    border: none; }
+  textarea.sheet-small {
+    height: 3rem; }
+  textarea.sheet-vertical {
+    resize: vertical; }
+
+.sheet-line, .line-input {
+  display: flex;
+  justify-content: space-around; }
+  .sheet-line .sheet-label, .line-input .sheet-label {
+    font-size: 1.4rem;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    font-weight: 500; }
+  .sheet-line input, .line-input input {
+    border: none;
+    border-bottom: solid 1px #a0a0a0;
+    border-radius: 0; }
+
+.sheet-max {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.sheet-dice-input {
+  font-size: 1.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .sheet-dice-input span {
+    display: inline-block;
+    vertical-align: middle; }
+  .sheet-dice-input input {
+    font-size: 1.8rem;
+    width: 3.5rem;
+    text-align: left; }
+    .sheet-dice-input input.sheet-amount {
+      text-align: right; }
+
+.sheet-list .sheet-line .sheet-label {
+  text-align: left;
+  width: 100%;
+  margin-right: 1rem; }
+
+.btn-radiobutton-row {
+  display: flex; }
+  .btn-radiobutton-row .btn-radiobutton:not(:last-child) {
+    margin-right: 0.5rem; }
+
+.btn-radiobutton {
+  position: relative; }
+  .btn-radiobutton input.btn-radiobutton-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    width: 100%;
+    height: 100%; }
+    .btn-radiobutton input.btn-radiobutton-input:checked + .btn-radiobutton-label {
+      background-color: #da4f49;
+      color: white; }
+  .btn-radiobutton .btn-radiobutton-label {
+    padding: 0.2rem 0.6rem;
+    font-size: 1.4rem;
+    border: solid 1px black;
+    border-radius: 0.6rem;
+    background-color: #f5f5f5; }
+
+.sheet-bubble {
+  padding: 1.5rem;
+  padding-top: 2rem;
+  border: solid 3px black;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  position: relative; }
+  .sheet-bubble .sheet-content {
+    width: 100%; }
+  .sheet-bubble .sheet-title {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 0.25rem 1rem;
+    border: solid 3px black;
+    background-color: white;
+    font-weight: 700;
+    white-space: nowrap; }
+  .sheet-bubble.flex-30 {
+    flex-basis: 30%; }
+  .sheet-bubble.flex-40 {
+    flex-basis: 40%; }
+  .sheet-bubble.flex-50 {
+    flex-basis: 50%; }
+  .sheet-bubble.flex-60 {
+    flex-basis: 60%; }
+  .sheet-bubble.extra-bottom {
+    margin-bottom: 3rem; }
+
+.content-list {
+  height: 100%; }
+
+.slot-toggled .slots-list .slot-toggle-1:checked ~ .slot-1 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-2:checked ~ .slot-1 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-2:checked ~ .slot-2 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-3:checked ~ .slot-1 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-3:checked ~ .slot-2 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-3:checked ~ .slot-3 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-1 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-2 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-3 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-4:checked ~ .slot-4 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-1 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-2 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-3 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-4 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-5:checked ~ .slot-5 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-1 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-2 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-3 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-4 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-5 {
+  display: block; }
+
+.slot-toggled .slots-list .slot-toggle-6:checked ~ .slot-6 {
+  display: block; }
+
+.slot-toggled .slot {
+  display: none; }
+  .slot-toggled .slot .slot-control:checked ~ .empty-text {
+    display: none; }
+
+.slot-section {
+  margin-top: 2rem; }
+  .slot-section .slots-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px; }
+  .slot-section .slot {
+    margin-bottom: 2rem;
+    min-height: 5rem;
+    padding: 0 0.5rem;
+    flex-basis: 32%; }
+    .slot-section .slot .slot-content-wrapper {
+      border: solid 4px #d3d3d3;
+      border-radius: 1rem;
+      padding: 1rem; }
+    .slot-section .slot .empty-text {
+      height: 100%;
+      font-size: 1.4rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+    .slot-section .slot .slot-content {
+      width: 100%; }
+
+.sheet-equipment-slots .slot-section .slot {
+  flex-basis: 30%; }
+
+.sheet-card select {
+  height: 2rem;
+  padding: 0;
+  margin: 0; }
+
+.sheet-card .card-field-label {
+  font-weight: 700;
+  font-size: 1.4rem; }
+  .sheet-card .card-field-label select {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    font-size: 1rem; }
+
+.sheet-card .sheet-max input {
+  width: 4rem; }
+
+.sheet-card .card-name {
+  margin-bottom: 1.2rem; }
+  .sheet-card .card-name input[type=text] {
+    font-weight: 700;
+    color: black;
+    border: none;
+    border-bottom: solid 3px black; }
+    .sheet-card .card-name input[type=text]::placeholder {
+      color: #d3d3d3;
+      font-weight: 300; }
+
+.sheet-card .card-line {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  margin-bottom: 1rem; }
+  .sheet-card .card-line .card-field-label {
+    flex-basis: 50%; }
+  .sheet-card .card-line select,
+  .sheet-card .card-line input {
+    font-size: 1.4rem;
+    padding: 0;
+    text-align: center; }
+
+.sheet-card .card-block {
+  text-align: center;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+  flex-basis: 40%;
+  flex-grow: 1; }
+  .sheet-card .card-block .card-field-label {
+    font-size: 1rem; }
+  .sheet-card .card-block .card-field-input {
+    width: 100%; }
+    .sheet-card .card-block .card-field-input input {
+      text-align: center;
+      width: 100%;
+      font-size: 1.4rem; }
+
+.sheet-card .sheet-card-type {
+  display: none; }
+  .sheet-card .sheet-card-type select {
+    font-size: 1rem; }
+
+.sheet-card .card-notes {
+  margin-top: 1rem;
+  border: solid 2px #d3d3d3;
+  border-radius: 1rem;
+  padding: 0.5rem; }
+  .sheet-card .card-notes textarea {
+    height: 7rem;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    margin-bottom: 0; }
+  .sheet-card .card-notes span {
+    font-style: italic;
+    font-size: 1.2rem; }
+
+.sheet-card .card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem -0.5rem; }
+  .sheet-card .card-actions .card-action {
+    padding: 0 0.5rem;
+    display: none;
+    margin-bottom: 1rem; }
+  .sheet-card .card-actions .action-deleteitem button {
+    background-color: #da4f49;
+    color: white; }
+  .sheet-card .card-actions .action-exportitem button {
+    background: none;
+    border: solid 1px black;
+    border-radius: 0; }
+    .sheet-card .card-actions .action-exportitem button:before {
+      content: none; }
+
+.sheet-card .card-uses.card-block .card-field-label {
+  white-space: nowrap; }
+
+.sheet-equipment-slots .sheet-card .card-actions .type_equipment {
+  display: block; }
+
+.sheet-inventory {
+  margin-top: 1rem; }
+  .sheet-inventory .sheet-slot-section .sheet-slot {
+    display: block; }
+  .sheet-inventory .repcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px; }
+    .sheet-inventory .repcontainer .repitem {
+      flex-basis: 25%; }
+  .sheet-inventory .sheet-card .sheet-card-type {
+    display: block;
+    width: 60%; }
+    .sheet-inventory .sheet-card .sheet-card-type select {
+      padding: 0 0.6rem; }
+  .sheet-inventory .sheet-card .type-label {
+    display: none; }
+  .sheet-inventory .repcontrol .repcontrol_edit {
+    float: none;
+    margin-right: 2rem; }
+  .sheet-inventory .sheet-wrap {
+    flex-wrap: wrap; }
+  .sheet-inventory .sheet-card .card-actions .type_inventory {
+    display: block; }
+
+.slot-content {
+  display: none; }
+
+input.slot-control:checked ~ .slot-content {
+  display: block; }
+
+.select-switch-display-1 {
+  display: none; }
+
+input.select-switch-control-1:checked ~ .select-switch-display-1 {
+  display: block; }
+
+.select-switch-display-2 {
+  display: none; }
+
+input.select-switch-control-2:checked ~ .select-switch-display-2 {
+  display: block; }
+
+.select-switch-display-3 {
+  display: none; }
+
+input.select-switch-control-3:checked ~ .select-switch-display-3 {
+  display: block; }
+
+.select-switch-display-4 {
+  display: none; }
+
+input.select-switch-control-4:checked ~ .select-switch-display-4 {
+  display: block; }
+
+.select-switch-display-5 {
+  display: none; }
+
+input.select-switch-control-5:checked ~ .select-switch-display-5 {
+  display: block; }
+
+.select-switch-display-6 {
+  display: none; }
+
+input.select-switch-control-6:checked ~ .select-switch-display-6 {
+  display: block; }
+
+.select-switch-display-7 {
+  display: none; }
+
+input.select-switch-control-7:checked ~ .select-switch-display-7 {
+  display: block; }
+
+.select-switch-display-8 {
+  display: none; }
+
+input.select-switch-control-8:checked ~ .select-switch-display-8 {
+  display: block; }
+
+.select-switch .select-switch-dropdown {
+  margin-right: 2rem;
+  flex-basis: 35%; }
+  .select-switch .select-switch-dropdown select {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 1rem;
+    display: block; }
+
+.select-switch .select-switch-display {
+  flex-basis: 65%; }
+
+.type-field {
+  display: none; }
+
+.type-toggle-misc:checked ~ .type-fields .type_misc {
+  display: block; }
+
+.type-toggle-blunt_melee_weapon:checked ~ .type-fields .type_blunt_melee_weapon {
+  display: block; }
+
+.type-toggle-sharp_melee_weapon:checked ~ .type-fields .type_sharp_melee_weapon {
+  display: block; }
+
+.type-toggle-firearms_weapon:checked ~ .type-fields .type_firearms_weapon {
+  display: block; }
+
+.type-toggle-projectile_weapon:checked ~ .type-fields .type_projectile_weapon {
+  display: block; }
+
+.type-toggle-throwing_weapon:checked ~ .type-fields .type_throwing_weapon {
+  display: block; }
+
+.type-toggle-consumable_item:checked ~ .type-fields .type_consumable_item {
+  display: block; }
+
+.type-toggle-armor_item:checked ~ .type-fields .type_armor_item {
+  display: block; }
+
+.sheet-character .sheet-header {
+  display: flex; }
+  .sheet-character .sheet-header .sheet-main {
+    flex-basis: 80%; }
+  .sheet-character .sheet-header .sheet-sidebar {
+    flex-basis: 20%; }
+  .sheet-character .sheet-header .sheet-top-1 {
+    flex-basis: 40%; }
+  .sheet-character .sheet-header .sheet-top-2 {
+    flex-basis: 60%; }
+  .sheet-character .sheet-header .sheet-bottom-1 {
+    flex-basis: 30%; }
+  .sheet-character .sheet-header .sheet-bottom-2 {
+    flex-basis: 70%; }
+
+.sheet-toggle-select .sheet-toggler {
+  margin-right: 2rem;
+  flex-basis: 35%; }
+
+.sheet-toggle-select .sheet-text {
+  flex-basis: 65%; }
+
+.sheet-bottom {
+  margin-bottom: 15rem; }
+
+.roll-widget {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 2.5rem;
+  height: 10rem; }
+  .roll-widget .ap-counter {
+    border-radius: 50%;
+    background: black;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    bottom: 0;
+    width: 10rem;
+    z-index: 10; }
+    .roll-widget .ap-counter .options-toggle,
+    .roll-widget .ap-counter .counter-label {
+      text-align: center;
+      position: absolute;
+      top: 0.6rem;
+      left: 50%;
+      transform: translateX(-50%); }
+    .roll-widget .ap-counter .options-toggle {
+      bottom: 0.6rem;
+      top: initial; }
+      .roll-widget .ap-counter .options-toggle input[type='checkbox'] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0; }
+    .roll-widget .ap-counter input {
+      background: black;
+      color: white; }
+    .roll-widget .ap-counter .sheet-input {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      align-items: center; }
+      .roll-widget .ap-counter .sheet-input input {
+        font-size: 2.2rem;
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem; }
+  .roll-widget .roll-controls {
+    background-color: white;
+    border: solid 3px black;
+    position: absolute;
+    padding-right: 5rem;
+    padding-left: 3rem;
+    z-index: 5;
+    right: 6rem;
+    top: 10%;
+    bottom: 10%;
+    display: flex;
+    align-items: center;
+    display: none; }
+    .roll-widget .roll-controls .control-option {
+      margin-right: 2rem; }
+      .roll-widget .roll-controls .control-option .control-label {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+        white-space: nowrap; }
+      .roll-widget .roll-controls .control-option .inputs {
+        text-align: center; }
+      .roll-widget .roll-controls .control-option input {
+        text-align: center; }
+    .roll-widget .roll-controls .commands {
+      display: flex;
+      margin-left: -0.5rem;
+      margin-right: -0.5rem; }
+      .roll-widget .roll-controls .commands .control {
+        padding: 0 0.5rem; }
+        .roll-widget .roll-controls .commands .control button {
+          white-space: nowrap; }
+  .roll-widget .toggle-roll-controls:checked ~ .roll-controls {
+    display: flex; }
+
+.sheet-character {
+  font-size: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }

@@ -1,0 +1,111 @@
+{% macro create(field, type, label, class='', btn=false) %}
+
+    <div class="sheet-bubble {{class}}">
+        <div class="sheet-title">
+            {% if label %}
+                {{ label }}
+            {% else %}
+                {{ field | getLabel }}
+            {% endif %}
+        </div>
+
+        <div class="sheet-content content-{{type}}">
+            {% switch type %}
+                {% case "max" %}
+                    {{ createMax(field=field) }}
+                {% case "list" %}
+                    {{ createList(field=field, btn=btn) }}
+                {% case "dice" %}
+                    {{ createDice(field=field) }}
+                {% case "number" %}
+                    {{ createNumber(field=field) }}
+                {% case "toggleselect" %}
+                    {{ createSelectSwitch(field=field) }}
+                {% case "textarea" %}
+                    {{ createTextarea(field=field) }}
+
+                {% default %}
+                    <p> ERROR! UNHANDLED FIELD TYPE! </p>
+            {% endswitch %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro createMax(field) %}
+    <div class="sheet-max">
+        <div>
+            <input type="number" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
+        </div>
+        <div class="sheet-divider">/</div>
+        <div>
+            <input type="number" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}_max" value="{{field.default}}"/>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro createTextarea(field) %}
+    <textarea class="sheet-small sheet-vertical" name="attr_{{field | getAttr}}"></textarea>
+{% endmacro %}
+
+
+{% macro createList(field, btn=false) %}
+    <div class="sheet-list">
+        {% for key, item in field.options | dictsort %}
+            <div class="sheet-line">
+                {% if btn == true %}
+                    <button type="roll" class="card-roll-btn" value="!!aproll pool='<%{{fields.character.stats.stamina | getAttr}}%>' characterid='@{character_id}' cost='<%{{fields.character.rolloptions.cost.id | getAttr}}%>' resource='{{fields.character.stats.ap | getAttr }}:{{fields.character.stats.ap  | getLabel }}'  title='{{item | getLabel | safe}}' action='{{item | getLabel | safe}} roll!' target='<%{{item | getAttr | safe}}%>' amountmod='-<%{{fields.character.stats.fatigue | getAttr}}%>' counter='{{fields.character.stats.fatigue | getAttr}}'"></button>
+                {% endif %}
+                <div class="sheet-label">{{item | getLabel}}</div>
+                <input type="number" class="sheet-number" name="attr_{{item | getAttr}}" value="{{field.default}}"/>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro createNumber(field) %}
+    <div class="sheet-input">
+        <input type="number" class="sheet-shy centered" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
+    </div>
+{% endmacro %}
+
+
+{% macro createDice(field) %}
+    <div class="sheet-dice-input">
+        <div class="sheet-input">
+            <span>d</span><input type="text" class="sheet-number sheet-shy" name="attr_{{field | getAttr}}" value="{{field.default}}"/>
+        </div>
+        <div class="sheet-divider">
+            +
+        </div>
+        <div class="sheet-input">
+            <input type="text" class="sheet-number sheet-shy" name="attr_{{field.bonus | getAttr}}" value="{{field.bonus.default}}"/>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro createSelectSwitch(field) %}
+    <div class="sheet-row-flex vert align-center select-switch">
+        <div class="select-switch-dropdown">
+
+            <select name="attr_{{field | getAttr}}">
+                {% for num, item in field.options | dictsort %}
+                    {% if num != 'default'%} <option value="{{item | getAttr}}"> {{item | getLabel}} </option>{% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        {% for opt, item in field.options | dictsort %}
+            {% if opt != 'default'%} {# Not sure why but default is sneaking in there #}
+                <input type="checkbox" class="sheet-hidden ability-control select-switch-control select-switch-control-{{loop.index}}" name="attr_{{field | getAttr}}" value="{{item | getAttr}}" {{"checked" if loop.first}} />
+
+                <div class="select-switch-display select-switch-display-{{loop.index}} ability-{{opt}}">
+                    <div class="ability-text select-switch-content-{{loop.index}}">
+                        {{item.description | safe}}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endmacro %}

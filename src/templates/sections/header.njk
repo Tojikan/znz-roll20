@@ -1,0 +1,23 @@
+
+{% import '../macros/bubble.njk' as bubble %}
+
+<div class="sheet-header">
+    <div class="sheet-main">
+        {# Top Row #}
+        <div class="sheet-row-flex">
+            {{bubble.createStats(fields.character.stats, 'sheet-top-1')}}
+            {{bubble.create(fields.character.ability, 'sheet-top-2')}}
+        </div>
+
+        {# Bottom Row #}
+        <div class="sheet-row-flex">
+            {{bubble.create(fields.character.defense, 'sheet-bottom-1')}}
+            {{bubble.create(fields.character.notes, 'sheet-bottom-2')}}
+        </div>
+    </div>
+
+    {# Right Sidebar #}
+    <div class="sheet-sidebar">
+        {{bubble.create(fields.character.combatskills)}}
+    </div>
+</div>

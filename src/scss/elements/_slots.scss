@@ -1,0 +1,80 @@
+
+//Show Hide Available Slots
+// Similar to a Switch but we also need to show preceeding slots
+.slot-toggled {    
+    .slots-list {
+        //1 indexed
+        //maxSlots is injected via gulp through a header
+        @for $i from 1 through $maxEquipmentSlots { 
+            // If weapon slot i is checked...
+            .slot-toggle-#{$i}:checked{
+    
+                //then show all weapons i and under!
+                @for $j from 1 through $i{
+                    ~ .slot-#{$j}{
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    
+    .slot {
+        display: none;
+        
+        .slot-control {
+            &:checked {
+                ~ .empty-text{
+                    display: none;
+                }
+            }
+        }
+    }
+    
+}
+
+
+.slot-section {
+    margin-top: $gap;
+
+    .slots-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -10px;
+        margin-right: -10px;    
+    }
+
+    .slot {
+        margin-bottom: $gap;
+        min-height: 5rem;
+        padding: 0 0.5rem;
+        flex-basis: 32%;
+
+        .slot-content-wrapper {
+            border: solid 4px $gray;
+            border-radius: 1rem;
+            padding: 1rem;
+        }
+
+        .empty-text {
+            height: 100%;
+            font-size: $medium;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slot-content {
+            width: 100%;
+        }
+    }
+}
+
+.sheet-equipment-slots {
+    .slot-section {
+        .slot {
+            flex-basis: 30%;
+        }
+    }
+}

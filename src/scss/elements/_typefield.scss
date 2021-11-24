@@ -1,0 +1,18 @@
+//$itemTypes injected via gulp
+
+
+//fields hidden unless certain dropdown option is selected.
+.type-field {
+    display: none;
+}
+
+//display type if checked
+@each $type in $itemTypes {
+    .type-toggle-#{$type}:checked {
+       & ~ .type-fields {
+           .type_#{$type} {
+               display: block;
+           }
+       }
+    }
+}

@@ -1,0 +1,95 @@
+.sheet-character{
+    label {
+        font-size: $large;
+    }   
+}
+
+
+.sheet-row-flex {
+    display: flex;
+
+    &.space-around {
+        justify-content: space-around;
+    }
+
+    &.space-between {
+        justify-content: space-between;;
+    }
+
+    &.align-end {
+        align-items: flex-end;
+    }
+
+    &.align-start {
+        align-items: flex-start;
+    }
+
+    &.vert {
+        flex-direction: column;;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+}
+
+
+
+.sheet-divider {
+    margin: 0 0.5rem;
+    font-size: $xLarge;
+    font-weight: 900;
+}
+
+
+.sheet-input {
+    text-align: center;
+}
+
+.sheet-hidden {
+    display: none;
+}
+
+.sheet-subtext {
+    font-size: $small;
+}
+
+//labels
+.sheet-label-row {
+    justify-content: start;
+    align-items: baseline;
+
+    .sheet-label {
+        display: inline-block;
+        width: auto;
+        margin-right: 2rem;
+        font-size: $medium;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .sheet-sublabel {
+        font-size: $small;
+
+        input {
+            font-size: $small;
+            
+            &.sheet-shy {
+                padding: 0;
+                width: 2.5rem;
+            }
+        }
+    }
+}
+
+
+.gridrow {
+    display: flex;
+    margin-left: -15px;
+    margin-right: 15px;
+
+    .col {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "abc": {
+        "id": "selectability",
+        "label": "Select an Ability",
+        "description": ""
+    },
+    "brawler": {
+        "id": "brawler",
+        "description": "During Guard phase, any excess guard can be dealt as damage if you declare it ahead of time. You take double damage that guard phase."
+    },
+    "cheerleader": {
+        "id": "cheerleader",
+        "description": "Reduce difficulty of roll for adjacent allies by 1 level."
+    },
+    "tinkerer": {
+        "id": "tinkerer",
+        "description": "Create a distraction device out of combat by using 1 stamina and 1 item. The device draws nearby zombies."
+    },
+    "scavenger": {
+        "id": "scavenger",
+        "description": "Draw 1 additional cards when you scavenge. If you are scavenging a location alone, draw 3."
+    },
+    "sniper": {
+        "id": "sniper",
+        "description": "If you don't do any actions at all this turn, you can take aim and add all actions as Free Ranged Attack action next turn. You lose these free actions the moment you do any action besides ranged attack next turn."
+    },
+    "prepared": {
+        "id": "prepared",
+        "label": "Doomsday Prep",
+        "description": "Start the game with 5 free scavenge actions and 2 additional equipment slots."
+    }
+}
