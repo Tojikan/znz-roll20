@@ -1,17 +1,9 @@
-import { capitalize } from "lodash";
+import { capitalizeFirstLetter } from "../../znzlib";
 
-//TODO define
 export class Field {
     constructor(id, props){
         this.id = id;
         this.props = props;
-    }
-
-    // Register Field in API
-    register(character){
-        return {
-            get: getAttrVal(character.id, this.id)
-        };
     }
 
     // Export Field into JSON
