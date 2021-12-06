@@ -1,3 +1,6 @@
+/////// Library of Functions for Interacting with Roll20 APIs
+
+
 /**
  * Gets a player's selected character. Only returns the character if the player controls the Character or is a GM
  * 
@@ -66,14 +69,14 @@ export const getAttrVal = function(character, attr){
  * @returns 
  */
  export const setAttrVal = function(character, attr, value){
-    let attr = getAttr(character, attrId);
+    let attribute = getAttr(character, attr);
 
-    if (!attr){
+    if (!attribute){
         return null;
     }
     
-    let current = attr.get('current');
-    attr.setWithWorker({current: value});
+    let current = attribute.get('current');
+    attribute.setWithWorker({current: value});
 
 
     return {

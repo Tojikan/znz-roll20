@@ -1,7 +1,11 @@
-.sheet-main {
-    flex-basis: 75%;
-}
 
-.sheet-sidebar {
-    flex-basis: 25%;
-} 
+
+.layout {
+    .sidebar {
+        width: 25%;
+    }
+
+    .main {
+        width: 50%;
+    }
+}

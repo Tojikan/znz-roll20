@@ -1,4 +1,4 @@
-import { capitalize } from "../../lib/helpers";
+import { capitalize } from "../../lib/znzlib";
 
 export class Model {
     constructor(model){
@@ -39,7 +39,7 @@ export class Model {
         for (let k of keys){
             let obj = this.model[k];
             
-            //For lists fields (such as skills), set up for each item in the list.
+            //For lists fields (such as skills), set up for each item in the list
             if (obj && 'list' in obj){
                 retVal[k] = {...obj, list:{}};
         

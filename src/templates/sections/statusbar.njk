@@ -23,7 +23,7 @@
     <div class="stage">
         {{ status(character.health) }}
         {{ status(character.fatigue) }}
-        {{ status(character.sanity) }}
+        {{ status(character.trauma) }}
         {{ status(character.actions) }}
     </div>
 </div>
@@ -51,10 +51,10 @@
     <div class="box">
         <div class="ammo-label">Ammo</div>
         <div class="ammo-list sheet-list">
-            {% for id, ammo in character.ammo.types %}
+            {% for id, ammo in character.ammo.list %}
                 <div class="sheet-line">
-                    <div class="sheet-label">{{ id | capitalize}}</div>
-                    <input type="number" name="attr_{{id}}" value="0"/>
+                    <div class="sheet-label">{{ ammo | getLabel}}</div>
+                    <input type="number" name="attr_{{ammo | getAttr}}" value="0"/>
                 </div>
             {% endfor %}
         </div>

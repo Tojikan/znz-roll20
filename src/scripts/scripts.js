@@ -1,72 +1,53 @@
-import { attrAlert } from "./attrAlert";
-import { reload } from "./reload";
-import { pickup } from "./pickup";
-import { RollAP } from "./rollAP";
-// import { attack } from "./attack";
-// import { combat } from './combat';
-import { splitArgs, getCharacter } from "./_helpers";
-import { cardDeck } from "./deck";
+import { splitArgs } from "../lib/znzlib";
+import { getCharacter } from "../lib/roll20";
 
 /**
- * Main handler. We register our API Scripts into this so we can have a single caller for all api scripts.
+ * Main Entrypoint into the API. 
+ * API Scripts are registered to this object. You can have Callers (in response to chat message) or Watchers (in response to attribute changes)
+ * 
+ * This will loop over all Callers/Watchers and add input in there.
  */
-
 var Main = Main || (function(){
 
-    const apiCallers = {};
-    const attrWatchers = [];
+    const callers = {};
+    const watchers = [];
+    const prefix = '!!'
+
+    //Init Scripts
+    const init = function() {
+        on('chat:message', HandleInput);
+        on('change:attribute', HandleAttributeChange);
+	};
 
     /**
-     * Register API Callers. Hook for adding in new APIs into this main one.
+     * Register Callers. Add in API Scripts through this function.
      * 
-     * @param {*} obj - Expects an object which contains 'caller' - msg in api to trigger the script - and 'handler' - function that does the api work based off the passed in args.
+     * @param {string} command Will call the function upon seeing this string in chat (if string is prepended with !!). This should be a valid JS variable string.
+     * @param {function} callFunction A function to be called when the command is issued.
      * @returns 
      */
-    const RegisterApiCaller = function(obj){
-        if (!('caller' in obj) || !('handler' in obj)){
-            return;
-        }
-
-        apiCallers[obj.caller] = {
-            handler: obj.handler
-        }
-
-        if ('responder' in obj){
-            apiCallers[obj.caller].responder = obj.responder;
-        } else {
-            apiCallers[obj.caller].responder = standardResponder;
-        }
-    }
-
-
-    /**
-     * Add an attribute watcher.
-     */
-    const RegisterAttrWatcher = function(obj){
-        attrWatchers.push(obj);
+    const RegisterCaller = function(command, callFunction){             
+        callers[command] = callFunction;
     }
 
     /**
-     * Default responder, which just prints out a message of a given type.
-     * @param {*} obj 
-     * @param {*} sender 
-     * @param {*} character 
-     */
-    const standardResponder = function(obj, sender, character){
-        if ("msg" in obj && "type" in obj){
-            sendMessage(obj.msg, sender, obj.type);
-        }
-    }
-
-    /**
-     * Router function. Takes a chat msg that begins with an API and then matches it to an API Caller thats
-     * registered to this. Then call the appropriate handler and responder 
+     * Register Watchers. Add in scripts that monitor attribute changes through this function
      * 
-     * @param {*} msg 
+     * @param {function} watchFunction A function to be called when attributes are changed
+     */
+    const RegisterWatcher = function(watchFunction){
+        watchers.push(obj);
+    }
+
+     /**
+     * Main router function for calling Callers. Takes an API chat message, parses its args, and then matches it to a caller.
+     * 
+     * Calls each caller by passing in the parsed args and character
+     * 
+     * @param {*} msg chat message
      * @returns 
      */
     const HandleInput = function(msg) {
-
         if (msg.type !== "api"){
             return;
         }
@@ -77,14 +58,11 @@ var Main = Main || (function(){
             character = getCharacter(sender, msg, args);
 
         // Go through our registered APIs and call as appropriate
-        for (const api in apiCallers){
-            if (msg.content.startsWith(api)){
+        for (const api in callers){
+            if (msg.content.startsWith(prefix + api)){
                 try {
-                    let caller = apiCallers[api];
-    
-                    // Flow - API handles the args, and then sends it to a responder to do the rest.
-                    let response = caller.handler(args, character);
-                    caller.responder(response, sender, character);
+                    //run the funciton
+                    callers[api](args, character);
                 } catch(err){
                     log(err);
                     log(err.stack);
@@ -100,76 +78,21 @@ var Main = Main || (function(){
             try {
                 watcher(obj, prev);
             } catch(err){
-                log(watcher);
                 log(err);
                 log(err.stack);
                 sendMessage(err, 'Error in attribute watcher:', 'error');
             }
         }
     }
-
-    /**
-     * Post a formatted text to chat.
-     * @param {*} msg 
-     * @param {*} who 
-     * @param {*} type 
-     * @returns 
-     */   
-    const sendMessage = function(msg, who, type){
-        let textColor = '#000',
-            bgColor = '#fff';
-
-        switch (type){
-            case "error":
-                textColor = '#C14054';
-                bgColor = '#EBC8C4';
-                break;
-            case "info":
-                bgColor = '#CCE8F4';
-                textColor = '#456C8B';
-                break;
-            case "warning":
-                bgColor = '#F8F3D6';
-                textColor = '#8B702D';
-                break;
-            case "success":
-                bgColor = '#baedc3';
-                textColor = '#135314';
-                break;
-            case "header":
-                sendChat(
-                    `${who}`,
-                    `<h3 style="border: solid 1px black; background-color: white; padding: 5px;">${msg}</h3>`
-                );             
-                return;
-        }
-
-        sendChat(
-            `${who}`,
-            `<div style="padding:3px; border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 120%;">${msg}</div>`
-		);
-    }
     
-    const init = function() {
-        on('chat:message', HandleInput);
-        on('change:attribute', HandleAttributeChange);
-	};
-    
+
     return {
         init: init,
-        RegisterApiCaller: RegisterApiCaller,
-        RegisterAttrWatcher: RegisterAttrWatcher
+        RegisterCaller: RegisterCaller,
+        RegisterWatcher: RegisterWatcher
     }
-})();
-
+});
 
 on("ready", function(){
-    Main.RegisterApiCaller(cardDeck);
-    Main.RegisterApiCaller(pickup);
-    Main.RegisterApiCaller(reload);
-    Main.RegisterApiCaller(RollAP);
-    // Main.RegisterApiCaller(attack);
-    // Main.RegisterApiCaller(combat);
-    Main.RegisterAttrWatcher(attrAlert);
     Main.init();
 });

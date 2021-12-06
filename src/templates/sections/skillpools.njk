@@ -1,0 +1,28 @@
+
+
+{% macro pool(field) %}
+    <div class="dice-pool-row">
+        <div class="pool-amount">
+            <input type="number" name="attr_{{ field | getAttr }}" value="{{field.default}}">
+        </div>
+        <div class="pool-label">
+            <span>{{ field | getLabel }}</span>
+        </div>
+    </div>
+
+    <div class="skill-list">
+        {% for id, skill in character.skills.list | dictsort %}
+        {%- if skill.uses == field.id -%}
+        <div class="skill-row">
+            <div class="skill-label">{{ skill.label }}</div>
+            <div class="skill-amount"><input type="number" name="attr_{{ skill | getAttr}}" value="2"></div>
+        </div>
+        {%- endif -%}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+
+{{ pool(character.body) }}
+{{ pool(character.spirit) }}
+{{ pool(character.mind) }}

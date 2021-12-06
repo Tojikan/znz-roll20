@@ -1,3 +1,7 @@
+.sheet-character {
+    margin-bottom: 14rem;
+}
+
 .character-status-bar {
     position: fixed;
     bottom: 0;
@@ -7,6 +11,7 @@
     background-color: $darkgray;
     border: solid 3px $black;
     box-sizing: border-box;
+    z-index: 1000;
 
     .stage {
         display: flex;

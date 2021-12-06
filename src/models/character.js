@@ -11,7 +11,7 @@ export const Character = new Model(
         fatigue: {
             affects: 'rolls'
         },
-        sanity: {
+        trauma: {
             affects: 'success'
         },
         actions: {
@@ -23,16 +23,43 @@ export const Character = new Model(
         rollmod: {},
         rollcost: {},
         ammo: {
-            types: {
-                light: {
-                    id: 'ammo_light'
-                },
-                medium: {
-                    id: 'ammo_medium'
-                },
-                heavy: {
-                    id: 'ammo_heavy'
-                }
+            list: {
+                light: {},
+                medium: {},
+                heavy: {}
+            }
+        },
+        body: { default: 10 },
+        mind: { default: 10 },
+        spirit: { default: 10 },
+        skills: {
+            list: {
+                melee: { uses: 'body', label: 'Melee Combat'},
+                blocking: { uses: 'body' },
+                dodging: { uses: 'body' },
+                ranged: { uses: 'body', label: 'Ranged Combat' },
+                throwing: { uses: 'body' },
+                athletics: { uses: 'body' },
+                endurance: { uses: 'body' },
+                stealth: { uses: 'body' },
+                
+                crafting: { uses: 'mind' },
+                learning: { uses: 'mind' },
+                vehicles: { uses: 'mind' },
+                engineering: { uses: 'mind' },
+                science: { uses: 'mind' },
+                medicine: { uses: 'mind' },
+                investigation: { uses: 'mind' },
+                nature: { uses: 'mind' },
+                
+                scouting: { uses: 'spirit' },
+                reflexes: { uses: 'spirit' },
+                tenacity: { uses: 'spirit' },
+                socialskills: {uses: 'spirit', label: 'Social Skills'},
+                thievery: { uses: 'spirit' },
+                emotions: {uses: 'spirit'},
+                insight: {uses: 'spirit'},
+                survival: { uses: 'spirit' }
             }
         }
     }

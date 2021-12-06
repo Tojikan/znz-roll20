@@ -1,0 +1,71 @@
+.character-skills {
+
+    .dice-pool-row {
+        color: $white;
+        font-weight: 700;
+        display: flex;
+        
+        .pool-amount {
+            background-color: $black;
+            padding: 1rem;
+            border-radius: 4rem;
+            position: relative;
+
+            input {
+                color: $white;
+                background-color: $black;
+                font-weight: 700;
+                text-align: center;
+                border: none;
+                font-size: $xLarge;
+                width: 3rem;
+                height: 3rem;
+                border-radius: 4rem;
+                box-sizing: content-box;
+            }
+        }
+
+        .pool-label {
+            background-color: $black;
+            padding: 0.5rem 1rem;
+            text-transform: uppercase;
+            height: 60%;
+            align-self: center;
+            font-size: $medium;
+            margin-left: -1rem;
+            padding-left: 2rem;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .skill-list {
+        margin-top: -1.4rem;
+    }
+
+    .skill-row {
+        display: flex;
+        justify-content: space-between;
+        border: solid 1px $darkgray;
+        margin-left: 5.4rem;
+        align-items: center;
+        padding-left: 0.6rem;
+
+        .skill-label {
+            flex: 1 1 80%;
+            font-size: $small;
+        }
+        
+        .skill-amount {
+            border-left: solid 2px $darkgray;
+            flex-basis: 20%;
+        }
+        
+        input {
+            width: 100%!important;
+            padding: 0.2rem 0.4rem;
+            text-align: center;
+            border: none;
+        }
+    }
+}

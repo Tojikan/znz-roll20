@@ -119,45 +119,6 @@ export function spendResource(amount, resource, character){
 
 
 /**
- * Gets a player's selected character. Only returns the character if the player controls the Character or is a GM
- * 
- * @param {*} sender 
- * @param {*} msg 
- * @param {*} args 
- * @returns 
- */
-export function getCharacter(sender, msg, args = {}){
-    let token,
-        character = null;
-    
-    if ("selected" in msg){
-        token = getObj('graphic', msg.selected[0]._id);
-
-        if (token){
-            character = getObj('character', token.get('represents'));
-        }
-    } else if ('characterid' in args){
-        character = getObj('character', args['characterid']);
-    }
-
-    //Validate player controls token or is GM
-    if (character){
-
-        if (!playerIsGM(msg.playerid) && 
-        !_.contains(character.get('controlledby').split(','), msg.playerid) &&
-        !_.contains(character.get('controlledby').split(','),'all') && 
-        msg.playerid !== 'API'){
-            return null;
-        }
-
-    } else{
-        return null;
-    }
-
-    return character;
-}
-
-/**
  * Retrieve an attribute for a given character
  * @param {*} character 
  * @param {*} attribute 
