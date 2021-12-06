@@ -5,6 +5,25 @@ import {fields as character} from './src/model/character';
 import * as types from './src/model/itemtypes';
 import { capitalize } from 'lodash';
 
+// When retrieving data from models, we want to clear cache and require() (instead of imports) so we can
+// get up to date data if the file was changed
+
+
+
+/**
+ * Clear the require cache of all files in a folder 
+ * 
+ * @param {*} dataFolder folder to clear
+ */
+const clearDataCache = function(dataFolder){
+    let dataFiles = fs.readdirSync(dataFolder);
+
+    dataFiles.forEach(file => {
+        if (path.extname(file) === '.json' || path.extname(file) === '.js'){
+            delete require.cache[require.resolve(dataFolder + file)];
+        }
+    });
+}
 
 /**
  * Imports files for our sheet model in a folder into a single object where we can refer to it.
@@ -23,16 +42,7 @@ const getModel = function(dataFolder){
         dataFolder += '/';
     }
 
-    //Clear require cache contents of folder
-    const clearDataCache = function(dataFolder){
-        let dataFiles = fs.readdirSync(dataFolder);
 
-        dataFiles.forEach(file => {
-            if (path.extname(file) === '.json' || path.extname(file) === '.js'){
-                delete require.cache[require.resolve(dataFolder + file)];
-            }
-        });
-    }
     clearDataCache(dataFolder);
     
     let files = fs.readdirSync(dataFolder);
@@ -58,6 +68,8 @@ const getModel = function(dataFolder){
             let filename = path.basename(file, '.js');
             let exported = require(dataFolder + file);
 
+            console.log(exported)
+
             if ('fields' in exported){
                 data.fields[filename] = exported['fields'];
             } 
@@ -70,7 +82,6 @@ const getModel = function(dataFolder){
 
     return data;
 }
-
 
 // Nunjucks Filters
 const filters = {
@@ -146,12 +157,24 @@ const sassHeaders = `
     }, []).join(',')};
 `;
 
+/**
+ * Get Character Model
+ * @returns Character Model
+ */
+const getCharacter = function(){
+    clearDataCache('./src/models/');
+    const character = require('./src/models/character').Character;
+
+    return character.toJson();
+}
+
 
 module.exports = {
     getModel: getModel,
     filters:  filters,
     sassHeaders: sassHeaders,
-    capitalize: capitalize
+    capitalize: capitalize,
+    getCharacter: getCharacter
 };
 
 

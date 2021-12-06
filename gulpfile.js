@@ -5,20 +5,15 @@ const   gulp = require('gulp'),
         sass = require('gulp-sass'),
         replace = require('gulp-replace'),
         nunjucksRender = require('gulp-nunjucks-render'),
-        header = require('gulp-header');
-const { PlayerCharacterModel } = require("./src/scripts/playercharacter/playerCharacterModel");
+        header = require('gulp-header'),
         inject = require('gulp-inject'),
-        removeEmptyLines = require('gulp-remove-empty-lines'),
-        del = require('del'),
-        cleancss = require('gulp-clean-css'),
-        htmlmin = require('gulp-htmlmin'),
         {rollup} = require('gulp-rollup-2'),
         commonjs = require('@rollup/plugin-commonjs'),
         json = require('@rollup/plugin-json'),
-        babel = require('gulp-babel'),
         buildContext = require('./BuildContext');
 
 const dataFolder = './src/model/';
+const dataFolder2 = './src/models/';
 
 
 /** Build HTML Templates from NJKS **/
@@ -29,14 +24,12 @@ function sheet(){
             path:'src/templates',
             manageEnv: function(env){
                 //Adds our data to global variable so we can reference anywhere in njk templates
-                env.addGlobal('fields', buildContext.getModel(dataFolder).fields);
-                env.addGlobal('options', buildContext.getModel(dataFolder).options);
+                // env.addGlobal('fields', buildContext.getModel(dataFolder).fields);
+                // env.addGlobal('options', buildContext.getModel(dataFolder).options);
 
-                let testModel = new PlayerCharacterModel('test').export();
-                env.addGlobal('test', testModel);
 
-                console.log(testModel);
-                console.log(new PlayerCharacterModel('test').life);
+                env.addGlobal('character', buildContext.getCharacter()); 
+
         
                 //Takes all functions in exported filters and adds them as filters to NJKS
                 const filters = buildContext.filters;

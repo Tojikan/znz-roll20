@@ -1,21 +1,17 @@
-
-import { capitalize } from "lodash";
-
+import { capitalize } from "../../lib/helpers";
 
 export class Model {
     constructor(model){
         this.model = model;
     }
-
     
     /**
      * Exports a model's fields into JSON. Generates an ID and label for each top level key in an object.
      * 
-     * @param {object} fields 
      * @returns 
      */
-    export(){
-        let keys = Object.keys(fields);
+    toJson(){
+        let keys = Object.keys(this.model);
         let retVal = {};
         
         // Inner function for setting ID and Label
@@ -41,7 +37,7 @@ export class Model {
         }
         
         for (let k of keys){
-            let obj = fields[k];
+            let obj = this.model[k];
             
             //For lists fields (such as skills), set up for each item in the list.
             if (obj && 'list' in obj){

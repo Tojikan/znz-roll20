@@ -5,7 +5,15 @@
 
 
 <div class="sheet-character">
-    <div class="sheet-row-flex">
+    <div class="character-status-bar">
+        <div class="stage">
+            {% include "./sections/statusbar.njk" %}
+        </div>
+    </div>
+
+
+
+    {# <div class="sheet-row-flex">
         <div class="sheet-main">
             <div class="sheet-row-flex">
                 {{bubble.create(fields.character.stats.health, 'max')}}
@@ -36,7 +44,7 @@
     {% include "./sections/inventory.njk" %}
     <div class="sheet-bottom">
         {% include "./sections/roll-widget.njk" %}
-    </div>
+    </div> #}
 </div>
 
 {# Sheet workers are injected here via Gulp process #}

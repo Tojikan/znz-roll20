@@ -37,6 +37,7 @@
     return character;
 }
 
+
 /**
  * Retrieve an attribute for a given character
  * @param {*} character 

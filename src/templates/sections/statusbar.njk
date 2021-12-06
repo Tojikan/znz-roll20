@@ -1,0 +1,62 @@
+{% macro status(field) %}
+    <div class="stat-tracker box {{field.id}}">
+        <div class="stat-label label-text">
+            {{field | getLabel}} 
+            {% if field.action %}<button type="action" name="act_{{field.action}}">{{field.actionlabel}}</button>{% endif %}
+        </div>
+        <div class="stat-wrapper">
+            <div class="main">
+                <input type="number" class="shy" name="attr_{{field | getAttr}}" value="{{field.default if field.default else 0}}"/>
+            </div>
+            {% if field.max %}
+                <div class="sub">
+                    Max:
+                    <input type="number" class="shy" name="attr_{{field | getAttr}}_max" value="{{field.default if field.default else 0}}"/>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+    
+<div class="stats-section">
+    <div class="stage">
+        {{ status(character.health) }}
+        {{ status(character.fatigue) }}
+        {{ status(character.sanity) }}
+        {{ status(character.actions) }}
+    </div>
+</div>
+
+<div class="roll-section">
+    <div class="stage">
+        <div class="roll-input-row"><span>Bonus Rolls:</span> <input type="number" class="shy underline" name="attr_{{character.rollmod | getAttr}}"/></div>
+        <div class="roll-input-row">
+            <span>Roll Type:</span> 
+            <div class="btn-radiobutton-row">
+                <div class="control btn-radiobutton">
+                    <input class="btn-radiobutton-input cost-1" type="radio" name="attr_{{character.rollcost}}" value="1" checked="checked">
+                    <div class="btn-radiobutton-label cost-1">Active</div>
+                </div>
+                <div class="control btn-radiobutton">
+                    <input class="btn-radiobutton-input cost-0" type="radio" name="attr_{{character.rollcost}}" value="0">
+                    <div class="btn-radiobutton-label cost-0">Free</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ammo-section">
+    <div class="box">
+        <div class="ammo-label">Ammo</div>
+        <div class="ammo-list sheet-list">
+            {% for id, ammo in character.ammo.types %}
+                <div class="sheet-line">
+                    <div class="sheet-label">{{ id | capitalize}}</div>
+                    <input type="number" name="attr_{{id}}" value="0"/>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

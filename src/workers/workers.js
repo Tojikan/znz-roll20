@@ -5,9 +5,10 @@ import { preventNegative } from './preventNegative';
 import { rollwidget } from './rollwidget-commands';
 import { rollOptions } from './rolloptions';
 
-equip().init();
-limit();
-// rollOptions();
-deleteItem();
-preventNegative();
+// equip().init();
+// limit();
+// // rollOptions();
+// deleteItem();
+// preventNegative();
 rollwidget();
+

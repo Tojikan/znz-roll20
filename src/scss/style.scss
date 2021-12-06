@@ -1,22 +1,24 @@
 @import "variables";
 
-@import "mixins";
-@import "layout";
-@import "general";
-@import "input";
-
-@import "elements/bubble";
-@import "elements/slots";
-@import "elements/card";
-@import "elements/switch";
-@import "elements/typefield";
-
-@import "sections/header";
-@import "sections/rollwidget";
-
-
 // sets 1rem = 10px
 .sheet-character {
     font-size: 10px;
     font-family: $helvetica;
 }
+
+// @import "mixins";
+// @import "layout";
+// @import "general";
+@import "input";
+@import "characterbar";
+
+
+// @import "elements/bubble";
+// @import "elements/slots";
+// @import "elements/card";
+// @import "elements/switch";
+// @import "elements/typefield";
+
+// @import "sections/header";
+// @import "sections/rollwidget";
+
