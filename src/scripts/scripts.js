@@ -1,5 +1,6 @@
 import { splitArgs } from "../lib/znzlib";
-import { getCharacter } from "../lib/roll20";
+import { getCharacter, sendMessage } from "../lib/roll20";
+import { FatigueRoll } from "./fatigueroll";
 
 /**
  * Main Entrypoint into the API. 
@@ -7,17 +8,11 @@ import { getCharacter } from "../lib/roll20";
  * 
  * This will loop over all Callers/Watchers and add input in there.
  */
-var Main = Main || (function(){
+const Main = (function(){
 
     const callers = {};
     const watchers = [];
-    const prefix = '!!'
-
-    //Init Scripts
-    const init = function() {
-        on('chat:message', HandleInput);
-        on('change:attribute', HandleAttributeChange);
-	};
+    const prefix = '!!';
 
     /**
      * Register Callers. Add in API Scripts through this function.
@@ -28,7 +23,7 @@ var Main = Main || (function(){
      */
     const RegisterCaller = function(command, callFunction){             
         callers[command] = callFunction;
-    }
+    };
 
     /**
      * Register Watchers. Add in scripts that monitor attribute changes through this function
@@ -37,7 +32,7 @@ var Main = Main || (function(){
      */
     const RegisterWatcher = function(watchFunction){
         watchers.push(obj);
-    }
+    };
 
      /**
      * Main router function for calling Callers. Takes an API chat message, parses its args, and then matches it to a caller.
@@ -57,12 +52,14 @@ var Main = Main || (function(){
             sender=(getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname'),
             character = getCharacter(sender, msg, args);
 
+
         // Go through our registered APIs and call as appropriate
         for (const api in callers){
+            log(prefix + api);
             if (msg.content.startsWith(prefix + api)){
                 try {
                     //run the funciton
-                    callers[api](args, character);
+                    callers[api](args, character, sender);
                 } catch(err){
                     log(err);
                     log(err.stack);
@@ -83,16 +80,25 @@ var Main = Main || (function(){
                 sendMessage(err, 'Error in attribute watcher:', 'error');
             }
         }
-    }
+    };
+
     
+    //Init Scripts
+    const init = function() {
+        on('chat:message', HandleInput);
+        on('change:attribute', HandleAttributeChange);
+	};
+
 
     return {
         init: init,
         RegisterCaller: RegisterCaller,
         RegisterWatcher: RegisterWatcher
     }
-});
+})();
+
 
 on("ready", function(){
+    Main.RegisterCaller('fatroll', FatigueRoll);
     Main.init();
 });

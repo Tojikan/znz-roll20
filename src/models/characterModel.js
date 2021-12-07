@@ -1,8 +1,6 @@
-// import { capitalize } from "lodash";
 import { Model } from "./classes/model";
 
-
-export const Character = new Model(
+export const CharacterModel = new Model(
     {
         health: {
             default: 100,
@@ -24,9 +22,9 @@ export const Character = new Model(
         rollcost: {},
         ammo: {
             list: {
-                light: {},
-                medium: {},
-                heavy: {}
+                ammolight: {label: 'Light'},
+                ammomedium: {label: 'Medium'},
+                ammoheavy: {label: 'Heavy'}
             }
         },
         body: { default: 10 },

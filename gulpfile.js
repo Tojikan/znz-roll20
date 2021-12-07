@@ -13,7 +13,6 @@ const   gulp = require('gulp'),
         buildContext = require('./BuildContext');
 
 const dataFolder = './src/model/';
-const dataFolder2 = './src/models/';
 
 
 /** Build HTML Templates from NJKS **/

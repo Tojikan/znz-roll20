@@ -4,7 +4,7 @@ import { pickup } from "./pickup";
 import { RollAP } from "./rollAP";
 // import { attack } from "./attack";
 // import { combat } from './combat';
-import { splitArgs, getCharacter } from "./_helpers";
+import { splitArgs, getCharacter } from "./_archive/_helpers";
 import { cardDeck } from "./deck";
 
 /**

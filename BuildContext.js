@@ -163,7 +163,7 @@ const sassHeaders = `
  */
 const getCharacter = function(){
     clearDataCache('./src/models/');
-    const character = require('./src/models/character').Character;
+    const character = require('./src/models/characterModel').CharacterModel;
 
     return character.toJson();
 }

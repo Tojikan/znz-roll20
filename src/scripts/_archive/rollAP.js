@@ -1,5 +1,5 @@
 import { fields as character } from '../model/character';
-import { getAttr, getAttrVal, spendResource, incrementCounter } from './_helpers';
+import { getAttr, getAttrVal, spendResource, incrementCounter } from './_archive/_helpers';
 
 /**
  * Roll System where we use a declining Pool of dice.

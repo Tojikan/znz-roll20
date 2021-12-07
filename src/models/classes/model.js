@@ -7,10 +7,10 @@ export class Model {
     
     /**
      * Exports a model's fields into JSON. Generates an ID and label for each top level key in an object.
-     * 
+     * @param {boolean} flatten flatten lists into the main object so everything is 1 dimensional. This is dangerous as this will overwrite keys so make sure all keys are unique
      * @returns 
      */
-    toJson(){
+    toJson(flatten=false){
         let keys = Object.keys(this.model);
         let retVal = {};
         
@@ -47,6 +47,13 @@ export class Model {
                     //add a prefix to the option id
                     retVal[k].list[opt] = setupField(`${opt}`, obj.list[opt], k);
                 }
+                
+                //If flatten, merge it back into the main object, deleting the original list.
+                if (flatten){
+                    retVal = {...retVal, ...retVal[k].list};
+                    delete retVal[k].list;
+                }
+
             } else {
                 retVal[k] = setupField(k, obj);
             }

@@ -1,7 +1,7 @@
-import { getAttr, getAttrVal } from "./_helpers"; 
+import { getAttr, getAttrVal } from "./_archive/_helpers"; 
 import { fields as card} from '../model/card';
 import { fields as charFields} from '../model/character';
-import { spendResource } from "./_helpers";
+import { spendResource } from "./_archive/_helpers";
 
 const handleResults = function(response, sender, character){
     let title = 'Reload';

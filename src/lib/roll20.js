@@ -147,3 +147,47 @@ export function addNumber(attr, amt){
         newValue: newValue
     }
 }
+
+
+
+/**
+ * Post a formatted text to chat.
+ * @param {*} msg 
+ * @param {*} who 
+ * @param {*} type 
+ * @returns 
+ */   
+export function sendMessage (msg, who, type){
+    let textColor = '#000',
+        bgColor = '#fff';
+
+    switch (type){
+        case "error":
+            textColor = '#C14054';
+            bgColor = '#EBC8C4';
+            break;
+        case "info":
+            bgColor = '#CCE8F4';
+            textColor = '#456C8B';
+            break;
+        case "warning":
+            bgColor = '#F8F3D6';
+            textColor = '#8B702D';
+            break;
+        case "success":
+            bgColor = '#baedc3';
+            textColor = '#135314';
+            break;
+        case "header":
+            sendChat(
+                `${who}`,
+                `<h3 style="border: solid 1px black; background-color: white; padding: 5px;">${msg}</h3>`
+            );             
+            return;
+    }
+
+    sendChat(
+        `${who}`,
+        `<div style="padding:3px; border: 1px solid ${textColor};background: ${bgColor}; color: ${textColor}; font-size: 120%;">${msg}</div>`
+    );
+}

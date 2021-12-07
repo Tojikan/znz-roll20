@@ -63,3 +63,27 @@ export function capitalize(str) {
     }
     return result;
 }
+
+
+/**
+ * Sum up an array of strings
+ * 
+ * @param {array} values values to sum
+ * @returns the sum of all values
+ */
+export function sumValues (values){
+    return values.reduce((prev, curr) =>{
+        return prev + (Number.parseInt(curr, 10) || 0);
+    }, 0)
+}
+
+/**
+ * Splits a string by | symbol, returning an an array of the split
+ * @param {string} str passed in string
+ * @returns array
+ */
+export function splitByPipe(str){
+    return str.toString()
+        .split('|')
+        .filter(x => x); //make sure its valid
+}

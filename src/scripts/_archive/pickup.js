@@ -1,6 +1,6 @@
-import { fields as card } from '../model/card';
-import { fields as charFields } from '../model/character';
-import * as itemtemplates from '../model/items.json';
+import { fields as card } from '../../model/card';
+import { fields as charFields } from '../../model/character';
+import * as itemtemplates from '../../model/items.json';
 import { generateRowID, getAttr, getAttrVal, getRepeaterIds } from "./_helpers";
 
 const templates = itemtemplates;

@@ -1,5 +1,5 @@
 // import { fields as character } from "../model/character";
-import { Character } from "../models/Character";
+import { CharacterModel } from "../models/characterModel";
 
 
 
