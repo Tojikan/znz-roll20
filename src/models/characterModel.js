@@ -27,9 +27,9 @@ export const CharacterModel = new Model(
                 ammoheavy: {label: 'Heavy'}
             }
         },
-        body: { default: 10 },
-        mind: { default: 10 },
-        spirit: { default: 10 },
+        body: { default: 10, tooltip: 'This is the number of dice rolled when making actions that involve physical activity. Skills below are used to set a roll target' },
+        mind: { default: 10, tooltip: 'This is the number of dice rolled when making actions that involve mental activity. Skills below are used to set a roll target' },
+        spirit: { default: 10, tooltip: 'This is the number of dice rolled when making supportive actions that involve your senses, emotions, creativity, or will to live. Skills below are used to set a roll target' },
         skills: {
             list: {
                 melee: { uses: 'body', label: 'Melee Combat'},
@@ -37,27 +37,27 @@ export const CharacterModel = new Model(
                 dodging: { uses: 'body' },
                 ranged: { uses: 'body', label: 'Ranged Combat' },
                 throwing: { uses: 'body' },
-                athletics: { uses: 'body' },
-                endurance: { uses: 'body' },
+                athletics: { uses: 'body' , tooltip: 'Ability to do movements such as climbing, swimming, parkour etc.'},
+                endurance: { uses: 'body' , tooltip: 'Resist sickness or health conditions or injuries.'},
                 stealth: { uses: 'body' },
                 
-                crafting: { uses: 'mind' },
-                learning: { uses: 'mind' },
-                vehicles: { uses: 'mind' },
-                engineering: { uses: 'mind' },
-                science: { uses: 'mind' },
-                medicine: { uses: 'mind' },
-                investigation: { uses: 'mind' },
-                nature: { uses: 'mind' },
+                memory: { uses: 'mind', tooltip: 'Ability to learn and also remember random trivia. '  },
+                sociology: { uses: 'mind', tooltip: 'Understanding of how people and society works.'},
+                engineering: { uses: 'mind', tooltip: 'Understanding of engineering concepts, make and repair machinery, etc.' },
+                science: { uses: 'mind' , tooltip: 'Understanding of scientific theories, such as physics, chemistry, biology, etc.' },
+                medicine: { uses: 'mind', tooltip: 'Used for curing sickness, applying first aid, healing wounds, etc.'  },
+                investigation: { uses: 'mind'},
+                nature: { uses: 'mind', tooltip: 'Understanding of nature, wildlife, plants, weather, etc.'  },
+                thievery: { uses: 'mind', tooltip: 'Used for hacking, lockpicking, stealing, hotwiring etc. '  },
                 
-                scouting: { uses: 'spirit' },
-                reflexes: { uses: 'spirit' },
-                tenacity: { uses: 'spirit' },
-                socialskills: {uses: 'spirit', label: 'Social Skills'},
-                thievery: { uses: 'spirit' },
-                emotions: {uses: 'spirit'},
-                insight: {uses: 'spirit'},
-                survival: { uses: 'spirit' }
+                crafting: { uses: 'spirit'},
+                perception: { uses: 'spirit'},
+                reflexes: { uses: 'spirit', tooltip: 'React to events. Also used to add bonus to initiative.'  },
+                tenacity: { uses: 'spirit', tooltip: 'Resist mental trauma and endure pain.'  },
+                socialskills: {uses: 'spirit', label: 'Social Skills', tooltip: 'Used for interacting with other people - persuasion, negotiation, intimidation'},
+                emotions: {uses: 'spirit', tooltip: 'Used for empathizing with others, getting others to trust you, and reducing your trauma.' },
+                insight: {uses: 'spirit', tooltip: 'Be able to ascertain or understand the intentions of others.' },
+                luck: { uses: 'spirit', tooltip: 'Improves any rolls that are pure random chance.'  }
             }
         }
     }

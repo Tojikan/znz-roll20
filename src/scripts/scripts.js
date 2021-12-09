@@ -55,7 +55,6 @@ const Main = (function(){
 
         // Go through our registered APIs and call as appropriate
         for (const api in callers){
-            log(prefix + api);
             if (msg.content.startsWith(prefix + api)){
                 try {
                     //run the funciton
@@ -71,7 +70,7 @@ const Main = (function(){
 
     // Single function call for all attribute watchers
     const HandleAttributeChange = function(obj, prev){
-        for (let watcher of attrWatchers){
+        for (let watcher of watchers){
             try {
                 watcher(obj, prev);
             } catch(err){

@@ -35,11 +35,11 @@
             <span>Roll Type:</span> 
             <div class="btn-radiobutton-row">
                 <div class="control btn-radiobutton">
-                    <input class="btn-radiobutton-input cost-1" type="radio" name="attr_{{character.rollcost}}" value="1" checked="checked">
+                    <input class="btn-radiobutton-input cost-1" type="radio" name="attr_{{character.rollcost | getAttr}}" value="1" checked="checked">
                     <div class="btn-radiobutton-label cost-1">Active</div>
                 </div>
                 <div class="control btn-radiobutton">
-                    <input class="btn-radiobutton-input cost-0" type="radio" name="attr_{{character.rollcost}}" value="0">
+                    <input class="btn-radiobutton-input cost-0" type="radio" name="attr_{{character.rollcost | getAttr}}" value="0">
                     <div class="btn-radiobutton-label cost-0">Free</div>
                 </div>
             </div>

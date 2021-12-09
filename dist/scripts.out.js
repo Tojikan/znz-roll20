@@ -259,19 +259,19 @@
                     stealth: { uses: 'body' },
                     
                     crafting: { uses: 'mind' },
-                    learning: { uses: 'mind' },
-                    vehicles: { uses: 'mind' },
+                    sociology: { uses: 'mind' },
                     engineering: { uses: 'mind' },
                     science: { uses: 'mind' },
                     medicine: { uses: 'mind' },
                     investigation: { uses: 'mind' },
                     nature: { uses: 'mind' },
+                    thievery: { uses: 'mind' },
                     
+                    learning: { uses: 'spirit' },
                     scouting: { uses: 'spirit' },
                     reflexes: { uses: 'spirit' },
                     tenacity: { uses: 'spirit' },
                     socialskills: {uses: 'spirit', label: 'Social Skills'},
-                    thievery: { uses: 'spirit' },
                     emotions: {uses: 'spirit'},
                     insight: {uses: 'spirit'},
                     survival: { uses: 'spirit' }
@@ -406,28 +406,29 @@
                     // doing it this way lets us overwrite the handler in the constructor, which makes it easier to unit test or something
                     let handler = (getHandler || function(target, key){
                         if ('id' in target[key]){
-                            let val = getAttrVal(target[key].id);
+                            let val = this.getAttrVal(target[key].id);
                             return ( Number(val, 10) || val );
                         } else {
                             return null;
                         }
 
-                    });
+                    }).bind(this);//double bind to get to class
 
                     return handler(target, key);
-                },
+                }.bind(this),//double bind to get to class
                 set: function(target, key, value) {
 
                     let handler = (setHandler || function(target, key, value){
                         if ('id' in target[key]){
-                            setAttrVal(target[key].id, value);
+                            this.setAttrVal(target[key].id, value);
                         } 
                         return true;
-                    });
+                    }).bind(this);
 
                     return handler(target, key, value)
-                }
+                }.bind(this)
             };
+
             this.data = new Proxy(this.model, modelProxy);
         }
 
@@ -460,7 +461,7 @@
          * @param {*} value value to set to
          */
         setAttrVal(attr, value){
-            let attribute = getAttr(attr);
+            let attribute = this.getAttr(attr);
 
             if (!attribute){
                 return null;
@@ -495,14 +496,14 @@
         const rollArgs = verifyRollArgs(args),
             character = new PlayerCharacter(char),
             dice = 10, //assuming we stick with a d10? Change if needed
-            hasCost = character.data.rollcost,
-            poolMod = character.data.rollmod,
+            hasCost = parseInt(character.data.rollcost, 10),
+            poolMod = parseInt(character.data.rollmod, 10) || 0,
+            fatigue = Math.max(parseInt(character.data.fatigue / 10, 10), 0),
             stdCost = 3;
+        let totalPool = Math.max(rollArgs.pool + poolMod - fatigue, 1);
 
-            
-            
-        let output = `&{template:default} {{name=${rollArgs.name || `${character.name} attemmpts a roll!`}}} `;
-        let rollText = generateRollText(dice, rollArgs.pool + poolMod - character.data.fatigue, rollArgs.target);
+        let output = `&{template:default} {{name=${rollArgs.name || `${character.name} attempts a roll!`}}} `;
+        let rollText = generateRollText(dice, totalPool, rollArgs.target);
 
         if (hasCost){
             if (character.data.actions > 0){
@@ -515,13 +516,16 @@
             }
         }
 
-        output += ` {{Roll Result= [[[[${rollText}]]-[[${character.data.trauma}]]]]}}`;
+        const trauma = Math.max(parseInt((character.data.trauma / 10), 10), 0);
+
+        if (trauma >= 1 ){
+            output += ` [[[[${rollText}]]-[[${trauma} trauma]]]] `;
+            output += ` {{Roll Result = $[[0]] - $[[1]] == $[[2]] Successes}}`;
+        } else {
+            output += `{{Roll Result= [[${rollText}]] Successes}}`;
+        }
         sendChat(sender, output);
     };
-
-
-
-
 
 
     function generateRollText(dice, pool, target){
@@ -534,16 +538,20 @@
 
         for (let arg of expectedArgs) {
             if (arg in args){
-                let val = parseInt(trim(args[arg]), 10);
+                let val = parseInt(args[arg], 10);
 
                 if (isNaN(val)){
                     throw(`FatigueRoll Error - '${arg}' must be an integer!`);
                 }
 
+                if (val <= 0){
+                    throw(`FatigueRoll Error - '${arg}' must be non-negative and non-zero!`);
+                }
+
                 args[arg] = val;
+            } else {
+                throw(`FatigueRoll Error - Missing required parameter '${arg}'`);
             }
-            
-            throw(`FatigueRoll Error - Missing required parameter '${arg}'`);
         }
 
         return args;
@@ -602,7 +610,6 @@
 
             // Go through our registered APIs and call as appropriate
             for (const api in callers){
-                log(prefix + api);
                 if (msg.content.startsWith(prefix + api)){
                     try {
                         //run the funciton
@@ -618,7 +625,7 @@
 
         // Single function call for all attribute watchers
         const HandleAttributeChange = function(obj, prev){
-            for (let watcher of attrWatchers){
+            for (let watcher of watchers){
                 try {
                     watcher(obj, prev);
                 } catch(err){

@@ -1,6 +1,5 @@
 import { CharacterModel } from "./CharacterModel";
 
-
 export class PlayerCharacter{
 
     /**
@@ -29,28 +28,29 @@ export class PlayerCharacter{
                 // doing it this way lets us overwrite the handler in the constructor, which makes it easier to unit test or something
                 let handler = (getHandler || function(target, key){
                     if ('id' in target[key]){
-                        let val = getAttrVal(target[key].id);
+                        let val = this.getAttrVal(target[key].id);
                         return ( Number(val, 10) || val );
                     } else {
                         return null;
                     }
 
-                });
+                }).bind(this);//double bind to get to class
 
                 return handler(target, key);
-            },
+            }.bind(this),//double bind to get to class
             set: function(target, key, value) {
 
                 let handler = (setHandler || function(target, key, value){
                     if ('id' in target[key]){
-                        setAttrVal(target[key].id, value);
+                        this.setAttrVal(target[key].id, value);
                     } 
                     return true;
-                })
+                }).bind(this);
 
                 return handler(target, key, value)
-            }
+            }.bind(this)
         };
+
         this.data = new Proxy(this.model, modelProxy);
     }
 
@@ -83,7 +83,7 @@ export class PlayerCharacter{
      * @param {*} value value to set to
      */
     setAttrVal(attr, value){
-        let attribute = getAttr(attr);
+        let attribute = this.getAttr(attr);
 
         if (!attribute){
             return null;

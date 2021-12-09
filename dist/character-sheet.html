@@ -88,11 +88,11 @@
             <span>Roll Type:</span> 
             <div class="btn-radiobutton-row">
                 <div class="control btn-radiobutton">
-                    <input class="btn-radiobutton-input cost-1" type="radio" name="attr_[object Object]" value="1" checked="checked">
+                    <input class="btn-radiobutton-input cost-1" type="radio" name="attr_rollcost" value="1" checked="checked">
                     <div class="btn-radiobutton-label cost-1">Active</div>
                 </div>
                 <div class="control btn-radiobutton">
-                    <input class="btn-radiobutton-input cost-0" type="radio" name="attr_[object Object]" value="0">
+                    <input class="btn-radiobutton-input cost-0" type="radio" name="attr_rollcost" value="0">
                     <div class="btn-radiobutton-label cost-0">Free</div>
                 </div>
             </div>
@@ -138,115 +138,380 @@
 
 
     <div class="dice-pool-row">
+        <div class="pool-label">
+            <div class="pool-roll">
+                <button type="roll" class="pool-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a generic Body roll!' target='?{Target Roll?}' characterid='@{character_id}'"></button>
+            </div>
+            <span>Body</span>
+            
+                <div class="znztip">
+                ?
+                    <div class="znztiptext">
+                        This is the number of dice rolled when making actions that involve physical activity. Skills below are used to set a roll target
+                    </div>
+                </div>
+            
+        </div>
         <div class="pool-amount">
             <input type="number" name="attr_body" value="10">
-        </div>
-        <div class="pool-label">
-            <span>Body</span>
         </div>
     </div>
 
     <div class="skill-list">
         <div class="skill-row">
-            <div class="skill-label">Athletics</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Athletics roll!' target='@{skills_athletics}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Athletics
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Ability to do movements such as climbing, swimming, parkour etc.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_athletics" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Blocking</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Blocking roll!' target='@{skills_blocking}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Blocking
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_blocking" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Dodging</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Dodging roll!' target='@{skills_dodging}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Dodging
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_dodging" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Endurance</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Endurance roll!' target='@{skills_endurance}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Endurance
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Resist sickness or health conditions or injuries.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_endurance" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Melee Combat</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Melee Combat roll!' target='@{skills_melee}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Melee Combat
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_melee" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Ranged Combat</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Ranged Combat roll!' target='@{skills_ranged}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Ranged Combat
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_ranged" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Stealth</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Stealth roll!' target='@{skills_stealth}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Stealth
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_stealth" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Throwing</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{body}' name='@{character_name} attempts to roll a Throwing roll!' target='@{skills_throwing}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Throwing
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_throwing" value="2"></div>
         </div>
     </div>
 
 
     <div class="dice-pool-row">
+        <div class="pool-label">
+            <div class="pool-roll">
+                <button type="roll" class="pool-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a generic Spirit roll!' target='?{Target Roll?}' characterid='@{character_id}'"></button>
+            </div>
+            <span>Spirit</span>
+            
+                <div class="znztip">
+                ?
+                    <div class="znztiptext">
+                        This is the number of dice rolled when making supportive actions that involve your senses, emotions, creativity, or will to live. Skills below are used to set a roll target
+                    </div>
+                </div>
+            
+        </div>
         <div class="pool-amount">
             <input type="number" name="attr_spirit" value="10">
-        </div>
-        <div class="pool-label">
-            <span>Spirit</span>
         </div>
     </div>
 
     <div class="skill-list">
         <div class="skill-row">
-            <div class="skill-label">Emotions</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Crafting roll!' target='@{skills_crafting}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Crafting
+                
+                
+            </div>
+            <div class="skill-amount"><input type="number" name="attr_skills_crafting" value="2"></div>
+        </div><div class="skill-row">
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Emotions roll!' target='@{skills_emotions}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Emotions
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Used for empathizing with others, getting others to trust you, and reducing your trauma.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_emotions" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Insight</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Insight roll!' target='@{skills_insight}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Insight
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Be able to ascertain or understand the intentions of others.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_insight" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Reflexes</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Luck roll!' target='@{skills_luck}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Luck
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Improves any rolls that are pure random chance.
+                        </div>
+                    </div>
+                
+                
+            </div>
+            <div class="skill-amount"><input type="number" name="attr_skills_luck" value="2"></div>
+        </div><div class="skill-row">
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Perception roll!' target='@{skills_perception}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Perception
+                
+                
+            </div>
+            <div class="skill-amount"><input type="number" name="attr_skills_perception" value="2"></div>
+        </div><div class="skill-row">
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Reflexes roll!' target='@{skills_reflexes}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Reflexes
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            React to events. Also used to add bonus to initiative.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_reflexes" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Scouting</div>
-            <div class="skill-amount"><input type="number" name="attr_skills_scouting" value="2"></div>
-        </div><div class="skill-row">
-            <div class="skill-label">Social Skills</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Social Skills roll!' target='@{skills_socialskills}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Social Skills
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Used for interacting with other people - persuasion, negotiation, intimidation
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_socialskills" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Survival</div>
-            <div class="skill-amount"><input type="number" name="attr_skills_survival" value="2"></div>
-        </div><div class="skill-row">
-            <div class="skill-label">Tenacity</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{spirit}' name='@{character_name} attempts to roll a Tenacity roll!' target='@{skills_tenacity}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Tenacity
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Resist mental trauma.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_tenacity" value="2"></div>
-        </div><div class="skill-row">
-            <div class="skill-label">Thievery</div>
-            <div class="skill-amount"><input type="number" name="attr_skills_thievery" value="2"></div>
         </div>
     </div>
 
 
     <div class="dice-pool-row">
+        <div class="pool-label">
+            <div class="pool-roll">
+                <button type="roll" class="pool-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a generic Mind roll!' target='?{Target Roll?}' characterid='@{character_id}'"></button>
+            </div>
+            <span>Mind</span>
+            
+                <div class="znztip">
+                ?
+                    <div class="znztiptext">
+                        This is the number of dice rolled when making actions that involve mental activity. Skills below are used to set a roll target
+                    </div>
+                </div>
+            
+        </div>
         <div class="pool-amount">
             <input type="number" name="attr_mind" value="10">
-        </div>
-        <div class="pool-label">
-            <span>Mind</span>
         </div>
     </div>
 
     <div class="skill-list">
         <div class="skill-row">
-            <div class="skill-label">Crafting</div>
-            <div class="skill-amount"><input type="number" name="attr_skills_crafting" value="2"></div>
-        </div><div class="skill-row">
-            <div class="skill-label">Engineering</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Engineering roll!' target='@{skills_engineering}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Engineering
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Understanding of engineering concepts, make and repair machinery, etc.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_engineering" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Investigation</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Investigation roll!' target='@{skills_investigation}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Investigation
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Investigate scenes and try to ascertain what happened.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_investigation" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Learning</div>
-            <div class="skill-amount"><input type="number" name="attr_skills_learning" value="2"></div>
-        </div><div class="skill-row">
-            <div class="skill-label">Medicine</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Medicine roll!' target='@{skills_medicine}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Medicine
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Used for curing sickness, applying first aid, healing wounds, etc.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_medicine" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Nature</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Memory roll!' target='@{skills_memory}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Memory
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Ability to learn and also remember random trivia. 
+                        </div>
+                    </div>
+                
+                
+            </div>
+            <div class="skill-amount"><input type="number" name="attr_skills_memory" value="2"></div>
+        </div><div class="skill-row">
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Nature roll!' target='@{skills_nature}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Nature
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Understanding of nature, wildlife, plants, weather, etc.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_nature" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Science</div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Science roll!' target='@{skills_science}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Science
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Understanding of scientific theories, such as physics, chemistry, biology, etc.
+                        </div>
+                    </div>
+                
+                
+            </div>
             <div class="skill-amount"><input type="number" name="attr_skills_science" value="2"></div>
         </div><div class="skill-row">
-            <div class="skill-label">Vehicles</div>
-            <div class="skill-amount"><input type="number" name="attr_skills_vehicles" value="2"></div>
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Sociology roll!' target='@{skills_sociology}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Sociology
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Understanding of how people and society works.
+                        </div>
+                    </div>
+                
+                
+            </div>
+            <div class="skill-amount"><input type="number" name="attr_skills_sociology" value="2"></div>
+        </div><div class="skill-row">
+            <div class="skill-roll"><button type="roll" class="skill-roll-btn" value="!!fatroll pool='@{mind}' name='@{character_name} attempts to roll a Thievery roll!' target='@{skills_thievery}' characterid='@{character_id}'"></button></div>
+            <div class="skill-label">
+                Thievery
+                
+                    <div class="znztip">
+                    ?
+                        <div class="znztiptext">
+                            Used for hacking, lockpicking, stealing, etc. 
+                        </div>
+                    </div>
+                
+                
+            </div>
+            <div class="skill-amount"><input type="number" name="attr_skills_thievery" value="2"></div>
         </div>
     </div>
 
@@ -275,19 +540,246 @@
     (function () {
     'use strict';
 
-    // import { fields as character } from "../model/character";
+    /////// Library of Functions for Generic Use
 
 
 
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    class Model {
+        constructor(model){
+            this.model = model;
+        }
+        
+        /**
+         * Exports a model's fields into JSON. Generates an ID and label for each top level key in an object.
+         * @param {boolean} flatten flatten lists into the main object so everything is 1 dimensional. This is dangerous as this will overwrite keys so make sure all keys are unique
+         * @returns 
+         */
+        toJson(flatten=false){
+            let keys = Object.keys(this.model);
+            let retVal = {};
+            
+            // Inner function for setting ID and Label
+            const setupField = function(key, obj, prefix=''){
+                let result = {...obj};
+                
+                //Set ID based on key if none provided
+                if (!('id' in obj)){
+                    result.id = key;
+                }
+            
+                //Set label based on key if none provided
+                if (!('label' in obj)){
+                    result.label = capitalize(key);
+                }   
+            
+                //Add prefix to the id.
+                if (prefix.length){
+                    result.id = `${prefix}_${result.id}`;
+                }
+                
+                return result;
+            };
+            
+            for (let k of keys){
+                let obj = this.model[k];
+                
+                //For lists fields (such as skills), set up for each item in the list
+                if (obj && 'list' in obj){
+                    retVal[k] = {...obj, list:{}};
+            
+                    for (let opt of Object.keys(obj.list)){
+                        //add a prefix to the option id
+                        retVal[k].list[opt] = setupField(`${opt}`, obj.list[opt], k);
+                    }
+                    
+                    //If flatten, merge it back into the main object, deleting the original list.
+                    if (flatten){
+                        retVal = {...retVal, ...retVal[k].list};
+                        delete retVal[k].list;
+                    }
+
+                } else {
+                    retVal[k] = setupField(k, obj);
+                }
+            }
+            
+            return retVal;
+
+        }
+    }
+
+    const CharacterModel = new Model(
+        {
+            health: {
+                default: 100,
+                max: true
+            },
+            fatigue: {
+                affects: 'rolls'
+            },
+            trauma: {
+                affects: 'success'
+            },
+            actions: {
+                max: true,
+                default: 3,
+                action: 'refreshAP',
+                actionlabel: 'refresh'
+            },
+            rollmod: {},
+            rollcost: {},
+            ammo: {
+                list: {
+                    ammolight: {label: 'Light'},
+                    ammomedium: {label: 'Medium'},
+                    ammoheavy: {label: 'Heavy'}
+                }
+            },
+            body: { default: 10, tooltip: 'This is the number of dice rolled when making actions that involve physical activity. Skills below are used to set a roll target' },
+            mind: { default: 10, tooltip: 'This is the number of dice rolled when making actions that involve mental activity. Skills below are used to set a roll target' },
+            spirit: { default: 10, tooltip: 'This is the number of dice rolled when making supportive actions that involve your senses, emotions, creativity, or will to live. Skills below are used to set a roll target' },
+            skills: {
+                list: {
+                    melee: { uses: 'body', label: 'Melee Combat'},
+                    blocking: { uses: 'body' },
+                    dodging: { uses: 'body' },
+                    ranged: { uses: 'body', label: 'Ranged Combat' },
+                    throwing: { uses: 'body' },
+                    athletics: { uses: 'body' , tooltip: 'Ability to do movements such as climbing, swimming, parkour etc.'},
+                    endurance: { uses: 'body' , tooltip: 'Resist sickness or health conditions or injuries.'},
+                    stealth: { uses: 'body' },
+                    
+                    memory: { uses: 'mind', tooltip: 'Ability to learn and also remember random trivia. '  },
+                    sociology: { uses: 'mind', tooltip: 'Understanding of how people and society works.'},
+                    engineering: { uses: 'mind', tooltip: 'Understanding of engineering concepts, make and repair machinery, etc.' },
+                    science: { uses: 'mind' , tooltip: 'Understanding of scientific theories, such as physics, chemistry, biology, etc.' },
+                    medicine: { uses: 'mind', tooltip: 'Used for curing sickness, applying first aid, healing wounds, etc.'  },
+                    investigation: { uses: 'mind', tooltip: 'Investigate scenes and try to ascertain what happened.'  },
+                    nature: { uses: 'mind', tooltip: 'Understanding of nature, wildlife, plants, weather, etc.'  },
+                    thievery: { uses: 'mind', tooltip: 'Used for hacking, lockpicking, stealing, etc. '  },
+                    
+                    crafting: { uses: 'spirit'},
+                    perception: { uses: 'spirit'},
+                    reflexes: { uses: 'spirit', tooltip: 'React to events. Also used to add bonus to initiative.'  },
+                    tenacity: { uses: 'spirit', tooltip: 'Resist mental trauma.'  },
+                    socialskills: {uses: 'spirit', label: 'Social Skills', tooltip: 'Used for interacting with other people - persuasion, negotiation, intimidation'},
+                    emotions: {uses: 'spirit', tooltip: 'Used for empathizing with others, getting others to trust you, and reducing your trauma.' },
+                    insight: {uses: 'spirit', tooltip: 'Be able to ascertain or understand the intentions of others.' },
+                    luck: { uses: 'spirit', tooltip: 'Improves any rolls that are pure random chance.'  }
+                }
+            }
+        }
+    );
+
+    // export const CharacterModel = {
+        // notes: {},
+        // ammo: {
+        //     type: 'list',
+        //     list: {
+        //         light:{},
+        //         medium:{},
+        //         heavy:{},
+        //         arrow:{}
+        //     }
+        // },
+        // health: {
+        //     type: 'max'
+        // },
+        // fatigue: {
+        //     type: 'max'
+        // },
+        // actions: {
+        //     type: 'max'
+        // },
+        // equipmentslots: {
+        //     default: 2,
+        //     max: 6
+        // },
+        // inventoryslots: {
+        //     default: 5,
+        //     max: 12
+        // },
+        // ability: {
+        //     options: {
+        //         _default: {
+        //             label: "Select an ability"
+        //         },
+        //         scavenger: {
+        //             description: "Draw 1 additional cards when you scavenge. If you are scavenging a location alone, draw 3."
+        //         },
+        //         sniper: {
+        //             description: "Take aim - don't take any actions this turn. Roll them as free ranged attack actions next turn. You lose these free attacks if you do any action other than ranged attack prior to using them."
+        //         }
+        //     }
+        // },
+        // combatskills: {
+        //     type:'list',
+        //     list: {
+        //         guard: {
+        //             label: "Guard"
+        //         },
+        //         throw: {
+        //             label: "Throw"
+        //         },
+        //         blunt: {
+        //             label: "Blunt Melee"
+        //         },
+        //         firearm: {
+        //             label: "Firearm"
+        //         },
+        //         sharp: {
+        //             label: "Sharp Melee"
+        //         },
+        //         unarmed: {
+        //             label: "Unarmed"
+        //         },
+        //         projectile: {
+        //             label: "Projectile"
+        //         }
+        //     }
+        // },
+        // skills: {
+        //     type: 'list',
+        //     list: {
+        //         lockpick: {
+        //             label: "Lockpick"
+        //         },
+        //         scout: {
+        //             label: "Scout"
+        //         },
+        //         stealth: {
+        //             label: "Stealth"
+        //         },
+        //         social: {
+        //             label: "Social"
+        //         },
+        //         firstaid: {
+        //             label: "First Aid"
+        //         },
+        //         construction: {
+        //             label: "Construction"
+        //         },
+        //         hacking: {
+        //             label: "Hacking"
+        //         },
+        //         athletics: {
+        //             label: "Athletics"
+        //         }
+        //     }
+        // }
+    // }
 
     function rollwidget(){
-        const charModel = Character.toJson();
+        const charModel = CharacterModel.toJson();
         const AP = charModel.actions;
 
         // AP reset
         //reset to max
         on(`clicked:${AP.action}`, function(evInfo){
-            console.log('hello');
             getAttrs([AP.id, AP.id + '_max'], function(results){
                 setAttrs({
                     [AP.id]: results[AP.id + '_max']

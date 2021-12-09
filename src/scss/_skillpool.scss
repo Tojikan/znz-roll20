@@ -4,6 +4,8 @@
         color: $white;
         font-weight: 700;
         display: flex;
+        min-width: 20rem;
+        box-sizing: content-box;
         
         .pool-amount {
             background-color: $black;
@@ -32,10 +34,31 @@
             height: 60%;
             align-self: center;
             font-size: $medium;
-            margin-left: -1rem;
-            padding-left: 2rem;
+            margin-right: -1rem;
+            padding-right: 2rem;
             width: 100%;
             text-align: center;
+            display: flex;
+            align-items: center;
+
+            .pool-roll-btn {
+                margin-right: 1rem;
+                background: $black;
+                transition: 0.3s;
+
+                &:before {
+                    color: $white;
+                    font-weight: 700;
+                }
+
+                &:hover {
+                    background: $white;
+
+                    &:before {
+                        color: $black;
+                    }
+                }
+            }
         }
     }
 
@@ -47,13 +70,31 @@
         display: flex;
         justify-content: space-between;
         border: solid 1px $darkgray;
-        margin-left: 5.4rem;
+        margin-right: 5.4rem;
         align-items: center;
-        padding-left: 0.6rem;
+        padding-left: 0.3rem;
+        min-width: 16rem;
 
         .skill-label {
             flex: 1 1 80%;
             font-size: $small;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .znztip {
+                margin: 0 1rem;
+                margin-right: 1rem;
+            }
+        }
+
+        .skill-roll {
+            button.skill-roll-btn {
+                margin-top: 0.4rem;
+                margin-bottom: 0.4rem;
+                margin-right: 1rem;
+                height: 1.5rem;
+            }
         }
         
         .skill-amount {

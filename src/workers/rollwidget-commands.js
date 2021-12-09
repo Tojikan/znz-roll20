@@ -1,17 +1,15 @@
-// import { fields as character } from "../model/character";
 import { CharacterModel } from "../models/characterModel";
 
 
 
 
 export function rollwidget(){
-    const charModel = Character.toJson();
+    const charModel = CharacterModel.toJson();
     const AP = charModel.actions;
 
     // AP reset
     //reset to max
     on(`clicked:${AP.action}`, function(evInfo){
-        console.log('hello');
         getAttrs([AP.id, AP.id + '_max'], function(results){
             setAttrs({
                 [AP.id]: results[AP.id + '_max']

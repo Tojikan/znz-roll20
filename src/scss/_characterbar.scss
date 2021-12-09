@@ -1,5 +1,9 @@
 .sheet-character {
     margin-bottom: 14rem;
+
+    @media (max-width: 760px){
+        margin-bottom: 20rem;
+    }
 }
 
 .character-status-bar {
@@ -17,7 +21,6 @@
         display: flex;
         height: 100%;
     }
-    
 
     .box {
         border: solid 2px;
@@ -126,6 +129,20 @@
                 color: $black;
             }
         }
+
+        @media ( max-width: 760px) {
+            position: absolute;
+            bottom: 100%;
+            background-color: $darkgray;
+            border: solid 3px $black;
+            left: 0;
+            right: 0;
+
+            .stage {
+                flex-direction: row;
+            }
+
+        };
     }
 
     .ammo-section {
@@ -145,5 +162,4 @@
             color: $bloodred
         }
     }
-
 }

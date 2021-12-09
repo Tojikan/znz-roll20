@@ -21,14 +21,14 @@ export const FatigueRoll = function(args, char, sender){
     const rollArgs = verifyRollArgs(args),
         character = new PlayerCharacter(char),
         dice = 10, //assuming we stick with a d10? Change if needed
-        hasCost = character.data.rollcost,
-        poolMod = character.data.rollmod,
+        hasCost = parseInt(character.data.rollcost, 10),
+        poolMod = parseInt(character.data.rollmod, 10) || 0,
+        fatigue = Math.max(parseInt(character.data.fatigue / 10, 10), 0),
         stdCost = 3;
+    let totalPool = Math.max(rollArgs.pool + poolMod - fatigue, 1)
 
-        
-        
-    let output = `&{template:default} {{name=${rollArgs.name || `${character.name} attemmpts a roll!`}}} `
-    let rollText = generateRollText(dice, rollArgs.pool + poolMod - character.data.fatigue, rollArgs.target)
+    let output = `&{template:default} {{name=${rollArgs.name || `${character.name} attempts a roll!`}}} `
+    let rollText = generateRollText(dice, totalPool, rollArgs.target)
 
     if (hasCost){
         if (character.data.actions > 0){
@@ -41,13 +41,16 @@ export const FatigueRoll = function(args, char, sender){
         }
     }
 
-    output += ` {{Roll Result= [[[[${rollText}]]-[[${character.data.trauma}]]]]}}`;
+    const trauma = Math.max(parseInt((character.data.trauma / 10), 10), 0);
+
+    if (trauma >= 1 ){
+        output += ` [[[[${rollText}]]-[[${trauma} trauma]]]] `;
+        output += ` {{Roll Result = $[[0]] - $[[1]] == $[[2]] Successes}}`
+    } else {
+        output += `{{Roll Result= [[${rollText}]] Successes}}`;
+    }
     sendChat(sender, output);
 }
-
-
-
-
 
 
 function generateRollText(dice, pool, target){
@@ -60,16 +63,20 @@ function verifyRollArgs(args){
 
     for (let arg of expectedArgs) {
         if (arg in args){
-            let val = parseInt(trim(args[arg]), 10);
+            let val = parseInt(args[arg], 10);
 
             if (isNaN(val)){
                 throw(`FatigueRoll Error - '${arg}' must be an integer!`);
             }
 
+            if (val <= 0){
+                throw(`FatigueRoll Error - '${arg}' must be non-negative and non-zero!`);
+            }
+
             args[arg] = val;
+        } else {
+            throw(`FatigueRoll Error - Missing required parameter '${arg}'`);
         }
-        
-        throw(`FatigueRoll Error - Missing required parameter '${arg}'`);
     }
 
     return args;
