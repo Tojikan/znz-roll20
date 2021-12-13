@@ -59,38 +59,17 @@ export const CharacterModel = new Model(
                 insight: {uses: 'spirit', tooltip: 'Be able to ascertain or understand the intentions of others.' },
                 luck: { uses: 'spirit', tooltip: 'Improves any rolls that are pure random chance.'  }
             }
+        },
+        equipmentslots: {
+            default: 2,
+            max: 6
+        },
+        inventoryslots: {
+            default: 5,
+            max: 12
         }
     }
 );
-
-// export const CharacterModel = {
-    // notes: {},
-    // ammo: {
-    //     type: 'list',
-    //     list: {
-    //         light:{},
-    //         medium:{},
-    //         heavy:{},
-    //         arrow:{}
-    //     }
-    // },
-    // health: {
-    //     type: 'max'
-    // },
-    // fatigue: {
-    //     type: 'max'
-    // },
-    // actions: {
-    //     type: 'max'
-    // },
-    // equipmentslots: {
-    //     default: 2,
-    //     max: 6
-    // },
-    // inventoryslots: {
-    //     default: 5,
-    //     max: 12
-    // },
     // ability: {
     //     options: {
     //         _default: {
@@ -104,59 +83,4 @@ export const CharacterModel = new Model(
     //         }
     //     }
     // },
-    // combatskills: {
-    //     type:'list',
-    //     list: {
-    //         guard: {
-    //             label: "Guard"
-    //         },
-    //         throw: {
-    //             label: "Throw"
-    //         },
-    //         blunt: {
-    //             label: "Blunt Melee"
-    //         },
-    //         firearm: {
-    //             label: "Firearm"
-    //         },
-    //         sharp: {
-    //             label: "Sharp Melee"
-    //         },
-    //         unarmed: {
-    //             label: "Unarmed"
-    //         },
-    //         projectile: {
-    //             label: "Projectile"
-    //         }
-    //     }
-    // },
-    // skills: {
-    //     type: 'list',
-    //     list: {
-    //         lockpick: {
-    //             label: "Lockpick"
-    //         },
-    //         scout: {
-    //             label: "Scout"
-    //         },
-    //         stealth: {
-    //             label: "Stealth"
-    //         },
-    //         social: {
-    //             label: "Social"
-    //         },
-    //         firstaid: {
-    //             label: "First Aid"
-    //         },
-    //         construction: {
-    //             label: "Construction"
-    //         },
-    //         hacking: {
-    //             label: "Hacking"
-    //         },
-    //         athletics: {
-    //             label: "Athletics"
-    //         }
-    //     }
-    // }
 // }
