@@ -1,0 +1,41 @@
+<div class="character-sheet">
+    <div class="character-status-bar">
+        <div class="stage">
+            <div class="stat-tracker box health">
+                <div class="stat-label label-text">Health</div>
+                <div class="stat-wrapper">
+                    <div class="main"><input type="number" name="attr_health" value="0" class="i1xvyh3l" /></div>
+                    <div class="sub">Max: <input type="number" name="attr_health_max" value="0" class="i1xvyh3l" /></div>
+                </div>
+            </div>
+            <div class="stat-tracker box fatigue">
+                <div class="stat-label label-text">Fatigue</div>
+                <div class="stat-wrapper">
+                    <div class="main"><input type="number" name="attr_fatigue" value="0" class="i1xvyh3l" /></div>
+                </div>
+            </div>
+            <div class="stat-tracker box trauma">
+                <div class="stat-label label-text">Trauma</div>
+                <div class="stat-wrapper">
+                    <div class="main"><input type="number" name="attr_trauma" value="0" class="i1xvyh3l" /></div>
+                </div>
+            </div>
+            <div class="stat-tracker box actions">
+                <div class="stat-label label-text">Actions<button type="action" name="refreshAP"></button></div>
+                <div class="stat-wrapper">
+                    <div class="main"><input type="number" name="attr_actions" value="0" class="i1xvyh3l" /></div>
+                    <div class="sub">Max: <input type="number" name="attr_actions_max" value="0" class="i1xvyh3l" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/worker">(function () {
+    'use strict';
+
+    (function () {
+      console.log('hello world');
+    })();
+
+})();
+</script>
+</div>

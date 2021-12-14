@@ -1,5 +1,12 @@
 # Roll20 Static Sheet Generator #
 
+**This is a complete rebuild using Webpack, ES6, and React for static templating, Work in Progress** 
+
+
+
+
+
+
 This is a custom build process for creating a custom Character Sheet in Roll20. In this process, we define our character sheet fields using JSON and JS to generate a "Model" of our sheet. This lets us define field attributes and properties in native JS and keeps it separate from our Markup. Then we can put this through an HTML Templater to generate our markup and a JS Bundler to bundle it up so we can reference these properties in our scripts and sheet workers.
 
 This may be difficult if you do not come from a developer background as you will need to understand the following concepts:
