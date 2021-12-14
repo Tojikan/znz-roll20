@@ -1,5 +1,6 @@
 import React from 'react';
 import { styled } from '@linaria/react';
+import { colors } from '../../styles/vars';
 
 const InputShy = styled.input`
     transition: 0.3s;
@@ -7,7 +8,7 @@ const InputShy = styled.input`
     border:none;
 
     &:hover {
-        background-color: #e5fffb;
+        background-color: ${colors.lightblue};
     }
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button{
@@ -23,6 +24,6 @@ const InputShy = styled.input`
 
 export default function NumberInput(props){
     return (
-        <InputShy type="number" name={`attr_${props.id}${props.max ? '_max': ''}`} value={props.default ?? 0} />
+        <InputShy type="number" name={`attr_${props.field.key}${props.max ? '_max': ''}`} defaultValue={props.field.default ?? 0} />
     )
 }

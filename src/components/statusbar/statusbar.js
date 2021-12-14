@@ -1,27 +1,40 @@
 import React from 'react'
-import StatTracker from './_stattracker';
-
-
-
-
-
-
+import StatBox from './statbox';
+import { Character } from '../../data/character';
+import { styled } from '@linaria/react';
+import { colors } from '../../styles/vars';
+import AmmoBox from './ammobox';
 
 
 export default function StatusBar(){
-    const health = {id: 'health', default: 100, max: true};
-    const fatigue = {id: 'fatigue'};
-    const trauma = {id: 'trauma'};
-    const actions = {id: 'actions', max: true, action: 'refreshAP', actionlabel: 'refresh'};
+    const StatusBar = styled.div`
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 10.5rem;
+        background-color: ${ colors.darkgray};
+        border: solid 3px ${ colors.black };
+        box-sizing: border-box;
+        z-index: 1000;
+
+        .stage {
+            display: flex;
+            height: 100%;
+        }
+    `;
+
+    let ammolist = Character.model.ammo.list;
     
     return (
-        <div className="character-status-bar">
-            <div class="stage">
-                <StatTracker stat={health}/>
-                <StatTracker stat={fatigue}/>
-                <StatTracker stat={trauma}/>
-                <StatTracker stat={actions}/>
+        <StatusBar className="character-status-bar">
+            <div className="stage">
+                <StatBox stat={Character.model.health}/>
+                <StatBox stat={Character.model.sanity}/>
+                <StatBox stat={Character.model.fatigue}/>
+                <StatBox stat={Character.model.actions}/>
+                <AmmoBox list={Object.keys(ammolist).map(x => ammolist[x])} />
             </div>
-        </div>
+        </StatusBar>
     )
 }
