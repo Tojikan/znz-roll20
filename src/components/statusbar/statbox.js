@@ -2,21 +2,17 @@ import React from 'react';
 import NumberInput from '../inputs/numberinput';
 import { styled } from '@linaria/react';
 import { colors, sizes, fonts } from '../../styles/vars';
-import Box from './box';
+import { Box, BoxLabel } from './box';
 import ToolTip from '../inputs/tooltip';
 
 
 export default function StatBox(props){
 
     const StatBox = styled.div`
-        .label-text {
-            font-size: ${sizes.xLarge};
-            text-align: center;
-            color: ${colors.bloodred};
-            font-family: ${fonts.shadows};
-            font-weight: 700;
-            text-transform: uppercase;
-            text-shadow: 0.15rem 0.15rem $black;
+        .stat-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .stat-label button{
@@ -55,17 +51,14 @@ export default function StatBox(props){
 
             input {
                 font-size: ${sizes.small};
-                padding: 0;
                 font-weight: 300;
                 color: ${colors.black}; 
             }
         }
         
         input {
-            background-color: ${colors.darkgray};
             color: ${colors.black}; 
             font-size: ${sizes.xLarge};
-            text-align: center;
             font-weight: 700;
             border: none;
         }
@@ -76,9 +69,9 @@ export default function StatBox(props){
         <Box>
             <StatBox className={`stat-box ${props.stat.key}`}>
                 <div className="stat-label label-text">
-                    { props.stat.label ?? props.stat.key.charAt(0).toUpperCase() + props.stat.key.slice(1)}
+                    <BoxLabel>{ props.stat.label ?? props.stat.key.charAt(0).toUpperCase() + props.stat.key.slice(1)}</BoxLabel>
                     { props.stat.action ? <button type='action' name={props.stat.action}>{props.stat.actiontext ?? ''}</button> : ''}
-                    { props.stat.tip ? <ToolTip text={props.stat.tip} margin={'0 0.5rem'} display='inline-block'/> : ''}
+                    { props.stat.tip ? <div><ToolTip text={props.stat.tip} margin={'0 0.5rem'} display='inline-block'/></div> : ''}
                 </div>
                 <div className="stat-wrapper">
                     <div className="main">

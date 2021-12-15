@@ -4,6 +4,8 @@ import { Character } from '../../data/character';
 import { styled } from '@linaria/react';
 import { colors } from '../../styles/vars';
 import AmmoBox from './ammobox';
+import OptionsBox from './optionsbox';
+import LineList from '../inputs/linelist';
 
 
 export default function StatusBar(){
@@ -25,6 +27,10 @@ export default function StatusBar(){
     `;
 
     let ammolist = Character.model.ammo.list;
+    let options = [
+        Character.model.bonusrolls,
+        Character.model.rollcost,
+    ];
     
     return (
         <StatusBar className="character-status-bar">
@@ -34,6 +40,7 @@ export default function StatusBar(){
                 <StatBox stat={Character.model.fatigue}/>
                 <StatBox stat={Character.model.actions}/>
                 <AmmoBox list={Object.keys(ammolist).map(x => ammolist[x])} />
+                <OptionsBox options={options}/>
             </div>
         </StatusBar>
     )

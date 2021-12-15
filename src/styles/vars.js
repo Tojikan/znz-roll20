@@ -22,3 +22,7 @@ export const fonts = {
     candal: "Candal",
     helvetica: '"Helvetica Neue",Helvetica,Arial,sans-serif',
 }
+
+export const breakpoints = {
+    md: '768px',
+}

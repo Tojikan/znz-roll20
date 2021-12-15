@@ -1,30 +1,64 @@
-<div class="character-sheet">
-    <div class="character-status-bar">
+<div class="character-sheet c10iqi96">
+    <div class="character-status-bar s1vkbf95">
         <div class="stage">
-            <div class="stat-tracker box health">
-                <div class="stat-label label-text">Health</div>
-                <div class="stat-wrapper">
-                    <div class="main"><input type="number" name="attr_health" value="0" class="i1xvyh3l" /></div>
-                    <div class="sub">Max: <input type="number" name="attr_health_max" value="0" class="i1xvyh3l" /></div>
+            <div class="b1h9xey1">
+                <div class="stat-box health s1yoomvf">
+                    <div class="stat-label label-text">Health<div class="tooltipcontrol tl6nuc5">?<div class="tooltiptext t15wxnce">Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost.</div>
+                        </div>
+                    </div>
+                    <div class="stat-wrapper">
+                        <div class="main"><input type="number" name="attr_health" class="i1xvyh3l" value="150" /></div>
+                        <div class="sub">Max: <input type="number" name="attr_health_max" class="i1xvyh3l" value="150" /></div>
+                    </div>
                 </div>
             </div>
-            <div class="stat-tracker box fatigue">
-                <div class="stat-label label-text">Fatigue</div>
-                <div class="stat-wrapper">
-                    <div class="main"><input type="number" name="attr_fatigue" value="0" class="i1xvyh3l" /></div>
+            <div class="b1h9xey1">
+                <div class="stat-box sanity s1yoomvf">
+                    <div class="stat-label label-text">Sanity<div class="tooltipcontrol tl6nuc5">?<div class="tooltiptext t15wxnce">Your character goes insane and will likely die when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost.</div>
+                        </div>
+                    </div>
+                    <div class="stat-wrapper">
+                        <div class="main"><input type="number" name="attr_sanity" class="i1xvyh3l" value="150" /></div>
+                        <div class="sub">Max: <input type="number" name="attr_sanity_max" class="i1xvyh3l" value="150" /></div>
+                    </div>
                 </div>
             </div>
-            <div class="stat-tracker box trauma">
-                <div class="stat-label label-text">Trauma</div>
-                <div class="stat-wrapper">
-                    <div class="main"><input type="number" name="attr_trauma" value="0" class="i1xvyh3l" /></div>
+            <div class="b1h9xey1">
+                <div class="stat-box fatigue s1yoomvf">
+                    <div class="stat-label label-text">Fatigue<div class="tooltipcontrol tl6nuc5">?<div class="tooltiptext t15wxnce">Measure of exhaustion - each point of fatigue increases the dice face used for all rolls by 1, which reduces the chance of getting a success.</div>
+                        </div>
+                    </div>
+                    <div class="stat-wrapper">
+                        <div class="main"><input type="number" name="attr_fatigue" class="i1xvyh3l" value="0" /></div>
+                    </div>
                 </div>
             </div>
-            <div class="stat-tracker box actions">
-                <div class="stat-label label-text">Actions<button type="action" name="refreshAP"></button></div>
-                <div class="stat-wrapper">
-                    <div class="main"><input type="number" name="attr_actions" value="0" class="i1xvyh3l" /></div>
-                    <div class="sub">Max: <input type="number" name="attr_actions_max" value="0" class="i1xvyh3l" /></div>
+            <div class="b1h9xey1">
+                <div class="stat-box actions s1yoomvf">
+                    <div class="stat-label label-text">Actions<button type="action" name="refreshAP">Refresh AP</button>
+                        <div class="tooltipcontrol tl6nuc5">?<div class="tooltiptext t15wxnce">Track the number of actions you&#x27;ve taken this turn</div>
+                        </div>
+                    </div>
+                    <div class="stat-wrapper">
+                        <div class="main"><input type="number" name="attr_actions" class="i1xvyh3l" value="0" /></div>
+                        <div class="sub">Max: <input type="number" name="attr_actions_max" class="i1xvyh3l" value="0" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="b1h9xey1">
+                <div class="avge6pb">
+                    <div class="l1moi9pp">Ammo</div>
+                    <div class="linelist l1v9e1vk">
+                        <div class="l4fqrp8">
+                            <div class="l1acxq7k">Light</div><input type="number" name="attr_ammolight" class="i1xvyh3l" value="0" />
+                        </div>
+                        <div class="l4fqrp8">
+                            <div class="l1acxq7k">Medium</div><input type="number" name="attr_ammomedium" class="i1xvyh3l" value="0" />
+                        </div>
+                        <div class="l4fqrp8">
+                            <div class="l1acxq7k">Heavy</div><input type="number" name="attr_ammoheavy" class="i1xvyh3l" value="0" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

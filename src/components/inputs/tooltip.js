@@ -29,11 +29,11 @@ export default function ToolTip(props){
     const TooltipText = styled.div`
         position: absolute;
         bottom: 100%;
-        left: 50%;
+        left: 9rem;
         transform: translateX(-50%);
         z-index: 1;
         visibility: hidden;
-        width: 20rem;
+        width: 15rem;
         background-color: ${colors.focusblue};
         color: ${colors.white};
         font-size: ${sizes.small};
@@ -46,7 +46,7 @@ export default function ToolTip(props){
             content: '';
             position: absolute;
             top: 100%; /* At the bottom of the tooltip */
-            left: 50%;
+            left: 10%;
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;

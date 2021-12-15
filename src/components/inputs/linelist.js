@@ -18,26 +18,27 @@ export default function LineList(props){
         flex-direction: column;
         justify-content: end;
         font-weight: 500;
-        `;
+        margin-right: 0.5rem;
+    `;
     
     const Line = styled.div`
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
 
         input {
             border: none;
-            border-bottom: solid 1px ${colors.darkgray};
+            border-bottom: ${props => props.underline ? `solid 1px ${colors.black}` : 'none'};
             border-radius: 0;
         }
     `;
 
     return (
-        <List className='linelist'>
+        <List className={`linelist ${props.className}`}>
             {
                 props.list.map((x) => {
                     return (
-                        <Line key={'line-'+x.key}>
-                            <Label>{x.label ?? x.key}</Label>
+                        <Line className={props.lineClass} key={'line-'+x.key} underline={props.underline}>
+                            <Label className={props.labelClass}>{x.label ?? x.key}</Label>
                             <NumberInput field={x}/>
                         </Line>
                     )
