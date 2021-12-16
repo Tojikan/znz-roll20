@@ -1,9 +1,9 @@
 import React from 'react';
-import NumberInput from '../inputs/numberinput';
+import { NumberInput } from '../inputs/numberinput';
 import { styled } from '@linaria/react';
 import { colors, sizes, fonts } from '../../styles/vars';
 import { Box, BoxLabel } from './box';
-import ToolTip from '../inputs/tooltip';
+import { ToolTip, TooltipIconStyle } from '../inputs/tooltip';
 
 
 export default function StatBox(props){
@@ -13,6 +13,10 @@ export default function StatBox(props){
             display: flex;
             align-items: center;
             justify-content: center;
+
+            ${TooltipIconStyle}{
+                display: flex;
+            }
         }
 
         .stat-label button{

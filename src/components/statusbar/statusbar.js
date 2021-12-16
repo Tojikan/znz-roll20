@@ -5,7 +5,7 @@ import { styled } from '@linaria/react';
 import { colors } from '../../styles/vars';
 import AmmoBox from './ammobox';
 import OptionsBox from './optionsbox';
-import LineList from '../inputs/linelist';
+import { statusbarVars } from './statusbar-vars';
 
 
 export default function StatusBar(){
@@ -14,7 +14,7 @@ export default function StatusBar(){
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 10.5rem;
+        height: ${ statusbarVars.barheight };
         background-color: ${ colors.darkgray};
         border: solid 3px ${ colors.black };
         box-sizing: border-box;

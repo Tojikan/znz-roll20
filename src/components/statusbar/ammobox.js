@@ -1,15 +1,17 @@
 import React from 'react';
-import NumberInput from '../inputs/numberinput';
+import { NumberInput, NumberLineInput } from '../inputs/numberinput';
 import { styled } from '@linaria/react';
 import { colors, sizes, fonts } from '../../styles/vars';
 import { Box, BoxLabel} from './box';
-import LineList from '../inputs/linelist';
 
 export default function AmmoBox(props){
 
     const AmmoBox = styled.div`
         font-size: ${sizes.small};
-        `;
+    `;
+
+
+
 
     return (
         <Box>
@@ -17,7 +19,13 @@ export default function AmmoBox(props){
                 <BoxLabel>
                     Ammo
                 </BoxLabel>
-                <LineList list={props.list}/>
+                {
+                    props.list.map((x) =>{
+                        return (
+                            <NumberLineInput field={x} underline={false}/>
+                        )
+                    })
+                }
             </AmmoBox>
         </Box>
     )

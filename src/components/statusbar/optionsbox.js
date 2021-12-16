@@ -2,52 +2,15 @@ import React from 'react';
 import { styled } from '@linaria/react';
 import { colors, sizes, fonts, breakpoints } from '../../styles/vars';
 import { Box, BoxLabel } from './box';
-import LineList from '../inputs/linelist';
+import { NumberLineInput, NumberLineInputStyle, NumberLineLabel } from '../inputs/numberinput';
+import { statusbarVars } from './statusbar-vars';
 
 export default function OptionsBox(props){
-    const OptionsBox = styled.div`
+    const OptionsBox = styled(Box)`
         flex: 100%;
-
-        @media screen and (max-width: ${breakpoints.md}) {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-
-        .option-list {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            padding: 0 2rem;
-
-            @media screen and (max-width: ${breakpoints.md}) {
-                justify-content: start;
-            }
-        }
-
-        .option-line {
-            margin-bottom: 1rem;
-
-            @media screen and (max-width: ${breakpoints.md}) {
-                margin-right: 2rem;
-                margin-bottom: 0;
-            }
-        }
-
-        .option-label {
-            font-weight: 700;
-        }
-    `;
-
-    const OptionBoxLabel = styled(BoxLabel)`
-        @media screen and (max-width: ${breakpoints.md}) {
-            font-size: ${sizes.medium};
-            margin-right: 5rem;
-        }
-    `;
-
-    const ResponsiveBox = styled(Box)`
         height: 100%;
+        
+        //Collapse to top of status bar on smaller screens
         @media screen and (max-width: ${breakpoints.md}) {
             position: absolute;
             bottom: 100%;
@@ -55,26 +18,58 @@ export default function OptionsBox(props){
             height: 3rem;
             right: 0;
             background-color: ${colors.darkgray};
+            display: flex;
+            align-items: center;
+        }
+        
+        ${NumberLineInputStyle} {
+            margin-right: 1rem;
+
+            @media screen and (min-width: ${breakpoints.md}) {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        ${NumberLineLabel} {
+            font-weight: 700;
         }
     `;
 
+    const OptionBoxLabel = styled(BoxLabel)`
+        @media screen and (max-width: ${breakpoints.md}) {
+            font-size: ${sizes.medium};
+            margin-right: 2rem;
+        }
+    `;
+
+    const OptionsBoxContent = styled.div`
+        display: flex;
+        align-items: center;
+        
+        @media screen and (min-width: ${breakpoints.md}){
+            flex-direction: column;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            height: ${ statusbarVars.barheight };
+        }
+    `
+
+
     return (
         <OptionsBox>
-            <ResponsiveBox>
-                <OptionsBox>
-                    <OptionBoxLabel>
-                        Roll Options
-                    </OptionBoxLabel>
-
-                    <LineList lineClass='option-line' 
-                                labelClass='option-label' 
-                                className='option-list' 
-                                list={props.options} 
-                                underline={true}
-                                />
-
-                </OptionsBox>
-            </ResponsiveBox>
+            <OptionBoxLabel>
+                Roll Options
+            </OptionBoxLabel>
+            <OptionsBoxContent>
+                {
+                    props.options.map((x) => {
+                        return (
+                            <NumberLineInput field={x} underline={true}/>
+                        )
+                    })
+                }
+            </OptionsBoxContent>
         </OptionsBox>
     )
 }

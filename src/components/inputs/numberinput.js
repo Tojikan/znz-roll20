@@ -1,30 +1,52 @@
 import React from 'react';
 import { styled } from '@linaria/react';
-import { colors } from '../../styles/vars';
+import { colors, sizes } from '../../styles/vars';
+import { capitalize } from '../../lib/znzlib';
 
-export default function NumberInput(props){
 
-    const InputNumber = styled.input`
-        transition: 0.3s;
-        font-size: 1.6rem;
-        border: none;
-        border-bottom: ${props => props.underline ? `solid 1px ${colors.black}` : 'none'};
-    
-        &:hover {
-            background-color: ${colors.lightblue};
-        }
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button{
-            -webkit-appearance: none; /* Chrome */
-            margin: 0; /* Apparently some margin are still there even though it's hidden */
-        }
-        &[type=number]{
-            -moz-appearance:textfield; /* Firefox */
-        }
-    
-    `;
+const NumberInputStyle = styled.input`
+    transition: 0.3s;
+    font-size: 1.6rem;
+    border: none;
+    border-bottom: ${props => props.underline ? `solid 1px ${colors.black}` : 'none'};
 
+    &:hover {
+        background-color: ${colors.lightblue};
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button{
+        -webkit-appearance: none; /* Chrome */
+        margin: 0; /* Apparently some margin are still there even though it's hidden */
+    }
+    &[type=number]{
+        -moz-appearance:textfield; /* Firefox */
+    }
+`;
+
+export const NumberLineLabel = styled.div`
+    font-size: ${sizes.medium};
+    text-align: right;
+    font-weight: 500;
+    margin-right: 0.5rem;
+`
+
+export const NumberLineInputStyle = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`;
+
+export function NumberInput(props){
     return (
-        <InputNumber type="number" name={`attr_${props.field.key}${props.max ? '_max': ''}`} defaultValue={props.field.default ?? 0} underline={props.underline} />
+        <NumberInputStyle type="number" name={`attr_${props.field.key}${props.max ? '_max': ''}`} defaultValue={props.field.default ?? 0} underline={props.underline} />
+    )
+}
+
+
+export function NumberLineInput(props) {
+    return (
+        <NumberLineInputStyle>
+            <NumberLineLabel>{props.field.label ? props.field.label : capitalize(props.field.key)}</NumberLineLabel>
+            <NumberInput field={props.field} underline={props.underline}></NumberInput>
+        </NumberLineInputStyle>
     )
 }
