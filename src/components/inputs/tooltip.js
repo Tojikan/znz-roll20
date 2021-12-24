@@ -42,15 +42,9 @@ export const TooltipText = styled.div`
     margin-bottom: 5px;
     font-family: ${fonts.helvetica};
 
-    &:after {
-        content: '';
-        position: absolute;
-        top: 100%; /* At the bottom of the tooltip */
-        left: 10%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: ${colors.focusblue} transparent transparent transparent;
+    &.bottom {
+        top: 100%;
+        bottom: initial;
     }
 `;
 
@@ -58,7 +52,7 @@ export function ToolTip(props){
     return (
         <TooltipIconStyle className="tooltipcontrol">
             ?
-            <TooltipText className="tooltiptext">
+            <TooltipText className={`tooltiptext ${props.bottom ? 'bottom' : ''}`}>
                 {props.text}
             </TooltipText>
         </TooltipIconStyle>

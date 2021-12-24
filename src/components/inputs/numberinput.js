@@ -4,7 +4,7 @@ import { colors, sizes } from '../../styles/vars';
 import { capitalize } from '../../lib/znzlib';
 
 
-const NumberInputStyle = styled.input`
+export const NumberInputStyle = styled.input`
     transition: 0.3s;
     font-size: 1.6rem;
     border: none;
@@ -46,6 +46,7 @@ export function NumberLineInput(props) {
     return (
         <NumberLineInputStyle>
             <NumberLineLabel>{props.field.label ? props.field.label : capitalize(props.field.key)}</NumberLineLabel>
+            {props.children}
             <NumberInput field={props.field} underline={props.underline}></NumberInput>
         </NumberLineInputStyle>
     )

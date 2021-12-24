@@ -22,7 +22,7 @@ export default function AmmoBox(props){
                 {
                     props.list.map((x) =>{
                         return (
-                            <NumberLineInput field={x} underline={false}/>
+                            <NumberLineInput field={x} underline={false} key={x.key}/>
                         )
                     })
                 }

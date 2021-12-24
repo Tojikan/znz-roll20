@@ -4,6 +4,7 @@ export const colors = {
     black: 'black',
     bloodred: '#bd0102',
     darkgray: '#a0a0a0',
+    lightgray: '#d3d3d3',
     focusblue: '#5E9ED6',
 }
 

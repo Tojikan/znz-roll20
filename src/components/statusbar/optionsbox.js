@@ -65,7 +65,7 @@ export default function OptionsBox(props){
                 {
                     props.options.map((x) => {
                         return (
-                            <NumberLineInput field={x} underline={true}/>
+                            <NumberLineInput field={x} underline={true} key={x.key}/>
                         )
                     })
                 }
