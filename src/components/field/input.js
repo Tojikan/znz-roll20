@@ -31,28 +31,3 @@ import { capitalize } from '../../lib/znzlib';
         )
     }
 //#endregion
-
-
-export const NumberLineLabel = styled.div`
-    font-size: ${sizes.medium};
-    text-align: right;
-    font-weight: 500;
-    margin-right: 0.5rem;
-`
-
-export const NumberLineInputStyle = styled.div`
-    display: flex;
-    justify-content: flex-end;
-`;
-
-
-
-export function NumberLineInput(props) {
-    return (
-        <NumberLineInputStyle>
-            <NumberLineLabel>{props.field.label ? props.field.label : capitalize(props.field.key)}</NumberLineLabel>
-            {props.children}
-            <NumberInput field={props.field} underline={props.underline}></NumberInput>
-        </NumberLineInputStyle>
-    )
-}

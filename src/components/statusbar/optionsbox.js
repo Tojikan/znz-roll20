@@ -1,9 +1,11 @@
 import React from 'react';
 import { styled } from '@linaria/react';
-import { colors, sizes, fonts, breakpoints } from '../../styles/vars';
+import { colors, sizes, breakpoints } from '../../styles/vars';
 import { Box, BoxLabel } from './box';
-import { NumberLineInput, NumberLineInputStyle, NumberLineLabel } from '../inputs/numberinput';
+import { NumberInput } from '../field/input';
 import { statusbarVars } from './statusbar-vars';
+import { LabelledFlex, LabelText, LabelFlexBox } from '../field/label';
+import { getLabel } from '../../lib/znzlib';
 
 export default function OptionsBox(props){
     const OptionsBox = styled(Box)`
@@ -22,7 +24,7 @@ export default function OptionsBox(props){
             align-items: center;
         }
         
-        ${NumberLineInputStyle} {
+        ${LabelFlexBox} {
             margin-right: 1rem;
 
             @media screen and (min-width: ${breakpoints.md}) {
@@ -31,7 +33,7 @@ export default function OptionsBox(props){
             }
         }
 
-        ${NumberLineLabel} {
+        ${LabelText} {
             font-weight: 700;
         }
     `;
@@ -65,7 +67,9 @@ export default function OptionsBox(props){
                 {
                     props.options.map((x) => {
                         return (
-                            <NumberLineInput field={x} underline={true} key={x.key}/>
+                            <LabelledFlex label={getLabel(x)}>
+                                <NumberInput field={x} underline={true} key={x.key}/>
+                            </LabelledFlex>
                         )
                     })
                 }

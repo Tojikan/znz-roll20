@@ -1,9 +1,9 @@
 import React from 'react';
-import { NumberInputStyle, NumberInput } from '../inputs/numberinput';
+import { NumberInputStyle, NumberInput } from '../field/input';
 import { styled } from '@linaria/react';
 import { colors, sizes } from '../../styles/vars';
-import { RollButton, RollButtonStyle } from '../inputs/rollbutton';
-import { ToolTip } from '../inputs/tooltip';
+import { RollButton, RollButtonStyle } from '../field/button';
+import { ToolTip } from '../field/tooltip';
 
 export const PoolStatStyle = styled.div`
     display: flex;

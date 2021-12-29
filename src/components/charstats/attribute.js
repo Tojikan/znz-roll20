@@ -1,9 +1,9 @@
 import React from 'react';
-import { NumberInput, NumberInputStyle, NumberLineLabel } from '../inputs/numberinput';
+import { NumberInput, NumberInputStyle, NumberLineLabel } from '../field/input';
 import { styled } from '@linaria/react';
 import { capitalize } from '../../lib/znzlib';
-import { RollButton } from '../inputs/rollbutton';
-import { ToolTip } from '../inputs/tooltip';
+import { RollButton } from '../field/button';
+import { ToolTip } from '../field/tooltip';
 import { sizes, colors } from '../../styles/vars';
 
 export const AttributeLabel = styled.div`

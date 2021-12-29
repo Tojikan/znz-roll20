@@ -1,9 +1,12 @@
 /////// Library of Functions for Generic Use
 
-
-
 export function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+
+export function getLabel(field){
+    return ( field.label ? field.label : capitalize(field.key) ) ?? 'NoLabel';
 }
 
 

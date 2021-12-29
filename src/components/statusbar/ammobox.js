@@ -1,8 +1,10 @@
 import React from 'react';
-import { NumberInput, NumberLineInput } from '../inputs/numberinput';
+import { NumberInput } from '../field/input';
 import { styled } from '@linaria/react';
-import { colors, sizes, fonts } from '../../styles/vars';
+import { sizes } from '../../styles/vars';
 import { Box, BoxLabel} from './box';
+import { LabelledFlex } from '../field/label';
+import { getLabel } from '../../lib/znzlib';
 
 export default function AmmoBox(props){
 
@@ -22,7 +24,9 @@ export default function AmmoBox(props){
                 {
                     props.list.map((x) =>{
                         return (
-                            <NumberLineInput field={x} underline={false} key={x.key}/>
+                            <LabelledFlex label={getLabel(x)}>
+                                <NumberInput field={x} underline={false} key={x.key}/>
+                            </LabelledFlex>
                         )
                     })
                 }
