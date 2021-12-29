@@ -6,6 +6,7 @@ export const colors = {
     darkgray: '#a0a0a0',
     lightgray: '#d3d3d3',
     focusblue: '#5E9ED6',
+    nearblack: 'rgba(0,0,0,0.8)',
 }
 
 export const sizes = {

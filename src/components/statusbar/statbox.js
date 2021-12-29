@@ -3,7 +3,7 @@ import { NumberInput } from '../inputs/numberinput';
 import { styled } from '@linaria/react';
 import { colors, sizes, fonts } from '../../styles/vars';
 import { Box, BoxLabel } from './box';
-import { ToolTip, TooltipIconStyle } from '../inputs/tooltip';
+import { ToolTip } from '../inputs/tooltip';
 
 
 export default function StatBox(props){
@@ -13,10 +13,6 @@ export default function StatBox(props){
             display: flex;
             align-items: center;
             justify-content: center;
-
-            ${TooltipIconStyle}{
-                display: flex;
-            }
         }
 
         .stat-label button{
@@ -73,9 +69,12 @@ export default function StatBox(props){
         <Box>
             <StatBox className={`stat-box ${props.stat.key}`}>
                 <div className="stat-label label-text">
-                    <BoxLabel>{ props.stat.label ?? props.stat.key.charAt(0).toUpperCase() + props.stat.key.slice(1)}</BoxLabel>
+                    <BoxLabel>
+                        <ToolTip text={props.stat.tip}>
+                        { props.stat.label ?? props.stat.key.charAt(0).toUpperCase() + props.stat.key.slice(1)}
+                        </ToolTip>
+                    </BoxLabel>
                     { props.stat.action ? <button type='action' name={props.stat.action}>{props.stat.actiontext ?? ''}</button> : ''}
-                    { props.stat.tip ? <div><ToolTip text={props.stat.tip} margin={'0 0.5rem'} display='inline-block'/></div> : ''}
                 </div>
                 <div className="stat-wrapper">
                     <div className="main">

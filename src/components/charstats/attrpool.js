@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@linaria/react';
-import { AttributeStat, AttrStatStyle } from './attribute';
+import { Attribute, AttributeStyle } from './attribute';
 import { PoolStat } from './pool';
 
 
@@ -9,7 +9,7 @@ export function AttrPool(props){
     const AttrPoolStyle = styled.div`
         margin-bottom: 2rem;
 
-        ${AttrStatStyle} {
+        ${AttributeStyle} {
             margin-left: 6.8rem;
         }
 
@@ -25,7 +25,7 @@ export function AttrPool(props){
                 { Object.keys(props.field.attr).map( (a)=>{
                     let obj = props.field.attr[a];
                     return (
-                        <AttributeStat field={obj} key={obj.key}/>
+                        <Attribute field={obj} key={obj.key}/>
                     )
                 })}
             </div>

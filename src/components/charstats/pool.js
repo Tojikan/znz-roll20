@@ -53,8 +53,9 @@ export function PoolStat(props){
             </div>
             <PoolStatLabelStyle>
                 <span>
-                {props.label.toUpperCase()}
-                { props.field.tip ? <ToolTip text={props.field.tip} display='inline' bottom={true}/> : ''}
+                    <ToolTip text={props.field.tip} bottom={true}>
+                        {props.label.toUpperCase()}
+                    </ToolTip>
                 </span>
                 <RollButton value='!!zroll'/>
             </PoolStatLabelStyle>

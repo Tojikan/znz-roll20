@@ -2,7 +2,7 @@ export const CharacterModel = {
     body: { 
         key: 'bodypool', 
         default: 15,
-        tip: "Number of dice rolled on physical actions. Attributes below determine the roll target. The roll button on the right can be used for a freeform roll",
+        tip: "Number of dice rolled on physical actions. Attributes below determine the target number to be considered a success",
         attr: {
             strength: { key: 'strength', tip:'Melee Attacks, Blocking', default:2},
             coordination: { key: 'coordination', tip:'Ranged Attacks, Dodging', default:2},
@@ -14,7 +14,7 @@ export const CharacterModel = {
     mind: { 
         key: 'mindpool', 
         default: 15, 
-        tip: "Number of dice rolled on mental actions. Attributes below determine the roll target. The roll button on the right can be used for a freeform roll",
+        tip: "Number of dice rolled on mental actions. Attributes below determine the target number to be considered a success",
         attr: {
             intelligence: { key: 'intelligence', tip:'Knowledges, Learning', default:2},
             charisma: { key: 'charisma', tip:'Social Interaction, Insight', default:2},

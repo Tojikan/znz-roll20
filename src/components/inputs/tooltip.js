@@ -3,30 +3,7 @@ import { styled } from '@linaria/react';
 import { colors, fonts, sizes } from '../../styles/vars';
 
 
-
-export const TooltipIconStyle = styled.div`
-    position: relative;
-    border: solid 1px ${colors.focusblue};
-    background-color: ${colors.focusblue};
-    border-radius: 4rem;
-    color: ${colors.white};
-    font-size: 1rem;
-    cursor: pointer;
-    margin: 0 0.5rem;
-    display: inline;
-    vertical-align: middle;
-    justify-content: center;
-    align-items: center;
-    font-family: ${fonts.helvetica};
-
-    &:hover {
-        .tooltiptext {
-            visibility: visible;
-        }
-    }
-`;
-
-export const TooltipText = styled.div`
+export const ToolTipText = styled.div`
     position: absolute;
     bottom: 100%;
     left: 9rem;
@@ -34,7 +11,7 @@ export const TooltipText = styled.div`
     z-index: 1;
     visibility: hidden;
     width: 15rem;
-    background-color: ${colors.focusblue};
+    background-color: ${colors.nearblack};
     color: ${colors.white};
     font-size: ${sizes.small};
     text-transform: none;
@@ -48,14 +25,31 @@ export const TooltipText = styled.div`
     }
 `;
 
-export function ToolTip(props){
-    return (
-        <TooltipIconStyle className="tooltipcontrol">
-            ?
-            <TooltipText className={`tooltiptext ${props.bottom ? 'bottom' : ''}`}>
-                {props.text}
-            </TooltipText>
-        </TooltipIconStyle>
+export const ToolTipHover = styled.span`
+    text-decoration: underline dotted;
+    cursor: pointer;
+    position: relative;
 
-    )
+    &:hover {
+        ${ToolTipText} {
+            visibility: visible;
+        }
+    }
+`;
+
+
+export function ToolTip(props){
+
+    if (props.text){
+        return (
+            <ToolTipHover className="tooltipcontrol">
+                { props.children }
+                <ToolTipText className={ `tooltiptext ${props.bottom ? 'bottom' : ''}` }>
+                    {props.text}
+                </ToolTipText>
+            </ToolTipHover>
+        )
+    } else {
+        return props.children
+    }
 }
