@@ -1,5 +1,10 @@
 /////// Library of Functions for Generic Use
 
+export function objToArray(obj) {
+    return Object.keys(obj).map((x)=> obj[x]);
+}
+
+
 export function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }

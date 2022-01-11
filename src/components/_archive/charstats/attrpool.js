@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from '@linaria/react';
 import { Attribute, AttributeStyle } from './attribute';
 import { PoolStat } from './pool';
+import { getLabel } from '../../lib/znzlib';
 
 
 export function AttrPool(props){
@@ -18,12 +19,14 @@ export function AttrPool(props){
         }
     `
 
+    let label = (props.label) ? props.label : getLabel(props.field);
+
     return (
         <AttrPoolStyle>
-            <PoolStat field={props.field} label={props.label}/>
+            <PoolStat field={props.field} label={label}/>
             <div className='attr-container'>
-                { Object.keys(props.field.attr).map( (a)=>{
-                    let obj = props.field.attr[a];
+                { Object.keys(props.field.list).sort().map( (a)=>{
+                    let obj = props.field.list[a];
                     return (
                         <Attribute field={obj} key={obj.key}/>
                     )

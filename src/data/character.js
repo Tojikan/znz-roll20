@@ -1,31 +1,52 @@
 export const CharacterModel = {
-    body: { 
-        key: 'bodypool', 
-        default: 15,
-        tip: "Number of dice rolled on physical actions. Attributes below determine the target number to be considered a success",
-        attr: {
-            strength: { key: 'strength', tip:'Melee Attacks, Blocking', default:2},
-            coordination: { key: 'coordination', tip:'Ranged Attacks, Dodging', default:2},
-            instinct: { key: 'instinct', tip:'Scavenging, Reaction Time', default:2},
-            endurance: { key: 'endurance', tip:'Resist Pain, Injuries and Sickness', default:2},
+    attributes: {
+        strength: {
+            key: 'strength',
+            abbr: 'STR',
+            default: 3
+        },
+        agility: {
+            key: 'agility',
+            abbr: 'AGI',
+            default: 3
+        },
+        intellect: {
+            key: 'intellect',
+            abbr: 'INT',
+            default: 3
+        },
+        charisma: {
+            key: 'charisma',
+            abbr: 'CHA',
+            default: 3
+        },
+        perception: {
+            key: 'perception',
+            abbr: 'PER',
+            default: 3
+        },
+        willpower: {
+            key: 'willpower',
+            abbr: 'WILL',
+            default: 3
         }
-
     },
-    mind: { 
-        key: 'mindpool', 
-        default: 15, 
-        tip: "Number of dice rolled on mental actions. Attributes below determine the target number to be considered a success",
-        attr: {
-            intelligence: { key: 'intelligence', tip:'Knowledges, Learning', default:2},
-            charisma: { key: 'charisma', tip:'Social Interaction, Insight', default:2},
-            perception: { key: 'perception', tip: 'Scouting, Sensing the environment', default:2},
-            tenacity: { key: 'tenacity', tip:'Resist Sanity Damage', default:2},
-        }
+    combatskills : {
+        bladedmelee: { key: 'sharpmelee', uses:'agility', label: 'Bladed Melee', tip:'Skill with a sharp weapon.', default:0},
+        bluntmelee: { key: 'bluntmelee', uses:'strength', label: 'Blunt Melee', tip:'Whacking something with something hard.', default:0},
+        block: { key: 'block', uses:'strength', tip:'Reduce damage of an attack.', default:0},
+        dodge: { key: 'dodge', uses:'agility', tip:'Avoid an attack', default:0},
+        throwing: { key: 'throwing', uses:'strength', tip: 'Throw things.', default:0},
+        firearm: { key: 'firearms', uses:'perception',tip:'Shoot something with a gun.', default:0},
+        projectile: { key: 'projectiles', uses:'agility', tip:'Skills with bows, crossbows, slings, or launched ammunition.', default:0},
+        unarmed: {key: 'unarmed', uses: 'strength', tip: 'Skills with fighting hand to hand and grappling.', default: 0},
     },
-    health: { key: 'health', default: 150, max: true, tip:"Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost."},
-    sanity: { key: 'sanity', default: 150, max: true, tip:"Your character goes insane when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost."},
-    fatigue: { key: 'fatigue', tip:"Every point of fatigue increases the dice face used for all rolls by 1, reducing chances of success"},
-    actions: { key: 'actions', max: true, action: 'refreshAP', actiontext: 'Refresh AP', tip:"Track the number of actions you've taken this turn"},
+    resources: {
+        health: { key: 'health', default: 100, max: true, tip:"Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost."},
+        sanity: { key: 'sanity', default: 100, max: true, tip:"Your character goes insane when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost."},
+        energy: { key: 'energy', default: 8, max: true, tip:"This is the number of dice you roll whenever you make any action. Reduced by 1 for every 10 Fatigue."},
+        fatigue: { key: 'fatigue', tip:"Every 10 points of fatigue reduces Energy by 1. Every action will usually cause you to gain fatigue."},
+    },
     ammo: {
         list: {
             light: {key: 'ammolight', label: 'Light'},

@@ -1,6 +1,6 @@
 import React from 'react';
 import StatusBar from './components/statusbar/_statusbar';
-import CharStats from './components/charstats/_charstats';
+import CharStatistics from './components/statistics/_stats';
 import { styled } from '@linaria/react';
 
 export default function CharacterSheet(){
@@ -26,10 +26,8 @@ export default function CharacterSheet(){
 
 
     return (
-        <CharSheet class="character-sheet">
-            <Sidebar>
-                <CharStats />
-            </Sidebar>
+        <CharSheet className="character-sheet">
+            <CharStatistics />
             <StatusBar />
             <script type="text/worker">
             </script>

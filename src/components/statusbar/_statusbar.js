@@ -6,6 +6,8 @@ import { colors } from '../../styles/vars';
 import AmmoBox from './ammobox';
 import OptionsBox from './optionsbox';
 import { statusbarVars } from './statusbar-vars';
+import { objToArray } from '../../lib/znzlib';
+
 
 
 export default function StatusBar(){
@@ -35,10 +37,11 @@ export default function StatusBar(){
     return (
         <StatusBar className="character-status-bar">
             <div className="stage">
-                <StatBox stat={CharacterModel.health}/>
-                <StatBox stat={CharacterModel.sanity}/>
-                <StatBox stat={CharacterModel.fatigue}/>
-                <StatBox stat={CharacterModel.actions}/>
+                { objToArray(CharacterModel.resources).map((x) => {
+                    return (
+                        <StatBox stat={x}/>
+                    )
+                })}
                 <AmmoBox list={Object.keys(ammolist).map(x => ammolist[x])} />
                 <OptionsBox options={options}/>
             </div>
