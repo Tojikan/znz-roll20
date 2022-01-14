@@ -1,5 +1,12 @@
 /////// Library of Functions for Generic Use
 
+
+export function prefixKey(field, prefix){
+    let fld = {...field};
+    fld.key = fld.key + '_' + prefix;
+    return fld;
+}
+
 export function objToArray(obj) {
     return Object.keys(obj).map((x)=> obj[x]);
 }

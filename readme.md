@@ -2,8 +2,8 @@
 
 **This is a complete rebuild using Webpack, ES6, and React for static templating, Work in Progress** 
 
-
-
+`npm run dev`
+`npm run build`
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { NumberInput } from '../field/input';
 import { styled } from '@linaria/react';
+import { NumberInput } from '../field/input';
 import { capitalize } from '../../lib/znzlib';
 import { RollButton } from '../field/button';
 import { ToolTip } from '../field/tooltip';
@@ -14,7 +14,6 @@ function Attr( props ) {
         justify-content: flex-end;
         padding: 0.25rem;
         font-size: ${sizes.large};
-        border-right: solid 1px white;
 
         input {
             width: 4rem!important;
@@ -30,6 +29,9 @@ function Attr( props ) {
 
         .attrlabel {
             margin-right: 2rem;
+            display: flex;
+            flex-grow: 1;
+            padding: 0 1rem;
         }
 
 
@@ -54,13 +56,12 @@ export function AttributesTable( props ){
     const AttrsContainer = styled.div`
         background-color: ${colors.black};
         color: ${colors.white};
-        column-count: 2;
         padding: 1rem 0;
     `
 
 
     return (
-        <AttrsContainer>
+        <AttrsContainer className={props.className}>
             { props.attrs.map( (x)=>{
                 return  (
                     <Attr field={x}></Attr>
