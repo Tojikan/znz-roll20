@@ -1,9 +1,9 @@
 /////// Library of Functions for Generic Use
 
 
-export function prefixKey(field, prefix){
+export function suffixKey(field, suffix){
     let fld = {...field};
-    fld.key = fld.key + '_' + prefix;
+    fld.key = fld.key + '_' + suffix;
     return fld;
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import StatusBar from './components/statusbar/_statusbar';
 import { CharStatistics } from './components/statistics/_stats';
 import { styled } from '@linaria/react';
+import { CharTraits } from './components/traits/_traits';
 
 export default function CharacterSheet(){
 
@@ -19,13 +20,33 @@ export default function CharacterSheet(){
         }
     `;
 
+    const Layout = styled.div`
+        display: flex;
+    `
+
+    const Sidebar = styled.div`
+        width: 25%;
+        margin-right: 1rem;
+    `
+
+    const Mainbar = styled.div`
+        width: 75%;
+    `
+
+    
+
     return (
         <CharSheet className="character-sheet">
             <span>Notes</span>
             <textarea name="attr_char_notes"/>
-
-            <CharStatistics/>
-
+            <Layout>
+                <Sidebar>
+                    <CharStatistics/>
+                </Sidebar>
+                <Mainbar>
+                    <CharTraits/>
+                </Mainbar>
+            </Layout>
             <StatusBar />
             <script type="text/worker">
             </script>

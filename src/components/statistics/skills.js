@@ -1,10 +1,11 @@
 import React from 'react';
 import { styled } from '@linaria/react';
 import { NumberInput, SelectInput, TextInput } from '../field/input';
-import { colors, sizes } from '../../styles/vars';
+import { colors, sizes, fonts } from '../../styles/vars';
 import { ToolTip } from '../field/tooltip';
 import { getAttrSelectOptions, lookupAttrAbbr} from '../../data/character';
 import { getLabel } from '../../lib/znzlib';
+import { RollButton } from '../field/button';
 
 const SkillRow = styled.div`
     display: flex;
@@ -20,7 +21,7 @@ const SkillRow = styled.div`
         font-weight: 700;
         flex-grow: 1;
         min-width: 5rem;
-        margin-right: 2rem;
+        margin-right: 0.5rem;
 
         input {
             font-size: ${sizes.medium};
@@ -31,6 +32,9 @@ const SkillRow = styled.div`
     .select-wrapper {
         select {
             font-size: ${sizes.xSmall};
+            padding-right: 0;
+            padding-left: 0;
+            margin-right: 0.2rem;
         }
     }
 
@@ -43,6 +47,8 @@ const SkillRow = styled.div`
 `;
 
 export function CombatSkill( props ){
+
+    //TODO - rollbuttons
     return (
         <SkillRow>
             <div className="name-wrapper">
@@ -53,6 +59,9 @@ export function CombatSkill( props ){
             </div>
             <div className="input-wrapper">
                 <NumberInput field={props.field} />
+            </div>
+            <div className="roll-wrapper">
+                <RollButton value='/roll'/>
             </div>
         </SkillRow>
     )
@@ -74,6 +83,9 @@ export function VariableSkill( props ){
             <div className="input-wrapper">
                 <NumberInput field={props.value}/>
             </div>
+            <div className="roll-wrapper">
+                <RollButton value='/roll'/>
+            </div>
         </SkillRow>
     )
 }
@@ -84,7 +96,10 @@ export function SkillTable( props ){
     
         h2 {
             text-align: center;
-            font-size: ${sizes.large};
+            font-size: ${sizes.xLarge};
+            font-weight: 700;
+            font-family: ${fonts.shadows};
+            color: ${colors.bloodred};
         }
     `;
 

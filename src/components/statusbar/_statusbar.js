@@ -37,9 +37,9 @@ export default function StatusBar(){
     return (
         <StatusBar className="character-status-bar">
             <div className="stage">
-                { objToArray(CharacterModel.resources).map((x) => {
+                { objToArray(CharacterModel.resources).map((x,i) => {
                     return (
-                        <StatBox stat={x}/>
+                        <StatBox stat={x} key={i}/>
                     )
                 })}
                 <AmmoBox list={Object.keys(ammolist).map(x => ammolist[x])} />

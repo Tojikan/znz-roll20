@@ -65,9 +65,9 @@ export default function OptionsBox(props){
             </OptionBoxLabel>
             <OptionsBoxContent>
                 {
-                    props.options.map((x) => {
+                    props.options.map((x, i) => {
                         return (
-                            <LabelledFlex label={getLabel(x)}>
+                            <LabelledFlex label={getLabel(x)} key={i}>
                                 <NumberInput field={x} underline={true} key={x.key}/>
                             </LabelledFlex>
                         )

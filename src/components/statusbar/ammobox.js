@@ -22,9 +22,9 @@ export default function AmmoBox(props){
                     Ammo
                 </BoxLabel>
                 {
-                    props.list.map((x) =>{
+                    props.list.map((x, i) =>{
                         return (
-                            <LabelledFlex label={getLabel(x)}>
+                            <LabelledFlex label={getLabel(x)} key={i}>
                                 <NumberInput field={x} underline={false} key={x.key}/>
                             </LabelledFlex>
                         )

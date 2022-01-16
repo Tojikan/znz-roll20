@@ -30,6 +30,25 @@ import { capitalize } from '../../lib/znzlib';
             <NumberInputStyle type="number" name={`attr_${props.field.key}${props.max ? '_max': ''}`} defaultValue={props.field.default ?? 0} underline={props.underline} />
         )
     }
+
+
+    export function LabelledNumberInput(props) {
+
+        const StyleWrapper = styled.div`
+
+        `
+
+
+        return (
+            <StyleWrapper>
+                <div>{props.label}</div>
+                <NumberInputStyle type="number" name={`attr_${props.field.key}${props.max ? '_max': ''}`} defaultValue={props.field.default ?? 0} underline={props.underline} />
+            </StyleWrapper>
+        )
+    }
+
+
+
 //#endregion
 
 //#region  Basic Number Input 
@@ -38,7 +57,7 @@ export const TextInputStyle = styled.input`
     font-size: 1.6rem;
     border: none;
     border-bottom: ${props => props.underline ? `solid 1px ${colors.black}` : 'none'};
-
+    width: 100%;
     `;
 
     export function TextInput(props){
@@ -50,23 +69,24 @@ export const TextInputStyle = styled.input`
 
 
 //#region Select
-    export const SelectStyle = styled.select`
-        transition: 0.3s;
-        width: 100%;
-        font-size: 1.2rem;
-        border: none;
-        appearance: none;
-        margin: 0;
 
-        &:hover {
-            background-color: ${colors.lightblue};
-        }
-    `;
+    export function SelectInput( props ){
+        const SelectStyle = styled.select`
+            transition: 0.3s;
+            width: 100%;
+            font-size: 1.2rem;
+            border: none;
+            appearance: ${props => props.appearance ? 'auto' : 'none'};
+            margin: 0;
+            border-bottom: ${props => props.underline ? `solid 1px ${colors.darkgray}` : 'none'};
 
-    export function SelectInput(props){
+            &:hover {
+                background-color: ${colors.lightblue};
+            }
+        `;
 
         return (
-            <SelectStyle name={`attr_${props.field.key}`}>
+            <SelectStyle name={`attr_${props.field.key}`} appearance={props.appearance} underline={props.underline}>
                 { props.default  &&
                     <option value={props.default.value}>{props.default.label}</option>
                 }
@@ -78,4 +98,20 @@ export const TextInputStyle = styled.input`
             </SelectStyle>
         )
     }
+
+
+    export function LabelledSelectInput( props ){
+
+        return (
+            <div>
+                <div>{ props.label }</div>
+                <SelectInput field={props.field} 
+                            options={props.options}
+                            default={props.default}
+                            appearance={props.appearance} 
+                            underline={props.underline}/>
+            </div>
+        )
+    }
+
 //#endregion

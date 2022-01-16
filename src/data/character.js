@@ -48,9 +48,58 @@ export const CharacterModel = {
         unarmed: {key: 'unarmed', uses: 'strength', tip: 'Skills with fighting hand to hand and grappling. Add skill amount to a strength roll.', default: 0},
     },
     skills: { 
+        count: 4,
         value: {key: 'skill', default: '0'},
         label: {key: 'skill_name'},
         uses: {key: 'skill_uses'},
+    },
+    abilities: {
+        count: 3,
+        selected: {key: 'ability'},
+        level: {key:'abilitylevel', label: 'Level'},
+        options: [
+            {
+                key: "sniper",
+                label: "Sniper",
+                lvl1: "Gain 2 bonus rolls on your next ranged attack this turn.",
+                lvl2: "The bonus is now 5.",
+                lvl3: "The bonus is now 10."
+            },
+            {
+                key: "cheerleader",
+                label: "Cheerleader",
+                lvl1: "Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.",
+                lvl2: "If you target 1 ally only, they gain bonus rolls equal to your Charisma instead.",
+                lvl3: "Fatigue now only increases by 5."
+            },
+            {
+                key: "protector",
+                label: "Protector",
+                lvl1: "You can take damage directed at adjacent or nearby allies.",
+                lvl2: "Excess block exceeding an attack can now be dealt as damage.",
+                lvl3: "At the start of your turn, you can enter defensive mode. You take half damage but deal half damage."
+            },
+            {
+                key: "actionstar",
+                label: "Action Star",
+                lvl1: "Reloading no longer ends your turn and only takes 1 action.",
+                lvl2: "If you use one of your actions to defend but no one attacks you, you can re-use that action to attack instead.",
+                lvl3: "You can now combine moving and attacking as a single action."
+            },
+
+        ]
+    },
+    flaws: {
+        count: 3,
+        selected: {key: 'flaw'},
+        options: [
+            "Afraid of the Dark",
+            "Nearsighted",
+            "Sickly",
+            "Diabetic",
+            "Weakly",
+            "Unlucky"
+        ]
     },
     resources: {
         health: { key: 'health', default: 100, max: true, tip:"Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost."},
