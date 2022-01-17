@@ -6,6 +6,7 @@ export const RollButtonStyle = styled.button`
     transition: 0.3s;
     border: none;
     background-color: transparent;
+    margin: 0!important;
 
     &:before {
         font-size: 2rem;

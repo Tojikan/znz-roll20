@@ -1,150 +1,408 @@
 <div class="character-sheet c10iqi96"><span>Notes</span><textarea name="attr_char_notes"></textarea>
-    <div class="s46743n">
-        <div class="souy6ed">
-            <div class="attr-table a1j9gbod">
-                <div class="a1ewdido">
-                    <div class="attrlabel"><span class="tooltipcontrol t1fu2t0i">Strength<div class="tooltiptext bottom tju1zi6">Used for blocking, melee attacks, physical feats, athleticism.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_strength" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+    <div class="l46743n">
+        <div class="s1bpmgwo">
+            <div class="souy6ed">
+                <div class="attr-table a1j9gbod">
+                    <div class="a1ewdido">
+                        <div class="attrlabel"><span class="tooltipcontrol tqm1uwy">Strength<div class="tooltiptext bottom  t1fu2t0i">Used for blocking, melee attacks, physical feats, athleticism.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_strength" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                    </div>
+                    <div class="a1ewdido">
+                        <div class="attrlabel"><span class="tooltipcontrol tqm1uwy">Agility<div class="tooltiptext bottom  t1fu2t0i">Used for dodging, ranged attacks, actions involving coordination, skill with your hands/fingers.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_agility" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                    </div>
+                    <div class="a1ewdido">
+                        <div class="attrlabel"><span class="tooltipcontrol tqm1uwy">Intellect<div class="tooltiptext bottom  t1fu2t0i">Used for healing and actions that require thinking and knowledge.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_intellect" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                    </div>
+                    <div class="a1ewdido">
+                        <div class="attrlabel"><span class="tooltipcontrol tqm1uwy">Charisma<div class="tooltiptext bottom  t1fu2t0i">Used for interacting with other human beings.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_charisma" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                    </div>
+                    <div class="a1ewdido">
+                        <div class="attrlabel"><span class="tooltipcontrol tqm1uwy">Perception<div class="tooltiptext bottom  t1fu2t0i">Ability to sense and notice things in the environment, your reflexes.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_perception" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                    </div>
+                    <div class="a1ewdido">
+                        <div class="attrlabel"><span class="tooltipcontrol tqm1uwy">Willpower<div class="tooltiptext bottom  t1fu2t0i">Resist physical and mental conditions and damage.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_willpower" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                    </div>
                 </div>
-                <div class="a1ewdido">
-                    <div class="attrlabel"><span class="tooltipcontrol t1fu2t0i">Agility<div class="tooltiptext bottom tju1zi6">Used for dodging, ranged attacks, actions involving coordination, skill with your hands/fingers.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_agility" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                <div class="skill-table s1v1uko9">
+                    <h2>Combat Bonuses</h2>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><span class="tooltipcontrol tqm1uwy">Block<div class="tooltiptext bottom  t1fu2t0i">Reduce damage of an attack by blocking with an item. Add skill amount to a strength roll. Multiply successes by item&#x27;s block value.</div></span></div>
+                        <div class="select-wrapper">STR +</div>
+                        <div class="input-wrapper"><input type="number" name="attr_block" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><span class="tooltipcontrol tqm1uwy">Dodge<div class="tooltiptext bottom  t1fu2t0i">Avoid attacks on yourself. Add skill amount to an agility roll. Each roll success reduces an attacks success.</div></span></div>
+                        <div class="select-wrapper">AGI +</div>
+                        <div class="input-wrapper"><input type="number" name="attr_dodge" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><span class="tooltipcontrol tqm1uwy">Melee<div class="tooltiptext bottom  t1fu2t0i">Skill with melee weapon attacks. Adds skill amount to a strength roll. Multiply successes by an melee weapon&#x27;s attack value.</div></span></div>
+                        <div class="select-wrapper">STR +</div>
+                        <div class="input-wrapper"><input type="number" name="attr_melee" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><span class="tooltipcontrol tqm1uwy">Ranged<div class="tooltiptext bottom  t1fu2t0i">Skill with ranged weapon attacks. Adds skill amount to a strength roll. Multiply successes by an ranged weapon&#x27;s attack value.</div></span></div>
+                        <div class="select-wrapper">AGI +</div>
+                        <div class="input-wrapper"><input type="number" name="attr_ranged" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><span class="tooltipcontrol tqm1uwy">Running<div class="tooltiptext bottom  t1fu2t0i">Determines how fast you run and if you trip while running.</div></span></div>
+                        <div class="select-wrapper">AGI +</div>
+                        <div class="input-wrapper"><input type="number" name="attr_run" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><span class="tooltipcontrol tqm1uwy">Throwing<div class="tooltiptext bottom  t1fu2t0i">Ability to throw an object. Add skill amount to a strength roll.</div></span></div>
+                        <div class="select-wrapper">STR +</div>
+                        <div class="input-wrapper"><input type="number" name="attr_throwing" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><span class="tooltipcontrol tqm1uwy">Unarmed<div class="tooltiptext bottom  t1fu2t0i">Skills with fighting hand to hand and grappling. Add skill amount to a strength roll.</div></span></div>
+                        <div class="select-wrapper">STR +</div>
+                        <div class="input-wrapper"><input type="number" name="attr_unarmed" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
                 </div>
-                <div class="a1ewdido">
-                    <div class="attrlabel"><span class="tooltipcontrol t1fu2t0i">Intellect<div class="tooltiptext bottom tju1zi6">Used for healing and actions that require thinking and knowledge.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_intellect" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
-                </div>
-                <div class="a1ewdido">
-                    <div class="attrlabel"><span class="tooltipcontrol t1fu2t0i">Charisma<div class="tooltiptext bottom tju1zi6">Used for interacting with other human beings.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_charisma" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
-                </div>
-                <div class="a1ewdido">
-                    <div class="attrlabel"><span class="tooltipcontrol t1fu2t0i">Perception<div class="tooltiptext bottom tju1zi6">Ability to sense and notice things in the environment, your reflexes.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_perception" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
-                </div>
-                <div class="a1ewdido">
-                    <div class="attrlabel"><span class="tooltipcontrol t1fu2t0i">Willpower<div class="tooltiptext bottom tju1zi6">Resist physical and mental conditions and damage.</div></span></div><button type="roll" value="!!zroll" class="rml2s6r"></button><input type="number" name="attr_willpower" class="nqol4dh" style="--nqol4dh-0:none" value="3" />
+                <div class="skill-table s1v1uko9">
+                    <h2>Skill Bonuses</h2>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><input type="text" name="attr_skill_name_1" placeholder="Enter Skill Name" class="thd2hk" style="--thd2hk-0:none" /></div>
+                        <div class="select-wrapper"><select name="attr_skill_uses_1" class="s1i42rw" style="--s1i42rw-0:none;--s1i42rw-1:none">
+                                <option>STR</option>
+                                <option>AGI</option>
+                                <option>INT</option>
+                                <option>CHA</option>
+                                <option>PER</option>
+                                <option>WILL</option>
+                            </select></div>
+                        <div>+</div>
+                        <div class="input-wrapper"><input type="number" name="attr_skill_1" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><input type="text" name="attr_skill_name_2" placeholder="" class="thd2hk" style="--thd2hk-0:none" /></div>
+                        <div class="select-wrapper"><select name="attr_skill_uses_2" class="s1i42rw" style="--s1i42rw-0:none;--s1i42rw-1:none">
+                                <option>STR</option>
+                                <option>AGI</option>
+                                <option>INT</option>
+                                <option>CHA</option>
+                                <option>PER</option>
+                                <option>WILL</option>
+                            </select></div>
+                        <div>+</div>
+                        <div class="input-wrapper"><input type="number" name="attr_skill_2" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><input type="text" name="attr_skill_name_3" placeholder="" class="thd2hk" style="--thd2hk-0:none" /></div>
+                        <div class="select-wrapper"><select name="attr_skill_uses_3" class="s1i42rw" style="--s1i42rw-0:none;--s1i42rw-1:none">
+                                <option>STR</option>
+                                <option>AGI</option>
+                                <option>INT</option>
+                                <option>CHA</option>
+                                <option>PER</option>
+                                <option>WILL</option>
+                            </select></div>
+                        <div>+</div>
+                        <div class="input-wrapper"><input type="number" name="attr_skill_3" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
+                        <div class="name-wrapper"><input type="text" name="attr_skill_name_4" placeholder="" class="thd2hk" style="--thd2hk-0:none" /></div>
+                        <div class="select-wrapper"><select name="attr_skill_uses_4" class="s1i42rw" style="--s1i42rw-0:none;--s1i42rw-1:none">
+                                <option>STR</option>
+                                <option>AGI</option>
+                                <option>INT</option>
+                                <option>CHA</option>
+                                <option>PER</option>
+                                <option>WILL</option>
+                            </select></div>
+                        <div>+</div>
+                        <div class="input-wrapper"><input type="number" name="attr_skill_4" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
                 </div>
             </div>
-            <div class="skill-table s1v1uko9">
-                <h2>Combat Skills</h2>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><span class="tooltipcontrol t1fu2t0i">Block<div class="tooltiptext bottom tju1zi6">Reduce damage of an attack by blocking with an item. Add skill amount to a strength roll. Multiply successes by item&#x27;s block value.</div></span></div>
-                    <div class="select-wrapper">STR +</div>
-                    <div class="input-wrapper"><input type="number" name="attr_block" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+        </div>
+        <div class="m1qsofh0">
+            <div class="tkdxrzp">
+                <div class="abilities">
+                    <div class="r1uzust1">
+                        <div class="ability-box a1bom5h9 tc5gu7u">
+                            <div class="rnaz2av">
+                                <div>
+                                    <div>Ability</div><select name="attr_ability_1" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                                        <option></option>
+                                        <option value="sniper">Sniper</option>
+                                        <option value="cheerleader">Cheerleader</option>
+                                        <option value="protector">Protector</option>
+                                        <option value="actionstar">Action Star</option>
+                                    </select>
+                                </div>
+                                <div class="s1uxurjd">
+                                    <div>Level</div><input type="number" name="attr_abilitylevel_1" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="sniper" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext   t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext   t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext   t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="cheerleader" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext   t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext   t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext   t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="protector" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext   t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext   t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext   t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="actionstar" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext   t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext   t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ability-box a1bom5h9 tc5gu7u">
+                            <div class="rnaz2av">
+                                <div>
+                                    <div>Ability</div><select name="attr_ability_2" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                                        <option></option>
+                                        <option value="sniper">Sniper</option>
+                                        <option value="cheerleader">Cheerleader</option>
+                                        <option value="protector">Protector</option>
+                                        <option value="actionstar">Action Star</option>
+                                    </select>
+                                </div>
+                                <div class="s1uxurjd">
+                                    <div>Level</div><input type="number" name="attr_abilitylevel_2" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="sniper" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext   t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext   t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext   t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="cheerleader" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext   t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext   t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext   t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="protector" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext   t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext   t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext   t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="actionstar" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext   t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext   t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ability-box a1bom5h9 tc5gu7u">
+                            <div class="rnaz2av">
+                                <div>
+                                    <div>Ability</div><select name="attr_ability_3" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                                        <option></option>
+                                        <option value="sniper">Sniper</option>
+                                        <option value="cheerleader">Cheerleader</option>
+                                        <option value="protector">Protector</option>
+                                        <option value="actionstar">Action Star</option>
+                                    </select>
+                                </div>
+                                <div class="s1uxurjd">
+                                    <div>Level</div><input type="number" name="attr_abilitylevel_3" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="sniper" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext   t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext   t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext   t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="cheerleader" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext   t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext   t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext   t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="protector" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext   t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext   t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext   t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="actionstar" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext   t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext   t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><span class="tooltipcontrol t1fu2t0i">Dodge<div class="tooltiptext bottom tju1zi6">Avoid attacks on yourself. Add skill amount to an agility roll. Each roll success reduces an attacks success.</div></span></div>
-                    <div class="select-wrapper">AGI +</div>
-                    <div class="input-wrapper"><input type="number" name="attr_dodge" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><span class="tooltipcontrol t1fu2t0i">Melee Weapons<div class="tooltiptext bottom tju1zi6">Skill with melee weapon attacks. Adds skill amount to a strength roll. Multiply successes by an melee weapon&#x27;s attack value.</div></span></div>
-                    <div class="select-wrapper">STR +</div>
-                    <div class="input-wrapper"><input type="number" name="attr_melee" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><span class="tooltipcontrol t1fu2t0i">Ranged Weapons<div class="tooltiptext bottom tju1zi6">Skill with ranged weapon attacks. Adds skill amount to a strength roll. Multiply successes by an ranged weapon&#x27;s attack value.</div></span></div>
-                    <div class="select-wrapper">AGI +</div>
-                    <div class="input-wrapper"><input type="number" name="attr_ranged" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><span class="tooltipcontrol t1fu2t0i">Throwing<div class="tooltiptext bottom tju1zi6">Ability to throw an object. Add skill amount to a strength roll.</div></span></div>
-                    <div class="select-wrapper">STR +</div>
-                    <div class="input-wrapper"><input type="number" name="attr_throwing" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><span class="tooltipcontrol t1fu2t0i">Unarmed<div class="tooltiptext bottom tju1zi6">Skills with fighting hand to hand and grappling. Add skill amount to a strength roll.</div></span></div>
-                    <div class="select-wrapper">STR +</div>
-                    <div class="input-wrapper"><input type="number" name="attr_unarmed" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-            </div>
-            <div class="skill-table s1v1uko9">
-                <h2>Skills</h2>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><input type="text" name="attr_skill_name_1" placeholder="Enter Skill Name" class="t1uxurjd" style="--t1uxurjd-0:none" /></div>
-                    <div class="select-wrapper"><select name="attr_skill_uses_1" class="shd2hk">
-                            <option value="strength">STR</option>
-                            <option value="agility">AGI</option>
-                            <option value="intellect">INT</option>
-                            <option value="charisma">CHA</option>
-                            <option value="perception">PER</option>
-                            <option value="willpower">WILL</option>
-                        </select></div>
-                    <div>+</div>
-                    <div class="input-wrapper"><input type="number" name="attr_skill_1" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><input type="text" name="attr_skill_name_2" placeholder="" class="t1uxurjd" style="--t1uxurjd-0:none" /></div>
-                    <div class="select-wrapper"><select name="attr_skill_uses_2" class="shd2hk">
-                            <option value="strength">STR</option>
-                            <option value="agility">AGI</option>
-                            <option value="intellect">INT</option>
-                            <option value="charisma">CHA</option>
-                            <option value="perception">PER</option>
-                            <option value="willpower">WILL</option>
-                        </select></div>
-                    <div>+</div>
-                    <div class="input-wrapper"><input type="number" name="attr_skill_2" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><input type="text" name="attr_skill_name_3" placeholder="" class="t1uxurjd" style="--t1uxurjd-0:none" /></div>
-                    <div class="select-wrapper"><select name="attr_skill_uses_3" class="shd2hk">
-                            <option value="strength">STR</option>
-                            <option value="agility">AGI</option>
-                            <option value="intellect">INT</option>
-                            <option value="charisma">CHA</option>
-                            <option value="perception">PER</option>
-                            <option value="willpower">WILL</option>
-                        </select></div>
-                    <div>+</div>
-                    <div class="input-wrapper"><input type="number" name="attr_skill_3" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><input type="text" name="attr_skill_name_4" placeholder="" class="t1uxurjd" style="--t1uxurjd-0:none" /></div>
-                    <div class="select-wrapper"><select name="attr_skill_uses_4" class="shd2hk">
-                            <option value="strength">STR</option>
-                            <option value="agility">AGI</option>
-                            <option value="intellect">INT</option>
-                            <option value="charisma">CHA</option>
-                            <option value="perception">PER</option>
-                            <option value="willpower">WILL</option>
-                        </select></div>
-                    <div>+</div>
-                    <div class="input-wrapper"><input type="number" name="attr_skill_4" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><input type="text" name="attr_skill_name_5" placeholder="" class="t1uxurjd" style="--t1uxurjd-0:none" /></div>
-                    <div class="select-wrapper"><select name="attr_skill_uses_5" class="shd2hk">
-                            <option value="strength">STR</option>
-                            <option value="agility">AGI</option>
-                            <option value="intellect">INT</option>
-                            <option value="charisma">CHA</option>
-                            <option value="perception">PER</option>
-                            <option value="willpower">WILL</option>
-                        </select></div>
-                    <div>+</div>
-                    <div class="input-wrapper"><input type="number" name="attr_skill_5" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                </div>
-                <div class="sjtcytr">
-                    <div class="name-wrapper"><input type="text" name="attr_skill_name_6" placeholder="" class="t1uxurjd" style="--t1uxurjd-0:none" /></div>
-                    <div class="select-wrapper"><select name="attr_skill_uses_6" class="shd2hk">
-                            <option value="strength">STR</option>
-                            <option value="agility">AGI</option>
-                            <option value="intellect">INT</option>
-                            <option value="charisma">CHA</option>
-                            <option value="perception">PER</option>
-                            <option value="willpower">WILL</option>
-                        </select></div>
-                    <div>+</div>
-                    <div class="input-wrapper"><input type="number" name="attr_skill_6" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                    <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                <div class="tc5gu7u">
+                    <h2>Flaws</h2>
+                    <div class="r1a7dxbt"><select name="attr_flaw_1" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                            <option></option>
+                            <option value="dark">Afraid of the Dark</option>
+                            <option value="nearsighted">Nearsighted</option>
+                            <option value="sickly">Sickly</option>
+                            <option value="weakly">Out of Breath</option>
+                            <option value="unlucky">Unlucky</option>
+                            <option value="clumsy">Clumsy</option>
+                        </select>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_1" value="dark" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bonus Rolls will always be set to -4 in low-light/dark environments.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_1" value="nearsighted" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Taking damage or failing an action can cause you to drop your glasses. Bonus rolls are set to -6 when your glasses are dropped.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_1" value="sickly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">You must take special medicine every day or else reduce your current health by 50%, minimum of 10. Start the game with 3 special medicine.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_1" value="weakly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Set your Fatigue Cost to 4.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_1" value="unlucky" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bad things seem to happen around you.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_1" value="clumsy" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Your character occasionally trips or knocks things over.</div>
+                                </span></div>
+                        </div>
+                    </div>
+                    <div class="r1a7dxbt"><select name="attr_flaw_2" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                            <option></option>
+                            <option value="dark">Afraid of the Dark</option>
+                            <option value="nearsighted">Nearsighted</option>
+                            <option value="sickly">Sickly</option>
+                            <option value="weakly">Out of Breath</option>
+                            <option value="unlucky">Unlucky</option>
+                            <option value="clumsy">Clumsy</option>
+                        </select>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_2" value="dark" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bonus Rolls will always be set to -4 in low-light/dark environments.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_2" value="nearsighted" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Taking damage or failing an action can cause you to drop your glasses. Bonus rolls are set to -6 when your glasses are dropped.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_2" value="sickly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">You must take special medicine every day or else reduce your current health by 50%, minimum of 10. Start the game with 3 special medicine.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_2" value="weakly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Set your Fatigue Cost to 4.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_2" value="unlucky" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bad things seem to happen around you.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_2" value="clumsy" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Your character occasionally trips or knocks things over.</div>
+                                </span></div>
+                        </div>
+                    </div>
+                    <div class="r1a7dxbt"><select name="attr_flaw_3" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                            <option></option>
+                            <option value="dark">Afraid of the Dark</option>
+                            <option value="nearsighted">Nearsighted</option>
+                            <option value="sickly">Sickly</option>
+                            <option value="weakly">Out of Breath</option>
+                            <option value="unlucky">Unlucky</option>
+                            <option value="clumsy">Clumsy</option>
+                        </select>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="dark" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bonus Rolls will always be set to -4 in low-light/dark environments.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="nearsighted" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Taking damage or failing an action can cause you to drop your glasses. Bonus rolls are set to -6 when your glasses are dropped.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="sickly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">You must take special medicine every day or else reduce your current health by 50%, minimum of 10. Start the game with 3 special medicine.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="weakly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Set your Fatigue Cost to 4.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="unlucky" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bad things seem to happen around you.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="clumsy" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Your character occasionally trips or knocks things over.</div>
+                                </span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,7 +412,7 @@
             <div class="b1rja6tp">
                 <div class="stat-box health s1yoomvf">
                     <div class="stat-label label-text">
-                        <div class="l1h9xey1"><span class="tooltipcontrol t1fu2t0i">Health<div class="tooltiptext  tju1zi6">Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost.</div></span></div>
+                        <div class="l1h9xey1"><span class="tooltipcontrol tqm1uwy">Health<div class="tooltiptext   t1fu2t0i">Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost.</div></span></div>
                     </div>
                     <div class="stat-wrapper">
                         <div class="main"><input type="number" name="attr_health" class="nqol4dh" style="--nqol4dh-0:none" value="100" /></div>
@@ -165,7 +423,7 @@
             <div class="b1rja6tp">
                 <div class="stat-box sanity s1yoomvf">
                     <div class="stat-label label-text">
-                        <div class="l1h9xey1"><span class="tooltipcontrol t1fu2t0i">Sanity<div class="tooltiptext  tju1zi6">Your character goes insane when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost.</div></span></div>
+                        <div class="l1h9xey1"><span class="tooltipcontrol tqm1uwy">Sanity<div class="tooltiptext   t1fu2t0i">Your character goes insane when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost.</div></span></div>
                     </div>
                     <div class="stat-wrapper">
                         <div class="main"><input type="number" name="attr_sanity" class="nqol4dh" style="--nqol4dh-0:none" value="100" /></div>
@@ -176,7 +434,7 @@
             <div class="b1rja6tp">
                 <div class="stat-box energy s1yoomvf">
                     <div class="stat-label label-text">
-                        <div class="l1h9xey1"><span class="tooltipcontrol t1fu2t0i">Energy<div class="tooltiptext  tju1zi6">This is the number of dice you roll whenever you make any action. Reduced by 1 for every 10 Fatigue.</div></span></div>
+                        <div class="l1h9xey1"><span class="tooltipcontrol tqm1uwy">Energy<div class="tooltiptext   t1fu2t0i">This is the number of dice you roll whenever you make any action. Reduced by 1 for every 10 Fatigue.</div></span></div>
                     </div>
                     <div class="stat-wrapper">
                         <div class="main"><input type="number" name="attr_energy" class="nqol4dh" style="--nqol4dh-0:none" value="8" /></div>
@@ -187,7 +445,7 @@
             <div class="b1rja6tp">
                 <div class="stat-box fatigue s1yoomvf">
                     <div class="stat-label label-text">
-                        <div class="l1h9xey1"><span class="tooltipcontrol t1fu2t0i">Fatigue<div class="tooltiptext  tju1zi6">Every 10 points of fatigue reduces Energy by 1. Every action will usually cause you to gain fatigue.</div></span></div>
+                        <div class="l1h9xey1"><span class="tooltipcontrol tqm1uwy">Fatigue<div class="tooltiptext   t1fu2t0i">Every 10 points of fatigue reduces Energy by 1. Every action will usually cause you to gain fatigue.</div></span></div>
                     </div>
                     <div class="stat-wrapper">
                         <div class="main"><input type="number" name="attr_fatigue" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
@@ -198,13 +456,13 @@
                 <div class="avge6pb">
                     <div class="l1h9xey1">Ammo</div>
                     <div class="l1k5kuh7">
-                        <div class="ljuasqp">Light</div><input type="number" name="attr_ammolight" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
+                        <div class="ljuasqp"><span class="tooltipcontrol tqm1uwy">Primary<div class="tooltiptext   t1fu2t0i">Pistols, Submachine Guns, Rifles</div></span></div><input type="number" name="attr_ammolight" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
                     </div>
                     <div class="l1k5kuh7">
-                        <div class="ljuasqp">Medium</div><input type="number" name="attr_ammomedium" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
+                        <div class="ljuasqp"><span class="tooltipcontrol tqm1uwy">Heavy<div class="tooltiptext   t1fu2t0i">Snipers, Shotguns, Magnums</div></span></div><input type="number" name="attr_ammomedium" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
                     </div>
                     <div class="l1k5kuh7">
-                        <div class="ljuasqp">Heavy</div><input type="number" name="attr_ammoheavy" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
+                        <div class="ljuasqp"><span class="tooltipcontrol tqm1uwy">Special<div class="tooltiptext   t1fu2t0i">Bows, Crossbows, Grenade Launchers</div></span></div><input type="number" name="attr_ammoheavy" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
                     </div>
                 </div>
             </div>
@@ -212,10 +470,21 @@
                 <div class="o18kumz9 l1h9xey1">Roll Options</div>
                 <div class="opr8o21">
                     <div class="l1k5kuh7">
+                        <div class="ljuasqp">Roll Type</div>
+                        <div class="t1dns5gm">
+                            <div class="toggle-control"><input type="radio" name="attr_rolltype" value="active" checked="" class="rpdi7mw" />
+                                <div class="toggle-label rg7y3qa">Active</div>
+                            </div>
+                            <div class="toggle-control"><input type="radio" name="attr_rolltype" value="free" class="rpdi7mw" />
+                                <div class="toggle-label rg7y3qa">Free</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="l1k5kuh7">
                         <div class="ljuasqp">Bonus Rolls</div><input type="number" name="attr_bonusrolls" class="nqol4dh" style="--nqol4dh-0:solid 1px black" value="0" />
                     </div>
                     <div class="l1k5kuh7">
-                        <div class="ljuasqp">Fatigue Cost</div><input type="number" name="attr_rollcost" class="nqol4dh" style="--nqol4dh-0:solid 1px black" value="1" />
+                        <div class="ljuasqp">Fatigue Cost</div><input type="number" name="attr_rollcost" class="nqol4dh" style="--nqol4dh-0:solid 1px black" value="3" />
                     </div>
                 </div>
             </div>

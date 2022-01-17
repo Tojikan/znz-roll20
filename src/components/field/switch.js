@@ -13,7 +13,6 @@ export function CheckboxSwitch( props ){
             display: none;
 
             &:checked {
-                display: none;
                 & + .switch-container {
                     display: block;
                 }
@@ -25,7 +24,7 @@ export function CheckboxSwitch( props ){
 
     return (
         <CheckSwitch>
-            <input type="checkbox" name={`attr_${ props.field.key } `} />
+            <input type="checkbox" name={`attr_${ props.field.key }`} value={props.value}/>
             <Container className='switch-container'>
                 { props.children }
             </Container>

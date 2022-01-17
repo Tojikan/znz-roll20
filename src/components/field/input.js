@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@linaria/react';
 import { colors, sizes } from '../../styles/vars';
-import { capitalize } from '../../lib/znzlib';
+import { capitalize, getLabel } from '../../lib/znzlib';
 
 
 
@@ -88,11 +88,11 @@ export const TextInputStyle = styled.input`
         return (
             <SelectStyle name={`attr_${props.field.key}`} appearance={props.appearance} underline={props.underline}>
                 { props.default  &&
-                    <option value={props.default.value}>{props.default.label}</option>
+                    <option value={props.default.key} key="default">{props.default.label}</option>
                 }
                 { props.options.map( (x) => {
                     return (
-                        <option value={x.value}>{x.label}</option>
+                        <option key={x.key} value={x.key} >{x.label}</option>
                     )
                 })}
             </SelectStyle>
@@ -115,3 +115,61 @@ export const TextInputStyle = styled.input`
     }
 
 //#endregion
+
+
+//#region Toggle
+export function ToggleInput( props ){
+    const ToggleRow = styled.div`
+        display: flex;
+        text-align: center;
+
+        .toggle-control {
+            margin-right: 0.5rem;
+            position: relative;
+        }
+    `
+    const RadioButtonLabel = styled.div`
+        background-color: ${colors.lightred};
+        padding: 0.2rem 0.6rem;
+        font-size: 1.4rem;
+        border: solid 1px black;
+        border-radius: 0.6rem;
+        background-color: ${colors.lightgray};
+    `;
+
+    const RadioButton = styled.input`
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+        width: 100%!important;
+        height: 100%!important;
+        text-align: center;
+
+        &:checked + .toggle-label {
+            background-color: ${colors.lightred};
+            color: ${colors.white}
+        }
+    `
+
+
+
+    return (
+        <ToggleRow>
+            { props.field.options.map((x, i) =>{
+                return (
+                    <div className="toggle-control" key={x}>
+                        <RadioButton type="radio" name={`attr_${props.field.key}`} value={x} checked={i == 0 ? 'checked' : ''}/>
+                        <RadioButtonLabel className="toggle-label">{capitalize(x)}</RadioButtonLabel>
+                    </div>
+                )
+            })}
+        </ToggleRow>
+    )
+}
+
+
+//#endregion    

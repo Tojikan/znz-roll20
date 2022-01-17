@@ -22,7 +22,7 @@ export function BoxLabel(props){
 }
 
 
-export function Box(props){
+export function StatusBarBox(props){
 
     const Box = styled.div`
         min-width: 10.5rem;

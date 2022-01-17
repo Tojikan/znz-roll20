@@ -42,8 +42,9 @@ export const CharacterModel = {
     combatskills : {
         block: { key: 'block', uses:'strength', tip:"Reduce damage of an attack by blocking with an item. Add skill amount to a strength roll. Multiply successes by item's block value.", default:0},
         dodge: { key: 'dodge', uses:'agility', tip:'Avoid attacks on yourself. Add skill amount to an agility roll. Each roll success reduces an attacks success.', default:0},
-        melee: { key: 'melee', uses:'strength', label: 'Melee Weapons', tip:"Skill with melee weapon attacks. Adds skill amount to a strength roll. Multiply successes by an melee weapon's attack value.", default:0},
-        ranged: { key: 'ranged', uses:'agility', label: 'Ranged Weapons', tip:"Skill with ranged weapon attacks. Adds skill amount to a strength roll. Multiply successes by an ranged weapon's attack value.", default:0},
+        melee: { key: 'melee', uses:'strength', label: 'Melee', tip:"Skill with melee weapon attacks. Adds skill amount to a strength roll. Multiply successes by an melee weapon's attack value.", default:0},
+        ranged: { key: 'ranged', uses:'agility', label: 'Ranged', tip:"Skill with ranged weapon attacks. Adds skill amount to a strength roll. Multiply successes by an ranged weapon's attack value.", default:0},
+        run : { key: 'run', uses:'agility', label: 'Running', tip:"Determines how fast you run and if you trip while running.", default:0},
         throwing: { key: 'throwing', uses:'strength', tip: 'Ability to throw an object. Add skill amount to a strength roll.', default:0},
         unarmed: {key: 'unarmed', uses: 'strength', tip: 'Skills with fighting hand to hand and grappling. Add skill amount to a strength roll.', default: 0},
     },
@@ -61,44 +62,108 @@ export const CharacterModel = {
             {
                 key: "sniper",
                 label: "Sniper",
-                lvl1: "Gain 2 bonus rolls on your next ranged attack this turn.",
-                lvl2: "The bonus is now 5.",
-                lvl3: "The bonus is now 10."
+                levels: [
+                    {
+                        label: "Aimed Shot",
+                        tip: "Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.",
+                    },
+                    {
+                        label: "Enhanced Aimed Shot",
+                        tip: "Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.",
+                    },
+                    {
+                        label: "Critical Strike",
+                        tip: "Anytime you have 10 or more successes on a ranged attack, deal double damage."
+                    }
+
+                ],
             },
             {
                 key: "cheerleader",
                 label: "Cheerleader",
-                lvl1: "Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.",
-                lvl2: "If you target 1 ally only, they gain bonus rolls equal to your Charisma instead.",
-                lvl3: "Fatigue now only increases by 5."
+                levels: [
+                    {
+                        label: "Go Team Go!",
+                        tip: "Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10."
+                    },
+                    {
+                        label: "You can do it!",
+                        tip: "Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.",
+                    },
+                    {
+                        label: "Cheering you on!",
+                        tip: "Fatigue Cost for Cheerleader actions now only increases by 5.",
+                    },
+                ]
             },
             {
                 key: "protector",
                 label: "Protector",
-                lvl1: "You can take damage directed at adjacent or nearby allies.",
-                lvl2: "Excess block exceeding an attack can now be dealt as damage.",
-                lvl3: "At the start of your turn, you can enter defensive mode. You take half damage but deal half damage."
+                levels: [
+                    {
+                        label: "Stay Behind Me",
+                        tip: "You can take damage directed at adjacent or nearby allies."
+                    },
+                    {
+                        label: "Shield Bash",
+                        tip: "Excess block exceeding an attack can now be dealt as damage."
+                    },
+                    {
+                        label: "Turtle Mode",
+                        tip: "At the start of your turn, you can enter defensive mode. You take half damage but deal half damage."
+                    }
+                ]
             },
             {
                 key: "actionstar",
                 label: "Action Star",
-                lvl1: "Reloading no longer ends your turn and only takes 1 action.",
-                lvl2: "If you use one of your actions to defend but no one attacks you, you can re-use that action to attack instead.",
-                lvl3: "You can now combine moving and attacking as a single action."
+                levels: [
+                    {
+                        label: "Active Reload",
+                        tip: "You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading)."
+                    },
+                    {
+                        label: "Hit and Run",
+                        tip: "You can now combine moving and attacking as a single action with a -4 roll penalty."
+                    }
+                ]
             },
-
         ]
     },
     flaws: {
         count: 3,
         selected: {key: 'flaw'},
         options: [
-            "Afraid of the Dark",
-            "Nearsighted",
-            "Sickly",
-            "Diabetic",
-            "Weakly",
-            "Unlucky"
+            {
+                label: "Afraid of the Dark",
+                key: 'dark',
+                tip: "Bonus Rolls will always be set to -4 in low-light/dark environments.",
+            },
+            {
+                label: "Nearsighted",
+                key: "nearsighted",
+                tip: "Taking damage or failing an action can cause you to drop your glasses. Bonus rolls are set to -6 when your glasses are dropped.",
+            },
+            {
+                label: "Sickly",
+                key: "sickly",
+                tip: "You must take special medicine every day or else reduce your current health by 50%, minimum of 10. Start the game with 3 special medicine.",
+            },
+            {
+                label: "Out of Breath",
+                key: "weakly",
+                tip: "Set your Fatigue Cost to 4.",
+            },
+            {
+                label: "Unlucky",
+                key: 'unlucky',
+                tip: 'Bad things seem to happen around you.',
+            },
+            {
+                label: "Clumsy",
+                key: 'clumsy',
+                tip: 'Your character occasionally trips or knocks things over.',
+            },
         ]
     },
     resources: {
@@ -109,13 +174,17 @@ export const CharacterModel = {
     },
     ammo: {
         list: {
-            light: {key: 'ammolight', label: 'Light', tip: 'Pistols, Submachine Guns'},
-            medium: {key: 'ammomedium', label: 'Medium', tip: 'Rifles, Shotguns'},
-            heavy: {key: 'ammoheavy', label: 'Heavy', tip:'Bows, Crossbows, Snipers'},
+            light: {key: 'ammolight', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
+            medium: {key: 'ammomedium', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
+            heavy: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
         }
     },
     bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0},
-    rollcost: {label: 'Fatigue Cost', key: 'rollcost', default: 1},
+    rollcost: {label: 'Fatigue Cost', key: 'rollcost', default: 3},
+    rolltype: {label: 'Roll Type', key: 'rolltype', options: [
+        'active', 
+        'free'
+    ]}
 };
 
 

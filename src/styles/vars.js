@@ -3,6 +3,7 @@ export const colors = {
     white: 'white',
     black: 'black',
     bloodred: '#bd0102',
+    lightred: '#da4f49',
     darkgray: '#a0a0a0',
     lightgray: '#d3d3d3',
     focusblue: '#5E9ED6',
@@ -28,3 +29,8 @@ export const fonts = {
 export const breakpoints = {
     md: '768px',
 }
+
+export  const StatusBarHeight = {
+    desktop: "10.5rem",
+    mobile:"7rem",
+};

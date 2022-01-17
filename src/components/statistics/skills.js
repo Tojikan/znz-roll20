@@ -35,12 +35,13 @@ const SkillRow = styled.div`
             padding-right: 0;
             padding-left: 0;
             margin-right: 0.2rem;
+            min-width: 2rem;
         }
     }
 
     .input-wrapper {
         input {
-            width: 3rem!important;
+            width: 2rem!important;
             text-align: center;
         }
     }

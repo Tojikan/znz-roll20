@@ -19,7 +19,7 @@ export function CharTraits( props ) {
         }
 
         .abilities {
-            width: 70%;
+            width: 80%;
         }
 
     `
@@ -27,12 +27,21 @@ export function CharTraits( props ) {
     const Row = styled.div`
         display: flex;
 
+        
         .ability-box {
             flex: 1 1 33%;
             width: 33%;
             word-wrap: normal;
         }
+        
+        @media screen and (max-width: 600px){
+            display: block;
 
+            .ability-box {
+                width: auto;
+            }
+        }
+        
     `
 
     let abilityCount = CharacterModel.abilities.count;
@@ -44,7 +53,7 @@ export function CharTraits( props ) {
         let prefixedLevel = suffixKey(CharacterModel.abilities.level, i);
 
         abilities.push(
-            <AbilityBox className="ability-box" level={prefixedLevel} field={prefixedAbility} options={CharacterModel.abilities.options}/>
+            <AbilityBox className="ability-box" level={prefixedLevel} field={prefixedAbility} options={CharacterModel.abilities.options} key={prefixedAbility.key}/>
         )
 
     }
@@ -59,3 +68,15 @@ export function CharTraits( props ) {
         </TraitsRow>
     )
 }
+
+
+
+export const TraitBox = styled.div`
+    border: solid 2px ${colors.black};
+    padding: 0.5rem 1rem;
+    margin-right: -2px;
+
+    h2 {
+        text-align: center;
+    }
+`;

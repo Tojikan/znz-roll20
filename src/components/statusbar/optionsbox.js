@@ -1,18 +1,17 @@
 import React from 'react';
 import { styled } from '@linaria/react';
 import { colors, sizes, breakpoints } from '../../styles/vars';
-import { Box, BoxLabel } from './box';
-import { NumberInput } from '../field/input';
-import { statusbarVars } from './statusbar-vars';
+import { StatusBarBox, BoxLabel } from './box';
+import { NumberInput, ToggleInput } from '../field/input';
 import { LabelledFlex, LabelText, LabelFlexBox } from '../field/label';
 import { getLabel } from '../../lib/znzlib';
+import { StatusBarHeight } from '../../styles/vars';
 
 export default function OptionsBox(props){
-    const OptionsBox = styled(Box)`
+    const OptionsBox = styled(StatusBarBox)`
         flex: 100%;
         height: 100%;
         
-        //Collapse to top of status bar on smaller screens
         @media screen and (max-width: ${breakpoints.md}) {
             position: absolute;
             bottom: 100%;
@@ -53,7 +52,7 @@ export default function OptionsBox(props){
             flex-direction: column;
             align-items: flex-start;
             flex-wrap: wrap;
-            height: ${ statusbarVars.barheight };
+            height: ${ StatusBarHeight.mobile };
         }
     `
 
@@ -65,7 +64,16 @@ export default function OptionsBox(props){
             </OptionBoxLabel>
             <OptionsBoxContent>
                 {
-                    props.options.map((x, i) => {
+                    props.toggleOptions.map((x, i)  => {
+                        return (
+                            <LabelledFlex label={getLabel(x)} key={i}>
+                                <ToggleInput field={x} />
+                            </LabelledFlex>
+                        )
+                    })
+                }
+                {
+                    props.numberOptions.map((x, i) => {
                         return (
                             <LabelledFlex label={getLabel(x)} key={i}>
                                 <NumberInput field={x} underline={true} key={x.key}/>

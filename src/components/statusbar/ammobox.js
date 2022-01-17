@@ -2,9 +2,10 @@ import React from 'react';
 import { NumberInput } from '../field/input';
 import { styled } from '@linaria/react';
 import { sizes } from '../../styles/vars';
-import { Box, BoxLabel} from './box';
+import { StatusBarBox, BoxLabel} from './box';
 import { LabelledFlex } from '../field/label';
 import { getLabel } from '../../lib/znzlib';
+import { ToolTip } from '../field/tooltip';
 
 export default function AmmoBox(props){
 
@@ -16,7 +17,7 @@ export default function AmmoBox(props){
 
 
     return (
-        <Box>
+        <StatusBarBox>
             <AmmoBox>
                 <BoxLabel>
                     Ammo
@@ -24,13 +25,17 @@ export default function AmmoBox(props){
                 {
                     props.list.map((x, i) =>{
                         return (
-                            <LabelledFlex label={getLabel(x)} key={i}>
+                            <LabelledFlex label={
+                                <ToolTip text={x.tip}>
+                                    {getLabel(x)}
+                                </ToolTip>
+                                } key={i}>
                                 <NumberInput field={x} underline={false} key={x.key}/>
                             </LabelledFlex>
                         )
                     })
                 }
             </AmmoBox>
-        </Box>
+        </StatusBarBox>
     )
 }

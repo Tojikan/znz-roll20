@@ -26,6 +26,7 @@ export default function CharacterSheet(){
 
     const Sidebar = styled.div`
         width: 25%;
+        min-width: 190px;
         margin-right: 1rem;
     `
 

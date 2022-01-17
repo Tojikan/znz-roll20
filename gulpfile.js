@@ -1,3 +1,4 @@
+const { watch } = require('gulp');
 const gulp = require('gulp'),
     {rollup} = require('gulp-rollup-2'),
     inject = require('gulp-inject'),
@@ -7,8 +8,8 @@ const gulp = require('gulp'),
     htmlbeautify = require('gulp-html-beautify');
 
 
-/** Append workers to sheet */
-function sheet(){
+/**Beautify and append sheet workers **/
+gulp.task('sheet', function(){
     return gulp.src('./dist/sheet.html')
         .pipe(htmlbeautify())
         .pipe(inject( (()=>{
@@ -32,9 +33,10 @@ function sheet(){
         }))
         .pipe(gulp.dest('./dist'))
     ;
-}
+})
 
-function scripts(){
+
+gulp.task('scripts', function(){
     return gulp.src('src/scripts.js')
         .pipe(rollup({
             input:'src/scripts.js',
@@ -46,6 +48,11 @@ function scripts(){
         }))
         .pipe(gulp.dest('./dist'))
     ;
-}
+})
 
-exports.default = gulp.series(sheet, scripts);
+exports.default = gulp.series(['sheet', 'scripts']);
+
+exports.watch = function(){
+    watch('./dist/sheet.html', gulp.series(['sheet']));
+    watch('./src/scripts/*.js', gulp.series(['scripts']));
+}

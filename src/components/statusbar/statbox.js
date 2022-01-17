@@ -2,7 +2,7 @@ import React from 'react';
 import { NumberInput } from '../field/input';
 import { styled } from '@linaria/react';
 import { colors, sizes, fonts } from '../../styles/vars';
-import { Box, BoxLabel } from './box';
+import { StatusBarBox, BoxLabel } from './box';
 import { ToolTip } from '../field/tooltip';
 
 
@@ -66,7 +66,7 @@ export default function StatBox(props){
 
 
     return (
-        <Box>
+        <StatusBarBox>
             <StatBox className={`stat-box ${props.stat.key}`}>
                 <div className="stat-label label-text">
                     <BoxLabel>
@@ -83,6 +83,6 @@ export default function StatBox(props){
                     { props.stat.max ? <div className="sub">Max: <NumberInput field={props.stat} max={true}/></div> : ''}
                 </div>
             </StatBox>
-        </Box>
+        </StatusBarBox>
     )
 }

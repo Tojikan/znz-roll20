@@ -5,8 +5,8 @@ import { styled } from '@linaria/react';
 import { colors } from '../../styles/vars';
 import AmmoBox from './ammobox';
 import OptionsBox from './optionsbox';
-import { statusbarVars } from './statusbar-vars';
 import { objToArray } from '../../lib/znzlib';
+import { StatusBarHeight } from '../../styles/vars';
 
 
 
@@ -16,7 +16,7 @@ export default function StatusBar(){
         bottom: 0;
         left: 0;
         width: 100%;
-        height: ${ statusbarVars.barheight };
+        height: ${ StatusBarHeight.desktop };
         background-color: ${ colors.darkgray};
         border: solid 3px ${ colors.black };
         box-sizing: border-box;
@@ -29,10 +29,13 @@ export default function StatusBar(){
     `;
 
     let ammolist = CharacterModel.ammo.list;
-    let options = [
+    let numberOpts = [
         CharacterModel.bonusrolls,
         CharacterModel.rollcost,
     ];
+    let toggleOpts = [
+        CharacterModel.rolltype
+    ]
     
     return (
         <StatusBar className="character-status-bar">
@@ -43,7 +46,7 @@ export default function StatusBar(){
                     )
                 })}
                 <AmmoBox list={Object.keys(ammolist).map(x => ammolist[x])} />
-                <OptionsBox options={options}/>
+                <OptionsBox numberOptions={numberOpts} toggleOptions={toggleOpts}/>
             </div>
         </StatusBar>
     )
