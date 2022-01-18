@@ -40,11 +40,7 @@ export function CharStatistics( props ) {
         let prefixedVal = suffixKey(CharacterModel.skills.value, i);
         let prefixedLabel = suffixKey(CharacterModel.skills.label, i);
         let prefixedUses = suffixKey(CharacterModel.skills.uses, i);
-        let placeholder = "";
-
-        if (i == 1){
-            placeholder = "Enter Skill Name";
-        }
+        let placeholder = "Skill Name";
 
         varSkills.push(
             <VariableSkill key={i} value={prefixedVal} label={prefixedLabel} uses={prefixedUses} placeholder={placeholder}></VariableSkill>

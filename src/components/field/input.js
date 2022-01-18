@@ -58,9 +58,21 @@ export const TextInputStyle = styled.input`
     border: none;
     border-bottom: ${props => props.underline ? `solid 1px ${colors.black}` : 'none'};
     width: 100%;
-    `;
+    color: ${colors.black};
+    
+    &::placeholder {
+        color: ${colors.lightgray};
+    }
+`;
 
-    export function TextInput(props){
+
+/**
+ * @param {field} props.field
+ * @param {boolean} props.underline
+ * @param {string} props.placeholder
+ * @returns 
+ */
+export function TextInput(props){
     return (
         <TextInputStyle type="text" name={`attr_${props.field.key}`}  underline={props.underline} placeholder={props.placeholder} />
     )
@@ -69,7 +81,15 @@ export const TextInputStyle = styled.input`
 
 
 //#region Select
-
+    /**
+     * @param {array} props.options [{key, label}]
+     * @param {field} props.field
+     * @param {object} props.default  {key, label}
+     * @param {boolean} props.appearance 
+     * @param {boolean} props.underline 
+     * @param {boolean} props.disabled 
+     * @returns 
+     */
     export function SelectInput( props ){
         const SelectStyle = styled.select`
             transition: 0.3s;
@@ -86,13 +106,13 @@ export const TextInputStyle = styled.input`
         `;
 
         return (
-            <SelectStyle name={`attr_${props.field.key}`} appearance={props.appearance} underline={props.underline}>
+            <SelectStyle name={`attr_${props.field.key}`} appearance={props.appearance} underline={props.underline} disabled={props.disabled}>
                 { props.default  &&
                     <option value={props.default.key} >{props.default.label}</option>
                 }
                 { props.options.map( (x,i) => {
                     return (
-                        <option key={i} value={x.key} >{x.label}</option>
+                        <option key={i} value={x.key}>{getLabel(x)}</option>
                     )
                 })}
             </SelectStyle>
@@ -174,6 +194,13 @@ export function ToggleInput( props ){
 
 
 //#region Hidden
+/**
+ * @param {field} props.field
+ * @param {string} props.value - optional
+ * @param {string} props.type
+ * @param {string} props.checked - 'checked'
+ * @returns 
+ */
 export function HiddenInput( props ){
 
     let proptype = ( props.type ? props.type : 'checkbox');
@@ -184,12 +211,33 @@ export function HiddenInput( props ){
 
     if (props.value ){
         return (
-            <InputStyle className={props.className} type={proptype} name={`attr_${props.field.key}`} value={props.value}/>
+            <InputStyle className={props.className} type={proptype} name={`attr_${props.field.key}`} value={props.value} defaultChecked={props.checked}/>
         )
     }
 
     return (
-        <InputStyle className={props.className} type={proptype} name={`attr_${props.field.key}`}/>
+        <InputStyle className={props.className} type={proptype} name={`attr_${props.field.key}`} defaultChecked={props.checked}/>
+    )
+}
+
+//#endregion    
+
+
+//#region TextArea
+    /**
+     * @param {field} props.field
+     * @returns 
+     */
+export function TextAreaInput( props ){
+
+    const TextArea = styled.textarea`
+        width: 100%;
+        box-sizing: border-box;
+    `;
+
+
+    return (
+        <TextArea className={props.className} name={`attr_${props.field.key}`}></TextArea>
     )
 }
 

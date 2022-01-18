@@ -16,7 +16,7 @@ export default function CharacterSheet(){
             margin-bottom: 20rem;
         }
 
-        textarea {
+        > textarea {
             height: 2rem;
         }
     `;

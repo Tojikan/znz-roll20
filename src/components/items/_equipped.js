@@ -2,11 +2,12 @@ import React from 'react'
 import { styled } from '@linaria/react';
 import { CharacterModel } from '../../data/character';
 import { Equipped, ItemModel } from '../../data/item';
-import { ItemCard } from './itemcard';
+import { Item } from './itemcard';
 import { SlotsList } from './slot';
 import { affixKey } from '../../lib/znzlib';
 import { NumberInput } from '../field/input';
 import { sizes } from '../../styles/vars';
+import { colors } from '../../styles/vars';
 
 
 
@@ -18,7 +19,9 @@ export function EquipmentSlots(){
 
     //Slots and cards are 1 indexed
     for (let i = 1; i <= slotCount; i++){
-        cardComponents.push(`Item ${i}`);
+        cardComponents.push(
+            <Item index={i} />
+        );
     }
 
     const LabelRow = styled.div`
@@ -60,3 +63,13 @@ export function EquipmentSlots(){
         </div>
     )
 }
+
+
+
+
+
+export const CardBorder  = styled.div`
+    border: solid 4px ${colors.lightgray};
+    border-radius: 1rem;
+    padding: 1rem;
+`

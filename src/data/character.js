@@ -37,6 +37,12 @@ export const CharacterModel = {
             abbr: 'WILL',
             default: 3,
             tip: "Resist physical and mental conditions and damage.",
+        },
+        luck: {
+            key: 'luck',
+            abbr: 'LCK',
+            default: 3,
+            tip: "Determines loot and general chance. ",
         }
     },
     combatskills : {
@@ -187,7 +193,7 @@ export const CharacterModel = {
     ]},
     equipmentslots: {
         key: "equipmentslots",
-        default: 1,
+        default: 2,
         count: 6,
         slotkey: "equipment"
     },
@@ -211,4 +217,5 @@ export function getAttrSelectOptions(){
         }
     })
 }
+
 
