@@ -184,7 +184,13 @@ export const CharacterModel = {
     rolltype: {label: 'Roll Type', key: 'rolltype', options: [
         'active', 
         'free'
-    ]}
+    ]},
+    equipmentslots: {
+        key: "equipmentslots",
+        default: 1,
+        count: 6,
+        slotkey: "equipment"
+    },
 };
 
 

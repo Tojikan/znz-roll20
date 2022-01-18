@@ -88,11 +88,11 @@ export const TextInputStyle = styled.input`
         return (
             <SelectStyle name={`attr_${props.field.key}`} appearance={props.appearance} underline={props.underline}>
                 { props.default  &&
-                    <option value={props.default.key} key="default">{props.default.label}</option>
+                    <option value={props.default.key} >{props.default.label}</option>
                 }
-                { props.options.map( (x) => {
+                { props.options.map( (x,i) => {
                     return (
-                        <option key={x.key} value={x.key} >{x.label}</option>
+                        <option key={i} value={x.key} >{x.label}</option>
                     )
                 })}
             </SelectStyle>
@@ -162,7 +162,7 @@ export function ToggleInput( props ){
             { props.field.options.map((x, i) =>{
                 return (
                     <div className="toggle-control" key={x}>
-                        <RadioButton type="radio" name={`attr_${props.field.key}`} value={x} checked={i == 0 ? 'checked' : ''}/>
+                        <RadioButton type="radio" name={`attr_${props.field.key}`} value={x} checked={i == 0 ? 'checked' : ''} onChange={()=>{} /* onchange for resolving console error */}/>
                         <RadioButtonLabel className="toggle-label">{capitalize(x)}</RadioButtonLabel>
                     </div>
                 )
@@ -170,6 +170,27 @@ export function ToggleInput( props ){
         </ToggleRow>
     )
 }
+//#endregion    
 
+
+//#region Hidden
+export function HiddenInput( props ){
+
+    let proptype = ( props.type ? props.type : 'checkbox');
+
+    const InputStyle = styled.input`
+        display: none;
+    `;
+
+    if (props.value ){
+        return (
+            <InputStyle className={props.className} type={proptype} name={`attr_${props.field.key}`} value={props.value}/>
+        )
+    }
+
+    return (
+        <InputStyle className={props.className} type={proptype} name={`attr_${props.field.key}`}/>
+    )
+}
 
 //#endregion    

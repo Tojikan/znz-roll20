@@ -1,9 +1,20 @@
 /////// Library of Functions for Generic Use
 
-
+/**
+ * @deprecated use affixKey
+ */
 export function suffixKey(field, suffix){
     let fld = {...field};
     fld.key = fld.key + '_' + suffix;
+    return fld;
+}
+
+
+export function affixKey(prefix, field, suffix){
+    let fld = {...field};
+
+    fld.key = (prefix ? prefix + '_' : '') + fld.key + (suffix ? '_' + suffix : '');
+
     return fld;
 }
 

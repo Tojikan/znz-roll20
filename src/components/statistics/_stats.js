@@ -36,8 +36,7 @@ export function CharStatistics( props ) {
     let varSkillsCount = CharacterModel.skills.count;
     let varSkills = [];
 
-    //1-indexed so we can refer to things as 1,2,3
-    for (let i = 1; i <= varSkillsCount; i++){
+    for (let i = 0; i < varSkillsCount; i++){
         let prefixedVal = suffixKey(CharacterModel.skills.value, i);
         let prefixedLabel = suffixKey(CharacterModel.skills.label, i);
         let prefixedUses = suffixKey(CharacterModel.skills.uses, i);
@@ -48,13 +47,13 @@ export function CharStatistics( props ) {
         }
 
         varSkills.push(
-            <VariableSkill value={prefixedVal} label={prefixedLabel} uses={prefixedUses} placeholder={placeholder}></VariableSkill>
+            <VariableSkill key={i} value={prefixedVal} label={prefixedLabel} uses={prefixedUses} placeholder={placeholder}></VariableSkill>
         )
     }
 
-    let combatSkills = objToArray(CharacterModel.combatskills).map((x)=>{
+    let combatSkills = objToArray(CharacterModel.combatskills).map((x, i)=>{
         return (
-            <CombatSkill field={x}/>
+            <CombatSkill key={i} field={x}/>
         )
     });
 

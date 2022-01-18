@@ -48,7 +48,7 @@ export function CharTraits( props ) {
 
     let abilities = [];
 
-    for (let i = 1; i <= abilityCount; i++){
+    for (let i = 0; i < abilityCount; i++){
         let prefixedAbility = suffixKey(CharacterModel.abilities.selected, i);
         let prefixedLevel = suffixKey(CharacterModel.abilities.level, i);
 

@@ -70,6 +70,20 @@
                 <div class="skill-table s1v1uko9">
                     <h2>Skill Bonuses</h2>
                     <div class="sjtcytr">
+                        <div class="name-wrapper"><input type="text" name="attr_skill_name_0" placeholder="" class="thd2hk" style="--thd2hk-0:none" /></div>
+                        <div class="select-wrapper"><select name="attr_skill_uses_0" class="s1i42rw" style="--s1i42rw-0:none;--s1i42rw-1:none">
+                                <option>STR</option>
+                                <option>AGI</option>
+                                <option>INT</option>
+                                <option>CHA</option>
+                                <option>PER</option>
+                                <option>WILL</option>
+                            </select></div>
+                        <div>+</div>
+                        <div class="input-wrapper"><input type="number" name="attr_skill_0" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
+                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
+                    </div>
+                    <div class="sjtcytr">
                         <div class="name-wrapper"><input type="text" name="attr_skill_name_1" placeholder="Enter Skill Name" class="thd2hk" style="--thd2hk-0:none" /></div>
                         <div class="select-wrapper"><select name="attr_skill_uses_1" class="s1i42rw" style="--s1i42rw-0:none;--s1i42rw-1:none">
                                 <option>STR</option>
@@ -111,20 +125,6 @@
                         <div class="input-wrapper"><input type="number" name="attr_skill_3" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
                         <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
                     </div>
-                    <div class="sjtcytr">
-                        <div class="name-wrapper"><input type="text" name="attr_skill_name_4" placeholder="" class="thd2hk" style="--thd2hk-0:none" /></div>
-                        <div class="select-wrapper"><select name="attr_skill_uses_4" class="s1i42rw" style="--s1i42rw-0:none;--s1i42rw-1:none">
-                                <option>STR</option>
-                                <option>AGI</option>
-                                <option>INT</option>
-                                <option>CHA</option>
-                                <option>PER</option>
-                                <option>WILL</option>
-                            </select></div>
-                        <div>+</div>
-                        <div class="input-wrapper"><input type="number" name="attr_skill_4" class="nqol4dh" style="--nqol4dh-0:none" value="0" /></div>
-                        <div class="roll-wrapper"><button type="roll" value="/roll" class="rml2s6r"></button></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -132,6 +132,49 @@
             <div class="tkdxrzp">
                 <div class="abilities">
                     <div class="r1uzust1">
+                        <div class="ability-box a1bom5h9 tc5gu7u">
+                            <div class="rnaz2av">
+                                <div>
+                                    <div>Ability</div><select name="attr_ability_0" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                                        <option></option>
+                                        <option value="sniper">Sniper</option>
+                                        <option value="cheerleader">Cheerleader</option>
+                                        <option value="protector">Protector</option>
+                                        <option value="actionstar">Action Star</option>
+                                    </select>
+                                </div>
+                                <div class="s1uxurjd">
+                                    <div>Level</div><input type="number" name="attr_abilitylevel_0" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_0" value="sniper" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext bottom  t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext bottom  t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext bottom  t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_0" value="cheerleader" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext bottom  t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext bottom  t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext bottom  t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_0" value="protector" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext bottom  t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext bottom  t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext bottom  t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
+                                </div>
+                            </div>
+                            <div class="c15np26p"><input type="checkbox" name="attr_ability_0" value="actionstar" />
+                                <div class="switch-container c1hzc3mr">
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext bottom  t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext bottom  t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ability-box a1bom5h9 tc5gu7u">
                             <div class="rnaz2av">
                                 <div>
@@ -149,29 +192,29 @@
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="sniper" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext   t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext   t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext   t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext bottom  t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext bottom  t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext bottom  t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
                                 </div>
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="cheerleader" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext   t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext   t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext   t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext bottom  t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext bottom  t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext bottom  t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
                                 </div>
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="protector" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext   t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext   t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext   t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext bottom  t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext bottom  t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext bottom  t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
                                 </div>
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_1" value="actionstar" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext   t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext   t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext bottom  t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext bottom  t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
                                 </div>
                             </div>
                         </div>
@@ -192,72 +235,29 @@
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="sniper" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext   t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext   t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext   t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext bottom  t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext bottom  t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext bottom  t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
                                 </div>
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="cheerleader" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext   t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext   t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext   t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext bottom  t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext bottom  t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext bottom  t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
                                 </div>
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="protector" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext   t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext   t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext   t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext bottom  t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext bottom  t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext bottom  t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
                                 </div>
                             </div>
                             <div class="c15np26p"><input type="checkbox" name="attr_ability_2" value="actionstar" />
                                 <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext   t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext   t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ability-box a1bom5h9 tc5gu7u">
-                            <div class="rnaz2av">
-                                <div>
-                                    <div>Ability</div><select name="attr_ability_3" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
-                                        <option></option>
-                                        <option value="sniper">Sniper</option>
-                                        <option value="cheerleader">Cheerleader</option>
-                                        <option value="protector">Protector</option>
-                                        <option value="actionstar">Action Star</option>
-                                    </select>
-                                </div>
-                                <div class="s1uxurjd">
-                                    <div>Level</div><input type="number" name="attr_abilitylevel_3" class="nqol4dh" style="--nqol4dh-0:none" value="0" />
-                                </div>
-                            </div>
-                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="sniper" />
-                                <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Aimed Shot<div class="tooltiptext   t1fu2t0i">Spend 1 action to gain 4 bonus rolls on your next ranged attack this turn.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Enhanced Aimed Shot<div class="tooltiptext   t1fu2t0i">Your Aimed shot now adds 6 bonus rolls. You can now accumulate 2 aimed shots in one turn to apply it to a ranged attack next turn as long as the attack is the first action you take.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Critical Strike<div class="tooltiptext   t1fu2t0i">Anytime you have 10 or more successes on a ranged attack, deal double damage.</div></span></div>
-                                </div>
-                            </div>
-                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="cheerleader" />
-                                <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Go Team Go!<div class="tooltiptext   t1fu2t0i">Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">You can do it!<div class="tooltiptext   t1fu2t0i">Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Cheering you on!<div class="tooltiptext   t1fu2t0i">Fatigue Cost for Cheerleader actions now only increases by 5.</div></span></div>
-                                </div>
-                            </div>
-                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="protector" />
-                                <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Stay Behind Me<div class="tooltiptext   t1fu2t0i">You can take damage directed at adjacent or nearby allies.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Shield Bash<div class="tooltiptext   t1fu2t0i">Excess block exceeding an attack can now be dealt as damage.</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 3</span> -   <span class="tooltipcontrol tqm1uwy">Turtle Mode<div class="tooltiptext   t1fu2t0i">At the start of your turn, you can enter defensive mode. You take half damage but deal half damage.</div></span></div>
-                                </div>
-                            </div>
-                            <div class="c15np26p"><input type="checkbox" name="attr_ability_3" value="actionstar" />
-                                <div class="switch-container c1hzc3mr">
-                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext   t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
-                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext   t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 1</span> -   <span class="tooltipcontrol tqm1uwy">Active Reload<div class="tooltiptext bottom  t1fu2t0i">You can now combine reloading and moving. Reloading no longer ends your attack phase (you can now attack right after reloading).</div></span></div>
+                                    <div class="level-line"><span class="level-label">Lvl 2</span> -   <span class="tooltipcontrol tqm1uwy">Hit and Run<div class="tooltiptext bottom  t1fu2t0i">You can now combine moving and attacking as a single action with a -4 roll penalty.</div></span></div>
                                 </div>
                             </div>
                         </div>
@@ -265,6 +265,52 @@
                 </div>
                 <div class="tc5gu7u">
                     <h2>Flaws</h2>
+                    <div class="r1a7dxbt"><select name="attr_flaw_0" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
+                            <option></option>
+                            <option value="dark">Afraid of the Dark</option>
+                            <option value="nearsighted">Nearsighted</option>
+                            <option value="sickly">Sickly</option>
+                            <option value="weakly">Out of Breath</option>
+                            <option value="unlucky">Unlucky</option>
+                            <option value="clumsy">Clumsy</option>
+                        </select>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_0" value="dark" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bonus Rolls will always be set to -4 in low-light/dark environments.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_0" value="nearsighted" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Taking damage or failing an action can cause you to drop your glasses. Bonus rolls are set to -6 when your glasses are dropped.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_0" value="sickly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">You must take special medicine every day or else reduce your current health by 50%, minimum of 10. Start the game with 3 special medicine.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_0" value="weakly" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Set your Fatigue Cost to 4.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_0" value="unlucky" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Bad things seem to happen around you.</div>
+                                </span></div>
+                        </div>
+                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_0" value="clumsy" />
+                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
+                                    <div class="tju1zi6">?</div>
+                                    <div class="tooltiptext  left t1fu2t0i">Your character occasionally trips or knocks things over.</div>
+                                </span></div>
+                        </div>
+                    </div>
                     <div class="r1a7dxbt"><select name="attr_flaw_1" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
                             <option></option>
                             <option value="dark">Afraid of the Dark</option>
@@ -357,50 +403,54 @@
                                 </span></div>
                         </div>
                     </div>
-                    <div class="r1a7dxbt"><select name="attr_flaw_3" class="s1i42rw" style="--s1i42rw-0:auto;--s1i42rw-1:solid 1px #a0a0a0">
-                            <option></option>
-                            <option value="dark">Afraid of the Dark</option>
-                            <option value="nearsighted">Nearsighted</option>
-                            <option value="sickly">Sickly</option>
-                            <option value="weakly">Out of Breath</option>
-                            <option value="unlucky">Unlucky</option>
-                            <option value="clumsy">Clumsy</option>
-                        </select>
-                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="dark" />
-                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
-                                    <div class="tju1zi6">?</div>
-                                    <div class="tooltiptext  left t1fu2t0i">Bonus Rolls will always be set to -4 in low-light/dark environments.</div>
-                                </span></div>
+                </div>
+            </div>
+            <div class="equipment-section">
+                <div class="lk0sr9t">
+                    <h2>Equipment</h2>
+                    <div class="equipment-slot-entry">Slots:<input type="number" name="attr_equipmentslots" class="nqol4dh" style="--nqol4dh-0:none" value="1" /></div>
+                </div>
+                <div class="s1udgm2n"><input type="checkbox" class="slot-trigger-1 i1a01tv2" name="attr_equipmentslots" value="1" /><input type="checkbox" class="slot-trigger-2 i1a01tv2" name="attr_equipmentslots" value="2" /><input type="checkbox" class="slot-trigger-3 i1a01tv2" name="attr_equipmentslots" value="3" /><input type="checkbox" class="slot-trigger-4 i1a01tv2" name="attr_equipmentslots" value="4" /><input type="checkbox" class="slot-trigger-5 i1a01tv2" name="attr_equipmentslots" value="5" /><input type="checkbox" class="slot-trigger-6 i1a01tv2" name="attr_equipmentslots" value="6" />
+                    <div class="slot_1 scdu23t">
+                        <div class="cgw7cd7">
+                            <div class="sldhokd"><input type="checkbox" class="slot-content-control i1a01tv2" name="attr_equipment_1" />
+                                <div class="slot-content s550djo">Item 1</div>
+                            </div>
                         </div>
-                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="nearsighted" />
-                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
-                                    <div class="tju1zi6">?</div>
-                                    <div class="tooltiptext  left t1fu2t0i">Taking damage or failing an action can cause you to drop your glasses. Bonus rolls are set to -6 when your glasses are dropped.</div>
-                                </span></div>
+                    </div>
+                    <div class="slot_2 scdu23t">
+                        <div class="cgw7cd7">
+                            <div class="sldhokd"><input type="checkbox" class="slot-content-control i1a01tv2" name="attr_equipment_2" />
+                                <div class="slot-content s550djo">Item 2</div>
+                            </div>
                         </div>
-                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="sickly" />
-                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
-                                    <div class="tju1zi6">?</div>
-                                    <div class="tooltiptext  left t1fu2t0i">You must take special medicine every day or else reduce your current health by 50%, minimum of 10. Start the game with 3 special medicine.</div>
-                                </span></div>
+                    </div>
+                    <div class="slot_3 scdu23t">
+                        <div class="cgw7cd7">
+                            <div class="sldhokd"><input type="checkbox" class="slot-content-control i1a01tv2" name="attr_equipment_3" />
+                                <div class="slot-content s550djo">Item 3</div>
+                            </div>
                         </div>
-                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="weakly" />
-                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
-                                    <div class="tju1zi6">?</div>
-                                    <div class="tooltiptext  left t1fu2t0i">Set your Fatigue Cost to 4.</div>
-                                </span></div>
+                    </div>
+                    <div class="slot_4 scdu23t">
+                        <div class="cgw7cd7">
+                            <div class="sldhokd"><input type="checkbox" class="slot-content-control i1a01tv2" name="attr_equipment_4" />
+                                <div class="slot-content s550djo">Item 4</div>
+                            </div>
                         </div>
-                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="unlucky" />
-                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
-                                    <div class="tju1zi6">?</div>
-                                    <div class="tooltiptext  left t1fu2t0i">Bad things seem to happen around you.</div>
-                                </span></div>
+                    </div>
+                    <div class="slot_5 scdu23t">
+                        <div class="cgw7cd7">
+                            <div class="sldhokd"><input type="checkbox" class="slot-content-control i1a01tv2" name="attr_equipment_5" />
+                                <div class="slot-content s550djo">Item 5</div>
+                            </div>
                         </div>
-                        <div class="c15np26p"><input type="checkbox" name="attr_flaw_3" value="clumsy" />
-                            <div class="switch-container c1hzc3mr"><span class="tooltipcontrol tqm1uwy">
-                                    <div class="tju1zi6">?</div>
-                                    <div class="tooltiptext  left t1fu2t0i">Your character occasionally trips or knocks things over.</div>
-                                </span></div>
+                    </div>
+                    <div class="slot_6 scdu23t">
+                        <div class="cgw7cd7">
+                            <div class="sldhokd"><input type="checkbox" class="slot-content-control i1a01tv2" name="attr_equipment_6" />
+                                <div class="slot-content s550djo">Item 6</div>
+                            </div>
                         </div>
                     </div>
                 </div>

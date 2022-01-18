@@ -46,7 +46,7 @@ export function FlawBox( props ) {
 
     let flawRows = [];
 
-    for (let i = 1; i <= props.count; i++){
+    for (let i = 0; i < props.count; i++){
         let prefixed = suffixKey(props.field, i);
         flawRows.push(
             <FlawRow

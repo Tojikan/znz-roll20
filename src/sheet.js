@@ -3,6 +3,7 @@ import StatusBar from './components/statusbar/_statusbar';
 import { CharStatistics } from './components/statistics/_stats';
 import { styled } from '@linaria/react';
 import { CharTraits } from './components/traits/_traits';
+import { EquipmentSlots } from './components/items/_equipped';
 
 export default function CharacterSheet(){
 
@@ -46,6 +47,7 @@ export default function CharacterSheet(){
                 </Sidebar>
                 <Mainbar>
                     <CharTraits/>
+                    <EquipmentSlots />
                 </Mainbar>
             </Layout>
             <StatusBar />

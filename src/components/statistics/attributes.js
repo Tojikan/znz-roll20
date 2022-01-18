@@ -62,9 +62,9 @@ export function AttributesTable( props ){
 
     return (
         <AttrsContainer className={props.className}>
-            { props.attrs.map( (x)=>{
+            { props.attrs.map( (x, i)=>{
                 return  (
-                    <Attr field={x}></Attr>
+                    <Attr field={x} key={`attr-${i}`}></Attr>
                 );
             })}
         </AttrsContainer>

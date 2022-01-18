@@ -49,7 +49,7 @@ export function AbilityBox( props ) {
                                 return (
                                     <div className="level-line"  key={i}>
                                         <span className="level-label">Lvl {i + 1}</span>  -&nbsp;&nbsp;&nbsp; 
-                                        <ToolTip text={x.tip}>
+                                        <ToolTip text={x.tip} bottom={true}>
                                             {x.label}
                                         </ToolTip>
                                     </div>
