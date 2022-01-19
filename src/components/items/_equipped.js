@@ -1,18 +1,14 @@
 import React from 'react'
 import { styled } from '@linaria/react';
 import { CharacterModel } from '../../data/character';
-import { Equipped, ItemModel } from '../../data/item';
+import { Equipped } from '../../data/item';
 import { Item } from './itemcard';
 import { SlotsList } from './slot';
-import { affixKey } from '../../lib/znzlib';
 import { NumberInput } from '../field/input';
-import { sizes } from '../../styles/vars';
-import { colors } from '../../styles/vars';
-
+import { SlotEntryRow } from './sharedCss';
 
 
 export function EquipmentSlots(){
-
 
     let slotCount = CharacterModel.equipmentslots.count;
     let cardComponents = [];
@@ -24,37 +20,16 @@ export function EquipmentSlots(){
         );
     }
 
-    const LabelRow = styled.div`
-        display: flex;
-        justify-content: start;
-        align-items: baseline;
-
-        h2 {
-            font-size: ${sizes.large};
-            margin-right: 3rem;
-        }
-
-        .equipment-slot-entry {
-            font-size: ${sizes.small};
-
-            input {
-                font-size: ${sizes.small}!important;
-            }
-        }
-
-    `
-
-
     return (
         <div className="equipment-section">
 
-            <LabelRow>
+            <SlotEntryRow>
                 <h2>Equipment</h2>
-                <div className="equipment-slot-entry">
+                <div className="slot-entry">
                     Slots: 
                     <NumberInput field={CharacterModel.equipmentslots} />
                 </div>
-            </LabelRow>
+            </SlotEntryRow>
             <SlotsList 
                 equippedField={Equipped} 
                 slotField={CharacterModel.equipmentslots}
@@ -65,11 +40,3 @@ export function EquipmentSlots(){
 }
 
 
-
-
-
-export const CardBorder  = styled.div`
-    border: solid 4px ${colors.lightgray};
-    border-radius: 1rem;
-    padding: 1rem;
-`

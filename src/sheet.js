@@ -4,6 +4,7 @@ import { CharStatistics } from './components/statistics/_stats';
 import { styled } from '@linaria/react';
 import { CharTraits } from './components/traits/_traits';
 import { EquipmentSlots } from './components/items/_equipped';
+import { Inventory } from './components/items/_inventory';
 
 export default function CharacterSheet(){
 
@@ -28,7 +29,7 @@ export default function CharacterSheet(){
     const Sidebar = styled.div`
         width: 25%;
         min-width: 190px;
-        margin-right: 1rem;
+        margin-right: 2rem;
     `
 
     const Mainbar = styled.div`
@@ -50,6 +51,7 @@ export default function CharacterSheet(){
                     <EquipmentSlots />
                 </Mainbar>
             </Layout>
+            <Inventory />
             <StatusBar />
             <script type="text/worker">
             </script>

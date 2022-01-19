@@ -24,3 +24,42 @@ export function RollButton(props){
         <RollButtonStyle type="roll" value={props.value} />
     )
 }
+
+export function BasicRollButton(props) {
+
+    const BasicButtonStyle = styled.button`
+        margin-bottom: 1rem;
+        border: solid 1px ${colors.darkgray};
+        border-radius: 0;
+
+        &:before {
+            content: none!important;
+        }
+    `
+
+    return (
+        <BasicButtonStyle type="roll" value={props.value} >
+            {props.children}
+        </BasicButtonStyle>
+    )
+}
+
+export function ActionButton(props) {
+
+    const ActionButtonStyle = styled.button`
+        margin-bottom: 1rem;
+        border: solid 1px ${colors.darkgray};
+        border-radius: 0;
+
+        &:before {
+            content: none!important;
+        }
+
+    `
+
+    return (
+        <ActionButtonStyle type="roll" name={`act_${props.action}`} >
+            {props.children}
+        </ActionButtonStyle>
+    )
+}

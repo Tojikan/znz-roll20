@@ -1,6 +1,10 @@
+
+import React from 'react'
+import { styled } from '@linaria/react';
 import { CharacterModel } from "../../data/character";
 import { ItemTypes } from "../../data/item";
 import { objToArray } from "../../lib/znzlib";
+import { sizes, colors } from '../../styles/vars';
 
 /**
  * Dynamic CSS Generated through loops and such whilst in the Component does not seem to work well with Linaria.
@@ -37,6 +41,7 @@ export const SlotTriggerCSS = (function(){
 
 
 /**
+ * @deprecated - Use array.reduce
  * Used in Item Cards to dynamically generate CSS for showing/hiding fields based on thee item type.
  */
  export const ItemTypesFieldCSS = (function(){
@@ -54,3 +59,31 @@ export const SlotTriggerCSS = (function(){
 
     return result;
 })();
+
+
+export const SlotEntryRow = styled.div`
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+
+    h2 {
+        font-size: ${sizes.large};
+        margin-right: 3rem;
+    }
+
+    .slot-entry {
+        font-size: ${sizes.small};
+
+        input {
+            font-size: ${sizes.small}!important;
+            text-align: center;
+            width: 3rem!important;
+        }
+    }
+`
+
+export const CardBorder  = styled.div`
+    border: solid 4px ${colors.lightgray};
+    border-radius: 1rem;
+    padding: 1rem;
+`

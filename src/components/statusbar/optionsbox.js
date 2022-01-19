@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@linaria/react';
-import { colors, sizes, breakpoints } from '../../styles/vars';
+import { colors, sizes } from '../../styles/vars';
 import { StatusBarBox, BoxLabel } from './box';
 import { NumberInput, ToggleInput } from '../field/input';
 import { LabelledFlex, LabelText, LabelFlexBox } from '../field/label';
@@ -12,7 +12,7 @@ export default function OptionsBox(props){
         flex: 100%;
         height: 100%;
         
-        @media screen and (max-width: ${breakpoints.md}) {
+        @media screen and (max-width: 787px) {
             position: absolute;
             bottom: 100%;
             left: 0;
@@ -26,7 +26,7 @@ export default function OptionsBox(props){
         ${LabelFlexBox} {
             margin-right: 1rem;
 
-            @media screen and (min-width: ${breakpoints.md}) {
+            @media screen and (min-width: 787px) {
                 margin-right: 0;
                 margin-bottom: 1rem;
             }
@@ -38,7 +38,7 @@ export default function OptionsBox(props){
     `;
 
     const OptionBoxLabel = styled(BoxLabel)`
-        @media screen and (max-width: ${breakpoints.md}) {
+        @media screen and (max-width: 787px) {
             font-size: ${sizes.medium};
             margin-right: 2rem;
         }
@@ -48,7 +48,7 @@ export default function OptionsBox(props){
         display: flex;
         align-items: center;
         
-        @media screen and (min-width: ${breakpoints.md}){
+        @media screen and (min-width: 787px){
             flex-direction: column;
             align-items: flex-start;
             flex-wrap: wrap;

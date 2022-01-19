@@ -197,6 +197,11 @@ export const CharacterModel = {
         count: 6,
         slotkey: "equipment"
     },
+    inventoryslots: {
+        key:"inventory",
+        default: 5,
+        max: 20,
+    }
 };
 
 

@@ -78,3 +78,22 @@ export function ToolTip(props){
         return props.children
     }
 }
+
+/**
+ * Like ToolTip but children is the text
+ * @param {*} props 
+ */
+export function ToolTip2(props) {
+    if (props.trigger){
+        return (
+            <ToolTipHover className="tooltipcontrol">
+                {props.trigger}
+                <ToolTipText className={ `tooltiptext ${props.bottom ? 'bottom' : ''} ${props.left ? 'left' : ''}` }>
+                    { props.children }
+                </ToolTipText>
+            </ToolTipHover>
+        )
+    } else {
+        return props.children
+    }
+}

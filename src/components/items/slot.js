@@ -2,9 +2,10 @@ import React from 'react'
 import { styled } from '@linaria/react';
 import { colors } from '../../styles/vars';
 import { HiddenInput } from '../field/input';
-import { CardBorder } from './_equipped';
+import { CardBorder } from './sharedCss';
 import { affixKey } from '../../lib/znzlib';
-import { SlotTriggerCSS } from './dynamicCSS';
+import { SlotTriggerCSS } from './sharedCss';
+import { CharacterModel } from '../../data/character';
 
 
 export function Slot( props ){
@@ -44,7 +45,6 @@ export function SlotsList( props ){
         margin-right: -1rem;
 
         ${SlotTriggerCSS}
-
     `
 
     const SlotWrap = styled.div`
@@ -63,7 +63,7 @@ export function SlotsList( props ){
     `;
 
     return (
-        <SlotsListWrapper>
+        <SlotsListWrapper list={props.list}>
             {/* {slotsDisplay} */}
             {props.list.map((x,i) =>{
                 // This checkbox determines how many slots are available.

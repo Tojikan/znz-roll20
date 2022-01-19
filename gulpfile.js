@@ -11,7 +11,7 @@ const gulp = require('gulp'),
 /**Beautify and append sheet workers **/
 gulp.task('sheet', function(){
     return gulp.src('./dist/sheet.html')
-        .pipe(htmlbeautify())
+        // .pipe(htmlbeautify())
         .pipe(inject( (()=>{
             return gulp.src('src/workers.js')
                 .pipe(rollup({

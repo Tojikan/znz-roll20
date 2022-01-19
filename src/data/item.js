@@ -6,8 +6,7 @@ export const ItemModel = {
     melee:{key:"melee"},
     ranged:{key:"ranged"},
     block:{key:"block"},
-    durability:{key:"durability"},
-    uses:{key:"uses"},
+    uses:{key:"uses", max:true},
 }
 
 
@@ -20,6 +19,7 @@ export const ItemTypes = {
     melee: {key: 'melee'},
     ranged: {key: 'ranged'},
     armor: {key: 'armor'},
+    thrown: {key: 'thrown'},
 }
 
 

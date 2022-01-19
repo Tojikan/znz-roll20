@@ -22,6 +22,15 @@ export function objToArray(obj) {
     return Object.keys(obj).map((x)=> obj[x]);
 }
 
+export function objMap(obj, callback){
+    let o = {...obj};
+    
+    for (let key of Object.keys(obj)){
+        o[key] = callback(obj[key]);
+    }
+    return o;
+}
+
 
 export function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);

@@ -6,6 +6,7 @@ import { capitalize, getLabel } from '../../lib/znzlib';
 
 
 //#region  Basic Number Input 
+
     export const NumberInputStyle = styled.input`
         transition: 0.3s;
         font-size: 1.6rem;
@@ -25,12 +26,17 @@ import { capitalize, getLabel } from '../../lib/znzlib';
         }
     `;
 
+    /**
+     * @param {field} props.field 
+     * @param {boolean} props.max
+     * @param {boolean} props.underline
+     * @returns 
+     */
     export function NumberInput(props){
         return (
             <NumberInputStyle type="number" name={`attr_${props.field.key}${props.max ? '_max': ''}`} defaultValue={props.field.default ?? 0} underline={props.underline} />
         )
     }
-
 
     export function LabelledNumberInput(props) {
 
@@ -44,6 +50,18 @@ import { capitalize, getLabel } from '../../lib/znzlib';
                 <div>{props.label}</div>
                 <NumberInputStyle type="number" name={`attr_${props.field.key}${props.max ? '_max': ''}`} defaultValue={props.field.default ?? 0} underline={props.underline} />
             </StyleWrapper>
+        )
+    }
+
+    export function DividerLine(props){
+        const Line = styled.span`
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0.2rem;
+        `
+
+        return (
+            <Line>/</Line>
         )
     }
 
