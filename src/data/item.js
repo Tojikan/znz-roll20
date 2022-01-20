@@ -6,7 +6,9 @@ export const ItemModel = {
     melee:{key:"melee"},
     ranged:{key:"ranged"},
     block:{key:"block"},
-    uses:{key:"uses", max:true},
+    durability:{key:"durability", max:true},
+    ammo:{key:"ammo", max:true},
+    ammotype:{key:"ammotype", select: true},
 }
 
 

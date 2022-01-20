@@ -260,3 +260,16 @@ export function TextAreaInput( props ){
 }
 
 //#endregion    
+
+
+
+export function ReadOnly(props) {
+
+    const SpanStyle = styled.span`
+        text-transform: capitalize;
+    `
+
+    return (
+        <SpanStyle name={`attr_${props.field.key}`}></SpanStyle>
+    )
+}

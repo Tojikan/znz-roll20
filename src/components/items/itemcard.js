@@ -3,9 +3,10 @@ import { styled } from '@linaria/react';
 import { colors, sizes } from '../../styles/vars';
 import { ItemModel, ItemTypes } from '../../data/item';
 import { affixKey, objToArray, objMap } from '../../lib/znzlib';
-import { SelectInput, TextInput, TextAreaInput, HiddenInput, NumberInput, DividerLine } from '../field/input';
+import { SelectInput, TextInput, TextAreaInput, HiddenInput, NumberInput, DividerLine, ReadOnly } from '../field/input';
 import { ToolTip } from '../field/tooltip';
 import { ActionButton, BasicRollButton } from '../field/button';
+import { CharacterModel } from '../../data/character';
 
 const ItemTypeArray = objToArray(ItemTypes);
 
@@ -98,12 +99,16 @@ export function Item( props ){
             <ContentWrapper className="hideable-fields">
                 <NameRow>
                     <TextInput field={itemFields.name} placeholder="Item Name"/>
-                    <SelectInput 
-                        field={itemFields.type}
-                        options={ItemTypeArray}
-                        appearance={false}
-                        disabled={!isInventory}
-                    />
+                    {isInventory && 
+                        <SelectInput 
+                            field={itemFields.type}
+                            options={ItemTypeArray}
+                            appearance={false}
+                        />
+                    }
+                    {!isInventory && 
+                        <ReadOnly field={itemFields.type}/>
+                    }
                 </NameRow>
 
                 <MiscField>
@@ -115,17 +120,19 @@ export function Item( props ){
                     <FieldRow >
                         <IconRow tip="Melee Attack Damage" field={itemFields.melee} src="https://tojikan.github.io/znz-roll20/assets/images/icons/pointy-sword.png"/>
                         <IconRow tip="Damage for throwing your melee weapon." field={itemFields.ranged} src="https://tojikan.github.io/znz-roll20/assets/images/icons/throwing-ball.png"/>
-                        <IconRow tip="Block Multiplier. " field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/vibrating-shield.png"/>
-                        <IconRow tip="Durability: Use 1 durability for every attack. Item breaks if 0." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
+                        <IconRow tip="Block Multiplier" field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/vibrating-shield.png"/>
+                        <IconRow tip="Durability: Use 1 durability for every attack/block. Item breaks if 0." field={itemFields.durability} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
                     </FieldRow>
                 </MeleeField>
 
                 <RangedField>
                     <FieldRow >
                         <IconRow tip="Ranged Attack Damage" field={itemFields.ranged} src="https://tojikan.github.io/znz-roll20/assets/images/icons/striking-splinter.png"/>
-                        <IconRow tip="Damage for meleeing with your ranged weapon." field={itemFields.melee} src="https://tojikan.github.io/znz-roll20/assets/images/icons/bayonet.png"/>
-                        <IconRow tip="Block/Durability. Blocking with a ranged weapon causes this to decrease. Weapon breaks if this reaches 0. " field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/shield-impact.png"/>
-                        <IconRow tip="Ammo. You use 1 ammo for every attack. Must be reloaded if 0." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/heavy-bullets.png"/>
+                        <IconRow tip="Damage for meleeing with your ranged weapon." field={itemFields.melee} src="https://tojikan.github.io/znz-roll20/assets/images/icons/gun-stock.png"/>
+                        <IconRow tip="Ammo Type" field={itemFields.ammotype} ammoselect={true} src="https://tojikan.github.io/znz-roll20/assets/images/icons/machine-gun-magazine.png"/>
+                        <IconRow tip="Ammo. You use 1 ammo for every attack. Must be reloaded if 0." field={itemFields.ammo} src="https://tojikan.github.io/znz-roll20/assets/images/icons/heavy-bullets.png"/>
+                        <IconRow tip="Block Multiplier" field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/vibrating-shield.png"/>
+                        <IconRow tip="Durability. Use 1 durability for every reload and melee/block. Item breaks if 0." field={itemFields.durability} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
                     </FieldRow>
                 </RangedField>
 
@@ -139,7 +146,7 @@ export function Item( props ){
                 <ArmorField>
                     <FieldRow >
                         <IconRow tip="Block Multiplier. " field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/vibrating-shield.png"/>
-                        <IconRow tip="Durability: Item breaks if 0." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
+                        <IconRow tip="Durability: Use 1 durability for every block. Item breaks if 0." field={itemFields.durability} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
                     </FieldRow>
                 </ArmorField>
 
@@ -232,6 +239,14 @@ function IconRow( props ){
         input {
             width: 3rem!important;
         }
+
+        select {
+            padding: 0;
+            font-size: 1rem;
+            text-align: center;
+            width: auto;
+            margin-left: 0.5rem;
+        }
     `
 
     const IconImage = styled.img`
@@ -239,6 +254,14 @@ function IconRow( props ){
         height: 2.4rem;
         min-width: 2rem;
     `
+    if (props.ammoselect){
+        return (
+            <Row>
+                <ToolTip text={props.tip}><IconImage src={props.src}/></ToolTip>
+                <SelectInput field={props.field} options={objToArray(CharacterModel.ammo.list)}/>
+            </Row>
+        )
+    }
 
     return (
         <Row>
