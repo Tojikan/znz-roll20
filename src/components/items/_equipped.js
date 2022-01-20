@@ -10,7 +10,7 @@ import { SlotEntryRow } from './sharedCss';
 
 export function EquipmentSlots(){
 
-    let slotCount = CharacterModel.equipmentslots.count;
+    let slotCount = CharacterModel.equipmentslots.max;
     let cardComponents = [];
 
     //Slots and cards are 1 indexed

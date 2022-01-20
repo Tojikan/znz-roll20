@@ -3,7 +3,7 @@ import { CharacterModel } from '../../data/character';
 import { styled } from '@linaria/react';
 import { AbilityBox } from './abilities';
 import { FlawBox } from './flaws';
-import { suffixKey } from '../../lib/znzlib';
+import { affixKey } from '../../lib/znzlib';
 import { sizes, fonts, colors } from '../../styles/vars';
 
 export function CharTraits( props ) {
@@ -49,11 +49,25 @@ export function CharTraits( props ) {
     let abilities = [];
 
     for (let i = 0; i < abilityCount; i++){
-        let prefixedAbility = suffixKey(CharacterModel.abilities.selected, i);
-        let prefixedLevel = suffixKey(CharacterModel.abilities.level, i);
+        let prefixedAbility = affixKey(null, CharacterModel.abilities.selected, i);
+        let prefixedLevel = affixKey(null, CharacterModel.abilities.level, i);
 
         abilities.push(
-            <AbilityBox className="ability-box" level={prefixedLevel} field={prefixedAbility} options={CharacterModel.abilities.options} key={prefixedAbility.key}/>
+            <AbilityBox 
+                className="ability-box" 
+                level={prefixedLevel} 
+                field={prefixedAbility} 
+                options={CharacterModel.abilities.options.sort((a,b)=>{
+                    if ( a.key < b.key ){
+                        return -1;
+                      }
+                      if ( a.key > b.key ){
+                        return 1;
+                      }
+                      return 0;
+                })} 
+                key={prefixedAbility.key}
+            />
         )
 
     }
@@ -64,7 +78,7 @@ export function CharTraits( props ) {
             <div className="abilities">
                 <Row>{abilities}</Row>
             </div>
-            <FlawBox options={CharacterModel.flaws.options} field={CharacterModel.flaws.selected} count={CharacterModel.flaws.count}/>
+            <FlawBox options={CharacterModel.flaws.options.sort((a,b)=>a.key[0] < b.key[0])} field={CharacterModel.flaws.selected} count={CharacterModel.flaws.count}/>
         </TraitsRow>
     )
 }

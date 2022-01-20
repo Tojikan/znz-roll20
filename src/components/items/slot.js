@@ -26,7 +26,7 @@ export function Slot( props ){
         <CardBorder className={props.className}>
             <SlotWrapper>
                 {/** This Checkbox is used to determine if this slot has been equipped. SlotContent displays if this element is checked **/}
-                <HiddenInput type="checkbox" field={props.equipField} className="slot-content-control" checked={ props.index <= 1 ? 'checked' : ''}/>
+                <HiddenInput type="checkbox" field={props.equipField} className="slot-content-control" />
                 <SlotContent className="slot-content">
                     { props.children }
                 </SlotContent>

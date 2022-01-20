@@ -50,7 +50,7 @@ export function Inventory(){
                 </div>
             </SlotEntryRow>
 
-            <fieldset className={`repeating_${CharacterModel.inventoryslots.key}`}>
+            <fieldset className={`repeating_${CharacterModel.inventory.key}`}>
                 <CardBorder>
                     <Item inventory={true}/>
                 </CardBorder>

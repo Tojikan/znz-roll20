@@ -2,7 +2,7 @@ import React from 'react'
 import { CharacterModel } from '../../data/character';
 import { styled } from '@linaria/react';
 import { AttributesTable } from './attributes';
-import { objToArray, suffixKey } from '../../lib/znzlib';
+import { affixKey, objToArray } from '../../lib/znzlib';
 import { SkillTable, CombatSkill, VariableSkill } from './skills';
 import { colors } from '../../styles/vars';
 
@@ -37,9 +37,9 @@ export function CharStatistics( props ) {
     let varSkills = [];
 
     for (let i = 0; i < varSkillsCount; i++){
-        let prefixedVal = suffixKey(CharacterModel.skills.value, i);
-        let prefixedLabel = suffixKey(CharacterModel.skills.label, i);
-        let prefixedUses = suffixKey(CharacterModel.skills.uses, i);
+        let prefixedVal = affixKey(null, CharacterModel.skills.value, i);
+        let prefixedLabel = affixKey(null, CharacterModel.skills.label, i);
+        let prefixedUses = affixKey(null, CharacterModel.skills.uses, i);
         let placeholder = "Skill Name";
 
         varSkills.push(

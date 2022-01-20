@@ -26,9 +26,15 @@ export function Item( props ){
         ${ ItemTypeArray.reduce((prev, curr)=>{
             //If item type is checked, set field to display
             return prev + ` .item-type-${curr.key}:checked{
-                ~ .card-content {
+                ~ .hideable-fields {
                     .${curr.key}-type-field {
                         display: block;
+                    }
+                }
+
+                ~ .hideable-inline-fields {
+                    .${curr.key}-type-field {
+                        display: inline-block;
                     }
                 }
             } `
@@ -77,7 +83,8 @@ export function Item( props ){
 
     const ButtonRow = styled.div`
         button {
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem!important;
+            margin-right: 0.5rem!important;
         }
     `;
 
@@ -88,7 +95,7 @@ export function Item( props ){
                     <HiddenInput className={`item-type-${x.key}`} field={itemFields.type} value={x.key} key={i}></HiddenInput>
                 )
             })}
-            <ContentWrapper className="card-content">
+            <ContentWrapper className="hideable-fields">
                 <NameRow>
                     <TextInput field={itemFields.name} placeholder="Item Name"/>
                     <SelectInput 
@@ -109,23 +116,23 @@ export function Item( props ){
                         <IconRow tip="Melee Attack Damage" field={itemFields.melee} src="https://tojikan.github.io/znz-roll20/assets/images/icons/pointy-sword.png"/>
                         <IconRow tip="Damage for throwing your melee weapon." field={itemFields.ranged} src="https://tojikan.github.io/znz-roll20/assets/images/icons/throwing-ball.png"/>
                         <IconRow tip="Block Multiplier. " field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/vibrating-shield.png"/>
-                        <IconRow tip="Durability: Item breaks if 0." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
+                        <IconRow tip="Durability: Use 1 durability for every attack. Item breaks if 0." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
                     </FieldRow>
                 </MeleeField>
 
                 <RangedField>
                     <FieldRow >
                         <IconRow tip="Ranged Attack Damage" field={itemFields.ranged} src="https://tojikan.github.io/znz-roll20/assets/images/icons/striking-splinter.png"/>
-                        <IconRow tip="Damage for melee attacking with your ranged weapon." field={itemFields.melee} src="https://tojikan.github.io/znz-roll20/assets/images/icons/pointy-sword.png"/>
-                        <IconRow tip="Block Multiplier. " field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/vibrating-shield.png"/>
-                        <IconRow tip="Ammo: Must reload if 0." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/heavy-bullets.png"/>
+                        <IconRow tip="Damage for meleeing with your ranged weapon." field={itemFields.melee} src="https://tojikan.github.io/znz-roll20/assets/images/icons/bayonet.png"/>
+                        <IconRow tip="Block/Durability. Blocking with a ranged weapon causes this to decrease. Weapon breaks if this reaches 0. " field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/shield-impact.png"/>
+                        <IconRow tip="Ammo. You use 1 ammo for every attack. Must be reloaded if 0." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/heavy-bullets.png"/>
                     </FieldRow>
                 </RangedField>
 
                 <ThrownField>
                     <FieldRow >
                         <IconRow tip="Thrown Weapon Damage" field={itemFields.ranged} src="https://tojikan.github.io/znz-roll20/assets/images/icons/throwing-ball.png"/>
-                        <IconRow tip="Ammo: How many of this item you can throw." field={itemFields.uses} src="https://tojikan.github.io/znz-roll20/assets/images/icons/heavy-bullets.png"/>
+                        <IconRow tip="Quantity." field={itemFields.quantity} src="https://tojikan.github.io/znz-roll20/assets/images/icons/grenade.png"/>
                     </FieldRow>
                 </ThrownField>
 
@@ -141,32 +148,32 @@ export function Item( props ){
             </ContentWrapper>
 
             {(!isInventory && props.index)&&
-                <ButtonRow className="card-content">
+                <ButtonRow className="hideable-fields">
                     <MeleeField>
-                        <BasicRollButton value={`!!zroll action='melee' item=${props.index}`}>Attack</BasicRollButton>
-                        <BasicRollButton value={`!!zroll action='throw' item=${props.index}`}>Throw</BasicRollButton> 
-                        <BasicRollButton value={`!!zroll action='block' item=${props.index}`}>Block</BasicRollButton> 
+                        <BasicRollButton value={`!!zroll action='meleeattack' item=${props.index}`}>Attack</BasicRollButton>
+                        <BasicRollButton value={`!!zroll action='meleethrow' item=${props.index}`}>Throw</BasicRollButton> 
+                        <BasicRollButton value={`!!zroll action='meleeblock' item=${props.index}`}>Block</BasicRollButton> 
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>
                     </MeleeField>
                     <RangedField>
-                        <BasicRollButton value={`!!zroll action='ranged' item=${props.index}`}>Fire</BasicRollButton>
-                        <BasicRollButton value={`!!zroll action='melee' item=${props.index}`}>Melee</BasicRollButton>
-                        <BasicRollButton value={`!!zroll action='block' item=${props.index}`}>Block</BasicRollButton>
+                        <BasicRollButton value={`!!zroll action='rangedattack' item=${props.index}`}>Fire</BasicRollButton>
+                        <BasicRollButton value={`!!zroll action='rangedmelee' item=${props.index}`}>Melee</BasicRollButton>
+                        <BasicRollButton value={`!!zroll action='rangedblock' item=${props.index}`}>Block</BasicRollButton>
                         <BasicRollButton value={`!!reload item=${props.index}`}>Reload</BasicRollButton>
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>
                     </RangedField>
                     <ArmorField>
-                        <BasicRollButton value={`!!zroll action='block' item=${props.index}`}>Block</BasicRollButton>
+                        <BasicRollButton value={`!!zroll action='armorblock' item=${props.index}`}>Block</BasicRollButton>
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>
                     </ArmorField>
                     <ThrownField>
-                        <BasicRollButton value={`!!zroll action='throw' item=${props.index}`}>Throw</BasicRollButton> 
+                        <BasicRollButton value={`!!zroll action='throwattack' item=${props.index}`}>Throw</BasicRollButton> 
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>
@@ -176,19 +183,21 @@ export function Item( props ){
             }
 
             {(isInventory) && 
-                <div>
-                    <ActionButton action='equip'>
-                        Equip
-                    </ActionButton>
+                <ButtonRow  className="hideable-inline-fields">
+                    <EquippableField>
+                        <ActionButton action='equip'>
+                            Equip
+                        </ActionButton>
+                    </EquippableField>
 
-                    <BasicRollButton value={`Export Item: <br/> !!pickup ${exportItem(itemFields)}`}>
+                    <BasicRollButton value={`Export Item: <br/> \n \n !!pickup ${exportItem(itemFields)}`}>
                         Export
                     </BasicRollButton>
 
-                    <ActionButton action='delete'>
+                    <ActionButton action='delete' red={true}>
                         Delete
                     </ActionButton>
-                </div>
+                </ButtonRow>
             }
 
         </ItemCard>
@@ -242,6 +251,20 @@ function IconRow( props ){
                 <NumberInput field={props.field} max={true}/>
             }
         </Row>
+    )
+}
+
+
+function EquippableField( props ){
+    const Equippable = styled.span`
+        display: none;
+    `
+
+    return (
+        <Equippable className={`${ItemTypes.melee.key}-type-field ${ItemTypes.ranged.key}-type-field ${ItemTypes.armor.key}-type-field ${ItemTypes.thrown.key}-type-field
+        `}>
+            {props.children}
+        </Equippable> 
     )
 }
 

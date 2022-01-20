@@ -21,7 +21,7 @@ import { sizes, colors } from '../../styles/vars';
  */
 export const SlotTriggerCSS = (function(){
     let result = '';
-    for (let i = 1; i <= CharacterModel.equipmentslots.count; i++){
+    for (let i = 1; i <= CharacterModel.equipmentslots.max; i++){
         // If slot trigger i is checked...
         result += `.slot-trigger-${i}:checked{  `;
 

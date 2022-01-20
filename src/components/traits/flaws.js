@@ -3,7 +3,7 @@ import { styled } from '@linaria/react';
 import { TraitBox } from './_traits';
 import { SelectInput } from '../field/input';
 import { ToolTip, ToolTipIcon } from '../field/tooltip';
-import { suffixKey } from '../../lib/znzlib';
+import { affixKey } from '../../lib/znzlib';
 import { CheckboxSwitch } from '../field/switch';
 
 
@@ -47,7 +47,7 @@ export function FlawBox( props ) {
     let flawRows = [];
 
     for (let i = 0; i < props.count; i++){
-        let prefixed = suffixKey(props.field, i);
+        let prefixed = affixKey(null, props.field, i);
         flawRows.push(
             <FlawRow
                 field={prefixed}

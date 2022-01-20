@@ -60,6 +60,40 @@ export const CharacterModel = {
         label: {key: 'skill_name'},
         uses: {key: 'skill_uses'},
     },
+
+    resources: {
+        health: { key: 'health', default: 100, max: true, tip:"Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost."},
+        sanity: { key: 'sanity', default: 100, max: true, tip:"Your character goes insane when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost."},
+        energy: { key: 'energy', default: 8, max: true, tip:"This is the number of dice you roll whenever you make any action. Reduced by 1 for every 10 Fatigue."},
+        fatigue: { key: 'fatigue', tip:"Every 10 points of fatigue reduces Energy by 1. Every action will usually cause you to gain fatigue."},
+    },
+    ammo: {
+        list: {
+            light: {key: 'ammolight', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
+            medium: {key: 'ammomedium', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
+            heavy: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
+        }
+    },
+    bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0},
+    rollcost: {label: 'Fatigue Cost', key: 'rollcost', default: 3},
+    rolltype: {label: 'Roll Type', key: 'rolltype', options: [
+        'active', 
+        'free'
+    ]},
+    equipmentslots: {
+        key: "equipmentslots",
+        default: 2,
+        max: 6,
+        slotkey: "equipment"
+    },
+    inventoryslots: {
+        key:"inventoryslots",
+        default: 5,
+        max: 20,
+    },
+    inventory:{
+        key: "inventory",
+    },
     abilities: {
         count: 3,
         selected: {key: 'ability'},
@@ -85,6 +119,24 @@ export const CharacterModel = {
                 ],
             },
             {
+                key: "encyclopedia",
+                label: "Encyclopedia",
+                levels: [
+                    {
+                        label: "Memory",
+                        tip: "You can attempt simple skills that you do not have with a -4 roll penalty. You cannot gain bonus rolls for this attempt.",
+                    },
+                    {
+                        label: "Knowledge",
+                        tip: "Spend 5 sanity. Get a helpful tip from the ZM.",
+                    },
+                    {
+                        label: "Mastery",
+                        tip: "Gain double XP."
+                    }
+                ],
+            },
+            {
                 key: "cheerleader",
                 label: "Cheerleader",
                 levels: [
@@ -93,12 +145,12 @@ export const CharacterModel = {
                         tip: "Spend 1 action to give 2 bonus rolls to adjacent/nearby allies. Increase Fatigue by 10."
                     },
                     {
-                        label: "You can do it!",
-                        tip: "Target 1 ally. They gain bonus rolls equal to your Charisma instead. Increase Fatigue by 10.",
+                        label: "If you can't do it!",
+                        tip: "Spend 1 action to target 1 ally. They gain bonus rolls equal to your Charisma. Increase Fatigue by 5.",
                     },
                     {
-                        label: "Cheering you on!",
-                        tip: "Fatigue Cost for Cheerleader actions now only increases by 5.",
+                        label: "Nobody can!",
+                        tip: "Bonus rolls persist through the end of combat. Rolls do not stack.",
                     },
                 ]
             },
@@ -131,6 +183,136 @@ export const CharacterModel = {
                     {
                         label: "Hit and Run",
                         tip: "You can now combine moving and attacking as a single action with a -4 roll penalty."
+                    },
+                    {
+                        label: "Bullet Time",
+                        tip: "Gain 1 additional action. Gain 5 fatigue."
+                    }
+                ]
+            },
+            {
+                key: "therapist",
+                label: "Therapist",
+                levels: [
+                    {
+                        label: "Here to Listen",
+                        tip: "You can give your Sanity to others during a short rest. Restore 5 Sanity on Long Rests."
+                    },
+                    {
+                        label: "Emotional Intelligence",
+                        tip: "When you give Sanity, give twice as much as you lose."
+                    },
+                    {
+                        label: "Personal Conneciton",
+                        tip: "Anyone you give Sanity to gains 2 Bonus Rolls until the next short rest. This can only be active on one person at a time."
+                    }
+                ]
+            },
+            {
+                key: "brawler",
+                label: "Brawler",
+                levels: [
+                    {
+                        label: "Counterstrike",
+                        tip: "Fully dodging a melee attack allows you to make a free attack back."
+                    },
+                    {
+                        label: "Doublestrike",
+                        tip: "Gain +2 bonus rolls to your attacks if you melee attack for all of your main actions."
+                    },
+                    {
+                        label: "Dodgestrike",
+                        tip: "Gain 1 free dodge success for every melee attack success after 5 successes."
+                    }
+                ]
+            },
+            {
+                key: "lucky",
+                label: "Lucky",
+                levels: [
+                    {
+                        label: "Re-roll",
+                        tip: "Three times per game session, you can re-roll a roll. You must accept the results of the second roll and you do not regain any resources back."
+                    },
+                    {
+                        label: "Treasure Finder",
+                        tip: "When you scavenge, roll a luck check. If the result is high enough, you can scavenge again."
+                    },
+                    {
+                        label: "Dodging Death",
+                        tip: "Whenever your health is reduced below 0 next, be reduced to 1 hp instead. If feasible, you will be placed away from any immediate danger. This can only occur once. You can use this effect on other players."
+                    }
+                ]
+            },
+            {
+                key: "combatsense",
+                label: "Combat Sense",
+                levels: [
+                    {
+                        label: "Combat Sense",
+                        tip: "You can use an action at the start of each combat round to sense the lowest health target."
+                    },
+                    {
+                        label: "Attack Interpolation",
+                        tip: "Your Combat Sense action can also sense enemy intents, such as their targets for ranged attacks."
+                    },
+                    {
+                        label: "Tactician",
+                        tip: "At the start of combat, you can re-assign initiative rolls between players."
+                    }
+                ]
+            },
+            {
+                key: "martialartist",
+                label: "Martial Artist",
+                levels: [
+                    {
+                        label: "Disabling Strike",
+                        tip: "Your unarmed attack can lower the results of any rolls your target makes this turn, based on number of successes. Does not stack."
+                    },
+                    {
+                        label: "Weakening Strike",
+                        tip: "Your unarmed attack on a target allows other targets to gain bonus rolls when attacking that same target this turn, based on number of successes. Does not stack."
+                    },
+                    {
+                        label: "Lotus Strike",
+                        tip: "Your unarmed attack on a target can stun the target, preventing any further actions this turn, based on number of successes."
+                    }
+                ]
+            },
+            {
+                key: "leader",
+                label: "Leader",
+                levels: [
+                    {
+                        label: "Lead from the front",
+                        tip: "Adjacent allies take reduced damage equal to your Charisma attribute but cannot reduce an attack's damage below 3."
+                    },
+                    {
+                        label: "Inspire",
+                        tip: "Once per combat, you can spend 5 sanity and 1 action to make all nearby/adjacent players have free rolls for a turn."
+                    },
+                    {
+                        label: "Stick to the Plan",
+                        tip: "At the start of combat, you can declare a plan of action. Players who sick to this plan of action gain +2 bonus rolls."
+                    },
+                ]
+            },
+            {
+                key: "zmutationN",
+                label: "N Mutation",
+                levels: [
+                    {
+                        label: "N Mutation",
+                        tip: "You cannot gain or level this ability through normal means. You are no longer quite human. There is no longer any limit on your Strength, Agility, and Perception attributes and they cost half XP to increase. Skills cost double XP to increase. Unarmed attacks deal damage equal to your Strength attribute."
+                    },
+                    {
+                        label: "???",
+                        tip: "????"
+                    },
+                    {
+                        label: "???",
+                        tip: "????"
                     }
                 ]
             },
@@ -172,36 +354,6 @@ export const CharacterModel = {
             },
         ]
     },
-    resources: {
-        health: { key: 'health', default: 100, max: true, tip:"Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost."},
-        sanity: { key: 'sanity', default: 100, max: true, tip:"Your character goes insane when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost."},
-        energy: { key: 'energy', default: 8, max: true, tip:"This is the number of dice you roll whenever you make any action. Reduced by 1 for every 10 Fatigue."},
-        fatigue: { key: 'fatigue', tip:"Every 10 points of fatigue reduces Energy by 1. Every action will usually cause you to gain fatigue."},
-    },
-    ammo: {
-        list: {
-            light: {key: 'ammolight', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
-            medium: {key: 'ammomedium', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
-            heavy: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
-        }
-    },
-    bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0},
-    rollcost: {label: 'Fatigue Cost', key: 'rollcost', default: 3},
-    rolltype: {label: 'Roll Type', key: 'rolltype', options: [
-        'active', 
-        'free'
-    ]},
-    equipmentslots: {
-        key: "equipmentslots",
-        default: 2,
-        count: 6,
-        slotkey: "equipment"
-    },
-    inventoryslots: {
-        key:"inventory",
-        default: 5,
-        max: 20,
-    }
 };
 
 

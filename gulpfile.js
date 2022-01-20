@@ -54,5 +54,6 @@ exports.default = gulp.series(['sheet', 'scripts']);
 
 exports.watch = function(){
     watch('./dist/sheet.html', gulp.series(['sheet']));
-    watch('./src/scripts/*.js', gulp.series(['scripts']));
+    watch('./src/workers/*.js', gulp.series(['scripts']));
+    watch('./src/workers.js', gulp.series(['scripts']));
 }

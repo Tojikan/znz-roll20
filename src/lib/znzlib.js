@@ -1,15 +1,25 @@
 /////// Library of Functions for Generic Use
 
+
 /**
- * @deprecated use affixKey
+ * Affix prefix/suffix to a stirng.
+ * @param {*} prefix 
+ * @param {*} str 
+ * @param {*} suffix 
+ * @returns 
  */
-export function suffixKey(field, suffix){
-    let fld = {...field};
-    fld.key = fld.key + '_' + suffix;
-    return fld;
+export function affixStr(prefix, str, suffix){
+    return (prefix ? prefix + '_' : '') + str + (suffix ? '_' + suffix : '');
 }
 
 
+/**
+ * Prepends/Appends a prefix/suffix to a field key.
+ * @param {*} prefix 
+ * @param {*} field 
+ * @param {*} suffix 
+ * @returns 
+ */
 export function affixKey(prefix, field, suffix){
     let fld = {...field};
 
@@ -18,10 +28,21 @@ export function affixKey(prefix, field, suffix){
     return fld;
 }
 
+/**
+ * Converts an object to array based on its keys.
+ * @param {*} obj 
+ * @returns 
+ */
 export function objToArray(obj) {
     return Object.keys(obj).map((x)=> obj[x]);
 }
 
+/**
+ * Calls a function on each key-value of an object
+ * @param {*} obj 
+ * @param {*} callback 
+ * @returns 
+ */
 export function objMap(obj, callback){
     let o = {...obj};
     
@@ -31,16 +52,48 @@ export function objMap(obj, callback){
     return o;
 }
 
-
+/**
+ * Capitalize first char of string.
+ * @param {*} str 
+ * @returns 
+ */
 export function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 
+/**
+ * Retrives a label for a field, or capitalizes its key if it has none.
+ * @param {*} field 
+ * @returns 
+ */
 export function getLabel(field){
     return ( field.label ? field.label : capitalize(field.key) ) ?? 'NoLabel';
 }
 
+
+/**
+ * Sum up an array of strings
+ * 
+ * @param {array} values values to sum
+ * @returns the sum of all values
+ */
+ export function sumValues (values){
+    return values.reduce((prev, curr) =>{
+        return prev + (Number.parseInt(curr, 10) || 0);
+    }, 0)
+}
+
+/**
+ * Splits a string by | symbol, returning an an array of the split
+ * @param {string} str passed in string
+ * @returns array
+ */
+export function splitByPipe(str){
+    return str.toString()
+        .split('|')
+        .filter(x => x); //make sure its valid
+}
 
 /**
  * Tokenizes chat inputs for API commands
@@ -99,26 +152,39 @@ export function getLabel(field){
     return result;
 }
 
-
 /**
- * Sum up an array of strings
- * 
- * @param {array} values values to sum
- * @returns the sum of all values
+ * Given a number, spread it and list all numbers preceeding it. 5 -> 4,3,2,1
+ * @param {*} num 
+ * @param {*} delim char between numbers
+ * @param {*} asc 
+ * @returns 
  */
-export function sumValues (values){
-    return values.reduce((prev, curr) =>{
-        return prev + (Number.parseInt(curr, 10) || 0);
-    }, 0)
-}
+export const sequenceNumber = (num, delim='', asc=false) => {
+    var result = '';
 
-/**
- * Splits a string by | symbol, returning an an array of the split
- * @param {string} str passed in string
- * @returns array
- */
-export function splitByPipe(str){
-    return str.toString()
-        .split('|')
-        .filter(x => x); //make sure its valid
+    if (!Number.isInteger(num)){
+        return '';
+    }
+
+    //descending order
+    if (flip){
+        for (let i = num; i >= 0; i--){
+            result += i.toString();
+    
+            if (i > 0 && delim.length){
+                result += delim;
+            }
+        }
+    } else {
+        //ascneding order
+        for (let i = 0; i <= num; i++){
+            result += i.toString();
+    
+            if (i < num && delim.length){
+                result += delim;
+            }
+        }
+    }
+
+    return result;
 }

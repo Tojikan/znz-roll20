@@ -50,6 +50,11 @@ export function ActionButton(props) {
         margin-bottom: 1rem;
         border: solid 1px ${colors.darkgray};
         border-radius: 0;
+        background-color: ${props => props.red ? colors.lightred : 'initial'};
+        color: ${props => props.red ? colors.white : 'initial'};
+        padding: 2px 3px;
+        display: inline-block;
+        vertical-align: middle;
 
         &:before {
             content: none!important;
@@ -58,7 +63,7 @@ export function ActionButton(props) {
     `
 
     return (
-        <ActionButtonStyle type="roll" name={`act_${props.action}`} >
+        <ActionButtonStyle type="action" name={`act_${props.action}`} red={props.red} >
             {props.children}
         </ActionButtonStyle>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@linaria/react';
 import { LabelledNumberInput, LabelledSelectInput } from '../field/input';
-import { colors } from '../../styles/vars';
+import { colors, sizes } from '../../styles/vars';
 import { CheckboxSwitch } from '../field/switch';
 import { ToolTip } from '../field/tooltip';
 import { TraitBox } from './_traits';
@@ -12,6 +12,7 @@ export function AbilityBox( props ) {
     const AbilityBox = styled(TraitBox)`
         .level-line {
             margin-bottom: 1rem;
+            font-size: ${sizes.small};
 
             .level-label {
                 font-weight: 700;
@@ -27,11 +28,13 @@ export function AbilityBox( props ) {
 
         select {
             margin-right: 2rem;
+            margin-bottom: 1rem;
         }
 
         input {
             max-width: 2rem!important;
             text-align: center;
+            margin-bottom: 1rem;
         }
     `
 
