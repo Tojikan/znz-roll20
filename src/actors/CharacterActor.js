@@ -1,6 +1,8 @@
 import { Actor } from "./Actor";
 import { CharacterModel } from "../data/character";
-import { generatePoolRollText } from "../lib/roll20lib";
+import { generatePoolRollText, generateRowID } from "../lib/roll20lib";
+import { ItemModel } from "../data/item";
+import { objToArray } from "../lib/znzlib";
 
 
 
@@ -13,6 +15,8 @@ const fields = {
     bonusrolls: CharacterModel.bonusrolls,
     rollcost: CharacterModel.rollcost,
     rolltype: CharacterModel.rolltype,
+    inventoryslots: CharacterModel.inventoryslots,
+    inventory: CharacterModel.inventory, //do not try to get this, just need the key in the fields object for pickup
 };
 
 // Remember that get() in this.data and this.attrs calls the Roll20 API so try to cache into a variable if you can.
@@ -60,5 +64,44 @@ export class CharacterActor extends Actor {
         fatAttr.setWithWorker({current: newFat});
 
         return rollCost;
+    }
+
+    /**
+     * Adds item 
+     * @param {*} itemObj object where each key is the item field and value is the value to be set.
+     */
+    addItem(itemObj){
+        const rowId = generateRowID();
+        const validKeys = objToArray(ItemModel).map(x => x.key);
+        let success = 0;
+
+        for (let key in itemObj){
+            //Don't handle max fields directly - max needs to be set as a property of an attribute
+            if (!validKeys.includes(key) || key.endsWith('_max')){
+                continue;
+            }
+
+            let baseField = ItemModel[key];
+
+            const newAttr = {};
+            newAttr.name = `repeating_${fields.inventory.key}_${rowId}_${baseField.key}`;
+            newAttr.current = Number(itemObj[key], 10) || itemObj[key];
+            newAttr.characterid = this.characterId;
+
+            if (baseField.max){
+                if (itemObj.hasOwnProperty(key + '_max')){
+                    newAttr.max = (Number(itemObj[key + '_max'], 10) || itemObj[key + '_max'] ) || newAttr.current;
+                } else {
+                    newAttr.max = newAttr.current;
+                }
+            }
+
+            if (newAttr.current){
+                createObj("attribute", newAttr);
+                success++;
+            }
+        }
+
+        return success;
     }
 }

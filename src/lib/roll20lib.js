@@ -58,7 +58,6 @@ export function outputDefaultTemplate(arr, name, sender){
         }
     }
 
-    log(output);
     sendChat(sender, output);
 }
 
@@ -67,10 +66,16 @@ export function outputDefaultTemplate(arr, name, sender){
 export function setupScriptVars(msg){
     let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname');
     let args = tokenizeArgs(msg.content)
+    let character = getCharacter(msg, args);
+
+    if (!character){
+        throw('No Character was selected or specified!');
+    }
+
     return {
         args: args,
         sender: sender,
-        character: getCharacter(msg, args)
+        character: character,
     };
 }
 
@@ -133,3 +138,78 @@ export function getButtonRowId(eventInfo){
 export function getAttr(attrKey, characterId){
     return findObjs({type: 'attribute', characterid: characterId, name: attrKey})[0];
 }
+
+
+
+/**
+ * Extract array of repeater IDs from character attributes
+ * @param {*} repeaterId 
+ * @returns 
+ */
+ export const getRepeaterIds = function(repeaterId, characterId){
+    let result = [];
+
+    let attributes = findObjs({type:'attribute', characterid:characterId});
+
+    const regexGetRowId = function(str){
+        return str.match(/(?<=_)-(.*?)(?=_)/);
+    }
+
+    attributes.map((attr)=>{
+        if (attr.get('name').startsWith(`repeating_${repeaterId}_`)){
+            let row = regexGetRowId(attr.get('name'));
+
+            if (row){
+                if (!result.includes(row[0])){
+                    result.push(row[0]);
+                }
+            }
+        }
+    });
+
+    return result;
+}
+
+
+/**
+ * API Script version for this since this is a sheetworker only function on R20.
+ * @returns a new row ID for a repeater row.
+ */
+export const generateRowID = function () {
+    "use strict";
+
+    /**
+     * Generates a UUID for a repeater section, just how Roll20 does it in the character sheet.
+     * https://app.roll20.net/forum/post/3025111/api-and-repeating-sections-on-character-sheets/?pageforid=3037403#post-3037403
+    */
+    const generateUUID = function() { 
+        "use strict";
+
+        var a = 0, b = [];
+        return (function() {
+            var c = (new Date()).getTime() + 0, d = c === a;
+            a = c;
+            for (var e = new Array(8), f = 7; 0 <= f; f--) {
+                e[f] = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(c % 64);
+                c = Math.floor(c / 64);
+            }
+            c = e.join("");
+            if (d) {
+                for (f = 11; 0 <= f && 63 === b[f]; f--) {
+                    b[f] = 0;
+                }
+                b[f]++;
+            } else {
+                for (f = 0; 12 > f; f++) {
+                    b[f] = Math.floor(64 * Math.random());
+                }
+            }
+            for (f = 0; 12 > f; f++){
+                c += "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(b[f]);
+            }
+            return c;
+        })();
+    }
+
+    return generateUUID().replace(/_/g, "Z");
+};

@@ -15,26 +15,6 @@ export default function StatBox(props){
             justify-content: center;
         }
 
-        .stat-label button{
-            border: none;
-            font-size: 0;
-            vertical-align: middle;
-            width: 10px;
-            background: url(https://img.icons8.com/ios-glyphs/30/000000/refresh--v1.png) no-repeat center;
-            background-size: contain;
-            transition: 0.3s;
-            border-radius: 2rem;
-
-            &:hover{
-                background-color: ${colors.white};
-            }
-
-            &:active {
-                background-color: ${colors.bloodred};
-            }
-        }
-
-
         .stat-wrapper {
             display: flex;
             flex-direction: column;

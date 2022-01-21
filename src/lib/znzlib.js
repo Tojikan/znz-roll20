@@ -37,7 +37,9 @@ export function affixStr(prefix, str, suffix){
 export function affixKey(prefix, field, suffix){
     let fld = {...field};
 
-    fld.key = (prefix ? prefix + '_' : '') + fld.key + (suffix ? '_' + suffix : '');
+    const isSet = (x) => x == null || x == undefined;
+
+    fld.key = (!isSet(prefix) ? prefix + '_' : '') + fld.key + (!isSet(suffix) ? '_' + suffix : '');
 
     return fld;
 }

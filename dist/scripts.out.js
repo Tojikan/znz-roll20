@@ -14,7 +14,9 @@
     function affixKey(prefix, field, suffix){
         let fld = {...field};
 
-        fld.key = (prefix ? prefix + '_' : '') + fld.key + (suffix ? '_' + suffix : '');
+        const isSet = (x) => x == null || x == undefined;
+
+        fld.key = (!isSet(prefix) ? prefix + '_' : '') + fld.key + (!isSet(suffix) ? '_' + suffix : '');
 
         return fld;
     }
@@ -158,7 +160,6 @@
             }
         }
 
-        log(output);
         sendChat(sender, output);
     }
 
@@ -167,10 +168,16 @@
     function setupScriptVars(msg){
         let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname');
         let args = tokenizeArgs(msg.content);
+        let character = getCharacter(msg, args);
+
+        if (!character){
+            throw('No Character was selected or specified!');
+        }
+
         return {
             args: args,
             sender: sender,
-            character: getCharacter(msg, args)
+            character: character,
         };
     }
 
@@ -212,6 +219,79 @@
 
         return character;
     }
+
+
+
+    /**
+     * Extract array of repeater IDs from character attributes
+     * @param {*} repeaterId 
+     * @returns 
+     */
+     const getRepeaterIds = function(repeaterId, characterId){
+        let result = [];
+
+        let attributes = findObjs({type:'attribute', characterid:characterId});
+
+        const regexGetRowId = function(str){
+            return str.match(/(?<=_)-(.*?)(?=_)/);
+        };
+
+        attributes.map((attr)=>{
+            if (attr.get('name').startsWith(`repeating_${repeaterId}_`)){
+                let row = regexGetRowId(attr.get('name'));
+
+                if (row){
+                    if (!result.includes(row[0])){
+                        result.push(row[0]);
+                    }
+                }
+            }
+        });
+
+        return result;
+    };
+
+
+    /**
+     * API Script version for this since this is a sheetworker only function on R20.
+     * @returns a new row ID for a repeater row.
+     */
+    const generateRowID = function () {
+
+        /**
+         * Generates a UUID for a repeater section, just how Roll20 does it in the character sheet.
+         * https://app.roll20.net/forum/post/3025111/api-and-repeating-sections-on-character-sheets/?pageforid=3037403#post-3037403
+        */
+        const generateUUID = function() { 
+
+            var a = 0, b = [];
+            return (function() {
+                var c = (new Date()).getTime() + 0, d = c === a;
+                a = c;
+                for (var e = new Array(8), f = 7; 0 <= f; f--) {
+                    e[f] = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(c % 64);
+                    c = Math.floor(c / 64);
+                }
+                c = e.join("");
+                if (d) {
+                    for (f = 11; 0 <= f && 63 === b[f]; f--) {
+                        b[f] = 0;
+                    }
+                    b[f]++;
+                } else {
+                    for (f = 0; 12 > f; f++) {
+                        b[f] = Math.floor(64 * Math.random());
+                    }
+                }
+                for (f = 0; 12 > f; f++){
+                    c += "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz".charAt(b[f]);
+                }
+                return c;
+            })();
+        };
+
+        return generateUUID().replace(/_/g, "Z");
+    };
 
     /**
      * Base class for an Actor. We just need a character ID.
@@ -667,6 +747,20 @@
         },
     };
 
+    //"Item" is a reserved key because it's used in pickup, so don't use it as a key here.
+    const ItemModel = {
+        name:{key:"name"},
+        type:{key:"type"},
+        description: {key:"description"},
+        quantity:{key:"quantity"},
+        melee:{key:"melee"},
+        ranged:{key:"ranged"},
+        block:{key:"block"},
+        durability:{key:"durability", max:true},
+        ammo:{key:"ammo", max:true},
+        ammotype:{key:"ammotype", select: true},
+    };
+
     // Permitted fields - you should just add fields that will be used in the API.
     const fields = {
         ...CharacterModel.attributes,
@@ -676,6 +770,8 @@
         bonusrolls: CharacterModel.bonusrolls,
         rollcost: CharacterModel.rollcost,
         rolltype: CharacterModel.rolltype,
+        inventoryslots: CharacterModel.inventoryslots,
+        inventory: CharacterModel.inventory, //do not try to get this, just need the key in the fields object for pickup
     };
 
     // Remember that get() in this.data and this.attrs calls the Roll20 API so try to cache into a variable if you can.
@@ -724,20 +820,46 @@
 
             return rollCost;
         }
-    }
 
-    const ItemModel = {
-        name:{key:"name"},
-        type:{key:"type"},
-        description: {key:"description"},
-        quantity:{key:"quantity"},
-        melee:{key:"melee"},
-        ranged:{key:"ranged"},
-        block:{key:"block"},
-        durability:{key:"durability", max:true},
-        ammo:{key:"ammo", max:true},
-        ammotype:{key:"ammotype", select: true},
-    };
+        /**
+         * Adds item 
+         * @param {*} itemObj object where each key is the item field and value is the value to be set.
+         */
+        addItem(itemObj){
+            const rowId = generateRowID();
+            const validKeys = objToArray(ItemModel).map(x => x.key);
+            let success = 0;
+
+            for (let key in itemObj){
+                //Don't handle max fields directly - max needs to be set as a property of an attribute
+                if (!validKeys.includes(key) || key.endsWith('_max')){
+                    continue;
+                }
+
+                let baseField = ItemModel[key];
+
+                const newAttr = {};
+                newAttr.name = `repeating_${fields.inventory.key}_${rowId}_${baseField.key}`;
+                newAttr.current = Number(itemObj[key], 10) || itemObj[key];
+                newAttr.characterid = this.characterId;
+
+                if (baseField.max){
+                    if (itemObj.hasOwnProperty(key + '_max')){
+                        newAttr.max = (Number(itemObj[key + '_max'], 10) || itemObj[key + '_max'] ) || newAttr.current;
+                    } else {
+                        newAttr.max = newAttr.current;
+                    }
+                }
+
+                if (newAttr.current){
+                    createObj("attribute", newAttr);
+                    success++;
+                }
+            }
+
+            return success;
+        }
+    }
 
     // Remember that get() in this.data and this.attrs calls the Roll20 API so try to cache into a variable if you can.
     class ItemActor extends Actor {
@@ -962,6 +1084,63 @@
         outputDefaultTemplate(results, title, sender);
     }
 
+    //TODO templates
+    const templates = {};
+
+    function HandlePickup(msg){
+        if (msg.type !== "api" || !msg.content.startsWith('!!pickup')){
+            return;
+        }
+
+        const {args, sender, character} = setupScriptVars(msg),
+            charActor = new CharacterActor(character.id);
+
+        let item = {};
+
+        if ("item" in args && args.item in templates){
+            item = templates[args.item];
+        }
+
+        //add any new props
+        for (let key in args){
+            //ITEM IS A RESERVED ARG AND SHOULD NOT BE USED AS A ITEMMODEL FIELD.
+            if (key !== 'item'){
+                item[key] = args[key];
+            }
+        }
+
+        const result = [],
+            itemName = item['name'] || "Item",
+            title = `${character.get('name')} tries to pick up a(n) ${itemName}!`;
+
+        
+        if (!Object.keys(item).length){
+            result.push({label: 'Error!', value: `Empty or Invalid Item!`});
+            outputDefaultTemplate(result, title, sender);
+            return;
+        }
+            
+        const slots = charActor.data.inventoryslots,
+            allIds = getRepeaterIds(charActor.fields.inventory.key, charActor.characterId);
+
+        if (allIds.length >= slots){
+            result.push({label: 'Inventory Full!', value: `${character.get('name')} has no more inventory slots!`});
+            outputDefaultTemplate(result, title, sender);
+            return;
+        }      
+        
+        let pickedUp = charActor.addItem(item); //returns how many valid fields were added.
+
+        if (pickedUp > 0){
+            result.push({label:'Success!', value: `${character.get('name')} picked up a(n) ${itemName}`});
+            result.push({label:'Valid Fields Added', value: pickedUp});
+        } else {
+            result.push({label:'Invalid Item!', value: `No fields were added. Did you use correct format?`});
+        }
+
+        outputDefaultTemplate(result, title, sender);
+    }
+
     function HandleReload(msg) {
         if (msg.type !== "api" || !msg.content.startsWith('!!reload')){
             return;
@@ -1012,7 +1191,8 @@
         const handlers = [
             {name:"Reload Script", fn:HandleReload},
             {name:"Attribute Roll Script", fn:HandleAttrRoll},
-            {name:"Attack Roll Script", fn:HandleAttack}
+            {name:"Attack Roll Script", fn:HandleAttack},
+            {name:"Pickup Script", fn:HandlePickup},
         ];
         const watchers = [
             {name:"AttrWatch", fn:attrAlert}

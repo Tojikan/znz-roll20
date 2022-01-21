@@ -126,7 +126,7 @@ export function TextInput(props){
         return (
             <SelectStyle name={`attr_${props.field.key}`} appearance={props.appearance} underline={props.underline} disabled={props.disabled}>
                 { props.default  &&
-                    <option value={props.default.key} >{props.default.label}</option>
+                    <option value={props.default.key}>{props.default.label}</option>
                 }
                 { props.options.map( (x,i) => {
                     return (

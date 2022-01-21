@@ -68,3 +68,31 @@ export function ActionButton(props) {
         </ActionButtonStyle>
     )
 }
+
+
+export function IconActionButton(props) {
+    const IconAction = styled.button`
+        border: none;
+        font-size: 0;
+        vertical-align: middle;
+        width: 10px;
+        background: url(https://img.icons8.com/ios-glyphs/30/000000/refresh--v1.png) no-repeat center;
+        background-size: contain;
+        transition: 0.3s;
+        border-radius: 2rem;
+
+        &:hover{
+            background-color: ${colors.bloodred};
+        }
+
+        &:active {
+            background-color: ${colors.bloodred};
+        }
+    `
+
+    return (
+        <IconAction type='action' name={`act_${props.action}`}>
+            {props.children}
+        </IconAction>
+    )
+}
