@@ -86,7 +86,7 @@ export function VariableSkill( props ){
                 <NumberInput field={props.skillBonus}/>
             </div>
             <div className="roll-wrapper">
-                <RollButton value={GenerateAttrRoll('', `@{${props.skillName.key}}`, `@{${props.skillBonus.key}}`, `@{${props.skillAttr.key}}`)}/>
+                <RollButton value={GenerateAttrRoll(`@{${props.skillAttr.key}}`, `@{${props.skillName.key}}`, `@{${props.skillBonus.key}}`)}/>
             </div>
         </SkillRow>
     )

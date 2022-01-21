@@ -21,7 +21,7 @@ export class Actor{
                 return this.setAttrVal(target[key].key, value);
             }.bind(this),
         }
-
+        
         /**
          * Proxy for retrieving the full character attribute.
          */
@@ -46,7 +46,7 @@ export class Actor{
      * @returns attribute object
      */
     getAttr(attrKey){
-        return findObjs({type: 'attribute', characterid: this.id, name: attrKey})[0];
+        return findObjs({type: 'attribute', characterid: this.characterId, name: attrKey})[0];
     }
     
     /**
@@ -56,7 +56,7 @@ export class Actor{
      * @returns 
      */
     getAttrVal(attrKey, getMax = false){
-        return getAttrByName(this.id, attrKey, (getMax ? 'max' : 'current'));
+        return getAttrByName(this.characterId, attrKey, (getMax ? 'max' : 'current'));
     }
 
 

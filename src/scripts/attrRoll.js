@@ -1,6 +1,6 @@
 import { generateParamString } from "../lib/znzlib";
 import { generateRollResultText, outputDefaultTemplate, setupScriptVars } from "../lib/roll20lib";
-import { CharacterActor } from "../data/character";
+import { CharacterActor } from "../actors/CharacterActor";
 
 /**
  * Generates command for attr roll
@@ -10,11 +10,10 @@ import { CharacterActor } from "../data/character";
  * @param {fieldKey} attrKey - if you can't get a value prior, you can pass in the attribute name here and the script will look it up instead if attribute is null.
  * @returns 
  */
-export function GenerateAttrRoll(attribute, title, rollBonus=0, attrKey=''){
+export function GenerateAttrRoll(attribute, title, rollBonus=0){
     let params = {
         characterid: '@{character_id}',
-        attribute: attribute ? `@{${attribute}}` : '',
-        attrKey: attrKey,
+        attribute: attribute,
         title: title,
         bonus: rollBonus,
     }
@@ -23,37 +22,23 @@ export function GenerateAttrRoll(attribute, title, rollBonus=0, attrKey=''){
 }
 
 
-
-
 export function HandleAttrRoll(msg){
     if (msg.type !== "api" || !msg.content.startsWith('!!aroll')){
         return;
     }
 
-    const {args, sender, character} = setupScriptVars(msg);
-    const charActor = new CharacterActor(character.id);
-    
-    let attrVal;
-    
-    if (!args.attribute && args.attrKey){
-        //if its a user supplied attribute, such as a variable skill.
-        attrVal = charActor.getAttrVal(args.attrKey);
-    } else if (args.attribute){
-        attrVal = args.attribute;
-    } else {
-        throw('No attribute set!');
-    }
-    
-    const title = `${character.get('name')} makes a ${args.title} roll!`;
-    const results = [];
+    const {args, sender, character} = setupScriptVars(msg),
+        charActor = new CharacterActor(character.id),
+        title = `${character.get('name')} makes a ${args.title} roll!`,
+        results = [];
 
-    const rollCommand = charActor.rollAgainst(attrVal, args.bonus);
+    const rollCommand = charActor.roll(charActor.data[args.attribute], args.bonus);
     results.push(generateRollResultText(rollCommand));
 
     let fatigueAdded = charActor.addFatigue();
     if (fatigueAdded){
-        results.push({label:'Gained Fatigue', value:fatigueAdded});
-    };    
+        results.push({label:'Gained Fatigue', value: fatigueAdded});
+    };
 
     outputDefaultTemplate(results, title, sender);
 }

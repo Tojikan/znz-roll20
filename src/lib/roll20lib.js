@@ -37,8 +37,7 @@ export function generateRollResultText(rollCommand, multiply=null, multiplyLabel
  */
 export function generatePoolRollText(amount, target, dice=10){
     //assume any conversions on negative rolls get handled prior to this method
-    let totalAmount = amount;
-    return `{${totalAmount}d${dice}}<${target}`
+    return `{${amount}d${dice}}<${target}`
 }
 
 
@@ -59,6 +58,7 @@ export function outputDefaultTemplate(arr, name, sender){
         }
     }
 
+    log(output);
     sendChat(sender, output);
 }
 

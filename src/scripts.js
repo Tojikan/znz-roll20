@@ -1,3 +1,4 @@
+import { HandleAttack } from './scripts/attack';
 import { attrAlert } from './scripts/attrAlert';
 import { HandleAttrRoll } from './scripts/attrRoll';
 import { HandleReload } from './scripts/reload';
@@ -6,7 +7,8 @@ import { HandleReload } from './scripts/reload';
 var Main = Main || (function(){
     const handlers = [
         {name:"Reload Script", fn:HandleReload},
-        {name:"Attr Roll Script", fn:HandleAttrRoll}
+        {name:"Attribute Roll Script", fn:HandleAttrRoll},
+        {name:"Attack Roll Script", fn:HandleAttack}
     ];
     const watchers = [
         {name:"AttrWatch", fn:attrAlert}

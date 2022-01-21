@@ -84,9 +84,9 @@ export const CharacterModel = {
     },
     ammo: {
         list: {
-            lightammo: {key: 'ammolight', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
-            medammo: {key: 'ammomedium', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
-            heavyammo: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
+            lightammo: {key: 'lightammo', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
+            mediumammo: {key: 'mediumammo', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
+            heavyammo: {key: 'heavyammo', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
         }
     },
     bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0, tip:"Adds/subtracts rolls from your pool."},
@@ -309,7 +309,7 @@ export const CharacterModel = {
                     },
                     {
                         label: "Stick to the Plan",
-                        tip: "At the start of combat, you can declare a plan of action. Players who sick to this plan of action gain +2 bonus rolls."
+                        tip: "At the start of combat, you can declare a specific plan of action. Players who stick to this plan of action gain +2 bonus rolls."
                     },
                 ]
             },
@@ -388,84 +388,4 @@ export function getAttrSelectOptions(){
             label: x.abbr
         }
     })
-}
-
-
-/**
- * For use in API Scripts
- */
-export class CharacterActor{
-    constructor(id){
-        this.id = id;
-    }
-
-    /**
-     * Gets a full attribute object
-     * @param {*} attrKey 
-     * @returns attribute object
-     */
-    getAttr = function(attrKey){
-        return findObjs({type: 'attribute', characterid: this.id, name: attrKey})[0];
-    }
-
-    /**
-     * Wrapper around roll20's getAttrByName. 
-     * Gets the value of an attribute but uses the field's default value if not present.
-     * 
-     * @param {string} attr name of the attribute
-     * @param {boolean} getMax get Max value instead of current if set to true.
-     * @returns 
-     */
-    getAttrVal = function(attrKey, getMax = false){
-        return getAttrByName(this.id, attrKey, (getMax ? 'max' : 'current'));
-    }
-
-    // Note this one returns the full attribute object because we expect to make changes.
-    get fatigue() {
-        return this.getAttr(CharacterModel.resources.fatigue.key);
-    }
-
-    get bonusRolls() {
-        return parseInt(this.getAttrVal(CharacterModel.bonusrolls.key), 10) || 0;
-    }
-
-    get fatigueCost(){
-        return parseInt(this.getAttrVal(CharacterModel.rollcost.key), 10) || 0;
-    }
-
-    get rolltype(){
-        return this.getAttrVal(CharacterModel.rolltype.key);
-    }
-
-    get energy(){
-        return parseInt(this.getAttrVal(CharacterModel.resources.energy.key), 10) || 0;
-    }
-
-
-
-    addFatigue(){
-        if (this.rolltype == 'free'){
-            return false;
-        }
-
-        //Be mindful each getter actually calls the Roll20 API.
-        let fatigueAttr = this.fatigue;
-        let currFatigue = parseInt(fatigueAttr.get('current'), 10) || 0;
-        let newFatigue = Math.max(currFatigue + this.fatigueCost, 0);
-
-        fatigueAttr.setWithWorker({current: newFatigue});
-
-        return this.fatigueCost;
-    }
-
-    rollAgainst(target, bonus=0){
-        let fatigueAttr = this.fatigue;
-        let fatiguePenalty = Math.max(parseInt((fatigueAttr.get('current') / 10), 10), 0),
-            totalEnergy = parseInt(this.energy, 10),
-            addedBonus = parseInt(bonus, 10) || 0;
-
-        let totalPool = Math.max(totalEnergy - fatiguePenalty + addedBonus + this.bonusRolls, 1);
-
-        return generatePoolRollText(totalPool, target);
-    }
 }

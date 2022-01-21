@@ -8,6 +8,7 @@ import { ToolTip } from '../field/tooltip';
 import { ActionButton, BasicRollButton } from '../field/button';
 import { CharacterModel } from '../../data/character';
 import { GenerateReloadCommand } from '../../scripts/reload';
+import { GenerateAttackRoll } from '../../scripts/attack';
 
 const ItemTypeArray = objToArray(ItemTypes);
 
@@ -133,7 +134,7 @@ export function Item( props ){
                         <IconRow tip="Ammo Type" field={itemFields.ammotype} ammoselect={true} src="https://tojikan.github.io/znz-roll20/assets/images/icons/machine-gun-magazine.png"/>
                         <IconRow tip="Ammo. You use 1 ammo for every attack. Must be reloaded if 0." field={itemFields.ammo} src="https://tojikan.github.io/znz-roll20/assets/images/icons/heavy-bullets.png"/>
                         <IconRow tip="Block Multiplier" field={itemFields.block} src="https://tojikan.github.io/znz-roll20/assets/images/icons/vibrating-shield.png"/>
-                        <IconRow tip="Durability. Use 1 durability for every reload and melee/block. Item breaks if 0." field={itemFields.durability} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
+                        <IconRow tip="Durability. Use 1 durability for every melee/block. Item breaks if 0." field={itemFields.durability} src="https://tojikan.github.io/znz-roll20/assets/images/icons/tinker.png"/>
                     </FieldRow>
                 </RangedField>
 
@@ -158,30 +159,30 @@ export function Item( props ){
             {(!isInventory && props.index)&&
                 <ButtonRow className="hideable-fields">
                     <MeleeField>
-                        <BasicRollButton value={`!!zroll action='meleeattack' item=${props.index}`}>Attack</BasicRollButton>
-                        <BasicRollButton value={`!!zroll action='meleethrow' item=${props.index}`}>Throw</BasicRollButton> 
-                        <BasicRollButton value={`!!zroll action='meleeblock' item=${props.index}`}>Block</BasicRollButton> 
+                        <BasicRollButton value={ GenerateAttackRoll('meleeattack', props.index, 'Melee Attack', itemFields.name.key)}>Attack</BasicRollButton>
+                        <BasicRollButton value={ GenerateAttackRoll('blockaction', props.index, 'Block', itemFields.name.key)}>Block</BasicRollButton> 
+                        <BasicRollButton value={ GenerateAttackRoll('meleethrow', props.index, 'throw their melee weapon!', itemFields.name.key)}>Throw</BasicRollButton> 
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>
                     </MeleeField>
                     <RangedField>
-                        <BasicRollButton value={`!!zroll action='rangedattack' item=${props.index}`}>Fire</BasicRollButton>
-                        <BasicRollButton value={`!!zroll action='rangedmelee' item=${props.index}`}>Melee</BasicRollButton>
-                        <BasicRollButton value={`!!zroll action='rangedblock' item=${props.index}`}>Block</BasicRollButton>
+                        <BasicRollButton value={ GenerateAttackRoll('rangedattack', props.index, 'Ranged Attack', itemFields.name.key)}>Fire</BasicRollButton>
+                        <BasicRollButton value={ GenerateAttackRoll('meleeattack', props.index, 'Melee with their ranged weapon!', itemFields.name.key)}>Melee</BasicRollButton>
+                        <BasicRollButton value={ GenerateAttackRoll('blockaction', props.index, 'Block', itemFields.name.key)}>Block</BasicRollButton>
                         <BasicRollButton value={GenerateReloadCommand(props.index, itemFields)}>Reload</BasicRollButton>
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>
                     </RangedField>
                     <ArmorField>
-                        <BasicRollButton value={`!!zroll action='armorblock' item=${props.index}`}>Block</BasicRollButton>
+                        <BasicRollButton value={ GenerateAttackRoll('blockaction', props.index, 'Block', itemFields.name.key) }>Block</BasicRollButton>
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>
                     </ArmorField>
                     <ThrownField>
-                        <BasicRollButton value={`!!zroll action='throwattack' item=${props.index}`}>Throw</BasicRollButton> 
+                        <BasicRollButton value={ GenerateAttackRoll('throwaction', props.index, 'Block', itemFields.name.key)}>Throw</BasicRollButton> 
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>

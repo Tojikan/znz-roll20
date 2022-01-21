@@ -3,6 +3,22 @@
 
     /////// Library of Functions for Generic Use
 
+
+    /**
+     * Prepends/Appends a prefix/suffix to a field key.
+     * @param {*} prefix 
+     * @param {*} field 
+     * @param {*} suffix 
+     * @returns 
+     */
+    function affixKey(prefix, field, suffix){
+        let fld = {...field};
+
+        fld.key = (prefix ? prefix + '_' : '') + fld.key + (suffix ? '_' + suffix : '');
+
+        return fld;
+    }
+
     /**
      * Converts an object to array based on its keys.
      * @param {*} obj 
@@ -10,6 +26,21 @@
      */
     function objToArray(obj) {
         return Object.keys(obj).map((x)=> obj[x]);
+    }
+
+    /**
+     * Calls a function on each key-value of an object
+     * @param {*} obj 
+     * @param {*} callback 
+     * @returns 
+     */
+    function objMap(obj, callback){
+        let o = {...obj};
+        
+        for (let key of Object.keys(obj)){
+            o[key] = callback(obj[key]);
+        }
+        return o;
     }
 
     /**
@@ -104,10 +135,9 @@
      * @param {*} dice - diceface
      * @returns 
      */
-    function generatePoolRollCommand(amount, target, amountmod = 0, dice=10){
+    function generatePoolRollText(amount, target, dice=10){
         //assume any conversions on negative rolls get handled prior to this method
-        let totalAmount = amount + amountmod;
-        return `{${totalAmount}d${dice}}<${target}`
+        return `{${amount}d${dice}}<${target}`
     }
 
 
@@ -128,6 +158,7 @@
             }
         }
 
+        log(output);
         sendChat(sender, output);
     }
 
@@ -180,6 +211,90 @@
         }
 
         return character;
+    }
+
+    /**
+     * Base class for an Actor. We just need a character ID.
+     */
+    class Actor{
+        constructor(characterId, fields){
+            this.characterId = characterId;
+            this.fields = fields;
+
+
+            /**
+             * Proxy for getting/setting character attribute. The proxy will call the Roll20 API
+             * in order to get/set an attribute
+             */
+            const dataProxy = {
+                get: function(target, key){ 
+                    let val = this.getAttrVal(target[key].key);
+                    return ( Number(val, 10) || val);
+                }.bind(this),
+                set: function(target, key, value){
+                    return this.setAttrVal(target[key].key, value);
+                }.bind(this),
+            };
+            
+            /**
+             * Proxy for retrieving the full character attribute.
+             */
+            const attrProxy = {
+                get: function(target, key){
+                    return this.getAttr(target[key].key);
+                }.bind(this)
+            };
+
+
+            /**
+             * Remember these proxies make API calls...So best to cache the results as much as possible
+             */
+            this.data = new Proxy(this.fields, dataProxy);
+            this.attrs = new Proxy(this.fields, attrProxy);
+        }
+
+
+        /**
+         * Gets a full attribute object
+         * @param {*} attrKey 
+         * @returns attribute object
+         */
+        getAttr(attrKey){
+            return findObjs({type: 'attribute', characterid: this.characterId, name: attrKey})[0];
+        }
+        
+        /**
+         * Gets the value of an attribute but uses the field's default value if not present.
+         * @param {string} attr name of the attribute
+         * @param {boolean} getMax get Max value instead of current if set to true.
+         * @returns 
+         */
+        getAttrVal(attrKey, getMax = false){
+            return getAttrByName(this.characterId, attrKey, (getMax ? 'max' : 'current'));
+        }
+
+
+        /**
+         * Set Value of an attribute
+         * 
+         * @param {string} attr attribute name
+         * @param {*} value value to set to
+         */
+        setAttrVal(attr, value){
+            let attribute = this.getAttr(attr);
+
+            if (!attribute){
+                return null;
+            }
+
+            let prev = attribute.get('current');
+            attribute.setWithWorker({current: value});
+
+            return {
+                prev: prev,
+                value: value
+            }
+        }
     }
 
     const CharacterModel = {
@@ -265,9 +380,9 @@
         },
         ammo: {
             list: {
-                light: {key: 'ammolight', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
-                medium: {key: 'ammomedium', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
-                heavy: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
+                lightammo: {key: 'lightammo', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
+                mediumammo: {key: 'mediumammo', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
+                heavyammo: {key: 'heavyammo', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
             }
         },
         bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0, tip:"Adds/subtracts rolls from your pool."},
@@ -490,7 +605,7 @@
                         },
                         {
                             label: "Stick to the Plan",
-                            tip: "At the start of combat, you can declare a plan of action. Players who sick to this plan of action gain +2 bonus rolls."
+                            tip: "At the start of combat, you can declare a specific plan of action. Players who stick to this plan of action gain +2 bonus rolls."
                         },
                     ]
                 },
@@ -552,84 +667,234 @@
         },
     };
 
+    // Permitted fields - you should just add fields that will be used in the API.
+    const fields = {
+        ...CharacterModel.attributes,
+        ...CharacterModel.combatskills,
+        ...CharacterModel.resources,
+        ...CharacterModel.ammo.list,
+        bonusrolls: CharacterModel.bonusrolls,
+        rollcost: CharacterModel.rollcost,
+        rolltype: CharacterModel.rolltype,
+    };
+
+    // Remember that get() in this.data and this.attrs calls the Roll20 API so try to cache into a variable if you can.
 
     /**
-     * For use in API Scripts
+     * Actor Object for interfacing with Character Attributes in an API Script.
+     * Pass it a characterId and you should be able to access allowed attributes through this.data or this.attrs
      */
-    class CharacterActor{
-        constructor(id){
-            this.id = id;
+    class CharacterActor extends Actor {
+        constructor(characterId){
+            super(characterId, fields);
         }
 
         /**
-         * Gets a full attribute object
-         * @param {*} attrKey 
-         * @returns attribute object
-         */
-        getAttr = function(attrKey){
-            return findObjs({type: 'attribute', characterid: this.id, name: attrKey})[0];
-        }
-
-        /**
-         * Wrapper around roll20's getAttrByName. 
-         * Gets the value of an attribute but uses the field's default value if not present.
-         * 
-         * @param {string} attr name of the attribute
-         * @param {boolean} getMax get Max value instead of current if set to true.
+         * Does a pool roll against a target.
+         * @param {*} target Target for roll
+         * @param {*} bonus Add bonus to target.
          * @returns 
          */
-        getAttrVal = function(attrKey, getMax = false){
-            return getAttrByName(this.id, attrKey, (getMax ? 'max' : 'current'));
+        roll(target, bonus){
+            let fatiguePenalty = parseInt(this.data.fatigue / 10, 10),
+                energy = parseInt(this.data.energy, 10),
+                bonusDice = parseInt(this.data.bonusrolls, 10);
+
+            let totalPool = Math.max(energy + bonusDice + parseInt(bonus, 10) - fatiguePenalty);
+            let rollTarget = target + parseInt(bonus, 10);
+
+            return generatePoolRollText(totalPool, rollTarget);
         }
 
-        // Note this one returns the full attribute object because we expect to make changes.
-        get fatigue() {
-            return this.getAttr(CharacterModel.resources.fatigue.key);
-        }
-
-        get bonusRolls() {
-            return parseInt(this.getAttrVal(CharacterModel.bonusrolls.key), 10) || 0;
-        }
-
-        get fatigueCost(){
-            return parseInt(this.getAttrVal(CharacterModel.rollcost.key), 10) || 0;
-        }
-
-        get rolltype(){
-            return this.getAttrVal(CharacterModel.rolltype.key);
-        }
-
-        get energy(){
-            return parseInt(this.getAttrVal(CharacterModel.resources.energy.key), 10) || 0;
-        }
-
-
+        /**
+         * Adds fatigue equal to rollcost.
+         * @returns false if free roll cost, else returns roll cost
+         */
         addFatigue(){
-            if (this.rolltype == 'free'){
+            if (this.data.rolltype == 'free') {
                 return false;
             }
 
-            //Be mindful each getter actually calls the Roll20 API.
-            let fatigueAttr = this.fatigue;
-            let currFatigue = parseInt(fatigueAttr.get('current'), 10) || 0;
-            let newFatigue = Math.max(currFatigue + this.fatigueCost, 0);
+            let fatAttr = this.attrs.fatigue;
+            let rollCost = this.data.rollcost;
+            let currFat = parseInt(fatAttr.get('current'), 10) || 0;
+            let newFat = Math.max(currFat + rollCost, 0);
 
-            fatigueAttr.setWithWorker({current: newFatigue});
+            fatAttr.setWithWorker({current: newFat});
 
-            return this.fatigueCost;
-        }
-
-        rollAgainst(target, bonus=0){
-            let fatigueAttr = this.fatigue;
-            let fatiguePenalty = Math.max(parseInt((fatigueAttr.get('current') / 10), 10), 0),
-                totalEnergy = parseInt(this.energy, 10),
-                addedBonus = parseInt(bonus, 10) || 0;
-
-            let totalPool = Math.max(totalEnergy - fatiguePenalty + addedBonus, 1);
-
-            return generatePoolRollCommand(totalPool, target, this.bonusRolls);
+            return rollCost;
         }
     }
+
+    const ItemModel = {
+        name:{key:"name"},
+        type:{key:"type"},
+        description: {key:"description"},
+        quantity:{key:"quantity"},
+        melee:{key:"melee"},
+        ranged:{key:"ranged"},
+        block:{key:"block"},
+        durability:{key:"durability", max:true},
+        ammo:{key:"ammo", max:true},
+        ammotype:{key:"ammotype", select: true},
+    };
+
+    // Remember that get() in this.data and this.attrs calls the Roll20 API so try to cache into a variable if you can.
+    class ItemActor extends Actor {
+        constructor(characterId, itemId){
+            let itemFields = ( itemId ) ? objMap(ItemModel,(x) => affixKey(itemId, x, null)) : ItemModel;
+
+            super(characterId, itemFields);
+            this.itemId = itemId;
+        }
+
+
+        spendAmmo(){ return this.spendResource(this.attrs.ammo)}
+        spendDurability(){ return this.spendResource(this.attrs.durability)}
+        spendQuantity(){ return this.spendResource(this.attrs.quantity)}
+        
+        /**
+         * Spend 1 of an attribute
+         * @param {*} attribute full attribute
+         * @returns 1 if success, 0 if success but causes attr to be 0, -1 if failed.
+         */
+        spendResource(attribute){
+            let val = attribute.get('current');
+            
+            //returns negative if nothing could be spent.
+            if ( val <= 0){
+                return -1;
+            }
+            
+            attribute.setWithWorker({current: val - 1});
+            
+            //Check if this spend causes attribute to be 0.
+            return (val - 1) <= 0 ? 0 : 1;
+        }
+    }
+
+    const HandleAttack = msg => (function(msg){
+        if (msg.type !== "api" || !msg.content.startsWith('!!attack')){
+            return;
+        }
+
+        const {args, sender, character} = setupScriptVars(msg),
+            itemActor = new ItemActor(character.id, args.itemId),
+            charActor = new CharacterActor(character.id),
+            title = `${args.charName} attempts to ${args.actionName}!`,
+            itemName = `${args.charName}'s ${args.itemName}`,
+            result = [{label: 'Equipment', value: args.itemName}];
+
+
+        //#region Actions
+            const CheckDurability = function(){
+                if (itemActor.data.durability <= 0){
+                    result.push({label: "Attack failed!", value: `${itemName} is broken!`});
+                    return false;
+                }
+                
+                return true;
+            };
+
+            const GenerateRollResult = function( attribute, skill, multiplier, multiplyLabel){
+                const rollCommand = charActor.roll(attribute, skill);
+                return generateRollResultText(rollCommand, multiplier, multiplyLabel);
+            };
+
+            const RangedAttack = function(){
+                const ammoSpent = itemActor.spendAmmo();
+
+                if (ammoSpent == -1){
+                    result.push({label: "Attack failed!", value: `${itemName} is out of ammo!`});
+                    return;
+                }
+                
+                result.push(GenerateRollResult(charActor.data.agility, charActor.data.ranged, itemActor.data.ranged, 'Ranged Damage'));
+                
+                if (ammoSpent == 0){
+                    result.push({label: "Warning", value: `${itemName} has ran out of ammo!`});
+                }
+            };
+
+            const MeleeAttack = function(){
+                const durSpent = itemActor.spendDurability();
+                //we already do broke check up top, so we can assume the attack goes through
+
+                result.push(GenerateRollResult(charActor.data.strength, charActor.data.melee, itemActor.data.melee, 'Melee Damage'));
+
+                if (durSpent == 0) {
+                    result.push({label: "Warning", value: `${itemName} breaks and can no longer be used!`});
+                }
+            };
+
+            const BlockAction = function(){
+                const durSpent = itemActor.spendDurability();
+                //we already do broke check up top, so we can assume the attack goes through
+
+                result.push(GenerateRollResult(charActor.data.strength, charActor.data.block, itemActor.data.block, 'Damage Blocked'));
+
+                if (durSpent == 0) {
+                    result.push({label: "Warning", value: `${itemName} breaks and can no longer be used!`});
+                }
+            };
+
+            const ThrowAction = function(){
+                const quantSpent = itemActor.spendQuantity();
+
+                if (quantSpent == -1){
+                    result.push({label: "Attack failed!", value: `${args.charName} is out of ${args.itemName}!`});
+                    return;
+                }
+
+                result.push(GenerateRollResult(charActor.data.strength, charActor.data.throwing, itemActor.data.ranged, 'Throw Damage'));
+
+                if (quantSpent == 0){
+                    result.push({label: "Warning", value: `${args.charName} is now out of ${args.itemName}!`});
+                }
+            };
+            
+            const MeleeThrow = function(){
+                const durSpent = itemActor.spendDurability();
+
+                result.push(GenerateRollResult(charActor.data.strength, charActor.data.throwing, itemActor.data.ranged, 'Throw Damage'));
+                
+                if (durSpent == 0){
+                    result.push({label: "Warning", value: `${itemName} breaks upon being thrown!`});
+                }
+            };
+
+        //#endregion
+
+        let check;
+
+        switch(args.action) {
+            case 'meleeattack':
+                check = CheckDurability();
+                if (check) MeleeAttack();
+                break;
+            case 'rangedattack':
+                check = CheckDurability();
+                if (check) RangedAttack();
+                break;
+            case 'blockaction':
+                check = CheckDurability();
+                if (check) BlockAction();
+                break;
+            case 'throwaction':
+                if (check) ThrowAction();
+                break;
+            case 'meleethrow':
+                check = CheckDurability();
+                if (check) MeleeThrow();
+                break;
+            default: 
+                throw('Unknown action type!');
+        }
+        
+        charActor.addFatigue();
+        outputDefaultTemplate(result, title, sender);
+        
+    })(msg);
 
     const watchedAttr = [
         ...objToArray(CharacterModel.resources).map(x => x.key),
@@ -682,29 +947,17 @@
             return;
         }
 
-        const {args, sender, character} = setupScriptVars(msg);
-        const charActor = new CharacterActor(character.id);
-        
-        let attrVal;
-        
-        if (!args.attribute && args.attrKey){
-            //if its a user supplied attribute, such as a variable skill.
-            attrVal = charActor.getAttrVal(args.attrKey);
-        } else if (args.attribute){
-            attrVal = args.attribute;
-        } else {
-            throw('No attribute set!');
-        }
-        
-        const title = `${character.get('name')} makes a ${args.title} roll!`;
-        const results = [];
+        const {args, sender, character} = setupScriptVars(msg),
+            charActor = new CharacterActor(character.id),
+            title = `${character.get('name')} makes a ${args.title} roll!`,
+            results = [];
 
-        const rollCommand = charActor.rollAgainst(attrVal, args.bonus);
+        const rollCommand = charActor.roll(charActor.data[args.attribute], args.bonus);
         results.push(generateRollResultText(rollCommand));
 
         let fatigueAdded = charActor.addFatigue();
         if (fatigueAdded){
-            results.push({label:'Gained Fatigue', value:fatigueAdded});
+            results.push({label:'Gained Fatigue', value: fatigueAdded});
         }
         outputDefaultTemplate(results, title, sender);
     }
@@ -716,60 +969,50 @@
 
         const {args, sender, character} = setupScriptVars(msg);
         
-        let result = [];
-        let charActor = new CharacterActor(character.id);
-        
-        let resultTitle = `${character.get('name')} attempts to reload their ${args.weaponname}!`;
+        const charActor = new CharacterActor(character.id),
+            itemActor = new ItemActor( character.id, args.item),
+            resultTitle = `${character.get('name')} attempts to reload their ${args.weaponname}!`,
+            result = [];
 
-        let ammoField = charActor.getAttr(args.ammo),
-            durabilityField = charActor.getAttr(args.durability),
-            ammoStoreField = charActor.getAttr(args.type);
+        //to reduce requests to r20 api, we just get the attr and compute from there rather than use the proxy setter.
+        const ammoAttr = itemActor.attrs.ammo,
+            ammoStoreAttr = charActor.attrs[args.type];
 
-            console.log();
-
-        let ammo = parseInt(ammoField.get('current'), 10) || 0,
-            ammoMax = parseInt(ammoField.get('max'), 10) || 0,
-            ammoStore = parseInt(ammoStoreField.get('current'), 10) || 0,
-            durability = parseInt(durabilityField.get('current'), 10) || 0;
+        const ammo = parseInt(ammoAttr.get('current'), 10) || 0,
+            ammoMax = parseInt(ammoAttr.get('max'), 10) || 0,
+            ammoStore = parseInt(ammoStoreAttr.get('current'), 10) || 0;
             
-        // get diff between max and curr, but limit it to size of store.
-        // factors in scenarios if max < curr 
-        const calculateAmmo = function (curr, max, store){
-            return Math.min( Math.max(max - curr, 0), store);
-        };
-
-        let ammoToAdd = calculateAmmo(ammo, ammoMax, ammoStore);
-
-        if (ammoToAdd == 0){
-            //already full
-            return;
-        }
-
+            
         if (ammoStore <= 0){
-            result.push({label: 'Failed to Reload', value:`${character.get('name')} has 0 ammo!`});
-
+            result.push({label: 'Failed to Reload', value:`${character.get('name')} has 0 ammo to reload with!`});
             outputDefaultTemplate(result, resultTitle, sender);
             return;
         }
-
-
-        ammoField.setWithWorker({current: ammo + ammoToAdd});
-        ammoStoreField.setWithWorker({current: ammoStore - ammoToAdd});
-        durabilityField.setWithWorker({current: Math.max(durability - 1, 0)});
-
-        result.push({label: 'Success', value:`${character.get('name')} reloads!`});
-
-        if (durability - 1 <= 0){
-            result.push({label: 'Weapon Broken!', value: `${args.weaponname} is Broken!`});
+        
+        // get diff between max and curr, but limit it to size of store.
+        // factors in scenarios if max < curr 
+        let ammoToAdd = Math.min( Math.max(ammoMax - ammo, 0), ammoStore);
+            
+        if (ammoToAdd == 0){
+            //already full
+            result.push({label: 'Reload Failed!', value: `${args.weaponname} is already full on ammo!`});
+            outputDefaultTemplate(result, resultTitle, sender);
+            return;
+        } else {
+            ammoAttr.setWithWorker({current: ammo + ammoToAdd});
+            ammoStoreAttr.setWithWorker({current: ammoStore - ammoToAdd});
+            result.push({label: 'Success', value:`${character.get('name')} reloads!`});
         }
-
+        
+        
         outputDefaultTemplate(result, resultTitle, sender);
     }
 
     var Main = Main || (function(){
         const handlers = [
             {name:"Reload Script", fn:HandleReload},
-            {name:"Attr Roll Script", fn:HandleAttrRoll}
+            {name:"Attribute Roll Script", fn:HandleAttrRoll},
+            {name:"Attack Roll Script", fn:HandleAttack}
         ];
         const watchers = [
             {name:"AttrWatch", fn:attrAlert}
