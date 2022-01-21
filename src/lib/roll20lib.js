@@ -35,9 +35,9 @@ export function generateRollResultText(rollCommand, multiply=null, multiplyLabel
  * @param {*} dice - diceface
  * @returns 
  */
-export function generatePoolRollCommand(amount, target, amountmod = 0, dice=10){
+export function generatePoolRollText(amount, target, dice=10){
     //assume any conversions on negative rolls get handled prior to this method
-    let totalAmount = amount + amountmod;
+    let totalAmount = amount;
     return `{${totalAmount}d${dice}}<${target}`
 }
 

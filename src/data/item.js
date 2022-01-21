@@ -82,4 +82,39 @@ export class ItemActor{
             value: value
         }
     }
+
+
+    spendAmmo(){
+        let ammoAttr = this.getAttr(ItemModel.ammo.key),
+            ammoVal = parseInt(ammoAttr.get('current'), 10) || 0;
+
+        if (ammoVal <= 0){
+            return false;
+        }
+
+        ammoAttr.setWithWorker({current: ammoVal - 1});
+
+        //return 2 if we're empty otherwise just 1.
+        return (ammoVal - 1 <= 0) ? 2 : 1;
+    }
+
+
+    spendDurability(){
+        let durAttr = this.getAttr(ItemModel.durability.key),
+            durVal = parseInt(durAttr.get('current'), 10) || 0;
+
+        if (durVal <= 0){
+            return false;
+        }
+
+        durAttr.setWithWorker({current: durVal - 1});
+
+        //return 2 if we're empty after this attack otherwise just 1.
+        return (durVal - 1 <= 0) ? 2 : 1;
+    }
+
+
+    get durability(){
+        return parseInt(this.getAttrVal(ItemModel.durability.key), 10) || 0;
+    }
 }

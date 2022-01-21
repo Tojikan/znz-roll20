@@ -1,12 +1,13 @@
 import { generateParamString } from "../lib/znzlib";
-import { generatePoolRollCommand, generateRollResultText, outputDefaultTemplate, setupScriptVars } from "../lib/roll20lib";
+import { generateRollResultText, outputDefaultTemplate, setupScriptVars } from "../lib/roll20lib";
 import { CharacterActor } from "../data/character";
 
 /**
  * Generates command for attr roll
  * @param {string} attribute - value of an attribute
  * @param {string} title - Title for roll
- * @param {fieldKey} attrKey - if you don't or can't get a value, set attribute to null and set this to the attrkey.
+ * @param {number} rollBonus - Additional skill bonus. Not bonus rolls.
+ * @param {fieldKey} attrKey - if you can't get a value prior, you can pass in the attribute name here and the script will look it up instead if attribute is null.
  * @returns 
  */
 export function GenerateAttrRoll(attribute, title, rollBonus=0, attrKey=''){

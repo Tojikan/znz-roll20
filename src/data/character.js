@@ -1,4 +1,4 @@
-import { generatePoolRollCommand } from "../lib/roll20lib";
+import { generatePoolRollText } from "../lib/roll20lib";
 import { objToArray } from "../lib/znzlib";
 
 export const CharacterModel = {
@@ -84,9 +84,9 @@ export const CharacterModel = {
     },
     ammo: {
         list: {
-            light: {key: 'ammolight', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
-            medium: {key: 'ammomedium', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
-            heavy: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
+            lightammo: {key: 'ammolight', label: 'Primary', tip: 'Pistols, Submachine Guns, Rifles'},
+            medammo: {key: 'ammomedium', label: 'Heavy', tip: 'Snipers, Shotguns, Magnums'},
+            heavyammo: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
         }
     },
     bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0, tip:"Adds/subtracts rolls from your pool."},
@@ -442,6 +442,7 @@ export class CharacterActor{
     }
 
 
+
     addFatigue(){
         if (this.rolltype == 'free'){
             return false;
@@ -463,8 +464,8 @@ export class CharacterActor{
             totalEnergy = parseInt(this.energy, 10),
             addedBonus = parseInt(bonus, 10) || 0;
 
-        let totalPool = Math.max(totalEnergy - fatiguePenalty + addedBonus, 1);
+        let totalPool = Math.max(totalEnergy - fatiguePenalty + addedBonus + this.bonusRolls, 1);
 
-        return generatePoolRollCommand(totalPool, target, this.bonusRolls);
+        return generatePoolRollText(totalPool, target);
     }
 }

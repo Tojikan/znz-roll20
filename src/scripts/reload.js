@@ -37,8 +37,6 @@ export function HandleReload(msg) {
         durabilityField = charActor.getAttr(args.durability),
         ammoStoreField = charActor.getAttr(args.type);
 
-        console.log()
-
     let ammo = parseInt(ammoField.get('current'), 10) || 0,
         ammoMax = parseInt(ammoField.get('max'), 10) || 0,
         ammoStore = parseInt(ammoStoreField.get('current'), 10) || 0,
