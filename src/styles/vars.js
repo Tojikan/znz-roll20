@@ -29,8 +29,3 @@ export const fonts = {
 export const breakpoints = {
     md: '768px',
 }
-
-export  const StatusBarHeight = {
-    desktop: "10.5rem",
-    mobile:"7rem",
-};

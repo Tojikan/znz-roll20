@@ -1,3 +1,4 @@
+import { generatePoolRollCommand } from "../lib/roll20lib";
 import { objToArray } from "../lib/znzlib";
 
 export const CharacterModel = {
@@ -64,8 +65,22 @@ export const CharacterModel = {
     resources: {
         health: { key: 'health', default: 100, max: true, tip:"Your character dies when this reaches 0. Lose 1 dice from your Body Pool per 10 health lost."},
         sanity: { key: 'sanity', default: 100, max: true, tip:"Your character goes insane when this reaches 0. Lose 1 dice from your Mind Pool per 10 sanity lost."},
-        energy: { key: 'energy', default: 8, max: true, tip:"This is the number of dice you roll whenever you make any action. Reduced by 1 for every 10 Fatigue."},
+        energy: { key: 'energy', default: 8, max: true, tip:"This is the number of dice in your pool you roll whenever you make any action. Reduced by 1 for every 10 Fatigue."},
         fatigue: { key: 'fatigue', tip:"Every 10 points of fatigue reduces Energy by 1. Every action will usually cause you to gain fatigue."},
+        xp: { key: 'EXP', default: 0, max: true,
+
+            tip: [
+                "Skill (Max 3): 40XP * LVL",
+                "Attribute (Max 6): 50XP * LVL",
+                "Ability: 150XP * LVL",
+                "Energy: 10XP * LVL",
+                "Health/Sanity Max: 20XP",
+                '',
+                "'LVL' refers to the new value after increasing by 1.",
+            ]
+
+        },
+
     },
     ammo: {
         list: {
@@ -74,9 +89,9 @@ export const CharacterModel = {
             heavy: {key: 'ammoheavy', label: 'Special', tip:'Bows, Crossbows, Grenade Launchers'},
         }
     },
-    bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0},
-    rollcost: {label: 'Fatigue Cost', key: 'rollcost', default: 3},
-    rolltype: {label: 'Roll Type', key: 'rolltype', options: [
+    bonusrolls: {label: 'Bonus Rolls', key: 'bonusrolls', default: 0, tip:"Adds/subtracts rolls from your pool."},
+    rollcost: {label: 'Fatigue Cost', key: 'rollcost', default: 3, tip:"Set how much fatigue does each roll add."},
+    rolltype: {label: 'Roll Type', key: 'rolltype', tip: 'If active, rolls will add to your fatigue', options: [
         'active', 
         'free'
     ]},
@@ -369,10 +384,87 @@ export function lookupAttrAbbr(attr){
 export function getAttrSelectOptions(){
     return objToArray(CharacterModel.attributes).map((x)=>{
         return {
-            value: x.key,
+            key: x.key,
             label: x.abbr
         }
     })
 }
 
 
+/**
+ * For use in API Scripts
+ */
+export class CharacterActor{
+    constructor(id){
+        this.id = id;
+    }
+
+    /**
+     * Gets a full attribute object
+     * @param {*} attrKey 
+     * @returns attribute object
+     */
+    getAttr = function(attrKey){
+        return findObjs({type: 'attribute', characterid: this.id, name: attrKey})[0];
+    }
+
+    /**
+     * Wrapper around roll20's getAttrByName. 
+     * Gets the value of an attribute but uses the field's default value if not present.
+     * 
+     * @param {string} attr name of the attribute
+     * @param {boolean} getMax get Max value instead of current if set to true.
+     * @returns 
+     */
+    getAttrVal = function(attrKey, getMax = false){
+        return getAttrByName(this.id, attrKey, (getMax ? 'max' : 'current'));
+    }
+
+    // Note this one returns the full attribute object because we expect to make changes.
+    get fatigue() {
+        return this.getAttr(CharacterModel.resources.fatigue.key);
+    }
+
+    get bonusRolls() {
+        return parseInt(this.getAttrVal(CharacterModel.bonusrolls.key), 10) || 0;
+    }
+
+    get fatigueCost(){
+        return parseInt(this.getAttrVal(CharacterModel.rollcost.key), 10) || 0;
+    }
+
+    get rolltype(){
+        return this.getAttrVal(CharacterModel.rolltype.key);
+    }
+
+    get energy(){
+        return parseInt(this.getAttrVal(CharacterModel.resources.energy.key), 10) || 0;
+    }
+
+
+    addFatigue(){
+        if (this.rolltype == 'free'){
+            return false;
+        }
+
+        //Be mindful each getter actually calls the Roll20 API.
+        let fatigueAttr = this.fatigue;
+        let currFatigue = parseInt(fatigueAttr.get('current'), 10) || 0;
+        let newFatigue = Math.max(currFatigue + this.fatigueCost, 0);
+
+        fatigueAttr.setWithWorker({current: newFatigue});
+
+        return this.fatigueCost;
+    }
+
+    rollAgainst(target, bonus=0){
+        let fatigueAttr = this.fatigue;
+        let fatiguePenalty = Math.max(parseInt((fatigueAttr.get('current') / 10), 10), 0),
+            totalEnergy = parseInt(this.energy, 10),
+            addedBonus = parseInt(bonus, 10) || 0;
+
+        let totalPool = Math.max(totalEnergy - fatiguePenalty + addedBonus, 1);
+
+        return generatePoolRollCommand(totalPool, target, this.bonusRolls);
+    }
+}

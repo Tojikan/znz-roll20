@@ -289,7 +289,6 @@ export function slotEquip(itemCardFields){
         });
     
         for (let i = 1; i <= maxSlots; i++){
-            console.log(`hook for unequip ${i}`);
             on(`clicked:${unequipAction}_${i}`, function(){
                 console.log('unequip');
                 unequipItem(i);

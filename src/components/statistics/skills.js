@@ -6,6 +6,8 @@ import { ToolTip } from '../field/tooltip';
 import { getAttrSelectOptions, lookupAttrAbbr} from '../../data/character';
 import { getLabel } from '../../lib/znzlib';
 import { RollButton } from '../field/button';
+import { GenerateAttrRoll } from '../../scripts/attrRoll';
+import { capitalize } from '../../lib/znzlib';
 
 const SkillRow = styled.div`
     display: flex;
@@ -49,7 +51,6 @@ const SkillRow = styled.div`
 
 export function CombatSkill( props ){
 
-    //TODO - rollbuttons
     return (
         <SkillRow>
             <div className="name-wrapper">
@@ -62,7 +63,7 @@ export function CombatSkill( props ){
                 <NumberInput field={props.field} />
             </div>
             <div className="roll-wrapper">
-                <RollButton value='/roll'/>
+            <RollButton value={GenerateAttrRoll(props.field.uses, getLabel(props.field), `@{${props.field.key}}`)}/>
             </div>
         </SkillRow>
     )
@@ -73,19 +74,19 @@ export function VariableSkill( props ){
     return (
         <SkillRow>
             <div className="name-wrapper">
-                <TextInput field={props.label} placeholder={props.placeholder}/>
+                <TextInput field={props.skillName} placeholder={props.placeholder}/>
             </div>
             <div className="select-wrapper">
-                <SelectInput options={getAttrSelectOptions()} field={props.uses}/>
+                <SelectInput options={getAttrSelectOptions()} field={props.skillAttr}/>
             </div>
             <div>
                 +
             </div>
             <div className="input-wrapper">
-                <NumberInput field={props.value}/>
+                <NumberInput field={props.skillBonus}/>
             </div>
             <div className="roll-wrapper">
-                <RollButton value='/roll'/>
+                <RollButton value={GenerateAttrRoll('', `@{${props.skillName.key}}`, `@{${props.skillBonus.key}}`, `@{${props.skillAttr.key}}`)}/>
             </div>
         </SkillRow>
     )

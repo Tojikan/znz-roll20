@@ -5,6 +5,7 @@ import { styled } from '@linaria/react';
 import { CharTraits } from './components/traits/_traits';
 import { EquipmentSlots } from './components/items/_equipped';
 import { Inventory } from './components/items/_inventory';
+import StatBox from './components/statusbar/statbox';
 
 export default function CharacterSheet(){
 

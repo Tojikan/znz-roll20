@@ -43,7 +43,7 @@ export function CharStatistics( props ) {
         let placeholder = "Skill Name";
 
         varSkills.push(
-            <VariableSkill key={i} value={prefixedVal} label={prefixedLabel} uses={prefixedUses} placeholder={placeholder}></VariableSkill>
+            <VariableSkill key={i} skillBonus={prefixedVal} skillName={prefixedLabel} skillAttr={prefixedUses} placeholder={placeholder}></VariableSkill>
         )
     }
 

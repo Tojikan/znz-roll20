@@ -16,7 +16,7 @@ export default function StatusBar(){
         bottom: 0;
         left: 0;
         width: 100%;
-        height: ${ StatusBarHeight.desktop };
+        height: auto;
         background-color: ${ colors.darkgray};
         border: solid 3px ${ colors.black };
         box-sizing: border-box;
@@ -39,6 +39,7 @@ export default function StatusBar(){
     
     return (
         <StatusBar className="character-status-bar">
+            <OptionsBox numberOptions={numberOpts} toggleOptions={toggleOpts}/>
             <div className="stage">
                 { objToArray(CharacterModel.resources).map((x,i) => {
                     return (
@@ -46,7 +47,6 @@ export default function StatusBar(){
                     )
                 })}
                 <AmmoBox list={Object.keys(ammolist).map(x => ammolist[x])} />
-                <OptionsBox numberOptions={numberOpts} toggleOptions={toggleOpts}/>
             </div>
         </StatusBar>
     )

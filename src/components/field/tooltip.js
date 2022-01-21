@@ -33,6 +33,7 @@ export const ToolTipText = styled.div`
     padding: 1rem;
     margin-bottom: 5px;
     font-family: ${fonts.helvetica};
+    text-align: left;
 
     &.bottom {
         top: 100%;
@@ -65,12 +66,21 @@ export const ToolTipHover = styled.span`
  */
 export function ToolTip(props){
 
+    let tipText;
+
+    if (Array.isArray(props.text)){
+        tipText = props.text.map(x => <div>{x}</div>);
+    } else {
+        tipText = props.text;
+    }
+
+
     if (props.text){
         return (
             <ToolTipHover className="tooltipcontrol">
                 { props.children }
                 <ToolTipText className={ `tooltiptext ${props.bottom ? 'bottom' : ''} ${props.left ? 'left' : ''}` }>
-                    {props.text}
+                    {tipText}
                 </ToolTipText>
             </ToolTipHover>
         )

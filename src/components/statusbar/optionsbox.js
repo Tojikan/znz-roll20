@@ -3,34 +3,16 @@ import { styled } from '@linaria/react';
 import { colors, sizes } from '../../styles/vars';
 import { StatusBarBox, BoxLabel } from './box';
 import { NumberInput, ToggleInput } from '../field/input';
-import { LabelledFlex, LabelText, LabelFlexBox } from '../field/label';
+import { LabelledFlex, LabelText } from '../field/label';
 import { getLabel } from '../../lib/znzlib';
-import { StatusBarHeight } from '../../styles/vars';
+import { ToolTip } from '../field/tooltip';
 
 export default function OptionsBox(props){
     const OptionsBox = styled(StatusBarBox)`
-        flex: 100%;
-        height: 100%;
-        
-        @media screen and (max-width: 787px) {
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            height: 3rem;
-            right: 0;
-            background-color: ${colors.darkgray};
-            display: flex;
-            align-items: center;
-        }
-        
-        ${LabelFlexBox} {
-            margin-right: 1rem;
-
-            @media screen and (min-width: 787px) {
-                margin-right: 0;
-                margin-bottom: 1rem;
-            }
-        }
+        display: flex;
+        align-items: center;
+        background-color: ${colors.darkgray};
+        padding-top: 0.5rem;
 
         ${LabelText} {
             font-weight: 700;
@@ -38,22 +20,15 @@ export default function OptionsBox(props){
     `;
 
     const OptionBoxLabel = styled(BoxLabel)`
-        @media screen and (max-width: 787px) {
-            font-size: ${sizes.medium};
-            margin-right: 2rem;
-        }
+        margin-right: 3rem;
+        font-size: ${sizes.xLarge};
     `;
 
     const OptionsBoxContent = styled.div`
         display: flex;
         align-items: center;
-        
-        @media screen and (min-width: 787px){
-            flex-direction: column;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            height: ${ StatusBarHeight.mobile };
-        }
+        justify-content: space-between;
+        flex-basis: 75%;
     `
 
 
@@ -66,7 +41,11 @@ export default function OptionsBox(props){
                 {
                     props.toggleOptions.map((x, i)  => {
                         return (
-                            <LabelledFlex label={getLabel(x)} key={i}>
+                            <LabelledFlex label={
+                                <ToolTip text={x.tip}>
+                                    {getLabel(x)}
+                                </ToolTip>
+                            } key={i}>
                                 <ToggleInput field={x} />
                             </LabelledFlex>
                         )
@@ -75,7 +54,11 @@ export default function OptionsBox(props){
                 {
                     props.numberOptions.map((x, i) => {
                         return (
-                            <LabelledFlex label={getLabel(x)} key={i}>
+                            <LabelledFlex label={
+                                <ToolTip text={x.tip}>
+                                    {getLabel(x)}
+                                </ToolTip>
+                            } key={i}>
                                 <NumberInput field={x} underline={true} key={x.key}/>
                             </LabelledFlex>
                         )

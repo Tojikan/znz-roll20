@@ -3,7 +3,7 @@ import { ItemModel } from "./data/item";
 import { objToArray } from "./lib/znzlib";
 import { deleteRepeaterItem } from "./workers/deleteRepeaterItem";
 import { limitRepeater } from "./workers/limitRepeater";
-import { preventNegative } from "./workers/preventNegative";
+import { preventValue } from "./workers/preventValue";
 import { slotEquip } from "./workers/slotEquip";
 
 
@@ -13,9 +13,13 @@ slotEquip(ItemModel);
 
 
 
-let attrs = objToArray(CharacterModel.attributes);
-attrs.push(CharacterModel.rollcost);
-attrs = attrs.concat(objToArray(CharacterModel.ammo.list));
+let attrs = objToArray(CharacterModel.attributes).map(x => x.key);
+preventValue(attrs, 1);
 
-let nonneg = attrs.map(x => x.key);
-preventNegative(nonneg);
+let nonneg = [];
+nonneg.push(CharacterModel.rollcost);
+nonneg.push(CharacterModel.resources.fatigue);
+nonneg = nonneg.concat(objToArray(CharacterModel.ammo.list));
+nonneg = nonneg.map(x => x.key);
+
+preventValue(nonneg);

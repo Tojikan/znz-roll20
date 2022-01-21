@@ -5,6 +5,7 @@ import { capitalize } from '../../lib/znzlib';
 import { RollButton } from '../field/button';
 import { ToolTip } from '../field/tooltip';
 import { sizes, colors } from '../../styles/vars';
+import { GenerateAttrRoll } from '../../scripts/attrRoll';
 
 
 function Attr( props ) {
@@ -44,7 +45,7 @@ function Attr( props ) {
                     {props.field.label ? props.field.label : capitalize(props.field.key)}
                 </ToolTip>
             </div>
-            <RollButton value='!!zroll'/>
+            <RollButton value={GenerateAttrRoll(props.field.key, capitalize(props.field.key))}/>
             <NumberInput field={props.field}/>
         </AttrStyle>
     )

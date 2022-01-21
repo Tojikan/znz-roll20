@@ -40,7 +40,7 @@ gulp.task('scripts', function(){
     return gulp.src('src/scripts.js')
         .pipe(rollup({
             input:'src/scripts.js',
-            plugins:[babel.babel({ babelHelpers: 'bundled' }), commonjs(), json()],
+            plugins:[commonjs(), json()],
             output: {
                 file: 'scripts.out.js',
                 format: 'iife'
@@ -55,5 +55,7 @@ exports.default = gulp.series(['sheet', 'scripts']);
 exports.watch = function(){
     watch('./dist/sheet.html', gulp.series(['sheet']));
     watch('./src/workers/*.js', gulp.series(['scripts']));
-    watch('./src/workers.js', gulp.series(['scripts']));
+    watch('./src/*/*.js', gulp.series(['scripts']));
+    watch('./src/scripts/*.js', gulp.series(['scripts']));
+    watch('./src/scripts.js', gulp.series(['scripts']));
 }

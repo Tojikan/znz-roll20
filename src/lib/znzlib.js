@@ -1,5 +1,19 @@
 /////// Library of Functions for Generic Use
 
+/**
+ * Reduces object to a string.
+ * @param {*} params Object
+ * @returns string
+ */
+export function generateParamString(params){
+
+    return Object.keys(params).reduce((prev, curr) =>{
+        return prev += `${curr}="${params[curr]}" `;
+    }, '')
+}
+
+
+
 
 /**
  * Affix prefix/suffix to a stirng.
@@ -109,7 +123,7 @@ export function splitByPipe(str){
  * @param {string} input - text input
  * @returns an object where each key is the param name and the value is its tokenized param value.
  */
- export function splitArgs (input) {
+ export function tokenizeArgs(input) {
     var result = {},
         argsRegex = /(.*)=(.*)/, //can't be global but shouldn't need it as we are splitting args. 
         quoteRegex = /(?:[^\s"']+|"[^"]*"|'[^']*')+/g; //Split on spaces unless space is within single or double quotes - https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
@@ -146,7 +160,7 @@ export function splitByPipe(str){
             let flag = quoteSplit[i].substring(2);
             result[flag] = true;
         } else { //Default - array position
-            result[quoteSplit[i]] = i;
+            result[i] = quoteSplit[i];
         }
     }
     return result;

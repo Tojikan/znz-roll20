@@ -7,6 +7,7 @@ import { SelectInput, TextInput, TextAreaInput, HiddenInput, NumberInput, Divide
 import { ToolTip } from '../field/tooltip';
 import { ActionButton, BasicRollButton } from '../field/button';
 import { CharacterModel } from '../../data/character';
+import { GenerateReloadCommand } from '../../scripts/reload';
 
 const ItemTypeArray = objToArray(ItemTypes);
 
@@ -168,7 +169,7 @@ export function Item( props ){
                         <BasicRollButton value={`!!zroll action='rangedattack' item=${props.index}`}>Fire</BasicRollButton>
                         <BasicRollButton value={`!!zroll action='rangedmelee' item=${props.index}`}>Melee</BasicRollButton>
                         <BasicRollButton value={`!!zroll action='rangedblock' item=${props.index}`}>Block</BasicRollButton>
-                        <BasicRollButton value={`!!reload item=${props.index}`}>Reload</BasicRollButton>
+                        <BasicRollButton value={GenerateReloadCommand(props.index, itemFields)}>Reload</BasicRollButton>
                         <ActionButton action={`unequip_${props.index}`}>
                             Unequip
                         </ActionButton>

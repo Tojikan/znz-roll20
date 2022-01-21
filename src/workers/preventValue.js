@@ -1,9 +1,10 @@
 
 /**
- * Prevent certain fields from becoming negative.
+ * Prevent certain fields from falling beneath a value
  * @param {arr} fields 
+ * @param {number} value
  */
-export function preventNegative(fields){
+export function preventValue(fields, value=0){
 
     for (let fld of fields){
         on(`change:${fld}`, function(){
@@ -13,13 +14,13 @@ export function preventNegative(fields){
     
     
                 if (isNaN(val)){
-                    console.error('Error when parsing value when preventing negative');
+                    console.error('Error when parsing value when preventing value');
                     return;
                 }
     
-                if (val < 0) {
+                if (val < value) {
                     const attrSet = {
-                        [fld]: 0
+                        [fld]: value
                     }
     
                     setAttrs(attrSet);
