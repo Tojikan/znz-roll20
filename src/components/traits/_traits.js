@@ -78,7 +78,19 @@ export function CharTraits( props ) {
             <div className="abilities">
                 <Row>{abilities}</Row>
             </div>
-            <FlawBox options={CharacterModel.flaws.options.sort((a,b)=>a.key[0] < b.key[0])} field={CharacterModel.flaws.selected} count={CharacterModel.flaws.count}/>
+            <FlawBox 
+                options={CharacterModel.flaws.options.sort((a,b)=>{
+                        if ( a.key < b.key ){
+                            return -1;
+                        }
+                        if ( a.key > b.key ){
+                            return 1;
+                        }
+                        return 0;
+                    })} 
+                    field={CharacterModel.flaws.selected} 
+                    count={CharacterModel.flaws.count}
+                />
         </TraitsRow>
     )
 }
