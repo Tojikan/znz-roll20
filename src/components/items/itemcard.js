@@ -59,24 +59,25 @@ export function Item( props ){
         margin-right: 0.5rem;
     `
 
-    const NameRow = styled(FlexRow)`
+    const NameRow = styled.div`
         border-bottom: solid 2px ${colors.black};
         padding-bottom: 0.5rem;
-
-        select {
-            width: 25%;
-            font-size: ${sizes.xSmall};
-            margin-left: 0.5rem;
-            padding: 0;
-            text-align: center;
-        }
     `
 
-    const CategoryRow = styled.div`
+    const CategoryRow = styled(FlexRow)`
         input {
             font-size: ${sizes.xSmall};
             padding: 0;
             color: ${colors.darkorange};
+            text-align: right;
+            width: 60%;
+        }
+
+        select {
+            width: 30%;
+            font-size: ${sizes.xSmall};
+            padding: 0;
+            height: auto;
         }
     `;
 
@@ -108,10 +109,6 @@ export function Item( props ){
             })}
             <ContentWrapper className="hideable-fields">
                 <CategoryRow>
-                    <TextInput field={itemFields.category}/>
-                </CategoryRow>
-                <NameRow>
-                    <TextInput field={itemFields.name} placeholder="Item Name"/>
                     {isInventory && 
                         <SelectInput 
                             field={itemFields.type}
@@ -122,6 +119,10 @@ export function Item( props ){
                     {!isInventory && 
                         <ReadOnly field={itemFields.type}/>
                     }
+                    <TextInput field={itemFields.category}/>
+                </CategoryRow>
+                <NameRow>
+                    <TextInput field={itemFields.name} placeholder="Item Name"/>
                 </NameRow>
 
                 <MiscField>
