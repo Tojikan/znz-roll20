@@ -8,6 +8,7 @@ export const colors = {
     lightgray: '#d3d3d3',
     focusblue: '#5E9ED6',
     nearblack: 'rgba(0,0,0,0.8)',
+    darkorange: '#CC5500',
 }
 
 export const sizes = {

@@ -5,6 +5,8 @@ import { AbilityBox } from './abilities';
 import { FlawBox } from './flaws';
 import { affixKey } from '../../lib/znzlib';
 import { sizes, fonts, colors } from '../../styles/vars';
+import AbilityList from '../../data/abilities';
+import FlawList from '../../data/flaws';
 
 export function CharTraits( props ) {
 
@@ -57,7 +59,7 @@ export function CharTraits( props ) {
                 className="ability-box" 
                 level={prefixedLevel} 
                 field={prefixedAbility} 
-                options={CharacterModel.abilities.options.sort((a,b)=>{
+                options={AbilityList.sort((a,b)=>{
                     if ( a.key < b.key ){
                         return -1;
                       }
@@ -72,14 +74,13 @@ export function CharTraits( props ) {
 
     }
 
-
     return (
         <TraitsRow>
             <div className="abilities">
                 <Row>{abilities}</Row>
             </div>
             <FlawBox 
-                options={CharacterModel.flaws.options.sort((a,b)=>{
+                options={FlawList.sort((a,b)=>{
                         if ( a.key < b.key ){
                             return -1;
                         }

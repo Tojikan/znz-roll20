@@ -1,10 +1,18 @@
 import { CharacterActor } from "../actors/CharacterActor";
 import { getRepeaterIds, setupScriptVars } from "../lib/roll20lib";
 import { outputDefaultTemplate } from "../lib/roll20lib";
+import { meleeWeapons } from '../data/itemtemplates';
+import { ItemTemplate } from "../actors/ItemTemplate";
+import { ItemModel } from "../data/item";
 
 
-//TODO templates
 const templates = {};
+
+for (let key in meleeWeapons){
+    //setup new item template class which handles rarity and storing item stats.
+    templates[key] = new ItemTemplate(meleeWeapons[key]);
+}
+
 
 export function HandlePickup(msg){
     if (msg.type !== "api" || !msg.content.startsWith('!!pickup')){
@@ -16,14 +24,18 @@ export function HandlePickup(msg){
 
     let item = {};
 
+    //if pulling from template, we can pull a variation.
+    let rarity = ("rarity" in args) ? args.rarity : '';
+    
+    //pull fields from template if a template is specified
     if ("item" in args && args.item in templates){
-        item = templates[args.item];
+        item = templates[args.item].getItem(rarity);
     }
 
-    //add any new props
+    //add any new props to the item
     for (let key in args){
-        //ITEM IS A RESERVED ARG AND SHOULD NOT BE USED AS A ITEMMODEL FIELD.
-        if (key !== 'item'){
+        //only allow itemmodel fields when building the item
+        if (key in ItemModel){
             item[key] = args[key];
         }
     }

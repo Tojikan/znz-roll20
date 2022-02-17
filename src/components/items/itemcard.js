@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@linaria/react';
-import { colors, sizes } from '../../styles/vars';
+import { colors, fonts, sizes } from '../../styles/vars';
 import { ItemModel, ItemTypes } from '../../data/item';
 import { affixKey, objToArray, objMap } from '../../lib/znzlib';
 import { SelectInput, TextInput, TextAreaInput, HiddenInput, NumberInput, DividerLine, ReadOnly } from '../field/input';
@@ -72,6 +72,14 @@ export function Item( props ){
         }
     `
 
+    const CategoryRow = styled.div`
+        input {
+            font-size: ${sizes.xSmall};
+            padding: 0;
+            color: ${colors.darkorange};
+        }
+    `;
+
     const FieldRow = styled.div`
         display: flex;
         margin-top: 1rem;
@@ -99,6 +107,9 @@ export function Item( props ){
                 )
             })}
             <ContentWrapper className="hideable-fields">
+                <CategoryRow>
+                    <TextInput field={itemFields.category}/>
+                </CategoryRow>
                 <NameRow>
                     <TextInput field={itemFields.name} placeholder="Item Name"/>
                     {isInventory && 

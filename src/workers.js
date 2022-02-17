@@ -6,6 +6,7 @@ import { limitRepeater } from "./workers/limitRepeater";
 import { preventValue } from "./workers/preventValue";
 import { slotEquip } from "./workers/slotEquip";
 import { randomize } from "./workers/randomize";
+import FlawList from "./data/flaws";
 
 
 deleteRepeaterItem(CharacterModel.inventory.key, 'delete');
@@ -27,6 +28,6 @@ preventValue(nonneg);
 
 
 for (let i = 0; i < CharacterModel.flaws.count; i++){
-    randomize(`randomize_${CharacterModel.flaws.selected.key}_${i}`, `${CharacterModel.flaws.selected.key}_${i}`, CharacterModel.flaws.options.map(x => x.key));
+    randomize(`randomize_${CharacterModel.flaws.selected.key}_${i}`, `${CharacterModel.flaws.selected.key}_${i}`, FlawList.map(x => x.key));
 }
 

@@ -3,6 +3,7 @@
 export const ItemModel = {
     name:{key:"name"},
     type:{key:"type"},
+    category: {key: "category"},
     description: {key:"description"},
     quantity:{key:"quantity"},
     melee:{key:"melee"},

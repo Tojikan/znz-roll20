@@ -41,7 +41,7 @@ export class CharacterActor extends Actor {
             energy = parseInt(this.data.energy, 10),
             bonusDice = parseInt(this.data.bonusrolls, 10);
 
-        let totalPool = Math.max(energy + bonusDice + parseInt(bonus, 10) - fatiguePenalty);
+        let totalPool = Math.max(energy + bonusDice - fatiguePenalty);
         let rollTarget = target + parseInt(bonus, 10);
 
         return generatePoolRollText(totalPool, rollTarget);
