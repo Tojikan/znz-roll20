@@ -1,16 +1,19 @@
 import { CharacterActor } from "../actors/CharacterActor";
 import { getRepeaterIds, setupScriptVars } from "../lib/roll20lib";
 import { outputDefaultTemplate } from "../lib/roll20lib";
-import { meleeWeapons } from '../data/itemtemplates';
+import { meleeWeapons, miscItems } from '../data/itemtemplates';
 import { ItemTemplate } from "../actors/ItemTemplate";
 import { ItemModel } from "../data/item";
 
 
-const templates = {};
+const templates = {
+    ...meleeWeapons,
+    ...miscItems
+};
 
-for (let key in meleeWeapons){
+for (let key in templates){
     //setup new item template class which handles rarity and storing item stats.
-    templates[key] = new ItemTemplate(meleeWeapons[key]);
+    templates[key] = new ItemTemplate(templates[key]);
 }
 
 
@@ -24,12 +27,19 @@ export function HandlePickup(msg){
 
     let item = {};
 
+    log("Executing pickup with following args:");
+    log(args);
     //if pulling from template, we can pull a variation.
     let rarity = ("rarity" in args) ? args.rarity : '';
     
-    //pull fields from template if a template is specified
-    if ("item" in args && args.item in templates){
-        item = templates[args.item].getItem(rarity);
+    //pull fields from template if a template is specified with item key or as a pure arg
+    if ("item" in args || "1" in args){
+
+        let itemKey = ("item" in args) ? args['item'] : args['1'];
+
+        if (itemKey in templates){
+            item = templates[itemKey].getItem(rarity);
+        }
     }
 
     //add any new props to the item

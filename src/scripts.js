@@ -3,14 +3,19 @@ import { attrAlert } from './scripts/attrAlert';
 import { HandleAttrRoll } from './scripts/attrRoll';
 import { HandlePickup } from './scripts/pickup';
 import { HandleReload } from './scripts/reload';
+import { LootDeck } from './scripts/lootDeck';
 
 
 var Main = Main || (function(){
+
+    const lootDeck = LootDeck(); //Deck gets initiated in function
+
     const handlers = [
         {name:"Reload Script", fn:HandleReload},
         {name:"Attribute Roll Script", fn:HandleAttrRoll},
         {name:"Attack Roll Script", fn:HandleAttack},
         {name:"Pickup Script", fn:HandlePickup},
+        {name:"Loot Deck Script", fn:lootDeck.handleDeck}, // This one is a closure.
     ];
     const watchers = [
         {name:"AttrWatch", fn:attrAlert}

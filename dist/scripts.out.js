@@ -69,29 +69,28 @@
      * @returns an object where each key is the param name and the value is its tokenized param value.
      */
      function tokenizeArgs(input) {
-        var result = {},
-            argsRegex = /(.*)=(.*)/, //can't be global but shouldn't need it as we are splitting args. 
-            quoteRegex = /(?:[^\s"']+|"[^"]*"|'[^']*')+/g; //Split on spaces unless space is within single or double quotes - https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
-            
+        const result = {};
         
-            var quoteSplit = input.match(quoteRegex).map(e => {
-                //https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
-                let quote = /(["'])(?:(?=(\\?))\2.)*?\1/g.exec(e); //get either ' or ", whatever is first
-
-                //if no quotes, will be null
-                if (quote){
-                    let re = new RegExp(quote[1], "g");
-                    return e.replace(re, ''); //remove outer quotes
-                } else {
-                    return e;
-                }
-            });
-
+        //First bit of regex: splits among spaces, unless a space is wrapped in `'" 
+        const quoteRegex = /(?:[^\s"'`]+|"[^"]*"|'[^']*'|`[^`]*`)+/g; //adapted from https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
+        var quoteSplit = input.match(quoteRegex).map(e => {
+            //https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
+            let quote = /([`"'])(?:(?=(\\?))\2.)*?\1/g.exec(e); //get either ' or ", whatever is first
             
-        // This is our own code below for splitting along "="
+            //if no quotes, will be null
+            if (quote){
+                let re = new RegExp(quote[1], "g");
+                return e.replace(re, ''); //remove outer quotes
+            } else {
+                return e;
+            }
+        });
+        
+        //For each of the splits from above, we can then split among "=" to get our key-value pairs.
+        //Since it's already split we don't have to worry about globals.
+        const argsRegex = /(.*?)=(.*)/; //Non-greedy first capture group so that future = signs don't mess this up. 
         for (let i = 0; i < quoteSplit.length; i++){ 
             let match = argsRegex.exec(quoteSplit[i]); //Regex to match anything before/after '='. G1 is before and G2 is after
-
             if (match !== null) { //
                 let value = match[2];
                 
@@ -921,6 +920,34 @@
         }
     };
 
+    //TODO: alias
+    const miscItems = {
+        food: {
+            name: "Snacks",
+            type: "misc",
+            category: 'Food',
+            quantity: 3,
+            description: "Remove 3 fatigue",
+            variations: {
+                uncommon: {
+                    name: "Meal",
+                    quantity: 1,
+                    description: "Remove 10 fatigue"
+                },
+                rare: {
+                    name: "Junk Food",
+                    quantity: 1,
+                    description: "Remove 5 fatigue. Regain 5 Sanity."
+                },
+                epic: {
+                    name: "Meal",
+                    quantity: 1,
+                    description: "Remove 10 fatigue"
+                }
+            }
+        }
+    };
+
     class ItemTemplate {
         constructor(template){
             this.stats = template;
@@ -954,11 +981,14 @@
         }
     }
 
-    const templates = {};
+    const templates = {
+        ...meleeWeapons,
+        ...miscItems
+    };
 
-    for (let key in meleeWeapons){
+    for (let key in templates){
         //setup new item template class which handles rarity and storing item stats.
-        templates[key] = new ItemTemplate(meleeWeapons[key]);
+        templates[key] = new ItemTemplate(templates[key]);
     }
 
 
@@ -972,12 +1002,19 @@
 
         let item = {};
 
+        log("Executing pickup with following args:");
+        log(args);
         //if pulling from template, we can pull a variation.
         let rarity = ("rarity" in args) ? args.rarity : '';
         
-        //pull fields from template if a template is specified
-        if ("item" in args && args.item in templates){
-            item = templates[args.item].getItem(rarity);
+        //pull fields from template if a template is specified with item key or as a pure arg
+        if ("item" in args || "1" in args){
+
+            let itemKey = ("item" in args) ? args['item'] : args['1'];
+
+            if (itemKey in templates){
+                item = templates[itemKey].getItem(rarity);
+            }
         }
 
         //add any new props to the item
@@ -1066,12 +1103,238 @@
         outputDefaultTemplate(result, resultTitle, sender);
     }
 
+    class Deck {
+        constructor(arr=[]){
+            this.deck = arr;
+        }
+        
+        addCard(card, random=true){
+            
+            // If a card is an object. You can give it a count property to add multiple cards.
+            // in that case, it'll need a card property which is the value of the card.
+            let count = card.hasOwnProperty('count') ? card.count : 1,
+                cardVal = card.hasOwnProperty('card') ? card.card : card;
+
+            //Only allow strings?
+            //TODO - if other types may be needed, evaluate
+            if (typeof cardVal !== 'string'){
+                return;
+            }
+
+            
+            //use loop so we can add duplicates of a card.
+            for (let i = 0; i < count; i++){
+                if (random){
+                    let i = Math.floor(Math.random() * this.deck.length);
+                    this.deck.splice(i, 0, cardVal);
+                } else {
+                    this.deck.push(cardVal);
+                }
+            }
+        }
+
+        drawCard(){
+            return this.deck.pop();
+        }
+
+        removeCard(card){
+            for (let i = this.deck.length - 1; i >= 0; i--){
+                if (this.deck[i] == card){
+                    this.deck.splice(i, 1);
+                }
+            }
+        }
+
+        shuffleDeck(){
+            for (let i = this.deck.length - 1; i > 0; i--){
+                let j = Math.floor(Math.random() * (i + 1));
+                let temp = this.deck[i];
+
+                this.deck[i] = this.deck[j];
+                this.deck[j] = temp;
+            }
+        }
+
+        setDeck(deck){
+            this.clearDeck();
+            for (let card of deck){
+                this.addCard(card, false);
+            }
+            this.shuffleDeck();
+        }
+
+        clearDeck(){
+            this.deck = [];
+        }
+
+        getDeck(){
+            return this.deck;
+        }
+
+        getLength(){
+            return this.deck.length;
+        }
+    }
+
+    const LootDeck = function(){
+        const deck = new Deck();
+
+        const setup = setupScriptVars;
+
+        const handleResponse = function(response, sender, character){
+            
+            if (response){
+                let msg = '',
+                pickup = '';
+
+                if ('info' in response){
+                    msg += `&{template:default} {{name=Loot Deck Info}} `;
+                    msg += ` {{Info=${response.info}}}`;
+                }
+
+                else if ('error' in response){
+                    msg += `&{template:default} {{name=Error in Loot Deck!}} `;
+                    msg += ` {{Error=${response.error}}}`;
+                }
+                
+
+                else if ('card' in response || 'fail' in response){
+                    msg += `&{template:default} {{name=${character.get('name')} attempts to scavenge for an item!}} `;
+
+                    if ('fail' in response){
+                        msg += ` {{Result=${response.fail}}}`;
+                    } 
+
+                    if ('card' in response){    
+                        pickup = response.card;
+
+                    }
+                }  
+                
+                if (msg.length){
+                    sendChat(sender, msg);
+                }
+                
+                //We can just let the pickup script handle the rest. We just have to make sure all decks are written in a way that will work with pickup.
+                if (pickup.length){
+                    sendChat(sender, `!!pickup ${pickup} characterid='${character.get('id')}'`);
+                }
+            }
+        };
+
+
+        const handleDeck = function(msg){
+            if (msg.type !== "api" || !msg.content.startsWith('!!deck')){
+                return;
+            }
+            
+            const {args, sender, character} = setup(msg),
+            retVal = {};
+
+            //make it easier to setup args.
+            let shortArg = ('1' in args ? args['1'] : '');
+
+            // Don't support multiple args, so uses a else if
+            
+            //Clear deck. Don't use shorthand here for safety.
+            if ("clear" in args && args['clear'] == true){
+                log('Loot Deck Reset!');
+                deck.clearDeck();
+                log(deck.getDeck());
+            
+            // Shuffle the deck
+            } else if ("shuffle" in args || shortArg == 'shuffled'){
+                log('Loot Deck Shuffled!');
+                deck.shuffleDeck();
+                log(deck.getDeck());
+                retVal.info = "The Loot Deck was shuffled!";
+            }
+
+            // Draw a card.
+            else if ("draw" in args || shortArg == 'draw'){
+                let card = deck.drawCard();
+                
+                if (!card){ 
+                    log('Attempted to draw, but Loot Deck was empty');
+                    retVal.fail = "The Loot Deck is empty!";
+                } else {
+                    log(`Attempted to draw a ${card} from the Loot Deck!`);
+                    retVal.card = card;
+                }
+            }
+
+            //Set a deck from some json. this needs an arg.
+            else if ("set" in args){
+                try {
+                    log('Attempting to set deck with:');
+                    log(args['set']);
+                    let json = JSON.parse(args['set']);
+
+                    if (!Array.isArray(json)){
+                        log('Invalid value when setting loot deck!');
+                        retVal.error = "Invalid type when setting Loot Deck!";
+                    }
+
+                    deck.setDeck(json);
+                    deck.shuffleDeck();
+                    log("Set Loot Deck with " + deck.getLength() + ' cards!');
+                    log(deck.getDeck());
+                    retVal.info = "The Loot Deck was set with new cards!";
+                } catch(e){
+                    log(e.message);
+                    retVal.error = "Unknown error setting loot deck!";
+                    log('Error');
+                }
+            }
+
+            // Add a card to the deck
+            else if ("add" in args && args['add'].length){
+                let toAdd = args['add'];
+
+                //In case we want to add json array, try to parse it first.
+                try {
+                    let json = JSON.parse(toAdd);
+                    toAdd = json;
+                } catch(e){}
+
+                log(`Added card(s) '${args['add']}' to deck!`); // log raw text
+                deck.addCard(toAdd);
+            }
+
+            // Remove a card from the deck
+            else if ("remove" in args && args['remove'].length){
+                log(`Removed card '${args['remove']}' from deck!`);
+                deck.removeCard(args['remove']);
+            }
+
+            // Display deck length. Log deck to console.
+            else if ("info" in args || shortArg == 'info'){
+                log('Getting deck info!');
+                retVal.info = `Deck has ${deck.getDeck().length} cards remaining!`;
+                log(deck.getDeck());
+                log(deck.getLength());
+            }
+            
+
+            handleResponse(retVal, sender, character);
+            return retVal;
+        };
+        
+        return {
+            handleDeck: handleDeck
+        };
+    };
+
     var Main = Main || (function(){
+
+        const lootDeck = LootDeck(); //Deck gets initiated in function
+
         const handlers = [
             {name:"Reload Script", fn:HandleReload},
             {name:"Attribute Roll Script", fn:HandleAttrRoll},
             {name:"Attack Roll Script", fn:HandleAttack},
             {name:"Pickup Script", fn:HandlePickup},
+            {name:"Loot Deck Script", fn:lootDeck.handleDeck}, // This one is a closure.
         ];
         const watchers = [
             {name:"AttrWatch", fn:attrAlert}

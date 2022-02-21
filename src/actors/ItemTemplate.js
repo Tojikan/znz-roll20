@@ -1,7 +1,5 @@
 import { capitalize } from "../lib/znzlib";
 
-capitalize
-
 export class ItemTemplate {
     constructor(template){
         this.stats = template;

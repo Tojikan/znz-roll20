@@ -126,29 +126,28 @@ export function splitByPipe(str){
  * @returns an object where each key is the param name and the value is its tokenized param value.
  */
  export function tokenizeArgs(input) {
-    var result = {},
-        argsRegex = /(.*)=(.*)/, //can't be global but shouldn't need it as we are splitting args. 
-        quoteRegex = /(?:[^\s"']+|"[^"]*"|'[^']*')+/g; //Split on spaces unless space is within single or double quotes - https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
-        
+    const result = {};
     
-        var quoteSplit = input.match(quoteRegex).map(e => {
-            //https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
-            let quote = /(["'])(?:(?=(\\?))\2.)*?\1/g.exec(e); //get either ' or ", whatever is first
-
-            //if no quotes, will be null
-            if (quote){
-                let re = new RegExp(quote[1], "g");
-                return e.replace(re, ''); //remove outer quotes
-            } else {
-                return e;
-            }
-        });
-
+    //First bit of regex: splits among spaces, unless a space is wrapped in `'" 
+    const quoteRegex = /(?:[^\s"'`]+|"[^"]*"|'[^']*'|`[^`]*`)+/g; //adapted from https://stackoverflow.com/questions/16261635/javascript-split-string-by-space-but-ignore-space-in-quotes-notice-not-to-spli
+    var quoteSplit = input.match(quoteRegex).map(e => {
+        //https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
+        let quote = /([`"'])(?:(?=(\\?))\2.)*?\1/g.exec(e); //get either ' or ", whatever is first
         
-    // This is our own code below for splitting along "="
+        //if no quotes, will be null
+        if (quote){
+            let re = new RegExp(quote[1], "g");
+            return e.replace(re, ''); //remove outer quotes
+        } else {
+            return e;
+        }
+    });
+    
+    //For each of the splits from above, we can then split among "=" to get our key-value pairs.
+    //Since it's already split we don't have to worry about globals.
+    const argsRegex = /(.*?)=(.*)/; //Non-greedy first capture group so that future = signs don't mess this up. 
     for (let i = 0; i < quoteSplit.length; i++){ 
         let match = argsRegex.exec(quoteSplit[i]); //Regex to match anything before/after '='. G1 is before and G2 is after
-
         if (match !== null) { //
             let value = match[2];
             
