@@ -63,12 +63,12 @@ export function outputDefaultTemplate(arr, name, sender){
 
 
 
-export function setupScriptVars(msg){
+export function setupScriptVars(msg, checkCharacter=true){
     let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname');
     let args = tokenizeArgs(msg.content)
     let character = getCharacter(msg, args);
 
-    if (!character){
+    if (checkCharacter && !character){
         throw('No Character was selected or specified!');
     }
 

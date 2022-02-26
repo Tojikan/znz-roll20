@@ -75,7 +75,7 @@ export const meleeWeapons = {
         }
     },
     handgun: {
-        name: "Pocket Pistol",
+        name: "Revolver",
         type: "ranged",
         category: 'Handgun',
         quantity: 1,
@@ -83,32 +83,18 @@ export const meleeWeapons = {
         ranged: 4,
         block: 1,
         durability: 2,
-        ammo: 6,
+        ammo: 4,
         variations: {
             uncommon: {
-                name: "Baseball Bat",
-                melee: 5,
-                durability: 15,
-                block: 5,
+                name: "9mm Pistol",
+                durability: 4,
+                ammo: 8,
             },
             rare: {
-                name: "Baton",
-                melee: 8,
-                durability: 25,
-                block: 8,
-            },
-            epic: {
-                name: "Morning Star",
-                melee: 12,
-                durability: 40,
-                block: 10,
-            },
-            legendary: {
-                name: "Kanabo",
-                melee: 18,
-                ranged: 5,
-                durability: 60,
-                block: 15
+                name: "Desert Eagle",
+                ranged: 8,
+                durability: 6,
+                ammo: 5
             }
         }
     }

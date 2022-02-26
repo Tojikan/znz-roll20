@@ -173,12 +173,12 @@
 
 
 
-    function setupScriptVars(msg){
+    function setupScriptVars(msg, checkCharacter=true){
         let sender = (getObj('player',msg.playerid)||{get:()=>'API'}).get('_displayname');
         let args = tokenizeArgs(msg.content);
         let character = getCharacter(msg, args);
 
-        if (!character){
+        if (checkCharacter && !character){
             throw('No Character was selected or specified!');
         }
 
@@ -917,6 +917,30 @@
                     block: 15
                 }
             }
+        },
+        handgun: {
+            name: "Revolver",
+            type: "ranged",
+            category: 'Handgun',
+            quantity: 1,
+            melee: 1,
+            ranged: 4,
+            block: 1,
+            durability: 2,
+            ammo: 4,
+            variations: {
+                uncommon: {
+                    name: "9mm Pistol",
+                    durability: 4,
+                    ammo: 8,
+                },
+                rare: {
+                    name: "Desert Eagle",
+                    ranged: 8,
+                    durability: 6,
+                    ammo: 5
+                }
+            }
         }
     };
 
@@ -936,15 +960,85 @@
                 },
                 rare: {
                     name: "Junk Food",
-                    quantity: 1,
+                    quantity: 2,
                     description: "Remove 5 fatigue. Regain 5 Sanity."
                 },
                 epic: {
-                    name: "Meal",
+                    name: "Gourmet Hot Meal",
                     quantity: 1,
-                    description: "Remove 10 fatigue"
+                    description: "Remove 15 fatigue. Regain 5 sanity. Regain 5 health."
+                },
+                legendary: {
+                    name: "Your Favorite Food.",
+                    quantity: 1,
+                    description: "Remove all fatigue or regain all sanity."
                 }
             }
+        },
+        medicine: {
+            name: "Bandages",
+            type: "misc",
+            category: 'Consumable',
+            quantity: 2,
+            description: "Regain 3 health.",
+            variations: {
+                uncommon: {
+                    name: "Pain Killers",
+                    quantity: 2,
+                    description: "Regain 5 health."
+                },
+                rare: {
+                    name: "First Aid Kit",
+                    quantity: 1,
+                    description: "Regain 15 health."
+                },
+                epic: {
+                    name: "Med Kit",
+                    quantity: 1,
+                    description: "Regain 25 health."
+                },
+                legendary: {
+                    name: "Trauma Pack",
+                    quantity: 1,
+                    description: "Regain 50 health."
+                }
+            }
+        },
+        alcohol: {
+            name: "Warm Beer",
+            type: "misc",
+            category: 'Consumable',
+            quantity: 1,
+            description: "Regain 3 sanity.",
+            variations: {
+                uncommon: {
+                    name: "Wine",
+                    quantity: 5,
+                    description: "Regain 2 Sanity."
+                },
+                rare: {
+                    name: "Liquor",
+                    quantity: 12,
+                    description: "Regain 2 Sanity."
+                },
+                epic: {
+                    name: "Top Shelf Liquor",
+                    quantity: 10,
+                    description: "Regain 5 Sanity."
+                },
+                legendary: {
+                    name: "Drugs",
+                    quantity: 5,
+                    description: "Regain 10 sanity."
+                }
+            }
+        },
+        water: {
+            name: "Water",
+            type: "misc",
+            category: 'Consumable',
+            quantity: 3,
+            description: "Use this in order to take a rest.",
         }
     };
 
@@ -1115,13 +1209,6 @@
             let count = card.hasOwnProperty('count') ? card.count : 1,
                 cardVal = card.hasOwnProperty('card') ? card.card : card;
 
-            //Only allow strings?
-            //TODO - if other types may be needed, evaluate
-            if (typeof cardVal !== 'string'){
-                return;
-            }
-
-            
             //use loop so we can add duplicates of a card.
             for (let i = 0; i < count; i++){
                 if (random){
@@ -1134,7 +1221,15 @@
         }
 
         drawCard(){
-            return this.deck.pop();
+            let card = this.deck.pop();
+
+            //if array, randomly choose card in array.
+            if ( Array.isArray(card) ){
+                let ind = Math.floor(Math.random() * card.length);
+
+                return card[ind];
+            } 
+            return card;
         }
 
         removeCard(card){
