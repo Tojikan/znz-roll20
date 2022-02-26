@@ -10,13 +10,6 @@ export class Deck {
         let count = card.hasOwnProperty('count') ? card.count : 1,
             cardVal = card.hasOwnProperty('card') ? card.card : card;
 
-        //Only allow strings?
-        //TODO - if other types may be needed, evaluate
-        if (typeof cardVal !== 'string'){
-            return;
-        }
-
-        
         //use loop so we can add duplicates of a card.
         for (let i = 0; i < count; i++){
             if (random){
@@ -29,7 +22,15 @@ export class Deck {
     }
 
     drawCard(){
-        return this.deck.pop();
+        let card = this.deck.pop();
+
+        //if array, randomly choose card in array.
+        if ( Array.isArray(card) ){
+            let ind = Math.floor(Math.random() * card.length);
+
+            return card[ind];
+        } 
+        return card;
     }
 
     removeCard(card){
