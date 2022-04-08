@@ -1338,7 +1338,7 @@
                 log(deck.getDeck());
             
             // Shuffle the deck
-            } else if ("shuffle" in args || shortArg == 'shuffled'){
+            } else if ("shuffle" in args || shortArg == 'shuffle'){
                 log('Loot Deck Shuffled!');
                 deck.shuffleDeck();
                 log(deck.getDeck());

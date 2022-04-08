@@ -6,6 +6,19 @@ title: Changelog
 
 # Change Log #
 
+## V3.5 Release ##
+
+- Complete Re-write into React.
+
+- New Success based roll system.
+
+- Item Slots
+
+- User-defined skills
+
+- Simpler ammo.
+
+
 
 
 ## V3.0 Release ##
