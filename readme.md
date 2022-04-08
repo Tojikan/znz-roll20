@@ -1,47 +1,53 @@
-# Roll20 Static Sheet Generator #
+# Static Sheet Generator #
 
-This is my build process for making Roll20 Custom Character Sheets. This is what does currently does.
+A Roll20 Sheet built with React and Static Site Generation.
 
-- Build a static sheet html file from dumb React Components.
-- Use styled components that extract out to a separate CSS file.
-- Bundle and Inject Sheet Workers automatically.
-- Bundle API Scripts into a single JS file.
-- Abstract out character sheets into a JSON file.
-- Abstract out some Roll20 API interactions.
-- Build a GitHub page to make a game rules page.
+- Sheet built with React Components in `components`. Uses Styled-Components for styling
+- Character Data for fields, attributes, stats, etc and such are in `/data`
+- Actors contains ways to modify a character in Roll20 API. Mostly done with a Proxy. In `/actors`
+- API Scripts are bundled together in `/scripts`
 
 
 
-## Quick Build Commands #
+
+## Build ##
+
+`npm run dev` - Run a local development server where you can see your React Components in a live view mode. Good for dev'ing your front end. I tried to copy over as much of the built-in styling in Roll20 so it looks similar to live. Don't have working repeating elements though.
+
+`npm run build` - Actually builds out all of your files into a single bundle in `/dist/` for deployment. The following gets built:   
+
+- **sheet.html**: HTML for your character sheet.  Your Sheet workers are automatically copied in.
+
+- **styles.css**: Styles built using [Linaria](https://github.com/callstack/linaria) into a single stylesheet. 
+
+- **scripts.out.js**: All of your API scripts bundled together so its a quicker copy+paste on Roll20.
+
+
+Build process does something ugly where we use webpack for the SSG and Linaria. But Gulp for injecting sheet workers.
+
+TODO: Figure out how to fold Webpack into Gulp or move injectiong to Webpack.
+
+
+## Dependencies ##
+
+- Node / NPM
+- Webpack
+- Gulp
+
+
+## Commands #
 
 
 `npm run dev` - Run a local development server where you can modify your code real time. Good for markup and styling and copies over some of the styles from Roll20. But you don't have features for repeating fields and API interactions.
 
-`npm run build` - Actually builds out all of your files into a single bundle in dist. The following get bundled into files:   Sheet Workers and Sheet HTML; Your styled component styles; API scripts. Meant for easier deployment to Roll20 (which is still manually done).
+`npm run build` - Actually builds out all of your files into a single bundle in `/dist/`. The following gets built:   
+
+- **sheet.html**: HTML for your character sheet and your Sheet Workers bundled and added in.
+
+- **styles.css**: Using [Linaria](https://github.com/callstack/linaria),
+Sheet Workers and Sheet HTML; Your styled component styles; API scripts. Meant for easier deployment to Roll20 (which is still manually done).
 
 
-## What This Does ##
-
-The current way is to try and separate a character sheet between its fields and its markup.
-
-
-### Character Sheet ###
-
-**Fields**
-We define character sheets through a JSON data. This file contains all we want to know about the literal input field that will show up in the character sheet.
-
-**Markup**
-Using our fields data, we use React to generate the HTML for a field. This lets us build a sheet consisting of React Components, making it easier to work with our HTML and display logic.
-As another benefit, our markup is now independent of the "fields" in the character sheet. 
-
-
-### API and Workers ###
-
-Because characters are now defined in this build system as a bunch of json fields, we can bundle it together with our Sheet Workers and APIs. Our Sheet Worker can just reference the fields.
-
-**API Actors**
-
-You'll notice an actors folder. Basically I got fancy and tried to define an object that we can use in the Roll20 Script API. We can try to abstract out a few things, including the code to try and get/set data through the Roll20API.
 
 
 
