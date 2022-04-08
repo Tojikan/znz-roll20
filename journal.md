@@ -46,3 +46,9 @@ Because characters are now defined in this build system as a bunch of json field
 **API Actors**
 
 You'll notice an actors folder. Basically I got fancy and tried to define an object that we can use in the Roll20 Script API. We can try to abstract out a few things, including the code to try and get/set data through the Roll20API.
+
+
+
+### Unit Testing ###
+
+Should do this more but we run it through Mocha
