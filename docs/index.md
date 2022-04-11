@@ -18,7 +18,7 @@ This game is set in a post-apocalyptic modern setting, where hordes of flesh-eat
 
 
 
-
+<br/><br/>
 
 
 ### Roll System ###
@@ -44,7 +44,7 @@ There are 2 types of skills:
 
 **Resources** - Sometimes, if you do an action with an item, it may consume resources. Examples such as durability for melee weapons or ammo for ranged weapons.
 
-
+<br/><br/>
 
 #### Example Roll ####
 
@@ -54,6 +54,7 @@ There are 2 types of skills:
 4. So a player will roll 8 dice. Then they count successes.
 
 
+<br/><br/><br/>
 
 ### Others ###
 
@@ -62,6 +63,7 @@ There are 2 types of skills:
 **Sanity** - When this goes to 0, you go insane.
 
 **XP** - You can buy stats or attributes with EXP. See the Character Creation page for more details.
+
 
 
 
@@ -75,7 +77,7 @@ Inventory and Equipped Items are limited to a number of slots. You can increase 
 
 
 
-
+<br/><br/>
 
 ### Roll Options ###
 
@@ -89,12 +91,13 @@ There are some options you can add to your character through the status bar at t
 
 
 
-
+<br/><br/>
 
 ### Abilities ###
 
 Your character has up to 3 special abilities they can choose from a list. Each ability has multiple levels.
 
+<br/><br/>
 
 ### Flaws ###
 

@@ -8,6 +8,7 @@ title: Character Creation and Leveling
 
 Players start with X amount of EXP which they can use to buy attributes, skills, etc.
 
+<br/><br/>
 
 
 ## Buy Costs ##
@@ -22,14 +23,14 @@ LVL refers to the current points in the skill/attribute/ability. For example, if
 | Energy        | 10XP * LVL  |
 | Health/Sanity | 20XP * LVL  |
 
-
+<br/><br/>
 
 ## Limits ##
 
 - Skills are capped at out 3 points.
 - Attributes are capped at 6.
 
-
+<br/><br/>
 
 ## Player Defined Skills ##
 
