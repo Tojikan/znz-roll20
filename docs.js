@@ -1,3 +1,4 @@
+
 import abilities from "./src/data/abilities.js";
 import flaws from "./src/data/flaws.js";
 import * as fs from 'fs';
@@ -23,3 +24,4 @@ let fl = JSON.stringify(flaw);
 
 fs.writeFileSync('./docs/_data/abilities.json', ab);
 fs.writeFileSync('./docs/_data/flaws.json', fl);
+console.log('Copied data files to docs');

@@ -60,6 +60,41 @@ However, you do not have access to Sheet Workers or Repeater elements.
 
 ## Docs ##
 
+We leverage Github Pages to build a Game Guide and System documentation. [Link.](https://tojikan.github.io/znz-roll20/)
+
+See the `/docs` folder for more info. 
+
+This is built out using [Jekyll on Github pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) and is hosted directly on Github. 
+
+We can even use it to host some assets like images or icons or fonts for our Character sheet.
+
+The `docs.js` file is run on build. This copies over some specified files to the `docs/_data` folder so that we can use it in Jekyll.
+
+Or, simply run `npm run docs` to copy over files.
+
+Due to some unfortunate setup, we're using esm to be able to run this script as a module, for now.
+
+
+## Lootprint ##
+
+One of the API scripts is a deck drawing system for drawing loot. 
+
+You can interact with it directly on the Roll20 API terminal and use that to set loot, etc.
+
+Since it has to be formatted into JSON, we can use the Lootprint script to print out loot sets so we can copy paste into Roll20.
+
+Check `lootprint.js` for more info.
+
+Run `npm run loot` to run the script.
+
+
+## Tests ##
+
+This is not a fully unit-tested application as it was a learn-as-you-go sort of process. There are some unit tests for testing scripts and such. 
+
+Tests are run with Mocha. Simply run `npm run test` to run unit tests.
+
+
 
 
 

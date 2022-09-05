@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha  --require @babel/register",
-    "build": "webpack --mode=production && gulp",
+    "build": "webpack --mode=production && gulp && node -r esm docs.js",
     "dev": "webpack-dev-server --mode=development",
-    "loot": "node lootprint.js"
+    "loot": "node -r esm lootprint.js",
+    "docs": "node -r esm docs.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
+    "esm": "^3.2.25",
     "gulp": "^4.0.2",
     "gulp-html-beautify": "^1.0.1",
     "gulp-inject": "^5.0.5",
