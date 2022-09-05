@@ -1,31 +1,14 @@
 # Static Sheet Generator #
 
-A Roll20 Sheet built with React and Static Site Generation.
+A Roll20 Custom Character Sheet built with Static Site Generation with Webpack.
 
-- Sheet built with React Components in `components`. Uses Styled-Components for styling
-- Character Data for fields, attributes, stats, etc and such are in `/data`
-- Actors contains ways to modify a character in Roll20 API. Mostly done with a Proxy. In `/actors`
-- API Scripts are bundled together in `/scripts`
-
-
-
-
-## Build ##
-
-`npm run dev` - Run a local development server where you can see your React Components in a live view mode. Good for dev'ing your front end. I tried to copy over as much of the built-in styling in Roll20 so it looks similar to live. Don't have working repeating elements though.
-
-`npm run build` - Actually builds out all of your files into a single bundle in `/dist/` for deployment. The following gets built:   
-
-- **sheet.html**: HTML for your character sheet.  Your Sheet workers are automatically copied in.
-
-- **styles.css**: Styles built using [Linaria](https://github.com/callstack/linaria) into a single stylesheet. 
-
-- **scripts.out.js**: All of your API scripts bundled together so its a quicker copy+paste on Roll20.
-
-
-Build process does something ugly where we use webpack for the SSG and Linaria. But Gulp for injecting sheet workers.
-
-TODO: Figure out how to fold Webpack into Gulp or move injectiong to Webpack.
+- Character Sheet HTML is generated from React Components; entry point at `src/sheet.js`
+- Styles are handled through Styled-Components and are built into a single stylesheet using [Linaria](https://github.com/callstack/linaria). 
+- Data for defining fields, attributes, stats, etc. are separate from our markup, located in `/src/data`
+- [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) are used to encapsulate interactions for the Roll20 API. In `/src/actors`
+- API Scripts are located in `/src/scripts`, entered from `src/scripts.js` and are bundled together into a single scripts.out.js file.
+- Workers are located in `/src/workers/`, entered from `src/workers.js` and are injected into the built-out Character Sheet HTML file.
+- Docs folder for creating a Github Page for an online Player's Guide for your custom system.
 
 
 ## Dependencies ##
@@ -35,20 +18,47 @@ TODO: Figure out how to fold Webpack into Gulp or move injectiong to Webpack.
 - Gulp
 
 
-## Commands #
+## Commands ##
+
+`npm run dev` - Run a local development server for previewing your character sheet in live mode. Most Roll20 built-in styles are copied over to attempt to imitate the Roll20 environment, but may need periodic updating. Currently does not have support for repeater fields.
+
+`npm run build` - Actually builds out all of your files into a single bundle in `/dist/` for deployment. See following section on build files.  
+
+Install with `npm install`.
 
 
-`npm run dev` - Run a local development server where you can modify your code real time. Good for markup and styling and copies over some of the styles from Roll20. But you don't have features for repeating fields and API interactions.
+## Build Process ##
 
-`npm run build` - Actually builds out all of your files into a single bundle in `/dist/`. The following gets built:   
-
-- **sheet.html**: HTML for your character sheet and your Sheet Workers bundled and added in.
-
-- **styles.css**: Using [Linaria](https://github.com/callstack/linaria),
-Sheet Workers and Sheet HTML; Your styled component styles; API scripts. Meant for easier deployment to Roll20 (which is still manually done).
+The build process consists of using Webpack, using the [Static Site Generator Plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin) to build out our HTML and CSS files. Then a separate Gulp task is used to append Sheet Workers to the HTML and bundle all of your script files into a single scripts.out.js file.
 
 
+The following files gets built out into Dist.
 
+- **sheet.html**: HTML for your character sheet, built with Webpack Static Site generation. Sheet workers are injected via Gulp at the bottom.
+
+- **styles.css**: Styles made from Styled Components, built using [Linaria](https://github.com/callstack/linaria) into a single stylesheet. 
+
+- **scripts.out.js**: All of your API scripts bundled together. You can just quickly copy+paste into the API terminal on Roll20.
+
+For deployment, you would simply need to copy these files onto the Roll20 platform in the appropriate locations.
+
+
+
+## Local Development Environment ##
+
+A local development server can be spun up with `npm run dev`. This builds and serves up files in `public/`.
+
+This creates a hot-reloaded environment where you can edit and view your Character Sheet in real time. It makes it easier to preview styling, layouts, etc.
+
+Some styles are copied over from Roll20 so it can imitate the Roll20 environment as best as possible. This may need updating from time to time.
+
+However, you do not have access to Sheet Workers or Repeater elements.
+
+
+
+
+
+## Docs ##
 
 
 

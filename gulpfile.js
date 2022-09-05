@@ -4,14 +4,12 @@ const gulp = require('gulp'),
     inject = require('gulp-inject'),
     commonjs = require('@rollup/plugin-commonjs'),
     json = require('@rollup/plugin-json'),
-    babel = require('@rollup/plugin-babel'),
-    htmlbeautify = require('gulp-html-beautify');
+    babel = require('@rollup/plugin-babel');
 
 
-/**Beautify and append sheet workers **/
+/**Append sheet workers **/
 gulp.task('sheet', function(){
     return gulp.src('./dist/sheet.html')
-        // .pipe(htmlbeautify())
         .pipe(inject( (()=>{
             return gulp.src('src/workers.js')
                 .pipe(rollup({
@@ -36,6 +34,7 @@ gulp.task('sheet', function(){
 })
 
 
+/** Bundle Scripts **/
 gulp.task('scripts', function(){
     return gulp.src('src/scripts.js')
         .pipe(rollup({
