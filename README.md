@@ -1,15 +1,24 @@
 # Static Sheet Generator #
 
-A Roll20 Custom Character Sheet built with Static Site Generation with Webpack.
+A Roll20 Custom Character Sheet templated using ReactJS. Uses React Static Site Generation with Webpack.
 
-- Character Sheet HTML is generated from React Components; entry point at `src/sheet.js`
-- Styles are handled through Styled-Components and are built into a single stylesheet using [Linaria](https://github.com/callstack/linaria). 
-- Data for defining fields, attributes, stats, etc. are separate from our markup, located in `/src/data`
-- [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) are used to encapsulate interactions for the Roll20 API. In `/src/actors`
-- API Scripts are located in `/src/scripts`, entered from `src/scripts.js` and are bundled together into a single scripts.out.js file.
-- Workers are located in `/src/workers/`, entered from `src/workers.js` and are injected into the built-out Character Sheet HTML file.
-- Docs folder for creating a Github Page for an online Player's Guide for your custom system.
 
+## Folder Structure ##
+
+- The main entry file is `index.js`. We import our character sheet and all other things here. 
+- React Components are located in `src/components`. The entry to the sheet is in `src/sheet.js`.
+- Styles are handled through [Styled-Components](https://styled-components.com/) and are built into an external stylesheet using [Linaria](https://github.com/callstack/linaria). 
+- In order to re-use field names throughout the HTML and our API Scripts/Workers, we define all attributes and stats in `/src/data`. Our components and scripts just import these data files to make use of them.
+- API Scripts are located in `/src/scripts`, entered from `src/scripts.js` and are bundled together into a single scripts.out.js file with Rollup.
+- Workers are located in `/src/workers/`, entered from `src/workers.js` and are injected after our Sheet HTML files gets built out.
+- Why not use Github Pages to host your Player's Guide? `docs` contains the static site for the [player's guide](https://tojikan.github.io/znz-roll20/).
+- This one was a little extra, but we use [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) to encapsulate interactions for the Roll20 API. Basically, let's us call Roll20 API functions just by modifying an object. Located in `/src/actors`. 
+
+## Build Results ##
+
+- `/dist/sheet.html` built from `src/sheet.js`. HTML for our character sheets.
+- `/dist/styles.css` built from Styled Components in our React Components.
+- `/dist/scripts.out.js` built from `src/scripts.js`. All of our custom API scripts bundled together.
 
 ## Dependencies ##
 
@@ -29,7 +38,7 @@ Install with `npm install`.
 
 ## Build Process ##
 
-The build process consists of using Webpack, using the [Static Site Generator Plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin) to build out our HTML and CSS files. Then a separate Gulp task is used to append Sheet Workers to the HTML and bundle all of your script files into a single scripts.out.js file.
+The build process consists of Webpack to build the HTML and Gulp to finish off the rest. In Webpack, we use the [Static Site Generator Plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin) to build out our HTML and CSS files. In Gulp, we inject our Sheet Workers into the HTML and then run a separate bundler for our script filesto bundle them all into a single scripts.out.js file.
 
 
 The following files gets built out into Dist.
